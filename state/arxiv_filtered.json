@@ -1,0 +1,426 @@
+{
+  "target_date": "2026-03-07",
+  "date_windows": {
+    "recent_30d": {
+      "start": "2026-02-05",
+      "end": "2026-03-07"
+    },
+    "past_year": {
+      "start": "2025-03-07",
+      "end": "2026-02-04"
+    }
+  },
+  "total_recent": 200,
+  "total_hot": 10,
+  "total_unique": 181,
+  "top_papers": [
+    {
+      "id": "http://arxiv.org/abs/2603.05500v1",
+      "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+      "summary": "Efficient and stable training of large language models (LLMs) remains a core challenge in modern machine learning systems. To address this challenge, Reparameterized Orthogonal Equivalence Training (POET), a spectrum-preserving framework that optimizes each weight matrix through orthogonal equivalence transformation, has been proposed. Although POET provides strong training stability, its original implementation incurs high memory consumption and computational overhead due to intensive matrix multiplications. To overcome these limitations, we introduce POET-X, a scalable and memory-efficient variant that performs orthogonal equivalence transformations with significantly reduced computational cost. POET-X maintains the generalization and stability benefits of POET while achieving substantial improvements in throughput and memory efficiency. In our experiments, POET-X enables the pretraining of billion-parameter LLMs on a single Nvidia H100 GPU, and in contrast, standard optimizers such as AdamW run out of memory under the same settings.",
+      "authors": [
+        "Zeju Qiu",
+        "Lixin Liu",
+        "Adrian Weller",
+        "Han Shi",
+        "Weiyang Liu"
+      ],
+      "published": "2026-03-05T18:59:23Z",
+      "published_date": "2026-03-05 18:59:23+00:00",
+      "updated": "2026-03-05T18:59:23Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05500v1",
+      "url": "http://arxiv.org/abs/2603.05500v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.8,
+        "recency": 3.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 8.67
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "LLM",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "is_hot_paper": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05092v1",
+      "title": "Aura: Universal Multi-dimensional Exogenous Integration for Aviation Time Series",
+      "summary": "Time series forecasting has witnessed an increasing demand across diverse industrial applications, where accurate predictions are pivotal for informed decision-making. Beyond numerical time series data, reliable forecasting in practical scenarios requires integrating diverse exogenous factors. Such exogenous information is often multi-dimensional or even multimodal, introducing heterogeneous interactions that unimodal time series models struggle to capture. In this paper, we delve into an aviation maintenance scenario and identify three distinct types of exogenous factors that influence temporal dynamics through distinct interaction modes. Based on this empirical insight, we propose Aura, a universal framework that explicitly organizes and encodes heterogeneous external information according to its interaction mode with the target time series. Specifically, Aura utilizes a tailored tripartite encoding mechanism to embed heterogeneous features into well-established time series models, ensuring seamless integration of non-sequential context. Extensive experiments on a large-scale, three-year industrial dataset from China Southern Airlines, covering the Boeing 777 and Airbus A320 fleets, demonstrate that Aura consistently achieves state-of-the-art performance across all baselines and exhibits superior adaptability. Our findings highlight Aura's potential as a general-purpose enhancement for aviation safety and reliability.",
+      "authors": [
+        "Jiafeng Lin",
+        "Mengren Zheng",
+        "Simeng Ye",
+        "Yuxuan Wang",
+        "Huan Zhang",
+        "Yuhui Liu",
+        "Zhongyi Pei",
+        "Jianmin Wang"
+      ],
+      "published": "2026-03-05T12:05:15Z",
+      "published_date": "2026-03-05 12:05:15+00:00",
+      "updated": "2026-03-05T12:05:15Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05092v1",
+      "url": "http://arxiv.org/abs/2603.05092v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 8.67
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "is_hot_paper": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05299v1",
+      "title": "WavSLM: Single-Stream Speech Language Modeling via WavLM Distillation",
+      "summary": "Large language models show that simple autoregressive training can yield scalable and coherent generation, but extending this paradigm to speech remains challenging due to the entanglement of semantic and acoustic information. Most existing speech language models rely on text supervision, hierarchical token streams, or complex hybrid architectures, departing from the single-stream generative pretraining paradigm that has proven effective in text. In this work, we introduce WavSLM, a speech language model trained by quantizing and distilling self-supervised WavLM representations into a single codebook and optimizing an autoregressive next-chunk prediction objective. WavSLM jointly models semantic and acoustic information within a single token stream without text supervision or text pretraining. Despite its simplicity, it achieves competitive performance on consistency benchmarks and speech generation while using fewer parameters, less training data, and supporting streaming inference. Demo samples are available at https://lucadellalib.github.io/wavslm-web/.",
+      "authors": [
+        "Luca Della Libera",
+        "Cem Subakan",
+        "Mirco Ravanelli"
+      ],
+      "published": "2026-03-05T15:39:54Z",
+      "published_date": "2026-03-05 15:39:54+00:00",
+      "updated": "2026-03-05T15:39:54Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL",
+        "cs.SD"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05299v1",
+      "url": "http://arxiv.org/abs/2603.05299v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.3,
+        "recency": 3.0,
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 8.53
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "is_hot_paper": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05471v1",
+      "title": "Leveraging LLM Parametric Knowledge for Fact Checking without Retrieval",
+      "summary": "Trustworthiness is a core research challenge for agentic AI systems built on Large Language Models (LLMs). To enhance trust, natural language claims from diverse sources, including human-written text, web content, and model outputs, are commonly checked for factuality by retrieving external knowledge and using an LLM to verify the faithfulness of claims to the retrieved evidence. As a result, such methods are constrained by retrieval errors and external data availability, while leaving the models intrinsic fact-verification capabilities largely unused. We propose the task of fact-checking without retrieval, focusing on the verification of arbitrary natural language claims, independent of their source. To study this setting, we introduce a comprehensive evaluation framework focused on generalization, testing robustness to (i) long-tail knowledge, (ii) variation in claim sources, (iii) multilinguality, and (iv) long-form generation. Across 9 datasets, 18 methods and 3 models, our experiments indicate that logit-based approaches often underperform compared to those that leverage internal model representations. Building on this finding, we introduce INTRA, a method that exploits interactions between internal representations and achieves state-of-the-art performance with strong generalization. More broadly, our work establishes fact-checking without retrieval as a promising research direction that can complement retrieval-based frameworks, improve scalability, and enable the use of such systems as reward signals during training or as components integrated into the generation process.",
+      "authors": [
+        "Artem Vazhentsev",
+        "Maria Marina",
+        "Daniil Moskovskiy",
+        "Sergey Pletenev",
+        "Mikhail Seleznyov",
+        "Mikhail Salnikov",
+        "Elena Tutubalina",
+        "Vasily Konovalov",
+        "Irina Nikishina",
+        "Alexander Panchenko",
+        "Viktor Moskvoretskii"
+      ],
+      "published": "2026-03-05T18:42:51Z",
+      "published_date": "2026-03-05 18:42:51+00:00",
+      "updated": "2026-03-05T18:42:51Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05471v1",
+      "url": "http://arxiv.org/abs/2603.05471v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.8,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 8.4
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "LLM",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "is_hot_paper": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05212v1",
+      "title": "Early Warning of Intraoperative Adverse Events via Transformer-Driven Multi-Label Learning",
+      "summary": "Early warning of intraoperative adverse events plays a vital role in reducing surgical risk and improving patient safety. While deep learning has shown promise in predicting the single adverse event, several key challenges remain: overlooking adverse event dependencies, underutilizing heterogeneous clinical data, and suffering from the class imbalance inherent in medical datasets. To address these issues, we construct the first Multi-label Adverse Events dataset (MuAE) for intraoperative adverse events prediction, covering six critical events. Next, we propose a novel Transformerbased multi-label learning framework (IAENet) that combines an improved Time-Aware Feature-wise Linear Modulation (TAFiLM) module for static covariates and dynamic variables robust fusion and complex temporal dependencies modeling. Furthermore, we introduce a Label-Constrained Reweighting Loss (LCRLoss) with co-occurrence regularization to effectively mitigate intra-event imbalance and enforce structured consistency among frequently co-occurring events. Extensive experiments demonstrate that IAENet consistently outperforms strong baselines on 5, 10, and 15-minute early warning tasks, achieving improvements of +5.05%, +2.82%, and +7.57% on average F1 score. These results highlight the potential of IAENet for supporting intelligent intraoperative decision-making in clinical practice.",
+      "authors": [
+        "Xueyao Wang",
+        "Xiuding Cai",
+        "Honglin Shang",
+        "Yaoyao Zhu",
+        "Yu Yao"
+      ],
+      "published": "2026-03-05T14:20:40Z",
+      "published_date": "2026-03-05 14:20:40+00:00",
+      "updated": "2026-03-05T14:20:40Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05212v1",
+      "url": "http://arxiv.org/abs/2603.05212v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.5,
+        "recency": 3.0,
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 8.4
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "transformer",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "is_hot_paper": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05181v1",
+      "title": "Mario: Multimodal Graph Reasoning with Large Language Models",
+      "summary": "Recent advances in large language models (LLMs) have opened new avenues for multimodal reasoning. Yet, most existing methods still rely on pretrained vision-language models (VLMs) to encode image-text pairs in isolation, ignoring the relational structure that real-world multimodal data naturally form. This motivates reasoning on multimodal graphs (MMGs), where each node has textual and visual attributes and edges provide structural cues. Enabling LLM-based reasoning on such heterogeneous multimodal signals while preserving graph topology introduces two key challenges: resolving weak cross-modal consistency and handling heterogeneous modality preference. To address this, we propose Mario, a unified framework that simultaneously resolves the two above challenges and enables effective LLM-based reasoning over MMGs. Mario consists of two innovative stages. Firstly, a graph-conditioned VLM design that jointly refines textual and visual features through fine-grained cross-modal contrastive learning guided by graph topology. Secondly, a modality-adaptive graph instruction tuning mechanism that organizes aligned multimodal features into graph-aware instruction views and employs a learnable router to surface, for each node and its neighborhood, the most informative modality configuration to the LLM. Extensive experiments across diverse MMG benchmarks demonstrate that Mario consistently outperforms state-of-the-art graph models in both supervised and zero-shot scenarios for node classification and link prediction. The code will be made available at https://github.com/sunyuanfu/Mario.",
+      "authors": [
+        "Yuanfu Sun",
+        "Kang Li",
+        "Pengkang Guo",
+        "Jiajin Liu",
+        "Qiaoyu Tan"
+      ],
+      "published": "2026-03-05T13:49:41Z",
+      "published_date": "2026-03-05 13:49:41+00:00",
+      "updated": "2026-03-05T13:49:41Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05181v1",
+      "url": "http://arxiv.org/abs/2603.05181v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.4,
+        "recency": 3.0,
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 8.27
+      },
+      "matched_domain": "Multimodal",
+      "matched_keywords": [
+        "vision-language",
+        "multimodal",
+        "image-text",
+        "cross-modal",
+        "cs.CV"
+      ],
+      "is_hot_paper": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05129v1",
+      "title": "MedCoRAG: Interpretable Hepatology Diagnosis via Hybrid Evidence Retrieval and Multispecialty Consensus",
+      "summary": "Diagnosing hepatic diseases accurately and interpretably is critical, yet it remains challenging in real-world clinical settings. Existing AI approaches for clinical diagnosis often lack transparency, structured reasoning, and deployability. Recent efforts have leveraged large language models (LLMs), retrieval-augmented generation (RAG), and multi-agent collaboration. However, these approaches typically retrieve evidence from a single source and fail to support iterative, role-specialized deliberation grounded in structured clinical data. To address this, we propose MedCoRAG (i.e., Medical Collaborative RAG), an end-to-end framework that generates diagnostic hypotheses from standardized abnormal findings and constructs a patient-specific evidence package by jointly retrieving and pruning UMLS knowledge graph paths and clinical guidelines. It then performs Multi-Agent Collaborative Reasoning: a Router Agent dynamically dispatches Specialist Agents based on case complexity; these agents iteratively reason over the evidence and trigger targeted re-retrievals when needed, while a Generalist Agent synthesizes all deliberations into a traceable consensus diagnosis that emulates multidisciplinary consultation. Experimental results on hepatic disease cases from MIMIC-IV show that MedCoRAG outperforms existing methods and closed-source models in both diagnostic performance and reasoning interpretability.",
+      "authors": [
+        "Zheng Li",
+        "Jiayi Xu",
+        "Zhikai Hu",
+        "Hechang Chen",
+        "Lele Cong",
+        "Yunyun Wang",
+        "Shuchao Pang"
+      ],
+      "published": "2026-03-05T12:58:45Z",
+      "published_date": "2026-03-05 12:58:45+00:00",
+      "updated": "2026-03-05T12:58:45Z",
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05129v1",
+      "url": "http://arxiv.org/abs/2603.05129v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.6,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 8.13
+      },
+      "matched_domain": "Agents",
+      "matched_keywords": [
+        "agent",
+        "multi-agent",
+        "cs.AI",
+        "cs.MA"
+      ],
+      "is_hot_paper": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05210v1",
+      "title": "Balancing Coverage and Draft Latency in Vocabulary Trimming for Faster Speculative Decoding",
+      "summary": "Speculative decoding accelerates inference for Large Language Models by using a lightweight draft model to propose candidate tokens that are verified in parallel by a larger target model. Prior work shows that the draft model often dominates speculative decoding latency, since it generates tokens sequentially and incurs high cost from its language modeling head as vocabulary size grows. This exposes a fundamental trade-off in draft model design: larger vocabularies improve token coverage and agreement with the target model, but incur higher draft latency, while smaller vocabularies reduce latency at the risk of missing tokens required for accurate draft generation. We address this trade-off through vocabulary trimming for draft models, motivated by the observation that domain-specific workloads use only a small fraction of the full vocabulary. We cast draft vocabulary selection as a constrained optimization problem that balances token coverage and draft latency. Coverage is computed over assistant responses in the training data, while latency is estimated using architecture-aware FLOPs that capture the cost of the language modeling head as a function of vocabulary size. We optimize a utility function with a Tree-structured Parzen Estimator to efficiently explore the coverage-latency Pareto frontier under a minimum coverage constraint. Experiments show improved speculative decoding throughput while reducing draft vocabularies by up to 97% with high coverage. On domain-specific tasks, we achieve up to 16% latency reduction and 20% throughput improvement, and up to 6.7% throughput gains on diverse out-of-distribution tasks.",
+      "authors": [
+        "Ofir Ben Shoham"
+      ],
+      "published": "2026-03-05T14:20:22Z",
+      "published_date": "2026-03-05 14:20:22+00:00",
+      "updated": "2026-03-05T14:20:22Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05210v1",
+      "url": "http://arxiv.org/abs/2603.05210v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.3,
+        "recency": 3.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 8.0
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "is_hot_paper": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05308v1",
+      "title": "Med-V1: Small Language Models for Zero-shot and Scalable Biomedical Evidence Attribution",
+      "summary": "Assessing whether an article supports an assertion is essential for hallucination detection and claim verification. While large language models (LLMs) have the potential to automate this task, achieving strong performance requires frontier models such as GPT-5 that are prohibitively expensive to deploy at scale. To efficiently perform biomedical evidence attribution, we present Med-V1, a family of small language models with only three billion parameters. Trained on high-quality synthetic data newly developed in this study, Med-V1 substantially outperforms (+27.0% to +71.3%) its base models on five biomedical benchmarks unified into a verification format. Despite its smaller size, Med-V1 performs comparably to frontier LLMs such as GPT-5, along with high-quality explanations for its predictions. We use Med-V1 to conduct a first-of-its-kind use case study that quantifies hallucinations in LLM-generated answers under different citation instructions. Results show that the format instruction strongly affects citation validity and hallucination, with GPT-5 generating more claims but exhibiting hallucination rates similar to GPT-4o. Additionally, we present a second use case showing that Med-V1 can automatically identify high-stakes evidence misattributions in clinical practice guidelines, revealing potentially negative public health impacts that are otherwise challenging to identify at scale. Overall, Med-V1 provides an efficient and accurate lightweight alternative to frontier LLMs for practical and real-world applications in biomedical evidence attribution and verification tasks. Med-V1 is available at https://github.com/ncbi-nlp/Med-V1.",
+      "authors": [
+        "Qiao Jin",
+        "Yin Fang",
+        "Lauren He",
+        "Yifan Yang",
+        "Guangzhi Xiong",
+        "Zhizheng Wang",
+        "Nicholas Wan",
+        "Joey Chan",
+        "Donald C. Comeau",
+        "Robert Leaman",
+        "Charalampos S. Floudas",
+        "Aidong Zhang",
+        "Michael F. Chiang",
+        "Yifan Peng",
+        "Zhiyong Lu"
+      ],
+      "published": "2026-03-05T15:48:43Z",
+      "published_date": "2026-03-05 15:48:43+00:00",
+      "updated": "2026-03-05T15:48:43Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05308v1",
+      "url": "http://arxiv.org/abs/2603.05308v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.6,
+        "recency": 3.0,
+        "popularity": 1.8,
+        "quality": 1.8,
+        "recommendation": 7.87
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "LLM",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "is_hot_paper": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05218v1",
+      "title": "KARL: Knowledge Agents via Reinforcement Learning",
+      "summary": "We present a system for training enterprise search agents via reinforcement learning that achieves state-of-the-art performance across a diverse suite of hard-to-verify agentic search tasks. Our work makes four core contributions. First, we introduce KARLBench, a multi-capability evaluation suite spanning six distinct search regimes, including constraint-driven entity search, cross-document report synthesis, tabular numerical reasoning, exhaustive entity retrieval, procedural reasoning over technical documentation, and fact aggregation over internal enterprise notes. Second, we show that models trained across heterogeneous search behaviors generalize substantially better than those optimized for any single benchmark. Third, we develop an agentic synthesis pipeline that employs long-horizon reasoning and tool use to generate diverse, grounded, and high-quality training data, with iterative bootstrapping from increasingly capable models. Fourth, we propose a new post-training paradigm based on iterative large-batch off-policy RL that is sample efficient, robust to train-inference engine discrepancies, and naturally extends to multi-task training with out-of-distribution generalization. Compared to Claude 4.6 and GPT 5.2, KARL is Pareto-optimal on KARLBench across cost-quality and latency-quality trade-offs, including tasks that were out-of-distribution during training. With sufficient test-time compute, it surpasses the strongest closed models. These results show that tailored synthetic data in combination with multi-task reinforcement learning enables cost-efficient and high-performing knowledge agents for grounded reasoning.",
+      "authors": [
+        "Jonathan D. Chang",
+        "Andrew Drozdov",
+        "Shubham Toshniwal",
+        "Owen Oertell",
+        "Alexander Trott",
+        "Jacob Portes",
+        "Abhay Gupta",
+        "Pallavi Koppol",
+        "Ashutosh Baheti",
+        "Sean Kulinski",
+        "Ivan Zhou",
+        "Irene Dea",
+        "Krista Opsahl-Ong",
+        "Simon Favreau-Lessard",
+        "Sean Owen",
+        "Jose Javier Gonzalez Ortiz",
+        "Arnav Singhvi",
+        "Xabi Andrade",
+        "Cindy Wang",
+        "Kartik Sreenivasan",
+        "Sam Havens",
+        "Jialu Liu",
+        "Peyton DeNiro",
+        "Wen Sun",
+        "Michael Bendersky",
+        "Jonathan Frankle"
+      ],
+      "published": "2026-03-05T14:30:25Z",
+      "published_date": "2026-03-05 14:30:25+00:00",
+      "updated": "2026-03-05T14:30:25Z",
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05218v1",
+      "url": "http://arxiv.org/abs/2603.05218v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.0,
+        "recency": 3.0,
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 7.73
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "is_hot_paper": false
+    }
+  ]
+}

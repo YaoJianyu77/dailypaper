@@ -1,0 +1,166 @@
+{
+  "notes": [
+    {
+      "title": "Aura: Universal Multi-dimensional Exogenous Integration for Aviation Time Series",
+      "slug": "2603-05092v1-aura-universal-multi-dimensional-exogenous-integ",
+      "source_path": "content/papers/2603-05092v1-aura-universal-multi-dimensional-exogenous-integ/index.md",
+      "url": "/papers/2603-05092v1-aura-universal-multi-dimensional-exogenous-integ/",
+      "title_keywords": [
+        "Aura"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "MedCoRAG: Interpretable Hepatology Diagnosis via Hybrid Evidence Retrieval and Multispecialty Consensus",
+      "slug": "2603-05129v1-medcorag-interpretable-hepatology-diagnosis-via",
+      "source_path": "content/papers/2603-05129v1-medcorag-interpretable-hepatology-diagnosis-via/index.md",
+      "url": "/papers/2603-05129v1-medcorag-interpretable-hepatology-diagnosis-via/",
+      "title_keywords": [
+        "MedCoRAG"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "Mario: Multimodal Graph Reasoning with Large Language Models",
+      "slug": "2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang",
+      "source_path": "content/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/index.md",
+      "url": "/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/",
+      "title_keywords": [
+        "Mario"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "Balancing Coverage and Draft Latency in Vocabulary Trimming for Faster Speculative Decoding",
+      "slug": "2603-05210v1-balancing-coverage-and-draft-latency-in-vocabula",
+      "source_path": "content/papers/2603-05210v1-balancing-coverage-and-draft-latency-in-vocabula/index.md",
+      "url": "/papers/2603-05210v1-balancing-coverage-and-draft-latency-in-vocabula/",
+      "title_keywords": [],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "Early Warning of Intraoperative Adverse Events via Transformer-Driven Multi-Label Learning",
+      "slug": "2603-05212v1-early-warning-of-intraoperative-adverse-events-v",
+      "source_path": "content/papers/2603-05212v1-early-warning-of-intraoperative-adverse-events-v/index.md",
+      "url": "/papers/2603-05212v1-early-warning-of-intraoperative-adverse-events-v/",
+      "title_keywords": [
+        "Transformer-Driven",
+        "Multi-Label"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "KARL: Knowledge Agents via Reinforcement Learning",
+      "slug": "2603-05218v1-karl-knowledge-agents-via-reinforcement-learning",
+      "source_path": "content/papers/2603-05218v1-karl-knowledge-agents-via-reinforcement-learning/index.md",
+      "url": "/papers/2603-05218v1-karl-knowledge-agents-via-reinforcement-learning/",
+      "title_keywords": [
+        "KARL"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "WavSLM: Single-Stream Speech Language Modeling via WavLM Distillation",
+      "slug": "2603-05299v1-wavslm-single-stream-speech-language-modeling-vi",
+      "source_path": "content/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/index.md",
+      "url": "/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/",
+      "title_keywords": [
+        "WavSLM",
+        "Single-Stream"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "Med-V1: Small Language Models for Zero-shot and Scalable Biomedical Evidence Attribution",
+      "slug": "2603-05308v1-med-v1-small-language-models-for-zero-shot-and-s",
+      "source_path": "content/papers/2603-05308v1-med-v1-small-language-models-for-zero-shot-and-s/index.md",
+      "url": "/papers/2603-05308v1-med-v1-small-language-models-for-zero-shot-and-s/",
+      "title_keywords": [
+        "Med-V1"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "Leveraging LLM Parametric Knowledge for Fact Checking without Retrieval",
+      "slug": "2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che",
+      "source_path": "content/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/index.md",
+      "url": "/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/",
+      "title_keywords": [],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+      "slug": "2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling",
+      "source_path": "content/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/index.md",
+      "url": "/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/",
+      "title_keywords": [
+        "POET-X"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    }
+  ],
+  "keyword_to_notes": {
+    "aura": [
+      "/papers/2603-05092v1-aura-universal-multi-dimensional-exogenous-integ/"
+    ],
+    "paper-note": [
+      "/papers/2603-05092v1-aura-universal-multi-dimensional-exogenous-integ/",
+      "/papers/2603-05129v1-medcorag-interpretable-hepatology-diagnosis-via/",
+      "/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/",
+      "/papers/2603-05210v1-balancing-coverage-and-draft-latency-in-vocabula/",
+      "/papers/2603-05212v1-early-warning-of-intraoperative-adverse-events-v/",
+      "/papers/2603-05218v1-karl-knowledge-agents-via-reinforcement-learning/",
+      "/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/",
+      "/papers/2603-05308v1-med-v1-small-language-models-for-zero-shot-and-s/",
+      "/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/",
+      "/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/"
+    ],
+    "medcorag": [
+      "/papers/2603-05129v1-medcorag-interpretable-hepatology-diagnosis-via/"
+    ],
+    "mario": [
+      "/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/"
+    ],
+    "transformer-driven": [
+      "/papers/2603-05212v1-early-warning-of-intraoperative-adverse-events-v/"
+    ],
+    "multi-label": [
+      "/papers/2603-05212v1-early-warning-of-intraoperative-adverse-events-v/"
+    ],
+    "karl": [
+      "/papers/2603-05218v1-karl-knowledge-agents-via-reinforcement-learning/"
+    ],
+    "wavslm": [
+      "/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/"
+    ],
+    "single-stream": [
+      "/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/"
+    ],
+    "med-v1": [
+      "/papers/2603-05308v1-med-v1-small-language-models-for-zero-shot-and-s/"
+    ],
+    "poet-x": [
+      "/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/"
+    ]
+  }
+}
