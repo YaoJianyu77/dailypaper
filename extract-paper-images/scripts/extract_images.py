@@ -8,7 +8,6 @@
 3. PDF直接提取的图片（最后备选）
 """
 
-import fitz  # PyMuPDF
 import os
 import json
 import sys
@@ -20,6 +19,14 @@ import logging
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
+
+try:
+    import fitz  # PyMuPDF
+    HAS_FITZ = True
+except ImportError:
+    fitz = None
+    HAS_FITZ = False
+    logger.warning("PyMuPDF not found, PDF-based image extraction will be skipped")
 
 try:
     import requests
@@ -112,6 +119,9 @@ def find_figures_from_source(temp_dir):
 
 def extract_pdf_figures(pdf_path, output_dir):
     """从PDF中提取图片（备选方案）"""
+    if not HAS_FITZ:
+        logger.warning("跳过PDF图片提取：PyMuPDF 不可用")
+        return []
     print("从PDF直接提取图片（备选方案）...")
 
     pdf_doc = fitz.open(pdf_path)
@@ -155,6 +165,9 @@ def extract_pdf_figures(pdf_path, output_dir):
 
 def extract_from_pdf_figures(figures_pdf, output_dir):
     """从PDF格式图片文件中提取图片"""
+    if not HAS_FITZ:
+        logger.warning("跳过PDF figure 提取：PyMuPDF 不可用")
+        return []
     print(f"从PDF图片文件提取: {os.path.basename(figures_pdf)}")
 
     extracted = []

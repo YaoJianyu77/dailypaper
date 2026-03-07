@@ -1,0 +1,275 @@
+{
+  "nodes": [
+    {
+      "id": "2603.05181v1",
+      "title": "Mario: Multimodal Graph Reasoning with Large Language Models",
+      "domain": "Multimodal",
+      "quality_score": 8.81,
+      "updated": "2026-03-07"
+    },
+    {
+      "id": "2603.05471v1",
+      "title": "Leveraging LLM Parametric Knowledge for Fact Checking without Retrieval",
+      "domain": "Large Language Models",
+      "quality_score": 8.73,
+      "updated": "2026-03-07"
+    },
+    {
+      "id": "2603.05500v1",
+      "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+      "domain": "Large Language Models",
+      "quality_score": 8.2,
+      "updated": "2026-03-07"
+    },
+    {
+      "id": "2603.05210v1",
+      "title": "Balancing Coverage and Draft Latency in Vocabulary Trimming for Faster Speculative Decoding",
+      "domain": "Large Language Models",
+      "quality_score": 8.2,
+      "updated": "2026-03-07"
+    },
+    {
+      "id": "2603.05299v1",
+      "title": "WavSLM: Single-Stream Speech Language Modeling via WavLM Distillation",
+      "domain": "Large Language Models",
+      "quality_score": 8.09,
+      "updated": "2026-03-07"
+    },
+    {
+      "id": "2603.05308v1",
+      "title": "Med-V1: Small Language Models for Zero-shot and Scalable Biomedical Evidence Attribution",
+      "domain": "Large Language Models",
+      "quality_score": 7.95,
+      "updated": "2026-03-07"
+    },
+    {
+      "id": "2603.05218v1",
+      "title": "KARL: Knowledge Agents via Reinforcement Learning",
+      "domain": "Large Language Models",
+      "quality_score": 7.93,
+      "updated": "2026-03-07"
+    },
+    {
+      "id": "2603.05028v1",
+      "title": "Survive at All Costs: Exploring LLM's Risky Behaviors under Survival Pressure",
+      "domain": "Large Language Models",
+      "quality_score": 7.93,
+      "updated": "2026-03-07"
+    },
+    {
+      "id": "2603.05129v1",
+      "title": "MedCoRAG: Interpretable Hepatology Diagnosis via Hybrid Evidence Retrieval and Multispecialty Consensus",
+      "domain": "Agents",
+      "quality_score": 7.9,
+      "updated": "2026-03-07"
+    },
+    {
+      "id": "2603.05290v1",
+      "title": "X-RAY: Mapping LLM Reasoning Capability via Formalized and Calibrated Probes",
+      "domain": "Large Language Models",
+      "quality_score": 7.8,
+      "updated": "2026-03-07"
+    }
+  ],
+  "edges": [
+    {
+      "source": "2603.05181v1",
+      "target": "2603.05471v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05181v1",
+      "target": "2603.05028v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05181v1",
+      "target": "2603.05290v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05471v1",
+      "target": "2603.05028v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05471v1",
+      "target": "2603.05290v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05471v1",
+      "target": "2603.05500v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05500v1",
+      "target": "2603.05471v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05500v1",
+      "target": "2603.05210v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05500v1",
+      "target": "2603.05299v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05210v1",
+      "target": "2603.05471v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05210v1",
+      "target": "2603.05500v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05210v1",
+      "target": "2603.05299v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05299v1",
+      "target": "2603.05471v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05299v1",
+      "target": "2603.05500v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05299v1",
+      "target": "2603.05210v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05308v1",
+      "target": "2603.05471v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05308v1",
+      "target": "2603.05500v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05308v1",
+      "target": "2603.05210v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05218v1",
+      "target": "2603.05028v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05218v1",
+      "target": "2603.05290v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05218v1",
+      "target": "2603.05471v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05028v1",
+      "target": "2603.05290v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05028v1",
+      "target": "2603.05471v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05028v1",
+      "target": "2603.05218v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05129v1",
+      "target": "2603.05218v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05129v1",
+      "target": "2603.05028v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05129v1",
+      "target": "2603.05290v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05290v1",
+      "target": "2603.05028v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05290v1",
+      "target": "2603.05471v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05290v1",
+      "target": "2603.05218v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05181v1",
+      "target": "2603.05299v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05471v1",
+      "target": "2603.05210v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.05471v1",
+      "target": "2603.05299v1",
+      "type": "related",
+      "weight": 0.7
+    }
+  ],
+  "last_updated": "2026-03-07"
+}

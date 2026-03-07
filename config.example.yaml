@@ -88,7 +88,12 @@ search:
       quality: 0.10
 
 assets:
+  enabled: true
+  auto_extract_top_n: 3
   max_images_per_paper: 5
+  refresh_existing: false
+  graph_enabled: true
+  max_graph_related: 3
 
 research_domains:
   "Large Language Models":

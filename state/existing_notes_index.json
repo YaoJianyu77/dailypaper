@@ -37,6 +37,16 @@
       ]
     },
     {
+      "title": "images",
+      "slug": "images",
+      "source_path": "content/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/images/index.md",
+      "url": "/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/images/",
+      "title_keywords": [
+        "images"
+      ],
+      "tag_keywords": []
+    },
+    {
       "title": "Mario: Multimodal Graph Reasoning with Large Language Models",
       "slug": "2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang",
       "source_path": "content/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/index.md",
@@ -121,6 +131,16 @@
       ]
     },
     {
+      "title": "images",
+      "slug": "images",
+      "source_path": "content/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/images/index.md",
+      "url": "/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/images/",
+      "title_keywords": [
+        "images"
+      ],
+      "tag_keywords": []
+    },
+    {
       "title": "Leveraging LLM Parametric Knowledge for Fact Checking without Retrieval",
       "slug": "2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che",
       "source_path": "content/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/index.md",
@@ -129,6 +149,16 @@
       "tag_keywords": [
         "paper-note"
       ]
+    },
+    {
+      "title": "images",
+      "slug": "images",
+      "source_path": "content/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/images/index.md",
+      "url": "/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/images/",
+      "title_keywords": [
+        "images"
+      ],
+      "tag_keywords": []
     },
     {
       "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
@@ -166,6 +196,11 @@
     ],
     "medcorag": [
       "/papers/2603-05129v1-medcorag-interpretable-hepatology-diagnosis-via/"
+    ],
+    "images": [
+      "/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/images/",
+      "/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/images/",
+      "/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/images/"
     ],
     "mario": [
       "/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/"

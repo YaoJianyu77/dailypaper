@@ -16,7 +16,7 @@ authors:
 domain: Large Language Models
 slug: 2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che
 published: '2026-03-05T18:42:51Z'
-summary: 这篇工作把事实核查从依赖外部检索的流水线，推进到直接调用 LLM 参数知识的设定。
+summary: 这篇论文的核心看点是尝试不用检索，只靠模型参数知识做事实核查。
 source_url: https://arxiv.org/abs/2603.05471v1
 pdf_url: https://arxiv.org/pdf/2603.05471v1.pdf
 scores:
@@ -30,21 +30,22 @@ tags:
 status: generated
 updated: '2026-03-07'
 keywords:
+- 大语言模型
 - 事实核查
 - 参数知识
 - 无检索
-- LLM
 - 可信性
 reading_priority: high
+image_count: 5
 ---
 
 # Leveraging LLM Parametric Knowledge for Fact Checking without Retrieval
 
 ## TL;DR
-这篇工作把事实核查从依赖外部检索的流水线，推进到直接调用 LLM 参数知识的设定。
+这篇论文的核心看点是尝试不用检索，只靠模型参数知识做事实核查。
 
 ## 中文摘要
-论文关注不依赖外部检索的事实核查，核心方向是直接利用 LLM 的参数知识判断自然语言陈述的真实性。这个问题对 agent 系统很现实，因为检索错误、外部数据缺失和额外链路复杂度本身就是脆弱点。摘要没有充分说明具体验证框架、置信度校准方式，以及对时效性知识和长尾事实的处理。
+论文瞄准事实核查中长期依赖“检索加验证”的范式，提出利用LLM参数知识在无检索条件下做核查。这个方向值得现在读，因为Agent系统的可信性越来越受限于检索错误、外部数据可用性和系统复杂度。摘要明确交代了问题动机，但未在给定内容中充分说明具体核查流程、适用事实范围以及与检索式方法的效果差距。
 
 ## Quick Facts
 - Paper ID: `2603.05471v1`
@@ -54,33 +55,59 @@ reading_priority: high
 - arXiv: [abstract](https://arxiv.org/abs/2603.05471v1)
 - PDF: [download](https://arxiv.org/pdf/2603.05471v1.pdf)
 - Reading priority: high
-- Why this priority: 直接命中 agent 可信性瓶颈，问题设定对当前 LLM 系统很重要，即使摘要细节不足也值得优先读。
+- Why this priority: 它命中LLM与Agent可靠性的核心议题，问题定义有明显新意；优先级高，但需要重点核对无检索条件下的边界和误判成本。
+
+## Problem Framing
+问题是现有事实核查通常依赖外部检索，容易受到检索错误、知识覆盖不足和外部数据可用性的限制，从而影响Agent系统可信性。
+
+## Approach Snapshot
+方法是利用LLM内部的参数化知识直接进行事实核查，尽量绕开检索步骤；但摘要没有充分说明它如何判断真伪、如何处理知识时效性，以及是否有不确定性估计。
+
+## Evidence Mentioned In Abstract
+摘要给出的证据主要是对现有检索式核查局限的论证，以及提出无检索核查这一替代方向；在已提供内容里，没有看到数据集、对比对象、定量结果或失败案例，摘要没有充分说明。
+
+## Reading Checklist
+- 无检索核查到底输出什么：真假标签、解释，还是证据归因？
+- 对于参数知识中不存在或过时的事实，方法如何避免自信地给出错误判断？
+- 与检索增强方法相比，它在时效性强、长尾或专业领域事实上会退化多少？
 
 ## Core Contributions
-- 把事实核查重新定义为参数知识利用问题，而不是默认检索先行。
-- 把 agent 可信性中的检索误差与外部数据可用性限制直接纳入问题定义。
-- 面向来自人类文本、网页内容和模型输出的陈述统一讨论核查场景。
+- 把事实核查目标从“依赖外部检索”改写为“直接利用参数知识”。
+- 把可信性问题聚焦到检索依赖本身，而不是仅优化验证提示词。
+- 为Agent系统中低延迟、低外部依赖的核查路径提供了研究切口。
 
 ## Why Read It
-- 很多 agent 流水线把检索视为必需组件，这篇工作直接挑战这一前提。
-- 如果无检索方案可用，就有机会减少外部依赖和检索误差传播。
-- 它对事实核查、输出校验和可信性评测都有直接相关性。
+- 这是和Agent可信性直接相关的问题，应用价值比单纯提高基准分更高。
+- 如果方法成立，会影响事实核查、回答自检和生成后验证三类工作流。
+- 它有机会澄清LLM参数知识到底能承担多少验证职责。
 
 ## Risks Or Limits
-- 参数知识会过时，摘要没有充分说明时间敏感事实如何处理。
-- 对长尾、专业或争议性陈述的覆盖边界未说明。','摘要没有充分说明如何做置信度校准与错误分析。
+- 参数知识天然有时效性和覆盖边界，无检索方案可能在动态事实下失效。
+- 如果没有校准或拒答机制，方法可能把幻觉包装成核查结论。
 
 ## Recommended For
-- 做 agent 可信性和校验链路的研究者
-- 事实核查与幻觉检测方向的工程师
-- 关注检索增强替代路径的团队
+- 关注Agent可信性、事实核查与LLM可靠性的研究者
+- 在做低延迟验证链路或回答后自检系统的工程师
 
 ## Keywords
+- 大语言模型
 - 事实核查
 - 参数知识
 - 无检索
-- LLM
 - 可信性
+
+## Figures
+![ICLR_scheme_bright-2.drawio_page1](images/ICLR_scheme_bright-2.drawio_page1.png)
+
+![best_vs_mean_per_language_group_roc_auc_fin_v3_page1](images/best_vs_mean_per_language_group_roc_auc_fin_v3_page1.png)
+
+![heroplot_with_ci_page1](images/heroplot_with_ci_page1.png)
+
+![layer_wise_scores_page1](images/layer_wise_scores_page1.png)
+
+![wh_auc_relative_medium_10bins_page1](images/wh_auc_relative_medium_10bins_page1.png)
+
+- Full asset manifest: [images/index.md](images/index.md)
 
 ## Abstract
 Trustworthiness is a core research challenge for agentic AI systems built on Large Language Models (LLMs). To enhance trust, natural language claims from diverse sources, including human-written text, web content, and model outputs, are commonly checked for factuality by retrieving external knowledge and using an LLM to verify the faithfulness of claims to the retrieved evidence. As a result, such methods are constrained by retrieval errors and external data availability, while leaving the models intrinsic fact-verification capabilities largely unused. We propose the task of fact-checking without retrieval, focusing on the verification of arbitrary natural language claims, independent of their source. To study this setting, we introduce a comprehensive evaluation framework focused on generalization, testing robustness to (i) long-tail knowledge, (ii) variation in claim sources, (iii) multilinguality, and (iv) long-form generation. Across 9 datasets, 18 methods and 3 models, our experiments indicate that logit-based approaches often underperform compared to those that leverage internal model representations. Building on this finding, we introduce INTRA, a method that exploits interactions between internal representations and achieves state-of-the-art performance with strong generalization. More broadly, our work establishes fact-checking without retrieval as a promising research direction that can complement retrieval-based frameworks, improve scalability, and enable the use of such systems as reward signals during training or as components integrated into the generation process.
@@ -91,3 +118,7 @@ Trustworthiness is a core research challenge for agentic AI systems built on Lar
 - Recency score: 3.0
 - Popularity score: 2.0
 - Quality score: 2.0
+
+## Assets
+- Extracted assets are stored in the `images/` folder next to this page.
+- Browse the image manifest here: [images/index.md](images/index.md)

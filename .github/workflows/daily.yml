@@ -76,7 +76,12 @@ jobs:
           PY
 
       - name: Publish daily content
-        run: python scripts/publish_daily.py --input state/arxiv_enriched.json
+        run: |
+          CONFIG_PATH="config.yaml"
+          if [ ! -f "$CONFIG_PATH" ]; then
+            CONFIG_PATH="config.example.yaml"
+          fi
+          python scripts/publish_daily.py --config "$CONFIG_PATH" --input state/arxiv_enriched.json
 
       - name: Build static site
         run: |

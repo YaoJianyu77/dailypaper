@@ -31,6 +31,10 @@
           "paper_id",
           "one_liner_zh",
           "summary_zh",
+          "problem_zh",
+          "approach_zh",
+          "evidence_zh",
+          "open_questions",
           "core_contributions",
           "why_read",
           "risks",
@@ -43,6 +47,14 @@
           "paper_id": {"type": "string"},
           "one_liner_zh": {"type": "string"},
           "summary_zh": {"type": "string"},
+          "problem_zh": {"type": "string"},
+          "approach_zh": {"type": "string"},
+          "evidence_zh": {"type": "string"},
+          "open_questions": {
+            "type": "array",
+            "items": {"type": "string"},
+            "maxItems": 3
+          },
           "core_contributions": {
             "type": "array",
             "items": {"type": "string"},

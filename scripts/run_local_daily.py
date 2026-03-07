@@ -158,6 +158,7 @@ def main() -> int:
     run([
         sys.executable,
         str(repo_root / 'scripts' / 'publish_daily.py'),
+        '--config', str(config_path),
         '--input', enriched_file,
     ], cwd=repo_root)
 

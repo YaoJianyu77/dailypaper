@@ -71,6 +71,14 @@ def normalize_paper_id(raw: str) -> str:
     return str(raw or '').replace('http://arxiv.org/abs/', '').replace('https://arxiv.org/abs/', '').replace('arXiv:', '').strip()
 
 
+def normalize_model_text(value: Any) -> str:
+    text = str(value or '').replace('\r', ' ').replace('\n', ' ').strip()
+    text = re.sub(r'\s+', ' ', text).strip()
+    if len(text) >= 2 and text[0] == text[-1] and text[0] in {"'", '"'}:
+        text = text[1:-1].strip()
+    return text
+
+
 def load_config(config_path: str | None) -> Dict[str, Any]:
     if not config_path:
         return {}
@@ -274,9 +282,14 @@ def build_messages(
         'The JSON object must have keys daily_brief and papers. '
         'daily_brief must contain overview_zh (string), top_themes (array of 3 short strings), and reading_strategy (array of 3 short strings). '
         'papers must be an array where each item contains: paper_id (string), one_liner_zh (string), summary_zh (string, 2-4 sentences), '
+        'problem_zh (string), approach_zh (string), evidence_zh (string), open_questions (array of 2-3 strings), '
         'core_contributions (array of 3 strings), why_read (array of 3 strings), risks (array of 2 strings), '
         'recommended_for (array of 2-3 strings), keywords (array of 4-6 short strings), reading_priority (one of high, medium, low), '
-        'and reading_priority_reason (string).'
+        'and reading_priority_reason (string). '
+        'problem_zh should explain the task and why it matters now. '
+        'approach_zh should explain the main mechanism or modeling move. '
+        'evidence_zh should state what the abstract actually claims about evaluation, or say the abstract does not make it clear. '
+        'open_questions should list the most important things to verify when reading the full paper.'
     )
     editorial_instructions = build_editorial_instruction_text(config)
     skill_instructions = build_skill_prompt_text(repo_root, config)
@@ -458,7 +471,18 @@ def coerce_string_list(value: Any, *, min_items: int = 0, max_items: int = 10, f
     if not isinstance(value, list):
         items = []
     else:
-        items = [str(item).strip() for item in value if str(item).strip()]
+        items = []
+        for item in value:
+            raw = normalize_model_text(item)
+            if not raw:
+                continue
+            pieces = [raw]
+            for pattern in (r"'\s*,\s*'", r'"\s*,\s*"'):
+                next_pieces = []
+                for piece in pieces:
+                    next_pieces.extend(re.split(pattern, piece))
+                pieces = next_pieces
+            items.extend(normalize_model_text(piece) for piece in pieces if normalize_model_text(piece))
     items = items[:max_items]
     if len(items) < min_items:
         items.extend(fallback[: max(0, min_items - len(items))])
@@ -478,16 +502,24 @@ def normalize_daily_brief(data: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def normalize_paper_ai(item: Dict[str, Any], fallback_paper: Dict[str, Any]) -> Dict[str, Any]:
+    summary = normalize_model_text(item.get('summary_zh') or '')
+    problem = normalize_model_text(item.get('problem_zh') or '')
+    approach = normalize_model_text(item.get('approach_zh') or '')
+    evidence = normalize_model_text(item.get('evidence_zh') or '')
     return {
-        'one_liner_zh': str(item.get('one_liner_zh') or '').strip(),
-        'summary_zh': str(item.get('summary_zh') or '').strip(),
+        'one_liner_zh': normalize_model_text(item.get('one_liner_zh') or ''),
+        'summary_zh': summary,
+        'problem_zh': problem,
+        'approach_zh': approach,
+        'evidence_zh': evidence,
+        'open_questions': coerce_string_list(item.get('open_questions'), max_items=3),
         'core_contributions': coerce_string_list(item.get('core_contributions'), max_items=3),
         'why_read': coerce_string_list(item.get('why_read'), max_items=3),
         'risks': coerce_string_list(item.get('risks'), max_items=2),
         'recommended_for': coerce_string_list(item.get('recommended_for'), max_items=3),
         'keywords': coerce_string_list(item.get('keywords'), max_items=6),
-        'reading_priority': str(item.get('reading_priority') or 'medium').strip().lower() or 'medium',
-        'reading_priority_reason': str(item.get('reading_priority_reason') or '').strip(),
+        'reading_priority': normalize_model_text(item.get('reading_priority') or 'medium').lower() or 'medium',
+        'reading_priority_reason': normalize_model_text(item.get('reading_priority_reason') or ''),
         'fallback_summary': short_fallback_summary(fallback_paper),
     }
 
@@ -529,6 +561,10 @@ def passthrough_payload(payload: Dict[str, Any], reason: str) -> Dict[str, Any]:
         paper.setdefault('ai', {
             'one_liner_zh': '',
             'summary_zh': '',
+            'problem_zh': '',
+            'approach_zh': '',
+            'evidence_zh': '',
+            'open_questions': [],
             'core_contributions': [],
             'why_read': [],
             'risks': [],

@@ -55,7 +55,9 @@ def build_prompt(repo_root: Path, report_date: str, config: Dict[str, Any], payl
         '4. JSON 结构必须匹配提供的 schema。\n'
         '5. `daily_brief.overview_zh` 要像日报编辑写的导语，不要空话。\n'
         '6. 每篇论文的 `summary_zh` 控制在 2 到 4 句。\n'
-        '7. `core_contributions`、`why_read`、`risks` 都尽量具体，避免泛泛而谈。',
+        '7. `problem_zh`、`approach_zh`、`evidence_zh` 要分别回答“问题是什么/方法是什么/摘要给了什么证据”。\n'
+        '8. `open_questions` 给出 2 到 3 个读论文时最该核对的具体问题。\n'
+        '9. `core_contributions`、`why_read`、`risks` 都尽量具体，避免泛泛而谈。',
     ]
     if editorial_instructions:
         instruction_blocks.append('仓库编辑偏好：\n' + editorial_instructions)

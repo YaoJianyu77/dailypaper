@@ -162,6 +162,14 @@ def apply_base_url(url: str, base_url: str) -> str:
 
 def render_inline(text: str, base_url: str) -> str:
     escaped = html.escape(text)
+    escaped = re.sub(
+        r'!\[([^\]]*)\]\(([^)]+)\)',
+        lambda match: (
+            f'<img alt="{html.escape(match.group(1), quote=True)}" '
+            f'src="{html.escape(apply_base_url(match.group(2), base_url), quote=True)}">'
+        ),
+        escaped,
+    )
     escaped = re.sub(r'`([^`]+)`', r'<code>\1</code>', escaped)
     escaped = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', escaped)
     escaped = re.sub(r'\*([^*]+)\*', r'<em>\1</em>', escaped)
