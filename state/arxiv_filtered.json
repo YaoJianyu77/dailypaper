@@ -11,8 +11,8 @@
     }
   },
   "total_recent": 200,
-  "total_hot": 20,
-  "total_unique": 187,
+  "total_hot": 10,
+  "total_unique": 181,
   "top_papers": [
     {
       "id": "http://arxiv.org/abs/2603.05500v1",
