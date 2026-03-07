@@ -102,47 +102,121 @@
         "enabled": true,
         "source_kind": "arxiv_source",
         "text_char_count": 53239,
+        "figure_context": [
+          {
+            "image_ref": "Figure/Figure1.pdf",
+            "image_token": "figure1",
+            "caption": "(a) Cosine similarity between text and image embeddings across three models on four datasets.\n(b) Venn diagram over three prompt templates with different modality inputs: Text-Only, Image-Only, and Text+Image. Each colored circle corresponds to one template; numbers in each region give the proportion of nodes that can be correctly classified only by that template or by the union of the templates whose regions overlap (where overlapping regions blend the colors). Results are averaged over four da",
+            "role_hint": "method"
+          },
+          {
+            "image_ref": "Figure/Mario.pdf",
+            "image_token": "mario",
+            "caption": "Overview of the proposed Mario framework. Given a MMG, Stage 1 uses a graph-conditioned vision–language model to perform structure-aware image–text alignment: images and texts are initially encoded, symmetrically refined by a Transformer-embedded Mixer that injects graph structure into token embeddings, and then aligned via contrastive learning. Stage 2 builds on these aligned features with modality-adaptive graph instruction tuning, where a lightweight router, trained under LLM supervision (a),",
+            "role_hint": "method"
+          },
+          {
+            "image_ref": "Figure/train_loss_comparison.png",
+            "image_token": "trainlosscomparison",
+            "caption": "Movies",
+            "role_hint": "results"
+          },
+          {
+            "image_ref": "Figure/train_loss_comparison2.png",
+            "image_token": "trainlosscomparison2",
+            "caption": "Movies",
+            "role_hint": "results"
+          },
+          {
+            "image_ref": "Figure/Arts_Reddit.png",
+            "image_token": "artsreddit",
+            "caption": "Arts\\&Reddit",
+            "role_hint": "other"
+          },
+          {
+            "image_ref": "Figure/CDs_Movies.png",
+            "image_token": "cdsmovies",
+            "caption": "Arts\\&Reddit",
+            "role_hint": "other"
+          },
+          {
+            "image_ref": "Figure/movies_visual.pdf",
+            "image_token": "moviesvisual",
+            "caption": "Movies",
+            "role_hint": "examples"
+          },
+          {
+            "image_ref": "Figure/arts_visual.pdf",
+            "image_token": "artsvisual",
+            "caption": "Movies",
+            "role_hint": "examples"
+          },
+          {
+            "image_ref": "Figure/img/moviesCLIP_tsne.pdf",
+            "image_token": "moviescliptsne",
+            "caption": "Movies – Frozen CLIP",
+            "role_hint": "results"
+          },
+          {
+            "image_ref": "Figure/img/moviesclip_tuning_tsne.pdf",
+            "image_token": "moviescliptuningtsne",
+            "caption": "Movies – Frozen CLIP",
+            "role_hint": "results"
+          },
+          {
+            "image_ref": "Figure/img/moviesmario_tsne.pdf",
+            "image_token": "moviesmariotsne",
+            "caption": "Movies – Frozen CLIP",
+            "role_hint": "results"
+          },
+          {
+            "image_ref": "Figure/img/redditsclip_tsne.pdf",
+            "image_token": "redditscliptsne",
+            "caption": "Movies – Frozen CLIP",
+            "role_hint": "results"
+          }
+        ],
         "content": {
-          "abstract_translation_zh": "近来的大语言模型进展为多模态推理带来了新机会，但现有多数方法仍依赖预训练视觉-语言模型把图文对孤立编码，忽略了真实世界多模态数据天然具有的关系结构。这促使作者考虑多模态图：每个节点同时具有文本和视觉属性，边提供结构线索。要在保留图拓扑的同时让 LLM 处理这类异构信号，会遇到两个关键挑战：跨模态一致性弱，以及不同节点对模态的偏好不同。为此，论文提出统一框架 Mario，同时解决这两个问题并支持在多模态图上进行 LLM 推理。Mario 包含两个阶段：第一阶段是图条件视觉-语言模型，在图拓扑引导下通过细粒度跨模态对比学习联合优化文本与视觉特征；第二阶段是模态自适应图指令微调，把对齐后的多模态特征组织成图感知指令视图，并用可学习路由器为每个节点及其邻域选择最有信息量的模态配置送入 LLM。摘要称，在多个多模态图基准上，Mario 在监督与零样本场景下的节点分类和链路预测都优于现有最强图模型；摘要还提到代码将公开。",
-          "background_zh": "这篇工作处在两个趋势的交叉点上：一边是 LLM/指令调优正在从纯文本走向多模态推理，另一边是越来越多真实数据并不是孤立图文对，而是带关系边的多模态实体图。常见做法是先用 CLIP 一类 VLM 编码节点，再交给 GNN 或 GraphLLM，但这种流水线默认节点内图文已经对齐良好，也默认所有节点适合同一提示模板，这两点在真实多模态图里都很脆弱。",
-          "problem_zh": "论文要解决的是：在多模态图中，如何既保留图结构和邻域依赖，又让 LLM 真正利用文本、图像和边关系进行节点分类与链路预测。作者把难点明确拆成两个瓶颈：第一，节点内图文往往噪声大、描述不完整或语义错位，直接融合后再做图传播可能放大错配；第二，不同节点及其局部子图对文本、图像、两者结合三种输入视图的依赖并不相同，固定模板会浪费可用监督。",
-          "method_overview_zh": "Mario 采用两阶段设计。第一阶段先训练一个图条件 VLM：在文本塔和图像塔内部引入拓扑感知的 multimodal mixer，使节点表示在图结构偏置下迭代吸收邻域信息，再用双向 InfoNCE 把两种模态在结构条件下对齐。第二阶段把这些对齐后的表示映射成可插入 LLM 的图文本和图图像 special tokens，围绕每个节点构造文本视图、图像视图和多模态视图三类图感知提示，并训练一个轻量路由器根据节点自身表示、1/2-hop 上下文和度信息，为每个样本选择最合适的提示视图；训练时做软路由联合学习，推理时做硬选择，只送一个模板进 LLM。",
+          "abstract_translation_zh": "近来，大语言模型推动了多模态推理的发展，但多数现有方法仍把图文对作为孤立样本交给预训练视觉语言模型编码，忽略了真实世界多模态数据天然具有的关系结构。为此，论文考虑多模态图（MMG）：每个节点同时带文本和视觉属性，边提供结构线索。在保留图拓扑的前提下，让 LLM 对这类异构多模态信号做推理面临两个关键挑战：跨模态一致性弱，以及不同节点存在异质的模态偏好。为解决这两个问题，作者提出统一框架 Mario。它包含两个阶段：第一阶段是图条件视觉语言模型，在图拓扑引导下通过细粒度跨模态对比学习联合优化文本与图像特征；第二阶段是模态自适应的图指令微调，将对齐后的多模态特征组织成图感知指令视图，并用可学习路由器为每个节点及其邻域选择最有信息量的模态配置交给 LLM。摘要称，在多个 MMG 基准上，Mario 在监督和零样本场景下的节点分类与链路预测任务中都持续优于现有最优图模型。",
+          "background_zh": "多模态 LLM 的常见输入仍是单个图文对，但真实数据往往更像“带关系的多模态实体集合”，节点之间的边本身就是重要信号。现有“VLM 编码节点、GNN 做传播”的路线默认节点内文本和图像已充分对齐，这在噪声文本、弱配图、语义不完整的场景里并不成立。",
+          "problem_zh": "论文要解决的是：在多模态图上，如何同时利用文本、图像和图结构，让 LLM 做节点分类与链路预测，而不是只在节点级做图文拼接。作者把问题拆成两个更具体的障碍：一是节点内图文常常语义不一致，需要借助邻居和拓扑来补全对齐；二是不同节点及其局部子图对文本、图像或二者组合的依赖不同，固定模板会浪费信息。",
+          "method_overview_zh": "Mario 是一个两阶段框架。第一阶段先训练图条件 VLM，用结构感知的跨模态对齐把节点文本和图像映射到更一致、同时保留拓扑信息的表示空间；第二阶段再把这些对齐后的表示转成多种图感知提示视图，并用模态自适应路由器为每个节点选择更合适的提示模板，让 LLM 在节点级和邻域级都能按需使用文本、图像或二者联合信息。",
           "method_details": [
-            "GVLM 采用双塔编码器分别处理文本和图像，节点的 [CLS] 表示作为后续结构感知聚合的核心载体；初始表示来自预训练 VLM 特征并加入位置编码。",
-            "Topology-Aware Multimodal Mixer 会收集图中节点的 [CLS] 表示，做带图结构位置偏置的多头注意力；该偏置由按最短路径距离分桶的可学习标量构成，用来编码节点间的结构角色关系。",
-            "每一层 mixer 得到的结构感知节点表示会回灌到对应模态序列中，替换下一层的 [CLS]，从而让 token/patch 级特征在多层过程中持续吸收图上下文，而不是只在输出端做一次图传播。",
-            "跨模态对齐使用对称、温度缩放的 InfoNCE：同一节点的文本-图像对为正样本，batch 内跨节点组合为负样本；因为表示已显式注入拓扑，所以这个对齐目标不只是节点内对齐，也隐含利用了邻域语义来缩小跨模态差距。",
-            "第二阶段先用共享投影器把 Stage 1 的文本/图像表示映射到 LLM token 空间，形成图文本和图图像 special tokens；再按 1/2-hop 邻居中与锚点拼接表示余弦相似度最高的节点构造三类模板，并用 MAPR 基于节点表示、邻域均值池化和对数度输入预测路由分布，通过“模板损失后验 + KL 正则”的方式学习选择最优模态视图。"
+            "Stage 1 采用文本塔和图像塔的双塔编码结构，初始表示来自预训练视觉语言特征并加入位置编码；每层都以 [CLS] 作为节点级摘要，供后续图结构注入与跨模态对齐使用。",
+            "核心的 Topology-Aware Multimodal Mixer 会收集所有节点的 [CLS] 表示，对其做带图偏置的多头注意力；这个图偏置由按最短路距离分桶的、head-specific 可学习标量实现，使不同结构角色进入注意力计算。",
+            "混合器得到的结构感知节点表示会被重新注入到各模态序列前端，替换原 [CLS]，从而在后续 Transformer 层中持续把图上下文与 token/patch 级特征迭代融合。",
+            "跨模态对齐使用双向温度缩放 InfoNCE：同一节点的文本-图像对是唯一正样本，batch 内跨节点组合为负样本。由于输入表示已编码邻域信息，这一步学到的是“拓扑感知”的图文一致性，而不是纯节点内对齐。",
+            "Stage 2 为每个节点构造三种提示视图（文本、图像、多模态），并加入基于 1/2-hop 邻居的图上下文 token；随后用 MAPR 路由器根据节点的 Stage 1 表示、1/2-hop 上下文均值和对数度数输出模板概率，训练时结合各模板对应的 LLM 损失后验与 KL 正则进行软路由，推理时切换为硬路由，只保留单一模板。"
           ],
-          "experiment_setup_zh": "实验围绕四个研究问题展开：1）在标准多模态图任务上与不同模态输入的强基线比较整体效果；2）在完全未见的多模态图上测试 zero-shot 泛化；3）分析图条件 VLM 对表示学习和后续指令调优的贡献；4）分析模态自适应图指令微调相对单模板方案的性能与效率。提取文本明确说明任务覆盖节点分类和链路预测，并且论文还包含 Dataset Details、Experiment Details、GVLM 对齐的 t-SNE 可视化、与 MMGCN/MGAT 的比较、额外 GNN zero-shot 结果以及 Frozen vs LoRA-Tuned Mario 的分析。具体 benchmark 名称、样本规模、所用 LLM/VLM 主干、超参数、重复次数和统计显著性，提取文本没有充分说明。",
-          "main_results_zh": "提取文本显示，作者报告 Mario 在多个多模态图基准上，对监督和 zero-shot 场景下的节点分类与链路预测都优于现有图模型；文中贡献总结还声称，在 zero-shot transfer 中最高可达到 1.6× 的收益。引言中的图表说明还给出一项对齐层面的证据：引入图拓扑后，跨模态一致性相对 frozen CLIP 平均提升 68%，相对逐节点微调再提升 6%。但各数据集上的绝对分数、方差、与不同基线的逐项差距，提取文本没有充分说明。",
+          "experiment_setup_zh": "提取文本显示，实验围绕四个问题展开：总体性能（RQ1）、零样本泛化与迁移（RQ2）、组件消融（RQ3）以及效率与可视化（RQ4）。任务明确包括节点分类和链路预测，场景覆盖监督与零样本设置；两阶段训练使用同一批数据，先预训练 GVLM，再固定其参数并用 LoRA 联合训练 LLM 与 MAPR。附录标题还表明作者做了 t-SNE 可视化、与 MMGCN/MGAT 的比较、额外 GNN 零样本结果，以及 Frozen vs LoRA-Tuned Mario 的比较，但提取文本没有充分说明具体数据集构成、基线名单、LLM 规模、超参数和评测协议细节。",
+          "main_results_zh": "提取文本支持的结论有四点：第一，论文声称 Mario 在多个多模态图基准上，对节点分类和链路预测都优于现有图模型，且覆盖监督与零样本场景；第二，作者在引言中给出一项对齐证据：把图拓扑纳入对齐后，跨模态一致性相对 frozen CLIP 平均提升 68%，相对逐节点微调再提升 6%；第三，图 1 相关文字说明接近 30% 的节点只能被三种模板中的某一种或某两种正确分类，这直接支持“固定单模板不足、需要自适应模态选择”的问题设定；第四，文中还声称零样本迁移可达到最高 1.6× 增益，且路由器让训练大约以单模板基线一半的 epoch 数收敛，推理阶段通过硬路由保持与单模板流程相当的计算开销。除这些结论外，提取文本没有充分说明更细的数值分布和统计稳定性。",
           "strengths": [
-            "问题定义抓得准：不是泛泛做“多模态图 + LLM”，而是把瓶颈具体落到跨模态错配和节点级模态偏好差异上。",
-            "方法分工清晰：Stage 1 先解决表示层的结构感知对齐，Stage 2 再解决提示层的自适应选择，逻辑闭环比较完整。",
-            "相对常见“先编码再图传播”的流程，Mario 把图结构前移到模态对齐阶段，这一点对 MMG 比普通图文任务更有针对性。",
-            "路由器设计有工程意识：训练期用多模板学习节点偏好，推理期硬选择单模板，文本中明确声称不会比单模板推理多算。"
+            "问题拆分清晰：把 MMG 上的难点明确为“弱跨模态一致性”和“异质模态偏好”，方法两阶段设计与这两个问题一一对应。",
+            "方法不是简单把图结构塞进 LLM，而是先做结构感知对齐，再做提示级模态选择，表示学习层和推理层的职责划分相对清楚。",
+            "Topology-aware mixer 的实现比较具体，不是泛泛说“融合图信息”，而是通过最短路距离偏置和 [CLS] 重新注入实现结构条件化的图文对齐。",
+            "MAPR 不是静态模板选择，而是用各模板的 LLM 损失后验反向监督路由器，训练目标与最终选择策略一致性较强。"
           ],
           "limitations": [
-            "实验信息缺口较大：具体 benchmark、绝对指标、误差范围和显著性没有在提取文本中展开，当前只能相信方向性结论。",
-            "训练链路较长：需要先做 GVLM 预训练，再做 LLM + 路由器联合调优；而且 Stage 2 每个样本要跑三个模板，真实训练成本提取文本没有充分说明。",
-            "方法对图质量可能敏感，因为 Stage 1 明确把图拓扑注入跨模态对齐；如果边有噪声、图很稀疏或存在强异配，是否会放大错误信号，提取文本没有充分说明。",
-            "提示构造依赖从训练集节点中选择 1/2-hop 邻居并附带标签作为 in-context evidence，这种设计对可用训练图上下文有依赖，其收益中有多少来自路由本身、有多少来自 exemplar 构造，需要看完整消融。"
+            "最关键的问题是实验细节缺失：提取文本没有充分说明具体 benchmark、基线配置、显著性、不同任务上的绝对提升幅度和方差，因此“持续优于 SOTA”的可信度目前只能部分接受。",
+            "两阶段流程较长，Stage 2 训练时每个样本要跑三套模板，虽然推理不增算力，但训练成本和工程复杂度明显更高。",
+            "方法强依赖图结构质量。文本明确把邻居当作补全图文一致性的关键来源，但如果边本身有噪声，可能反而放大错误对齐；这部分提取文本没有充分说明。",
+            "模态路由依赖训练节点构造 1/2-hop 上下文与示例，泛化是否受图规模、节点度分布、邻域稀疏性影响，提取文本没有充分说明。"
           ],
-          "relation_to_prior_work_zh": "相对常见的“用 VLM 编码单节点图文，再把嵌入交给 GNN/Graph 模型传播”的路线，Mario 的关键差异是把图结构直接放进跨模态对齐阶段，而不是默认 CLIP 式表征已经足够一致；它通过双塔编码内部的结构偏置和 per-modality 对齐，显式修正节点内图文错配。相对只处理文本图或依赖固定提示模板的 GraphLLM 路线，Mario 不再用一套模板覆盖所有节点，而是维护 text、image、multimodal 三类图感知模板并让路由器按节点选择。相对 MLaGA 这类先把图像和文本融合成共享查询再对齐的方案，Mario 更强调保留模态特有信息后再做节点级选择；相对主要处理缺失模态的 Graph4MM，它面向的是“模态齐全但对齐差、偏好异质”的 MMG 场景。",
-          "practical_value_zh": "如果论文结论成立，这项工作最值得研究者和工程师关注的价值，不只是一个新的 MMG 模型，而是一条更系统的设计范式：先做结构感知的跨模态对齐，再做节点级模态路由。它适合那些节点天然带图文属性且实体之间有关系边的系统，如多模态知识图、文档图、内容网络、商品或媒体实体图。对多模态 Agent/复杂信息系统而言，它也给出一个重要提醒：不要假设节点内图文天然一致，也不要假设所有节点都该走同一种提示模板。",
+          "relation_to_prior_work_zh": "相对最常见的“先用 CLIP 类 VLM 独立编码每个节点，再把嵌入交给 GNN/GraphLLM”的路线，Mario 的核心差别是把图拓扑提前放进跨模态对齐阶段，而不是默认节点内图文已经同步。相对多数 GraphLLM 工作只处理文本图、并使用单一固定模板的做法，Mario 明确把文本、图像、多模态三种视图都保留下来，再让路由器按节点和局部子图做选择。文中还点名区分了两类接近路线：MLaGA 是先把图文融合成共享查询再对齐，隐含了模态效用相近的假设；Graph4MM 主要面向缺模态设置，而 Mario 更关注“模态齐全但一致性弱、偏好异质”的 fully observed MMG。",
+          "practical_value_zh": "如果这些结论成立，Mario 的价值不在于又一个更强的图模型，而在于给出了一条更系统的 MMG+LLM 方案：先用结构感知对齐修正节点内图文错位，再把节点级模态选择显式交给路由器。对需要同时看文本、图像和实体关系的系统，这种设计比“把所有输入直接拼进 prompt”更有可解释的工程分层，也更容易分析性能到底来自对齐还是来自提示策略。",
           "future_work": [
-            "检验图条件对齐在错边、噪声边、异配图上的鲁棒性，明确结构信息何时帮助对齐、何时反而放大误差。",
-            "把 Mario 扩展到缺失模态、超过两种模态或更一般的异构图场景，验证 router 的稳定性与可迁移性。",
-            "拆分 zero-shot 收益来源，分别量化 GVLM、模板银行、MAPR 和训练节点 exemplars 的独立贡献。",
-            "探索更低成本的训练方案，例如减少三模板多次前反向开销，或把两阶段训练做得更统一。"
+            "检验对错误边、弱连接和噪声邻居的鲁棒性，确认 Stage 1 的结构条件对齐在坏图上是否会放大误差。",
+            "把 MAPR 的选择粒度从节点级扩展到更细的邻域或子任务级，研究不同 hop、不同节点类型下的路由校准问题。",
+            "降低 Stage 2 三模板联合训练的成本，例如蒸馏为更轻的选择器，或研究是否能在更少模板下保留大部分收益。",
+            "扩展到文本+图像之外的更异构输入，验证该框架是否真能泛化为更一般的多模态图推理接口。"
           ],
           "reading_checklist": [
-            "先看 Introduction 和 Figure 1，确认论文为何把问题拆成“跨模态一致性弱”和“模态偏好异质”两个层次。",
-            "细读 Graph-conditioned Vision-Language Model，重点核对 shortest-path bucket 图偏置、[CLS] 回灌机制，以及 InfoNCE 的正负样本定义。",
-            "细读 Modality-Adaptive Graph Instruction Tuning，确认三类模板分别包含哪些 special tokens、是否保留原始文本、邻居标签如何注入。",
-            "核对 zero-shot 设定到底是跨数据集、跨图还是跨类别，避免把更弱的泛化设定误读成更强的迁移结论。"
+            "先看 Figure 1 和方法总览，确认作者提出的两个挑战是否真的由数据现象支撑，而不是事后命名。",
+            "细读 Stage 1：最短路距离偏置如何进入注意力、Mixer 放在每层的哪个位置、为何只替换 [CLS] 就足够传递结构信息。",
+            "核对 Stage 2 的模板构造：三种视图各包含哪些 token，邻居是如何按相似度筛选的，是否可能把标签泄露或引入过强的 ICL 先验。",
+            "重点看 RQ3/RQ4 消融：去掉 GVLM、去掉 MAPR、改成单模板后分别损失多少，才能判断两阶段是否都必要。"
           ],
-          "overall_assessment_zh": "这篇论文现在值得读，主要因为它抓住了一个比普通图文任务更贴近真实系统的问题：当输入是带关系结构的多模态实体图时，LLM 不能只依赖孤立图文编码，也不能默认所有节点都适合同一提示模板。全文最值得信的是问题拆解和机制设计的对应关系很清楚，Stage 1 与 Stage 2 各自解决的瓶颈明确，而且提取文本确实给出了一些支撑性证据，如跨模态一致性提升、监督与 zero-shot 上的整体优势、以及最高 1.6× 的 zero-shot 增益。最该保持怀疑的是实验普适性和真实成本：当前提取文本没有充分说明具体 benchmark、绝对提升、统计稳定性、对噪声边或缺失模态的鲁棒性，以及训练期三模板多次前反向的资源代价。因此，它更像一篇方向感很强、方法构型有说服力的系统论文；是否已经成为稳健、可复用的工程方案，还要依赖完整实验节和消融来验证。"
+          "overall_assessment_zh": "这篇论文当前最值得信的部分，是问题定义和方法结构之间的对应关系比较严密：作者没有把 MMG 上的困难笼统归因于“多模态复杂”，而是拆成对齐问题和选择问题，并分别用图条件对齐和模板路由来处理；引言中的对齐提升、模板互补性和推理无额外算力也给了初步证据。最该怀疑的部分是实验充分性和外推边界：提取文本没有充分说明 benchmark、基线、公平比较、统计稳定性以及噪声图上的鲁棒性，而方法本身训练链路偏长、对图质量和邻域选择可能较敏感。因此，这篇论文很值得作为“MMG 上如何把表示学习与 LLM 推理解耦”的主线来读，但在接受其 SOTA 与泛化结论前，必须先补看完整实验和失败案例。"
         }
       }
     },
@@ -237,47 +311,85 @@
         "enabled": true,
         "source_kind": "arxiv_source",
         "text_char_count": 48087,
+        "figure_context": [
+          {
+            "image_ref": "images/ICLR_scheme_bright-2.drawio.pdf",
+            "image_token": "iclrschemebright2drawio",
+            "caption": "The task setting of fact-checking without retrieval. Claims from any source (human or LLMs) can be verified without having access to a knowledge base.",
+            "role_hint": "other"
+          },
+          {
+            "image_ref": "images/layer_wise_scores.pdf",
+            "image_token": "layerwisescores",
+            "caption": "ROC-AUC performance of individual layers in the INTRA method.",
+            "role_hint": "method"
+          },
+          {
+            "image_ref": "images/heroplot_with_ci.pdf",
+            "image_token": "heroplotwithci",
+            "caption": "ROC-AUC on PopQA, split into five popularity groups. The green arrow shows the percent improvement of the top method (INTRA) over the runner-up.",
+            "role_hint": "method"
+          },
+          {
+            "image_ref": "images/best_vs_mean_per_language_group_roc_auc_fin_v3.pdf",
+            "image_token": "bestvsmeanperlanguagegrouprocaucfinv3",
+            "caption": "ROC-AUC on PopQA, split into five popularity groups. The green arrow shows the percent improvement of the top method (INTRA) over the runner-up.",
+            "role_hint": "method"
+          },
+          {
+            "image_ref": "images/wh_auc_relative_short_10bins.pdf",
+            "image_token": "whaucrelativeshort10bins",
+            "caption": "Short-length claims.",
+            "role_hint": "other"
+          },
+          {
+            "image_ref": "images/wh_auc_relative_medium_10bins.pdf",
+            "image_token": "whaucrelativemedium10bins",
+            "caption": "Short-length claims.",
+            "role_hint": "other"
+          }
+        ],
         "content": {
-          "abstract_translation_zh": "可信性是基于大语言模型构建的 Agent 系统中的核心研究挑战。为了提升可信性，来自人类文本、网页内容和模型输出等不同来源的自然语言断言，通常会先检索外部知识，再用大语言模型验证这些断言是否忠实于检索到的证据。因此，这类方法会受限于检索错误和外部数据可得性，同时模型自身内在的事实核验能力并没有被充分利用。本文提出“无检索事实核验”任务，目标是在不依赖外部检索的情况下验证任意自然语言断言。为研究这一设定，作者构建了一个强调泛化能力的综合评测框架，重点测试四类鲁棒性：(i) 长尾知识，(ii) 断言来源变化，(iii) 多语言，(iv) 长文本生成。基于 9 个数据集、18 种方法和 3 个模型的实验表明，基于 logit 的方法通常不如利用模型内部表征的方法。基于这一发现，作者提出 INTRA，通过利用内部表征之间的交互来达到最优性能并展现较强泛化。更广泛地说，这项工作把无检索事实核验确立为一个有前景的研究方向，它可与检索式框架互补、提升可扩展性，并支持将此类系统作为训练奖励信号或集成到生成过程中。",
-          "background_zh": "当前事实核验和幻觉检测主流仍是“检索外部证据，再判断是否一致”的流水线，但这种路线会引入额外延迟、受检索质量影响，并且默认外部证据比模型参数知识更可靠。随着大模型在参数中已经编码了大量百科和常识知识，直接评估并利用其内在事实判断能力，成为面向 Agent 可信性的一个自然下一步。",
-          "problem_zh": "论文要回答的是：在完全不访问外部证据、也不依赖原始提示词和完整生成上下文的前提下，能否仅根据一个原子事实断言的文本本身，以及模型处理该断言时产生的内部信号，估计其真实性？这个问题重要，因为它对应低延迟、弱外部依赖、甚至训练期可内嵌的事实性判别能力，而不只是传统 RAG 验证链路的简化版。",
-          "method_overview_zh": "方法上，论文先把现有无检索核验方法分成基于输出概率/logit 的不确定性方法与基于内部表征的监督方法，再提出 INTRA 作为统一的内部表征路线。INTRA 不直接依赖某一层、某一 token 或单一不确定性分数，而是先在每一层对整条 claim 聚合出序列表征，分别得到层级真实性分数，再对中间层的层级分数做归一化与回归融合，从而利用“层间+表征交互”提升泛化。",
+          "abstract_translation_zh": "可信性是构建在大语言模型之上的 Agentic AI 系统的核心研究挑战。为了提升信任，来自人类文本、网页内容和模型输出等不同来源的自然语言断言，通常通过检索外部知识，再由 LLM 验证断言是否忠实于检索到的证据来完成事实核验。因此，这类方法受制于检索错误和外部数据可得性，同时也没有充分利用模型内在的事实验证能力。本文提出“无检索事实核验”任务，关注对任意自然语言断言的验证，而不依赖其来源。为研究这一设定，作者构建了一个强调泛化的综合评测框架，测试在长尾知识、断言来源变化、多语言和长文本生成上的鲁棒性。在 9 个数据集、18 种方法和 3 个模型上的实验表明，基于 logit 的方法往往不如利用内部表征的方法。基于这一发现，作者提出 INTRA，该方法利用内部表征之间的交互，并在强泛化下取得了当前最优表现。更广泛地说，本文将无检索事实核验建立为一个有前景的研究方向，可作为检索式框架的补充、提升可扩展性，并支持把这类系统用作训练奖励信号或生成过程中的组件。",
+          "background_zh": "当前面向 LLM 的事实核验主流仍是“claim 拆分 + 外部检索 + 与证据比对”，本质上更偏向验证对外部证据的忠实性。与此同时，LLM 的参数中已经编码了大量百科和常识知识，因此直接挖掘内部信号来判断 claim 真伪，成为低延迟、低外部依赖场景下值得单独研究的问题。",
+          "problem_zh": "论文把问题明确成：给定一个来自任意来源的原子事实断言，只使用 claim 文本以及模型在处理该文本时产生的内部信号，不访问原始提示、上下文或外部知识库，输出一个真实性分数。这个设定的关键难点在于，它既不同于依赖检索证据的事实核验，也不同于只估计模型对自己生成内容置信度的不确定性方法，而是要求系统对跨来源、跨语言、长文本拆出的 claim 和长尾事实都具有泛化能力。",
+          "method_overview_zh": "作者先把现有无检索核验思路分成两类：一类依赖输出概率或不确定性信号，另一类依赖隐藏状态、注意力等内部表征；随后提出 INTRA。INTRA 的核心不是直接读最终 logit，而是从各层 token 级隐藏状态中提取层内真实性线索，先得到每一层的 claim-level truthfulness score，再对更有信息量的中间层分数做标准化融合，形成最终判定。整体设计强调轻量监督和跨数据集泛化，而不是为某个单一 benchmark 堆叠复杂结构。",
           "method_details": [
-            "INTRA 先对每一层的 token hidden states 做可学习加权聚合，形成 sequence-level embedding；权重通过 softmax 归一化，因此不是简单平均或只取首尾 token。",
-            "在每一层上，模型单独训练一个线性分类器输出该层的 truthfulness probability，并使用标准交叉熵训练，刻意保持头部简单以减少对特定模式的过拟合。",
-            "最终判别不直接使用某一层，而是只取模型中间层的层级概率做融合；文中明确认为首层和末层通常较弱，因此使用从前 1/3 到后 2/3 之间的中间层区间。",
-            "为避免不同层输出概率分布不一致影响融合效果，INTRA 在回归前先对层级概率做 quantile normalization，再训练回归器得到最终 truthfulness score。",
-            "训练被拆成两段：先用一部分训练数据拟合各层聚合与分类参数，再用另一部分训练回归融合器；这种两阶段设计旨在降低层间融合对训练分布的耦合。"
+            "对每一层的 token 级隐藏状态做可学习的注意力式聚合，生成该层的序列级表示，而不是只取首/尾 token 或简单平均。",
+            "在每一层的序列表示上训练线性分类器，经 sigmoid 输出该层对 claim 真实性的概率，并用标准交叉熵训练，以控制模型复杂度并减少对特定模式的过拟合。",
+            "最终判定不是直接选单层最好结果，而是把多个层的 layer-wise truthfulness probabilities 交给额外回归器做跨层融合。",
+            "跨层融合时只使用中间层，不使用通常较弱的首尾层；提取文本给出的示例是 Llama 3.1-8B-Instruct 使用第 11 到 22 层。",
+            "为缓解不同层输出分数尺度不一致的问题，作者在跨层回归前对 layer-wise probabilities 做 quantile normalization；训练上还把训练集拆成两部分，分别拟合层内组件和最终融合器。"
           ],
-          "experiment_setup_zh": "实验围绕作者定义的“无检索事实核验”设定展开：输入是任意来源的原子事实断言，模型只能基于 claim 文本本身及其内部信号打分，不能访问外部知识。评测覆盖 9 个数据集、18 种方法和 3 个模型，重点考察长尾知识、人工与模型生成来源差异、多语言、长文本生成以及跨模型 claim 等泛化维度。文中把 PopQA 视为有监督训练的 in-domain 数据，其余数据集视为 out-of-domain；主要指标是 ROC-AUC 和 PR-AUC。提取文本还说明了一个检索增强对照 `Verb + RAG`，以及 UHead 只对 Llama 3.1 提供了预训练开源检查点。",
-          "main_results_zh": "提取文本支持的主要结论是：1）总体上，利用内部表征的方法比基于 logit/不确定性的办法更稳健，后者除 SP 外普遍偏弱；2）INTRA 在跨 9 个数据集的平均表现上达到最优，并表现出更一致的泛化，而不是只在单一基准上强；3）在 Llama 3.1 上，INTRA 的 ROC-AUC 比第二名 Sheeps 高 0.5%，跨数据集平均 ROC-AUC 相对第二名 retrieval-free 方法 Sheeps 高 2.7%，跨全部模型平均高 1.3%；4）INTRA 的 ROC-AUC 与 Verb+RAG 持平，但平均 PR-AUC 高 3%，且计算时间约少 20 倍；5）Verb 是最强的无监督方法之一，但计算成本显著更高，并且在非英语输入上有很高拒答率，最高可到 58%；6）一些方法在特定数据集上强，但跨场景泛化差，文中还指出规则生成数据集可能已接近饱和，存在污染或针对性过拟合迹象。",
+          "experiment_setup_zh": "评测围绕作者提出的无检索事实核验 benchmark 展开：共 9 个数据集、18 种方法、3 个模型，主要指标为 ROC-AUC 和 PR-AUC。评测维度覆盖长尾知识、claim 来源变化（人工撰写与模型生成）、多语言、长文本生成以及 cross-model claims；提取文本明确提到的集合包括 AC-PopQA、AC-WH、AVeriTeC、X-Fact、Cities、Companies、CounterFact、UHead、Common Claims，但完整九个数据集的最终列表、样本规模和标注细节，提取文本没有充分说明。监督方法在 PopQA 的训练划分上训练，因此 PopQA 被视为 in-domain，其余数据集视为 out-of-domain；模型层面至少包括 Llama 3.1、Ministral 和 Phi-4。另有一个带检索参照 Verb+RAG，会为每个 claim 检索 top-5 search snippets，但是否存在更强、更完整的 retrieval baseline 组合，提取文本没有充分说明。",
+          "main_results_zh": "作者报告，在无检索设定下，基于内部表征的方法整体上比大多数基于 logit 或不确定性的做法更稳健；除 SP 外，不确定性方法普遍偏弱。INTRA 在平均表现上最稳定：在 Llama 3.1 上，其跨数据集 ROC-AUC 比第二名 retrieval-free 方法 Sheeps 高 2.7%，跨全部模型平均高 1.3%；文中另称在 Llama 3.1 上最高 ROC-AUC 也领先 Sheeps 0.5%。与 Verb+RAG 相比，INTRA 的 ROC-AUC 基本持平，但平均 PR-AUC 高 3%，计算时间约低 20 倍。作者还指出，Verbalized assessment 是最强无监督方法之一，但在非英语输入上拒答率可高达 58%，且计算成本显著更高；某些规则生成数据集则表现出“饱和”或污染迹象。",
           "strengths": [
-            "问题定义清楚，把“无检索事实核验”从传统检索式 faithful verification 和常见 uncertainty estimation 中分离出来，研究对象更明确。",
-            "评测设计强调泛化而非单基准最优，覆盖长尾、多语言、长文本、来源变化和跨模型 claim，比较接近真实部署中的失配场景。",
-            "方法本身相对克制，没有引入很重的架构修改，而是围绕层级表征聚合、分层判别和中间层融合做设计，便于分析内部知识信号。",
-            "实验结论不只说 INTRA 更强，也给出一个更广泛的经验判断：内部表征路线通常优于直接看 logit/概率的不确定性信号。"
+            "问题切分清楚：它把“无检索事实核验”从 RAG 式证据比对和一般不确定性估计中明确分离出来。",
+            "评测覆盖面广：不是只在单一 benchmark 上报分，而是围绕长尾、多语言、来源变化、长文本和 cross-model 泛化做系统比较。",
+            "经验结论可操作：论文不仅指出内部表征优于纯 logit 信号，还进一步给出中间层更有信息量的分析方向。",
+            "INTRA 结构相对克制：层内聚合、线性判别、跨层融合三步走，目标是用简单监督结构换取更稳的泛化。`,`和 Verb+RAG 的对照体现了潜在工程价值：文中报告其 ROC-AUC 持平、PR-AUC 更高，且计算开销明显更低。"
           ],
           "limitations": [
-            "该设定天然受模型参数知识的时效性、覆盖面和记忆偏差限制；遇到知识过时或模型从未见过的事实时，上限可能明显受约束。",
-            "INTRA 依然是有监督方法，并以 PopQA 训练后再测试其他数据集；虽然论文强调 OOD 泛化，但训练分布对结果的影响仍需仔细看正文和附录。",
-            "提取文本没有充分说明 INTRA 的额外训练成本、特征维度、部署内存开销，以及与更强检索系统的完整成本收益比较。",
-            "作者自己指出部分规则生成数据集可能存在污染或过拟合风险，这意味着某些 benchmark 上的高分未必能直接转化为真实世界稳健性。"
+            "核心的“内部表征交互”机制在提取文本里只部分可见，精确公式、特征维度和实现代价提取文本没有充分说明。",
+            "监督式结果建立在 PopQA 训练划分之上，强泛化结论对训练源选择较敏感；如果换训练数据，结论是否保持，提取文本没有充分说明。",
+            "作者自己指出部分规则生成数据集可能已“饱和”或存在污染，这会削弱某些 benchmark 上高分对真实泛化能力的说服力。",
+            "无检索设定天然受参数知识覆盖和时效性限制；论文把它定位为检索框架的补充，但何时必须回退到检索，提取文本没有充分说明。"
           ],
-          "relation_to_prior_work_zh": "相对常见的 RAG 式事实核验，这篇论文不再验证“claim 是否被检索证据支持”，而是直接判定 claim 本身是否为真，且完全不依赖外部检索。相对传统不确定性估计，它也不是评估模型对自己生成内容的信心，而是评估任意来源断言的真实性。相对已有 probe/hidden-state 方法，INTRA 的差异不在于再找一个“最佳单层”或“最佳 token”，而是在保持判别头简单的前提下，用可学习序列聚合、分层打分、中间层选择和归一化后的层间回归，把多层内部信号整合起来，重点追求跨数据集泛化而不是单任务适配。",
-          "practical_value_zh": "如果这个方向站得住，它对工程上最直接的价值是提供一种低外部依赖、低延迟的 claim verifier，可作为 RAG 核验链路的补充，或用于没有稳定检索条件的场景。对研究上，它也有两个清晰用途：一是把“大模型内部到底有没有可稳定提取的真实性信号”变成可系统评测的问题；二是为 truthfulness-oriented reward model 或生成过程中的在线监控模块提供候选技术路线。",
+          "relation_to_prior_work_zh": "相对常见的 RAG/事实核验流水线，这篇论文不再判断“声明是否被检索证据支持”，而是直接判断“声明本身是否为真”，并且输入只保留 claim 文本。相对传统不确定性估计，它不是评估模型对自己生成内容的信心，而是要求对任意来源的断言给出真实性分数。相对以往只取单层、单 token 或单一 hidden-state probe 的路线，INTRA 采用 token 级隐藏状态聚合形成层内表示，再把多个中间层的层级分数经过标准化后融合，更强调跨层内部信号的组织，而不是只依赖输出 logit、最后一层 embedding 或 retrieval evidence。",
+          "practical_value_zh": "如果结论稳固，这篇论文的工程价值不在于“取代所有检索式核验”，而在于为事实核验提供了一个低延迟、弱外部依赖的内部 detector 设计空间。它适合离线、隐私受限、检索资源不足，或希望把真实性信号直接接入训练、解码和在线监控流程的场景；同时也为把 factuality detector 作为 reward model、reranker 或 generation-time monitor 提供了更明确的起点。",
           "future_work": [
-            "核查在知识过时、真实世界新近事件和极长尾实体上的失效边界，明确无检索路线与检索增强路线各自适用范围。",
-            "进一步分析中间层为何最有效，以及不同层在不同语言、不同 claim 类型上的分工是否稳定。",
-            "把 claim 位置、生成长度等结构信息更系统地纳入长文本场景中的真实性检测。",
-            "研究如何将无检索判别器与检索式核验组合，而不是二选一，以兼顾速度、时效性和可解释性。"
+            "把“中间层更强”的观察做成可自适应层选择或跨模型共享的训练策略。",
+            "系统研究无检索 detector 与 retrieval-based verifier 的级联、回退或集成机制，明确什么时候单靠参数知识不够。",
+            "在多语言、长尾实体和长文本场景下做更细粒度误差分析，区分知识缺失、来源偏置和表面模式匹配。",
+            "把 claim 位置、生成长度等结构特征与内部表征联合建模，尤其面向 long-form generation。`,`检验这类 detector 作为 reward signal 或 generation-time monitor 时，是否真的提升生成事实性，而不是只提高离线判别分数。"
           ],
           "reading_checklist": [
-            "先看任务定义：作者如何严格限制输入，只允许 claim 文本和内部信号，而不允许提示词、完整生成或外部证据。",
-            "重点看 INTRA 的具体实现：序列聚合用的参数化形式、层级分类器输入、quantile normalization 的细节，以及两阶段训练如何避免信息泄漏。",
-            "检查 9 个数据集的构成与拆分，尤其是 PopQA 训练、其余数据集 OOD 的设置是否足够公平。",
-            "对照 Verb、Verb+RAG、Sheeps、UHead 等强基线，确认 INTRA 的优势到底来自表征质量、训练目标，还是 benchmark 偏好。"
+            "先看 Task Description，确认这个任务的输入边界：只看 claim 文本，不看原始提示、上下文和外部证据。",
+            "再看 INTRA 的层内聚合与跨层融合公式，重点核对 attention pooling、layer-wise classifier、quantile normalization 和两阶段训练。",
+            "重点读 layer-wise analysis，确认中间层为何更强，以及这一结论在不同模型上是否一致。",
+            "按 benchmark 维度读结果，而不是只看平均分：长尾知识、人工 vs 模型生成、多语言、长文本、cross-model 各自有没有明显短板。`,`仔细比较 Verb、Verb+RAG、Sheeps、UHead 等对照的成本、输入要求和适用边界，尤其是多语言拒答与长文本专长。`,`最后检查作者关于数据集污染/饱和的分析和失败案例，判断高分是否来自真正的事实判断，而不是对数据构造模式的适配。"
           ],
-          "overall_assessment_zh": "这篇论文最值得信的是它把“无检索事实核验”定义成了一个独立且现实的问题，并且从实验叙述看，作者没有只追求单一基准分数，而是在泛化维度上做了较系统的比较；“内部表征优于纯 logit 信号”这个结论也与方法设计和结果描述相互呼应。最该怀疑的地方有两点：第一，这条路线受参数知识时效性和覆盖度的硬约束，能否替代检索很可疑，更像补充模块；第二，提取文本虽然给出平均优势和效率收益，但对失败模式、训练成本、数据污染影响和与强检索系统的真实工程对比说明仍不充分，因此应把它视为一个方向性很强的研究起点，而不是已定型的通用解决方案。"
+          "overall_assessment_zh": "这篇论文现在值得读，主要因为它把一个常被混在 hallucination detection 与 RAG 里的问题重新切清楚了：在没有检索时，LLM 内部到底能不能直接完成 claim verification。最值得信的是它的经验层面主结论：在跨 9 个数据集、18 种方法、3 个模型的设置里，内部表征信号普遍比纯 logit 或通用不确定性信号更可靠，而 INTRA 作为相对简单的中间层融合器，确实报告了稳定优势和不错的成本收益。最该怀疑的地方有三点：第一，强结论建立在 PopQA 训练、其余数据 OOD 的设定上，泛化是否足够接近真实部署仍需进一步验证；第二，作者自己承认部分规则数据集可能污染，说明 benchmark 本身并非完全干净；第三，对于知识过时、未知事实和必须检索的边界，现有提取文本没有给出足够细的失效分析。因此，这篇工作更像是为 retrieval-free factuality detector 建立了有价值的研究基线，而不是已经证明无检索核验可以独立承担高风险场景。"
         }
       }
     },
@@ -368,47 +480,97 @@
         "enabled": true,
         "source_kind": "arxiv_source",
         "text_char_count": 33640,
+        "figure_context": [
+          {
+            "image_ref": "figs/matrix_coverage_new.pdf",
+            "image_token": "matrixcoveragenew",
+            "caption": "Fully-stochastic POET (with ) vs. block-stochastic POET (with ) for the weight matrix update coverage. In the toy experiment, we use a weight matrix and run both POET variants for 100-step update, so 200 are the largest possible update steps (multiplication by and counts as two updates). Block-stochastic POET ensures balanced update for the weight matrix while fully-stocahstic POET does not.",
+            "role_hint": "results"
+          },
+          {
+            "image_ref": "figs/cnp-crop.pdf",
+            "image_token": "cnpcrop",
+            "caption": "Illustration of efficient Cayley-Neumann parameterization (batch-wise implementation).",
+            "role_hint": "other"
+          },
+          {
+            "image_ref": "figs/linear_breakdown.pdf",
+            "image_token": "linearbreakdown",
+            "caption": "Latency breakdown of POET, POET-X, and PyTorch Linear Layers with sequence length 2048 and block size .",
+            "role_hint": "other"
+          },
+          {
+            "image_ref": "figs/memory_breakdown.pdf",
+            "image_token": "memorybreakdown",
+            "caption": "Memory breakdown for training Llama-8B on a single GPU across different methods with batch size 1, sequence lengths 1024 and block size . Since POET~ runs OOM under this setting, we estimate its memory footprint by profiling memory usage across different numbers of decoder layers (i.e., parameter sizes) and applying scaling.",
+            "role_hint": "method"
+          },
+          {
+            "image_ref": "figs/val_ppl_256.pdf",
+            "image_token": "valppl256",
+            "caption": "Validation perplexity dynamics with respect to GPU hours for training Llama-8B with (5B tokens) and (10B tokens), respectively.",
+            "role_hint": "other"
+          },
+          {
+            "image_ref": "figs/val_ppl_1024.pdf",
+            "image_token": "valppl1024",
+            "caption": "Validation perplexity dynamics with respect to GPU hours for training Llama-8B with (5B tokens) and (10B tokens), respectively.",
+            "role_hint": "other"
+          },
+          {
+            "image_ref": "figs/throughput_scale_v3.pdf",
+            "image_token": "throughputscalev3",
+            "caption": "Throughput (k tokens/s) across different numbers of GPUs. The solid line denotes the actual throughput, and the dashed line denotes the ideal linear scaling throughput. The ideal throughput of GPUs is defined as ).",
+            "role_hint": "other"
+          },
+          {
+            "image_ref": "figs/throughput_scale.pdf",
+            "image_token": "throughputscale",
+            "caption": "Throughput (k tokens/s) across different numbers of GPUs. The solid line denotes the actual throughput, and the dashed line denotes the ideal linear scaling throughput. The ideal throughput of GPUs is defined as ).",
+            "role_hint": "other"
+          }
+        ],
         "content": {
-          "abstract_translation_zh": "大语言模型的高效且稳定训练仍是现代机器学习系统中的核心挑战。为解决这一问题，已有工作提出了重参数化正交等价训练（POET）：它通过对每个权重矩阵施加正交等价变换来优化参数，并保持谱性质不变。虽然 POET 在训练稳定性上表现强，但其原始实现因大量矩阵乘法而带来较高的显存占用和计算开销。为克服这些限制，本文提出 POET-X，这是一个可扩展且更省显存的变体，以显著更低的计算成本完成正交等价变换。POET-X 在保持 POET 泛化与稳定性收益的同时，显著提升了吞吐与显存效率。实验中，POET-X 可以在单张 Nvidia H100 GPU 上完成十亿参数级 LLM 的预训练；相比之下，标准优化器 AdamW 在相同设置下会因显存不足而失败。",
-          "background_zh": "LLM 训练长期处在一个三难困境里：稳定性、吞吐和显存通常难以同时兼顾。POET 这类保持谱性质的训练框架提供了不同于 AdamW 的稳定训练路径，但原始实现的矩阵乘法、激活保存和正交参数化开销太大，导致它在大模型预训练里缺乏可扩展性。",
-          "problem_zh": "本文要解决的不是“如何再设计一个新优化器目标”，而是如何把已有的 POET 路线真正扩展到大规模 LLM 预训练：在保留其谱保持和训练稳定性的前提下，显著降低显存占用与运行时开销。这个问题重要，因为很多结构化或更稳定的训练方法最后并不是败在思想上，而是败在系统实现成本上。",
-          "method_overview_zh": "POET-X 延续了 POET 的核心建模思路：用左右两个可训练正交矩阵对固定基权重做正交等价变换，从而在训练中保持谱性质，并在训练后把这些变换并回权重中，因此没有推理额外开销。它的主要创新不在目标函数，而在把这套正交变换的实现整体重写成可扩展版本：一方面把原先以权重矩阵为中心的计算改为以输入为中心的线性映射序列，减少中间激活和大矩阵操作；另一方面利用块稀疏、置换、Cayley-Neumann 参数化和自定义 CUDA/Triton kernel，系统性压缩正交变换在前向和反向传播中的显存与时间成本。",
+          "abstract_translation_zh": "大语言模型的高效且稳定训练仍是现代机器学习系统中的核心挑战。为解决这一问题，已有工作提出了重参数化正交等价训练（POET）：它通过正交等价变换来优化每个权重矩阵，并保持谱性质不变。尽管 POET 具有较强的训练稳定性，但其原始实现因大量矩阵乘法而带来较高的显存占用和计算开销。为克服这些限制，本文提出 POET-X，这是一种可扩展且更省内存的变体，能够以显著更低的计算代价执行正交等价变换。POET-X 在保持 POET 泛化与稳定性优势的同时，显著提升了吞吐和显存效率。实验中，POET-X 据称可以在单张 Nvidia H100 上完成十亿级参数 LLM 的预训练，而相同设置下 AdamW 会因显存不足而失败。",
+          "background_zh": "LLM 训练一方面需要更高稳定性，另一方面又越来越受限于显存、吞吐和系统成本。POET 这类通过保持谱性质来增强稳定性的路线在理论上有吸引力，但原始实现的矩阵乘法和激活保存成本过高，导致它难以真正用于大规模预训练。",
+          "problem_zh": "论文要解决的不是“再发明一个优化器”，而是如何把 POET 这种基于正交等价变换的稳定训练框架做成真正可扩展的系统：既保留谱保持与训练稳定性，又把显存和计算成本降到足以支撑大模型预训练的水平。这个问题重要，因为很多更稳的训练方法最终都败在系统代价上，无法进入实际训练栈。",
+          "method_overview_zh": "POET-X 延续 POET 的核心参数化思路：用左右两个可训练正交矩阵去变换固定基权重矩阵，从而在保持谱性质的同时学习权重；训练结束后这些变换可以并回原权重，因此没有推理额外开销。它的主要贡献不在新的优化目标，而在把原本昂贵的正交等价变换拆解为一组更省显存、更少数据搬运、更适合 GPU 并行执行的计算过程，并在需要时进一步结合 checkpointing 和量化来压缩训练内存。",
           "method_details": [
-            "将原始 POET 的 weight-centric 实现改写为 input-centric 形式，把一次更新表示成若干线性映射，避免保存与权重矩阵相关的大型中间激活，从而降低反向传播显存压力。",
-            "利用块对角、块稀疏正交矩阵结构，不再显式构造完整的大型稀疏块对角矩阵，而是把每个块当作独立矩阵做 batch-parallel 乘法，减少无效存储并提升运行效率。",
-            "对置换操作做两层优化：一是通过索引映射实现自定义 CUDA 置换算子，避免显式构造置换矩阵；二是在内循环开始前把部分置换预先合并到固定权重中，减少重复置换次数。",
-            "重新实现 Cayley-Neumann Parameterization：只存 skew-symmetric 矩阵的上三角部分，将相关参数、梯度和优化器状态减半；同时重排 CNP 计算式，并用 Triton kernel 融合前向和反向中的共享张量读取与高阶项计算。",
-            "提出两种内存/计算权衡版本，其中一种沿用标准 autograd 保存额外激活，另一种通过 gradient checkpointing 在反向时重算所需张量；在此基础上进一步给出仅在 checkpointing 版本上可行的量化训练扩展 POET-XQ。"
+            "将原始的 weight-centric 实现改写为 input-centric 线性映射序列，把“显式构造和保存变换后权重/中间激活”的做法改为围绕输入执行若干矩阵-向量或等价线性操作，以减少反向传播所需保存的激活。",
+            "建立在 block-stochastic POET 上，利用块对角稀疏正交矩阵与随机置换矩阵的结构，让更新覆盖更均衡；实现时不再显式构造大块对角稀疏矩阵，而是把每个块当作独立小矩阵进行 batch-parallel 乘法。",
+            "对置换操作做两层优化：一是用自定义 CUDA 索引映射代替显式置换矩阵，二是在内层优化阶段把部分置换预先并入固定权重，减少重复置换次数和访存开销。",
+            "重新实现 Cayley-Neumann Parameterization：只存 skew-symmetric 矩阵的上三角部分，把参数量、梯度和优化器状态直接减半；同时重排 CNP 计算，使前向和反向都可在 Triton kernel 中做共享内存复用与算子融合。",
+            "提出两种内存/速度折中版本：一个沿用标准 Autograd 保存额外激活，另一个通过 gradient checkpointing 在反向时重算中间量以进一步省显存；基于这一机制又扩展出只存低比特基模型权重、按需反量化的 POET-XQ。"
           ],
-          "experiment_setup_zh": "提取文本说明，实验分为三部分：一是单层 profiling，用于直接对比原始 POET、POET-X 与标准线性层在前向/反向中的时间与显存；二是大规模 LLM 预训练，对 Llama-3B 在 C4 数据集上的训练效果进行比较，基线包括 AdamW、Muon、GaLore、APOLLO；三是更细的效率消融，分析不同实现策略、不同计算规模下的运行时与显存。文中还提到一个多节点分布式设置：32 张 Nvidia H100 GPU（4 节点，每节点 8 卡）用于 wall-clock 收敛比较。更完整的超参数、模型结构、序列长度和附加实验在附录中，但提取文本没有充分说明。",
-          "main_results_zh": "提取文本支持的主要结论有三点。第一，相比原始 POET，POET-X 在单层基准上显著降低了前后向耗时；文中明确写到，总前后向时间从 10.59ms 降到 1.38ms 和 1.89ms（对应两个 POET-X 变体）。第二，论文在导言中声称，相比原始 POET，POET-X 达到约 3 倍 GPU 显存下降和约 8 倍运行速度提升，同时不牺牲原始 POET 的训练稳定性。第三，在 Llama-3B 的预训练比较中，提取文本称 POET-X 的验证困惑度优于 AdamW 及其他若干内存高效方法，但略逊于 Muon；同时其更高的显存效率带来了更好的 wall-clock 训练效率。关于“单张 H100 可训练到 13B 参数”与“AdamW 在同设定下显存不足”的说法，提取文本明确给出了该主张，但没有展开完整实验条件与边界。",
+          "experiment_setup_zh": "提取文本显示实验分为三层。第一层是单层 profiling，对比原始 POET、POET-X 变体和标准线性层的前后向时延，并分析单卡训练时的显存构成。第二层是大规模预训练：在 C4 上训练 Llama-3B，并与 AdamW、Muon、GaLore、APOLLO 比较；文中说训练预算参考 Chinchilla 比例，使用 60B tokens。第三层是效率与扩展性分析，包括单卡 Llama-8B 的显存分解、基于 GPU hours 的验证困惑度曲线，以及 32 张 H100（4 节点，每节点 8 卡）上的 wall-clock 与吞吐扩展。更细的超参数、block size 取值、学习率和训练配方，提取文本没有充分说明。",
+          "main_results_zh": "提取文本支持以下结论。相对原始 POET，POET-X 在作者报告中实现了约 3 倍 GPU 显存下降和 8 倍运行速度提升。单层 profiling 中，原始 POET 的一次前后向总时延从 10.59ms 降到 POET-X 两个变体的 1.38ms 和 1.89ms，且其反向延迟已接近标准线性层。显存分解显示，原始 POET 因保存变换后权重等激活而可能比 AdamW 更耗内存，而 POET-X 两个变体呈现出更接近 PEFT 方法的显存结构。多节点 Llama-3B 预训练中，POET-X 的验证困惑度优于 AdamW 和其他内存友好方法，略逊于 Muon，但使用更低 GPU 内存；同时文中声称其 wall-clock 效率也优于 AdamW。摘要和引言还声称在单张 H100 上可进行十亿级甚至最高到 13B 规模模型的预训练，但对应配置与完整证据在提取文本中没有充分展开。",
           "strengths": [
-            "论文切入点明确：不是再做一个抽象优化器，而是把已有的稳定训练路线通过系统实现优化推到可扩展区间。",
-            "方法链条完整，覆盖输入中心化计算、块稀疏批并行、置换优化、CNP 压缩、kernel 融合、checkpointing 和量化扩展，说明作者关注的是端到端系统瓶颈而非单点技巧。",
-            "保留了 POET 的核心性质：正交等价变换、谱保持、训练后可并回权重、无推理额外开销，这一点使其区别于只在训练时做低秩附加模块的方法。",
-            "实验设置至少覆盖了单层 profiling、预训练表现和 wall-clock 效率，而不是只报一个吞吐数字。提取文本还给出了与 AdamW、Muon、GaLore、APOLLO 的对比框架。"
+            "问题定义清晰：不是泛泛谈训练稳定性，而是直接瞄准“稳定方法为何在系统层面跑不起来”这一瓶颈。",
+            "方法是成体系的工程改造，而非单一技巧，覆盖计算重写、稀疏结构利用、置换优化、参数化压缩、kernel fusion、checkpointing 和量化支持。",
+            "保留了 POET 的核心结构优势：谱保持、稀疏训练动机，以及训练后可并回权重、无推理额外开销。",
+            "实验设计至少覆盖了算子级、单卡显存级和多节点预训练级三个层次，能较完整地支撑“系统可扩展性”叙事。"
           ],
           "limitations": [
-            "许多关键结论在提取文本里只有主张，没有足够完整的表格或数值支撑，例如最终验证困惑度、显存峰值、吞吐、训练 token 对齐方式等。",
-            "“保持原始 POET 的泛化和稳定性收益”是核心卖点，但提取文本没有充分说明稳定性是如何测量的，也没有看到更细的失败案例或训练波动分析。",
-            "单张 H100 可训练 13B 或十亿级模型这一点很吸引人，但提取文本没有充分说明 batch size、序列长度、精度、并行策略、checkpointing/量化是否同时使用，因此复现实用边界不清楚。",
-            "与 Muon 的比较只被简要描述为质量略逊但显存更低，提取文本没有充分说明两者是否在相同训练预算、相同实现成熟度和相同系统栈下公平比较。"
+            "许多关键实验细节在提取文本里不完整，尤其是具体超参数、block size 选择、训练步数和完整最终质量数字，因此结果可复现性目前难判断。",
+            "“保留 POET 的泛化和稳定性优势”是核心卖点，但提取文本对稳定性指标、不同模型规模和不同任务上的一致性说明不足。",
+            "收益高度依赖自定义 CUDA/Triton kernel 与特定 GPU 执行路径，跨硬件平台或跨软件栈迁移后的效果存在不确定性。",
+            "CNP 本身是近似正交化，论文称轻微偏离正交性不影响性能，但提取文本没有充分说明这种近似在更长训练、更大模型下是否会累积风险。"
           ],
-          "relation_to_prior_work_zh": "相对常见的 AdamW 路线，这篇工作不是在一阶优化更新规则上做局部改动，而是通过正交等价变换重参数化权重，让训练过程在保持谱性质的约束下进行。相对 LoRA、GaLore、APOLLO 这类强调低秩或内存高效训练/微调的方法，POET-X 的核心不是附加一个参数高效模块，而是试图把正交结构化训练本身做成接近 PEFT 级别的显存占用。相对原始 POET，它的关键差异也不是理论性质变化，而是把“参数上稀疏”进一步落实成“系统上省显存、省时间”的具体实现，包括 input-centric 重写、置换预合并、块并行和 CNP kernel 融合。",
-          "practical_value_zh": "如果文中的主张成立，POET-X 的实际价值很直接：它把一种原本更偏理论吸引力的稳定训练方法，推进到可能真正进入大模型预训练工程栈的形态。对资源受限团队，它意味着在更少显存预算下测试更大模型和更稳训练路径的机会；对研究者，它提供了一条不同于 AdamW 与低秩路线的替代方向，即通过结构化正交重参数化获得稳定性与效率的组合收益。POET-XQ 还说明这条路线有机会继续和量化训练结合，进一步压低内存门槛。",
+          "relation_to_prior_work_zh": "相对常见的 AdamW、Muon 这类“直接在稠密权重或梯度空间改更新规则”的路线，POET-X 走的是重参数化路线：它不直接改写基础权重的更新，而是通过左右正交变换来学习权重，从而显式保留谱性质。相对 LoRA、GaLore、APOLLO 这类主要从低秩、梯度压缩或内存友好优化器角度降成本的方法，POET-X 的差异在于它把“结构化正交变换”作为训练主对象，并试图让这种参数效率真正转化为系统显存效率。相对原始 POET，本文不是再强调稳定性理论，而是把重点转向 OET 的可扩展实现，核心增量是 input-centric 重写、置换/块计算优化和高效 CNP，而不是新的训练目标。",
+          "practical_value_zh": "如果论文结论成立，POET-X 的价值主要在两点。第一，它把原本更像研究型想法的 POET 推进成接近可落地的大模型训练方案，使“更稳的训练参数化”不再天然意味着巨额显存和吞吐损失。第二，它为资源受限环境提供了更有吸引力的预训练选项：不是单纯省一点优化器状态，而是通过重写整个正交变换计算链条，把单卡或小规模集群能尝试的模型规模继续往上推。对研究者而言，这也意味着正交约束、谱保持和稀疏训练之间的结合开始具备系统可行性。",
           "future_work": [
-            "核对不同模型规模、不同数据配方和不同训练长度下，POET-X 是否始终保留相对 AdamW 的质量优势，还是只在特定规模区间有效。",
-            "更系统地分析稳定性的来源与边界，例如训练曲线波动、梯度行为、超参数敏感性，以及与谱保持性质之间的因果关系。",
-            "验证其硬件可迁移性：当前收益是否依赖 H100、Triton/CUDA 特化 kernel，换到不同 GPU、编译栈或分布式配置后收益是否仍然成立。",
-            "进一步研究 POET-XQ 的质量-显存权衡，特别是在低比特权重量化和 checkpointing 同时启用时，对收敛和最终性能的影响。"
+            "补齐跨规模质量验证，尤其是从 3B、8B 到文中宣称的更大规模时，训练稳定性、最终困惑度和 wall-clock 成本是否仍保持优势。",
+            "分析不同 block size、置换策略、checkpointing 选择和量化设置对收敛质量与效率的联合影响，而不只给总吞吐或总显存。",
+            "验证自定义 CUDA/Triton 实现对硬件代际、互联方式和软件栈版本的敏感性，确认方法不是仅在特定 H100 环境下成立。",
+            "更系统地研究 CNP 近似误差与正交性偏差在长程预训练中的累积效应。"
           ],
           "reading_checklist": [
-            "先看 Input-centric Implementation：这是全文最关键的系统改写点，要确认它具体减少了哪些中间激活、复杂度如何变化。",
-            "再看 Permutation Acceleration and Reduction：置换在这类结构化方法里常是隐藏瓶颈，需要核对自定义算子到底省的是显存、带宽还是 kernel launch 开销。",
-            "重点读 Efficient Cayley-Neumann Parameterization：这是正交约束保持与实际效率之间的核心桥梁，尤其要看只存上三角和 kernel fusion 是否改变数值稳定性。",
-            "读 Single-layer Benchmarking against POET：先确认 3x 显存下降、8x 加速以及 10.59ms 到 1.38/1.89ms 的结论是在什么精确设置下得到的。"
+            "先确认 POET 的基础参数化到底固定了什么、学习了什么，以及“谱保持”为什么能带来训练稳定性。",
+            "重点看 input-centric 实现的推导，核对它究竟省掉了哪些中间激活，哪些张量在反向中仍必须访问。",
+            "检查置换加速与 permutation reduction 的具体执行顺序，确认它们是否只是工程常数优化，还是也改变了实际内存峰值。",
+            "细读高效 CNP 部分，尤其是上三角存储、kernel fusion 和前后向共享内存复用各自贡献了多少。提取文本对分项贡献有方向性描述，但完整拆分仍需看正文表格。"
           ],
-          "overall_assessment_zh": "这篇论文最值得信的部分，是它把问题定义得很工程化且方法路径自洽：POET 的瓶颈确实主要来自正交变换实现成本，而文中给出的 input-centric 改写、块稀疏批并行、置换预处理、CNP 压缩与 fused kernel 形成了一条完整的降本链条，因此“它比原始 POET 更能跑”这件事高度可信。最该怀疑的部分，则是它是否在广泛设置下真正同时保住了训练质量、稳定性和系统收益。提取文本给出了若干强主张，例如单卡 H100 训练 13B、优于 AdamW、接近或优于多种高效方法，但缺少足够完整的实验上下文和数值展开。简言之，这篇文章很值得读，不是因为它已经无可置疑地证明了新范式成立，而是因为它把“正交重参数化训练”第一次明显推近了大模型工程可用区；真正需要仔细核对的是质量公平性、硬件依赖性和收益边界。"
+          "overall_assessment_zh": "这篇论文现在值得读，原因不是它又提出了一个训练算法名词，而是它试图把“谱保持/正交变换带来稳定性”这条路线从理论上可取推进到系统上可跑。最值得信的部分，是它对原始 POET 瓶颈的拆解相当具体，input-centric 重写、置换规约、块并行和高效 CNP 之间的逻辑链条完整，而且单层 profiling 与显存分解也和这个故事一致。最该怀疑的部分，是质量与泛化是否在更大规模、更长训练和更多任务上稳定保留；提取文本虽然给出优于 AdamW 的结论和略逊 Muon 的定位，但完整数字、设置公平性、硬件依赖和 13B 单卡主张的细节都没有充分展开。因此，我会把它看成一篇很强的系统化训练工程论文，但在把它当成“普适替代 AdamW 的新范式”之前，还需要更仔细核对实验边界。"
         }
       }
     },

@@ -50,6 +50,16 @@ DEFAULT_ANALYSIS_SETTINGS = {
 }
 
 
+def normalize_image_token(value: str) -> str:
+    text = str(value or '').strip().lower()
+    text = re.sub(r'\\', '/', text)
+    text = text.split('/')[-1]
+    text = re.sub(r'\.[a-z0-9]+$', '', text)
+    text = re.sub(r'_page\d+$', '', text)
+    text = re.sub(r'[^a-z0-9]+', '', text)
+    return text
+
+
 def normalize_paper_id(raw: str) -> str:
     return str(raw or '').replace('http://arxiv.org/abs/', '').replace('https://arxiv.org/abs/', '').replace('arXiv:', '').strip()
 
@@ -181,6 +191,80 @@ def latex_to_text(text: str) -> str:
     return text.strip()
 
 
+def extract_braced_value(text: str, start_index: int) -> tuple[str, int]:
+    if start_index >= len(text) or text[start_index] != '{':
+        return '', start_index
+    depth = 0
+    result: List[str] = []
+    index = start_index
+    while index < len(text):
+        char = text[index]
+        if char == '{':
+            depth += 1
+            if depth > 1:
+                result.append(char)
+        elif char == '}':
+            depth -= 1
+            if depth == 0:
+                return ''.join(result), index + 1
+            if depth > 0:
+                result.append(char)
+        else:
+            result.append(char)
+        index += 1
+    return ''.join(result), index
+
+
+def command_argument(block: str, command: str) -> str:
+    match = re.search(rf'\\{command}\*?(?:\[[^\]]*\])?\{{', block)
+    if not match:
+        return ''
+    start = match.end() - 1
+    value, _ = extract_braced_value(block, start)
+    return value
+
+
+def classify_figure_role(text: str) -> str:
+    normalized = normalize_heading(text)
+    if any(token in normalized for token in ['framework', 'pipeline', 'overview', 'architecture', 'method', 'model', 'system', 'workflow']):
+        return 'method'
+    if any(token in normalized for token in ['result', 'performance', 'benchmark', 'evaluation', 'experiment', 'ablation', 'tsne', 'accuracy', 'comparison', 'analysis']):
+        return 'results'
+    if any(token in normalized for token in ['dataset', 'example', 'case', 'visual', 'qualitative']):
+        return 'examples'
+    return 'other'
+
+
+def extract_figure_context(latex_source: str) -> List[Dict[str, Any]]:
+    entries: List[Dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    figure_blocks = re.finditer(r'\\begin\{figure\*?\}(.*?)\\end\{figure\*?\}', latex_source, flags=re.DOTALL)
+
+    for match in figure_blocks:
+        block = match.group(1)
+        caption_raw = command_argument(block, 'caption')
+        caption = latex_to_text(caption_raw)[:500] if caption_raw else ''
+        refs = re.findall(r'\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}', block)
+        if not refs:
+            continue
+        role_hint = classify_figure_role(' '.join(refs) + ' ' + caption)
+        for ref in refs:
+            token = normalize_image_token(ref)
+            if not token:
+                continue
+            key = (token, caption)
+            if key in seen:
+                continue
+            seen.add(key)
+            entries.append({
+                'image_ref': ref,
+                'image_token': token,
+                'caption': caption,
+                'role_hint': role_hint,
+            })
+    return entries[:20]
+
+
 def score_tex_file(path: Path) -> tuple[int, int]:
     text = path.read_text(encoding='utf-8', errors='ignore')
     score = 0
@@ -192,13 +276,13 @@ def score_tex_file(path: Path) -> tuple[int, int]:
     return score, len(text)
 
 
-def extract_text_from_source_tree(root: Path) -> str:
+def extract_text_and_figures_from_source_tree(root: Path) -> tuple[str, List[Dict[str, Any]]]:
     tex_files = [path for path in root.rglob('*.tex') if path.is_file()]
     if not tex_files:
-        return ''
+        return '', []
     main_tex = sorted(tex_files, key=score_tex_file, reverse=True)[0]
     expanded = expand_tex_file(main_tex, seen=set())
-    return latex_to_text(expanded)
+    return latex_to_text(expanded), extract_figure_context(expanded)
 
 
 def extract_text_from_pdf(pdf_path: Path, page_limit: int) -> str:
@@ -266,7 +350,11 @@ def build_text_context(text: str, max_full_text_chars: int, section_char_budget:
 def extract_paper_context(paper: Dict[str, Any], settings: Dict[str, Any]) -> Dict[str, Any]:
     paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
     if not paper_id:
-        return {'source_kind': 'none', 'text_context': build_text_context('', settings['max_full_text_chars'], settings['section_char_budget'])}
+        return {
+            'source_kind': 'none',
+            'text_context': build_text_context('', settings['max_full_text_chars'], settings['section_char_budget']),
+            'figure_context': [],
+        }
 
     with tempfile.TemporaryDirectory(prefix='full-paper-analysis-') as tmp:
         tmp_dir = Path(tmp)
@@ -275,13 +363,14 @@ def extract_paper_context(paper: Dict[str, Any], settings: Dict[str, Any]) -> Di
 
         text = ''
         source_kind = 'none'
+        figure_context: List[Dict[str, Any]] = []
 
         try:
             download_to_path(f'https://arxiv.org/e-print/{paper_id}', source_path)
             extract_dir = tmp_dir / 'source'
             extract_dir.mkdir(parents=True, exist_ok=True)
             safe_extract_tarball(source_path, extract_dir)
-            text = extract_text_from_source_tree(extract_dir)
+            text, figure_context = extract_text_and_figures_from_source_tree(extract_dir)
             if text:
                 source_kind = 'arxiv_source'
         except Exception as exc:
@@ -301,6 +390,7 @@ def extract_paper_context(paper: Dict[str, Any], settings: Dict[str, Any]) -> Di
             'source_kind': source_kind,
             'text_context': text_context,
             'text_char_count': len(text),
+            'figure_context': figure_context[:12],
         }
 
 
@@ -333,6 +423,7 @@ def build_prompt(repo_root: Path, config: Dict[str, Any], paper: Dict[str, Any],
             'image_files': image_manifest(repo_root, paper),
         },
         'full_text_context': context,
+        'figure_context': context.get('figure_context', [])[:8],
     }
 
     instructions = [
@@ -401,6 +492,7 @@ def analyze_paper(repo_root: Path, config: Dict[str, Any], paper: Dict[str, Any]
             'enabled': True,
             'source_kind': context.get('source_kind', 'none'),
             'text_char_count': context.get('text_char_count', 0),
+            'figure_context': context.get('figure_context', []),
             'content': normalize_full_analysis(raw),
         }
     finally:

@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import re
 import subprocess
 import sys
 from collections import Counter
@@ -42,6 +43,15 @@ def normalize_paper_id(raw: str) -> str:
     return str(raw or '').replace('http://arxiv.org/abs/', '').replace('https://arxiv.org/abs/', '').replace('arXiv:', '').strip()
 
 
+def normalize_image_token(value: str) -> str:
+    text = str(value or '').strip().lower()
+    text = text.replace('\\', '/').split('/')[-1]
+    text = text.rsplit('.', 1)[0]
+    text = text.removesuffix('_page1')
+    text = ''.join(ch for ch in text if ch.isalnum())
+    return text
+
+
 def paper_urls(paper_id: str) -> tuple[str, str]:
     pid = normalize_paper_id(paper_id)
     return f'https://arxiv.org/abs/{pid}', f'https://arxiv.org/pdf/{pid}.pdf'
@@ -57,6 +67,16 @@ def full_analysis_fields(paper: Dict[str, Any]) -> Dict[str, Any]:
         return {}
     content = raw.get('content', {})
     return content if isinstance(content, dict) else {}
+
+
+def full_analysis_figure_context(paper: Dict[str, Any]) -> List[Dict[str, Any]]:
+    raw = paper.get('full_analysis', {})
+    if not isinstance(raw, dict) or not raw.get('enabled'):
+        return []
+    context = raw.get('figure_context', [])
+    if not isinstance(context, list):
+        return []
+    return [item for item in context if isinstance(item, dict)]
 
 
 def fallback_summary(paper: Dict[str, Any]) -> str:
@@ -96,7 +116,18 @@ def author_text(paper: Dict[str, Any]) -> str:
 
 
 def bullet_section(lines: List[str], title: str, items: List[str], limit: int | None = None) -> None:
-    cleaned = [str(item).strip() for item in items if str(item).strip()]
+    cleaned: List[str] = []
+    for item in items:
+        raw = str(item).strip()
+        if not raw:
+            continue
+        pieces = [raw]
+        for pattern in (r"'\s*,\s*'", r'"\s*,\s*"', r'`\s*,\s*`'):
+            next_pieces: List[str] = []
+            for piece in pieces:
+                next_pieces.extend(part for part in re.split(pattern, piece) if part)
+            pieces = next_pieces
+        cleaned.extend(piece.strip() for piece in pieces if piece.strip())
     if limit is not None:
         cleaned = cleaned[:limit]
     if not cleaned:
@@ -106,7 +137,18 @@ def bullet_section(lines: List[str], title: str, items: List[str], limit: int | 
 
 
 def inline_bullets(prefix: str, items: List[str], limit: int | None = None) -> List[str]:
-    cleaned = [str(item).strip() for item in items if str(item).strip()]
+    cleaned: List[str] = []
+    for item in items:
+        raw = str(item).strip()
+        if not raw:
+            continue
+        pieces = [raw]
+        for pattern in (r"'\s*,\s*'", r'"\s*,\s*"', r'`\s*,\s*`'):
+            next_pieces: List[str] = []
+            for piece in pieces:
+                next_pieces.extend(part for part in re.split(pattern, piece) if part)
+            pieces = next_pieces
+        cleaned.extend(piece.strip() for piece in pieces if piece.strip())
     if limit is not None:
         cleaned = cleaned[:limit]
     return [f'- {prefix}: {item}' for item in cleaned]
@@ -222,6 +264,126 @@ def image_markdown_lines(note_dir: Path, max_images: int) -> List[str]:
     return lines
 
 
+def available_image_files(note_dir: Path) -> List[Path]:
+    image_dir = note_dir / 'images'
+    if not image_dir.exists():
+        return []
+    return [
+        path for path in sorted(image_dir.iterdir())
+        if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
+    ]
+
+
+def classify_figure_role(text: str) -> str:
+    value = str(text or '').lower()
+    if any(token in value for token in ['result', 'performance', 'benchmark', 'evaluation', 'experiment', 'ablation', 'tsne', 'accuracy', 'comparison', 'analysis', 'latency', 'memory', 'throughput', 'ppl', 'perplexity', 'roc-auc', 'auc', 'score']):
+        return 'results'
+    if any(token in value for token in ['framework', 'pipeline', 'overview', 'architecture', 'method', 'model', 'system', 'illustration', 'scheme', 'parameterization', 'router']):
+        return 'method'
+    if any(token in value for token in ['dataset', 'example', 'case', 'visual', 'qualitative']):
+        return 'examples'
+    return 'other'
+
+
+def figure_priority(entry: Dict[str, Any], target: str) -> int:
+    text = f"{entry['path'].stem} {entry.get('caption', '')}".lower()
+    if target == 'method':
+        score = 0
+        if any(token in text for token in ['overview', 'framework', 'pipeline', 'architecture', 'illustration', 'scheme', 'parameterization', 'router', 'workflow']):
+            score += 5
+        if any(token in text for token in ['method', 'model', 'approach', 'alignment']):
+            score += 3
+        if any(token in text for token in ['latency', 'memory', 'throughput', 'perplexity', 'roc-auc', 'auc', 'tsne', 'result', 'evaluation', 'benchmark']):
+            score -= 3
+        return score
+    if target == 'results':
+        score = 0
+        if any(token in text for token in ['result', 'evaluation', 'benchmark', 'latency', 'memory', 'throughput', 'perplexity', 'roc-auc', 'auc', 'accuracy', 'tsne', 'comparison', 'analysis', 'score']):
+            score += 5
+        if any(token in text for token in ['overview', 'framework', 'pipeline', 'architecture', 'illustration', 'scheme']):
+            score -= 2
+        return score
+    if target == 'examples':
+        return 2 if any(token in text for token in ['visual', 'example', 'dataset', 'qualitative', 'case']) else 0
+    return 0
+
+
+def resolve_image_file(image_files: List[Path], token: str) -> Path | None:
+    normalized = normalize_image_token(token)
+    if not normalized:
+        return None
+    scored: List[tuple[int, Path]] = []
+    for path in image_files:
+        candidate = normalize_image_token(path.name)
+        if not candidate:
+            continue
+        if candidate == normalized:
+            scored.append((3, path))
+        elif candidate.startswith(normalized) or normalized.startswith(candidate):
+            scored.append((2, path))
+        elif normalized in candidate or candidate in normalized:
+            scored.append((1, path))
+    if not scored:
+        return None
+    scored.sort(key=lambda item: (-item[0], item[1].name))
+    return scored[0][1]
+
+
+def contextual_figure_entries(note_dir: Path, paper: Dict[str, Any], max_images: int) -> List[Dict[str, Any]]:
+    image_files = available_image_files(note_dir)
+    if not image_files or max_images <= 0:
+        return []
+
+    entries: List[Dict[str, Any]] = []
+    used_paths: set[str] = set()
+    for item in full_analysis_figure_context(paper):
+        image_path = resolve_image_file(image_files, item.get('image_token') or item.get('image_ref') or '')
+        if not image_path or str(image_path) in used_paths:
+            continue
+        used_paths.add(str(image_path))
+        caption = str(item.get('caption') or '').strip()
+        inferred_role = classify_figure_role(f'{caption} {image_path.stem}')
+        role = inferred_role if inferred_role != 'other' else str(item.get('role_hint') or '').strip() or 'other'
+        entries.append({
+            'path': image_path,
+            'caption': caption,
+            'role': role,
+        })
+
+    if entries:
+        return entries[:max_images]
+
+    for path in image_files[:max_images]:
+        entries.append({
+            'path': path,
+            'caption': '',
+            'role': classify_figure_role(path.stem),
+        })
+    return entries
+
+
+def pick_figure(entries: List[Dict[str, Any]], preferred_roles: List[str], used: set[str]) -> Dict[str, Any] | None:
+    for role in preferred_roles:
+        candidates = [
+            entry for entry in entries
+            if str(entry['path']) not in used and entry.get('role') == role
+        ]
+        if candidates:
+            candidates.sort(key=lambda entry: (-figure_priority(entry, role), entry['path'].name))
+            used.add(str(candidates[0]['path']))
+            return candidates[0]
+    return None
+
+
+def figure_block(title: str, entry: Dict[str, Any]) -> List[str]:
+    path = entry['path']
+    lines = ['', f'### {title}', f'![{path.stem}](images/{path.name})', '']
+    caption = str(entry.get('caption') or '').strip()
+    if caption:
+        lines.append(f'*Figure cue:* {caption}')
+    return lines
+
+
 def maybe_update_graph(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[str, Any]], settings: Dict[str, Any]) -> None:
     if not settings['graph_enabled']:
         return
@@ -262,7 +424,14 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
     maybe_extract_images(repo_root, note_dir, paper, settings, rank)
     maybe_update_graph(repo_root, paper, papers, settings)
 
-    embedded_images = image_markdown_lines(note_dir, settings['max_images_per_paper'])
+    figure_entries = contextual_figure_entries(note_dir, paper, settings['max_images_per_paper'])
+    used_figure_paths: set[str] = set()
+    method_figure = pick_figure(figure_entries, ['method', 'other', 'examples'], used_figure_paths)
+    results_figure = pick_figure(figure_entries, ['results', 'examples', 'other'], used_figure_paths)
+    remaining_figures = [
+        entry for entry in figure_entries
+        if str(entry['path']) not in used_figure_paths
+    ]
 
     frontmatter = {
         'paper_id': paper_id,
@@ -283,8 +452,8 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
         frontmatter['keywords'] = ai.get('keywords', [])
     if ai.get('reading_priority'):
         frontmatter['reading_priority'] = ai.get('reading_priority')
-    if embedded_images:
-        frontmatter['image_count'] = len(embedded_images) // 2
+    if figure_entries:
+        frontmatter['image_count'] = len(figure_entries)
     if full:
         frontmatter['analysis_depth'] = 'full'
         frontmatter['full_analysis_source'] = str(paper.get('full_analysis', {}).get('source_kind') or '')
@@ -335,6 +504,8 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
             '## Method Overview',
             analysis_value(full, ai, 'method_overview_zh', 'approach_zh'),
         ])
+        if method_figure:
+            body_lines.extend(figure_block('Method Figure', method_figure))
     bullet_section(body_lines, 'Method Details', full.get('method_details', []), limit=5)
     if analysis_value(full, ai, 'experiment_setup_zh', 'evidence_zh'):
         body_lines.extend([
@@ -342,12 +513,16 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
             '## Experimental Setup And Evidence',
             analysis_value(full, ai, 'experiment_setup_zh', 'evidence_zh'),
         ])
+        if results_figure:
+            body_lines.extend(figure_block('Experiment Figure', results_figure))
     if full.get('main_results_zh'):
         body_lines.extend([
             '',
             '## Main Results And Claims',
             full.get('main_results_zh', ''),
         ])
+        if results_figure and '### Experiment Figure' not in body_lines:
+            body_lines.extend(figure_block('Results Figure', results_figure))
     if analysis_value(full, ai, 'practical_value_zh', 'value_zh'):
         body_lines.extend([
             '',
@@ -376,9 +551,16 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
     bullet_section(body_lines, 'Recommended For', ai.get('recommended_for', []), limit=3)
     bullet_section(body_lines, 'Keywords', ai.get('keywords', []), limit=6)
 
-    if embedded_images:
-        body_lines.extend(['', '## Figures'])
-        body_lines.extend(embedded_images)
+    if remaining_figures:
+        body_lines.extend(['', '## Additional Figures'])
+        for entry in remaining_figures:
+            body_lines.extend([
+                '',
+                f'![{entry["path"].stem}](images/{entry["path"].name})',
+                '',
+            ])
+            if entry.get('caption'):
+                body_lines.append(f'*Figure cue:* {entry["caption"]}')
         body_lines.append('- Full asset manifest: [images/index.md](images/index.md)')
 
     body_lines.extend([
