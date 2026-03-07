@@ -301,10 +301,13 @@ def build_sidebar(latest: Dict, daily_index: List[Dict], papers: List[Tuple[Dict
     archive_items = ''.join(
         f'<li><a href="{apply_base_url(entry["path"], base_url)}">{entry["date"]}</a></li>' for entry in daily_index[:10]
     ) or '<li class="meta">No history yet.</li>'
-    paper_items = ''.join(
-        f'<li><a href="{apply_base_url(f"/papers/{frontmatter.get("slug", path.parent.name)}/", base_url)}">{html.escape(frontmatter.get("title", path.parent.name))}</a></li>'
-        for frontmatter, path in papers[:12]
-    ) or '<li class="meta">No paper pages yet.</li>'
+    paper_item_parts = []
+    for frontmatter, path in papers[:12]:
+        slug = frontmatter.get('slug', path.parent.name)
+        title = html.escape(frontmatter.get('title', path.parent.name))
+        href = apply_base_url(f'/papers/{slug}/', base_url)
+        paper_item_parts.append(f'<li><a href="{href}">{title}</a></li>')
+    paper_items = ''.join(paper_item_parts) or '<li class="meta">No paper pages yet.</li>'
 
     return (
         '<h2>Latest</h2>'
