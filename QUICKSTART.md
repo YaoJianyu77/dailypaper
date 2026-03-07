@@ -111,7 +111,7 @@ For Netlify or Cloudflare Pages:
 - output directory: `dist`
 - leave `SITE_BASE_URL` empty unless you deploy under a custom subpath
 
-The workflow prefers the strongest available OpenAI model from GitHub Models. You can override that with the `AI_MODEL` repository variable.
+The workflow now tries `openai/gpt-5.4` first, then falls back through `openai/gpt-5`, `openai/gpt-4.1`, and `openai/gpt-4o`. You can override that with the `AI_MODEL` repository variable.
 
 ## Output layout
 

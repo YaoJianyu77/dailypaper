@@ -247,6 +247,7 @@ Output:
 
 By default the script calls GitHub Models and prefers the strongest available OpenAI model from the repository's visible model catalog. The default preference order is:
 
+- `openai/gpt-5.4`
 - `openai/gpt-5`
 - `openai/gpt-4.1`
 - `openai/gpt-4o`

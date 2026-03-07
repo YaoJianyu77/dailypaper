@@ -29,6 +29,7 @@ DEFAULT_OPENAI_MODEL = 'gpt-4.1-mini'
 DEFAULT_OPENAI_API_BASE = 'https://api.openai.com/v1'
 DEFAULT_GITHUB_MODELS_API_BASE = 'https://models.github.ai'
 DEFAULT_GITHUB_MODELS_PREFERRED_MODELS = [
+    'openai/gpt-5.4',
     'openai/gpt-5',
     'openai/gpt-4.1',
     'openai/gpt-4o',
@@ -201,6 +202,8 @@ def list_github_models(token: str, api_base: str, timeout_seconds: int) -> List[
 
 def score_openai_model(model_id: str) -> tuple[int, int]:
     lowered = model_id.lower()
+    if lowered.startswith('openai/gpt-5.4'):
+        return (6, len(model_id))
     if lowered.startswith('openai/gpt-5'):
         return (5, len(model_id))
     if lowered.startswith('openai/gpt-4.1'):
