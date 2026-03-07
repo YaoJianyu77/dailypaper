@@ -1,0 +1,80 @@
+name: Daily Papers
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 11 * * *'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Search papers
+        run: |
+          CONFIG_PATH="config.yaml"
+          if [ ! -f "$CONFIG_PATH" ]; then
+            CONFIG_PATH="config.example.yaml"
+          fi
+          python start-my-day/scripts/search_arxiv.py \
+            --config "$CONFIG_PATH" \
+            --output state/arxiv_filtered.json \
+            --max-results 200 \
+            --top-n 10 \
+            --categories "cs.AI,cs.LG,cs.CL,cs.CV,cs.MM,cs.MA,cs.RO"
+
+      - name: Publish daily content
+        run: python scripts/publish_daily.py --input state/arxiv_filtered.json
+
+      - name: Build static site
+        run: |
+          SITE_BASE_URL=""
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          if [ "$REPO_NAME" != "${GITHUB_REPOSITORY_OWNER}.github.io" ]; then
+            SITE_BASE_URL="/$REPO_NAME"
+          fi
+          export SITE_BASE_URL
+          python scripts/build_site.py --output-dir dist
+
+      - name: Commit generated content
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git add content state
+          git diff --cached --quiet || git commit -m "chore: update daily paper content"
+          git push
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

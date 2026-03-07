@@ -1,0 +1,7 @@
+[build]
+command = "python3 scripts/build_site.py --output-dir dist"
+publish = "dist"
+
+[build.environment]
+PYTHON_VERSION = "3.11"
+SITE_BASE_URL = ""

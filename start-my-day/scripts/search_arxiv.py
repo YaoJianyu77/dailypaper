@@ -753,14 +753,16 @@ def main():
     """主函数"""
     import argparse
 
-    default_config = os.environ.get('OBSIDIAN_VAULT_PATH', '')
-    if default_config:
-        default_config = os.path.join(default_config, '99_System', 'Config', 'research_interests.yaml')
+    repo_root = Path(__file__).resolve().parents[2]
+    default_config = os.environ.get('PAPER_SITE_CONFIG', '')
+    if not default_config:
+        config_yaml = repo_root / 'config.yaml'
+        default_config = str(config_yaml if config_yaml.exists() else repo_root / 'config.example.yaml')
 
     parser = argparse.ArgumentParser(description='Search and filter arXiv papers with Semantic Scholar integration')
     parser.add_argument('--config', type=str,
                         default=default_config or None,
-                        help='Path to research interests config file (or set OBSIDIAN_VAULT_PATH env var)')
+                        help='Path to research interests config file (or set PAPER_SITE_CONFIG env var)')
     parser.add_argument('--output', type=str, default='arxiv_filtered.json',
                         help='Output JSON file path')
     parser.add_argument('--max-results', type=int, default=200,
@@ -785,7 +787,7 @@ def main():
     )
 
     if not args.config:
-        logger.error("未指定配置文件路径。请通过 --config 参数或 OBSIDIAN_VAULT_PATH 环境变量设置。")
+        logger.error("未指定配置文件路径。请通过 --config 参数或 PAPER_SITE_CONFIG 环境变量设置。")
         return 1
 
     logger.info("Loading config from: %s", args.config)
