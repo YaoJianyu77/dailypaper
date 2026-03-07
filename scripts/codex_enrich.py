@@ -14,8 +14,6 @@ import tempfile
 from pathlib import Path
 from typing import Any, Dict
 
-import yaml
-
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
@@ -26,7 +24,17 @@ logger = logging.getLogger(__name__)
 
 
 def build_prompt(report_date: str, config: Dict[str, Any], payload: Dict[str, Any]) -> str:
-    prompt_payload = build_prompt_payload(report_date, config, payload.get('top_papers', []))
+    top_papers = payload.get('top_papers', [])
+    ai_settings = config.get('ai', {}) if isinstance(config, dict) else {}
+    paper_limit = int(ai_settings.get('codex_paper_limit', len(top_papers) or 10))
+    max_abstract_chars = int(ai_settings.get('codex_abstract_chars', 1200))
+    prompt_payload = build_prompt_payload(
+        report_date,
+        config,
+        top_papers,
+        paper_limit=paper_limit,
+        max_abstract_chars=max_abstract_chars,
+    )
     return (
         '你是一个严格的研究论文编辑。请只基于给定的论文标题、作者、摘要和评分信息，'
         '输出一个 JSON 对象，不要输出任何额外解释。\n\n'
