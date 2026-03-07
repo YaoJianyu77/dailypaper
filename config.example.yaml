@@ -11,8 +11,13 @@ build:
 
 ai:
   enabled: true
-  model: "gpt-4.1-mini"
-  api_base: "https://api.openai.com/v1"
+  provider: "github_models"
+  model: "auto"
+  github_models_api_base: "https://models.github.ai"
+  preferred_models:
+    - "openai/gpt-5"
+    - "openai/gpt-4.1"
+    - "openai/gpt-4o"
   timeout_seconds: 180
   max_output_tokens: 5000
 

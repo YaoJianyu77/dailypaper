@@ -2,18 +2,46 @@ name: Daily Papers
 
 "on":
   workflow_dispatch:
+  schedule:
+    - cron: '0 11 * * *'
+    - cron: '0 12 * * *'
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
+  models: read
 
 concurrency:
   group: daily-papers
   cancel-in-progress: true
 
 jobs:
+  schedule-guard:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.guard.outputs.should_run }}
+      ny_time: ${{ steps.guard.outputs.ny_time }}
+
+    steps:
+      - name: Check New York local time
+        id: guard
+        run: |
+          python - <<'PY'
+          import os
+          from datetime import datetime, timezone
+          from zoneinfo import ZoneInfo
+
+          now_ny = datetime.now(timezone.utc).astimezone(ZoneInfo("America/New_York"))
+          should_run = "true" if now_ny.hour == 7 else "false"
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+              fh.write(f"should_run={should_run}\n")
+              fh.write(f"ny_time={now_ny.isoformat()}\n")
+          print(f"New York time: {now_ny.isoformat()}")
+          print(f"should_run={should_run}")
+          PY
+
   build-and-commit:
+    needs: schedule-guard
+    if: github.event_name != 'schedule' || needs.schedule-guard.outputs.should_run == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -43,9 +71,11 @@ jobs:
 
       - name: AI enrich papers
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
-          OPENAI_API_BASE: ${{ vars.OPENAI_API_BASE }}
+          AI_PROVIDER: github_models
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AI_MODEL: ${{ vars.AI_MODEL }}
+          GITHUB_MODELS_PREFERRED_MODELS: ${{ vars.GITHUB_MODELS_PREFERRED_MODELS }}
+          GITHUB_MODELS_API_BASE: ${{ vars.GITHUB_MODELS_API_BASE }}
         run: |
           CONFIG_PATH="config.yaml"
           if [ ! -f "$CONFIG_PATH" ]; then
@@ -76,15 +106,3 @@ jobs:
           git add content state
           git diff --cached --quiet || git commit -m "chore: update daily paper content"
           git push
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

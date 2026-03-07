@@ -16,28 +16,55 @@ cp config.example.yaml config.yaml
 
 Edit `config.yaml` to match your research interests.
 
-## 3. Prepare local Codex automation
+## 3. Enable GitHub-hosted daily generation
 
 ```bash
-codex --help
-git push origin main
+git remote -v
 ```
 
-Requirements for unattended local runs:
+The default setup now runs on GitHub, not on your laptop.
 
-- `codex` must be installed and already logged in on this machine
-- `git push origin main` must work without prompting
-- the machine must be on at 07:00 local time
+What you need in GitHub:
 
-## 4. Generate today's content locally
+- `Actions` enabled
+- `Pages` enabled with `GitHub Actions` as source
+- `.github/workflows/daily.yml` enabled
+- `.github/workflows/pages.yml` enabled
 
-Run the full local pipeline:
+The generation workflow uses GitHub Models and runs every day at New York `07:00`.
+
+Optional repository variables:
+
+- `AI_MODEL`
+- `GITHUB_MODELS_PREFERRED_MODELS`
+- `GITHUB_MODELS_API_BASE`
+
+## 4. Trigger a manual run once
+
+Run the generation workflow manually once from the GitHub Actions web UI:
+
+- `Actions`
+- `Daily Papers`
+- `Run workflow`
+
+This will:
+
+1. search and rank papers
+2. call GitHub Models for structured Chinese editorial output
+3. publish content into `content/`
+4. commit and push updated content back to `main`
+5. trigger `.github/workflows/pages.yml`
+6. refresh GitHub Pages
+
+## 5. Optional local fallback
+
+If you still want your own machine to do the generation:
 
 ```bash
 uv run --with-requirements requirements.txt python scripts/run_local_daily.py
 ```
 
-This will:
+This local path will:
 
 1. pull the latest `main`
 2. search and rank papers
@@ -56,7 +83,7 @@ uv run --with-requirements requirements.txt python scripts/run_local_daily.py --
 uv run --with-requirements requirements.txt python scripts/run_local_daily.py --remote origin
 ```
 
-## 5. Install the daily 07:00 cron job
+## 6. Optional local 07:00 cron job
 
 ```bash
 ./scripts/install_local_cron.sh
@@ -66,13 +93,13 @@ Cron output goes to:
 
 - `state/logs/local_daily.log`
 
-## 6. GitHub Pages deployment model
+## 7. GitHub Pages deployment model
 
 Push the repository to GitHub and enable GitHub Pages.
 
 With the current setup:
 
-1. your local 07:00 cron job generates and pushes content
+1. `.github/workflows/daily.yml` generates content every day at New York `07:00`
 2. `.github/workflows/pages.yml` rebuilds the static site on every push to `main`
 3. GitHub Pages publishes the updated site
 
@@ -84,13 +111,7 @@ For Netlify or Cloudflare Pages:
 - output directory: `dist`
 - leave `SITE_BASE_URL` empty unless you deploy under a custom subpath
 
-## 7. Optional GitHub-side generation
-
-If you later want GitHub Actions to generate content without your local machine, use `.github/workflows/daily.yml` manually. That workflow both generates content and deploys Pages directly. Set:
-
-- `OPENAI_API_KEY`
-- optional `OPENAI_MODEL`
-- optional `OPENAI_API_BASE`
+The workflow prefers the strongest available OpenAI model from GitHub Models. You can override that with the `AI_MODEL` repository variable.
 
 ## Output layout
 

@@ -2,15 +2,15 @@
 
 A repository-backed daily paper pipeline with two operating modes:
 
-- local Codex CLI generation on your machine
-- optional GitHub-hosted generation via API
+- GitHub-hosted generation with GitHub Models and GitHub Actions
+- local `uv` + Codex CLI generation as a fallback
 
 The repository is now structured as a content store plus a static website:
 
 - `start-my-day/scripts/search_arxiv.py` fetches and ranks papers from arXiv and Semantic Scholar.
 - `scripts/publish_daily.py` converts search output into versioned markdown under `content/`.
 - `scripts/build_site.py` compiles that markdown into a static site under `dist/`.
-- `.github/workflows/daily.yml` can generate fresh content manually from GitHub Actions.
+- `.github/workflows/daily.yml` generates fresh content on a schedule or on manual dispatch.
 - `.github/workflows/pages.yml` deploys GitHub Pages whenever `main` changes.
 
 ## What Changed
@@ -76,9 +76,41 @@ uv run --with-requirements requirements.txt python -m http.server 8000 -d dist
 
 Then open `http://localhost:8000`.
 
-## Local Codex CLI Automation
+## GitHub Automation Model
 
-If you want the content quality from a local coding agent instead of a remote API job, use the local flow:
+The GitHub-hosted path is now the default:
+
+1. `.github/workflows/daily.yml` runs every day at New York `07:00`.
+2. The workflow searches papers, calls GitHub Models for Chinese editorial enrichment, and commits fresh `content/` and `state/`.
+3. `.github/workflows/pages.yml` sees the push to `main` and redeploys GitHub Pages.
+
+The schedule uses two UTC cron entries plus a timezone guard so it stays aligned to New York `07:00` across daylight saving changes.
+
+Recommended repository setup:
+
+- keep GitHub Pages enabled with `GitHub Actions` as the source
+- leave `.github/workflows/pages.yml` enabled
+- leave `.github/workflows/daily.yml` enabled for daily generation
+- optionally set repository variable `AI_MODEL` if you want to force a specific GitHub Models model id
+
+The generation workflow does this:
+
+1. Run the paper search.
+2. Enrich the top papers with GitHub Models.
+3. Generate or update daily markdown and paper pages.
+4. Commit `content/` and `state/` changes back into the repository.
+
+That gives you:
+
+- a homepage that shows the latest daily report
+- an archive page for older reports
+- one page per paper
+- git history for every generated artifact
+- a site you can browse on GitHub Pages or locally after `git clone`
+
+## Local Fallback
+
+If you still want agent generation on your own machine, the local flow is still supported:
 
 1. `scripts/run_local_daily.py` pulls `main`, searches papers, runs local Codex CLI enrichment, publishes markdown, builds the site, commits `content/` and `state/`, and pushes back to GitHub.
 2. `scripts/install_local_cron.sh` installs a local cron job for `07:00` every day.
@@ -90,7 +122,7 @@ Prerequisites on the machine that will run at 7am:
 - `git push` must already work non-interactively, preferably with SSH keys or a credential helper
 - the machine must be powered on at the scheduled time
 
-Install the local 7am cron job:
+Install the local cron job:
 
 ```bash
 ./scripts/install_local_cron.sh
@@ -117,36 +149,6 @@ By default the script auto-detects the active Git remote. Use `--remote` only if
 Cron logs are written to:
 
 - `state/logs/local_daily.log`
-
-## GitHub Automation Model
-
-The GitHub workflow is now split into generation and deployment:
-
-1. `.github/workflows/daily.yml` is manual-only and can generate content from GitHub Actions when you explicitly run it. It also deploys Pages directly for that manual run.
-2. `.github/workflows/pages.yml` deploys the current repository state to GitHub Pages on every push to `main`.
-
-If you choose the local Codex CLI path, the everyday flow is:
-
-1. Your machine runs `scripts/run_local_daily.py` at 07:00 local time.
-2. The script pushes updated `content/` and `state/` to GitHub.
-3. GitHub Pages rebuilds from that push and updates the site.
-
-If you choose the API path, the GitHub-side generation workflow does this:
-
-1. Run the paper search.
-2. Optionally enrich the top papers with AI-generated Chinese summaries and recommendations.
-3. Generate or update daily markdown and paper pages.
-4. Commit `content/` and `state/` changes back into the repository.
-5. Build the static site.
-6. Deploy the static site to GitHub Pages.
-
-That gives you:
-
-- a homepage that shows the latest daily report
-- an archive page for older reports
-- one page per paper
-- git history for every generated artifact
-- a site you can browse on GitHub Pages or locally after `git clone`
 
 ## Content and Asset Management
 
@@ -189,10 +191,11 @@ The included workflows live at:
 - `.github/workflows/daily.yml`
 - `.github/workflows/pages.yml`
 
-Recommended setup for your current local-Codex model:
+Recommended setup:
 
-- leave `.github/workflows/daily.yml` as a manual fallback
-- let `.github/workflows/pages.yml` deploy on push to `main`
+- `.github/workflows/daily.yml` should stay enabled for the 7am generation job
+- `.github/workflows/pages.yml` should stay enabled for deployment on push to `main`
+- local `scripts/run_local_daily.py` is optional fallback, not the primary path
 
 For a project site such as `https://YaoJianyu77.github.io/dailypaper/`, the build now supports a subpath base URL.
 
@@ -242,7 +245,15 @@ Output:
 
 - `state/arxiv_enriched.json`
 
-When `OPENAI_API_KEY` is present, the script calls the OpenAI Responses API and adds:
+By default the script calls GitHub Models and prefers the strongest available OpenAI model from the repository's visible model catalog. The default preference order is:
+
+- `openai/gpt-5`
+- `openai/gpt-4.1`
+- `openai/gpt-4o`
+
+You can force a specific model with the repository variable `AI_MODEL` or the config key `ai.model`.
+
+The enrichment layer adds:
 
 - `daily_brief.overview_zh`
 - `daily_brief.top_themes`
@@ -257,27 +268,25 @@ When `OPENAI_API_KEY` is present, the script calls the OpenAI Responses API and 
   - `keywords`
   - `reading_priority`
 
-When `OPENAI_API_KEY` is missing, the script degrades safely and passes the ranked papers through without failing the workflow.
+If GitHub Models is unavailable or disabled, the script degrades safely and passes the ranked papers through without failing the workflow.
 
-### GitHub Secrets
+### GitHub Variables
 
-To enable unattended API enrichment in GitHub Actions:
-
-1. Open `Settings -> Secrets and variables -> Actions`
-2. Add repository secret:
-   - `OPENAI_API_KEY`
-3. Optional repository variables:
-   - `OPENAI_MODEL`
-   - `OPENAI_API_BASE`
-
-Default model in config:
+For the GitHub-hosted path, the default config is:
 
 ```yaml
 ai:
-  model: "gpt-4.1-mini"
+  provider: "github_models"
+  model: "auto"
 ```
 
-You can also run it locally:
+Optional repository variables for GitHub Actions:
+
+- `AI_MODEL`
+- `GITHUB_MODELS_PREFERRED_MODELS`
+- `GITHUB_MODELS_API_BASE`
+
+You can still run OpenAI directly if you want:
 
 ```bash
 export OPENAI_API_KEY=\"your-key\"
@@ -300,7 +309,7 @@ uv run --with-requirements requirements.txt python scripts/publish_daily.py --in
 uv run --with-requirements requirements.txt python scripts/build_site.py --output-dir dist
 ```
 
-For the local Codex CLI path, replace the middle steps with:
+For the local Codex CLI fallback, replace the middle steps with:
 
 ```bash
 uv run --with-requirements requirements.txt python scripts/run_local_daily.py --skip-push
