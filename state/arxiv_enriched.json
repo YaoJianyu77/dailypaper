@@ -51,7 +51,41 @@
         "cs.LG",
         "cs.CL"
       ],
-      "is_hot_paper": false
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "通过缩放正交变换重写POET，把LLM训练的显存和计算开销压到更可部署的水平。",
+        "summary_zh": "论文从POET的正交等价变换出发，提出更可扩展、显存更友好的POET-X，以降低原方法大量矩阵乘法带来的负担。摘要称，该方法在保持POET泛化性与训练稳定性的同时，显著提升吞吐并改善内存效率。作者进一步给出一个强工程信号：十亿参数级LLM可在单张Nvidia H100上完成预训练，而同设定下AdamW会因显存不足失败。",
+        "core_contributions": [
+          "提出POET-X，在POET框架内以更低成本执行正交等价变换。",
+          "把训练稳定性与泛化收益保留下来，同时改善吞吐与显存占用。",
+          "将方法落到十亿参数级LLM预训练场景，强调单卡可训练性。"
+        ],
+        "why_read": [
+          "如果你在意大模型训练的显存墙，这是少见直接对优化器或重参数化方案动刀的工作。",
+          "它不是单纯追求更快，而是把稳定训练和硬件可达性放在一起考虑。",
+          "适合与AdamW、低内存优化器和其他训练稳定化路线做横向比较。"
+        ],
+        "risks": [
+          "摘要没有充分说明缩放正交变换的具体实现细节和额外工程复杂度。",
+          "单卡H100结论很强，但摘要没有充分说明任务规模、序列长度和批大小等前提。\",\"泛化收益主要来自摘要表述，跨模型族或下游任务的边界仍不清楚。"
+        ],
+        "recommended_for": [
+          "LLM训练系统研究者",
+          "优化器与重参数化方向研究者",
+          "资源受限的预训练工程团队"
+        ],
+        "keywords": [
+          "LLM训练",
+          "内存效率",
+          "正交变换",
+          "POET",
+          "训练稳定性",
+          "单卡预训练"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "同时命中LLM训练稳定性和显存效率两个核心问题，且摘要给出了单卡H100预训练这一强部署信号。",
+        "fallback_summary": "Efficient and stable training of large language models (LLMs) remains a core challenge in modern machine learning systems."
+      }
     },
     {
       "id": "http://arxiv.org/abs/2603.05092v1",
@@ -91,7 +125,40 @@
         "cs.LG",
         "cs.CL"
       ],
-      "is_hot_paper": false
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "把航空时序预测中的异构外源因素按交互模式拆开建模，而不是简单拼接特征。",
+        "summary_zh": "论文围绕航空维修时间序列预测，先归纳出三类影响目标序列的外源因素及其不同交互模式，再提出Aura统一接入框架。Aura通过定制的三分式编码机制，把多维甚至多模态的非顺序上下文嵌入成熟时序模型。摘要称，其在覆盖波音777和空客A320机队的三年工业数据上，相对各类基线都取得了更好的效果。",
+        "core_contributions": [
+          "归纳航空维修场景中三类外源因素及其不同作用方式。",
+          "提出三分式编码机制，把异构外部信息显式接入现有时序模型。",
+          "在大规模工业数据上展示该框架作为通用增强模块的潜力。"
+        ],
+        "why_read": [
+          "外源信息如何接入时序模型是工业预测中的常见难题，这篇给出了结构化解法。",
+          "它强调按作用机制组织信息，而不是把多源特征直接堆叠。",
+          "对多模态上下文融入预测任务的研究者有方法层面的借鉴价值。"
+        ],
+        "risks": [
+          "与LLM主线关联有限。",
+          "摘要没有充分说明不同模态的数据形式、缺失处理和部署成本。\",\"通用性主要由单一航空场景支撑，跨行业外推仍不明确。"
+        ],
+        "recommended_for": [
+          "工业时间序列研究者",
+          "多模态融合研究者",
+          "航空维修分析团队"
+        ],
+        "keywords": [
+          "时间序列预测",
+          "外源信息融合",
+          "航空维修",
+          "多模态外生变量",
+          "工业数据"
+        ],
+        "reading_priority": "medium",
+        "reading_priority_reason": "与给定主题并非最直接相关，但外源多模态融合的建模思想有跨任务借鉴价值。",
+        "fallback_summary": "Time series forecasting has witnessed an increasing demand across diverse industrial applications, where accurate predictions are pivotal for informed decision-making."
+      }
     },
     {
       "id": "http://arxiv.org/abs/2603.05299v1",
@@ -128,7 +195,41 @@
         "cs.LG",
         "cs.CL"
       ],
-      "is_hot_paper": false
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "用WavLM蒸馏出的单码本离散表示，尝试把语音生成做成真正的单流自回归建模。",
+        "summary_zh": "WavSLM将自监督WavLM表示量化并蒸馏到单一代码本中，再用自回归的next-chunk prediction训练语音语言模型。它试图同时在同一token流里建模语义和声学信息，并明确避免文本监督与文本预训练。摘要称，该方法在一致性基准和语音生成上具备竞争力，同时参数更少、训练数据更省，并支持流式推理。",
+        "core_contributions": [
+          "提出基于WavLM蒸馏和单码本量化的单流语音语言模型。",
+          "在同一token流中联合建模语义与声学信息，且不依赖文本监督。",
+          "兼顾生成能力与流式推理，强调简洁架构。"
+        ],
+        "why_read": [
+          "它直接挑战语音建模为何不能沿用文本中的单流自回归范式。",
+          "如果你关注语音原生生成模型，这是一条明显更简化的路线。",
+          "参数和数据成本更低的表述，使其具备一定工程吸引力。"
+        ],
+        "risks": [
+          "摘要没有充分说明量化码本大小、语义与声学权衡以及失真控制方式。",
+          "竞争力结论存在，但摘要没有充分说明所对比的基线和评测覆盖面。\",\"不依赖文本是优点，也可能限制与文本任务对齐时的上限。"
+        ],
+        "recommended_for": [
+          "语音生成研究者",
+          "多模态基础模型研究者",
+          "流式推理系统工程师"
+        ],
+        "keywords": [
+          "语音语言模型",
+          "WavLM",
+          "单流建模",
+          "量化蒸馏",
+          "自回归生成",
+          "流式推理"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "它正面挑战语音建模的表示范式，是多模态生成方向里少见的结构性尝试。",
+        "fallback_summary": "Large language models show that simple autoregressive training can yield scalable and coherent generation, but extending this paradigm to speech remains challenging due to the entanglement of semantic and acoustic information."
+      }
     },
     {
       "id": "http://arxiv.org/abs/2603.05471v1",
@@ -171,7 +272,41 @@
         "cs.AI",
         "cs.CL"
       ],
-      "is_hot_paper": false
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "把事实核验的重心从外部检索转向模型内部表征，探索“无检索核验”作为独立任务。",
+        "summary_zh": "论文正式提出“无检索事实核验”任务，目标是在不依赖外部证据检索的前提下验证任意自然语言声明。作者还构建了覆盖长尾知识、来源变化、多语言和长文本生成鲁棒性的综合评测框架。摘要称，基于内部表征的方法普遍优于logit型方法，其提出的INTRA进一步取得了更强的泛化与最优性能。",
+        "core_contributions": [
+          "把无检索事实核验定义为独立研究任务。",
+          "构建面向长尾知识、来源变化、多语言和长文本的综合评测框架。",
+          "提出利用内部表征交互的INTRA方法，并报告更强的泛化表现。"
+        ],
+        "why_read": [
+          "适合判断LLM内部参数知识到底能否承担一部分可信性校验。",
+          "对Agent系统很关键，因为检索链路并非总是可用且常有误检。",
+          "论文不只提方法，还把泛化维度本身设计成研究对象。"
+        ],
+        "risks": [
+          "无检索设定天然受限于参数知识的新鲜度和覆盖范围。",
+          "摘要没有充分说明在最新事实、冲突事实和高争议陈述上的失败模式。\",\"如果将其作为训练奖励或生成内环组件，误判成本如何控制，摘要没有充分说明。"
+        ],
+        "recommended_for": [
+          "可信AI研究者",
+          "事实核验与RAG研究者",
+          "Agent系统设计者"
+        ],
+        "keywords": [
+          "事实核验",
+          "无检索验证",
+          "参数知识",
+          "内部表征",
+          "INTRA",
+          "泛化评测"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "紧扣可信LLM与Agent的核心问题，而且问题设定和评测框架本身就值得优先读。",
+        "fallback_summary": "Trustworthiness is a core research challenge for agentic AI systems built on Large Language Models (LLMs)."
+      }
     },
     {
       "id": "http://arxiv.org/abs/2603.05212v1",
@@ -207,7 +342,41 @@
         "cs.AI",
         "cs.LG"
       ],
-      "is_hot_paper": false
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "为术中风险预警建立多标签数据集与Transformer框架，重点处理事件依赖和类别不平衡。",
+        "summary_zh": "论文首先构建了面向术中不良事件预测的多标签数据集MuAE，覆盖六类关键事件。随后提出IAENet，用改进的Time-Aware FiLM融合静态协变量与动态变量，并通过LCRLoss处理事件不平衡与共现约束。摘要给出的结果显示，该方法在5、10、15分钟预警任务上的平均F1均优于强基线。",
+        "core_contributions": [
+          "构建首个术中不良事件多标签预测数据集MuAE。",
+          "提出IAENet，将静态和动态临床变量做时间感知融合并建模复杂依赖。",
+          "提出带共现正则的LCRLoss，以缓解类别不平衡并强化标签一致性。"
+        ],
+        "why_read": [
+          "如果你关心医疗时序中的多标签依赖，这篇比单事件预测更接近真实临床流程。",
+          "数据集建设和损失函数设计都围绕实际不平衡问题展开。",
+          "对高风险场景中的早预警系统有直接参考价值。"
+        ],
+        "risks": [
+          "与LLM、Multimodal、Agents主线关联较弱。",
+          "摘要没有充分说明数据来源分布、标签质量控制和外部验证情况。\",\"临床部署中的误报与漏报权衡、可解释性和实时性要求仍不清楚。"
+        ],
+        "recommended_for": [
+          "医疗时序建模研究者",
+          "临床AI工程团队",
+          "多标签学习研究者"
+        ],
+        "keywords": [
+          "医疗预警",
+          "多标签学习",
+          "Transformer",
+          "类别不平衡",
+          "MuAE",
+          "术中事件"
+        ],
+        "reading_priority": "low",
+        "reading_priority_reason": "应用价值明确，但与本期核心主题的相关性较弱，适合作为行业案例补读。",
+        "fallback_summary": "Early warning of intraoperative adverse events plays a vital role in reducing surgical risk and improving patient safety."
+      }
     },
     {
       "id": "http://arxiv.org/abs/2603.05181v1",
@@ -244,7 +413,41 @@
         "cross-modal",
         "cs.CV"
       ],
-      "is_hot_paper": false
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "让LLM在多模态图上推理，不再把图像和文本当作彼此孤立的节点属性。",
+        "summary_zh": "Mario针对多模态图推理中的两个难点展开：跨模态一致性弱，以及不同节点或邻域对模态偏好不同。其第一阶段用图条件VLM在拓扑引导下做细粒度跨模态对比学习，第二阶段再通过带可学习路由的图指令微调，把更合适的模态配置交给LLM。摘要称，该方法在节点分类和链路预测上，无论监督还是零样本设定，都优于现有图模型。",
+        "core_contributions": [
+          "提出图条件VLM，用图拓扑引导跨模态特征对齐。",
+          "提出带可学习路由的模态自适应图指令微调机制。",
+          "把LLM真正用于多模态图上的节点分类与链路预测推理。"
+        ],
+        "why_read": [
+          "它把多模态、图结构和LLM三条线真正接到了一起。",
+          "方法设计具体，不是泛泛地把图特征塞进提示词。",
+          "如果你做图文知识图谱、社交图或商品图，这篇有较强迁移价值。"
+        ],
+        "risks": [
+          "摘要没有充分说明图规模扩展性、训练成本和推理时延。",
+          "性能提升来自摘要总结，但不同模块各自贡献仍不清楚。\",\"对视觉质量较差或文本噪声较大的节点是否稳健，摘要没有充分说明。"
+        ],
+        "recommended_for": [
+          "多模态推理研究者",
+          "图学习研究者",
+          "LLM应用团队"
+        ],
+        "keywords": [
+          "多模态图",
+          "LLM推理",
+          "图条件VLM",
+          "指令微调",
+          "模态路由",
+          "链路预测"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "这是少数把多模态图结构问题明确升级为LLM推理问题的工作，方向契合度高。",
+        "fallback_summary": "Recent advances in large language models (LLMs) have opened new avenues for multimodal reasoning."
+      }
     },
     {
       "id": "http://arxiv.org/abs/2603.05129v1",
@@ -283,7 +486,41 @@
         "cs.AI",
         "cs.MA"
       ],
-      "is_hot_paper": false
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "把RAG、知识图谱和多Agent会诊流程揉在一起，追求可追踪的肝病诊断共识。",
+        "summary_zh": "MedCoRAG先从标准化异常发现生成诊断假设，再联合检索并裁剪UMLS知识图谱路径与临床指南，形成患者特定证据包。之后由Router Agent按病例复杂度调度专科Agent开展多轮协作推理，必要时触发定向再检索，最后由Generalist Agent汇总为可追踪共识诊断。摘要称，其在MIMIC-IV肝病病例上同时提升了诊断表现与推理可解释性。",
+        "core_contributions": [
+          "提出结合知识图谱路径与临床指南的混合证据检索方案。",
+          "设计Router、Specialist、Generalist协作的多Agent诊断流程，并允许定向再检索。",
+          "把诊断输出组织为可追踪的共识结果，强调可解释性。"
+        ],
+        "why_read": [
+          "这篇展示了Agent在高风险医疗场景里如何围绕证据而不是围绕聊天来组织。",
+          "多专科协作和再检索机制，比单轮RAG更接近真实会诊。",
+          "适合参考如何把结构化知识、指南和Agent工作流连接起来。"
+        ],
+        "risks": [
+          "摘要没有充分说明各Agent的责任边界、失败回退机制和成本。",
+          "效果验证集中在肝病场景，跨专科迁移能力仍不明确。\",\"医疗场景对安全性要求极高，但摘要没有充分说明人工审核或审计流程。"
+        ],
+        "recommended_for": [
+          "医疗Agent研究者",
+          "RAG系统设计者",
+          "临床决策支持团队"
+        ],
+        "keywords": [
+          "医疗Agent",
+          "RAG",
+          "知识图谱",
+          "多专科协作",
+          "可解释诊断",
+          "MIMIC-IV"
+        ],
+        "reading_priority": "medium",
+        "reading_priority_reason": "Agent工作流设计有参考价值，但应用场景较窄，摘要也未充分展开安全与部署细节。",
+        "fallback_summary": "Diagnosing hepatic diseases accurately and interpretably is critical, yet it remains challenging in real-world clinical settings."
+      }
     },
     {
       "id": "http://arxiv.org/abs/2603.05210v1",
@@ -317,7 +554,41 @@
         "cs.LG",
         "cs.CL"
       ],
-      "is_hot_paper": false
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "从草稿模型词表下手优化推测解码，把覆盖率和延迟的矛盾显式化。",
+        "summary_zh": "论文指出，推测解码里草稿模型往往才是主要延迟来源，而词表越大，语言模型头的顺序生成成本越高。作者将草稿词表选择表述为一个同时约束覆盖率与延迟的优化问题，用训练数据中的assistant回复估计覆盖率，并用架构感知FLOPs估计延迟，再以Tree-structured Parzen Estimator搜索Pareto前沿。摘要称，该方法可将草稿词表最多缩减97%，并在领域任务上带来最高16%的延迟下降和20%的吞吐提升。",
+        "core_contributions": [
+          "把草稿模型词表选择形式化为覆盖率与延迟的受约束优化问题。",
+          "结合覆盖统计与架构感知FLOPs，构造可操作的延迟代理目标。",
+          "用TPE搜索覆盖率-延迟Pareto前沿，直接服务推测解码加速。"
+        ],
+        "why_read": [
+          "它不是又一个通用加速技巧，而是直击推测解码中常被忽略的词表成本。",
+          "方法可解释，容易与现有草稿模型或领域部署流程结合。",
+          "对服务特定领域流量的LLM推理系统尤其有现实意义。"
+        ],
+        "risks": [
+          "收益依赖领域分布稳定性，词表裁剪后遇到分布漂移可能回退明显。",
+          "摘要没有充分说明裁剪词表对生成质量、罕见token和安全对齐的影响。\",\"延迟模型基于FLOPs估计，真实系统中的内存与内核开销是否匹配，摘要没有充分说明。"
+        ],
+        "recommended_for": [
+          "LLM推理工程师",
+          "推测解码研究者",
+          "领域化模型部署团队"
+        ],
+        "keywords": [
+          "推测解码",
+          "词表裁剪",
+          "延迟优化",
+          "吞吐提升",
+          "Pareto前沿",
+          "草稿模型"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "问题定义直接落在推理成本上，方法又足够工程化，适合优先吸收。",
+        "fallback_summary": "Speculative decoding accelerates inference for Large Language Models by using a lightweight draft model to propose candidate tokens that are verified in parallel by a larger target model."
+      }
     },
     {
       "id": "http://arxiv.org/abs/2603.05308v1",
@@ -364,7 +635,41 @@
         "cs.AI",
         "cs.CL"
       ],
-      "is_hot_paper": false
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "用3B级小模型做生物医学证据归因，目标是在零样本和规模化部署之间找平衡。",
+        "summary_zh": "Med-V1是一组3B参数的小语言模型，基于本文构建的高质量合成数据训练，用于判断文献是否支持某个断言。摘要称，它在五个统一为验证格式的生物医学基准上显著超过底座模型，并与前沿大模型表现相近。作者还把它用于分析不同引用指令下的幻觉情况，以及发现临床指南中的高风险证据误归因。",
+        "core_contributions": [
+          "训练面向生物医学证据归因的3B小语言模型家族。",
+          "将五个生物医学基准统一到验证任务格式，并报告相对底座模型的大幅提升。",
+          "展示两个实际用例：引用指令下的幻觉分析，以及临床指南中的证据误归因发现。"
+        ],
+        "why_read": [
+          "这是小模型在高价值垂直任务上替代前沿大模型的一个清晰案例。",
+          "证据归因比一般问答更接近医疗部署中的真实审核需求。",
+          "如果你关心解释性是否能随模型缩小而保住，这篇值得看。"
+        ],
+        "risks": [
+          "性能高度依赖合成训练数据质量，摘要没有充分说明其构造偏差与覆盖边界。",
+          "生物医学领域适配很强，但向通用领域迁移的可行性不明确。\",\"解释质量被强调，但摘要没有充分说明解释如何评测和校验。"
+        ],
+        "recommended_for": [
+          "医疗NLP研究者",
+          "事实核验研究者",
+          "小模型落地团队"
+        ],
+        "keywords": [
+          "生物医学NLP",
+          "证据归因",
+          "小语言模型",
+          "幻觉检测",
+          "合成数据",
+          "零样本验证"
+        ],
+        "reading_priority": "medium",
+        "reading_priority_reason": "垂直领域价值高，但更适合作为可信AI在专业场景中的专题阅读，而非本期首选主线。",
+        "fallback_summary": "Assessing whether an article supports an assertion is essential for hallucination detection and claim verification."
+      }
     },
     {
       "id": "http://arxiv.org/abs/2603.05218v1",
@@ -420,7 +725,60 @@
         "cs.AI",
         "cs.LG"
       ],
-      "is_hot_paper": false
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "用合成数据、工具使用和离策略强化学习，系统化训练企业搜索型知识Agent。",
+        "summary_zh": "论文先提出KARLBench，覆盖约束实体搜索、跨文档报告综合、表格数值推理、穷尽式实体检索、技术文档过程推理和企业笔记事实汇聚等六类任务。随后作者展示，多行为、多任务联合训练比只对单一基准优化更具泛化性，并给出一个利用长程推理与工具使用生成多样、可溯源训练数据的Agent合成管线。摘要称，基于迭代大批量离策略RL的后训练范式，使KARL在其基准上取得了具成本与延迟优势的表现，并在更高测试时计算下超过强闭源模型。",
+        "core_contributions": [
+          "提出覆盖六类企业搜索行为的KARLBench评测集。",
+          "证明跨异构搜索行为的多任务训练优于单基准优化。",
+          "提出结合长程推理、工具使用和迭代自举的数据合成管线，以及大批量离策略RL后训练范式。"
+        ],
+        "why_read": [
+          "它把Agent研究从prompt workflow推进到评测集、数据生成和后训练范式三件套。",
+          "企业搜索任务难验证，这篇正面处理了如何训练与如何评估的问题。",
+          "适合和RAG、工具调用以及RL后训练路线做方法论比较。"
+        ],
+        "risks": [
+          "很多结论建立在作者自建基准上，外部可复现性与基准偏差需要警惕。",
+          "摘要没有充分说明训练成本、工具环境复杂度和真实企业数据权限约束。\",\"对开放网页、长尾事实或强对抗查询的鲁棒性边界不清楚。"
+        ],
+        "recommended_for": [
+          "Agent研究者",
+          "企业搜索系统团队",
+          "RL后训练研究者"
+        ],
+        "keywords": [
+          "知识Agent",
+          "企业搜索",
+          "强化学习",
+          "合成数据",
+          "工具使用",
+          "多任务泛化"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "它同时覆盖Agent评测、数据和RL训练范式，信息密度高且与当前Agent主线高度相关。",
+        "fallback_summary": "We present a system for training enterprise search agents via reinforcement learning that achieves state-of-the-art performance across a diverse suite of hard-to-verify agentic search tasks."
+      }
     }
-  ]
+  ],
+  "daily_brief": {
+    "overview_zh": "今天这批论文的共同指向很明确：大模型研究正在从“更大参数”转向“更稳训练、更快推理、更可信验证”。值得优先关注的是三条主线：训练与解码效率优化、利用模型内部知识做事实核验，以及把多模态或Agent能力落到图推理、企业搜索、医疗诊断等更接近真实部署的问题上。医疗和航空场景论文也不少，但真正有长期价值的，主要是那些把系统约束、泛化评测和可解释链路一起纳入方法设计的工作。",
+    "top_themes": [
+      "大模型训练与推理效率成为主线，而不再只是参数扩张",
+      "无检索事实核验与证据归因，开始系统挖掘模型内部知识",
+      "多模态研究从图文配对走向图结构推理与语音单流建模\",\"Agent工作从流程编排转向评测集、合成数据与强化学习后训练\",\"医疗与航空等高风险场景更强调可追踪证据与结构化决策"
+    ],
+    "reading_strategy": [
+      "先读POET-X和词表裁剪推测解码，快速掌握本期最实用的训练/推理效率改进。",
+      "再读无检索事实核验、KARL和Med-V1，对比“内部知识利用”与“检索/工具使用”的边界。",
+      "最后看Mario、WavSLM、MedCoRAG及行业应用论文，判断这些多模态或结构化方法是否能迁移到你的任务。"
+    ]
+  },
+  "ai_enrichment": {
+    "enabled": true,
+    "model": "codex-cli",
+    "generated_at": "2026-03-07T14:32:30Z",
+    "provider": "codex-cli"
+  }
 }
