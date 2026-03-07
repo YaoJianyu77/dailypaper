@@ -1,7 +1,7 @@
 # Example configuration for the GitHub-hosted daily paper site.
 
 site:
-  title: "Evil Read ArXiv"
+  title: "DailyPaper"
   timezone: "America/New_York"
   base_url: ""
 

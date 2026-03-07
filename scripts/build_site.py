@@ -15,7 +15,7 @@ import yaml
 
 from content_store import get_content_root, get_daily_root, get_meta_root, get_papers_root, get_repo_root, iter_markdown_files, load_markdown, read_json
 
-DEFAULT_SITE_TITLE = 'Evil Read ArXiv'
+DEFAULT_SITE_TITLE = 'DailyPaper'
 
 CSS = """
 :root {

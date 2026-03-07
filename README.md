@@ -1,4 +1,4 @@
-# evil-read-arxiv
+# dailypaper
 
 A repository-backed daily paper pipeline with two operating modes:
 
@@ -193,8 +193,8 @@ The static output is also compatible with Netlify and Cloudflare Pages.
 
 Included platform config:
 
-- [netlify.toml](/home/y/evil-read-arxiv/netlify.toml)
-- [wrangler.toml](/home/y/evil-read-arxiv/wrangler.toml)
+- `netlify.toml`
+- `wrangler.toml`
 
 Recommended settings:
 
