@@ -51,6 +51,14 @@ def ai_fields(paper: Dict[str, Any]) -> Dict[str, Any]:
     return paper.get('ai', {}) if isinstance(paper.get('ai'), dict) else {}
 
 
+def full_analysis_fields(paper: Dict[str, Any]) -> Dict[str, Any]:
+    raw = paper.get('full_analysis', {})
+    if not isinstance(raw, dict) or not raw.get('enabled'):
+        return {}
+    content = raw.get('content', {})
+    return content if isinstance(content, dict) else {}
+
+
 def fallback_summary(paper: Dict[str, Any]) -> str:
     text = (paper.get('summary') or paper.get('abstract') or '').replace('\n', ' ').strip()
     if not text:
@@ -69,6 +77,15 @@ def summarize_paper(paper: Dict[str, Any]) -> str:
 def detail_summary(paper: Dict[str, Any]) -> str:
     ai = ai_fields(paper)
     return ai.get('summary_zh') or ai.get('fallback_summary') or fallback_summary(paper)
+
+
+def analysis_value(full: Dict[str, Any], ai: Dict[str, Any], full_key: str, ai_key: str | None = None) -> Any:
+    value = full.get(full_key)
+    if value:
+        return value
+    if ai_key:
+        return ai.get(ai_key)
+    return None
 
 
 def author_text(paper: Dict[str, Any]) -> str:
@@ -239,6 +256,7 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
     note_path = get_papers_root(repo_root) / slug / 'index.md'
     source_url, pdf_url = paper_urls(paper_id)
     ai = ai_fields(paper)
+    full = full_analysis_fields(paper)
     note_dir = note_path.parent
 
     maybe_extract_images(repo_root, note_dir, paper, settings, rank)
@@ -267,6 +285,9 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
         frontmatter['reading_priority'] = ai.get('reading_priority')
     if embedded_images:
         frontmatter['image_count'] = len(embedded_images) // 2
+    if full:
+        frontmatter['analysis_depth'] = 'full'
+        frontmatter['full_analysis_source'] = str(paper.get('full_analysis', {}).get('source_kind') or '')
 
     body_lines = [
         f'# {title}',
@@ -290,41 +311,68 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
     if ai.get('reading_priority_reason'):
         body_lines.append(f'- Why this priority: {ai.get("reading_priority_reason")}')
 
-    if ai.get('background_zh'):
+    if full.get('abstract_translation_zh'):
+        body_lines.extend([
+            '',
+            '## Abstract Translation',
+            full.get('abstract_translation_zh', ''),
+        ])
+    if analysis_value(full, ai, 'background_zh', 'background_zh'):
         body_lines.extend([
             '',
             '## Research Background And Motivation',
-            ai.get('background_zh', ''),
+            analysis_value(full, ai, 'background_zh', 'background_zh'),
         ])
-    if ai.get('problem_zh'):
+    if analysis_value(full, ai, 'problem_zh', 'problem_zh'):
         body_lines.extend([
             '',
             '## Problem Framing',
-            ai.get('problem_zh', ''),
+            analysis_value(full, ai, 'problem_zh', 'problem_zh'),
         ])
-    if ai.get('approach_zh'):
+    if analysis_value(full, ai, 'method_overview_zh', 'approach_zh'):
         body_lines.extend([
             '',
-            '## Approach Snapshot',
-            ai.get('approach_zh', ''),
+            '## Method Overview',
+            analysis_value(full, ai, 'method_overview_zh', 'approach_zh'),
         ])
-    if ai.get('evidence_zh'):
+    bullet_section(body_lines, 'Method Details', full.get('method_details', []), limit=5)
+    if analysis_value(full, ai, 'experiment_setup_zh', 'evidence_zh'):
         body_lines.extend([
             '',
-            '## Evidence Mentioned In Abstract',
-            ai.get('evidence_zh', ''),
+            '## Experimental Setup And Evidence',
+            analysis_value(full, ai, 'experiment_setup_zh', 'evidence_zh'),
         ])
-    if ai.get('value_zh'):
+    if full.get('main_results_zh'):
+        body_lines.extend([
+            '',
+            '## Main Results And Claims',
+            full.get('main_results_zh', ''),
+        ])
+    if analysis_value(full, ai, 'practical_value_zh', 'value_zh'):
         body_lines.extend([
             '',
             '## Research Or Engineering Value',
-            ai.get('value_zh', ''),
+            analysis_value(full, ai, 'practical_value_zh', 'value_zh'),
         ])
-    bullet_section(body_lines, 'Reading Checklist', ai.get('open_questions', []), limit=3)
+    if full.get('relation_to_prior_work_zh'):
+        body_lines.extend([
+            '',
+            '## Relation To Prior Work',
+            full.get('relation_to_prior_work_zh', ''),
+        ])
+    if full.get('overall_assessment_zh'):
+        body_lines.extend([
+            '',
+            '## Overall Assessment',
+            full.get('overall_assessment_zh', ''),
+        ])
+    bullet_section(body_lines, 'Strengths', full.get('strengths', []), limit=4)
+    bullet_section(body_lines, 'Future Work', full.get('future_work', []), limit=4)
+    bullet_section(body_lines, 'Reading Checklist', full.get('reading_checklist', []) or ai.get('open_questions', []), limit=4)
 
     bullet_section(body_lines, 'Core Contributions', ai.get('core_contributions', []), limit=3)
     bullet_section(body_lines, 'Why Read It', ai.get('why_read', []), limit=3)
-    bullet_section(body_lines, 'Risks Or Limits', ai.get('risks', []), limit=2)
+    bullet_section(body_lines, 'Risks Or Limits', full.get('limitations', []) or ai.get('risks', []), limit=4)
     bullet_section(body_lines, 'Recommended For', ai.get('recommended_for', []), limit=3)
     bullet_section(body_lines, 'Keywords', ai.get('keywords', []), limit=6)
 

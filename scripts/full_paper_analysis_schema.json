@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "paper_id",
+    "abstract_translation_zh",
+    "background_zh",
+    "problem_zh",
+    "method_overview_zh",
+    "method_details",
+    "experiment_setup_zh",
+    "main_results_zh",
+    "strengths",
+    "limitations",
+    "relation_to_prior_work_zh",
+    "practical_value_zh",
+    "future_work",
+    "reading_checklist",
+    "overall_assessment_zh"
+  ],
+  "properties": {
+    "paper_id": {
+      "type": "string"
+    },
+    "abstract_translation_zh": {
+      "type": "string"
+    },
+    "background_zh": {
+      "type": "string"
+    },
+    "problem_zh": {
+      "type": "string"
+    },
+    "method_overview_zh": {
+      "type": "string"
+    },
+    "method_details": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5
+    },
+    "experiment_setup_zh": {
+      "type": "string"
+    },
+    "main_results_zh": {
+      "type": "string"
+    },
+    "strengths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4
+    },
+    "relation_to_prior_work_zh": {
+      "type": "string"
+    },
+    "practical_value_zh": {
+      "type": "string"
+    },
+    "future_work": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4
+    },
+    "reading_checklist": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4
+    },
+    "overall_assessment_zh": {
+      "type": "string"
+    }
+  }
+}

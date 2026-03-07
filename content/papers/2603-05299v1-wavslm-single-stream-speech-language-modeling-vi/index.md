@@ -54,10 +54,10 @@ WavSLM 通过量化并蒸馏自监督 WavLM 表征，把语义与声学信息压
 ## Problem Framing
 问题是能否在不借助文本监督和复杂多流设计的情况下，用单一 token 流同时建模语音的语义与声学信息。这个问题重要，因为更简单的训练与推理范式更容易扩展和部署。
 
-## Approach Snapshot
+## Method Overview
 作者先对自监督 WavLM 表征进行量化与蒸馏，得到单一代码本表示，再训练单流自回归模型做 next-chunk prediction。整个方案强调结构简单、无需文本预训练，并支持流式推理。
 
-## Evidence Mentioned In Abstract
+## Experimental Setup And Evidence
 摘要声称该方法在一致性基准和语音生成上有竞争力，同时参数更少、训练数据更少，并支持 streaming inference。具体比较对象、生成质量评价方式和长时语音稳定性摘要没有充分说明。
 
 ## Research Or Engineering Value

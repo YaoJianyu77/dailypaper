@@ -46,6 +46,14 @@ ai:
       - "编造实验细节、数字或作者背景"
     custom_instruction: ""
 
+analysis:
+  enabled: true
+  top_n: 3
+  refresh_existing: false
+  max_full_text_chars: 24000
+  section_char_budget: 4500
+  pdf_page_limit: 18
+
 search:
   max_results: 200
   top_n: 10

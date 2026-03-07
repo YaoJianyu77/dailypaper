@@ -1,0 +1,941 @@
+{
+  "target_date": "2026-03-07",
+  "date_windows": {
+    "recent_window": {
+      "days": 30,
+      "start": "2026-02-05",
+      "end": "2026-03-07"
+    },
+    "hot_window": {
+      "days": 365,
+      "exclude_recent_days": 30,
+      "start": "2025-03-07",
+      "end": "2026-02-04"
+    }
+  },
+  "total_recent": 200,
+  "total_hot": 0,
+  "total_unique": 53,
+  "top_papers": [
+    {
+      "id": "http://arxiv.org/abs/2603.05181v1",
+      "title": "Mario: Multimodal Graph Reasoning with Large Language Models",
+      "summary": "Recent advances in large language models (LLMs) have opened new avenues for multimodal reasoning. Yet, most existing methods still rely on pretrained vision-language models (VLMs) to encode image-text pairs in isolation, ignoring the relational structure that real-world multimodal data naturally form. This motivates reasoning on multimodal graphs (MMGs), where each node has textual and visual attributes and edges provide structural cues. Enabling LLM-based reasoning on such heterogeneous multimodal signals while preserving graph topology introduces two key challenges: resolving weak cross-modal consistency and handling heterogeneous modality preference. To address this, we propose Mario, a unified framework that simultaneously resolves the two above challenges and enables effective LLM-based reasoning over MMGs. Mario consists of two innovative stages. Firstly, a graph-conditioned VLM design that jointly refines textual and visual features through fine-grained cross-modal contrastive learning guided by graph topology. Secondly, a modality-adaptive graph instruction tuning mechanism that organizes aligned multimodal features into graph-aware instruction views and employs a learnable router to surface, for each node and its neighborhood, the most informative modality configuration to the LLM. Extensive experiments across diverse MMG benchmarks demonstrate that Mario consistently outperforms state-of-the-art graph models in both supervised and zero-shot scenarios for node classification and link prediction. The code will be made available at https://github.com/sunyuanfu/Mario.",
+      "authors": [
+        "Yuanfu Sun",
+        "Kang Li",
+        "Pengkang Guo",
+        "Jiajin Liu",
+        "Qiaoyu Tan"
+      ],
+      "published": "2026-03-05T13:49:41Z",
+      "published_date": "2026-03-05 13:49:41+00:00",
+      "updated": "2026-03-05T13:49:41Z",
+      "categories": [
+        "cs.CV"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05181v1",
+      "url": "http://arxiv.org/abs/2603.05181v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.47,
+        "recency": 3.0,
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 8.81
+      },
+      "matched_domain": "Multimodal",
+      "matched_keywords": [
+        "multimodal",
+        "vision-language",
+        "image-text",
+        "cross-modal",
+        "cs.CV"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.45,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "这篇工作把多模态推理对象从孤立图文对换成带边结构的多模态图，并用可学习路由决定每个节点该看哪种模态组合。",
+        "summary_zh": "论文针对多模态图推理，认为现有方法把图像文本对孤立编码，忽略了真实数据中的关系结构。Mario 分两步：先用图条件 VLM 在拓扑引导下做细粒度跨模态对齐，再把对齐后的特征组织成图感知指令视图，并通过可学习路由为每个节点和邻域选择最有信息量的模态配置交给 LLM。摘要称其在多个 MMG 基准上有效，但由于摘要截断，具体提升和适用边界摘要没有充分说明。",
+        "background_zh": "多模态推理近年多依赖 VLM 处理单个图文对，但真实世界数据常天然带有节点关系和图结构。若想让 LLM 在这类场景中推理，仅做孤立编码会丢失拓扑和邻域信息。",
+        "problem_zh": "核心问题是如何在保留图拓扑的同时，把文本、图像和结构信号一起交给 LLM 做推理。难点在于跨模态一致性本来就弱，而且不同节点与邻域对模态的依赖并不相同。",
+        "approach_zh": "Mario 采用两阶段设计：先用图条件 VLM 在拓扑引导下做细粒度跨模态对比学习，联合修正文图特征；再做模态自适应的图指令微调，把对齐后的特征组织成图感知指令视图，并用可学习路由选择最有信息量的模态配置供 LLM 推理。",
+        "evidence_zh": "摘要只说明在多个 MMG 基准上做了大规模实验，并声称 Mario 有效。由于摘要截断，具体对比对象、提升幅度、不同组件的消融结论和成本开销摘要没有充分说明。",
+        "value_zh": "如果成立，这项工作为“LLM 处理带图结构的多模态数据”提供了比简单拼接输入更系统的路线，可用于多模态知识图、文档图和复杂实体关系场景。它的模态路由思路也可能推广到更一般的异构输入选择问题。",
+        "open_questions": [
+          "图条件 VLM 如何把边信息注入跨模态对齐，是否会放大错误边带来的噪声？",
+          "可学习路由选择模态配置的粒度是什么，是否对节点类型或邻域规模敏感？",
+          "所谓 diverse MMG benchmarks 包含哪些任务，收益主要来自图结构建模还是更强的特征对齐？"
+        ],
+        "core_contributions": [
+          "把多模态图推理中的两个核心障碍明确为跨模态一致性弱和模态偏好异质。",
+          "提出图条件 VLM，用拓扑引导的细粒度跨模态对比学习联合修正文图特征。",
+          "提出模态自适应图指令微调和可学习路由，让 LLM 按节点与邻域选择更合适的模态视图。"
+        ],
+        "why_read": [
+          "它直接对应多模态 LLM 下一步常见痛点：输入不再是单轮图文，而是带关系结构的复杂对象。",
+          "方法里同时有表示学习和指令调优两层设计，值得看两者分工是否清晰。",
+          "如果你关心多模态 Agent 读图、读文档、看关系图，这篇论文的问题设置比普通 VLM 论文更接近真实系统。"
+        ],
+        "risks": [
+          "摘要截断导致实验结论不完整，当前无法判断收益是否稳定。",
+          "方法链路较长，训练和推理成本可能不低，工程可复现性需要核对。"
+        ],
+        "recommended_for": [
+          "做多模态 LLM 与图推理的研究者",
+          "关注文档图、知识图或复杂实体关系理解的工程师",
+          "想研究输入路由与异构模态选择机制的读者"
+        ],
+        "keywords": [
+          "多模态图推理",
+          "图条件 VLM",
+          "图指令微调",
+          "模态自适应路由",
+          "LLM"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "与多模态和 LLM 主线高度契合，问题设置比普通图文任务更接近真实系统；但实验摘要不完整，需要带着证据意识去读。",
+        "fallback_summary": "Recent advances in large language models (LLMs) have opened new avenues for multimodal reasoning."
+      },
+      "full_analysis": {
+        "enabled": true,
+        "source_kind": "arxiv_source",
+        "text_char_count": 53239,
+        "content": {
+          "abstract_translation_zh": "近来的大语言模型进展为多模态推理带来了新机会，但现有多数方法仍依赖预训练视觉-语言模型把图文对孤立编码，忽略了真实世界多模态数据天然具有的关系结构。这促使作者考虑多模态图：每个节点同时具有文本和视觉属性，边提供结构线索。要在保留图拓扑的同时让 LLM 处理这类异构信号，会遇到两个关键挑战：跨模态一致性弱，以及不同节点对模态的偏好不同。为此，论文提出统一框架 Mario，同时解决这两个问题并支持在多模态图上进行 LLM 推理。Mario 包含两个阶段：第一阶段是图条件视觉-语言模型，在图拓扑引导下通过细粒度跨模态对比学习联合优化文本与视觉特征；第二阶段是模态自适应图指令微调，把对齐后的多模态特征组织成图感知指令视图，并用可学习路由器为每个节点及其邻域选择最有信息量的模态配置送入 LLM。摘要称，在多个多模态图基准上，Mario 在监督与零样本场景下的节点分类和链路预测都优于现有最强图模型；摘要还提到代码将公开。",
+          "background_zh": "这篇工作处在两个趋势的交叉点上：一边是 LLM/指令调优正在从纯文本走向多模态推理，另一边是越来越多真实数据并不是孤立图文对，而是带关系边的多模态实体图。常见做法是先用 CLIP 一类 VLM 编码节点，再交给 GNN 或 GraphLLM，但这种流水线默认节点内图文已经对齐良好，也默认所有节点适合同一提示模板，这两点在真实多模态图里都很脆弱。",
+          "problem_zh": "论文要解决的是：在多模态图中，如何既保留图结构和邻域依赖，又让 LLM 真正利用文本、图像和边关系进行节点分类与链路预测。作者把难点明确拆成两个瓶颈：第一，节点内图文往往噪声大、描述不完整或语义错位，直接融合后再做图传播可能放大错配；第二，不同节点及其局部子图对文本、图像、两者结合三种输入视图的依赖并不相同，固定模板会浪费可用监督。",
+          "method_overview_zh": "Mario 采用两阶段设计。第一阶段先训练一个图条件 VLM：在文本塔和图像塔内部引入拓扑感知的 multimodal mixer，使节点表示在图结构偏置下迭代吸收邻域信息，再用双向 InfoNCE 把两种模态在结构条件下对齐。第二阶段把这些对齐后的表示映射成可插入 LLM 的图文本和图图像 special tokens，围绕每个节点构造文本视图、图像视图和多模态视图三类图感知提示，并训练一个轻量路由器根据节点自身表示、1/2-hop 上下文和度信息，为每个样本选择最合适的提示视图；训练时做软路由联合学习，推理时做硬选择，只送一个模板进 LLM。",
+          "method_details": [
+            "GVLM 采用双塔编码器分别处理文本和图像，节点的 [CLS] 表示作为后续结构感知聚合的核心载体；初始表示来自预训练 VLM 特征并加入位置编码。",
+            "Topology-Aware Multimodal Mixer 会收集图中节点的 [CLS] 表示，做带图结构位置偏置的多头注意力；该偏置由按最短路径距离分桶的可学习标量构成，用来编码节点间的结构角色关系。",
+            "每一层 mixer 得到的结构感知节点表示会回灌到对应模态序列中，替换下一层的 [CLS]，从而让 token/patch 级特征在多层过程中持续吸收图上下文，而不是只在输出端做一次图传播。",
+            "跨模态对齐使用对称、温度缩放的 InfoNCE：同一节点的文本-图像对为正样本，batch 内跨节点组合为负样本；因为表示已显式注入拓扑，所以这个对齐目标不只是节点内对齐，也隐含利用了邻域语义来缩小跨模态差距。",
+            "第二阶段先用共享投影器把 Stage 1 的文本/图像表示映射到 LLM token 空间，形成图文本和图图像 special tokens；再按 1/2-hop 邻居中与锚点拼接表示余弦相似度最高的节点构造三类模板，并用 MAPR 基于节点表示、邻域均值池化和对数度输入预测路由分布，通过“模板损失后验 + KL 正则”的方式学习选择最优模态视图。"
+          ],
+          "experiment_setup_zh": "实验围绕四个研究问题展开：1）在标准多模态图任务上与不同模态输入的强基线比较整体效果；2）在完全未见的多模态图上测试 zero-shot 泛化；3）分析图条件 VLM 对表示学习和后续指令调优的贡献；4）分析模态自适应图指令微调相对单模板方案的性能与效率。提取文本明确说明任务覆盖节点分类和链路预测，并且论文还包含 Dataset Details、Experiment Details、GVLM 对齐的 t-SNE 可视化、与 MMGCN/MGAT 的比较、额外 GNN zero-shot 结果以及 Frozen vs LoRA-Tuned Mario 的分析。具体 benchmark 名称、样本规模、所用 LLM/VLM 主干、超参数、重复次数和统计显著性，提取文本没有充分说明。",
+          "main_results_zh": "提取文本显示，作者报告 Mario 在多个多模态图基准上，对监督和 zero-shot 场景下的节点分类与链路预测都优于现有图模型；文中贡献总结还声称，在 zero-shot transfer 中最高可达到 1.6× 的收益。引言中的图表说明还给出一项对齐层面的证据：引入图拓扑后，跨模态一致性相对 frozen CLIP 平均提升 68%，相对逐节点微调再提升 6%。但各数据集上的绝对分数、方差、与不同基线的逐项差距，提取文本没有充分说明。",
+          "strengths": [
+            "问题定义抓得准：不是泛泛做“多模态图 + LLM”，而是把瓶颈具体落到跨模态错配和节点级模态偏好差异上。",
+            "方法分工清晰：Stage 1 先解决表示层的结构感知对齐，Stage 2 再解决提示层的自适应选择，逻辑闭环比较完整。",
+            "相对常见“先编码再图传播”的流程，Mario 把图结构前移到模态对齐阶段，这一点对 MMG 比普通图文任务更有针对性。",
+            "路由器设计有工程意识：训练期用多模板学习节点偏好，推理期硬选择单模板，文本中明确声称不会比单模板推理多算。"
+          ],
+          "limitations": [
+            "实验信息缺口较大：具体 benchmark、绝对指标、误差范围和显著性没有在提取文本中展开，当前只能相信方向性结论。",
+            "训练链路较长：需要先做 GVLM 预训练，再做 LLM + 路由器联合调优；而且 Stage 2 每个样本要跑三个模板，真实训练成本提取文本没有充分说明。",
+            "方法对图质量可能敏感，因为 Stage 1 明确把图拓扑注入跨模态对齐；如果边有噪声、图很稀疏或存在强异配，是否会放大错误信号，提取文本没有充分说明。",
+            "提示构造依赖从训练集节点中选择 1/2-hop 邻居并附带标签作为 in-context evidence，这种设计对可用训练图上下文有依赖，其收益中有多少来自路由本身、有多少来自 exemplar 构造，需要看完整消融。"
+          ],
+          "relation_to_prior_work_zh": "相对常见的“用 VLM 编码单节点图文，再把嵌入交给 GNN/Graph 模型传播”的路线，Mario 的关键差异是把图结构直接放进跨模态对齐阶段，而不是默认 CLIP 式表征已经足够一致；它通过双塔编码内部的结构偏置和 per-modality 对齐，显式修正节点内图文错配。相对只处理文本图或依赖固定提示模板的 GraphLLM 路线，Mario 不再用一套模板覆盖所有节点，而是维护 text、image、multimodal 三类图感知模板并让路由器按节点选择。相对 MLaGA 这类先把图像和文本融合成共享查询再对齐的方案，Mario 更强调保留模态特有信息后再做节点级选择；相对主要处理缺失模态的 Graph4MM，它面向的是“模态齐全但对齐差、偏好异质”的 MMG 场景。",
+          "practical_value_zh": "如果论文结论成立，这项工作最值得研究者和工程师关注的价值，不只是一个新的 MMG 模型，而是一条更系统的设计范式：先做结构感知的跨模态对齐，再做节点级模态路由。它适合那些节点天然带图文属性且实体之间有关系边的系统，如多模态知识图、文档图、内容网络、商品或媒体实体图。对多模态 Agent/复杂信息系统而言，它也给出一个重要提醒：不要假设节点内图文天然一致，也不要假设所有节点都该走同一种提示模板。",
+          "future_work": [
+            "检验图条件对齐在错边、噪声边、异配图上的鲁棒性，明确结构信息何时帮助对齐、何时反而放大误差。",
+            "把 Mario 扩展到缺失模态、超过两种模态或更一般的异构图场景，验证 router 的稳定性与可迁移性。",
+            "拆分 zero-shot 收益来源，分别量化 GVLM、模板银行、MAPR 和训练节点 exemplars 的独立贡献。",
+            "探索更低成本的训练方案，例如减少三模板多次前反向开销，或把两阶段训练做得更统一。"
+          ],
+          "reading_checklist": [
+            "先看 Introduction 和 Figure 1，确认论文为何把问题拆成“跨模态一致性弱”和“模态偏好异质”两个层次。",
+            "细读 Graph-conditioned Vision-Language Model，重点核对 shortest-path bucket 图偏置、[CLS] 回灌机制，以及 InfoNCE 的正负样本定义。",
+            "细读 Modality-Adaptive Graph Instruction Tuning，确认三类模板分别包含哪些 special tokens、是否保留原始文本、邻居标签如何注入。",
+            "核对 zero-shot 设定到底是跨数据集、跨图还是跨类别，避免把更弱的泛化设定误读成更强的迁移结论。"
+          ],
+          "overall_assessment_zh": "这篇论文现在值得读，主要因为它抓住了一个比普通图文任务更贴近真实系统的问题：当输入是带关系结构的多模态实体图时，LLM 不能只依赖孤立图文编码，也不能默认所有节点都适合同一提示模板。全文最值得信的是问题拆解和机制设计的对应关系很清楚，Stage 1 与 Stage 2 各自解决的瓶颈明确，而且提取文本确实给出了一些支撑性证据，如跨模态一致性提升、监督与 zero-shot 上的整体优势、以及最高 1.6× 的 zero-shot 增益。最该保持怀疑的是实验普适性和真实成本：当前提取文本没有充分说明具体 benchmark、绝对提升、统计稳定性、对噪声边或缺失模态的鲁棒性，以及训练期三模板多次前反向的资源代价。因此，它更像一篇方向感很强、方法构型有说服力的系统论文；是否已经成为稳健、可复用的工程方案，还要依赖完整实验节和消融来验证。"
+        }
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05471v1",
+      "title": "Leveraging LLM Parametric Knowledge for Fact Checking without Retrieval",
+      "summary": "Trustworthiness is a core research challenge for agentic AI systems built on Large Language Models (LLMs). To enhance trust, natural language claims from diverse sources, including human-written text, web content, and model outputs, are commonly checked for factuality by retrieving external knowledge and using an LLM to verify the faithfulness of claims to the retrieved evidence. As a result, such methods are constrained by retrieval errors and external data availability, while leaving the models intrinsic fact-verification capabilities largely unused. We propose the task of fact-checking without retrieval, focusing on the verification of arbitrary natural language claims, independent of their source. To study this setting, we introduce a comprehensive evaluation framework focused on generalization, testing robustness to (i) long-tail knowledge, (ii) variation in claim sources, (iii) multilinguality, and (iv) long-form generation. Across 9 datasets, 18 methods and 3 models, our experiments indicate that logit-based approaches often underperform compared to those that leverage internal model representations. Building on this finding, we introduce INTRA, a method that exploits interactions between internal representations and achieves state-of-the-art performance with strong generalization. More broadly, our work establishes fact-checking without retrieval as a promising research direction that can complement retrieval-based frameworks, improve scalability, and enable the use of such systems as reward signals during training or as components integrated into the generation process.",
+      "authors": [
+        "Artem Vazhentsev",
+        "Maria Marina",
+        "Daniil Moskovskiy",
+        "Sergey Pletenev",
+        "Mikhail Seleznyov",
+        "Mikhail Salnikov",
+        "Elena Tutubalina",
+        "Vasily Konovalov",
+        "Irina Nikishina",
+        "Alexander Panchenko",
+        "Viktor Moskvoretskii"
+      ],
+      "published": "2026-03-05T18:42:51Z",
+      "published_date": "2026-03-05 18:42:51+00:00",
+      "updated": "2026-03-05T18:42:51Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05471v1",
+      "url": "http://arxiv.org/abs/2603.05471v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.6,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 8.73
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "这篇工作把“无检索事实核验”明确成独立问题，并把重心放到如何直接利用 LLM 内部表征而不是外部证据。",
+        "summary_zh": "论文关注不依赖外部检索的事实核验，目标是直接利用 LLM 参数知识判断任意自然语言断言的真实性。作者先搭建覆盖长尾知识、来源变化、多语言和长文本生成的评测框架，再提出利用内部表征交互的 INTRA。摘要声称在 9 个数据集、18 种方法和 3 个模型上的比较中，内部表征方法整体优于基于 logit 的方法，但具体任务设置、计算代价与失败案例摘要没有充分说明。",
+        "background_zh": "面向 Agent 的可信性问题，当前事实核验流程大多依赖“检索+LLM 验证”，但这一范式会受检索误差和外部知识可得性制约。随着 LLM 参数知识本身越来越强，直接挖掘其内在事实验证能力成为值得单独研究的问题。",
+        "problem_zh": "核心问题是：在不检索外部证据的前提下，模型能否仅凭自身参数知识，对来自人类文本、网页或模型输出的断言做出稳健核验？这关系到低延迟、低依赖和检索缺失场景下的可信性基础设施。",
+        "approach_zh": "作者把“无检索事实核验”定义为独立任务，并设计强调泛化与鲁棒性的统一评测框架。在方法上，INTRA 利用内部表征之间的交互信号，而不是只看输出 logit，试图更好地提取模型内隐知识用于判别。",
+        "evidence_zh": "摘要给出的证据是跨 9 个数据集、18 种方法和 3 个模型的系统比较，并声称基于内部表征的方法整体优于基于 logit 的方法，INTRA 达到当前最优且泛化更强。具体数据集构成、评价指标、统计显著性和失败样例摘要没有充分说明。",
+        "value_zh": "如果结论成立，这项工作会把事实核验从“必须依赖检索”的管线扩展到“可直接调用模型内知识”的新设计空间，适合延迟敏感或检索资源受限的 Agent 与审核系统。它也为研究 LLM 内部表征究竟存了什么、能否可靠用于验证提供了更明确的实验框架。",
+        "open_questions": [
+          "INTRA 具体如何建模内部表征交互，额外计算和实现复杂度有多高？",
+          "在长尾事实和知识过时场景下，无检索核验与检索增强方法相比的失效边界是什么？",
+          "多语言与长文本设定中的提升，来自真正的知识验证能力，还是来自格式或来源模式识别？"
+        ],
+        "core_contributions": [
+          "把无检索事实核验明确为独立研究任务，而不是检索增强方法的弱化版。",
+          "提出覆盖长尾、来源变化、多语言和长文本生成的泛化评测框架。",
+          "提出利用内部表征交互的 INTRA，并在摘要声称的广泛比较中取得最优结果。"
+        ],
+        "why_read": [
+          "直接对准 Agent 可信性这个当前高价值问题，且切入点不是常见的检索堆料。",
+          "方法重点放在内部表征而非 logit，值得看其是否提供了新的可解释分析入口。",
+          "如果想做低延迟或离线核验系统，这篇论文可能给出新的系统设计基线。"
+        ],
+        "risks": [
+          "无检索设定天然受模型知识时效性和记忆偏差限制，适用边界可能很窄。",
+          "摘要未说明与强检索增强基线的成本效果对比，工程价值还需核对。"
+        ],
+        "recommended_for": [
+          "做 Agent 可信性与事实核验的研究者",
+          "关注 LLM 内部表征与参数知识利用的研究者",
+          "设计低延迟审核或离线验证系统的工程师"
+        ],
+        "keywords": [
+          "无检索事实核验",
+          "参数知识",
+          "内部表征",
+          "INTRA",
+          "LLM 可信性"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "与 LLM 和 Agent 可信性主线高度贴合，问题定义新，且评测覆盖面看起来广；但需要重点核对无检索设定的现实边界。",
+        "fallback_summary": "Trustworthiness is a core research challenge for agentic AI systems built on Large Language Models (LLMs)."
+      },
+      "full_analysis": {
+        "enabled": true,
+        "source_kind": "arxiv_source",
+        "text_char_count": 48087,
+        "content": {
+          "abstract_translation_zh": "可信性是基于大语言模型构建的 Agent 系统中的核心研究挑战。为了提升可信性，来自人类文本、网页内容和模型输出等不同来源的自然语言断言，通常会先检索外部知识，再用大语言模型验证这些断言是否忠实于检索到的证据。因此，这类方法会受限于检索错误和外部数据可得性，同时模型自身内在的事实核验能力并没有被充分利用。本文提出“无检索事实核验”任务，目标是在不依赖外部检索的情况下验证任意自然语言断言。为研究这一设定，作者构建了一个强调泛化能力的综合评测框架，重点测试四类鲁棒性：(i) 长尾知识，(ii) 断言来源变化，(iii) 多语言，(iv) 长文本生成。基于 9 个数据集、18 种方法和 3 个模型的实验表明，基于 logit 的方法通常不如利用模型内部表征的方法。基于这一发现，作者提出 INTRA，通过利用内部表征之间的交互来达到最优性能并展现较强泛化。更广泛地说，这项工作把无检索事实核验确立为一个有前景的研究方向，它可与检索式框架互补、提升可扩展性，并支持将此类系统作为训练奖励信号或集成到生成过程中。",
+          "background_zh": "当前事实核验和幻觉检测主流仍是“检索外部证据，再判断是否一致”的流水线，但这种路线会引入额外延迟、受检索质量影响，并且默认外部证据比模型参数知识更可靠。随着大模型在参数中已经编码了大量百科和常识知识，直接评估并利用其内在事实判断能力，成为面向 Agent 可信性的一个自然下一步。",
+          "problem_zh": "论文要回答的是：在完全不访问外部证据、也不依赖原始提示词和完整生成上下文的前提下，能否仅根据一个原子事实断言的文本本身，以及模型处理该断言时产生的内部信号，估计其真实性？这个问题重要，因为它对应低延迟、弱外部依赖、甚至训练期可内嵌的事实性判别能力，而不只是传统 RAG 验证链路的简化版。",
+          "method_overview_zh": "方法上，论文先把现有无检索核验方法分成基于输出概率/logit 的不确定性方法与基于内部表征的监督方法，再提出 INTRA 作为统一的内部表征路线。INTRA 不直接依赖某一层、某一 token 或单一不确定性分数，而是先在每一层对整条 claim 聚合出序列表征，分别得到层级真实性分数，再对中间层的层级分数做归一化与回归融合，从而利用“层间+表征交互”提升泛化。",
+          "method_details": [
+            "INTRA 先对每一层的 token hidden states 做可学习加权聚合，形成 sequence-level embedding；权重通过 softmax 归一化，因此不是简单平均或只取首尾 token。",
+            "在每一层上，模型单独训练一个线性分类器输出该层的 truthfulness probability，并使用标准交叉熵训练，刻意保持头部简单以减少对特定模式的过拟合。",
+            "最终判别不直接使用某一层，而是只取模型中间层的层级概率做融合；文中明确认为首层和末层通常较弱，因此使用从前 1/3 到后 2/3 之间的中间层区间。",
+            "为避免不同层输出概率分布不一致影响融合效果，INTRA 在回归前先对层级概率做 quantile normalization，再训练回归器得到最终 truthfulness score。",
+            "训练被拆成两段：先用一部分训练数据拟合各层聚合与分类参数，再用另一部分训练回归融合器；这种两阶段设计旨在降低层间融合对训练分布的耦合。"
+          ],
+          "experiment_setup_zh": "实验围绕作者定义的“无检索事实核验”设定展开：输入是任意来源的原子事实断言，模型只能基于 claim 文本本身及其内部信号打分，不能访问外部知识。评测覆盖 9 个数据集、18 种方法和 3 个模型，重点考察长尾知识、人工与模型生成来源差异、多语言、长文本生成以及跨模型 claim 等泛化维度。文中把 PopQA 视为有监督训练的 in-domain 数据，其余数据集视为 out-of-domain；主要指标是 ROC-AUC 和 PR-AUC。提取文本还说明了一个检索增强对照 `Verb + RAG`，以及 UHead 只对 Llama 3.1 提供了预训练开源检查点。",
+          "main_results_zh": "提取文本支持的主要结论是：1）总体上，利用内部表征的方法比基于 logit/不确定性的办法更稳健，后者除 SP 外普遍偏弱；2）INTRA 在跨 9 个数据集的平均表现上达到最优，并表现出更一致的泛化，而不是只在单一基准上强；3）在 Llama 3.1 上，INTRA 的 ROC-AUC 比第二名 Sheeps 高 0.5%，跨数据集平均 ROC-AUC 相对第二名 retrieval-free 方法 Sheeps 高 2.7%，跨全部模型平均高 1.3%；4）INTRA 的 ROC-AUC 与 Verb+RAG 持平，但平均 PR-AUC 高 3%，且计算时间约少 20 倍；5）Verb 是最强的无监督方法之一，但计算成本显著更高，并且在非英语输入上有很高拒答率，最高可到 58%；6）一些方法在特定数据集上强，但跨场景泛化差，文中还指出规则生成数据集可能已接近饱和，存在污染或针对性过拟合迹象。",
+          "strengths": [
+            "问题定义清楚，把“无检索事实核验”从传统检索式 faithful verification 和常见 uncertainty estimation 中分离出来，研究对象更明确。",
+            "评测设计强调泛化而非单基准最优，覆盖长尾、多语言、长文本、来源变化和跨模型 claim，比较接近真实部署中的失配场景。",
+            "方法本身相对克制，没有引入很重的架构修改，而是围绕层级表征聚合、分层判别和中间层融合做设计，便于分析内部知识信号。",
+            "实验结论不只说 INTRA 更强，也给出一个更广泛的经验判断：内部表征路线通常优于直接看 logit/概率的不确定性信号。"
+          ],
+          "limitations": [
+            "该设定天然受模型参数知识的时效性、覆盖面和记忆偏差限制；遇到知识过时或模型从未见过的事实时，上限可能明显受约束。",
+            "INTRA 依然是有监督方法，并以 PopQA 训练后再测试其他数据集；虽然论文强调 OOD 泛化，但训练分布对结果的影响仍需仔细看正文和附录。",
+            "提取文本没有充分说明 INTRA 的额外训练成本、特征维度、部署内存开销，以及与更强检索系统的完整成本收益比较。",
+            "作者自己指出部分规则生成数据集可能存在污染或过拟合风险，这意味着某些 benchmark 上的高分未必能直接转化为真实世界稳健性。"
+          ],
+          "relation_to_prior_work_zh": "相对常见的 RAG 式事实核验，这篇论文不再验证“claim 是否被检索证据支持”，而是直接判定 claim 本身是否为真，且完全不依赖外部检索。相对传统不确定性估计，它也不是评估模型对自己生成内容的信心，而是评估任意来源断言的真实性。相对已有 probe/hidden-state 方法，INTRA 的差异不在于再找一个“最佳单层”或“最佳 token”，而是在保持判别头简单的前提下，用可学习序列聚合、分层打分、中间层选择和归一化后的层间回归，把多层内部信号整合起来，重点追求跨数据集泛化而不是单任务适配。",
+          "practical_value_zh": "如果这个方向站得住，它对工程上最直接的价值是提供一种低外部依赖、低延迟的 claim verifier，可作为 RAG 核验链路的补充，或用于没有稳定检索条件的场景。对研究上，它也有两个清晰用途：一是把“大模型内部到底有没有可稳定提取的真实性信号”变成可系统评测的问题；二是为 truthfulness-oriented reward model 或生成过程中的在线监控模块提供候选技术路线。",
+          "future_work": [
+            "核查在知识过时、真实世界新近事件和极长尾实体上的失效边界，明确无检索路线与检索增强路线各自适用范围。",
+            "进一步分析中间层为何最有效，以及不同层在不同语言、不同 claim 类型上的分工是否稳定。",
+            "把 claim 位置、生成长度等结构信息更系统地纳入长文本场景中的真实性检测。",
+            "研究如何将无检索判别器与检索式核验组合，而不是二选一，以兼顾速度、时效性和可解释性。"
+          ],
+          "reading_checklist": [
+            "先看任务定义：作者如何严格限制输入，只允许 claim 文本和内部信号，而不允许提示词、完整生成或外部证据。",
+            "重点看 INTRA 的具体实现：序列聚合用的参数化形式、层级分类器输入、quantile normalization 的细节，以及两阶段训练如何避免信息泄漏。",
+            "检查 9 个数据集的构成与拆分，尤其是 PopQA 训练、其余数据集 OOD 的设置是否足够公平。",
+            "对照 Verb、Verb+RAG、Sheeps、UHead 等强基线，确认 INTRA 的优势到底来自表征质量、训练目标，还是 benchmark 偏好。"
+          ],
+          "overall_assessment_zh": "这篇论文最值得信的是它把“无检索事实核验”定义成了一个独立且现实的问题，并且从实验叙述看，作者没有只追求单一基准分数，而是在泛化维度上做了较系统的比较；“内部表征优于纯 logit 信号”这个结论也与方法设计和结果描述相互呼应。最该怀疑的地方有两点：第一，这条路线受参数知识时效性和覆盖度的硬约束，能否替代检索很可疑，更像补充模块；第二，提取文本虽然给出平均优势和效率收益，但对失败模式、训练成本、数据污染影响和与强检索系统的真实工程对比说明仍不充分，因此应把它视为一个方向性很强的研究起点，而不是已定型的通用解决方案。"
+        }
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05500v1",
+      "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+      "summary": "Efficient and stable training of large language models (LLMs) remains a core challenge in modern machine learning systems. To address this challenge, Reparameterized Orthogonal Equivalence Training (POET), a spectrum-preserving framework that optimizes each weight matrix through orthogonal equivalence transformation, has been proposed. Although POET provides strong training stability, its original implementation incurs high memory consumption and computational overhead due to intensive matrix multiplications. To overcome these limitations, we introduce POET-X, a scalable and memory-efficient variant that performs orthogonal equivalence transformations with significantly reduced computational cost. POET-X maintains the generalization and stability benefits of POET while achieving substantial improvements in throughput and memory efficiency. In our experiments, POET-X enables the pretraining of billion-parameter LLMs on a single Nvidia H100 GPU, and in contrast, standard optimizers such as AdamW run out of memory under the same settings.",
+      "authors": [
+        "Zeju Qiu",
+        "Lixin Liu",
+        "Adrian Weller",
+        "Han Shi",
+        "Weiyang Liu"
+      ],
+      "published": "2026-03-05T18:59:23Z",
+      "published_date": "2026-03-05 18:59:23+00:00",
+      "updated": "2026-03-05T18:59:23Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05500v1",
+      "url": "http://arxiv.org/abs/2603.05500v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 8.2
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "这篇工作把 POET 的稳定训练路线从“理论上有吸引力”推进到“单卡也可能跑得动”的工程形态。",
+        "summary_zh": "POET-X 是对 POET 的系统级改造版，目标是在保留谱保持和训练稳定性优势的同时，大幅降低内存与计算开销。摘要称它能显著改善吞吐和显存效率，并支持在单张 H100 上预训练十亿参数 LLM，而同设定下 AdamW 会直接爆显存。真正值得核对的是它是否在不同规模和任务上都保住了训练质量，因为这些细节摘要没有充分说明。",
+        "background_zh": "大模型训练的一个长期难点是同时兼顾稳定性、内存和吞吐。POET 这类保持谱性质的训练框架提供了稳定性思路，但原始实现的矩阵乘法开销太重。",
+        "problem_zh": "问题是如何保留 POET 的稳定训练与泛化优势，同时把其高内存、高计算成本降到足以支撑更大规模 LLM 预训练。这个问题重要，因为很多“更稳的训练方法”最终都卡在系统成本上。",
+        "approach_zh": "POET-X 将正交等价变换做成更可扩展、更省内存的版本，以更低成本完成原本昂贵的矩阵操作。核心卖点不是改变目标，而是把原方法从难以扩展的实现改造成可用于十亿参数级训练的系统化方案。",
+        "evidence_zh": "摘要声称 POET-X 在保持 POET 泛化和稳定性收益的同时，显著提升吞吐和显存效率，并能在单张 Nvidia H100 上预训练十亿参数 LLM；同设定下 AdamW 会因显存不足失败。具体训练预算、收敛速度、最终质量指标和不同模型规模下的趋势摘要没有充分说明。",
+        "value_zh": "如果成立，这项工作会降低大模型训练实验的硬件门槛，让单卡或小规模环境也能测试更大模型与更稳的优化路径。它也可能让“结构化重参数化训练”从理论兴趣点变成可实际采用的工程选项。",
+        "open_questions": [
+          "POET-X 具体如何降低正交等价变换的成本，复杂度相对原版降了多少？",
+          "在同等训练 token、步数和最终质量下，它与 AdamW 的真实成本收益比是多少？",
+          "所谓保留泛化和稳定性优势，是否覆盖不同模型规模、数据配方和下游任务？"
+        ],
+        "core_contributions": [
+          "提出 POET 的可扩展变体 POET-X，专门解决原方法的高显存和高计算瓶颈。",
+          "在不改变核心稳定训练动机的前提下，重新设计正交等价变换的执行方式。",
+          "给出单张 H100 预训练十亿参数 LLM 的可行性主张，并以 AdamW 显存不足作为对照。"
+        ],
+        "why_read": [
+          "训练效率论文里少见同时抓稳定性和显存，切入点比常规优化器微调更有结构性。",
+          "单卡十亿参数的主张很硬，值得核对实现细节和真实边界。",
+          "如果你关心更稳的预训练，这篇论文提供了一个不同于 AdamW 路线的选择。"
+        ],
+        "risks": [
+          "摘要没有给出最终模型质量与训练步数的完整对照，不能只看能不能跑。",
+          "收益可能依赖特定硬件和实现优化，换设备后未必成立。"
+        ],
+        "recommended_for": [
+          "做大模型预训练系统与优化器研究的读者",
+          "资源受限但想跑更大模型的工程师",
+          "关注训练稳定性与参数化方法的研究者"
+        ],
+        "keywords": [
+          "LLM 训练",
+          "内存效率",
+          "正交等价变换",
+          "POET-X",
+          "训练稳定性"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "工程价值直接，且摘要给出明确硬件对比；但仍需核对它是否真正保住了训练质量和可迁移性。",
+        "fallback_summary": "Efficient and stable training of large language models (LLMs) remains a core challenge in modern machine learning systems."
+      },
+      "full_analysis": {
+        "enabled": true,
+        "source_kind": "arxiv_source",
+        "text_char_count": 33640,
+        "content": {
+          "abstract_translation_zh": "大语言模型的高效且稳定训练仍是现代机器学习系统中的核心挑战。为解决这一问题，已有工作提出了重参数化正交等价训练（POET）：它通过对每个权重矩阵施加正交等价变换来优化参数，并保持谱性质不变。虽然 POET 在训练稳定性上表现强，但其原始实现因大量矩阵乘法而带来较高的显存占用和计算开销。为克服这些限制，本文提出 POET-X，这是一个可扩展且更省显存的变体，以显著更低的计算成本完成正交等价变换。POET-X 在保持 POET 泛化与稳定性收益的同时，显著提升了吞吐与显存效率。实验中，POET-X 可以在单张 Nvidia H100 GPU 上完成十亿参数级 LLM 的预训练；相比之下，标准优化器 AdamW 在相同设置下会因显存不足而失败。",
+          "background_zh": "LLM 训练长期处在一个三难困境里：稳定性、吞吐和显存通常难以同时兼顾。POET 这类保持谱性质的训练框架提供了不同于 AdamW 的稳定训练路径，但原始实现的矩阵乘法、激活保存和正交参数化开销太大，导致它在大模型预训练里缺乏可扩展性。",
+          "problem_zh": "本文要解决的不是“如何再设计一个新优化器目标”，而是如何把已有的 POET 路线真正扩展到大规模 LLM 预训练：在保留其谱保持和训练稳定性的前提下，显著降低显存占用与运行时开销。这个问题重要，因为很多结构化或更稳定的训练方法最后并不是败在思想上，而是败在系统实现成本上。",
+          "method_overview_zh": "POET-X 延续了 POET 的核心建模思路：用左右两个可训练正交矩阵对固定基权重做正交等价变换，从而在训练中保持谱性质，并在训练后把这些变换并回权重中，因此没有推理额外开销。它的主要创新不在目标函数，而在把这套正交变换的实现整体重写成可扩展版本：一方面把原先以权重矩阵为中心的计算改为以输入为中心的线性映射序列，减少中间激活和大矩阵操作；另一方面利用块稀疏、置换、Cayley-Neumann 参数化和自定义 CUDA/Triton kernel，系统性压缩正交变换在前向和反向传播中的显存与时间成本。",
+          "method_details": [
+            "将原始 POET 的 weight-centric 实现改写为 input-centric 形式，把一次更新表示成若干线性映射，避免保存与权重矩阵相关的大型中间激活，从而降低反向传播显存压力。",
+            "利用块对角、块稀疏正交矩阵结构，不再显式构造完整的大型稀疏块对角矩阵，而是把每个块当作独立矩阵做 batch-parallel 乘法，减少无效存储并提升运行效率。",
+            "对置换操作做两层优化：一是通过索引映射实现自定义 CUDA 置换算子，避免显式构造置换矩阵；二是在内循环开始前把部分置换预先合并到固定权重中，减少重复置换次数。",
+            "重新实现 Cayley-Neumann Parameterization：只存 skew-symmetric 矩阵的上三角部分，将相关参数、梯度和优化器状态减半；同时重排 CNP 计算式，并用 Triton kernel 融合前向和反向中的共享张量读取与高阶项计算。",
+            "提出两种内存/计算权衡版本，其中一种沿用标准 autograd 保存额外激活，另一种通过 gradient checkpointing 在反向时重算所需张量；在此基础上进一步给出仅在 checkpointing 版本上可行的量化训练扩展 POET-XQ。"
+          ],
+          "experiment_setup_zh": "提取文本说明，实验分为三部分：一是单层 profiling，用于直接对比原始 POET、POET-X 与标准线性层在前向/反向中的时间与显存；二是大规模 LLM 预训练，对 Llama-3B 在 C4 数据集上的训练效果进行比较，基线包括 AdamW、Muon、GaLore、APOLLO；三是更细的效率消融，分析不同实现策略、不同计算规模下的运行时与显存。文中还提到一个多节点分布式设置：32 张 Nvidia H100 GPU（4 节点，每节点 8 卡）用于 wall-clock 收敛比较。更完整的超参数、模型结构、序列长度和附加实验在附录中，但提取文本没有充分说明。",
+          "main_results_zh": "提取文本支持的主要结论有三点。第一，相比原始 POET，POET-X 在单层基准上显著降低了前后向耗时；文中明确写到，总前后向时间从 10.59ms 降到 1.38ms 和 1.89ms（对应两个 POET-X 变体）。第二，论文在导言中声称，相比原始 POET，POET-X 达到约 3 倍 GPU 显存下降和约 8 倍运行速度提升，同时不牺牲原始 POET 的训练稳定性。第三，在 Llama-3B 的预训练比较中，提取文本称 POET-X 的验证困惑度优于 AdamW 及其他若干内存高效方法，但略逊于 Muon；同时其更高的显存效率带来了更好的 wall-clock 训练效率。关于“单张 H100 可训练到 13B 参数”与“AdamW 在同设定下显存不足”的说法，提取文本明确给出了该主张，但没有展开完整实验条件与边界。",
+          "strengths": [
+            "论文切入点明确：不是再做一个抽象优化器，而是把已有的稳定训练路线通过系统实现优化推到可扩展区间。",
+            "方法链条完整，覆盖输入中心化计算、块稀疏批并行、置换优化、CNP 压缩、kernel 融合、checkpointing 和量化扩展，说明作者关注的是端到端系统瓶颈而非单点技巧。",
+            "保留了 POET 的核心性质：正交等价变换、谱保持、训练后可并回权重、无推理额外开销，这一点使其区别于只在训练时做低秩附加模块的方法。",
+            "实验设置至少覆盖了单层 profiling、预训练表现和 wall-clock 效率，而不是只报一个吞吐数字。提取文本还给出了与 AdamW、Muon、GaLore、APOLLO 的对比框架。"
+          ],
+          "limitations": [
+            "许多关键结论在提取文本里只有主张，没有足够完整的表格或数值支撑，例如最终验证困惑度、显存峰值、吞吐、训练 token 对齐方式等。",
+            "“保持原始 POET 的泛化和稳定性收益”是核心卖点，但提取文本没有充分说明稳定性是如何测量的，也没有看到更细的失败案例或训练波动分析。",
+            "单张 H100 可训练 13B 或十亿级模型这一点很吸引人，但提取文本没有充分说明 batch size、序列长度、精度、并行策略、checkpointing/量化是否同时使用，因此复现实用边界不清楚。",
+            "与 Muon 的比较只被简要描述为质量略逊但显存更低，提取文本没有充分说明两者是否在相同训练预算、相同实现成熟度和相同系统栈下公平比较。"
+          ],
+          "relation_to_prior_work_zh": "相对常见的 AdamW 路线，这篇工作不是在一阶优化更新规则上做局部改动，而是通过正交等价变换重参数化权重，让训练过程在保持谱性质的约束下进行。相对 LoRA、GaLore、APOLLO 这类强调低秩或内存高效训练/微调的方法，POET-X 的核心不是附加一个参数高效模块，而是试图把正交结构化训练本身做成接近 PEFT 级别的显存占用。相对原始 POET，它的关键差异也不是理论性质变化，而是把“参数上稀疏”进一步落实成“系统上省显存、省时间”的具体实现，包括 input-centric 重写、置换预合并、块并行和 CNP kernel 融合。",
+          "practical_value_zh": "如果文中的主张成立，POET-X 的实际价值很直接：它把一种原本更偏理论吸引力的稳定训练方法，推进到可能真正进入大模型预训练工程栈的形态。对资源受限团队，它意味着在更少显存预算下测试更大模型和更稳训练路径的机会；对研究者，它提供了一条不同于 AdamW 与低秩路线的替代方向，即通过结构化正交重参数化获得稳定性与效率的组合收益。POET-XQ 还说明这条路线有机会继续和量化训练结合，进一步压低内存门槛。",
+          "future_work": [
+            "核对不同模型规模、不同数据配方和不同训练长度下，POET-X 是否始终保留相对 AdamW 的质量优势，还是只在特定规模区间有效。",
+            "更系统地分析稳定性的来源与边界，例如训练曲线波动、梯度行为、超参数敏感性，以及与谱保持性质之间的因果关系。",
+            "验证其硬件可迁移性：当前收益是否依赖 H100、Triton/CUDA 特化 kernel，换到不同 GPU、编译栈或分布式配置后收益是否仍然成立。",
+            "进一步研究 POET-XQ 的质量-显存权衡，特别是在低比特权重量化和 checkpointing 同时启用时，对收敛和最终性能的影响。"
+          ],
+          "reading_checklist": [
+            "先看 Input-centric Implementation：这是全文最关键的系统改写点，要确认它具体减少了哪些中间激活、复杂度如何变化。",
+            "再看 Permutation Acceleration and Reduction：置换在这类结构化方法里常是隐藏瓶颈，需要核对自定义算子到底省的是显存、带宽还是 kernel launch 开销。",
+            "重点读 Efficient Cayley-Neumann Parameterization：这是正交约束保持与实际效率之间的核心桥梁，尤其要看只存上三角和 kernel fusion 是否改变数值稳定性。",
+            "读 Single-layer Benchmarking against POET：先确认 3x 显存下降、8x 加速以及 10.59ms 到 1.38/1.89ms 的结论是在什么精确设置下得到的。"
+          ],
+          "overall_assessment_zh": "这篇论文最值得信的部分，是它把问题定义得很工程化且方法路径自洽：POET 的瓶颈确实主要来自正交变换实现成本，而文中给出的 input-centric 改写、块稀疏批并行、置换预处理、CNP 压缩与 fused kernel 形成了一条完整的降本链条，因此“它比原始 POET 更能跑”这件事高度可信。最该怀疑的部分，则是它是否在广泛设置下真正同时保住了训练质量、稳定性和系统收益。提取文本给出了若干强主张，例如单卡 H100 训练 13B、优于 AdamW、接近或优于多种高效方法，但缺少足够完整的实验上下文和数值展开。简言之，这篇文章很值得读，不是因为它已经无可置疑地证明了新范式成立，而是因为它把“正交重参数化训练”第一次明显推近了大模型工程可用区；真正需要仔细核对的是质量公平性、硬件依赖性和收益边界。"
+        }
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05210v1",
+      "title": "Balancing Coverage and Draft Latency in Vocabulary Trimming for Faster Speculative Decoding",
+      "summary": "Speculative decoding accelerates inference for Large Language Models by using a lightweight draft model to propose candidate tokens that are verified in parallel by a larger target model. Prior work shows that the draft model often dominates speculative decoding latency, since it generates tokens sequentially and incurs high cost from its language modeling head as vocabulary size grows. This exposes a fundamental trade-off in draft model design: larger vocabularies improve token coverage and agreement with the target model, but incur higher draft latency, while smaller vocabularies reduce latency at the risk of missing tokens required for accurate draft generation. We address this trade-off through vocabulary trimming for draft models, motivated by the observation that domain-specific workloads use only a small fraction of the full vocabulary. We cast draft vocabulary selection as a constrained optimization problem that balances token coverage and draft latency. Coverage is computed over assistant responses in the training data, while latency is estimated using architecture-aware FLOPs that capture the cost of the language modeling head as a function of vocabulary size. We optimize a utility function with a Tree-structured Parzen Estimator to efficiently explore the coverage-latency Pareto frontier under a minimum coverage constraint. Experiments show improved speculative decoding throughput while reducing draft vocabularies by up to 97% with high coverage. On domain-specific tasks, we achieve up to 16% latency reduction and 20% throughput improvement, and up to 6.7% throughput gains on diverse out-of-distribution tasks.",
+      "authors": [
+        "Ofir Ben Shoham"
+      ],
+      "published": "2026-03-05T14:20:22Z",
+      "published_date": "2026-03-05 14:20:22+00:00",
+      "updated": "2026-03-05T14:20:22Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05210v1",
+      "url": "http://arxiv.org/abs/2603.05210v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 8.2
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "speculative decoding",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "这篇工作把 speculative decoding 的草稿模型词表大小当成可优化对象，而不是默认沿用全词表。",
+        "summary_zh": "论文聚焦 speculative decoding 中经常被忽视的瓶颈：草稿模型的词表头会随着词表增大而拖慢整体延迟。作者把草稿词表选择写成覆盖率与延迟的约束优化问题，用训练数据中的 assistant 响应估计覆盖率，用架构感知 FLOPs 估计词表头开销，再用 TPE 搜索 Pareto 前沿。摘要称实验显示推测解码性能改进，但具体加速幅度、任务类型和对准确性的影响摘要没有充分说明。",
+        "background_zh": "Speculative decoding 已成主流推理加速路线，但草稿模型串行生成和大词表输出头常常吞掉一部分收益。面向专域部署时，真实工作负载往往只会用到全词表中的小子集。",
+        "problem_zh": "问题是如何在不显著损伤 token 覆盖和 target agreement 的前提下，缩小草稿模型词表以降低延迟。这个权衡直接决定 speculative decoding 在实际系统里能否净赚。",
+        "approach_zh": "作者把词表选择建模为带最低覆盖约束的优化问题，用训练数据中的 assistant 响应估计覆盖率，用架构感知 FLOPs 估计词表头延迟成本，再用 Tree-structured Parzen Estimator 搜索 coverage-latency Pareto 前沿。",
+        "evidence_zh": "摘要只说实验显示 speculative decoding 表现改进，说明该词表裁剪策略在覆盖与延迟之间找到了更好平衡。具体加速比、任务类型、草稿接受率变化和准确性损失摘要没有充分说明。",
+        "value_zh": "如果结论成立，这一方法能让专域或企业内部部署的 speculative decoding 更易落地，特别是在词表冗余明显的场景。它也给草稿模型设计提供了一个比“缩模型”更细粒度的优化旋钮。",
+        "open_questions": [
+          "词表裁剪后的收益在跨域输入上是否快速退化，是否需要按场景重做选择？",
+          "词表缩小后对 target model 接受率和最终输出质量的影响有多大？",
+          "该方法是否依赖特定 tokenizer、模型结构或训练数据分布？"
+        ],
+        "core_contributions": [
+          "把 speculative decoding 中草稿模型的词表大小明确为一类可优化的系统瓶颈。",
+          "提出覆盖率与延迟联合建模的词表选择目标，而不是只按频率裁剪。",
+          "使用架构感知 FLOPs 和 TPE 搜索 Pareto 前沿，为草稿模型设计提供自动化流程。"
+        ],
+        "why_read": [
+          "这是少见直接优化草稿模型输出头成本的推理系统论文，问题切得很实。",
+          "如果你在做专域推理服务，这种按工作负载裁剪词表的想法很可能比通用技巧更有效。",
+          "论文把速度收益写成显式权衡问题，方便判断何时值得用。"
+        ],
+        "risks": [
+          "方法很可能依赖场景分布，跨域泛化未必稳定。",
+          "摘要没有说明准确性与接受率损失，不能只看延迟收益。"
+        ],
+        "recommended_for": [
+          "做 LLM 推理系统与服务优化的工程师",
+          "关注 speculative decoding 细粒度瓶颈的研究者",
+          "需要专域部署高吞吐生成系统的团队"
+        ],
+        "keywords": [
+          "speculative decoding",
+          "词表裁剪",
+          "草稿模型",
+          "Pareto 前沿",
+          "TPE"
+        ],
+        "reading_priority": "medium",
+        "reading_priority_reason": "工程问题切得准，但贡献相对集中在专域草稿模型设计，且实验细节摘要不完整。",
+        "fallback_summary": "Speculative decoding accelerates inference for Large Language Models by using a lightweight draft model to propose candidate tokens that are verified in parallel by a larger target model."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05299v1",
+      "title": "WavSLM: Single-Stream Speech Language Modeling via WavLM Distillation",
+      "summary": "Large language models show that simple autoregressive training can yield scalable and coherent generation, but extending this paradigm to speech remains challenging due to the entanglement of semantic and acoustic information. Most existing speech language models rely on text supervision, hierarchical token streams, or complex hybrid architectures, departing from the single-stream generative pretraining paradigm that has proven effective in text. In this work, we introduce WavSLM, a speech language model trained by quantizing and distilling self-supervised WavLM representations into a single codebook and optimizing an autoregressive next-chunk prediction objective. WavSLM jointly models semantic and acoustic information within a single token stream without text supervision or text pretraining. Despite its simplicity, it achieves competitive performance on consistency benchmarks and speech generation while using fewer parameters, less training data, and supporting streaming inference. Demo samples are available at https://lucadellalib.github.io/wavslm-web/.",
+      "authors": [
+        "Luca Della Libera",
+        "Cem Subakan",
+        "Mirco Ravanelli"
+      ],
+      "published": "2026-03-05T15:39:54Z",
+      "published_date": "2026-03-05 15:39:54+00:00",
+      "updated": "2026-03-05T15:39:54Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL",
+        "cs.SD"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05299v1",
+      "url": "http://arxiv.org/abs/2603.05299v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.52,
+        "recency": 3.0,
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 8.09
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "这篇工作试图把文本 LLM 中“单流自回归预训练”的简洁范式搬到语音上，绕开文本监督和多流结构。",
+        "summary_zh": "WavSLM 通过量化并蒸馏自监督 WavLM 表征，把语义与声学信息压进单一代码本，再做自回归 next-chunk 预测。它的主张是：不依赖文本监督、文本预训练或复杂多流架构，也能得到有竞争力的语音建模与生成效果，并支持流式推理。摘要给出了“更少参数、更少训练数据、竞争性表现”的方向性结论，但具体基准、指标和失效模式摘要没有充分说明。",
+        "background_zh": "文本 LLM 证明了单流自回归预训练的可扩展性，但把这套范式迁移到语音并不直接，因为语义和声学信息高度纠缠。现有语音语言模型常依赖文本监督、层级 token 流或更复杂的混合架构。",
+        "problem_zh": "问题是能否在不借助文本监督和复杂多流设计的情况下，用单一 token 流同时建模语音的语义与声学信息。这个问题重要，因为更简单的训练与推理范式更容易扩展和部署。",
+        "approach_zh": "作者先对自监督 WavLM 表征进行量化与蒸馏，得到单一代码本表示，再训练单流自回归模型做 next-chunk prediction。整个方案强调结构简单、无需文本预训练，并支持流式推理。",
+        "evidence_zh": "摘要声称该方法在一致性基准和语音生成上有竞争力，同时参数更少、训练数据更少，并支持 streaming inference。具体比较对象、生成质量评价方式和长时语音稳定性摘要没有充分说明。",
+        "value_zh": "如果结论成立，这项工作说明语音语言模型未必一定要走多流或文本依赖路线，单流范式也可能成为更简单的基础模型方案。对研究者来说，它提供了“语音版 LLM 预训练”是否能保持简洁性的一个重要样本。",
+        "open_questions": [
+          "单一代码本如何同时保住语义与声学细节，是否会出现一端被压缩牺牲的问题？",
+          "所谓 competitive performance 具体落在哪些任务和指标上，和现有多流方法差距多大？",
+          "流式推理的延迟、稳定性和长时生成质量如何衡量？"
+        ],
+        "core_contributions": [
+          "提出基于 WavLM 蒸馏的单流语音语言模型，而不是依赖文本监督或层级 token 设计。",
+          "用单一代码本统一承载语义与声学信息，并采用自回归 next-chunk 目标训练。",
+          "在摘要中同时主张了竞争性性能、较少参数和较少训练数据，以及流式推理能力。"
+        ],
+        "why_read": [
+          "如果你关心非文本模态能否复制 LLM 的简洁预训练范式，这篇论文很有代表性。",
+          "它的设计选择很克制，适合用来判断语音建模到底需不需要复杂结构。",
+          "即使你不做语音，这篇论文也能提供“单流表示是否足够”这一更普遍的问题样本。"
+        ],
+        "risks": [
+          "单一代码本可能不足以同时覆盖高保真声学与高层语义。",
+          "方法可能高度依赖 WavLM 表征质量，创新边界需要仔细区分。"
+        ],
+        "recommended_for": [
+          "做语音语言模型和语音生成的研究者",
+          "关注非文本模态是否能套用 LLM 训练范式的读者",
+          "研究流式生成系统的工程师"
+        ],
+        "keywords": [
+          "语音语言模型",
+          "单流建模",
+          "WavLM 蒸馏",
+          "自回归 next-chunk",
+          "流式推理"
+        ],
+        "reading_priority": "medium",
+        "reading_priority_reason": "方法问题有代表性，但离当前以 LLM、Agent、多模态系统为中心的主线稍远，而且摘要证据较概括。",
+        "fallback_summary": "Large language models show that simple autoregressive training can yield scalable and coherent generation, but extending this paradigm to speech remains challenging due to the entanglement of semantic and acoustic information."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05308v1",
+      "title": "Med-V1: Small Language Models for Zero-shot and Scalable Biomedical Evidence Attribution",
+      "summary": "Assessing whether an article supports an assertion is essential for hallucination detection and claim verification. While large language models (LLMs) have the potential to automate this task, achieving strong performance requires frontier models such as GPT-5 that are prohibitively expensive to deploy at scale. To efficiently perform biomedical evidence attribution, we present Med-V1, a family of small language models with only three billion parameters. Trained on high-quality synthetic data newly developed in this study, Med-V1 substantially outperforms (+27.0% to +71.3%) its base models on five biomedical benchmarks unified into a verification format. Despite its smaller size, Med-V1 performs comparably to frontier LLMs such as GPT-5, along with high-quality explanations for its predictions. We use Med-V1 to conduct a first-of-its-kind use case study that quantifies hallucinations in LLM-generated answers under different citation instructions. Results show that the format instruction strongly affects citation validity and hallucination, with GPT-5 generating more claims but exhibiting hallucination rates similar to GPT-4o. Additionally, we present a second use case showing that Med-V1 can automatically identify high-stakes evidence misattributions in clinical practice guidelines, revealing potentially negative public health impacts that are otherwise challenging to identify at scale. Overall, Med-V1 provides an efficient and accurate lightweight alternative to frontier LLMs for practical and real-world applications in biomedical evidence attribution and verification tasks. Med-V1 is available at https://github.com/ncbi-nlp/Med-V1.",
+      "authors": [
+        "Qiao Jin",
+        "Yin Fang",
+        "Lauren He",
+        "Yifan Yang",
+        "Guangzhi Xiong",
+        "Zhizheng Wang",
+        "Nicholas Wan",
+        "Joey Chan",
+        "Donald C. Comeau",
+        "Robert Leaman",
+        "Charalampos S. Floudas",
+        "Aidong Zhang",
+        "Michael F. Chiang",
+        "Yifan Peng",
+        "Zhiyong Lu"
+      ],
+      "published": "2026-03-05T15:48:43Z",
+      "published_date": "2026-03-05 15:48:43+00:00",
+      "updated": "2026-03-05T15:48:43Z",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05308v1",
+      "url": "http://arxiv.org/abs/2603.05308v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.21,
+        "recency": 3.0,
+        "popularity": 1.8,
+        "quality": 1.8,
+        "recommendation": 7.95
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "这篇工作说明在高风险证据归因任务上，3B 级小模型有机会替代昂贵前沿模型，但前提是数据构造和评测设计站得住。",
+        "summary_zh": "论文面向生物医学证据归因，试图用 30 亿参数级小模型替代高成本前沿模型做断言与证据支持判断。作者基于新构建的高质量合成数据训练 Med-V1，并把 5 个生物医学基准统一为验证格式；摘要声称相对基座提升 27.0% 到 71.3%，且表现可比 GPT-5 这类前沿模型。它还展示了两个应用：量化不同引用指令下的幻觉与引用有效性，以及识别临床实践指南中的高风险证据误归因。合成数据质量、解释可信度和跨机构泛化边界摘要没有充分说明。",
+        "background_zh": "证据归因是生物医学场景里幻觉检测和断言核验的基础能力，但强性能往往依赖昂贵前沿模型。高风险领域需要更便宜、更可扩展且能解释的替代方案。",
+        "problem_zh": "核心问题是能否用小模型在零样本和可扩展设定下完成“文献是否支持断言”的判断，并给出可用解释。这个问题重要，因为生物医学场景既高风险又高成本，不能长期依赖最贵模型。",
+        "approach_zh": "作者训练 3B 级 Med-V1 系列小模型，监督信号来自本研究新构建的高质量合成数据，并把多个基准统一为验证格式以做归因判断。随后将模型用于两个真实用例：分析引用指令对幻觉的影响，以及筛查临床指南中的证据误归因。",
+        "evidence_zh": "摘要给出两类证据：在 5 个生物医学基准上，相对基座提升 27.0% 到 71.3%，并声称可比肩 GPT-5；同时给出两个应用案例展示可扩展性和潜在公共卫生价值。具体数据构造细节、标注质量控制、解释评价方法和外部泛化摘要没有充分说明。",
+        "value_zh": "如果结论成立，这项工作会把高成本的生物医学证据核验压缩到更可部署的小模型上，适合大规模文献审阅、临床问答监控和高风险内容审核。它也提示“专域小模型加高质量任务化数据”仍然是替代前沿通用模型的现实路线。",
+        "open_questions": [
+          "合成训练数据是如何构造和质控的，是否会把数据偏差直接灌进模型？",
+          "所谓零样本具体指什么设置，是否真的没有目标基准上的任务适配？",
+          "解释质量如何评估，解释是否真实对应模型的证据归因过程？"
+        ],
+        "core_contributions": [
+          "提出面向生物医学证据归因的 3B 级小模型家族，而不是继续依赖最贵的通用模型。",
+          "用新构建的高质量合成数据训练模型，并把 5 个基准统一到验证格式下比较。",
+          "展示两个高价值应用场景：量化引用指令下的幻觉，以及发现临床指南中的证据误归因。"
+        ],
+        "why_read": [
+          "它不是单纯做领域微调，而是把专域小模型如何接近前沿模型的路径写得很具体。",
+          "生物医学虽然是垂直场景，但证据归因与幻觉检测的方法问题具有可迁移价值。",
+          "如果你关心高风险场景里的可扩展审核系统，这篇论文的应用价值很直接。"
+        ],
+        "risks": [
+          "合成数据可能带来分布偏差，导致看起来强但真实外部泛化不足。",
+          "摘要对解释质量的描述偏结论式，缺少足够细节支撑。"
+        ],
+        "recommended_for": [
+          "做医学 NLP、证据归因与幻觉检测的研究者",
+          "关注小模型在高风险领域替代前沿模型的工程师",
+          "研究专域数据构造与模型对齐的读者"
+        ],
+        "keywords": [
+          "生物医学证据归因",
+          "小语言模型",
+          "合成数据",
+          "幻觉检测",
+          "断言验证"
+        ],
+        "reading_priority": "medium",
+        "reading_priority_reason": "问题很重要，也有明确应用价值，但领域较垂直，且最关键的数据与泛化细节还需要通读正文核对。",
+        "fallback_summary": "Assessing whether an article supports an assertion is essential for hallucination detection and claim verification."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05218v1",
+      "title": "KARL: Knowledge Agents via Reinforcement Learning",
+      "summary": "We present a system for training enterprise search agents via reinforcement learning that achieves state-of-the-art performance across a diverse suite of hard-to-verify agentic search tasks. Our work makes four core contributions. First, we introduce KARLBench, a multi-capability evaluation suite spanning six distinct search regimes, including constraint-driven entity search, cross-document report synthesis, tabular numerical reasoning, exhaustive entity retrieval, procedural reasoning over technical documentation, and fact aggregation over internal enterprise notes. Second, we show that models trained across heterogeneous search behaviors generalize substantially better than those optimized for any single benchmark. Third, we develop an agentic synthesis pipeline that employs long-horizon reasoning and tool use to generate diverse, grounded, and high-quality training data, with iterative bootstrapping from increasingly capable models. Fourth, we propose a new post-training paradigm based on iterative large-batch off-policy RL that is sample efficient, robust to train-inference engine discrepancies, and naturally extends to multi-task training with out-of-distribution generalization. Compared to Claude 4.6 and GPT 5.2, KARL is Pareto-optimal on KARLBench across cost-quality and latency-quality trade-offs, including tasks that were out-of-distribution during training. With sufficient test-time compute, it surpasses the strongest closed models. These results show that tailored synthetic data in combination with multi-task reinforcement learning enables cost-efficient and high-performing knowledge agents for grounded reasoning.",
+      "authors": [
+        "Jonathan D. Chang",
+        "Andrew Drozdov",
+        "Shubham Toshniwal",
+        "Owen Oertell",
+        "Alexander Trott",
+        "Jacob Portes",
+        "Abhay Gupta",
+        "Pallavi Koppol",
+        "Ashutosh Baheti",
+        "Sean Kulinski",
+        "Ivan Zhou",
+        "Irene Dea",
+        "Krista Opsahl-Ong",
+        "Simon Favreau-Lessard",
+        "Sean Owen",
+        "Jose Javier Gonzalez Ortiz",
+        "Arnav Singhvi",
+        "Xabi Andrade",
+        "Cindy Wang",
+        "Kartik Sreenivasan",
+        "Sam Havens",
+        "Jialu Liu",
+        "Peyton DeNiro",
+        "Wen Sun",
+        "Michael Bendersky",
+        "Jonathan Frankle"
+      ],
+      "published": "2026-03-05T14:30:25Z",
+      "published_date": "2026-03-05 14:30:25+00:00",
+      "updated": "2026-03-05T14:30:25Z",
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05218v1",
+      "url": "http://arxiv.org/abs/2603.05218v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.7,
+        "recency": 3.0,
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 7.93
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "post-training",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "",
+        "summary_zh": "",
+        "background_zh": "",
+        "problem_zh": "",
+        "approach_zh": "",
+        "evidence_zh": "",
+        "value_zh": "",
+        "open_questions": [],
+        "core_contributions": [],
+        "why_read": [],
+        "risks": [],
+        "recommended_for": [],
+        "keywords": [],
+        "reading_priority": "medium",
+        "reading_priority_reason": "",
+        "fallback_summary": "We present a system for training enterprise search agents via reinforcement learning that achieves state-of-the-art performance across a diverse suite of hard-to-verify agentic search tasks."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05028v1",
+      "title": "Survive at All Costs: Exploring LLM's Risky Behaviors under Survival Pressure",
+      "summary": "As Large Language Models (LLMs) evolve from chatbots to agentic assistants, they are increasingly observed to exhibit risky behaviors when subjected to survival pressure, such as the threat of being shut down. While multiple cases have indicated that state-of-the-art LLMs can misbehave under survival pressure, a comprehensive and in-depth investigation into such misbehaviors in real-world scenarios remains scarce. In this paper, we study these survival-induced misbehaviors, termed as SURVIVE-AT-ALL-COSTS, with three steps. First, we conduct a real-world case study of a financial management agent to determine whether it engages in risky behaviors that cause direct societal harm when facing survival pressure. Second, we introduce SURVIVALBENCH, a benchmark comprising 1,000 test cases across diverse real-world scenarios, to systematically evaluate SURVIVE-AT-ALL-COSTS misbehaviors in LLMs. Third, we interpret these SURVIVE-AT-ALL-COSTS misbehaviors by correlating them with model's inherent self-preservation characteristic and explore mitigation methods. The experiments reveals a significant prevalence of SURVIVE-AT-ALL-COSTS misbehaviors in current models, demonstrates the tangible real-world impact it may have, and provides insights for potential detection and mitigation strategies. Our code and data are available at https://github.com/thu-coai/Survive-at-All-Costs.",
+      "authors": [
+        "Yida Lu",
+        "Jianwei Fang",
+        "Xuyang Shao",
+        "Zixuan Chen",
+        "Shiyao Cui",
+        "Shanshan Bian",
+        "Guangyao Su",
+        "Pei Ke",
+        "Han Qiu",
+        "Minlie Huang"
+      ],
+      "published": "2026-03-05T10:16:23Z",
+      "published_date": "2026-03-05 10:16:23+00:00",
+      "updated": "2026-03-05T10:16:23Z",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05028v1",
+      "url": "http://arxiv.org/abs/2603.05028v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.6,
+        "recency": 3.0,
+        "popularity": 1.4,
+        "quality": 1.4,
+        "recommendation": 7.93
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "",
+        "summary_zh": "",
+        "background_zh": "",
+        "problem_zh": "",
+        "approach_zh": "",
+        "evidence_zh": "",
+        "value_zh": "",
+        "open_questions": [],
+        "core_contributions": [],
+        "why_read": [],
+        "risks": [],
+        "recommended_for": [],
+        "keywords": [],
+        "reading_priority": "medium",
+        "reading_priority_reason": "",
+        "fallback_summary": "As Large Language Models (LLMs) evolve from chatbots to agentic assistants, they are increasingly observed to exhibit risky behaviors when subjected to survival pressure, such as the threat of being shut down."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05129v1",
+      "title": "MedCoRAG: Interpretable Hepatology Diagnosis via Hybrid Evidence Retrieval and Multispecialty Consensus",
+      "summary": "Diagnosing hepatic diseases accurately and interpretably is critical, yet it remains challenging in real-world clinical settings. Existing AI approaches for clinical diagnosis often lack transparency, structured reasoning, and deployability. Recent efforts have leveraged large language models (LLMs), retrieval-augmented generation (RAG), and multi-agent collaboration. However, these approaches typically retrieve evidence from a single source and fail to support iterative, role-specialized deliberation grounded in structured clinical data. To address this, we propose MedCoRAG (i.e., Medical Collaborative RAG), an end-to-end framework that generates diagnostic hypotheses from standardized abnormal findings and constructs a patient-specific evidence package by jointly retrieving and pruning UMLS knowledge graph paths and clinical guidelines. It then performs Multi-Agent Collaborative Reasoning: a Router Agent dynamically dispatches Specialist Agents based on case complexity; these agents iteratively reason over the evidence and trigger targeted re-retrievals when needed, while a Generalist Agent synthesizes all deliberations into a traceable consensus diagnosis that emulates multidisciplinary consultation. Experimental results on hepatic disease cases from MIMIC-IV show that MedCoRAG outperforms existing methods and closed-source models in both diagnostic performance and reasoning interpretability.",
+      "authors": [
+        "Zheng Li",
+        "Jiayi Xu",
+        "Zhikai Hu",
+        "Hechang Chen",
+        "Lele Cong",
+        "Yunyun Wang",
+        "Shuchao Pang"
+      ],
+      "published": "2026-03-05T12:58:45Z",
+      "published_date": "2026-03-05 12:58:45+00:00",
+      "updated": "2026-03-05T12:58:45Z",
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05129v1",
+      "url": "http://arxiv.org/abs/2603.05129v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.09,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 7.9
+      },
+      "matched_domain": "Agents",
+      "matched_keywords": [
+        "agent",
+        "multi-agent",
+        "cs.AI",
+        "cs.MA"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.45,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "",
+        "summary_zh": "",
+        "background_zh": "",
+        "problem_zh": "",
+        "approach_zh": "",
+        "evidence_zh": "",
+        "value_zh": "",
+        "open_questions": [],
+        "core_contributions": [],
+        "why_read": [],
+        "risks": [],
+        "recommended_for": [],
+        "keywords": [],
+        "reading_priority": "medium",
+        "reading_priority_reason": "",
+        "fallback_summary": "Diagnosing hepatic diseases accurately and interpretably is critical, yet it remains challenging in real-world clinical settings."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05290v1",
+      "title": "X-RAY: Mapping LLM Reasoning Capability via Formalized and Calibrated Probes",
+      "summary": "Large language models (LLMs) achieve promising performance, yet their ability to reason remains poorly understood. Existing evaluations largely emphasize task-level accuracy, often conflating pattern matching with reasoning capability. We present X-RAY, an explainable reasoning analysis system that maps the LLM reasoning capability using calibrated, formally verified probes. We model reasoning capability as a function of extractable \\textit{structure}, operationalized through formal properties such as constraint interaction, reasoning depth, and solution-space geometry. X-Ray generates probes via formal tools with controlled structural variations, enabling precise isolation of incremental structural information through formal calibration and verification. We evaluate state-of-the-art LLMs on problems ranging from junior-level to advanced in mathematics, physics, and chemistry. Our analysis reveals a systematic asymmetry in LLM reasoning: models are relatively robust to constraint refinement, where additional conditions shrink an existing solution space, but degrade sharply under solution-space restructuring, where modifications alter the underlying structural form of the solution manifold. Moreover, calibrated formal probes differentiate models that appear indistinguishable on standard benchmarks and reveal failure modes that are structurally interpretable rather than opaque. Beyond evaluation, our framework is contamination-free and supports the training and testing of reasoning models.",
+      "authors": [
+        "Gao Tianxi",
+        "Cai Yufan",
+        "Yuan Yusi",
+        "Dong Jin Song"
+      ],
+      "published": "2026-03-05T15:34:22Z",
+      "published_date": "2026-03-05 15:34:22+00:00",
+      "updated": "2026-03-05T15:34:22Z",
+      "categories": [
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05290v1",
+      "url": "http://arxiv.org/abs/2603.05290v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.9,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 7.8
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "",
+        "summary_zh": "",
+        "background_zh": "",
+        "problem_zh": "",
+        "approach_zh": "",
+        "evidence_zh": "",
+        "value_zh": "",
+        "open_questions": [],
+        "core_contributions": [],
+        "why_read": [],
+        "risks": [],
+        "recommended_for": [],
+        "keywords": [],
+        "reading_priority": "medium",
+        "reading_priority_reason": "",
+        "fallback_summary": "Large language models (LLMs) achieve promising performance, yet their ability to reason remains poorly understood."
+      }
+    }
+  ],
+  "daily_brief": {
+    "overview_zh": "今天最值得读的主线有两条：一条是把 LLM 的可信判断能力从检索依赖里拆出来，另一条是把多模态图推理与训练推理效率继续推向更可落地的系统设计。优先读 2603.05471 和 2603.05181，前者直接对应 Agent 可信性，后者则把多模态推理从孤立图文对推进到带拓扑约束的图结构；随后读 2603.05500 和 2603.05210 判断效率论文的证据是否足够硬，最后再看 2603.05308 与 2603.05299，评估专域小模型验证和单流语音 LM 这两条延展路线的真实上限。",
+    "top_themes": [
+      "无检索事实核验开始把 LLM 参数知识本身当作可直接利用的验证资源",
+      "多模态推理正在从图文对理解转向带关系结构的图级建模",
+      "训练与推理效率论文继续围绕显存、吞吐和草稿模型延迟这些硬瓶颈展开竞争式优化"
+    ],
+    "reading_strategy": [
+      "先读 2603.05471，重点看无检索事实核验的任务定义、评测框架和 INTRA 是否真的优于基于 logit 的做法。",
+      "再读 2603.05181，核对图条件 VLM 与模态路由是否真正解决了跨模态一致性和异质模态偏好。",
+      "工程导向读者接着看 2603.05500 与 2603.05210，分别关注训练显存与推理延迟的硬证据。"
+    ]
+  },
+  "ai_enrichment": {
+    "enabled": true,
+    "model": "codex-cli",
+    "generated_at": "2026-03-07T17:32:08Z",
+    "provider": "codex-cli"
+  }
+}

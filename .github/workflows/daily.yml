@@ -75,13 +75,24 @@ jobs:
           print(json.dumps(info, ensure_ascii=False, indent=2))
           PY
 
+      - name: Full paper analysis for top papers
+        run: |
+          CONFIG_PATH="config.yaml"
+          if [ ! -f "$CONFIG_PATH" ]; then
+            CONFIG_PATH="config.example.yaml"
+          fi
+          python scripts/codex_full_paper_analysis.py \
+            --config "$CONFIG_PATH" \
+            --input state/arxiv_enriched.json \
+            --output state/arxiv_analyzed.json
+
       - name: Publish daily content
         run: |
           CONFIG_PATH="config.yaml"
           if [ ! -f "$CONFIG_PATH" ]; then
             CONFIG_PATH="config.example.yaml"
           fi
-          python scripts/publish_daily.py --config "$CONFIG_PATH" --input state/arxiv_enriched.json
+          python scripts/publish_daily.py --config "$CONFIG_PATH" --input state/arxiv_analyzed.json
 
       - name: Build static site
         run: |

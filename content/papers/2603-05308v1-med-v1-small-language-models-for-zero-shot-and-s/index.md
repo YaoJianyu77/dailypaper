@@ -67,10 +67,10 @@ reading_priority: medium
 ## Problem Framing
 核心问题是能否用小模型在零样本和可扩展设定下完成“文献是否支持断言”的判断，并给出可用解释。这个问题重要，因为生物医学场景既高风险又高成本，不能长期依赖最贵模型。
 
-## Approach Snapshot
+## Method Overview
 作者训练 3B 级 Med-V1 系列小模型，监督信号来自本研究新构建的高质量合成数据，并把多个基准统一为验证格式以做归因判断。随后将模型用于两个真实用例：分析引用指令对幻觉的影响，以及筛查临床指南中的证据误归因。
 
-## Evidence Mentioned In Abstract
+## Experimental Setup And Evidence
 摘要给出两类证据：在 5 个生物医学基准上，相对基座提升 27.0% 到 71.3%，并声称可比肩 GPT-5；同时给出两个应用案例展示可扩展性和潜在公共卫生价值。具体数据构造细节、标注质量控制、解释评价方法和外部泛化摘要没有充分说明。
 
 ## Research Or Engineering Value
