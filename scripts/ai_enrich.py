@@ -73,6 +73,7 @@ def normalize_paper_id(raw: str) -> str:
 
 def normalize_model_text(value: Any) -> str:
     text = str(value or '').replace('\r', ' ').replace('\n', ' ').strip()
+    text = re.sub(r'【[^】]*oops[^】]*】', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\s+', ' ', text).strip()
     if len(text) >= 2 and text[0] == text[-1] and text[0] in {"'", '"'}:
         text = text[1:-1].strip()
@@ -282,13 +283,15 @@ def build_messages(
         'The JSON object must have keys daily_brief and papers. '
         'daily_brief must contain overview_zh (string), top_themes (array of 3 short strings), and reading_strategy (array of 3 short strings). '
         'papers must be an array where each item contains: paper_id (string), one_liner_zh (string), summary_zh (string, 2-4 sentences), '
-        'problem_zh (string), approach_zh (string), evidence_zh (string), open_questions (array of 2-3 strings), '
+        'background_zh (string), problem_zh (string), approach_zh (string), evidence_zh (string), value_zh (string), open_questions (array of 2-3 strings), '
         'core_contributions (array of 3 strings), why_read (array of 3 strings), risks (array of 2 strings), '
         'recommended_for (array of 2-3 strings), keywords (array of 4-6 short strings), reading_priority (one of high, medium, low), '
         'and reading_priority_reason (string). '
+        'background_zh should explain the field context and motivation in 1-2 sentences. '
         'problem_zh should explain the task and why it matters now. '
         'approach_zh should explain the main mechanism or modeling move. '
         'evidence_zh should state what the abstract actually claims about evaluation, or say the abstract does not make it clear. '
+        'value_zh should explain the likely research or engineering value if the paper works as claimed. '
         'open_questions should list the most important things to verify when reading the full paper.'
     )
     editorial_instructions = build_editorial_instruction_text(config)
@@ -503,15 +506,19 @@ def normalize_daily_brief(data: Dict[str, Any]) -> Dict[str, Any]:
 
 def normalize_paper_ai(item: Dict[str, Any], fallback_paper: Dict[str, Any]) -> Dict[str, Any]:
     summary = normalize_model_text(item.get('summary_zh') or '')
+    background = normalize_model_text(item.get('background_zh') or '')
     problem = normalize_model_text(item.get('problem_zh') or '')
     approach = normalize_model_text(item.get('approach_zh') or '')
     evidence = normalize_model_text(item.get('evidence_zh') or '')
+    value = normalize_model_text(item.get('value_zh') or '')
     return {
         'one_liner_zh': normalize_model_text(item.get('one_liner_zh') or ''),
         'summary_zh': summary,
+        'background_zh': background,
         'problem_zh': problem,
         'approach_zh': approach,
         'evidence_zh': evidence,
+        'value_zh': value,
         'open_questions': coerce_string_list(item.get('open_questions'), max_items=3),
         'core_contributions': coerce_string_list(item.get('core_contributions'), max_items=3),
         'why_read': coerce_string_list(item.get('why_read'), max_items=3),
@@ -561,9 +568,11 @@ def passthrough_payload(payload: Dict[str, Any], reason: str) -> Dict[str, Any]:
         paper.setdefault('ai', {
             'one_liner_zh': '',
             'summary_zh': '',
+            'background_zh': '',
             'problem_zh': '',
             'approach_zh': '',
             'evidence_zh': '',
+            'value_zh': '',
             'open_questions': [],
             'core_contributions': [],
             'why_read': [],

@@ -290,6 +290,12 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
     if ai.get('reading_priority_reason'):
         body_lines.append(f'- Why this priority: {ai.get("reading_priority_reason")}')
 
+    if ai.get('background_zh'):
+        body_lines.extend([
+            '',
+            '## Research Background And Motivation',
+            ai.get('background_zh', ''),
+        ])
     if ai.get('problem_zh'):
         body_lines.extend([
             '',
@@ -307,6 +313,12 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
             '',
             '## Evidence Mentioned In Abstract',
             ai.get('evidence_zh', ''),
+        ])
+    if ai.get('value_zh'):
+        body_lines.extend([
+            '',
+            '## Research Or Engineering Value',
+            ai.get('value_zh', ''),
         ])
     bullet_section(body_lines, 'Reading Checklist', ai.get('open_questions', []), limit=3)
 

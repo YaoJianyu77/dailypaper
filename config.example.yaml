@@ -21,9 +21,9 @@ ai:
     - "skills/paper-image-extractor/SKILL.md"
   github_models_api_base: "https://models.github.ai"
   github_models_paper_limit: 8
-  github_models_abstract_chars: 650
+  github_models_abstract_chars: 1200
   codex_paper_limit: 6
-  codex_abstract_chars: 500
+  codex_abstract_chars: 1400
   preferred_models:
     - "openai/gpt-5.4"
     - "openai/gpt-5"
