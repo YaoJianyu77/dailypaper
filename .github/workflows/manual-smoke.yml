@@ -1,0 +1,11 @@
+name: Manual Smoke Test
+
+"on":
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Smoke
+        run: echo "GitHub Actions is working for dailypaper"
