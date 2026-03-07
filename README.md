@@ -1,13 +1,17 @@
 # evil-read-arxiv
 
-A GitHub-hosted daily paper pipeline.
+A repository-backed daily paper pipeline with two operating modes:
+
+- local Codex CLI generation on your machine
+- optional GitHub-hosted generation via API
 
 The repository is now structured as a content store plus a static website:
 
 - `start-my-day/scripts/search_arxiv.py` fetches and ranks papers from arXiv and Semantic Scholar.
 - `scripts/publish_daily.py` converts search output into versioned markdown under `content/`.
 - `scripts/build_site.py` compiles that markdown into a static site under `dist/`.
-- `.github/workflows/daily.yml` runs the pipeline on a schedule, commits fresh content, and deploys GitHub Pages.
+- `.github/workflows/daily.yml` can generate fresh content manually from GitHub Actions.
+- `.github/workflows/pages.yml` deploys GitHub Pages whenever `main` changes.
 
 ## What Changed
 
@@ -72,9 +76,62 @@ python -m http.server 8000 -d dist
 
 Then open `http://localhost:8000`.
 
-## Automation Model
+## Local Codex CLI Automation
 
-The scheduled GitHub Actions workflow does this end to end:
+If you want the content quality from a local coding agent instead of a remote API job, use the local flow:
+
+1. `scripts/run_local_daily.py` pulls `main`, searches papers, runs local Codex CLI enrichment, publishes markdown, builds the site, commits `content/` and `state/`, and pushes back to GitHub.
+2. `scripts/install_local_cron.sh` installs a local cron job for `07:00` every day.
+3. `.github/workflows/pages.yml` sees the new push on `main` and redeploys GitHub Pages.
+
+Prerequisites on the machine that will run at 7am:
+
+- `codex` must already be installed and logged in
+- `git push` must already work non-interactively, preferably with SSH keys or a credential helper
+- the machine must be powered on at the scheduled time
+
+Install the local 7am cron job:
+
+```bash
+./scripts/install_local_cron.sh
+```
+
+Run the full local pipeline immediately:
+
+```bash
+python scripts/run_local_daily.py
+```
+
+Useful variants:
+
+```bash
+python scripts/run_local_daily.py --target-date 2026-03-07
+python scripts/run_local_daily.py --skip-push
+python scripts/run_local_daily.py --enricher openai
+python scripts/run_local_daily.py --enricher none
+python scripts/run_local_daily.py --remote origin
+```
+
+By default the script auto-detects the active Git remote. Use `--remote` only if your clone does not track the correct remote.
+
+Cron logs are written to:
+
+- `state/logs/local_daily.log`
+
+## GitHub Automation Model
+
+The GitHub workflow is now split into generation and deployment:
+
+1. `.github/workflows/daily.yml` is manual-only and can generate content from GitHub Actions when you explicitly run it. It also deploys Pages directly for that manual run.
+2. `.github/workflows/pages.yml` deploys the current repository state to GitHub Pages on every push to `main`.
+
+If you choose the local Codex CLI path, the everyday flow is:
+
+1. Your machine runs `scripts/run_local_daily.py` at 07:00 local time.
+2. The script pushes updated `content/` and `state/` to GitHub.
+3. GitHub Pages rebuilds from that push and updates the site.
+
+If you choose the API path, the GitHub-side generation workflow does this:
 
 1. Run the paper search.
 2. Optionally enrich the top papers with AI-generated Chinese summaries and recommendations.
@@ -127,11 +184,15 @@ The search script reads:
 
 Enable GitHub Pages for the repository and let GitHub Actions deploy it.
 
-The included workflow lives at:
+The included workflows live at:
 
 - `.github/workflows/daily.yml`
+- `.github/workflows/pages.yml`
 
-It runs on a cron schedule and also supports manual dispatch.
+Recommended setup for your current local-Codex model:
+
+- leave `.github/workflows/daily.yml` as a manual fallback
+- let `.github/workflows/pages.yml` deploy on push to `main`
 
 For a project site such as `https://YaoJianyu77.github.io/dailypaper/`, the build now supports a subpath base URL.
 
@@ -200,7 +261,7 @@ When `OPENAI_API_KEY` is missing, the script degrades safely and passes the rank
 
 ### GitHub Secrets
 
-To enable unattended AI enrichment in GitHub Actions:
+To enable unattended API enrichment in GitHub Actions:
 
 1. Open `Settings -> Secrets and variables -> Actions`
 2. Add repository secret:
@@ -238,7 +299,12 @@ pip install -r requirements.txt
 python start-my-day/scripts/search_arxiv.py --config config.example.yaml --output state/arxiv_filtered.json
 python scripts/publish_daily.py --input state/arxiv_filtered.json
 python scripts/build_site.py --output-dir dist
-python -m http.server 8000 -d dist
+```
+
+For the local Codex CLI path, replace the middle steps with:
+
+```bash
+python scripts/run_local_daily.py --skip-push
 ```
 
 ## Main Files

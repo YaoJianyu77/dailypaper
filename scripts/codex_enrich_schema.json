@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["daily_brief", "papers"],
+  "properties": {
+    "daily_brief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overview_zh", "top_themes", "reading_strategy"],
+      "properties": {
+        "overview_zh": {"type": "string"},
+        "top_themes": {
+          "type": "array",
+          "items": {"type": "string"},
+          "maxItems": 3
+        },
+        "reading_strategy": {
+          "type": "array",
+          "items": {"type": "string"},
+          "maxItems": 3
+        }
+      }
+    },
+    "papers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "paper_id",
+          "one_liner_zh",
+          "summary_zh",
+          "core_contributions",
+          "why_read",
+          "risks",
+          "recommended_for",
+          "keywords",
+          "reading_priority",
+          "reading_priority_reason"
+        ],
+        "properties": {
+          "paper_id": {"type": "string"},
+          "one_liner_zh": {"type": "string"},
+          "summary_zh": {"type": "string"},
+          "core_contributions": {
+            "type": "array",
+            "items": {"type": "string"},
+            "maxItems": 3
+          },
+          "why_read": {
+            "type": "array",
+            "items": {"type": "string"},
+            "maxItems": 3
+          },
+          "risks": {
+            "type": "array",
+            "items": {"type": "string"},
+            "maxItems": 2
+          },
+          "recommended_for": {
+            "type": "array",
+            "items": {"type": "string"},
+            "maxItems": 3
+          },
+          "keywords": {
+            "type": "array",
+            "items": {"type": "string"},
+            "maxItems": 6
+          },
+          "reading_priority": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          },
+          "reading_priority_reason": {"type": "string"}
+        }
+      }
+    }
+  }
+}

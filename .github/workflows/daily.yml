@@ -2,8 +2,6 @@ name: Daily Papers
 
 "on":
   workflow_dispatch:
-  schedule:
-    - cron: '15 11 * * *'
 
 permissions:
   contents: write
@@ -11,15 +9,12 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: daily-papers
   cancel-in-progress: true
 
 jobs:
-  build-and-publish:
+  build-and-commit:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Check out repository
