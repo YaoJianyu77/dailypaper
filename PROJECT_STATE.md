@@ -78,5 +78,6 @@ Project path is /home/y/dailypaper. Read PROJECT_STATE.md first. The primary wor
 - The current production workflow does not use the repository's legacy `skill.md` files.
 - The old `skill.md` files are legacy documentation from the original repo structure, not the active automation path.
 - The active automation path is code-driven through Python scripts.
-- In this chat session, no repository `SKILL.md` file was used.
-- The only higher-level instructions currently in effect came from `AGENTS.md` and system/developer instructions.
+- Active repo-level skills now live under `skills/`.
+- `scripts/codex_enrich.py` and `scripts/ai_enrich.py` now load all active repo skills in `ai.skill_paths` by default.
+- Repo-level `AGENTS.md` tells future Codex runs which skill to use for search, enrichment, note search, deep analysis, and image extraction tasks.

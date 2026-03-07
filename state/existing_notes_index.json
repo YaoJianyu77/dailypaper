@@ -1,6 +1,18 @@
 {
   "notes": [
     {
+      "title": "Survive at All Costs: Exploring LLM's Risky Behaviors under Survival Pressure",
+      "slug": "2603-05028v1-survive-at-all-costs-exploring-llm-s-risky-behav",
+      "source_path": "content/papers/2603-05028v1-survive-at-all-costs-exploring-llm-s-risky-behav/index.md",
+      "url": "/papers/2603-05028v1-survive-at-all-costs-exploring-llm-s-risky-behav/",
+      "title_keywords": [
+        "Survive at All Costs"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
       "title": "Aura: Universal Multi-dimensional Exogenous Integration for Aviation Time Series",
       "slug": "2603-05092v1-aura-universal-multi-dimensional-exogenous-integ",
       "source_path": "content/papers/2603-05092v1-aura-universal-multi-dimensional-exogenous-integ/index.md",
@@ -72,6 +84,18 @@
       ]
     },
     {
+      "title": "X-RAY: Mapping LLM Reasoning Capability via Formalized and Calibrated Probes",
+      "slug": "2603-05290v1-x-ray-mapping-llm-reasoning-capability-via-forma",
+      "source_path": "content/papers/2603-05290v1-x-ray-mapping-llm-reasoning-capability-via-forma/index.md",
+      "url": "/papers/2603-05290v1-x-ray-mapping-llm-reasoning-capability-via-forma/",
+      "title_keywords": [
+        "X-RAY"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
       "title": "WavSLM: Single-Stream Speech Language Modeling via WavLM Distillation",
       "slug": "2603-05299v1-wavslm-single-stream-speech-language-modeling-vi",
       "source_path": "content/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/index.md",
@@ -120,20 +144,25 @@
     }
   ],
   "keyword_to_notes": {
-    "aura": [
-      "/papers/2603-05092v1-aura-universal-multi-dimensional-exogenous-integ/"
+    "survive at all costs": [
+      "/papers/2603-05028v1-survive-at-all-costs-exploring-llm-s-risky-behav/"
     ],
     "paper-note": [
+      "/papers/2603-05028v1-survive-at-all-costs-exploring-llm-s-risky-behav/",
       "/papers/2603-05092v1-aura-universal-multi-dimensional-exogenous-integ/",
       "/papers/2603-05129v1-medcorag-interpretable-hepatology-diagnosis-via/",
       "/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/",
       "/papers/2603-05210v1-balancing-coverage-and-draft-latency-in-vocabula/",
       "/papers/2603-05212v1-early-warning-of-intraoperative-adverse-events-v/",
       "/papers/2603-05218v1-karl-knowledge-agents-via-reinforcement-learning/",
+      "/papers/2603-05290v1-x-ray-mapping-llm-reasoning-capability-via-forma/",
       "/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/",
       "/papers/2603-05308v1-med-v1-small-language-models-for-zero-shot-and-s/",
       "/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/",
       "/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/"
+    ],
+    "aura": [
+      "/papers/2603-05092v1-aura-universal-multi-dimensional-exogenous-integ/"
     ],
     "medcorag": [
       "/papers/2603-05129v1-medcorag-interpretable-hepatology-diagnosis-via/"
@@ -149,6 +178,9 @@
     ],
     "karl": [
       "/papers/2603-05218v1-karl-knowledge-agents-via-reinforcement-learning/"
+    ],
+    "x-ray": [
+      "/papers/2603-05290v1-x-ray-mapping-llm-reasoning-capability-via-forma/"
     ],
     "wavslm": [
       "/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/"

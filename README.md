@@ -166,6 +166,17 @@ The search script reads:
 - otherwise `config.example.yaml`
 - or a path passed explicitly with `--config`
 
+Search tuning lives in:
+
+- `search` for time windows, hot-paper depth, and ranking weights
+- `research_domains` for topic keywords, negative keywords, minimum match thresholds, and domain priority
+
+AI digest tuning lives in:
+
+- `ai.editorial_preferences` for audience, tone, and what the summaries should emphasize
+- `ai.skill_paths` for repo-local skills loaded into the prompt path
+- active repo skills live under `skills/`
+
 ## GitHub Pages
 
 Enable GitHub Pages for the repository and let GitHub Actions deploy it.
@@ -237,6 +248,18 @@ By default the script calls GitHub Models and prefers the strongest available Op
 - `openai/gpt-4o`
 
 You can force a specific model with the repository variable `AI_MODEL` or the config key `ai.model`.
+
+The local Codex and hosted-model enrichment paths now share the same preference surface:
+
+- `ai.editorial_preferences` controls digest style and emphasis
+- all active repo skills under `skills/` can be listed in `ai.skill_paths`
+- by default the enrichment path loads:
+  - `skills/daily-paper-search/SKILL.md`
+  - `skills/daily-paper-editor/SKILL.md`
+  - `skills/paper-note-search/SKILL.md`
+  - `skills/paper-deep-analysis/SKILL.md`
+  - `skills/paper-image-extractor/SKILL.md`
+- repo `AGENTS.md` points future Codex runs at the same curation skill
 
 The enrichment layer adds:
 

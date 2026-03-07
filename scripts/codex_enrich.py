@@ -17,13 +17,21 @@ from typing import Any, Dict
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
-from ai_enrich import build_prompt_payload, get_repo_root, load_config, merge_enrichment, passthrough_payload
+from ai_enrich import (
+    build_editorial_instruction_text,
+    build_prompt_payload,
+    build_skill_prompt_text,
+    get_repo_root,
+    load_config,
+    merge_enrichment,
+    passthrough_payload,
+)
 from content_store import write_json
 
 logger = logging.getLogger(__name__)
 
 
-def build_prompt(report_date: str, config: Dict[str, Any], payload: Dict[str, Any]) -> str:
+def build_prompt(repo_root: Path, report_date: str, config: Dict[str, Any], payload: Dict[str, Any]) -> str:
     top_papers = payload.get('top_papers', [])
     ai_settings = config.get('ai', {}) if isinstance(config, dict) else {}
     paper_limit = int(ai_settings.get('codex_paper_limit', len(top_papers) or 10))
@@ -35,9 +43,11 @@ def build_prompt(report_date: str, config: Dict[str, Any], payload: Dict[str, An
         paper_limit=paper_limit,
         max_abstract_chars=max_abstract_chars,
     )
-    return (
-        '你是一个严格的研究论文编辑。请只基于给定的论文标题、作者、摘要和评分信息，'
-        '输出一个 JSON 对象，不要输出任何额外解释。\n\n'
+    editorial_instructions = build_editorial_instruction_text(config)
+    skill_instructions = build_skill_prompt_text(repo_root, config)
+    instruction_blocks = [
+        '你是一个严格的研究论文编辑。请只基于给定的论文标题、作者、摘要和评分信息，输出一个 JSON 对象，不要输出任何额外解释。',
+        '禁止事项：不要读取仓库文件，不要运行任何命令，不要调用任何工具，不要自行搜索额外信息。你需要的规则和输入都已经在下面给出。',
         '要求：\n'
         '1. 输出语言为简体中文。\n'
         '2. 不要编造实验细节、性能数字、作者背景、代码链接。\n'
@@ -45,8 +55,15 @@ def build_prompt(report_date: str, config: Dict[str, Any], payload: Dict[str, An
         '4. JSON 结构必须匹配提供的 schema。\n'
         '5. `daily_brief.overview_zh` 要像日报编辑写的导语，不要空话。\n'
         '6. 每篇论文的 `summary_zh` 控制在 2 到 4 句。\n'
-        '7. `core_contributions`、`why_read`、`risks` 都尽量具体，避免泛泛而谈。\n\n'
-        '下面是输入数据：\n'
+        '7. `core_contributions`、`why_read`、`risks` 都尽量具体，避免泛泛而谈。',
+    ]
+    if editorial_instructions:
+        instruction_blocks.append('仓库编辑偏好：\n' + editorial_instructions)
+    if skill_instructions:
+        instruction_blocks.append('项目技能说明：\n' + skill_instructions)
+    return (
+        '\n\n'.join(instruction_blocks)
+        + '\n\n下面是输入数据：\n'
         + json.dumps(prompt_payload, ensure_ascii=False, indent=2)
     )
 
@@ -87,7 +104,7 @@ def main() -> int:
 
     report_date = payload.get('target_date') or ''
     model = os.environ.get('CODEX_MODEL', '').strip()
-    prompt = build_prompt(report_date, config, payload)
+    prompt = build_prompt(repo_root, report_date, config, payload)
     schema_path = repo_root / 'scripts' / 'codex_enrich_schema.json'
 
     with tempfile.NamedTemporaryFile(mode='w+', encoding='utf-8', suffix='.json', delete=False) as tmp:

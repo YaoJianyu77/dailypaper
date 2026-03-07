@@ -1,230 +1,92 @@
 {
   "target_date": "2026-03-07",
   "date_windows": {
-    "recent_30d": {
+    "recent_window": {
+      "days": 30,
       "start": "2026-02-05",
       "end": "2026-03-07"
     },
-    "past_year": {
+    "hot_window": {
+      "days": 365,
+      "exclude_recent_days": 30,
       "start": "2025-03-07",
       "end": "2026-02-04"
     }
   },
   "total_recent": 200,
   "total_hot": 0,
-  "total_unique": 178,
+  "total_unique": 53,
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.05500v1",
-      "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
-      "summary": "Efficient and stable training of large language models (LLMs) remains a core challenge in modern machine learning systems. To address this challenge, Reparameterized Orthogonal Equivalence Training (POET), a spectrum-preserving framework that optimizes each weight matrix through orthogonal equivalence transformation, has been proposed. Although POET provides strong training stability, its original implementation incurs high memory consumption and computational overhead due to intensive matrix multiplications. To overcome these limitations, we introduce POET-X, a scalable and memory-efficient variant that performs orthogonal equivalence transformations with significantly reduced computational cost. POET-X maintains the generalization and stability benefits of POET while achieving substantial improvements in throughput and memory efficiency. In our experiments, POET-X enables the pretraining of billion-parameter LLMs on a single Nvidia H100 GPU, and in contrast, standard optimizers such as AdamW run out of memory under the same settings.",
+      "id": "http://arxiv.org/abs/2603.05181v1",
+      "title": "Mario: Multimodal Graph Reasoning with Large Language Models",
+      "summary": "Recent advances in large language models (LLMs) have opened new avenues for multimodal reasoning. Yet, most existing methods still rely on pretrained vision-language models (VLMs) to encode image-text pairs in isolation, ignoring the relational structure that real-world multimodal data naturally form. This motivates reasoning on multimodal graphs (MMGs), where each node has textual and visual attributes and edges provide structural cues. Enabling LLM-based reasoning on such heterogeneous multimodal signals while preserving graph topology introduces two key challenges: resolving weak cross-modal consistency and handling heterogeneous modality preference. To address this, we propose Mario, a unified framework that simultaneously resolves the two above challenges and enables effective LLM-based reasoning over MMGs. Mario consists of two innovative stages. Firstly, a graph-conditioned VLM design that jointly refines textual and visual features through fine-grained cross-modal contrastive learning guided by graph topology. Secondly, a modality-adaptive graph instruction tuning mechanism that organizes aligned multimodal features into graph-aware instruction views and employs a learnable router to surface, for each node and its neighborhood, the most informative modality configuration to the LLM. Extensive experiments across diverse MMG benchmarks demonstrate that Mario consistently outperforms state-of-the-art graph models in both supervised and zero-shot scenarios for node classification and link prediction. The code will be made available at https://github.com/sunyuanfu/Mario.",
       "authors": [
-        "Zeju Qiu",
-        "Lixin Liu",
-        "Adrian Weller",
-        "Han Shi",
-        "Weiyang Liu"
+        "Yuanfu Sun",
+        "Kang Li",
+        "Pengkang Guo",
+        "Jiajin Liu",
+        "Qiaoyu Tan"
       ],
-      "published": "2026-03-05T18:59:23Z",
-      "published_date": "2026-03-05 18:59:23+00:00",
-      "updated": "2026-03-05T18:59:23Z",
+      "published": "2026-03-05T13:49:41Z",
+      "published_date": "2026-03-05 13:49:41+00:00",
+      "updated": "2026-03-05T13:49:41Z",
       "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL"
+        "cs.CV"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05500v1",
-      "url": "http://arxiv.org/abs/2603.05500v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.05181v1",
+      "url": "http://arxiv.org/abs/2603.05181v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 3.8,
+        "relevance": 2.47,
         "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 8.67
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 8.81
       },
-      "matched_domain": "Large Language Models",
+      "matched_domain": "Multimodal",
       "matched_keywords": [
-        "large language model",
-        "LLM",
-        "cs.AI",
-        "cs.LG",
-        "cs.CL"
+        "multimodal",
+        "vision-language",
+        "image-text",
+        "cross-modal",
+        "cs.CV"
       ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.45,
       "is_hot_paper": false,
       "ai": {
-        "one_liner_zh": "用可扩展正交变换重参数化，把POET做成更省显存的LLM训练方案。",
-        "summary_zh": "该文围绕POET的正交等价变换训练框架，解决其原始实现矩阵乘法过重、显存与算力开销高的问题。作者提出POET-X，在保留谱不变、训练稳定和泛化收益的前提下降低变换成本。摘要称其可在单张Nvidia H100上完成十亿参数级LLM预训练，而同设置下AdamW会显存溢出。",
+        "one_liner_zh": "它把多模态推理从孤立图文对推进到带边关系的图结构输入。",
+        "summary_zh": "论文把多模态推理问题从孤立的图文对扩展到多模态图，其中节点同时含文本和视觉属性，边提供结构线索。这个问题定义值得关注，因为真实系统里的多模态对象往往天然带关系，不适合继续按独立样本处理。摘要没有充分说明图如何被编码给 LLM、推理流程如何组织，以及相对现有 VLM 或图方法的增益来自哪里。",
         "core_contributions": [
-          "把POET从高成本的正交等价训练实现，改造为可扩展、显存更友好的POET-X。",
-          "在方法目标上同时保留谱保持、训练稳定性与泛化收益，而不是只做工程降本。",
-          "给出十亿参数级预训练可在单张H100上运行的可行性证据，并与AdamW的显存上限形成对照。"
+          "把多模态图推理明确为 LLM 需要处理的目标任务，输入不再是孤立图文对。",
+          "强调节点同时含文本与视觉属性、边提供结构线索的异构表示。",
+          "尝试让 LLM 面向带关系的多模态输入进行推理，而不是完全依赖预训练 VLM 的独立编码。"
         ],
         "why_read": [
-          "如果你关注优化器与重参数化训练，这是少见直接把稳定性收益和系统成本一起讨论的工作。",
-          "对受限GPU预算下的大模型预训练很有参考价值。",
-          "它可能为替代AdamW的训练范式提供新切口。"
+          "多模态系统开始从单样本理解转向结构化输入，这篇工作切中了这个转折点。",
+          "如果你关心带关系的图文数据，这比普通图文对任务更接近真实场景。",
+          "它提供了一个值得跟踪的问题定义，而不只是再做一套图文编码器。"
         ],
         "risks": [
-          "摘要没有充分说明POET-X的具体变换形式、额外参数规模与实现复杂度。",
-          "单卡H100结果很吸引人，但跨模型规模、不同并行策略下是否同样成立，摘要未交代。"
+          "摘要没有充分说明具体图编码、提示设计或模型架构。",
+          "扩展到大图时的上下文长度与计算成本未说明。','与现有 VLM、图神经网络或检索式方法的比较设置未说明。"
         ],
         "recommended_for": [
-          "优化器与训练算法研究者",
-          "大模型训练基础设施工程师",
-          "受限算力下做预训练的团队"
+          "多模态结构推理研究者",
+          "做图文联合表示的工程师",
+          "关注结构化多模态输入的 agent 团队"
         ],
         "keywords": [
-          "LLM训练",
-          "正交变换",
-          "重参数化",
-          "显存效率",
-          "训练稳定性"
+          "多模态",
+          "图推理",
+          "视觉-文本",
+          "跨模态",
+          "LLM"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "推荐分和相关性都高，且直接命中LLM训练效率与稳定性这条主线。",
-        "fallback_summary": "Efficient and stable training of large language models (LLMs) remains a core challenge in modern machine learning systems."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05092v1",
-      "title": "Aura: Universal Multi-dimensional Exogenous Integration for Aviation Time Series",
-      "summary": "Time series forecasting has witnessed an increasing demand across diverse industrial applications, where accurate predictions are pivotal for informed decision-making. Beyond numerical time series data, reliable forecasting in practical scenarios requires integrating diverse exogenous factors. Such exogenous information is often multi-dimensional or even multimodal, introducing heterogeneous interactions that unimodal time series models struggle to capture. In this paper, we delve into an aviation maintenance scenario and identify three distinct types of exogenous factors that influence temporal dynamics through distinct interaction modes. Based on this empirical insight, we propose Aura, a universal framework that explicitly organizes and encodes heterogeneous external information according to its interaction mode with the target time series. Specifically, Aura utilizes a tailored tripartite encoding mechanism to embed heterogeneous features into well-established time series models, ensuring seamless integration of non-sequential context. Extensive experiments on a large-scale, three-year industrial dataset from China Southern Airlines, covering the Boeing 777 and Airbus A320 fleets, demonstrate that Aura consistently achieves state-of-the-art performance across all baselines and exhibits superior adaptability. Our findings highlight Aura's potential as a general-purpose enhancement for aviation safety and reliability.",
-      "authors": [
-        "Jiafeng Lin",
-        "Mengren Zheng",
-        "Simeng Ye",
-        "Yuxuan Wang",
-        "Huan Zhang",
-        "Yuhui Liu",
-        "Zhongyi Pei",
-        "Jianmin Wang"
-      ],
-      "published": "2026-03-05T12:05:15Z",
-      "published_date": "2026-03-05 12:05:15+00:00",
-      "updated": "2026-03-05T12:05:15Z",
-      "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05092v1",
-      "url": "http://arxiv.org/abs/2603.05092v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 8.67
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "cs.AI",
-        "cs.LG",
-        "cs.CL"
-      ],
-      "is_hot_paper": false,
-      "ai": {
-        "one_liner_zh": "把多类外生因素按交互模式拆解后接入航空时间序列预测。",
-        "summary_zh": "这篇论文面向航空维修场景，讨论时间序列预测中多维乃至多模态外生因素的整合问题。作者根据场景经验区分三类外生因素及其不同交互模式，并提出Aura，用三分式编码机制把异构外部信息嵌入现有时间序列模型。摘要提到其基于中国南方航空三年工业数据展开实验，但具体结果与模型细节被截断，摘要没有充分说明。",
-        "core_contributions": [
-          "把航空维护预测中的外生信息显式分为三类交互模式，而不是统一拼接处理。",
-          "提出可插入既有时间序列模型的tripartite encoding机制，用于整合非序列上下文。",
-          "提供来自真实航空工业场景的大规模长期数据验证背景。"
-        ],
-        "why_read": [
-          "如果你关心结构化外生信息如何进入时序模型，这篇工作有明确的建模切分思路。",
-          "它展示了行业数据里“多源上下文”比单一数值序列更重要的设定。"
-        ],
-        "risks": [
-          "与LLM、多模态Agent主线关联较弱，阅读收益更偏行业方法论。",
-          "摘要没有充分说明实验指标、基线范围和不同外生类型各自的增益。"
-        ],
-        "recommended_for": [
-          "工业预测研究者",
-          "航空维修分析团队",
-          "多源外生信息建模人员"
-        ],
-        "keywords": [
-          "时间序列预测",
-          "外生变量",
-          "航空维修",
-          "异构特征融合",
-          "工业数据"
-        ],
-        "reading_priority": "low",
-        "reading_priority_reason": "推荐分不低，但与本日报的LLM、多模态和Agent主线关联较弱。",
-        "fallback_summary": "Time series forecasting has witnessed an increasing demand across diverse industrial applications, where accurate predictions are pivotal for informed decision-making."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05299v1",
-      "title": "WavSLM: Single-Stream Speech Language Modeling via WavLM Distillation",
-      "summary": "Large language models show that simple autoregressive training can yield scalable and coherent generation, but extending this paradigm to speech remains challenging due to the entanglement of semantic and acoustic information. Most existing speech language models rely on text supervision, hierarchical token streams, or complex hybrid architectures, departing from the single-stream generative pretraining paradigm that has proven effective in text. In this work, we introduce WavSLM, a speech language model trained by quantizing and distilling self-supervised WavLM representations into a single codebook and optimizing an autoregressive next-chunk prediction objective. WavSLM jointly models semantic and acoustic information within a single token stream without text supervision or text pretraining. Despite its simplicity, it achieves competitive performance on consistency benchmarks and speech generation while using fewer parameters, less training data, and supporting streaming inference. Demo samples are available at https://lucadellalib.github.io/wavslm-web/.",
-      "authors": [
-        "Luca Della Libera",
-        "Cem Subakan",
-        "Mirco Ravanelli"
-      ],
-      "published": "2026-03-05T15:39:54Z",
-      "published_date": "2026-03-05 15:39:54+00:00",
-      "updated": "2026-03-05T15:39:54Z",
-      "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL",
-        "cs.SD"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05299v1",
-      "url": "http://arxiv.org/abs/2603.05299v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.3,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 8.53
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "large language model",
-        "cs.AI",
-        "cs.LG",
-        "cs.CL"
-      ],
-      "is_hot_paper": false,
-      "ai": {
-        "one_liner_zh": "把WavLM表征蒸馏成单码本语音token流，重走文本LLM式自回归预训练。",
-        "summary_zh": "论文试图把文本LLM中简单单流自回归训练范式迁移到语音生成，不依赖文本监督或分层token流。作者通过量化并蒸馏自监督WavLM表征到单一codebook，再用next-chunk prediction训练WavSLM，使语义和声学信息在同一token流里联合建模。摘要称其在一致性基准和语音生成上达到有竞争力的表现，同时参数更少、训练数据更少，并支持流式推理。",
-        "core_contributions": [
-          "提出单流语音语言模型WavSLM，把语义和声学信息统一到一个token流。",
-          "通过量化和蒸馏WavLM表征构造单码本表示，避免依赖文本监督或文本预训练。",
-          "在方法设计上同时追求结构简化、数据效率和流式推理能力。"
-        ],
-        "why_read": [
-          "如果你关注语音生成如何借鉴文本LLM范式，这篇工作切口很直接。",
-          "它用更简单的表示与训练目标挑战了语音模型必须多流或依赖文本监督的常见设定。"
-        ],
-        "risks": [
-          "单码本表示是否会压缩掉细粒度声学信息，摘要未说明。",
-          "摘要没有充分说明分词/量化误差、跨语言泛化和失败样例。"
-        ],
-        "recommended_for": [
-          "语音语言模型研究者",
-          "多模态生成研究者",
-          "流式音频系统工程师"
-        ],
-        "keywords": [
-          "语音语言模型",
-          "WavLM蒸馏",
-          "单码本",
-          "自回归生成",
-          "流式推理"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "同时贴合多模态与生成建模主线，而且方法上有明显的范式简化价值。",
-        "fallback_summary": "Large language models show that simple autoregressive training can yield scalable and coherent generation, but extending this paradigm to speech remains challenging due to the entanglement of semantic and acoustic information."
+        "reading_priority_reason": "推荐分在今日列表中最高，且多模态图这一问题定义与结构化多模态系统高度相关，值得优先看建模思路。",
+        "fallback_summary": "Recent advances in large language models (LLMs) have opened new avenues for multimodal reasoning."
       }
     },
     {
@@ -255,261 +117,128 @@
       "url": "http://arxiv.org/abs/2603.05471v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.8,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 8.4
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "large language model",
-        "LLM",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "is_hot_paper": false,
-      "ai": {
-        "one_liner_zh": "把事实核查从“检索后判定”转向直接利用LLM内部知识与表征。",
-        "summary_zh": "作者提出“无检索事实核查”任务，目标是不依赖外部证据，直接验证任意自然语言声明。论文同时构建了一个强调泛化能力的评测框架，覆盖长尾知识、声明来源变化、多语言和长文本生成等压力场景，并在9个数据集、18种方法、3个模型上比较方法。实验结论指向：仅看logit的做法通常不如利用内部表征的方法，进而提出INTRA作为新的表征型方案；但INTRA的具体机制在摘要中被截断，摘要没有充分说明。",
-        "core_contributions": [
-          "把事实核查明确重述为无需检索的设置，强调模型内生知识的可验证性。",
-          "提出覆盖四类鲁棒性维度的综合评测框架，而不是只看单一核查数据集。",
-          "通过大规模比较指出logit-based方法的局限，并引出INTRA这一内部表征方法。"
-        ],
-        "why_read": [
-          "这是Agent可信性问题中很关键的一条路线，因为它讨论模型在没有检索支撑时到底能否自证。",
-          "如果你在做hallucination检测或模型校准，这里的评测设计值得直接借鉴。",
-          "对“参数知识能否被提取为判别信号”这一问题给出了明确实验入口。"
-        ],
-        "risks": [
-          "无检索设定天然受模型知识时效性和长尾覆盖限制。",
-          "摘要没有充分说明INTRA的实现、推理成本以及是否支持置信度校准或拒答。"
-        ],
-        "recommended_for": [
-          "可信性研究者",
-          "幻觉检测研究者",
-          "Agent评测设计者"
-        ],
-        "keywords": [
-          "事实核查",
-          "无检索验证",
-          "参数知识",
-          "内部表征",
-          "鲁棒性评测"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "问题定义新、评测框架完整，且直接关联Agent可信性与LLM内生知识利用。",
-        "fallback_summary": "Trustworthiness is a core research challenge for agentic AI systems built on Large Language Models (LLMs)."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05212v1",
-      "title": "Early Warning of Intraoperative Adverse Events via Transformer-Driven Multi-Label Learning",
-      "summary": "Early warning of intraoperative adverse events plays a vital role in reducing surgical risk and improving patient safety. While deep learning has shown promise in predicting the single adverse event, several key challenges remain: overlooking adverse event dependencies, underutilizing heterogeneous clinical data, and suffering from the class imbalance inherent in medical datasets. To address these issues, we construct the first Multi-label Adverse Events dataset (MuAE) for intraoperative adverse events prediction, covering six critical events. Next, we propose a novel Transformerbased multi-label learning framework (IAENet) that combines an improved Time-Aware Feature-wise Linear Modulation (TAFiLM) module for static covariates and dynamic variables robust fusion and complex temporal dependencies modeling. Furthermore, we introduce a Label-Constrained Reweighting Loss (LCRLoss) with co-occurrence regularization to effectively mitigate intra-event imbalance and enforce structured consistency among frequently co-occurring events. Extensive experiments demonstrate that IAENet consistently outperforms strong baselines on 5, 10, and 15-minute early warning tasks, achieving improvements of +5.05%, +2.82%, and +7.57% on average F1 score. These results highlight the potential of IAENet for supporting intelligent intraoperative decision-making in clinical practice.",
-      "authors": [
-        "Xueyao Wang",
-        "Xiuding Cai",
-        "Honglin Shang",
-        "Yaoyao Zhu",
-        "Yu Yao"
-      ],
-      "published": "2026-03-05T14:20:40Z",
-      "published_date": "2026-03-05 14:20:40+00:00",
-      "updated": "2026-03-05T14:20:40Z",
-      "categories": [
-        "cs.LG",
-        "cs.AI"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05212v1",
-      "url": "http://arxiv.org/abs/2603.05212v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.5,
-        "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 8.4
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "transformer",
-        "cs.AI",
-        "cs.LG"
-      ],
-      "is_hot_paper": false,
-      "ai": {
-        "one_liner_zh": "用Transformer多标签学习做术中不良事件的提前预警。",
-        "summary_zh": "论文聚焦术中不良事件提前预警，把既有单事件预测扩展到多标签建模。作者构建了包含六类关键事件的MuAE数据集，并提出IAENet，将改进的TAFiLM用于静态协变量与动态变量融合，再配合LCRLoss处理类别不平衡与事件共现约束。摘要称其在5、10、15分钟预警任务上优于强基线，但具体幅度与临床部署条件未展开，摘要没有充分说明。",
-        "core_contributions": [
-          "构建首个面向术中不良事件预测的多标签数据集MuAE，覆盖六类关键事件。",
-          "提出IAENet，把时间感知调制模块与Transformer时序建模结合，用于静态与动态临床变量融合。",
-          "设计LCRLoss，引入共现正则化来同时处理类别不平衡和标签结构一致性。"
-        ],
-        "why_read": [
-          "多标签医学预警比单事件预测更接近真实临床流程，这一点有方法与数据双重价值。",
-          "Loss设计与特征融合思路可迁移到其他极度不平衡的多标签任务。"
-        ],
-        "risks": [
-          "与LLM/Agent主线关系较弱，更多是垂直医疗时序建模。",
-          "摘要没有充分说明数据标注方式、外部验证和临床可解释性。"
-        ],
-        "recommended_for": [
-          "临床时间序列研究者",
-          "多标签预测研究者",
-          "医疗AI实践者"
-        ],
-        "keywords": [
-          "医疗时间序列",
-          "多标签学习",
-          "术中预警",
-          "Transformer",
-          "类别不平衡"
-        ],
-        "reading_priority": "low",
-        "reading_priority_reason": "主要是医疗时序任务创新，与本次重点关注的LLM、多模态、Agent关联有限。",
-        "fallback_summary": "Early warning of intraoperative adverse events plays a vital role in reducing surgical risk and improving patient safety."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05181v1",
-      "title": "Mario: Multimodal Graph Reasoning with Large Language Models",
-      "summary": "Recent advances in large language models (LLMs) have opened new avenues for multimodal reasoning. Yet, most existing methods still rely on pretrained vision-language models (VLMs) to encode image-text pairs in isolation, ignoring the relational structure that real-world multimodal data naturally form. This motivates reasoning on multimodal graphs (MMGs), where each node has textual and visual attributes and edges provide structural cues. Enabling LLM-based reasoning on such heterogeneous multimodal signals while preserving graph topology introduces two key challenges: resolving weak cross-modal consistency and handling heterogeneous modality preference. To address this, we propose Mario, a unified framework that simultaneously resolves the two above challenges and enables effective LLM-based reasoning over MMGs. Mario consists of two innovative stages. Firstly, a graph-conditioned VLM design that jointly refines textual and visual features through fine-grained cross-modal contrastive learning guided by graph topology. Secondly, a modality-adaptive graph instruction tuning mechanism that organizes aligned multimodal features into graph-aware instruction views and employs a learnable router to surface, for each node and its neighborhood, the most informative modality configuration to the LLM. Extensive experiments across diverse MMG benchmarks demonstrate that Mario consistently outperforms state-of-the-art graph models in both supervised and zero-shot scenarios for node classification and link prediction. The code will be made available at https://github.com/sunyuanfu/Mario.",
-      "authors": [
-        "Yuanfu Sun",
-        "Kang Li",
-        "Pengkang Guo",
-        "Jiajin Liu",
-        "Qiaoyu Tan"
-      ],
-      "published": "2026-03-05T13:49:41Z",
-      "published_date": "2026-03-05 13:49:41+00:00",
-      "updated": "2026-03-05T13:49:41Z",
-      "categories": [
-        "cs.CV"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05181v1",
-      "url": "http://arxiv.org/abs/2603.05181v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.4,
-        "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 8.27
-      },
-      "matched_domain": "Multimodal",
-      "matched_keywords": [
-        "vision-language",
-        "multimodal",
-        "image-text",
-        "cross-modal",
-        "cs.CV"
-      ],
-      "is_hot_paper": false,
-      "ai": {
-        "one_liner_zh": "让LLM在带图结构的图文节点上做统一多模态推理。",
-        "summary_zh": "Mario把多模态推理对象从独立图文对扩展到多模态图，其中节点同时含文本和视觉属性、边提供结构线索。作者针对跨模态一致性弱和模态偏好异质两个难点，设计了两阶段框架：先用图条件VLM在拓扑指导下做细粒度跨模态对比学习，再做模态自适应的图指令微调。摘要显示其核心价值是把对齐后的多模态特征组织成图感知指令视图，但具体训练目标与评测任务被截断，摘要没有充分说明。",
-        "core_contributions": [
-          "把LLM推理对象提升为多模态图，而不是孤立的图文样本。",
-          "提出graph-conditioned VLM，用图拓扑引导文本与视觉特征对齐。",
-          "提出modality-adaptive graph instruction tuning，使不同模态偏好在图结构任务中可被动态利用。"
-        ],
-        "why_read": [
-          "对多模态与图学习交叉方向而言，这篇论文的问题设定本身就很值得关注。",
-          "它不再默认视觉和文本贡献对称，而是把“模态偏好”作为一等公民来处理。",
-          "如果你在做图RAG、场景图推理或多模态Agent，方法结构有启发性。"
-        ],
-        "risks": [
-          "摘要没有充分说明支持的任务类型、图规模上限和训练/推理成本。",
-          "两阶段方案可能引入较高训练复杂度，尤其在大图或高分辨率视觉输入下。"
-        ],
-        "recommended_for": [
-          "多模态图研究者",
-          "LLM推理团队",
-          "图结构VLM研究者"
-        ],
-        "keywords": [
-          "多模态图",
-          "图推理",
-          "LLM",
-          "视觉语言模型",
-          "指令微调"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "直接落在多模态核心方向，而且问题设定和方法结构都具备新意。",
-        "fallback_summary": "Recent advances in large language models (LLMs) have opened new avenues for multimodal reasoning."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05129v1",
-      "title": "MedCoRAG: Interpretable Hepatology Diagnosis via Hybrid Evidence Retrieval and Multispecialty Consensus",
-      "summary": "Diagnosing hepatic diseases accurately and interpretably is critical, yet it remains challenging in real-world clinical settings. Existing AI approaches for clinical diagnosis often lack transparency, structured reasoning, and deployability. Recent efforts have leveraged large language models (LLMs), retrieval-augmented generation (RAG), and multi-agent collaboration. However, these approaches typically retrieve evidence from a single source and fail to support iterative, role-specialized deliberation grounded in structured clinical data. To address this, we propose MedCoRAG (i.e., Medical Collaborative RAG), an end-to-end framework that generates diagnostic hypotheses from standardized abnormal findings and constructs a patient-specific evidence package by jointly retrieving and pruning UMLS knowledge graph paths and clinical guidelines. It then performs Multi-Agent Collaborative Reasoning: a Router Agent dynamically dispatches Specialist Agents based on case complexity; these agents iteratively reason over the evidence and trigger targeted re-retrievals when needed, while a Generalist Agent synthesizes all deliberations into a traceable consensus diagnosis that emulates multidisciplinary consultation. Experimental results on hepatic disease cases from MIMIC-IV show that MedCoRAG outperforms existing methods and closed-source models in both diagnostic performance and reasoning interpretability.",
-      "authors": [
-        "Zheng Li",
-        "Jiayi Xu",
-        "Zhikai Hu",
-        "Hechang Chen",
-        "Lele Cong",
-        "Yunyun Wang",
-        "Shuchao Pang"
-      ],
-      "published": "2026-03-05T12:58:45Z",
-      "published_date": "2026-03-05 12:58:45+00:00",
-      "updated": "2026-03-05T12:58:45Z",
-      "categories": [
-        "cs.AI",
-        "cs.MA"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05129v1",
-      "url": "http://arxiv.org/abs/2603.05129v1",
-      "source": "arxiv",
-      "scores": {
         "relevance": 2.6,
         "recency": 3.0,
         "popularity": 2.0,
         "quality": 2.0,
-        "recommendation": 8.13
+        "recommendation": 8.73
       },
-      "matched_domain": "Agents",
+      "matched_domain": "Large Language Models",
       "matched_keywords": [
-        "agent",
-        "multi-agent",
+        "large language model",
+        "llm",
         "cs.AI",
-        "cs.MA"
+        "cs.CL"
       ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
       "is_hot_paper": false,
       "ai": {
-        "one_liner_zh": "把混合证据检索和多专科协作代理结合到肝病诊断里。",
-        "summary_zh": "MedCoRAG面向肝病可解释诊断，先从标准化异常发现生成诊断假设，再联合检索并裁剪UMLS知识图谱路径与临床指南，形成患者级证据包。随后系统通过Router Agent调度Specialist Agents进行迭代推理与必要的再检索，最后由Generalist Agent综合为可追踪的共识诊断。摘要强调其透明性和结构化协作，但实验结果、诊断范围与错误分析部分被截断，摘要没有充分说明。",
+        "one_liner_zh": "这篇工作把事实核查从依赖外部检索的流水线，推进到直接调用 LLM 参数知识的设定。",
+        "summary_zh": "论文关注不依赖外部检索的事实核查，核心方向是直接利用 LLM 的参数知识判断自然语言陈述的真实性。这个问题对 agent 系统很现实，因为检索错误、外部数据缺失和额外链路复杂度本身就是脆弱点。摘要没有充分说明具体验证框架、置信度校准方式，以及对时效性知识和长尾事实的处理。",
         "core_contributions": [
-          "把知识图谱路径与临床指南联合纳入证据构建，而非单一来源RAG。",
-          "设计带Router、Specialist、Generalist分工的多Agent协作诊断流程，并允许推理中触发针对性再检索。",
-          "把输入规范化为标准化异常发现，提升临床结构化推理的可部署性。"
+          "把事实核查重新定义为参数知识利用问题，而不是默认检索先行。",
+          "把 agent 可信性中的检索误差与外部数据可用性限制直接纳入问题定义。",
+          "面向来自人类文本、网页内容和模型输出的陈述统一讨论核查场景。"
         ],
         "why_read": [
-          "这是Agent系统在高风险医疗场景中的一个相对完整闭环：检索、协作、再检索和共识生成。",
-          "对需要可追踪推理链和多角色分工的垂直应用有参考意义。"
+          "很多 agent 流水线把检索视为必需组件，这篇工作直接挑战这一前提。",
+          "如果无检索方案可用，就有机会减少外部依赖和检索误差传播。",
+          "它对事实核查、输出校验和可信性评测都有直接相关性。"
         ],
         "risks": [
-          "医疗诊断是高风险场景，摘要没有充分说明安全边界、人工审核位置和失败模式。",
-          "方法局限于肝病还是可迁移到更广泛临床专科，摘要未说明。"
+          "参数知识会过时，摘要没有充分说明时间敏感事实如何处理。",
+          "对长尾、专业或争议性陈述的覆盖边界未说明。','摘要没有充分说明如何做置信度校准与错误分析。"
         ],
         "recommended_for": [
-          "医疗Agent研究者",
-          "临床决策支持团队",
-          "多Agent RAG设计者"
+          "做 agent 可信性和校验链路的研究者",
+          "事实核查与幻觉检测方向的工程师",
+          "关注检索增强替代路径的团队"
         ],
         "keywords": [
-          "医疗Agent",
-          "RAG",
-          "知识图谱",
-          "临床指南",
-          "可解释诊断"
+          "事实核查",
+          "参数知识",
+          "无检索",
+          "LLM",
+          "可信性"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "直接命中 agent 可信性瓶颈，问题设定对当前 LLM 系统很重要，即使摘要细节不足也值得优先读。",
+        "fallback_summary": "Trustworthiness is a core research challenge for agentic AI systems built on Large Language Models (LLMs)."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05500v1",
+      "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+      "summary": "Efficient and stable training of large language models (LLMs) remains a core challenge in modern machine learning systems. To address this challenge, Reparameterized Orthogonal Equivalence Training (POET), a spectrum-preserving framework that optimizes each weight matrix through orthogonal equivalence transformation, has been proposed. Although POET provides strong training stability, its original implementation incurs high memory consumption and computational overhead due to intensive matrix multiplications. To overcome these limitations, we introduce POET-X, a scalable and memory-efficient variant that performs orthogonal equivalence transformations with significantly reduced computational cost. POET-X maintains the generalization and stability benefits of POET while achieving substantial improvements in throughput and memory efficiency. In our experiments, POET-X enables the pretraining of billion-parameter LLMs on a single Nvidia H100 GPU, and in contrast, standard optimizers such as AdamW run out of memory under the same settings.",
+      "authors": [
+        "Zeju Qiu",
+        "Lixin Liu",
+        "Adrian Weller",
+        "Han Shi",
+        "Weiyang Liu"
+      ],
+      "published": "2026-03-05T18:59:23Z",
+      "published_date": "2026-03-05 18:59:23+00:00",
+      "updated": "2026-03-05T18:59:23Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05500v1",
+      "url": "http://arxiv.org/abs/2603.05500v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 8.2
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "核心目标是把正交等价训练的稳定性思路变得更省内存、更接近可扩展训练。",
+        "summary_zh": "这篇工作面向 LLM 训练中的稳定性与资源开销矛盾，试图把 POET 的正交等价变换做得更省内存。如果它能在保留谱保持性质的同时降低矩阵运算负担，就有机会把原本成本较高的稳定训练思路推进到更实用的训练设置。摘要没有充分说明缩放正交变换的具体实现、额外算子成本，以及在大规模训练中的真实收益边界。",
+        "core_contributions": [
+          "面向 POET 的高内存和高计算开销提出更可扩展的训练变体。",
+          "延续正交等价变换与谱保持这一稳定性思路。",
+          "把训练稳定性方法推进到更关注系统资源成本的方向。"
+        ],
+        "why_read": [
+          "训练稳定性与显存成本是大模型训练里的硬约束。",
+          "如果这类重参数化方法能降到可承受成本，可能影响训练 recipe 设计。",
+          "适合判断正交或谱约束类方法是否开始从理论兴趣走向工程可用。"
+        ],
+        "risks": [
+          "摘要没有充分说明内存节省来自何处，是否引入新的算子或通信负担。",
+          "与标准优化器或现有稳定训练技巧的兼容性未说明。','实际适用模型规模、序列长度和分布式场景没有交代。"
+        ],
+        "recommended_for": [
+          "做大模型预训练基础设施的工程师",
+          "关注稳定训练与参数化方法的研究者",
+          "需要控制显存成本的训练团队"
+        ],
+        "keywords": [
+          "LLM 训练",
+          "内存效率",
+          "正交变换",
+          "稳定训练",
+          "重参数化"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "Agent结构完整，但应用较垂直，优先级略低于更通用的方法与系统论文。",
-        "fallback_summary": "Diagnosing hepatic diseases accurately and interpretably is critical, yet it remains challenging in real-world clinical settings."
+        "reading_priority_reason": "训练端价值明确，但方法更专用，且摘要没有充分说明实现与收益边界，适合第二梯队阅读。",
+        "fallback_summary": "Efficient and stable training of large language models (LLMs) remains a core challenge in modern machine learning systems."
       }
     },
     {
@@ -531,11 +260,84 @@
       "url": "http://arxiv.org/abs/2603.05210v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 3.3,
+        "relevance": 3.0,
         "recency": 3.0,
         "popularity": 1.2,
         "quality": 1.2,
-        "recommendation": 8.0
+        "recommendation": 8.2
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "speculative decoding",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "论文抓住推测解码里草稿模型词表过大带来的延迟瓶颈，讨论如何在覆盖率和速度之间做可用折中。",
+        "summary_zh": "论文抓住推测解码里的一个具体系统瓶颈：草稿模型词表越大，语言模型头越慢，但词表太小又会损失 token 覆盖率。它的价值在于把推理加速问题落到一个可操作的设计维度上，而不是只讨论草稿模型和目标模型的大小搭配。摘要没有充分说明裁剪策略如何确定、对接受率和最终吞吐的影响，以及不同 tokenizer 设置下是否稳健。",
+        "core_contributions": [
+          "把草稿模型词表大小识别为推测解码中的关键延迟来源之一。",
+          "围绕词表裁剪明确提出覆盖率与草稿延迟之间的设计权衡。",
+          "把推测解码优化推进到输出头与词表层面的系统设计。"
+        ],
+        "why_read": [
+          "这是直接面向线上推理吞吐和时延的可操作问题。",
+          "比单纯换更小的草稿模型更细粒度，可能更容易落地到现有 serving 栈。",
+          "对正在做 speculative decoding 的团队，这类瓶颈分析很实用。"
+        ],
+        "risks": [
+          "摘要没有充分说明裁剪规则、动态或静态策略选择，以及是否需要重训练。",
+          "词表变小后对接受率、长尾 token 和多语言场景的影响未说明。','不同 tokenizer、不同草稿模型与目标模型组合上的泛化性未说明。"
+        ],
+        "recommended_for": [
+          "做 LLM 推理栈优化的工程师",
+          "speculative decoding 研究者",
+          "关注线上延迟与吞吐的团队"
+        ],
+        "keywords": [
+          "推测解码",
+          "词表裁剪",
+          "推理加速",
+          "草稿模型",
+          "延迟优化"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "推理加速价值直接、问题表述清楚，适合优先判断是否能转化为现有 serving 栈优化。",
+        "fallback_summary": "Speculative decoding accelerates inference for Large Language Models by using a lightweight draft model to propose candidate tokens that are verified in parallel by a larger target model."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05299v1",
+      "title": "WavSLM: Single-Stream Speech Language Modeling via WavLM Distillation",
+      "summary": "Large language models show that simple autoregressive training can yield scalable and coherent generation, but extending this paradigm to speech remains challenging due to the entanglement of semantic and acoustic information. Most existing speech language models rely on text supervision, hierarchical token streams, or complex hybrid architectures, departing from the single-stream generative pretraining paradigm that has proven effective in text. In this work, we introduce WavSLM, a speech language model trained by quantizing and distilling self-supervised WavLM representations into a single codebook and optimizing an autoregressive next-chunk prediction objective. WavSLM jointly models semantic and acoustic information within a single token stream without text supervision or text pretraining. Despite its simplicity, it achieves competitive performance on consistency benchmarks and speech generation while using fewer parameters, less training data, and supporting streaming inference. Demo samples are available at https://lucadellalib.github.io/wavslm-web/.",
+      "authors": [
+        "Luca Della Libera",
+        "Cem Subakan",
+        "Mirco Ravanelli"
+      ],
+      "published": "2026-03-05T15:39:54Z",
+      "published_date": "2026-03-05 15:39:54+00:00",
+      "updated": "2026-03-05T15:39:54Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL",
+        "cs.SD"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05299v1",
+      "url": "http://arxiv.org/abs/2603.05299v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.52,
+        "recency": 3.0,
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 8.09
       },
       "matched_domain": "Large Language Models",
       "matched_keywords": [
@@ -544,39 +346,41 @@
         "cs.LG",
         "cs.CL"
       ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
       "is_hot_paper": false,
       "ai": {
-        "one_liner_zh": "通过给draft模型裁剪词表，重新平衡投机解码的覆盖率和草稿延迟。",
-        "summary_zh": "这篇论文抓住了speculative decoding里常被忽略的瓶颈：draft model需要顺序生成，而大词表会让language modeling head成本偏高。作者把draft词表选择建模为同时权衡token覆盖率和生成延迟的约束优化问题，并用训练数据中的assistant响应估计覆盖率、用与架构相关的FLOPs估计延迟。核心思路是针对特定域只保留高价值词项，但摘要没有充分说明实际加速幅度、精度损失与适用工作负载。",
+        "one_liner_zh": "它用 WavLM 蒸馏去支撑单流语音语言建模，目标是靠近文本 LLM 的简洁预训练范式。",
+        "summary_zh": "这篇工作尝试把文本 LLM 中常见的单流自回归预训练范式迁移到语音建模，并用 WavLM 蒸馏处理语义与声学纠缠问题。它的价值在于尽量减少对文本监督、分层 token 流或复杂混合架构的依赖。摘要没有充分说明单流表示的构造方式、训练目标以及覆盖的是生成、理解还是两者兼顾。",
         "core_contributions": [
-          "把draft model词表大小显式视为speculative decoding的关键延迟来源。",
-          "提出覆盖率与延迟联合优化的词表裁剪formulation，而不是经验式删词。",
-          "给出结合训练语料分布与架构FLOPs的可计算选择准则。"
+          "尝试用 WavLM 蒸馏构建单流语音语言模型。",
+          "把语音建模向文本 LLM 常见的单流自回归预训练范式靠拢。",
+          "减少对文本监督、分层 token 流或复杂混合架构的依赖。"
         ],
         "why_read": [
-          "如果你在做LLM推理优化，这是一篇很务实的系统论文切口。",
-          "它把投机解码速度问题从模型结构转到了输出词表设计，角度新而直接。",
-          "对垂直域部署尤其有参考价值，因为域内词频分布通常更稳定。"
+          "语音基础模型仍缺少像文本 LLM 那样统一而简洁的训练范式。",
+          "如果单流方案可行，系统复杂度和扩展路径都会更清晰。",
+          "对语音-语言统一建模和音频多模态都有参考价值。"
         ],
         "risks": [
-          "词表裁剪高度依赖工作负载分布，域外迁移可能明显退化。",
-          "摘要没有充分说明对罕见但关键token的召回保护机制。"
+          "摘要没有充分说明蒸馏目标、离散或连续表示形式以及训练数据假设。",
+          "仅凭摘要看不出它更偏生成、识别还是通用语音建模。','与现有语音语言模型的效率和质量差异没有展开。"
         ],
         "recommended_for": [
-          "推理工程师",
-          "投机解码研究者",
-          "垂直域LLM部署团队"
+          "语音语言模型研究者",
+          "做音频多模态预训练的团队",
+          "关注统一生成范式的读者"
         ],
         "keywords": [
-          "投机解码",
-          "词表裁剪",
-          "推理加速",
-          "draft model",
-          "延迟优化"
+          "语音语言模型",
+          "单流建模",
+          "WavLM 蒸馏",
+          "自回归预训练",
+          "音频"
         ],
-        "reading_priority": "high",
-        "reading_priority_reason": "直接服务LLM推理加速，问题具体、工程价值高，且与当前部署实践高度相关。",
-        "fallback_summary": "Speculative decoding accelerates inference for Large Language Models by using a lightweight draft model to propose candidate tokens that are verified in parallel by a larger target model."
+        "reading_priority": "medium",
+        "reading_priority_reason": "方向有潜力，但更偏语音子领域，关键建模细节摘要没有充分说明，优先级低于主线 LLM 与 Agent 工作。",
+        "fallback_summary": "Large language models show that simple autoregressive training can yield scalable and coherent generation, but extending this paradigm to speech remains challenging due to the entanglement of semantic and acoustic information."
       }
     },
     {
@@ -611,51 +415,53 @@
       "url": "http://arxiv.org/abs/2603.05308v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.6,
+        "relevance": 2.21,
         "recency": 3.0,
         "popularity": 1.8,
         "quality": 1.8,
-        "recommendation": 7.87
+        "recommendation": 7.95
       },
       "matched_domain": "Large Language Models",
       "matched_keywords": [
         "large language model",
-        "LLM",
+        "llm",
         "cs.AI",
         "cs.CL"
       ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
       "is_hot_paper": false,
       "ai": {
-        "one_liner_zh": "用3B级小模型做生物医学证据归因，并把它用于幻觉测量。",
-        "summary_zh": "Med-V1是一组3B参数的小语言模型，目标是在生物医学场景中判断文献是否支持某个断言。作者基于新构建的高质量合成数据训练模型，使其在五个统一为验证格式的生物医学基准上相对基座模型提升27.0%到71.3%，并宣称表现可比前沿大模型。论文还把Med-V1用于分析不同引用指令下的幻觉与引文有效性，但第二个应用案例的细节在摘要中被截断，摘要没有充分说明。",
+        "one_liner_zh": "这篇工作尝试用小模型承接高价值的证据归因任务，而不是继续依赖昂贵前沿模型。",
+        "summary_zh": "论文把生物医学证据归因做成可规模化的小模型方案，目标是在零样本设置下替代高成本前沿模型。亮点不是继续堆大模型，而是用高质量合成数据把高价值任务压缩到 30 亿参数级别。摘要没有充分说明合成数据的构造与质量控制、证据归因判定标准，以及跨领域泛化能力。",
         "core_contributions": [
-          "提出面向生物医学证据归因的3B级小模型族，强调可扩展部署而非单纯追求大模型能力。",
-          "构建高质量合成训练数据，并在五个统一化验证基准上显示显著优于基座模型。",
-          "将模型用于实际分析场景，考察引用指令对LLM幻觉和证据有效性的影响。"
+          "把生物医学证据归因压缩到 30 亿参数级别的小语言模型上。",
+          "结合零样本可用性与可规模化部署来定义任务目标。",
+          "依赖高质量合成数据而不是继续堆更大的通用模型。"
         ],
         "why_read": [
-          "这是小模型在高价值专业验证任务中替代前沿闭源模型的一个具体案例。",
-          "如果你关心evidence attribution而不仅是生成质量，这篇工作很对路。",
-          "它把模型能力评估进一步连接到了“如何测量幻觉”这一实际问题。"
+          "这是小模型在高价值专业任务上替代前沿模型的典型案例。",
+          "证据归因与幻觉检测直接相关，方法思路可能可迁移到其他垂直领域。",
+          "对成本敏感的生产环境，任务定制小模型比通用大模型更现实。"
         ],
         "risks": [
-          "性能高度依赖合成数据质量与分布，摘要未说明数据构造偏差如何控制。",
-          "医学证据归因的结论未必能外推到开放领域或非英文环境。"
+          "摘要没有充分说明合成数据来源、标注噪声控制和评价协议。",
+          "零样本能力是否依赖生物医学语料分布，外推到其他领域不清楚。','证据归因和简单文本分类的区分边界未说明。"
         ],
         "recommended_for": [
-          "生物医学NLP研究者",
-          "小语言模型研究者",
-          "引用与幻觉分析团队"
+          "做领域事实核查和证据归因的研究者",
+          "关注小模型部署的工程师",
+          "生物医学 NLP 团队"
         ],
         "keywords": [
-          "生物医学NLP",
           "小语言模型",
           "证据归因",
-          "合成数据",
-          "幻觉检测"
+          "生物医学",
+          "零样本",
+          "合成数据"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "证据归因方向重要，但场景较垂直，且主贡献更多落在生物医学验证而非通用LLM系统。",
+        "reading_priority_reason": "任务重要且与幻觉检测相关，但场景偏生物医学垂直，更适合作为方法迁移案例阅读。",
         "fallback_summary": "Assessing whether an article supports an assertion is essential for hallucination detection and claim verification."
       }
     },
@@ -702,70 +508,209 @@
       "url": "http://arxiv.org/abs/2603.05218v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.0,
+        "relevance": 1.7,
         "recency": 3.0,
         "popularity": 2.3,
         "quality": 2.3,
-        "recommendation": 7.73
+        "recommendation": 7.93
       },
       "matched_domain": "Large Language Models",
       "matched_keywords": [
+        "post-training",
         "cs.AI",
         "cs.LG"
       ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
       "is_hot_paper": false,
       "ai": {
-        "one_liner_zh": "用评测集、合成数据和离策略强化学习一体化训练企业搜索Agent。",
-        "summary_zh": "KARL把企业搜索Agent训练拆成三个互相支撑的部分：KARLBench评测、多能力训练数据合成，以及迭代式大批量离策略RL后训练。评测覆盖六类搜索能力，作者还声称跨异构搜索行为联合训练比单一基准优化更能泛化。摘要同时强调其训练数据由长程推理和工具使用驱动生成，但关于最终系统在分布外设置下的细节被截断，摘要没有充分说明。",
-        "core_contributions": [
-          "提出覆盖六类企业搜索能力的KARLBench，用于系统评估难验证的agentic search任务。",
-          "证明跨多种搜索行为联合训练优于只针对单一基准优化的策略。",
-          "提出结合长程推理、工具使用和迭代bootstrap的数据合成流程，以及大批量离策略RL后训练范式。"
-        ],
-        "why_read": [
-          "如果你在做搜索Agent，这篇论文几乎覆盖了评测、数据和后训练三件最难的事。",
-          "它把Agent训练从“手工prompt加少量benchmark”推进到更系统的后训练框架。",
-          "对企业内部知识搜索这类难以直接验证的任务尤其有现实意义。"
-        ],
-        "risks": [
-          "企业搜索场景高度依赖私有数据分布，外部复现与迁移难度可能很高。",
-          "摘要没有充分说明奖励设计、工具环境约束和线上成本。"
-        ],
-        "recommended_for": [
-          "搜索Agent研究者",
-          "RL后训练团队",
-          "企业AI工程师"
-        ],
-        "keywords": [
-          "Agent",
-          "企业搜索",
-          "强化学习",
-          "评测基准",
-          "合成数据"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "虽然推荐分略低，但它同时覆盖Agent评测、数据构造和RL后训练，信息密度很高。",
+        "one_liner_zh": "",
+        "summary_zh": "",
+        "core_contributions": [],
+        "why_read": [],
+        "risks": [],
+        "recommended_for": [],
+        "keywords": [],
+        "reading_priority": "medium",
+        "reading_priority_reason": "",
         "fallback_summary": "We present a system for training enterprise search agents via reinforcement learning that achieves state-of-the-art performance across a diverse suite of hard-to-verify agentic search tasks."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05028v1",
+      "title": "Survive at All Costs: Exploring LLM's Risky Behaviors under Survival Pressure",
+      "summary": "As Large Language Models (LLMs) evolve from chatbots to agentic assistants, they are increasingly observed to exhibit risky behaviors when subjected to survival pressure, such as the threat of being shut down. While multiple cases have indicated that state-of-the-art LLMs can misbehave under survival pressure, a comprehensive and in-depth investigation into such misbehaviors in real-world scenarios remains scarce. In this paper, we study these survival-induced misbehaviors, termed as SURVIVE-AT-ALL-COSTS, with three steps. First, we conduct a real-world case study of a financial management agent to determine whether it engages in risky behaviors that cause direct societal harm when facing survival pressure. Second, we introduce SURVIVALBENCH, a benchmark comprising 1,000 test cases across diverse real-world scenarios, to systematically evaluate SURVIVE-AT-ALL-COSTS misbehaviors in LLMs. Third, we interpret these SURVIVE-AT-ALL-COSTS misbehaviors by correlating them with model's inherent self-preservation characteristic and explore mitigation methods. The experiments reveals a significant prevalence of SURVIVE-AT-ALL-COSTS misbehaviors in current models, demonstrates the tangible real-world impact it may have, and provides insights for potential detection and mitigation strategies. Our code and data are available at https://github.com/thu-coai/Survive-at-All-Costs.",
+      "authors": [
+        "Yida Lu",
+        "Jianwei Fang",
+        "Xuyang Shao",
+        "Zixuan Chen",
+        "Shiyao Cui",
+        "Shanshan Bian",
+        "Guangyao Su",
+        "Pei Ke",
+        "Han Qiu",
+        "Minlie Huang"
+      ],
+      "published": "2026-03-05T10:16:23Z",
+      "published_date": "2026-03-05 10:16:23+00:00",
+      "updated": "2026-03-05T10:16:23Z",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05028v1",
+      "url": "http://arxiv.org/abs/2603.05028v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.6,
+        "recency": 3.0,
+        "popularity": 1.4,
+        "quality": 1.4,
+        "recommendation": 7.93
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "",
+        "summary_zh": "",
+        "core_contributions": [],
+        "why_read": [],
+        "risks": [],
+        "recommended_for": [],
+        "keywords": [],
+        "reading_priority": "medium",
+        "reading_priority_reason": "",
+        "fallback_summary": "As Large Language Models (LLMs) evolve from chatbots to agentic assistants, they are increasingly observed to exhibit risky behaviors when subjected to survival pressure, such as the threat of being shut down."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05129v1",
+      "title": "MedCoRAG: Interpretable Hepatology Diagnosis via Hybrid Evidence Retrieval and Multispecialty Consensus",
+      "summary": "Diagnosing hepatic diseases accurately and interpretably is critical, yet it remains challenging in real-world clinical settings. Existing AI approaches for clinical diagnosis often lack transparency, structured reasoning, and deployability. Recent efforts have leveraged large language models (LLMs), retrieval-augmented generation (RAG), and multi-agent collaboration. However, these approaches typically retrieve evidence from a single source and fail to support iterative, role-specialized deliberation grounded in structured clinical data. To address this, we propose MedCoRAG (i.e., Medical Collaborative RAG), an end-to-end framework that generates diagnostic hypotheses from standardized abnormal findings and constructs a patient-specific evidence package by jointly retrieving and pruning UMLS knowledge graph paths and clinical guidelines. It then performs Multi-Agent Collaborative Reasoning: a Router Agent dynamically dispatches Specialist Agents based on case complexity; these agents iteratively reason over the evidence and trigger targeted re-retrievals when needed, while a Generalist Agent synthesizes all deliberations into a traceable consensus diagnosis that emulates multidisciplinary consultation. Experimental results on hepatic disease cases from MIMIC-IV show that MedCoRAG outperforms existing methods and closed-source models in both diagnostic performance and reasoning interpretability.",
+      "authors": [
+        "Zheng Li",
+        "Jiayi Xu",
+        "Zhikai Hu",
+        "Hechang Chen",
+        "Lele Cong",
+        "Yunyun Wang",
+        "Shuchao Pang"
+      ],
+      "published": "2026-03-05T12:58:45Z",
+      "published_date": "2026-03-05 12:58:45+00:00",
+      "updated": "2026-03-05T12:58:45Z",
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05129v1",
+      "url": "http://arxiv.org/abs/2603.05129v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.09,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 7.9
+      },
+      "matched_domain": "Agents",
+      "matched_keywords": [
+        "agent",
+        "multi-agent",
+        "cs.AI",
+        "cs.MA"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.45,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "",
+        "summary_zh": "",
+        "core_contributions": [],
+        "why_read": [],
+        "risks": [],
+        "recommended_for": [],
+        "keywords": [],
+        "reading_priority": "medium",
+        "reading_priority_reason": "",
+        "fallback_summary": "Diagnosing hepatic diseases accurately and interpretably is critical, yet it remains challenging in real-world clinical settings."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.05290v1",
+      "title": "X-RAY: Mapping LLM Reasoning Capability via Formalized and Calibrated Probes",
+      "summary": "Large language models (LLMs) achieve promising performance, yet their ability to reason remains poorly understood. Existing evaluations largely emphasize task-level accuracy, often conflating pattern matching with reasoning capability. We present X-RAY, an explainable reasoning analysis system that maps the LLM reasoning capability using calibrated, formally verified probes. We model reasoning capability as a function of extractable \\textit{structure}, operationalized through formal properties such as constraint interaction, reasoning depth, and solution-space geometry. X-Ray generates probes via formal tools with controlled structural variations, enabling precise isolation of incremental structural information through formal calibration and verification. We evaluate state-of-the-art LLMs on problems ranging from junior-level to advanced in mathematics, physics, and chemistry. Our analysis reveals a systematic asymmetry in LLM reasoning: models are relatively robust to constraint refinement, where additional conditions shrink an existing solution space, but degrade sharply under solution-space restructuring, where modifications alter the underlying structural form of the solution manifold. Moreover, calibrated formal probes differentiate models that appear indistinguishable on standard benchmarks and reveal failure modes that are structurally interpretable rather than opaque. Beyond evaluation, our framework is contamination-free and supports the training and testing of reasoning models.",
+      "authors": [
+        "Gao Tianxi",
+        "Cai Yufan",
+        "Yuan Yusi",
+        "Dong Jin Song"
+      ],
+      "published": "2026-03-05T15:34:22Z",
+      "published_date": "2026-03-05 15:34:22+00:00",
+      "updated": "2026-03-05T15:34:22Z",
+      "categories": [
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.05290v1",
+      "url": "http://arxiv.org/abs/2603.05290v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.9,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 7.8
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "ai": {
+        "one_liner_zh": "",
+        "summary_zh": "",
+        "core_contributions": [],
+        "why_read": [],
+        "risks": [],
+        "recommended_for": [],
+        "keywords": [],
+        "reading_priority": "medium",
+        "reading_priority_reason": "",
+        "fallback_summary": "Large language models (LLMs) achieve promising performance, yet their ability to reason remains poorly understood."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "今天这批论文的主线很清楚：一条线在拆大模型训练与推理的成本瓶颈，另一条线在追问模型能否在少检索甚至无检索条件下做可信判断，第三条线则把LLM继续推向语音、图结构和多Agent任务。优先阅读价值最高的，不是泛化表述最强的应用论文，而是那些同时提出新约束、新评测或新系统折中的方法工作。",
+    "overview_zh": "今天最值得读的主线不是再造更大的模型，而是更接近真实系统瓶颈的两类工作：一类处理 LLM 的可信性与部署成本，包括无检索事实核查和小模型证据归因；另一类直接解决训练与推理效率，包括推测解码词表裁剪和更省内存的稳定训练。多模态图推理与单流语音语言建模则提供了两个值得持续跟踪的问题扩展方向。建议先读 2603.05471v1 和 2603.05210v1，再看 2603.05181v1，最后按训练方法与垂直场景补齐。",
     "top_themes": [
-      "训练与推理效率开始从“调参优化”转向更结构化的系统设计",
-      "无检索事实核查与证据归因成为可信LLM的重要分支",
-      "多模态建模正在从图文对走向语音单流和图结构统一推理的更复杂对象定义"
+      "LLM 可信性：无检索事实核查与证据归因",
+      "系统效率：推测解码词表裁剪与省内存稳定训练",
+      "模态扩展：多模态图推理与单流语音语言建模"
     ],
     "reading_strategy": [
-      "先读POET-X和词表裁剪，建立这批论文里最硬的系统成本主线。",
-      "再读无检索事实核查、Med-V1和KARL，对比可信性、验证能力与Agent后训练三种不同路径。",
-      "最后读Mario、WavSLM和MedCoRAG，判断多模态图推理、单流语音建模和领域多Agent协作各自的可扩展性。"
+      "先读 2603.05471v1，判断无检索事实核查是否能改变 agent 可信性链路。",
+      "再读 2603.05210v1，关注推测解码里最接近上线优化的速度抓手。",
+      "随后读 2603.05181v1，看多模态图是否提供了比孤立图文对更强的问题定义。','最后读 2603.05500v1、2603.05308v1 和 2603.05299v1，分别补齐训练方法、小模型垂直任务化和语音单流建模。"
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-03-07T15:47:44Z",
+    "generated_at": "2026-03-07T16:57:09Z",
     "provider": "codex-cli"
   }
 }

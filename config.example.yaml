@@ -13,9 +13,17 @@ ai:
   enabled: true
   provider: "github_models"
   model: "auto"
+  skill_paths:
+    - "skills/daily-paper-search/SKILL.md"
+    - "skills/daily-paper-editor/SKILL.md"
+    - "skills/paper-note-search/SKILL.md"
+    - "skills/paper-deep-analysis/SKILL.md"
+    - "skills/paper-image-extractor/SKILL.md"
   github_models_api_base: "https://models.github.ai"
   github_models_paper_limit: 8
   github_models_abstract_chars: 650
+  codex_paper_limit: 6
+  codex_abstract_chars: 500
   preferred_models:
     - "openai/gpt-5.4"
     - "openai/gpt-5"
@@ -23,10 +31,28 @@ ai:
     - "openai/gpt-4o"
   timeout_seconds: 180
   max_output_tokens: 5000
+  editorial_preferences:
+    audience: "关注大模型、Agent、多模态系统与高价值方法论文的研究者和工程师"
+    tone: "简洁、直接、高信息密度，少空话"
+    overview_goal: "先点出今天最值得读的主线，再给阅读顺序建议"
+    daily_brief_style: "像研究日报编辑，不像宣传文案"
+    prioritize:
+      - "为什么这篇论文现在值得读"
+      - "方法或问题定义的新意在哪里"
+      - "最大的风险、边界或摘要未说明之处"
+    avoid:
+      - "空泛赞美"
+      - "复述标题"
+      - "编造实验细节、数字或作者背景"
+    custom_instruction: ""
 
 search:
   max_results: 200
   top_n: 10
+  recent_window_days: 30
+  hot_window_days: 365
+  hot_exclude_recent_days: 30
+  hot_top_k_per_category: 5
   categories:
     - "cs.AI"
     - "cs.LG"
@@ -36,6 +62,30 @@ search:
     - "cs.MA"
     - "cs.RO"
   skip_hot_papers: false
+  scoring:
+    relevance_title_keyword_boost: 0.6
+    relevance_summary_keyword_boost: 0.3
+    relevance_category_match_boost: 0.7
+    popularity_influential_citation_full_score: 100
+    priority_bonus_per_level: 0.15
+    max_priority_bonus: 0.6
+    recency_thresholds:
+      - days: 30
+        score: 3.0
+      - days: 90
+        score: 2.0
+      - days: 180
+        score: 1.0
+    weights_normal:
+      relevance: 0.40
+      recency: 0.20
+      popularity: 0.30
+      quality: 0.10
+    weights_hot:
+      relevance: 0.35
+      recency: 0.10
+      popularity: 0.45
+      quality: 0.10
 
 assets:
   max_images_per_paper: 5
@@ -43,41 +93,95 @@ assets:
 research_domains:
   "Large Language Models":
     keywords:
-      - "pre-training"
-      - "foundation model"
-      - "large language model"
-      - "LLM"
-      - "transformer"
+      - term: "large language model"
+        fields: ["title", "summary"]
+        weight: 1.4
+      - term: "llm"
+        fields: ["title", "summary"]
+        weight: 1.3
+      - term: "foundation model"
+        fields: ["title", "summary"]
+        weight: 1.2
+      - term: "pre-training"
+        fields: ["title", "summary"]
+        weight: 1.0
+      - term: "post-training"
+        fields: ["title", "summary"]
+        weight: 1.0
+      - term: "speculative decoding"
+        fields: ["title", "summary"]
+        weight: 1.1
+      - term: "instruction tuning"
+        fields: ["title", "summary"]
+        weight: 1.0
+    negative_keywords:
+      - term: "time series"
+      - term: "forecasting"
+      - term: "hepatology"
+      - term: "intraoperative"
     arxiv_categories:
       - "cs.AI"
       - "cs.LG"
       - "cs.CL"
+    require_text_match: true
+    min_keyword_matches: 1
+    min_score: 1.5
     priority: 5
 
   "Multimodal":
     keywords:
-      - "vision-language"
-      - "multimodal"
-      - "image-text"
-      - "visual reasoning"
-      - "cross-modal"
+      - term: "multimodal"
+        fields: ["title", "summary"]
+        weight: 1.3
+      - term: "vision-language"
+        fields: ["title", "summary"]
+        weight: 1.2
+      - term: "image-text"
+        fields: ["title", "summary"]
+        weight: 1.1
+      - term: "visual reasoning"
+        fields: ["title", "summary"]
+        weight: 1.1
+      - term: "cross-modal"
+        fields: ["title", "summary"]
+        weight: 1.0
+      - term: "speech"
+        fields: ["title", "summary"]
+        weight: 0.9
     arxiv_categories:
       - "cs.CV"
       - "cs.MM"
       - "cs.CL"
+    require_text_match: true
+    min_score: 1.2
     priority: 4
 
   "Agents":
     keywords:
-      - "agent"
-      - "multi-agent"
-      - "orchestration"
-      - "autonomous"
-      - "planning"
+      - term: "agent"
+        fields: ["title", "summary"]
+        weight: 1.1
+      - term: "multi-agent"
+        fields: ["title", "summary"]
+        weight: 1.2
+      - term: "orchestration"
+        fields: ["title", "summary"]
+        weight: 1.0
+      - term: "autonomous"
+        fields: ["title", "summary"]
+        weight: 1.0
+      - term: "planning"
+        fields: ["title", "summary"]
+        weight: 0.9
+      - term: "tool use"
+        fields: ["title", "summary"]
+        weight: 1.0
     arxiv_categories:
       - "cs.AI"
       - "cs.MA"
       - "cs.RO"
+    require_text_match: true
+    min_score: 1.1
     priority: 4
 
 excluded_keywords:

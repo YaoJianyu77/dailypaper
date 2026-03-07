@@ -20,7 +20,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
-from content_store import get_repo_root, write_json
+from content_store import get_repo_root, parse_frontmatter, write_json
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +41,30 @@ DEFAULT_GITHUB_MODELS_PAPER_LIMIT = 8
 DEFAULT_GITHUB_MODELS_ABSTRACT_CHARS = 650
 DEFAULT_GITHUB_MODELS_RETRY_PAPER_LIMIT = 6
 DEFAULT_GITHUB_MODELS_RETRY_ABSTRACT_CHARS = 400
+DEFAULT_SKILL_PATHS = [
+    'skills/daily-paper-search/SKILL.md',
+    'skills/daily-paper-editor/SKILL.md',
+    'skills/paper-note-search/SKILL.md',
+    'skills/paper-deep-analysis/SKILL.md',
+    'skills/paper-image-extractor/SKILL.md',
+]
+DEFAULT_EDITORIAL_PREFERENCES = {
+    'audience': '关注大模型、Agent、多模态系统与高价值方法论文的研究者和工程师',
+    'tone': '简洁、直接、高信息密度，少空话',
+    'overview_goal': '先点出今天最值得读的主线，再给阅读顺序建议',
+    'daily_brief_style': '像研究日报编辑，不像宣传文案',
+    'prioritize': [
+        '为什么这篇论文现在值得读',
+        '方法或问题定义的新意在哪里',
+        '最大的风险、边界或摘要未说明之处',
+    ],
+    'avoid': [
+        '空泛赞美',
+        '复述标题',
+        '编造实验细节、数字或作者背景',
+    ],
+    'custom_instruction': '',
+}
 
 
 def normalize_paper_id(raw: str) -> str:
@@ -80,10 +104,105 @@ def compact_scores(scores: Dict[str, Any]) -> Dict[str, Any]:
     if not isinstance(scores, dict):
         return {}
     result: Dict[str, Any] = {}
-    for key in ['recommendation', 'relevance', 'recency']:
+    for key in ['recommendation', 'relevance', 'recency', 'popularity', 'quality']:
         if key in scores:
             result[key] = scores[key]
     return result
+
+
+def normalize_editorial_preferences(config: Dict[str, Any]) -> Dict[str, Any]:
+    ai_settings = config.get('ai', {}) if isinstance(config, dict) else {}
+    raw_preferences = ai_settings.get('editorial_preferences', {})
+    if not isinstance(raw_preferences, dict):
+        raw_preferences = {}
+
+    prioritize = coerce_string_list(raw_preferences.get('prioritize'), max_items=6)
+    avoid = coerce_string_list(raw_preferences.get('avoid'), max_items=6)
+    if not prioritize:
+        prioritize = list(DEFAULT_EDITORIAL_PREFERENCES['prioritize'])
+    if not avoid:
+        avoid = list(DEFAULT_EDITORIAL_PREFERENCES['avoid'])
+
+    return {
+        'audience': str(raw_preferences.get('audience') or DEFAULT_EDITORIAL_PREFERENCES['audience']).strip(),
+        'tone': str(raw_preferences.get('tone') or DEFAULT_EDITORIAL_PREFERENCES['tone']).strip(),
+        'overview_goal': str(raw_preferences.get('overview_goal') or DEFAULT_EDITORIAL_PREFERENCES['overview_goal']).strip(),
+        'daily_brief_style': str(raw_preferences.get('daily_brief_style') or DEFAULT_EDITORIAL_PREFERENCES['daily_brief_style']).strip(),
+        'prioritize': prioritize,
+        'avoid': avoid,
+        'custom_instruction': str(raw_preferences.get('custom_instruction') or DEFAULT_EDITORIAL_PREFERENCES['custom_instruction']).strip(),
+    }
+
+
+def normalize_skill_paths(config: Dict[str, Any]) -> List[str]:
+    ai_settings = config.get('ai', {}) if isinstance(config, dict) else {}
+    raw_paths = ai_settings.get('skill_paths')
+    if raw_paths is None:
+        raw_paths = list(DEFAULT_SKILL_PATHS)
+
+    if isinstance(raw_paths, str):
+        paths = [part.strip() for part in raw_paths.split(',') if part.strip()]
+    elif isinstance(raw_paths, list):
+        paths = [str(part).strip() for part in raw_paths if str(part).strip()]
+    else:
+        paths = list(DEFAULT_SKILL_PATHS)
+
+    return list(dict.fromkeys(paths))
+
+
+def load_skill_blocks(repo_root: Path, config: Dict[str, Any]) -> List[Dict[str, str]]:
+    blocks: List[Dict[str, str]] = []
+
+    for relative_path in normalize_skill_paths(config):
+        path = Path(relative_path)
+        if not path.is_absolute():
+            path = repo_root / path
+        if not path.exists() or not path.is_file():
+            continue
+
+        text = path.read_text(encoding='utf-8')
+        frontmatter, body = parse_frontmatter(text)
+        skill_name = str(frontmatter.get('name') or path.stem).strip() or path.stem
+        try:
+            display_path = path.relative_to(repo_root).as_posix()
+        except ValueError:
+            display_path = str(path)
+
+        blocks.append({
+            'name': skill_name,
+            'path': display_path,
+            'body': body.strip() or text.strip(),
+        })
+
+    return blocks
+
+
+def build_skill_prompt_text(repo_root: Path, config: Dict[str, Any]) -> str:
+    blocks = load_skill_blocks(repo_root, config)
+    if not blocks:
+        return ''
+
+    parts = []
+    for block in blocks:
+        parts.append(f"Skill `{block['name']}` from `{block['path']}`:\n{block['body']}")
+    return '\n\n'.join(parts)
+
+
+def build_editorial_instruction_text(config: Dict[str, Any]) -> str:
+    preferences = normalize_editorial_preferences(config)
+    lines = [
+        f"Audience: {preferences['audience']}",
+        f"Tone: {preferences['tone']}",
+        f"Daily brief goal: {preferences['overview_goal']}",
+        f"Daily brief style: {preferences['daily_brief_style']}",
+        'Prioritize:',
+    ]
+    lines.extend(f"- {item}" for item in preferences['prioritize'])
+    lines.append('Avoid:')
+    lines.extend(f"- {item}" for item in preferences['avoid'])
+    if preferences['custom_instruction']:
+        lines.append(f"Custom instruction: {preferences['custom_instruction']}")
+    return '\n'.join(lines)
 
 
 def build_prompt_payload(
@@ -95,7 +214,18 @@ def build_prompt_payload(
     max_abstract_chars: int,
     max_authors: int = 4,
 ) -> Dict[str, Any]:
-    domains = list((config.get('research_domains') or {}).keys())
+    domain_configs = config.get('research_domains', {}) if isinstance(config, dict) else {}
+    domains = []
+    if isinstance(domain_configs, dict):
+        for name, domain_config in domain_configs.items():
+            priority = 0
+            if isinstance(domain_config, dict):
+                try:
+                    priority = int(domain_config.get('priority', 0))
+                except (TypeError, ValueError):
+                    priority = 0
+            domains.append({'name': str(name), 'priority': priority})
+
     prompt_papers: List[Dict[str, Any]] = []
     for paper in papers[:paper_limit]:
         paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
@@ -106,6 +236,14 @@ def build_prompt_payload(
             'domain': paper.get('matched_domain', 'Uncategorized'),
             'published': paper.get('published', paper.get('publicationDate', '')),
             'abstract': trim_text(paper.get('summary') or paper.get('abstract') or '', max_abstract_chars),
+            'categories': (paper.get('categories') or [])[:6],
+            'matched_keywords': (paper.get('matched_keywords') or [])[:6],
+            'selection_signals': {
+                'source': paper.get('source', ''),
+                'is_hot_paper': bool(paper.get('is_hot_paper')),
+                'domain_priority': paper.get('matched_domain_priority', 0),
+                'domain_preference_bonus': paper.get('domain_preference_bonus', 0),
+            },
             'scores': compact_scores(paper.get('scores', {})),
         })
 
@@ -113,11 +251,13 @@ def build_prompt_payload(
         'report_date': report_date,
         'preferred_language': 'zh-CN',
         'research_domains': domains,
+        'editorial_preferences': normalize_editorial_preferences(config),
         'papers': prompt_papers,
     }
 
 
 def build_messages(
+    repo_root: Path,
     report_date: str,
     config: Dict[str, Any],
     papers: List[Dict[str, Any]],
@@ -138,6 +278,12 @@ def build_messages(
         'recommended_for (array of 2-3 strings), keywords (array of 4-6 short strings), reading_priority (one of high, medium, low), '
         'and reading_priority_reason (string).'
     )
+    editorial_instructions = build_editorial_instruction_text(config)
+    skill_instructions = build_skill_prompt_text(repo_root, config)
+    if editorial_instructions:
+        system_prompt += '\n\nRepository editorial preferences:\n' + editorial_instructions
+    if skill_instructions:
+        system_prompt += '\n\nProject skill instructions:\n' + skill_instructions
     user_payload = build_prompt_payload(
         report_date,
         config,
@@ -466,6 +612,7 @@ def main() -> int:
             logger.info('Using GitHub Models provider with model %s', model)
             try:
                 messages = build_messages(
+                    repo_root,
                     report_date,
                     config,
                     papers,
@@ -483,6 +630,7 @@ def main() -> int:
                     DEFAULT_GITHUB_MODELS_RETRY_ABSTRACT_CHARS,
                 )
                 messages = build_messages(
+                    repo_root,
                     report_date,
                     config,
                     papers,
@@ -499,6 +647,7 @@ def main() -> int:
                 return 0
             logger.info('Using OpenAI provider with model %s', model)
             messages = build_messages(
+                repo_root,
                 report_date,
                 config,
                 papers,

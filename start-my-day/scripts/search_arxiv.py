@@ -12,7 +12,7 @@ import sys
 import time
 import logging
 from datetime import datetime, timedelta
-from typing import List, Dict, Set, Optional, Tuple
+from typing import Any, List, Dict, Set, Optional, Tuple
 from pathlib import Path
 import urllib.request
 import urllib.parse
@@ -130,7 +130,130 @@ def load_research_config(config_path: str) -> Dict:
         }
 
 
-def calculate_date_windows(target_date: Optional[datetime] = None) -> Tuple[datetime, datetime, datetime, datetime]:
+def get_search_settings(config: Dict[str, Any]) -> Dict[str, Any]:
+    search_settings = config.get('search', {})
+    if isinstance(search_settings, dict):
+        return search_settings
+    return {}
+
+
+def get_search_scoring_settings(config: Dict[str, Any]) -> Dict[str, Any]:
+    scoring_settings = get_search_settings(config).get('scoring', {})
+    if isinstance(scoring_settings, dict):
+        return scoring_settings
+    return {}
+
+
+def get_config_float(config: Dict[str, Any], key: str, default: float) -> float:
+    try:
+        return float(config.get(key, default))
+    except (TypeError, ValueError, AttributeError):
+        return default
+
+
+def get_config_int(config: Dict[str, Any], key: str, default: int) -> int:
+    try:
+        return int(config.get(key, default))
+    except (TypeError, ValueError, AttributeError):
+        return default
+
+
+def normalize_keyword_rules(raw_rules: Any) -> List[Dict[str, Any]]:
+    rules: List[Dict[str, Any]] = []
+    if not isinstance(raw_rules, list):
+        return rules
+
+    for raw_rule in raw_rules:
+        if isinstance(raw_rule, str):
+            term = raw_rule.strip()
+            if not term:
+                continue
+            rules.append({
+                'term': term,
+                'fields': ['title', 'summary'],
+                'weight': 1.0,
+            })
+            continue
+
+        if not isinstance(raw_rule, dict):
+            continue
+
+        term = str(raw_rule.get('term') or raw_rule.get('keyword') or raw_rule.get('phrase') or '').strip()
+        if not term:
+            continue
+
+        raw_fields = raw_rule.get('fields', ['title', 'summary'])
+        if isinstance(raw_fields, str):
+            fields = [part.strip().lower() for part in raw_fields.split(',') if part.strip()]
+        elif isinstance(raw_fields, list):
+            fields = [str(part).strip().lower() for part in raw_fields if str(part).strip()]
+        else:
+            fields = ['title', 'summary']
+
+        if not fields:
+            fields = ['title', 'summary']
+
+        rules.append({
+            'term': term,
+            'fields': fields,
+            'weight': get_config_float(raw_rule, 'weight', 1.0),
+        })
+
+    return rules
+
+
+def keyword_rule_matches(rule: Dict[str, Any], title: str, summary: str) -> List[str]:
+    term = str(rule.get('term') or '').strip().lower()
+    if not term:
+        return []
+
+    matched_fields: List[str] = []
+    fields = rule.get('fields', [])
+    if 'title' in fields and term in title:
+        matched_fields.append('title')
+    if 'summary' in fields and term in summary:
+        matched_fields.append('summary')
+    return matched_fields
+
+
+def get_recency_thresholds(config: Dict[str, Any]) -> List[Tuple[int, float]]:
+    raw_thresholds = get_search_scoring_settings(config).get('recency_thresholds')
+    thresholds: List[Tuple[int, float]] = []
+
+    if isinstance(raw_thresholds, list):
+        for item in raw_thresholds:
+            if not isinstance(item, dict):
+                continue
+            try:
+                thresholds.append((int(item['days']), float(item['score'])))
+            except (KeyError, TypeError, ValueError):
+                continue
+
+    return thresholds or RECENCY_THRESHOLDS
+
+
+def get_recommendation_weights(
+    scoring_settings: Dict[str, Any],
+    key: str,
+    defaults: Dict[str, float],
+) -> Dict[str, float]:
+    raw_weights = scoring_settings.get(key, {})
+    if not isinstance(raw_weights, dict):
+        return defaults
+
+    weights: Dict[str, float] = {}
+    for metric, default_value in defaults.items():
+        weights[metric] = get_config_float(raw_weights, metric, default_value)
+    return weights
+
+
+def calculate_date_windows(
+    target_date: Optional[datetime] = None,
+    *,
+    recent_window_days: int = 30,
+    hot_window_days: int = 365,
+    hot_exclude_recent_days: Optional[int] = None,
+) -> Tuple[datetime, datetime, datetime, datetime]:
     """
     计算两个时间窗口：最近30天和过去一年（除去最近30天）
 
@@ -147,13 +270,16 @@ def calculate_date_windows(target_date: Optional[datetime] = None) -> Tuple[date
     if target_date is None:
         target_date = datetime.now()
 
-    # 最近30天窗口: [target_date - 30 days, target_date]
-    window_30d_start = target_date - timedelta(days=30)
+    if hot_exclude_recent_days is None:
+        hot_exclude_recent_days = recent_window_days
+
+    # 最近窗口: [target_date - recent_window_days, target_date]
+    window_30d_start = target_date - timedelta(days=recent_window_days)
     window_30d_end = target_date
 
-    # 过去一年窗口（除去最近30天）: [target_date - 365 days, target_date - 31 days]
-    window_1y_start = target_date - timedelta(days=365)
-    window_1y_end = target_date - timedelta(days=31)
+    # 热门窗口（除去最近窗口）: [target_date - hot_window_days, target_date - hot_exclude_recent_days - 1 days]
+    window_1y_start = target_date - timedelta(days=hot_window_days)
+    window_1y_end = target_date - timedelta(days=hot_exclude_recent_days + 1)
 
     return window_30d_start, window_30d_end, window_1y_start, window_1y_end
 
@@ -508,8 +634,9 @@ def parse_arxiv_xml(xml_content: str) -> List[Dict]:
 def calculate_relevance_score(
     paper: Dict,
     domains: Dict,
-    excluded_keywords: List[str]
-) -> Tuple[float, Optional[str], List[str]]:
+    excluded_keywords: List[str],
+    scoring_settings: Dict[str, Any],
+) -> Tuple[float, Optional[str], List[str], int]:
     """
     计算论文与研究兴趣的相关性评分
 
@@ -526,46 +653,90 @@ def calculate_relevance_score(
     categories = set(paper.get('categories', []))
 
     # 检查排除关键词
-    for keyword in excluded_keywords:
-        if keyword.lower() in title or keyword.lower() in summary:
-            return 0, None, []
+    for rule in normalize_keyword_rules(excluded_keywords):
+        if keyword_rule_matches(rule, title, summary):
+            return 0, None, [], 0
 
     max_score = 0
     best_domain = None
     matched_keywords = []
+    best_priority = 0
+
+    title_keyword_boost = get_config_float(
+        scoring_settings,
+        'relevance_title_keyword_boost',
+        RELEVANCE_TITLE_KEYWORD_BOOST,
+    )
+    summary_keyword_boost = get_config_float(
+        scoring_settings,
+        'relevance_summary_keyword_boost',
+        RELEVANCE_SUMMARY_KEYWORD_BOOST,
+    )
+    category_match_boost = get_config_float(
+        scoring_settings,
+        'relevance_category_match_boost',
+        RELEVANCE_CATEGORY_MATCH_BOOST,
+    )
 
     # 遍历所有领域
     for domain_name, domain_config in domains.items():
         score = 0
         domain_matched_keywords = []
+        text_match_count = 0
 
         # 关键词匹配
-        keywords = domain_config.get('keywords', [])
-        for keyword in keywords:
-            keyword_lower = keyword.lower()
-            if keyword_lower in title:
-                score += RELEVANCE_TITLE_KEYWORD_BOOST
-                domain_matched_keywords.append(keyword)
-            elif keyword_lower in summary:
-                score += RELEVANCE_SUMMARY_KEYWORD_BOOST
-                domain_matched_keywords.append(keyword)
+        keywords = normalize_keyword_rules(domain_config.get('keywords', []))
+        negative_keywords = normalize_keyword_rules(domain_config.get('negative_keywords', []))
+
+        if any(keyword_rule_matches(rule, title, summary) for rule in negative_keywords):
+            continue
+
+        for rule in keywords:
+            matched_fields = keyword_rule_matches(rule, title, summary)
+            if not matched_fields:
+                continue
+            text_match_count += 1
+            domain_matched_keywords.append(rule['term'])
+            weight = get_config_float(rule, 'weight', 1.0)
+            if 'title' in matched_fields:
+                score += title_keyword_boost * weight
+            else:
+                score += summary_keyword_boost * weight
 
         # 类别匹配
         domain_categories = domain_config.get('arxiv_categories', [])
         for cat in domain_categories:
             if cat in categories:
-                score += RELEVANCE_CATEGORY_MATCH_BOOST
+                score += category_match_boost
                 domain_matched_keywords.append(cat)
 
-        if score > max_score:
+        require_text_match = bool(domain_config.get('require_text_match', False))
+        min_keyword_matches = get_config_int(domain_config, 'min_keyword_matches', 0)
+        min_score = get_config_float(domain_config, 'min_score', 0.0)
+        domain_priority = get_config_int(domain_config, 'priority', 0)
+
+        if require_text_match and text_match_count == 0:
+            continue
+        if min_keyword_matches and text_match_count < min_keyword_matches:
+            continue
+        if score < min_score:
+            continue
+
+        if score > max_score or (score == max_score and domain_priority > best_priority):
             max_score = score
             best_domain = domain_name
             matched_keywords = domain_matched_keywords
+            best_priority = domain_priority
 
-    return max_score, best_domain, matched_keywords
+    return max_score, best_domain, matched_keywords, best_priority
 
 
-def calculate_recency_score(published_date: Optional[datetime]) -> float:
+def calculate_recency_score(
+    published_date: Optional[datetime],
+    *,
+    reference_date: Optional[datetime] = None,
+    thresholds: Optional[List[Tuple[int, float]]] = None,
+) -> float:
     """
     根据发布日期计算新近性评分
 
@@ -578,10 +749,19 @@ def calculate_recency_score(published_date: Optional[datetime]) -> float:
     if published_date is None:
         return 0
 
-    now = datetime.now(published_date.tzinfo) if published_date.tzinfo else datetime.now()
-    days_diff = (now - published_date).days
+    if thresholds is None:
+        thresholds = RECENCY_THRESHOLDS
 
-    for max_days, score in RECENCY_THRESHOLDS:
+    if reference_date is None:
+        reference_date = datetime.now(published_date.tzinfo) if published_date.tzinfo else datetime.now()
+    elif published_date.tzinfo and reference_date.tzinfo is None:
+        reference_date = reference_date.replace(tzinfo=published_date.tzinfo)
+    elif published_date.tzinfo is None and reference_date.tzinfo:
+        reference_date = reference_date.replace(tzinfo=None)
+
+    days_diff = (reference_date - published_date).days
+
+    for max_days, score in thresholds:
         if days_diff <= max_days:
             return score
     return RECENCY_DEFAULT
@@ -650,7 +830,11 @@ def calculate_recommendation_score(
     recency_score: float,
     popularity_score: float,
     quality_score: float,
-    is_hot_paper: bool = False
+    is_hot_paper: bool = False,
+    *,
+    priority_bonus: float = 0.0,
+    weights_normal: Optional[Dict[str, float]] = None,
+    weights_hot: Optional[Dict[str, float]] = None,
 ) -> float:
     """
     计算综合推荐评分
@@ -675,12 +859,15 @@ def calculate_recommendation_score(
         'quality': quality_score,
     }
     # 归一化到 0-10 分
-    normalized = {k: (v / SCORE_MAX) * 10 for k, v in scores.items()}
+    normalized = {k: (min(max(v, 0.0), SCORE_MAX) / SCORE_MAX) * 10 for k, v in scores.items()}
 
-    weights = WEIGHTS_HOT if is_hot_paper else WEIGHTS_NORMAL
-    final_score = sum(normalized[k] * weights[k] for k in weights)
+    weights = weights_hot if is_hot_paper else weights_normal
+    if not weights:
+        weights = WEIGHTS_HOT if is_hot_paper else WEIGHTS_NORMAL
 
-    return round(final_score, 2)
+    final_score = sum(normalized[k] * weights[k] for k in weights) + max(priority_bonus, 0.0)
+
+    return round(min(final_score, 10.0), 2)
 
 
 def filter_and_score_papers(
@@ -703,13 +890,24 @@ def filter_and_score_papers(
     """
     domains = config.get('research_domains', {})
     excluded_keywords = config.get('excluded_keywords', [])
+    scoring_settings = get_search_scoring_settings(config)
+    recency_thresholds = get_recency_thresholds(config)
+    weights_normal = get_recommendation_weights(scoring_settings, 'weights_normal', WEIGHTS_NORMAL)
+    weights_hot = get_recommendation_weights(scoring_settings, 'weights_hot', WEIGHTS_HOT)
+    influential_citation_full_score = get_config_float(
+        scoring_settings,
+        'popularity_influential_citation_full_score',
+        POPULARITY_INFLUENTIAL_CITATION_FULL_SCORE,
+    )
+    priority_bonus_per_level = get_config_float(scoring_settings, 'priority_bonus_per_level', 0.15)
+    max_priority_bonus = get_config_float(scoring_settings, 'max_priority_bonus', 0.6)
 
     scored_papers = []
 
     for paper in papers:
         # 计算相关性
-        relevance, matched_domain, matched_keywords = calculate_relevance_score(
-            paper, domains, excluded_keywords
+        relevance, matched_domain, matched_keywords, domain_priority = calculate_relevance_score(
+            paper, domains, excluded_keywords, scoring_settings
         )
 
         # 如果相关性为0，跳过
@@ -718,14 +916,28 @@ def filter_and_score_papers(
 
         # 计算新近性
         if 'published_date' in paper:
-            recency = calculate_recency_score(paper.get('published_date'))
+            published_date = paper.get('published_date')
+            if isinstance(published_date, str):
+                try:
+                    published_date = datetime.fromisoformat(published_date.replace('Z', '+00:00'))
+                except ValueError:
+                    published_date = None
+            recency = calculate_recency_score(
+                published_date,
+                reference_date=target_date,
+                thresholds=recency_thresholds,
+            )
         else:
             # 对于 Semantic Scholar 的论文，使用 publicationDate
             pub_date_str = paper.get('publicationDate')
             if pub_date_str:
                 try:
                     pub_date = datetime.strptime(pub_date_str, '%Y-%m-%d')
-                    recency = calculate_recency_score(pub_date)
+                    recency = calculate_recency_score(
+                        pub_date,
+                        reference_date=target_date,
+                        thresholds=recency_thresholds,
+                    )
                 except (ValueError, TypeError):
                     recency = 0
             else:
@@ -736,7 +948,7 @@ def filter_and_score_papers(
             # 高影响力论文：使用 influentialCitationCount
             inf_cit = paper.get('influentialCitationCount', 0)
             popularity = min(
-                inf_cit / (POPULARITY_INFLUENTIAL_CITATION_FULL_SCORE / SCORE_MAX),
+                inf_cit / (influential_citation_full_score / SCORE_MAX),
                 SCORE_MAX,
             )
         else:
@@ -747,10 +959,22 @@ def filter_and_score_papers(
         # 计算质量
         summary = paper.get('summary', '') if 'summary' in paper else paper.get('abstract', '')
         quality = calculate_quality_score(summary)
+        relevance = min(relevance, SCORE_MAX)
+        recency = min(recency, SCORE_MAX)
+        popularity = min(popularity, SCORE_MAX)
+        quality = min(quality, SCORE_MAX)
+        priority_bonus = min(max(domain_priority - 1, 0) * priority_bonus_per_level, max_priority_bonus)
 
         # 计算综合推荐评分
         recommendation_score = calculate_recommendation_score(
-            relevance, recency, popularity, quality, is_hot_paper_batch
+            relevance,
+            recency,
+            popularity,
+            quality,
+            is_hot_paper_batch,
+            priority_bonus=priority_bonus,
+            weights_normal=weights_normal,
+            weights_hot=weights_hot,
         )
 
         # 添加评分信息
@@ -763,6 +987,8 @@ def filter_and_score_papers(
         }
         paper['matched_domain'] = matched_domain
         paper['matched_keywords'] = matched_keywords
+        paper['matched_domain_priority'] = domain_priority
+        paper['domain_preference_bonus'] = round(priority_bonus, 2)
         paper['is_hot_paper'] = is_hot_paper_batch
 
         scored_papers.append(paper)
@@ -816,6 +1042,7 @@ def main():
 
     logger.info("Loading config from: %s", args.config)
     config = load_research_config(args.config)
+    search_settings = get_search_settings(config)
 
     # 解析目标日期
     target_date = None
@@ -830,10 +1057,26 @@ def main():
         target_date = datetime.now()
         logger.info("Using current date: %s", target_date.strftime('%Y-%m-%d'))
 
-    window_30d_start, window_30d_end, window_1y_start, window_1y_end = calculate_date_windows(target_date)
+    recent_window_days = get_config_int(search_settings, 'recent_window_days', 30)
+    hot_window_days = get_config_int(search_settings, 'hot_window_days', 365)
+    hot_exclude_recent_days = get_config_int(search_settings, 'hot_exclude_recent_days', recent_window_days)
+    hot_top_k_per_category = get_config_int(search_settings, 'hot_top_k_per_category', 5)
+
+    window_30d_start, window_30d_end, window_1y_start, window_1y_end = calculate_date_windows(
+        target_date,
+        recent_window_days=recent_window_days,
+        hot_window_days=hot_window_days,
+        hot_exclude_recent_days=hot_exclude_recent_days,
+    )
     logger.info("Date windows:")
-    logger.info("  Recent 30 days: %s to %s", window_30d_start.date(), window_30d_end.date())
-    logger.info("  Past year (31-365 days): %s to %s", window_1y_start.date(), window_1y_end.date())
+    logger.info("  Recent window (%d days): %s to %s", recent_window_days, window_30d_start.date(), window_30d_end.date())
+    logger.info(
+        "  Hot window (%d days, excluding last %d days): %s to %s",
+        hot_window_days,
+        hot_exclude_recent_days,
+        window_1y_start.date(),
+        window_1y_end.date(),
+    )
 
     # 解析分类
     categories = args.categories.split(',')
@@ -876,7 +1119,7 @@ def main():
             categories=categories,
             start_date=window_1y_start,
             end_date=window_1y_end,
-            top_k_per_category=5
+            top_k_per_category=hot_top_k_per_category
         )
 
         if hot_papers:
@@ -930,11 +1173,14 @@ def main():
     output = {
         'target_date': args.target_date or target_date.strftime('%Y-%m-%d'),
         'date_windows': {
-            'recent_30d': {
+            'recent_window': {
+                'days': recent_window_days,
                 'start': window_30d_start.strftime('%Y-%m-%d'),
                 'end': window_30d_end.strftime('%Y-%m-%d')
             },
-            'past_year': {
+            'hot_window': {
+                'days': hot_window_days,
+                'exclude_recent_days': hot_exclude_recent_days,
                 'start': window_1y_start.strftime('%Y-%m-%d'),
                 'end': window_1y_end.strftime('%Y-%m-%d')
             }
