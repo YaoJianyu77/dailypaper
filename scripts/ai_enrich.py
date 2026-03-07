@@ -37,6 +37,10 @@ DEFAULT_GITHUB_MODELS_PREFERRED_MODELS = [
 DEFAULT_TIMEOUT = 180
 DEFAULT_MAX_OUTPUT_TOKENS = 5000
 DEFAULT_GITHUB_API_VERSION = '2022-11-28'
+DEFAULT_GITHUB_MODELS_PAPER_LIMIT = 8
+DEFAULT_GITHUB_MODELS_ABSTRACT_CHARS = 650
+DEFAULT_GITHUB_MODELS_RETRY_PAPER_LIMIT = 6
+DEFAULT_GITHUB_MODELS_RETRY_ABSTRACT_CHARS = 400
 
 
 def normalize_paper_id(raw: str) -> str:
@@ -62,19 +66,47 @@ def short_fallback_summary(paper: Dict[str, Any]) -> str:
     return sentence
 
 
-def build_prompt_payload(report_date: str, config: Dict[str, Any], papers: List[Dict[str, Any]]) -> Dict[str, Any]:
+def trim_text(text: str, max_chars: int) -> str:
+    value = str(text or '').replace('\n', ' ').strip()
+    if len(value) <= max_chars:
+        return value
+    clipped = value[: max(0, max_chars - 1)].rsplit(' ', 1)[0].strip()
+    if not clipped:
+        clipped = value[: max(0, max_chars - 1)].strip()
+    return clipped + '…'
+
+
+def compact_scores(scores: Dict[str, Any]) -> Dict[str, Any]:
+    if not isinstance(scores, dict):
+        return {}
+    result: Dict[str, Any] = {}
+    for key in ['recommendation', 'relevance', 'recency']:
+        if key in scores:
+            result[key] = scores[key]
+    return result
+
+
+def build_prompt_payload(
+    report_date: str,
+    config: Dict[str, Any],
+    papers: List[Dict[str, Any]],
+    *,
+    paper_limit: int,
+    max_abstract_chars: int,
+    max_authors: int = 4,
+) -> Dict[str, Any]:
     domains = list((config.get('research_domains') or {}).keys())
     prompt_papers: List[Dict[str, Any]] = []
-    for paper in papers:
+    for paper in papers[:paper_limit]:
         paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
         prompt_papers.append({
             'paper_id': paper_id,
             'title': paper.get('title', ''),
-            'authors': paper.get('authors', []),
+            'authors': (paper.get('authors') or [])[:max_authors],
             'domain': paper.get('matched_domain', 'Uncategorized'),
             'published': paper.get('published', paper.get('publicationDate', '')),
-            'abstract': (paper.get('summary') or paper.get('abstract') or '').strip(),
-            'scores': paper.get('scores', {}),
+            'abstract': trim_text(paper.get('summary') or paper.get('abstract') or '', max_abstract_chars),
+            'scores': compact_scores(paper.get('scores', {})),
         })
 
     return {
@@ -85,7 +117,15 @@ def build_prompt_payload(report_date: str, config: Dict[str, Any], papers: List[
     }
 
 
-def build_messages(report_date: str, config: Dict[str, Any], papers: List[Dict[str, Any]]) -> List[Dict[str, str]]:
+def build_messages(
+    report_date: str,
+    config: Dict[str, Any],
+    papers: List[Dict[str, Any]],
+    *,
+    paper_limit: int,
+    max_abstract_chars: int,
+    max_authors: int = 4,
+) -> List[Dict[str, str]]:
     system_prompt = (
         'You are a rigorous research editor producing a high-signal daily paper digest in Simplified Chinese. '
         'Use only the metadata and abstracts provided. Do not invent metrics, experiments, authors, or claims not present in the input. '
@@ -98,7 +138,14 @@ def build_messages(report_date: str, config: Dict[str, Any], papers: List[Dict[s
         'recommended_for (array of 2-3 strings), keywords (array of 4-6 short strings), reading_priority (one of high, medium, low), '
         'and reading_priority_reason (string).'
     )
-    user_payload = build_prompt_payload(report_date, config, papers)
+    user_payload = build_prompt_payload(
+        report_date,
+        config,
+        papers,
+        paper_limit=paper_limit,
+        max_abstract_chars=max_abstract_chars,
+        max_authors=max_authors,
+    )
     user_prompt = 'Generate the daily digest JSON for the following paper set:\n' + json.dumps(user_payload, ensure_ascii=False, indent=2)
     return [
         {'role': 'system', 'content': system_prompt},
@@ -405,7 +452,8 @@ def main() -> int:
 
     report_date = payload.get('target_date') or datetime.now().strftime('%Y-%m-%d')
     papers = payload.get('top_papers', [])
-    messages = build_messages(report_date, config, papers)
+    github_models_paper_limit = int(ai_settings.get('github_models_paper_limit', DEFAULT_GITHUB_MODELS_PAPER_LIMIT))
+    github_models_abstract_chars = int(ai_settings.get('github_models_abstract_chars', DEFAULT_GITHUB_MODELS_ABSTRACT_CHARS))
 
     try:
         if provider == 'github_models':
@@ -416,7 +464,32 @@ def main() -> int:
             catalog = list_github_models(github_models_token, github_models_api_base, timeout_seconds)
             model = pick_github_model(catalog, model, preferred_models)
             logger.info('Using GitHub Models provider with model %s', model)
-            response_payload = call_github_models(messages, github_models_token, model, github_models_api_base, timeout_seconds, max_output_tokens)
+            try:
+                messages = build_messages(
+                    report_date,
+                    config,
+                    papers,
+                    paper_limit=github_models_paper_limit,
+                    max_abstract_chars=github_models_abstract_chars,
+                )
+                response_payload = call_github_models(messages, github_models_token, model, github_models_api_base, timeout_seconds, max_output_tokens)
+            except requests.HTTPError as exc:
+                status_code = exc.response.status_code if exc.response is not None else None
+                if status_code != 413:
+                    raise
+                logger.warning(
+                    'GitHub Models request was too large; retrying with smaller prompt (papers=%s, abstract_chars=%s)',
+                    DEFAULT_GITHUB_MODELS_RETRY_PAPER_LIMIT,
+                    DEFAULT_GITHUB_MODELS_RETRY_ABSTRACT_CHARS,
+                )
+                messages = build_messages(
+                    report_date,
+                    config,
+                    papers,
+                    paper_limit=min(github_models_paper_limit, DEFAULT_GITHUB_MODELS_RETRY_PAPER_LIMIT),
+                    max_abstract_chars=min(github_models_abstract_chars, DEFAULT_GITHUB_MODELS_RETRY_ABSTRACT_CHARS),
+                )
+                response_payload = call_github_models(messages, github_models_token, model, github_models_api_base, timeout_seconds, max_output_tokens)
             response_text = extract_chat_completion_text(response_payload)
         elif provider == 'openai':
             model = os.environ.get('OPENAI_MODEL', model).strip() or DEFAULT_OPENAI_MODEL
@@ -425,6 +498,13 @@ def main() -> int:
                 write_json(output_path, passthrough_payload(payload, 'missing_api_key'))
                 return 0
             logger.info('Using OpenAI provider with model %s', model)
+            messages = build_messages(
+                report_date,
+                config,
+                papers,
+                paper_limit=len(papers),
+                max_abstract_chars=1200,
+            )
             response_payload = call_openai(messages, openai_api_key, model, openai_api_base, timeout_seconds, max_output_tokens)
             response_text = extract_output_text(response_payload)
         else:

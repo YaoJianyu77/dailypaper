@@ -9,6 +9,8 @@ name: Daily Papers
 permissions:
   contents: write
   models: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: daily-papers
@@ -106,3 +108,15 @@ jobs:
           git add content state
           git diff --cached --quiet || git commit -m "chore: update daily paper content"
           git push
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -53,8 +53,7 @@ This will:
 2. call GitHub Models for structured Chinese editorial output
 3. publish content into `content/`
 4. commit and push updated content back to `main`
-5. trigger `.github/workflows/pages.yml`
-6. refresh GitHub Pages
+5. deploy GitHub Pages directly
 
 ## 5. Optional local fallback
 
@@ -99,8 +98,8 @@ Push the repository to GitHub and enable GitHub Pages.
 
 With the current setup:
 
-1. `.github/workflows/daily.yml` generates content every day at New York `07:00`
-2. `.github/workflows/pages.yml` rebuilds the static site on every push to `main`
+1. `.github/workflows/daily.yml` generates content every day at New York `07:00` and deploys the site
+2. `.github/workflows/pages.yml` rebuilds the static site for local or manual pushes to `main`
 3. GitHub Pages publishes the updated site
 
 For GitHub Pages project sites like `https://YaoJianyu77.github.io/dailypaper/`, the build supports the `/dailypaper` subpath automatically in the included GitHub Actions workflow.

@@ -81,8 +81,8 @@ Then open `http://localhost:8000`.
 The GitHub-hosted path is now the default:
 
 1. `.github/workflows/daily.yml` runs every day at New York `07:00`.
-2. The workflow searches papers, calls GitHub Models for Chinese editorial enrichment, and commits fresh `content/` and `state/`.
-3. `.github/workflows/pages.yml` sees the push to `main` and redeploys GitHub Pages.
+2. The workflow searches papers, calls GitHub Models for Chinese editorial enrichment, commits fresh `content/` and `state/`, and deploys GitHub Pages directly.
+3. `.github/workflows/pages.yml` remains useful for human or local pushes to `main`.
 
 The schedule uses two UTC cron entries plus a timezone guard so it stays aligned to New York `07:00` across daylight saving changes.
 
@@ -99,6 +99,7 @@ The generation workflow does this:
 2. Enrich the top papers with GitHub Models.
 3. Generate or update daily markdown and paper pages.
 4. Commit `content/` and `state/` changes back into the repository.
+5. Deploy the updated static site to GitHub Pages.
 
 That gives you:
 
@@ -194,7 +195,7 @@ The included workflows live at:
 Recommended setup:
 
 - `.github/workflows/daily.yml` should stay enabled for the 7am generation job
-- `.github/workflows/pages.yml` should stay enabled for deployment on push to `main`
+- `.github/workflows/pages.yml` should stay enabled for deployment on local or manual pushes to `main`
 - local `scripts/run_local_daily.py` is optional fallback, not the primary path
 
 For a project site such as `https://YaoJianyu77.github.io/dailypaper/`, the build now supports a subpath base URL.
