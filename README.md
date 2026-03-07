@@ -2,15 +2,15 @@
 
 A repository-backed daily paper pipeline with two operating modes:
 
-- GitHub-hosted generation with GitHub Models and GitHub Actions
-- local `uv` + Codex CLI generation as a fallback
+- local `uv` + Codex CLI generation on your machine
+- optional GitHub-hosted generation as a manual fallback
 
 The repository is now structured as a content store plus a static website:
 
 - `start-my-day/scripts/search_arxiv.py` fetches and ranks papers from arXiv and Semantic Scholar.
 - `scripts/publish_daily.py` converts search output into versioned markdown under `content/`.
 - `scripts/build_site.py` compiles that markdown into a static site under `dist/`.
-- `.github/workflows/daily.yml` generates fresh content on a schedule or on manual dispatch.
+- `.github/workflows/daily.yml` is kept as a manual fallback workflow.
 - `.github/workflows/pages.yml` deploys GitHub Pages whenever `main` changes.
 
 ## What Changed
@@ -76,42 +76,9 @@ uv run --with-requirements requirements.txt python -m http.server 8000 -d dist
 
 Then open `http://localhost:8000`.
 
-## GitHub Automation Model
+## Local Codex CLI Automation
 
-The GitHub-hosted path is now the default:
-
-1. `.github/workflows/daily.yml` runs every day at New York `07:00`.
-2. The workflow searches papers, calls GitHub Models for Chinese editorial enrichment, commits fresh `content/` and `state/`, and deploys GitHub Pages directly.
-3. `.github/workflows/pages.yml` remains useful for human or local pushes to `main`.
-
-The schedule uses two UTC cron entries plus a timezone guard so it stays aligned to New York `07:00` across daylight saving changes.
-
-Recommended repository setup:
-
-- keep GitHub Pages enabled with `GitHub Actions` as the source
-- leave `.github/workflows/pages.yml` enabled
-- leave `.github/workflows/daily.yml` enabled for daily generation
-- optionally set repository variable `AI_MODEL` if you want to force a specific GitHub Models model id
-
-The generation workflow does this:
-
-1. Run the paper search.
-2. Enrich the top papers with GitHub Models.
-3. Generate or update daily markdown and paper pages.
-4. Commit `content/` and `state/` changes back into the repository.
-5. Deploy the updated static site to GitHub Pages.
-
-That gives you:
-
-- a homepage that shows the latest daily report
-- an archive page for older reports
-- one page per paper
-- git history for every generated artifact
-- a site you can browse on GitHub Pages or locally after `git clone`
-
-## Local Fallback
-
-If you still want agent generation on your own machine, the local flow is still supported:
+The local path is the default again:
 
 1. `scripts/run_local_daily.py` pulls `main`, searches papers, runs local Codex CLI enrichment, publishes markdown, builds the site, commits `content/` and `state/`, and pushes back to GitHub.
 2. `scripts/install_local_cron.sh` installs a local cron job for `07:00` every day.
@@ -142,7 +109,7 @@ uv run --with-requirements requirements.txt python scripts/run_local_daily.py --
 uv run --with-requirements requirements.txt python scripts/run_local_daily.py --skip-push
 uv run --with-requirements requirements.txt python scripts/run_local_daily.py --enricher openai
 uv run --with-requirements requirements.txt python scripts/run_local_daily.py --enricher none
-uv run --with-requirements requirements.txt python scripts/run_local_daily.py --remote origin
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --remote dailypaper
 ```
 
 By default the script auto-detects the active Git remote. Use `--remote` only if your clone does not track the correct remote.
@@ -150,6 +117,22 @@ By default the script auto-detects the active Git remote. Use `--remote` only if
 Cron logs are written to:
 
 - `state/logs/local_daily.log`
+
+## GitHub Automation Model
+
+GitHub now only handles deployment by default. The main repository automation path is:
+
+1. Your machine runs `scripts/run_local_daily.py` at `07:00` local time.
+2. The script pushes updated `content/` and `state/` to GitHub.
+3. `.github/workflows/pages.yml` rebuilds and deploys GitHub Pages.
+
+That gives you:
+
+- a homepage that shows the latest daily report
+- an archive page for older reports
+- one page per paper
+- git history for every generated artifact
+- a site you can browse on GitHub Pages or locally after `git clone`
 
 ## Content and Asset Management
 
@@ -194,9 +177,9 @@ The included workflows live at:
 
 Recommended setup:
 
-- `.github/workflows/daily.yml` should stay enabled for the 7am generation job
-- `.github/workflows/pages.yml` should stay enabled for deployment on local or manual pushes to `main`
-- local `scripts/run_local_daily.py` is optional fallback, not the primary path
+- `.github/workflows/pages.yml` should stay enabled for deployment on pushes to `main`
+- `.github/workflows/daily.yml` can stay as a manual fallback, but not as the primary generation path
+- local `scripts/run_local_daily.py` is the primary path
 
 For a project site such as `https://YaoJianyu77.github.io/dailypaper/`, the build now supports a subpath base URL.
 

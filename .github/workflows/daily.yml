@@ -2,9 +2,6 @@ name: Daily Papers
 
 "on":
   workflow_dispatch:
-  schedule:
-    - cron: '0 11 * * *'
-    - cron: '0 12 * * *'
 
 permissions:
   contents: write
@@ -17,38 +14,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  schedule-guard:
-    runs-on: ubuntu-latest
-    outputs:
-      should_run: ${{ steps.guard.outputs.should_run }}
-      ny_time: ${{ steps.guard.outputs.ny_time }}
-
-    steps:
-      - name: Check New York local time
-        id: guard
-        run: |
-          python - <<'PY'
-          import os
-          from datetime import datetime, timezone
-          from zoneinfo import ZoneInfo
-
-          now_ny = datetime.now(timezone.utc).astimezone(ZoneInfo("America/New_York"))
-          should_run = "true" if now_ny.hour == 7 else "false"
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
-              fh.write(f"should_run={should_run}\n")
-              fh.write(f"ny_time={now_ny.isoformat()}\n")
-          print(f"New York time: {now_ny.isoformat()}")
-          print(f"should_run={should_run}")
-          PY
-
   build-and-commit:
-    needs: schedule-guard
-    if: github.event_name != 'schedule' || needs.schedule-guard.outputs.should_run == 'true'
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -90,6 +63,18 @@ jobs:
             --input state/arxiv_filtered.json \
             --output state/arxiv_enriched.json
 
+      - name: Show AI enrichment metadata
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          payload = json.loads(Path('state/arxiv_enriched.json').read_text(encoding='utf-8'))
+          info = payload.get('ai_enrichment', {})
+          print('AI enrichment metadata:')
+          print(json.dumps(info, ensure_ascii=False, indent=2))
+          PY
+
       - name: Publish daily content
         run: python scripts/publish_daily.py --input state/arxiv_enriched.json
 
@@ -108,8 +93,12 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@users.noreply.github.com
           git add content state
-          git diff --cached --quiet || git commit -m "chore: update daily paper content"
-          git push
+          if git diff --cached --quiet; then
+            echo "No content changes detected."
+          else
+            git commit -m "chore: update daily paper content"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
