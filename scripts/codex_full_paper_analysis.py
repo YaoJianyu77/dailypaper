@@ -49,6 +49,14 @@ DEFAULT_ANALYSIS_SETTINGS = {
     'pdf_page_limit': 18,
 }
 
+DEFAULT_SCORE_CARD = {
+    'innovation': 6,
+    'technical_quality': 6,
+    'experimental_rigor': 6,
+    'writing_clarity': 6,
+    'practical_value': 6,
+}
+
 
 def normalize_image_token(value: str) -> str:
     text = str(value or '').strip().lower()
@@ -83,6 +91,40 @@ def coerce_string_list(value: Any, max_items: int) -> List[str]:
             if text:
                 items.append(text)
     return items[:max_items]
+
+
+def coerce_score_card(value: Any) -> Dict[str, int]:
+    raw = value if isinstance(value, dict) else {}
+    result: Dict[str, int] = {}
+    for key, default in DEFAULT_SCORE_CARD.items():
+        try:
+            score = int(raw.get(key, default))
+        except (TypeError, ValueError, AttributeError):
+            score = default
+        result[key] = max(1, min(10, score))
+    return result
+
+
+def coerce_related_work_comparisons(value: Any, max_items: int) -> List[Dict[str, str]]:
+    if not isinstance(value, list):
+        return []
+    items: List[Dict[str, str]] = []
+    for item in value[:max_items]:
+        if not isinstance(item, dict):
+            continue
+        title = normalize_model_text(item.get('title') or '')
+        comparison = normalize_model_text(item.get('comparison_zh') or '')
+        relation = normalize_model_text(item.get('relation') or '')
+        paper_id = normalize_paper_id(item.get('paper_id') or '')
+        if not title or not comparison:
+            continue
+        items.append({
+            'paper_id': paper_id,
+            'title': title,
+            'relation': relation or 'related',
+            'comparison_zh': comparison,
+        })
+    return items
 
 
 def normalize_analysis_settings(config: Dict[str, Any]) -> Dict[str, Any]:
@@ -405,7 +447,52 @@ def image_manifest(repo_root: Path, paper: Dict[str, Any]) -> List[str]:
     return result[:12]
 
 
-def build_prompt(repo_root: Path, config: Dict[str, Any], paper: Dict[str, Any], context: Dict[str, Any]) -> str:
+def paper_keyword_set(paper: Dict[str, Any]) -> set[str]:
+    keywords = paper.get('matched_keywords') or paper.get('ai', {}).get('keywords') or []
+    if not isinstance(keywords, list):
+        return set()
+    return {str(item).strip().lower() for item in keywords if str(item).strip()}
+
+
+def related_paper_candidates(current_paper: Dict[str, Any], papers: List[Dict[str, Any]], limit: int = 3) -> List[Dict[str, Any]]:
+    current_id = normalize_paper_id(current_paper.get('arxiv_id') or current_paper.get('arxivId') or current_paper.get('id', ''))
+    current_domain = str(current_paper.get('matched_domain') or '').strip()
+    current_keywords = paper_keyword_set(current_paper)
+    scored: List[tuple[int, float, Dict[str, Any]]] = []
+
+    for other in papers:
+        other_id = normalize_paper_id(other.get('arxiv_id') or other.get('arxivId') or other.get('id', ''))
+        if not other_id or other_id == current_id:
+            continue
+        overlap = len(current_keywords & paper_keyword_set(other))
+        score = overlap
+        if current_domain and other.get('matched_domain') == current_domain:
+            score += 2
+        if score <= 0:
+            continue
+        scored.append((score, float(other.get('scores', {}).get('recommendation', 0) or 0), other))
+
+    scored.sort(key=lambda item: (-item[0], -item[1], str(item[2].get('title') or '')))
+    candidates: List[Dict[str, Any]] = []
+    for _, _, paper in scored[:limit]:
+        candidates.append({
+            'paper_id': normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', '')),
+            'title': str(paper.get('title') or ''),
+            'domain': str(paper.get('matched_domain') or ''),
+            'summary': normalize_model_text(paper.get('ai', {}).get('summary_zh') or paper.get('summary') or ''),
+            'keywords': list(paper_keyword_set(paper))[:6],
+            'recommendation_score': paper.get('scores', {}).get('recommendation', 0),
+        })
+    return candidates
+
+
+def build_prompt(
+    repo_root: Path,
+    config: Dict[str, Any],
+    paper: Dict[str, Any],
+    context: Dict[str, Any],
+    related_candidates: List[Dict[str, Any]],
+) -> str:
     editorial = build_editorial_instruction_text(config)
     skills = build_skill_prompt_text(repo_root, config)
     payload = {
@@ -424,6 +511,7 @@ def build_prompt(repo_root: Path, config: Dict[str, Any], paper: Dict[str, Any],
         },
         'full_text_context': context,
         'figure_context': context.get('figure_context', [])[:8],
+        'related_paper_candidates': related_candidates[:3],
     }
 
     instructions = [
@@ -438,7 +526,10 @@ def build_prompt(repo_root: Path, config: Dict[str, Any], paper: Dict[str, Any],
         '6. `method_details` 要给出 3 到 5 个足够具体的技术点。\n'
         '7. `main_results_zh` 只写提取文本真正支持的结论。\n'
         '8. `relation_to_prior_work_zh` 要说明它相对常见路线的差异，而不是泛泛说“有创新”。\n'
-        '9. `overall_assessment_zh` 要给出一段客观评价，指出最值得信和最该怀疑的地方。',
+        '9. `overall_assessment_zh` 要给出一段客观评价，指出最值得信和最该怀疑的地方。\n'
+        '10. `technical_route_zh` 要说明这篇论文属于哪条技术路线、解决链路中的哪一段问题。\n'
+        '11. `score_card` 必须保守打分，1 到 10 的整数，分别评价创新性、技术质量、实验严谨性、写作清晰度和实用价值。\n'
+        '12. `related_work_comparisons` 只允许对给定的候选论文做比较；如果不适合比较，可以返回空数组。',
     ]
     if editorial:
         instructions.append('仓库编辑偏好：\n' + editorial)
@@ -459,7 +550,10 @@ def normalize_full_analysis(raw: Dict[str, Any]) -> Dict[str, Any]:
         'main_results_zh': normalize_model_text(raw.get('main_results_zh') or ''),
         'strengths': coerce_string_list(raw.get('strengths'), 4),
         'limitations': coerce_string_list(raw.get('limitations'), 4),
+        'technical_route_zh': normalize_model_text(raw.get('technical_route_zh') or ''),
         'relation_to_prior_work_zh': normalize_model_text(raw.get('relation_to_prior_work_zh') or ''),
+        'related_work_comparisons': coerce_related_work_comparisons(raw.get('related_work_comparisons'), 3),
+        'score_card': coerce_score_card(raw.get('score_card')),
         'practical_value_zh': normalize_model_text(raw.get('practical_value_zh') or ''),
         'future_work': coerce_string_list(raw.get('future_work'), 4),
         'reading_checklist': coerce_string_list(raw.get('reading_checklist'), 4),
@@ -467,9 +561,21 @@ def normalize_full_analysis(raw: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-def analyze_paper(repo_root: Path, config: Dict[str, Any], paper: Dict[str, Any], codex_path: str) -> Dict[str, Any]:
+def analyze_paper(
+    repo_root: Path,
+    config: Dict[str, Any],
+    paper: Dict[str, Any],
+    papers: List[Dict[str, Any]],
+    codex_path: str,
+) -> Dict[str, Any]:
     context = extract_paper_context(paper, normalize_analysis_settings(config))
-    prompt = build_prompt(repo_root, config, paper, context)
+    prompt = build_prompt(
+        repo_root,
+        config,
+        paper,
+        context,
+        related_paper_candidates(paper, papers),
+    )
     schema_path = repo_root / 'scripts' / 'full_paper_analysis_schema.json'
 
     with tempfile.NamedTemporaryFile(mode='w+', encoding='utf-8', suffix='.json', delete=False) as tmp:
@@ -552,7 +658,7 @@ def main() -> int:
         paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
         logger.info('Running full-paper analysis for %s', paper_id or f'paper-{index}')
         try:
-            paper['full_analysis'] = analyze_paper(repo_root, config, paper, codex_path)
+            paper['full_analysis'] = analyze_paper(repo_root, config, paper, result.get('top_papers', []), codex_path)
         except Exception as exc:
             logger.exception('Full-paper analysis failed for %s: %s', paper_id, exc)
             if args.strict:

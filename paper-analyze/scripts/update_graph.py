@@ -32,6 +32,12 @@ def main() -> int:
     parser.add_argument('--domain', required=True, help='Paper domain')
     parser.add_argument('--score', type=float, default=0.0, help='Quality score')
     parser.add_argument('--related', nargs='*', default=[], help='Related paper IDs')
+    parser.add_argument(
+        '--related-spec',
+        action='append',
+        default=[],
+        help='Structured related edge as paper_id|edge_type|weight',
+    )
     parser.add_argument('--repo-root', default=None, help='Repository root path')
     args = parser.parse_args()
 
@@ -68,6 +74,28 @@ def main() -> int:
                 'type': 'related',
                 'weight': 0.7,
             })
+            existing_edges.add((args.paper_id, related))
+
+    for raw_spec in args.related_spec:
+        if not raw_spec:
+            continue
+        parts = raw_spec.split('|')
+        if len(parts) != 3:
+            continue
+        target_id, edge_type, raw_weight = [part.strip() for part in parts]
+        if not target_id or (args.paper_id, target_id) in existing_edges:
+            continue
+        try:
+            weight = float(raw_weight)
+        except ValueError:
+            weight = 0.7
+        graph['edges'].append({
+            'source': args.paper_id,
+            'target': target_id,
+            'type': edge_type or 'related',
+            'weight': max(0.1, min(1.0, weight)),
+        })
+        existing_edges.add((args.paper_id, target_id))
 
     graph['last_updated'] = date
     write_json(graph_path, graph)

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "paper_id",
+    "one_liner_zh",
+    "summary_zh",
+    "background_zh",
+    "problem_zh",
+    "approach_zh",
+    "evidence_zh",
+    "value_zh",
+    "open_questions",
+    "core_contributions",
+    "why_read",
+    "risks",
+    "recommended_for",
+    "keywords",
+    "reading_priority",
+    "reading_priority_reason"
+  ],
+  "properties": {
+    "paper_id": {"type": "string"},
+    "one_liner_zh": {"type": "string"},
+    "summary_zh": {"type": "string"},
+    "background_zh": {"type": "string"},
+    "problem_zh": {"type": "string"},
+    "approach_zh": {"type": "string"},
+    "evidence_zh": {"type": "string"},
+    "value_zh": {"type": "string"},
+    "open_questions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "maxItems": 3
+    },
+    "core_contributions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "maxItems": 3
+    },
+    "why_read": {
+      "type": "array",
+      "items": {"type": "string"},
+      "maxItems": 3
+    },
+    "risks": {
+      "type": "array",
+      "items": {"type": "string"},
+      "maxItems": 2
+    },
+    "recommended_for": {
+      "type": "array",
+      "items": {"type": "string"},
+      "maxItems": 3
+    },
+    "keywords": {
+      "type": "array",
+      "items": {"type": "string"},
+      "maxItems": 6
+    },
+    "reading_priority": {
+      "type": "string",
+      "enum": ["high", "medium", "low"]
+    },
+    "reading_priority_reason": {"type": "string"}
+  }
+}

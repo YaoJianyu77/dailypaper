@@ -20,10 +20,11 @@ ai:
     - "skills/paper-deep-analysis/SKILL.md"
     - "skills/paper-image-extractor/SKILL.md"
   github_models_api_base: "https://models.github.ai"
-  github_models_paper_limit: 8
+  github_models_paper_limit: 10
   github_models_abstract_chars: 1200
-  codex_paper_limit: 6
+  codex_paper_limit: 10
   codex_abstract_chars: 1400
+  codex_timeout_seconds: 600
   preferred_models:
     - "openai/gpt-5.4"
     - "openai/gpt-5"
@@ -61,6 +62,7 @@ search:
   hot_window_days: 365
   hot_exclude_recent_days: 30
   hot_top_k_per_category: 5
+  hot_fallback_max_results: 100
   categories:
     - "cs.AI"
     - "cs.LG"
@@ -98,7 +100,7 @@ search:
 assets:
   enabled: true
   auto_extract_top_n: 3
-  max_images_per_paper: 5
+  max_images_per_paper: 0
   refresh_existing: false
   graph_enabled: true
   max_graph_related: 3

@@ -534,6 +534,31 @@ def search_hot_papers_from_categories(
     return all_hot_papers
 
 
+def search_hot_papers_from_arxiv_fallback(
+    categories: List[str],
+    start_date: datetime,
+    end_date: datetime,
+    max_results: int = 120,
+) -> List[Dict]:
+    """
+    当 Semantic Scholar 不可用或没有结果时，使用 arXiv 一年窗口回退搜索。
+
+    这里无法得到真实引用数，因此只提供“过去一年但不在最近窗口内”的候选集合，
+    后续仍由相关性、质量和较弱的热门度启发式排序。
+    """
+    papers = search_arxiv_by_date_range(
+        categories=categories,
+        start_date=start_date,
+        end_date=end_date,
+        max_results=max_results,
+    )
+    for paper in papers:
+        paper['source'] = 'arxiv_hot_fallback'
+        paper['hot_score'] = 0
+    logger.info("[arXiv fallback] Found %d hot-window papers", len(papers))
+    return papers
+
+
 def parse_arxiv_xml(xml_content: str) -> List[Dict]:
     """
     解析 arXiv XML 结果
@@ -946,11 +971,16 @@ def filter_and_score_papers(
         # 计算热门度
         if is_hot_paper_batch:
             # 高影响力论文：使用 influentialCitationCount
-            inf_cit = paper.get('influentialCitationCount', 0)
-            popularity = min(
-                inf_cit / (influential_citation_full_score / SCORE_MAX),
-                SCORE_MAX,
-            )
+            inf_cit = paper.get('influentialCitationCount', 0) or 0
+            if inf_cit > 0:
+                popularity = min(
+                    inf_cit / (influential_citation_full_score / SCORE_MAX),
+                    SCORE_MAX,
+                )
+            else:
+                # Semantic Scholar 不可用时回退到较保守的摘要启发式，避免 hot window 直接失真为 0。
+                summary = paper.get('summary', '') if 'summary' in paper else paper.get('abstract', '')
+                popularity = min(calculate_quality_score(summary) + 0.4, SCORE_MAX)
         else:
             # 普通论文：基于摘要推断
             summary = paper.get('summary', '') if 'summary' in paper else paper.get('abstract', '')
@@ -1061,6 +1091,7 @@ def main():
     hot_window_days = get_config_int(search_settings, 'hot_window_days', 365)
     hot_exclude_recent_days = get_config_int(search_settings, 'hot_exclude_recent_days', recent_window_days)
     hot_top_k_per_category = get_config_int(search_settings, 'hot_top_k_per_category', 5)
+    hot_fallback_max_results = get_config_int(search_settings, 'hot_fallback_max_results', max(args.max_results // 2, 80))
 
     window_30d_start, window_30d_end, window_1y_start, window_1y_end = calculate_date_windows(
         target_date,
@@ -1132,7 +1163,24 @@ def main():
             logger.info("Scored %d hot papers", len(scored_hot))
             all_scored_papers.extend(scored_hot)
         else:
-            logger.warning("No hot papers found from Semantic Scholar")
+            logger.warning("No hot papers found from Semantic Scholar, falling back to arXiv hot window")
+            hot_papers = search_hot_papers_from_arxiv_fallback(
+                categories=categories,
+                start_date=window_1y_start,
+                end_date=window_1y_end,
+                max_results=hot_fallback_max_results,
+            )
+            if hot_papers:
+                scored_hot = filter_and_score_papers(
+                    papers=hot_papers,
+                    config=config,
+                    target_date=target_date,
+                    is_hot_paper_batch=True,
+                )
+                logger.info("Scored %d fallback hot papers", len(scored_hot))
+                all_scored_papers.extend(scored_hot)
+            else:
+                logger.warning("No hot papers found from fallback arXiv search either")
     else:
         logger.info("Skipping hot paper search (disabled by user)")
 

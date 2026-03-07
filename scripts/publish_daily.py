@@ -17,6 +17,7 @@ from typing import Any, Dict, List
 import yaml
 
 from content_store import (
+    get_content_root,
     get_daily_root,
     get_meta_root,
     get_papers_root,
@@ -52,6 +53,11 @@ def normalize_image_token(value: str) -> str:
     return text
 
 
+def relative_asset_url(path: Path, repo_root: Path) -> str:
+    rel = path.relative_to(get_content_root(repo_root)).as_posix()
+    return '/' + rel.lstrip('/')
+
+
 def paper_urls(paper_id: str) -> tuple[str, str]:
     pid = normalize_paper_id(paper_id)
     return f'https://arxiv.org/abs/{pid}', f'https://arxiv.org/pdf/{pid}.pdf'
@@ -77,6 +83,27 @@ def full_analysis_figure_context(paper: Dict[str, Any]) -> List[Dict[str, Any]]:
     if not isinstance(context, list):
         return []
     return [item for item in context if isinstance(item, dict)]
+
+
+def full_analysis_score_card(paper: Dict[str, Any]) -> Dict[str, int]:
+    full = full_analysis_fields(paper)
+    card = full.get('score_card', {})
+    if not isinstance(card, dict):
+        return {}
+    result: Dict[str, int] = {}
+    for key in ['innovation', 'technical_quality', 'experimental_rigor', 'writing_clarity', 'practical_value']:
+        value = card.get(key)
+        if isinstance(value, int):
+            result[key] = max(1, min(10, value))
+    return result
+
+
+def full_analysis_related_work(paper: Dict[str, Any]) -> List[Dict[str, str]]:
+    full = full_analysis_fields(paper)
+    value = full.get('related_work_comparisons', [])
+    if not isinstance(value, list):
+        return []
+    return [item for item in value if isinstance(item, dict)]
 
 
 def fallback_summary(paper: Dict[str, Any]) -> str:
@@ -106,6 +133,62 @@ def analysis_value(full: Dict[str, Any], ai: Dict[str, Any], full_key: str, ai_k
     if ai_key:
         return ai.get(ai_key)
     return None
+
+
+def paper_url_by_id(repo_root: Path, papers: List[Dict[str, Any]], paper_id: str, fallback_title: str = '') -> str | None:
+    normalized = normalize_paper_id(paper_id)
+    if not normalized:
+        return None
+    for paper in papers:
+        current_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
+        if current_id == normalized:
+            slug = paper_slug(current_id, str(paper.get('title') or fallback_title or 'paper'))
+            path = get_papers_root(repo_root) / slug / 'index.md'
+            return relative_site_url(path, repo_root)
+    if fallback_title:
+        path = get_papers_root(repo_root) / paper_slug(normalized, fallback_title) / 'index.md'
+        if path.exists():
+            return relative_site_url(path, repo_root)
+    return None
+
+
+def scorecard_lines(score_card: Dict[str, int]) -> List[str]:
+    if not score_card:
+        return []
+    labels = {
+        'innovation': 'Innovation',
+        'technical_quality': 'Technical Quality',
+        'experimental_rigor': 'Experimental Rigor',
+        'writing_clarity': 'Writing Clarity',
+        'practical_value': 'Practical Value',
+    }
+    avg = round(sum(score_card.values()) / len(score_card), 1)
+    lines = [
+        '',
+        '## Scorecard',
+        f'- Overall: {avg}/10',
+    ]
+    for key in ['innovation', 'technical_quality', 'experimental_rigor', 'writing_clarity', 'practical_value']:
+        if key in score_card:
+            lines.append(f'- {labels[key]}: {score_card[key]}/10')
+    return lines
+
+
+def related_work_lines(repo_root: Path, papers: List[Dict[str, Any]], comparisons: List[Dict[str, str]]) -> List[str]:
+    if not comparisons:
+        return []
+    lines = ['', '## Related Paper Comparisons']
+    for item in comparisons[:3]:
+        paper_id = normalize_paper_id(item.get('paper_id') or '')
+        title = str(item.get('title') or paper_id or 'Related paper').strip()
+        relation = str(item.get('relation') or 'related').strip()
+        comparison = str(item.get('comparison_zh') or '').strip()
+        url = paper_url_by_id(repo_root, papers, paper_id, title)
+        if url:
+            lines.append(f'- [{title}]({url}) ({relation}): {comparison}')
+        else:
+            lines.append(f'- {title} ({relation}): {comparison}')
+    return lines
 
 
 def author_text(paper: Dict[str, Any]) -> str:
@@ -207,6 +290,19 @@ def related_paper_ids(current_paper: Dict[str, Any], papers: List[Dict[str, Any]
 
     scored.sort(reverse=True)
     return [paper_id for _, _, paper_id in scored[:limit]]
+
+
+def normalize_graph_edge_type(value: str) -> str:
+    text = str(value or '').strip().lower()
+    if any(token in text for token in ['improve', 'improves', 'better', 'beats', '超越', '改进']):
+        return 'improves'
+    if any(token in text for token in ['extend', 'extends', 'builds on', 'based on', '扩展', '建立在']):
+        return 'extends'
+    if any(token in text for token in ['compare', 'compares', 'vs', '对比', '比较']):
+        return 'compares'
+    if any(token in text for token in ['follow', 'follows', 'same line', '后续', '沿着']):
+        return 'follows'
+    return 'related'
 
 
 def maybe_extract_images(repo_root: Path, note_dir: Path, paper: Dict[str, Any], settings: Dict[str, Any], rank: int) -> None:
@@ -331,8 +427,9 @@ def resolve_image_file(image_files: List[Path], token: str) -> Path | None:
 
 def contextual_figure_entries(note_dir: Path, paper: Dict[str, Any], max_images: int) -> List[Dict[str, Any]]:
     image_files = available_image_files(note_dir)
-    if not image_files or max_images <= 0:
+    if not image_files:
         return []
+    limit = max_images if max_images > 0 else None
 
     entries: List[Dict[str, Any]] = []
     used_paths: set[str] = set()
@@ -351,9 +448,18 @@ def contextual_figure_entries(note_dir: Path, paper: Dict[str, Any], max_images:
         })
 
     if entries:
-        return entries[:max_images]
+        for path in image_files:
+            if str(path) in used_paths:
+                continue
+            entries.append({
+                'path': path,
+                'caption': '',
+                'role': classify_figure_role(path.stem),
+            })
+        return entries[:limit] if limit else entries
 
-    for path in image_files[:max_images]:
+    fallback_files = image_files[:limit] if limit else image_files
+    for path in fallback_files:
         entries.append({
             'path': path,
             'caption': '',
@@ -384,6 +490,22 @@ def figure_block(title: str, entry: Dict[str, Any]) -> List[str]:
     return lines
 
 
+def daily_feature_figure(repo_root: Path, note_dir: Path, paper: Dict[str, Any], settings: Dict[str, Any]) -> Dict[str, str]:
+    entries = contextual_figure_entries(note_dir, paper, settings['max_images_per_paper'])
+    used: set[str] = set()
+    preferred = (
+        pick_figure(entries, ['method', 'results', 'examples', 'other'], used)
+        or (entries[0] if entries else None)
+    )
+    if not preferred:
+        return {}
+    return {
+        'url': relative_asset_url(preferred['path'], repo_root),
+        'caption': str(preferred.get('caption') or '').strip(),
+        'alt': preferred['path'].stem,
+    }
+
+
 def maybe_update_graph(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[str, Any]], settings: Dict[str, Any]) -> None:
     if not settings['graph_enabled']:
         return
@@ -401,9 +523,24 @@ def maybe_update_graph(repo_root: Path, paper: Dict[str, Any], papers: List[Dict
         '--domain', str(paper.get('matched_domain') or 'Uncategorized'),
         '--score', str(float(paper.get('scores', {}).get('recommendation', 0) or 0)),
     ]
-    related = related_paper_ids(paper, papers, settings['max_graph_related'])
+    semantic_targets = {
+        normalize_paper_id(item.get('paper_id') or '')
+        for item in full_analysis_related_work(paper)
+        if normalize_paper_id(item.get('paper_id') or '')
+    }
+    related = [
+        item for item in related_paper_ids(paper, papers, settings['max_graph_related'])
+        if item not in semantic_targets
+    ]
     if related:
         cmd.extend(['--related', *related])
+    for item in full_analysis_related_work(paper):
+        target_id = normalize_paper_id(item.get('paper_id') or '')
+        if not target_id:
+            continue
+        edge_type = normalize_graph_edge_type(item.get('relation') or '')
+        weight = 0.8 if edge_type in {'improves', 'extends'} else 0.7
+        cmd.extend(['--related-spec', f'{target_id}|{edge_type}|{weight}'])
 
     try:
         subprocess.run(cmd, check=True, capture_output=True, text=True)
@@ -411,7 +548,7 @@ def maybe_update_graph(repo_root: Path, paper: Dict[str, Any], papers: List[Dict
         logger.warning('Graph update failed for %s: %s', paper_id, exc.stderr.strip() or exc.stdout.strip() or exc)
 
 
-def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[str, Any]], settings: Dict[str, Any], rank: int) -> str:
+def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[str, Any]], settings: Dict[str, Any], rank: int) -> Dict[str, str]:
     paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
     title = paper.get('title', 'Untitled Paper').strip()
     slug = paper_slug(paper_id, title)
@@ -432,6 +569,7 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
         entry for entry in figure_entries
         if str(entry['path']) not in used_figure_paths
     ]
+    daily_figure = daily_feature_figure(repo_root, note_dir, paper, settings)
 
     frontmatter = {
         'paper_id': paper_id,
@@ -541,6 +679,14 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
             '## Overall Assessment',
             full.get('overall_assessment_zh', ''),
         ])
+    if full.get('technical_route_zh'):
+        body_lines.extend([
+            '',
+            '## Technical Route Positioning',
+            full.get('technical_route_zh', ''),
+        ])
+    body_lines.extend(scorecard_lines(full_analysis_score_card(paper)))
+    body_lines.extend(related_work_lines(repo_root, papers, full_analysis_related_work(paper)))
     bullet_section(body_lines, 'Strengths', full.get('strengths', []), limit=4)
     bullet_section(body_lines, 'Future Work', full.get('future_work', []), limit=4)
     bullet_section(body_lines, 'Reading Checklist', full.get('reading_checklist', []) or ai.get('open_questions', []), limit=4)
@@ -586,7 +732,16 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
         ])
 
     write_markdown(note_path, frontmatter, '\n'.join(body_lines) + '\n')
-    return relative_site_url(note_path, repo_root)
+    result = {
+        'page_url': relative_site_url(note_path, repo_root),
+    }
+    if daily_figure.get('url'):
+        result['daily_figure_url'] = daily_figure['url']
+    if daily_figure.get('caption'):
+        result['daily_figure_caption'] = daily_figure['caption']
+    if daily_figure.get('alt'):
+        result['daily_figure_alt'] = daily_figure['alt']
+    return result
 
 
 def fallback_overview(papers: List[Dict[str, Any]]) -> str:
@@ -606,7 +761,12 @@ def build_overview(payload: Dict[str, Any], papers: List[Dict[str, Any]]) -> str
     return daily_brief.get('overview_zh') or fallback_overview(papers)
 
 
-def build_daily_body(report_date: str, payload: Dict[str, Any], papers: List[Dict[str, Any]], paper_urls_map: Dict[str, str]) -> str:
+def build_daily_body(
+    report_date: str,
+    payload: Dict[str, Any],
+    papers: List[Dict[str, Any]],
+    paper_meta_map: Dict[str, Dict[str, str]],
+) -> str:
     daily_brief = payload.get('daily_brief', {}) if isinstance(payload.get('daily_brief'), dict) else {}
     lines = [
         f'# Daily Paper Report - {report_date}',
@@ -629,7 +789,8 @@ def build_daily_body(report_date: str, payload: Dict[str, Any], papers: List[Dic
     for index, paper in enumerate(papers, start=1):
         paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
         title = paper.get('title', 'Untitled Paper')
-        url = paper_urls_map[paper_id]
+        paper_meta = paper_meta_map.get(paper_id, {})
+        url = paper_meta.get('page_url', '#')
         abs_url, pdf_url = paper_urls(paper_id)
         ai = ai_fields(paper)
         score = paper.get('scores', {}).get('recommendation', 'N/A')
@@ -643,7 +804,24 @@ def build_daily_body(report_date: str, payload: Dict[str, Any], papers: List[Dic
             f'- Published: {paper.get("published", paper.get("publicationDate", "Unknown"))}',
             f'- Links: [arXiv]({abs_url}) | [PDF]({pdf_url})',
             f'- One-line view: {summarize_paper(paper)}',
+            f'- Summary: {detail_summary(paper)}',
         ])
+        if ai.get('background_zh'):
+            lines.append(f'- Background: {ai.get("background_zh")}')
+        if ai.get('approach_zh'):
+            lines.append(f'- Method: {ai.get("approach_zh")}')
+        if ai.get('evidence_zh'):
+            lines.append(f'- Evidence: {ai.get("evidence_zh")}')
+        if index <= 3:
+            lines.append(f'- Detailed report: [paper page]({url})')
+            if paper_meta.get('daily_figure_url'):
+                lines.extend([
+                    '',
+                    f'![{paper_meta.get("daily_figure_alt", title)}]({paper_meta["daily_figure_url"]})',
+                    '',
+                ])
+                if paper_meta.get('daily_figure_caption'):
+                    lines.append(f'*Figure cue:* {paper_meta["daily_figure_caption"]}')
         if ai.get('reading_priority_reason'):
             lines.append(f'- Why now: {ai.get("reading_priority_reason")}')
         lines.extend(inline_bullets('Core contribution', ai.get('core_contributions', []), limit=3))
@@ -654,6 +832,20 @@ def build_daily_body(report_date: str, payload: Dict[str, Any], papers: List[Dic
             lines.append(f'- Recommended for: {", ".join(recommended_for[:3])}')
 
     return '\n'.join(lines) + '\n'
+
+
+def daily_keywords(papers: List[Dict[str, Any]]) -> List[str]:
+    counts: Counter[str] = Counter()
+    for paper in papers:
+        ai = ai_fields(paper)
+        raw_keywords = ai.get('keywords') or paper.get('matched_keywords') or []
+        if not isinstance(raw_keywords, list):
+            continue
+        for keyword in raw_keywords:
+            text = str(keyword).strip()
+            if text:
+                counts[text] += 1
+    return [keyword for keyword, _ in counts.most_common(12)]
 
 
 def rebuild_indexes(repo_root: Path, latest_entry: Dict[str, Any]) -> None:
@@ -708,10 +900,10 @@ def main() -> int:
     report_date = payload.get('target_date') or datetime.now().strftime('%Y-%m-%d')
     papers = payload.get('top_papers', [])
 
-    paper_page_urls: Dict[str, str] = {}
+    paper_page_meta: Dict[str, Dict[str, str]] = {}
     for rank, paper in enumerate(papers, start=1):
         paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
-        paper_page_urls[paper_id] = ensure_paper_page(repo_root, paper, papers, settings, rank)
+        paper_page_meta[paper_id] = ensure_paper_page(repo_root, paper, papers, settings, rank)
 
     daily_path = get_daily_root(repo_root) / f'{report_date}.md'
     frontmatter = {
@@ -720,13 +912,16 @@ def main() -> int:
         'paper_count': len(papers),
         'tags': ['daily-report'],
     }
+    keywords = daily_keywords(papers)
+    if keywords:
+        frontmatter['keywords'] = keywords
     enrichment_meta = payload.get('ai_enrichment', {}) if isinstance(payload.get('ai_enrichment'), dict) else {}
     if 'enabled' in enrichment_meta:
         frontmatter['ai_enriched'] = bool(enrichment_meta.get('enabled'))
     if enrichment_meta.get('model'):
         frontmatter['ai_model'] = enrichment_meta.get('model')
 
-    body = build_daily_body(report_date, payload, papers, paper_page_urls)
+    body = build_daily_body(report_date, payload, papers, paper_page_meta)
     write_markdown(daily_path, frontmatter, body)
     run_linking(repo_root, daily_path)
 

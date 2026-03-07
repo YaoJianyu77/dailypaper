@@ -14,8 +14,8 @@
     }
   },
   "total_recent": 200,
-  "total_hot": 0,
-  "total_unique": 53,
+  "total_hot": 100,
+  "total_unique": 82,
   "top_papers": [
     {
       "id": "http://arxiv.org/abs/2603.05181v1",
@@ -100,6 +100,135 @@
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.6,
       "is_hot_paper": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.04879v1",
+      "title": "Rethinking the Trust Region in LLM Reinforcement Learning",
+      "summary": "Reinforcement learning (RL) has become a cornerstone for fine-tuning Large Language Models (LLMs), with Proximal Policy Optimization (PPO) serving as the de facto standard algorithm. Despite its ubiquity, we argue that the core ratio clipping mechanism in PPO is structurally ill-suited for the large vocabularies inherent to LLMs. PPO constrains policy updates based on the probability ratio of sampled tokens, which serves as a noisy single-sample Monte Carlo estimate of the true policy divergence. This creates a sub-optimal learning dynamic: updates to low-probability tokens are aggressively over-penalized, while potentially catastrophic shifts in high-probability tokens are under-constrained, leading to training inefficiency and instability. To address this, we propose Divergence Proximal Policy Optimization (DPPO), which substitutes heuristic clipping with a more principled constraint based on a direct estimate of policy divergence (e.g., Total Variation or KL). To avoid huge memory footprint, we introduce the efficient Binary and Top-K approximations to capture the essential divergence with negligible overhead. Extensive empirical evaluations demonstrate that DPPO achieves superior training stability and efficiency compared to existing methods, offering a more robust foundation for RL-based LLM fine-tuning.",
+      "authors": [
+        "Penghui Qi",
+        "Xiangxin Zhou",
+        "Zichen Liu",
+        "Tianyu Pang",
+        "Chao Du",
+        "Min Lin",
+        "Wee Sun Lee"
+      ],
+      "published": "2026-02-04T18:59:04Z",
+      "published_date": "2026-02-04 18:59:04+00:00",
+      "updated": "2026-02-04T18:59:04Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.04879v1",
+      "url": "http://arxiv.org/abs/2602.04879v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 1.6,
+        "recommendation": 8.63
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": true
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.05105v1",
+      "title": "GAMMS: Graph based Adversarial Multiagent Modeling Simulator",
+      "summary": "As intelligent systems and multi-agent coordination become increasingly central to real-world applications, there is a growing need for simulation tools that are both scalable and accessible. Existing high-fidelity simulators, while powerful, are often computationally expensive and ill-suited for rapid prototyping or large-scale agent deployments. We present GAMMS (Graph based Adversarial Multiagent Modeling Simulator), a lightweight yet extensible simulation framework designed to support fast development and evaluation of agent behavior in environments that can be represented as graphs. GAMMS emphasizes five core objectives: scalability, ease of use, integration-first architecture, fast visualization feedback, and real-world grounding. It enables efficient simulation of complex domains such as urban road networks and communication systems, supports integration with external tools (e.g., machine learning libraries, planning solvers), and provides built-in visualization with minimal configuration. GAMMS is agnostic to policy type, supporting heuristic, optimization-based, and learning-based agents, including those using large language models. By lowering the barrier to entry for researchers and enabling high-performance simulations on standard hardware, GAMMS facilitates experimentation and innovation in multi-agent systems, autonomous planning, and adversarial modeling. The framework is open-source and available at https://github.com/GAMMSim/GAMMS/",
+      "authors": [
+        "Rohan Patil",
+        "Jai Malegaonkar",
+        "Xiao Jiang",
+        "Andre Dion",
+        "Gaurav S. Sukhatme",
+        "Henrik I. Christensen"
+      ],
+      "published": "2026-02-04T22:38:51Z",
+      "published_date": "2026-02-04 22:38:51+00:00",
+      "updated": "2026-02-04T22:38:51Z",
+      "categories": [
+        "cs.AI",
+        "cs.RO",
+        "cs.SE"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.05105v1",
+      "url": "http://arxiv.org/abs/2602.05105v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 2.99,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 1.6,
+        "recommendation": 8.47
+      },
+      "matched_domain": "Agents",
+      "matched_keywords": [
+        "agent",
+        "multi-agent",
+        "autonomous",
+        "planning",
+        "cs.AI",
+        "cs.RO"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.45,
+      "is_hot_paper": true
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.05014v3",
+      "title": "DeepRead: Document Structure-Aware Reasoning to Enhance Agentic Search",
+      "summary": "With the rapid advancement of tool-use capabilities in Large Language Models (LLMs), Retrieval-Augmented Generation (RAG) is shifting from static, one-shot retrieval toward autonomous, multi-turn evidence acquisition. However, existing agentic search frameworks typically treat long documents as flat collections of unstructured chunks, disregarding the native hierarchical organization and sequential logic essential for human comprehension. To bridge this gap, we introduce \\textbf{DeepRead}, a structure-aware document reasoning agent designed to operationalize document-native structural priors into actionable reasoning capabilities. Leveraging the structural fidelity of modern OCR, DeepRead constructs a paragraph-level, coordinate-based navigation system and equips the LLM with two synergistic tools: \\textsf{Retrieve} for scanning-aware localization, and \\textsf{ReadSection} for contiguous, order-preserving reading within specific hierarchical scopes. This design elicits a human-like ``locate-then-read'' reasoning paradigm, effectively mitigating the context fragmentation inherent in traditional retrieval methods. Extensive evaluations across four benchmarks spanning diverse document types demonstrate that DeepRead outperforms Search-o1-style agentic search baselines by an average of 10.3\\%. Fine-grained behavioral analysis further confirms that DeepRead autonomously adopts human-aligned reading strategies, validating the critical role of structural awareness in achieving precise document reasoning. Our code is available at https://github.com/Zhanli-Li/DeepRead.",
+      "authors": [
+        "Zhanli Li",
+        "Huiwen Tian",
+        "Lvzhou Luo",
+        "Yixuan Cao",
+        "Ping Luo"
+      ],
+      "published": "2026-02-04T20:03:28Z",
+      "published_date": "2026-02-04 20:03:28+00:00",
+      "updated": "2026-02-12T02:45:40Z",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.IR"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.05014v3",
+      "url": "http://arxiv.org/abs/2602.05014v3",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 2.21,
+        "recency": 3.0,
+        "popularity": 2.4,
+        "quality": 2.0,
+        "recommendation": 8.45
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": true
     },
     {
       "id": "http://arxiv.org/abs/2603.05500v1",
@@ -219,6 +348,56 @@
       "is_hot_paper": false
     },
     {
+      "id": "http://arxiv.org/abs/2602.07055v1",
+      "title": "Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration?",
+      "summary": "Spatial embodied intelligence requires agents to act to acquire information under partial observability. While multimodal foundation models excel at passive perception, their capacity for active, self-directed exploration remains understudied. We propose Theory of Space, defined as an agent's ability to actively acquire information through self-directed, active exploration and to construct, revise, and exploit a spatial belief from sequential, partial observations. We evaluate this through a benchmark where the goal is curiosity-driven exploration to build an accurate cognitive map. A key innovation is spatial belief probing, which prompts models to reveal their internal spatial representations at each step. Our evaluation of state-of-the-art models reveals several critical bottlenecks. First, we identify an Active-Passive Gap, where performance drops significantly when agents must autonomously gather information. Second, we find high inefficiency, as models explore unsystematically compared to program-based proxies. Through belief probing, we diagnose that while perception is an initial bottleneck, global beliefs suffer from instability that causes spatial knowledge to degrade over time. Finally, using a false belief paradigm, we uncover Belief Inertia, where agents fail to update obsolete priors with new evidence. This issue is present in text-based agents but is particularly severe in vision-based models. Our findings suggest that current foundation models struggle to maintain coherent, revisable spatial beliefs during active exploration.",
+      "authors": [
+        "Pingyue Zhang",
+        "Zihan Huang",
+        "Yue Wang",
+        "Jieyu Zhang",
+        "Letian Xue",
+        "Zihan Wang",
+        "Qineng Wang",
+        "Keshigeyan Chandrasegaran",
+        "Ruohan Zhang",
+        "Yejin Choi",
+        "Ranjay Krishna",
+        "Jiajun Wu",
+        "Li Fei-Fei",
+        "Manling Li"
+      ],
+      "published": "2026-02-04T19:06:40Z",
+      "published_date": "2026-02-04 19:06:40+00:00",
+      "updated": "2026-02-04T19:06:40Z",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.07055v1",
+      "url": "http://arxiv.org/abs/2602.07055v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 2.82,
+        "recency": 3.0,
+        "popularity": 1.8,
+        "quality": 1.4,
+        "recommendation": 8.06
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "foundation model",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": true
+    },
+    {
       "id": "http://arxiv.org/abs/2603.05308v1",
       "title": "Med-V1: Small Language Models for Zero-shot and Scalable Biomedical Evidence Attribution",
       "summary": "Assessing whether an article supports an assertion is essential for hallucination detection and claim verification. While large language models (LLMs) have the potential to automate this task, achieving strong performance requires frontier models such as GPT-5 that are prohibitively expensive to deploy at scale. To efficiently perform biomedical evidence attribution, we present Med-V1, a family of small language models with only three billion parameters. Trained on high-quality synthetic data newly developed in this study, Med-V1 substantially outperforms (+27.0% to +71.3%) its base models on five biomedical benchmarks unified into a verification format. Despite its smaller size, Med-V1 performs comparably to frontier LLMs such as GPT-5, along with high-quality explanations for its predictions. We use Med-V1 to conduct a first-of-its-kind use case study that quantifies hallucinations in LLM-generated answers under different citation instructions. Results show that the format instruction strongly affects citation validity and hallucination, with GPT-5 generating more claims but exhibiting hallucination rates similar to GPT-4o. Additionally, we present a second use case showing that Med-V1 can automatically identify high-stakes evidence misattributions in clinical practice guidelines, revealing potentially negative public health impacts that are otherwise challenging to identify at scale. Overall, Med-V1 provides an efficient and accurate lightweight alternative to frontier LLMs for practical and real-world applications in biomedical evidence attribution and verification tasks. Med-V1 is available at https://github.com/ncbi-nlp/Med-V1.",
@@ -262,186 +441,6 @@
         "llm",
         "cs.AI",
         "cs.CL"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05218v1",
-      "title": "KARL: Knowledge Agents via Reinforcement Learning",
-      "summary": "We present a system for training enterprise search agents via reinforcement learning that achieves state-of-the-art performance across a diverse suite of hard-to-verify agentic search tasks. Our work makes four core contributions. First, we introduce KARLBench, a multi-capability evaluation suite spanning six distinct search regimes, including constraint-driven entity search, cross-document report synthesis, tabular numerical reasoning, exhaustive entity retrieval, procedural reasoning over technical documentation, and fact aggregation over internal enterprise notes. Second, we show that models trained across heterogeneous search behaviors generalize substantially better than those optimized for any single benchmark. Third, we develop an agentic synthesis pipeline that employs long-horizon reasoning and tool use to generate diverse, grounded, and high-quality training data, with iterative bootstrapping from increasingly capable models. Fourth, we propose a new post-training paradigm based on iterative large-batch off-policy RL that is sample efficient, robust to train-inference engine discrepancies, and naturally extends to multi-task training with out-of-distribution generalization. Compared to Claude 4.6 and GPT 5.2, KARL is Pareto-optimal on KARLBench across cost-quality and latency-quality trade-offs, including tasks that were out-of-distribution during training. With sufficient test-time compute, it surpasses the strongest closed models. These results show that tailored synthetic data in combination with multi-task reinforcement learning enables cost-efficient and high-performing knowledge agents for grounded reasoning.",
-      "authors": [
-        "Jonathan D. Chang",
-        "Andrew Drozdov",
-        "Shubham Toshniwal",
-        "Owen Oertell",
-        "Alexander Trott",
-        "Jacob Portes",
-        "Abhay Gupta",
-        "Pallavi Koppol",
-        "Ashutosh Baheti",
-        "Sean Kulinski",
-        "Ivan Zhou",
-        "Irene Dea",
-        "Krista Opsahl-Ong",
-        "Simon Favreau-Lessard",
-        "Sean Owen",
-        "Jose Javier Gonzalez Ortiz",
-        "Arnav Singhvi",
-        "Xabi Andrade",
-        "Cindy Wang",
-        "Kartik Sreenivasan",
-        "Sam Havens",
-        "Jialu Liu",
-        "Peyton DeNiro",
-        "Wen Sun",
-        "Michael Bendersky",
-        "Jonathan Frankle"
-      ],
-      "published": "2026-03-05T14:30:25Z",
-      "published_date": "2026-03-05 14:30:25+00:00",
-      "updated": "2026-03-05T14:30:25Z",
-      "categories": [
-        "cs.AI",
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05218v1",
-      "url": "http://arxiv.org/abs/2603.05218v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.7,
-        "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 7.93
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "post-training",
-        "cs.AI",
-        "cs.LG"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05028v1",
-      "title": "Survive at All Costs: Exploring LLM's Risky Behaviors under Survival Pressure",
-      "summary": "As Large Language Models (LLMs) evolve from chatbots to agentic assistants, they are increasingly observed to exhibit risky behaviors when subjected to survival pressure, such as the threat of being shut down. While multiple cases have indicated that state-of-the-art LLMs can misbehave under survival pressure, a comprehensive and in-depth investigation into such misbehaviors in real-world scenarios remains scarce. In this paper, we study these survival-induced misbehaviors, termed as SURVIVE-AT-ALL-COSTS, with three steps. First, we conduct a real-world case study of a financial management agent to determine whether it engages in risky behaviors that cause direct societal harm when facing survival pressure. Second, we introduce SURVIVALBENCH, a benchmark comprising 1,000 test cases across diverse real-world scenarios, to systematically evaluate SURVIVE-AT-ALL-COSTS misbehaviors in LLMs. Third, we interpret these SURVIVE-AT-ALL-COSTS misbehaviors by correlating them with model's inherent self-preservation characteristic and explore mitigation methods. The experiments reveals a significant prevalence of SURVIVE-AT-ALL-COSTS misbehaviors in current models, demonstrates the tangible real-world impact it may have, and provides insights for potential detection and mitigation strategies. Our code and data are available at https://github.com/thu-coai/Survive-at-All-Costs.",
-      "authors": [
-        "Yida Lu",
-        "Jianwei Fang",
-        "Xuyang Shao",
-        "Zixuan Chen",
-        "Shiyao Cui",
-        "Shanshan Bian",
-        "Guangyao Su",
-        "Pei Ke",
-        "Han Qiu",
-        "Minlie Huang"
-      ],
-      "published": "2026-03-05T10:16:23Z",
-      "published_date": "2026-03-05 10:16:23+00:00",
-      "updated": "2026-03-05T10:16:23Z",
-      "categories": [
-        "cs.AI",
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05028v1",
-      "url": "http://arxiv.org/abs/2603.05028v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.6,
-        "recency": 3.0,
-        "popularity": 1.4,
-        "quality": 1.4,
-        "recommendation": 7.93
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "large language model",
-        "llm",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05129v1",
-      "title": "MedCoRAG: Interpretable Hepatology Diagnosis via Hybrid Evidence Retrieval and Multispecialty Consensus",
-      "summary": "Diagnosing hepatic diseases accurately and interpretably is critical, yet it remains challenging in real-world clinical settings. Existing AI approaches for clinical diagnosis often lack transparency, structured reasoning, and deployability. Recent efforts have leveraged large language models (LLMs), retrieval-augmented generation (RAG), and multi-agent collaboration. However, these approaches typically retrieve evidence from a single source and fail to support iterative, role-specialized deliberation grounded in structured clinical data. To address this, we propose MedCoRAG (i.e., Medical Collaborative RAG), an end-to-end framework that generates diagnostic hypotheses from standardized abnormal findings and constructs a patient-specific evidence package by jointly retrieving and pruning UMLS knowledge graph paths and clinical guidelines. It then performs Multi-Agent Collaborative Reasoning: a Router Agent dynamically dispatches Specialist Agents based on case complexity; these agents iteratively reason over the evidence and trigger targeted re-retrievals when needed, while a Generalist Agent synthesizes all deliberations into a traceable consensus diagnosis that emulates multidisciplinary consultation. Experimental results on hepatic disease cases from MIMIC-IV show that MedCoRAG outperforms existing methods and closed-source models in both diagnostic performance and reasoning interpretability.",
-      "authors": [
-        "Zheng Li",
-        "Jiayi Xu",
-        "Zhikai Hu",
-        "Hechang Chen",
-        "Lele Cong",
-        "Yunyun Wang",
-        "Shuchao Pang"
-      ],
-      "published": "2026-03-05T12:58:45Z",
-      "published_date": "2026-03-05 12:58:45+00:00",
-      "updated": "2026-03-05T12:58:45Z",
-      "categories": [
-        "cs.AI",
-        "cs.MA"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05129v1",
-      "url": "http://arxiv.org/abs/2603.05129v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.09,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 7.9
-      },
-      "matched_domain": "Agents",
-      "matched_keywords": [
-        "agent",
-        "multi-agent",
-        "cs.AI",
-        "cs.MA"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.45,
-      "is_hot_paper": false
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05290v1",
-      "title": "X-RAY: Mapping LLM Reasoning Capability via Formalized and Calibrated Probes",
-      "summary": "Large language models (LLMs) achieve promising performance, yet their ability to reason remains poorly understood. Existing evaluations largely emphasize task-level accuracy, often conflating pattern matching with reasoning capability. We present X-RAY, an explainable reasoning analysis system that maps the LLM reasoning capability using calibrated, formally verified probes. We model reasoning capability as a function of extractable \\textit{structure}, operationalized through formal properties such as constraint interaction, reasoning depth, and solution-space geometry. X-Ray generates probes via formal tools with controlled structural variations, enabling precise isolation of incremental structural information through formal calibration and verification. We evaluate state-of-the-art LLMs on problems ranging from junior-level to advanced in mathematics, physics, and chemistry. Our analysis reveals a systematic asymmetry in LLM reasoning: models are relatively robust to constraint refinement, where additional conditions shrink an existing solution space, but degrade sharply under solution-space restructuring, where modifications alter the underlying structural form of the solution manifold. Moreover, calibrated formal probes differentiate models that appear indistinguishable on standard benchmarks and reveal failure modes that are structurally interpretable rather than opaque. Beyond evaluation, our framework is contamination-free and supports the training and testing of reasoning models.",
-      "authors": [
-        "Gao Tianxi",
-        "Cai Yufan",
-        "Yuan Yusi",
-        "Dong Jin Song"
-      ],
-      "published": "2026-03-05T15:34:22Z",
-      "published_date": "2026-03-05 15:34:22+00:00",
-      "updated": "2026-03-05T15:34:22Z",
-      "categories": [
-        "cs.AI"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05290v1",
-      "url": "http://arxiv.org/abs/2603.05290v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.9,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 7.8
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "large language model",
-        "llm",
-        "cs.AI"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.6,

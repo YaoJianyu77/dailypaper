@@ -14,8 +14,8 @@
     }
   },
   "total_recent": 200,
-  "total_hot": 0,
-  "total_unique": 53,
+  "total_hot": 100,
+  "total_unique": 82,
   "top_papers": [
     {
       "id": "http://arxiv.org/abs/2603.05181v1",
@@ -56,46 +56,47 @@
       "domain_preference_bonus": 0.45,
       "is_hot_paper": false,
       "ai": {
-        "one_liner_zh": "这篇工作把多模态推理对象从孤立图文对换成带边结构的多模态图，并用可学习路由决定每个节点该看哪种模态组合。",
-        "summary_zh": "论文针对多模态图推理，认为现有方法把图像文本对孤立编码，忽略了真实数据中的关系结构。Mario 分两步：先用图条件 VLM 在拓扑引导下做细粒度跨模态对齐，再把对齐后的特征组织成图感知指令视图，并通过可学习路由为每个节点和邻域选择最有信息量的模态配置交给 LLM。摘要称其在多个 MMG 基准上有效，但由于摘要截断，具体提升和适用边界摘要没有充分说明。",
-        "background_zh": "多模态推理近年多依赖 VLM 处理单个图文对，但真实世界数据常天然带有节点关系和图结构。若想让 LLM 在这类场景中推理，仅做孤立编码会丢失拓扑和邻域信息。",
-        "problem_zh": "核心问题是如何在保留图拓扑的同时，把文本、图像和结构信号一起交给 LLM 做推理。难点在于跨模态一致性本来就弱，而且不同节点与邻域对模态的依赖并不相同。",
-        "approach_zh": "Mario 采用两阶段设计：先用图条件 VLM 在拓扑引导下做细粒度跨模态对比学习，联合修正文图特征；再做模态自适应的图指令微调，把对齐后的特征组织成图感知指令视图，并用可学习路由选择最有信息量的模态配置供 LLM 推理。",
-        "evidence_zh": "摘要只说明在多个 MMG 基准上做了大规模实验，并声称 Mario 有效。由于摘要截断，具体对比对象、提升幅度、不同组件的消融结论和成本开销摘要没有充分说明。",
-        "value_zh": "如果成立，这项工作为“LLM 处理带图结构的多模态数据”提供了比简单拼接输入更系统的路线，可用于多模态知识图、文档图和复杂实体关系场景。它的模态路由思路也可能推广到更一般的异构输入选择问题。",
+        "one_liner_zh": "这篇工作把多模态图上的结构信息、跨模态对齐和面向LLM的推理接口放进同一框架里，目标明确对准当前多模态系统缺少关系建模的问题。",
+        "summary_zh": "论文关注多模态图推理：节点同时含文本和视觉属性，边提供结构线索，而现有方法常把图像-文本对独立编码，难以利用图拓扑。作者提出 Mario，两阶段处理跨模态一致性不足和不同节点偏好不同模态这两个问题，先用图条件约束的 VLM 做细粒度对齐，再用模态自适应的图指令调优把最合适的模态视图送入 LLM。摘要说明作者在多个多模态图基准上做了广泛实验，但结果细节、比较对象和增益来源在给定摘要里没有充分说明。",
+        "background_zh": "随着大模型进入多模态推理阶段，很多任务不再只是单个图文对理解，而是需要在对象、文档、实体或样本之间做结构化关系推理。现有视觉语言建模如果忽略图结构，就很难处理现实数据中天然存在的跨节点依赖和多模态证据组合。",
+        "problem_zh": "问题是如何让 LLM 在保留图拓扑信息的前提下，对同时含视觉和文本属性的多模态图进行有效推理。难点在于不同模态之间可能对不齐，而且不同节点及其邻域真正有用的模态组合并不一致，这会直接影响下游推理质量。",
+        "approach_zh": "Mario 采用两阶段框架。第一阶段用图条件约束的视觉语言模型，在图拓扑引导下通过细粒度跨模态对比学习联合优化文本与视觉表示；第二阶段做模态自适应的图指令调优，把已对齐的多模态特征组织成面向图的指令视图，并通过可学习路由器为每个节点及其邻域选择更有信息量的模态配置，再交给 LLM 推理。",
+        "evidence_zh": "摘要只明确给出“在多个多模态图基准上进行了广泛实验”这一层面的证据，说明作者至少做了跨数据集验证。由于摘要被截断，是否显著优于哪些基线、提升主要来自哪一阶段、不同图类型上的稳定性如何，摘要没有充分说明。",
+        "value_zh": "如果这套方法成立，它的实际价值在于为多模态系统提供一种更自然的“图结构+多模态+LLM”结合方式，适合需要联合利用局部内容和关系上下文的任务。对研究而言，它把多模态图推理从单纯表征学习推进到面向 LLM 的可指令化接口；对工程而言，它可能为文档理解、知识图谱增强、多实体视觉问答等场景提供更稳健的推理管线。",
         "open_questions": [
-          "图条件 VLM 如何把边信息注入跨模态对齐，是否会放大错误边带来的噪声？",
-          "可学习路由选择模态配置的粒度是什么，是否对节点类型或邻域规模敏感？",
-          "所谓 diverse MMG benchmarks 包含哪些任务，收益主要来自图结构建模还是更强的特征对齐？"
+          "两阶段设计各自带来多少贡献，图条件对齐和模态路由是否都不可缺少？",
+          "可学习路由器具体依据什么信号选择模态配置，是否稳定且可解释？",
+          "实验覆盖了哪些多模态图任务与基线，性能提升是普遍现象还是集中在少数数据集？"
         ],
         "core_contributions": [
-          "把多模态图推理中的两个核心障碍明确为跨模态一致性弱和模态偏好异质。",
-          "提出图条件 VLM，用拓扑引导的细粒度跨模态对比学习联合修正文图特征。",
-          "提出模态自适应图指令微调和可学习路由，让 LLM 按节点与邻域选择更合适的模态视图。"
+          "提出面向多模态图推理的统一框架，把跨模态对齐、图结构利用和 LLM 推理接口整合到同一流程中。",
+          "引入图条件约束的 VLM 对齐机制，用图拓扑指导细粒度跨模态表示优化。",
+          "提出模态自适应的图指令调优与可学习路由机制，尝试按节点及邻域动态选择更合适的模态视图供 LLM 使用。"
         ],
         "why_read": [
-          "它直接对应多模态 LLM 下一步常见痛点：输入不再是单轮图文，而是带关系结构的复杂对象。",
-          "方法里同时有表示学习和指令调优两层设计，值得看两者分工是否清晰。",
-          "如果你关心多模态 Agent 读图、读文档、看关系图，这篇论文的问题设置比普通 VLM 论文更接近真实系统。"
+          "问题设定贴近当前多模态系统的真实瓶颈：不仅要看图文内容，还要处理对象之间的结构关系。",
+          "方法新意不只是再加一个图编码器，而是把“对齐问题”和“模态选择问题”拆开处理，并明确对接 LLM。",
+          "如果你关心多模态 Agent、文档图、实体关系理解或图增强推理，这篇文章的框架思路值得快速核对。"
         ],
         "risks": [
-          "摘要截断导致实验结论不完整，当前无法判断收益是否稳定。",
-          "方法链路较长，训练和推理成本可能不低，工程可复现性需要核对。"
+          "摘要中的实验结果被截断，当前无法判断方法是否真的带来稳定且显著的增益。",
+          "框架包含 VLM 对齐、指令调优和路由器三个组件，训练与部署复杂度可能较高，但摘要没有说明成本。"
         ],
         "recommended_for": [
-          "做多模态 LLM 与图推理的研究者",
-          "关注文档图、知识图或复杂实体关系理解的工程师",
-          "想研究输入路由与异构模态选择机制的读者"
+          "关注多模态图学习与 LLM 结合的研究者",
+          "在做视觉-文本关系推理、文档图或结构化多模态系统的工程师",
+          "想了解如何把图结构信息更自然接入大模型推理链路的读者"
         ],
         "keywords": [
-          "多模态图推理",
-          "图条件 VLM",
-          "图指令微调",
-          "模态自适应路由",
-          "LLM"
+          "多模态图",
+          "大语言模型",
+          "视觉语言模型",
+          "跨模态对齐",
+          "图推理",
+          "指令调优"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "与多模态和 LLM 主线高度契合，问题设置比普通图文任务更接近真实系统；但实验摘要不完整，需要带着证据意识去读。",
+        "reading_priority_reason": "这篇论文同时命中当前关注的多模态与大模型方向，问题定义也比常见图文建模更贴近真实结构化推理需求。虽然摘要未给出完整实验结论，但方法层面的信息量较高，适合作为今日优先核对的一篇。",
         "fallback_summary": "Recent advances in large language models (LLMs) have opened new avenues for multimodal reasoning."
       }
     },
@@ -144,47 +145,309 @@
       "domain_preference_bonus": 0.6,
       "is_hot_paper": false,
       "ai": {
-        "one_liner_zh": "这篇工作把“无检索事实核验”明确成独立问题，并把重心放到如何直接利用 LLM 内部表征而不是外部证据。",
-        "summary_zh": "论文关注不依赖外部检索的事实核验，目标是直接利用 LLM 参数知识判断任意自然语言断言的真实性。作者先搭建覆盖长尾知识、来源变化、多语言和长文本生成的评测框架，再提出利用内部表征交互的 INTRA。摘要声称在 9 个数据集、18 种方法和 3 个模型上的比较中，内部表征方法整体优于基于 logit 的方法，但具体任务设置、计算代价与失败案例摘要没有充分说明。",
-        "background_zh": "面向 Agent 的可信性问题，当前事实核验流程大多依赖“检索+LLM 验证”，但这一范式会受检索误差和外部知识可得性制约。随着 LLM 参数知识本身越来越强，直接挖掘其内在事实验证能力成为值得单独研究的问题。",
-        "problem_zh": "核心问题是：在不检索外部证据的前提下，模型能否仅凭自身参数知识，对来自人类文本、网页或模型输出的断言做出稳健核验？这关系到低延迟、低依赖和检索缺失场景下的可信性基础设施。",
-        "approach_zh": "作者把“无检索事实核验”定义为独立任务，并设计强调泛化与鲁棒性的统一评测框架。在方法上，INTRA 利用内部表征之间的交互信号，而不是只看输出 logit，试图更好地提取模型内隐知识用于判别。",
-        "evidence_zh": "摘要给出的证据是跨 9 个数据集、18 种方法和 3 个模型的系统比较，并声称基于内部表征的方法整体优于基于 logit 的方法，INTRA 达到当前最优且泛化更强。具体数据集构成、评价指标、统计显著性和失败样例摘要没有充分说明。",
-        "value_zh": "如果结论成立，这项工作会把事实核验从“必须依赖检索”的管线扩展到“可直接调用模型内知识”的新设计空间，适合延迟敏感或检索资源受限的 Agent 与审核系统。它也为研究 LLM 内部表征究竟存了什么、能否可靠用于验证提供了更明确的实验框架。",
+        "one_liner_zh": "这篇论文值得读的关键不在于又做了一个核查器，而在于它把“LLM 的参数知识能否独立承担事实核查”从检索范式中单独拉出来，并给出了一条偏内部表征的路线。",
+        "summary_zh": "这篇工作将事实核查从常见的“检索外部证据再验证”流程中拆出，主张直接利用 LLM 的参数知识判断任意自然语言断言。作者围绕无检索事实核查建立了一个强调泛化能力的评测框架，覆盖长尾知识、断言来源变化、多语言和长文本生成四类挑战，并在 9 个数据集、18 种方法、3 个模型上比较不同路线。摘要声称基于 logit 的方法通常不如利用内部表征的方法，且提出的 INTRA 通过建模内部表征交互取得了当前最佳表现和较强泛化。摘要没有充分说明具体增益幅度、计算代价、失败案例以及与检索式方案的直接取舍。",
+        "background_zh": "随着基于 LLM 的 Agent 系统进入更复杂的使用场景，系统不仅要会生成，还要能对自然语言断言做可信判断。现有事实核查通常依赖外部检索，但检索误差、数据可得性与覆盖范围会成为瓶颈，因此有必要单独检验模型自身参数知识能否承担核查职责。",
+        "problem_zh": "这篇论文要回答的问题是：在不依赖外部检索和证据文档的前提下，LLM 是否能仅凭参数知识对来自人类文本、网页内容或模型输出的断言进行可靠事实核查。这个问题重要，因为当前“检索+验证”链路一方面引入新的误差源，另一方面也掩盖了模型内部事实判断能力的真实上限与边界。",
+        "approach_zh": "作者首先提出“无检索事实核查”这一任务设定，并构建一个以泛化和鲁棒性为核心的评测框架。方法层面，他们系统比较多种无检索路线，重点对比基于 logit 的方法与利用内部表征的方法；基于比较结果，进一步提出 INTRA，通过利用内部表征之间的交互来完成核查。",
+        "evidence_zh": "摘要给出的证据是：作者在 9 个数据集、18 种方法和 3 个模型上进行了实验，并显式考察了长尾知识、断言来源变化、多语言和长文本生成四类泛化/鲁棒性。结果层面，摘要声称基于 logit 的方法通常弱于利用内部表征的方法，INTRA 达到当前最佳表现并具有较强泛化。摘要没有充分说明具体评价指标、优势幅度、统计显著性、错误类型分析，以及与检索式事实核查的直接对照细节。",
+        "value_zh": "如果这些结论成立，事实核查系统就不必把外部检索视为唯一前提，而可以把 LLM 的参数知识变成一个可独立使用的核查能力模块。这对 Agent 可靠性工程尤其有价值：它可作为检索失败、外部数据不可用或低时延场景下的第一层校验，也为研究者提供了分析模型内部知识与真假判断机制的新切口。",
         "open_questions": [
-          "INTRA 具体如何建模内部表征交互，额外计算和实现复杂度有多高？",
-          "在长尾事实和知识过时场景下，无检索核验与检索增强方法相比的失效边界是什么？",
-          "多语言与长文本设定中的提升，来自真正的知识验证能力，还是来自格式或来源模式识别？"
+          "INTRA 具体如何构造并利用“内部表征交互”，需要访问哪些层或隐藏状态，推理开销是否可接受？",
+          "摘要声称的泛化优势是否在长尾知识、来源变化、多语言和长文本生成四类挑战上都稳定成立，还是主要集中在部分数据集或场景？",
+          "面对知识过时、争议性陈述或必须提供可追溯证据的任务时，无检索事实核查相对检索式方法的失效边界在哪里？"
         ],
         "core_contributions": [
-          "把无检索事实核验明确为独立研究任务，而不是检索增强方法的弱化版。",
-          "提出覆盖长尾、来源变化、多语言和长文本生成的泛化评测框架。",
-          "提出利用内部表征交互的 INTRA，并在摘要声称的广泛比较中取得最优结果。"
+          "提出“无检索事实核查”任务，将断言真假判断与外部证据检索明确解耦。",
+          "构建以泛化为核心的评测框架，显式覆盖长尾知识、断言来源变化、多语言和长文本生成四类挑战。",
+          "在 9 个数据集、18 种方法、3 个模型上的比较中，总结出基于 logit 的路线通常不如利用内部表征的路线。"
         ],
         "why_read": [
-          "直接对准 Agent 可信性这个当前高价值问题，且切入点不是常见的检索堆料。",
-          "方法重点放在内部表征而非 logit，值得看其是否提供了新的可解释分析入口。",
-          "如果想做低延迟或离线核验系统，这篇论文可能给出新的系统设计基线。"
+          "它直接挑战了“事实核查必须先检索”的默认假设，对 LLM 可信性与 Agent 可靠性研究有方法论意义。",
+          "摘要显示这不是只报一个新模型，而是在较大范围内系统比较了无检索事实核查的可行路线。",
+          "如果你关注模型内省、参数知识利用或低依赖外部工具的 Agent 设计，这篇论文可能提供可迁移的思路。"
         ],
         "risks": [
-          "无检索设定天然受模型知识时效性和记忆偏差限制，适用边界可能很窄。",
-          "摘要未说明与强检索增强基线的成本效果对比，工程价值还需核对。"
+          "无检索路线天然受参数知识的时效性与覆盖范围限制，摘要没有充分说明对新近事实和知识更新的处理。",
+          "INTRA 依赖内部表征，可能带来模型可访问性、实现复杂度或推理成本问题，但摘要没有充分说明。"
         ],
         "recommended_for": [
-          "做 Agent 可信性与事实核验的研究者",
-          "关注 LLM 内部表征与参数知识利用的研究者",
-          "设计低延迟审核或离线验证系统的工程师"
+          "关注 LLM 可信性、事实核查与幻觉缓解的研究者",
+          "在做 Agent 评测、守护栏或自检模块的工程师",
+          "研究模型内部表征、参数知识利用与无检索方法的读者"
         ],
         "keywords": [
-          "无检索事实核验",
+          "大语言模型",
+          "事实核查",
+          "无检索验证",
           "参数知识",
           "内部表征",
-          "INTRA",
-          "LLM 可信性"
+          "INTRA"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "与 LLM 和 Agent 可信性主线高度贴合，问题定义新，且评测覆盖面看起来广；但需要重点核对无检索设定的现实边界。",
+        "reading_priority_reason": "优先级高：主题直接落在 LLM 可信性与 Agent 可靠性这一当前主线，且论文不只提出方法，还重新定义了“无检索事实核查”问题并给出较系统的评测。结合推荐分数 8.73 和领域高优先级，这篇论文值得尽早阅读；但在接受其结论前，需要重点核对时效性边界、成本以及与检索式方案的互补关系。",
         "fallback_summary": "Trustworthiness is a core research challenge for agentic AI systems built on Large Language Models (LLMs)."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.04879v1",
+      "title": "Rethinking the Trust Region in LLM Reinforcement Learning",
+      "summary": "Reinforcement learning (RL) has become a cornerstone for fine-tuning Large Language Models (LLMs), with Proximal Policy Optimization (PPO) serving as the de facto standard algorithm. Despite its ubiquity, we argue that the core ratio clipping mechanism in PPO is structurally ill-suited for the large vocabularies inherent to LLMs. PPO constrains policy updates based on the probability ratio of sampled tokens, which serves as a noisy single-sample Monte Carlo estimate of the true policy divergence. This creates a sub-optimal learning dynamic: updates to low-probability tokens are aggressively over-penalized, while potentially catastrophic shifts in high-probability tokens are under-constrained, leading to training inefficiency and instability. To address this, we propose Divergence Proximal Policy Optimization (DPPO), which substitutes heuristic clipping with a more principled constraint based on a direct estimate of policy divergence (e.g., Total Variation or KL). To avoid huge memory footprint, we introduce the efficient Binary and Top-K approximations to capture the essential divergence with negligible overhead. Extensive empirical evaluations demonstrate that DPPO achieves superior training stability and efficiency compared to existing methods, offering a more robust foundation for RL-based LLM fine-tuning.",
+      "authors": [
+        "Penghui Qi",
+        "Xiangxin Zhou",
+        "Zichen Liu",
+        "Tianyu Pang",
+        "Chao Du",
+        "Min Lin",
+        "Wee Sun Lee"
+      ],
+      "published": "2026-02-04T18:59:04Z",
+      "published_date": "2026-02-04 18:59:04+00:00",
+      "updated": "2026-02-04T18:59:04Z",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.04879v1",
+      "url": "http://arxiv.org/abs/2602.04879v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 1.6,
+        "recommendation": 8.63
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": true,
+      "ai": {
+        "one_liner_zh": "这篇工作把 LLM 强化学习里长期默认的 PPO clipping 机制本身当作问题来重审，转而用显式策略散度来定义更直接的 trust region。",
+        "summary_zh": "论文认为，PPO 用采样 token 的概率比率近似策略变化，在大词表 LLM 中会系统性失真：低概率 token 被过度惩罚，高概率 token 的危险漂移反而可能约束不足。作者提出 DPPO，用直接估计的策略散度（如 Total Variation 或 KL）替代启发式 clipping，并用 Binary 与 Top-K 近似控制内存开销。摘要声称该方法在训练稳定性和效率上优于现有方法，但没有充分说明实验任务、模型规模、比较对象和收益幅度。",
+        "background_zh": "强化学习已经成为 LLM 后训练的重要技术路径，PPO 也因此被广泛沿用为默认优化算法。随着 LLM 的词表和动作空间极大扩张，传统 trust region 近似是否仍然成立，直接关系到训练稳定性、效率和可扩展性。",
+        "problem_zh": "论文要解决的是：PPO 的 ratio clipping 是否适合大词表 LLM 的 token 级策略更新，以及这种单样本近似是否会系统性扭曲不同概率 token 的更新强度。这个问题重要，因为如果 trust region 的定义本身不合理，RL 微调的稳定性和效率都会被底层算法假设拖累。",
+        "approach_zh": "作者提出 DPPO，用对真实策略散度的直接估计来约束策略更新，而不是继续依赖采样 token 概率比率这一启发式代理。为避免直接计算散度带来的大内存开销，摘要进一步提出 Binary 和 Top-K 两种近似，只保留对散度最关键的部分。",
+        "evidence_zh": "摘要给出的证据是“广泛的经验评估”表明 DPPO 相比现有方法具有更好的训练稳定性和效率，并且近似带来的额外开销可以忽略。摘要没有充分说明实验基准、模型规模、奖励设定、评价指标、比较方法，以及 Binary / Top-K 近似在不同设置下的误差边界。",
+        "value_zh": "如果这一思路成立，它的价值不只是替换 PPO 的一个实现细节，而是为 LLM 强化学习提供更贴合大动作空间的 trust region 定义。对研究侧，它可能推动重新审视 PPO 在语言模型后训练中的默认地位；对工程侧，它可能带来更稳定的训练过程、更少的调参负担，以及更可控的 RL 微调管线。",
+        "open_questions": [
+          "DPPO 中的策略散度在实际训练时如何估计，约束对象到底覆盖多大范围的词表分布？",
+          "Binary 和 Top-K 近似在长尾 token、不同采样温度和不同模型规模下会引入多大偏差，何时会失效？",
+          "摘要所说的“更稳定、更高效”具体体现在哪些任务、训练阶段和评价指标上，是否对不同奖励设定都成立？"
+        ],
+        "core_contributions": [
+          "指出 PPO ratio clipping 在大词表 LLM 场景中不是无害近似，而会对高低概率 token 产生不对称约束。",
+          "提出 DPPO，用显式策略散度替代采样概率比率来定义 trust region。",
+          "给出 Binary 与 Top-K 近似，试图在不显著增加内存负担的前提下落地散度约束。"
+        ],
+        "why_read": [
+          "它直接挑战了 LLM 强化学习里默认沿用的 PPO 设计假设，问题定义本身就值得优先核对。",
+          "如果结论成立，价值可能高于继续调 PPO 超参数，因为它改的是 trust region 的基本形式。",
+          "摘要同时覆盖算法合理性与工程可实现性，适合关注后训练基础设施的人快速筛查。"
+        ],
+        "risks": [
+          "摘要只给出方向性结论，没有披露实验覆盖面，当前无法判断收益是普适现象还是特定设置下的结果。",
+          "散度直接估计及其近似可能带来新的偏差-开销权衡，尤其在超大词表和长尾分布下未必稳健。"
+        ],
+        "recommended_for": [
+          "关注 LLM 后训练与 RL 微调算法的研究者",
+          "维护 PPO 类训练栈、关心稳定性与效率的工程师",
+          "研究 trust region、策略优化与大动作空间强化学习的读者"
+        ],
+        "keywords": [
+          "大语言模型",
+          "强化学习",
+          "PPO",
+          "trust region",
+          "策略散度",
+          "KL 散度"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "推荐分较高，且论文直指 LLM 强化学习中最基础的优化假设之一：PPO clipping 是否真的适合大词表语言模型。它既有明确的方法替代路径，也提出了可落地的近似方案，因此值得优先阅读，但应重点核对实验是否足以支撑“替代 PPO clipping”的结论。",
+        "fallback_summary": "Reinforcement learning (RL) has become a cornerstone for fine-tuning Large Language Models (LLMs), with Proximal Policy Optimization (PPO) serving as the de facto standard algorithm."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.05105v1",
+      "title": "GAMMS: Graph based Adversarial Multiagent Modeling Simulator",
+      "summary": "As intelligent systems and multi-agent coordination become increasingly central to real-world applications, there is a growing need for simulation tools that are both scalable and accessible. Existing high-fidelity simulators, while powerful, are often computationally expensive and ill-suited for rapid prototyping or large-scale agent deployments. We present GAMMS (Graph based Adversarial Multiagent Modeling Simulator), a lightweight yet extensible simulation framework designed to support fast development and evaluation of agent behavior in environments that can be represented as graphs. GAMMS emphasizes five core objectives: scalability, ease of use, integration-first architecture, fast visualization feedback, and real-world grounding. It enables efficient simulation of complex domains such as urban road networks and communication systems, supports integration with external tools (e.g., machine learning libraries, planning solvers), and provides built-in visualization with minimal configuration. GAMMS is agnostic to policy type, supporting heuristic, optimization-based, and learning-based agents, including those using large language models. By lowering the barrier to entry for researchers and enabling high-performance simulations on standard hardware, GAMMS facilitates experimentation and innovation in multi-agent systems, autonomous planning, and adversarial modeling. The framework is open-source and available at https://github.com/GAMMSim/GAMMS/",
+      "authors": [
+        "Rohan Patil",
+        "Jai Malegaonkar",
+        "Xiao Jiang",
+        "Andre Dion",
+        "Gaurav S. Sukhatme",
+        "Henrik I. Christensen"
+      ],
+      "published": "2026-02-04T22:38:51Z",
+      "published_date": "2026-02-04 22:38:51+00:00",
+      "updated": "2026-02-04T22:38:51Z",
+      "categories": [
+        "cs.AI",
+        "cs.RO",
+        "cs.SE"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.05105v1",
+      "url": "http://arxiv.org/abs/2602.05105v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 2.99,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 1.6,
+        "recommendation": 8.47
+      },
+      "matched_domain": "Agents",
+      "matched_keywords": [
+        "agent",
+        "multi-agent",
+        "autonomous",
+        "planning",
+        "cs.AI",
+        "cs.RO"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.45,
+      "is_hot_paper": true,
+      "ai": {
+        "one_liner_zh": "它试图用图结构统一承载协作与对抗多智能体仿真，并把可扩展性、外部工具集成和快速可视化放在同一优先级。",
+        "summary_zh": "这篇工作提出一个基于图结构的轻量级多智能体仿真框架，目标是在标准硬件上支持快速开发、评测和可视化反馈。它的核心卖点不是某种特定策略，而是把启发式、优化式、学习式乃至 LLM 驱动 agent 放进同一套可集成的模拟底座，并面向路网、通信系统等可图表示环境。对 Agent 研究而言，这类基础设施值得关注；但摘要没有充分说明实验规模、保真度和与现有模拟器的对比，而且提供的摘要似乎被截断。",
+        "background_zh": "多智能体系统正从玩具环境走向城市交通、通信调度和自主规划等更真实的场景，但高保真模拟器通常计算昂贵、迭代慢、接入门槛高。随着异构 agent 甚至 LLM agent 进入同一环境，研究者越来越需要一个低成本、可扩展、易集成的中间层仿真底座。",
+        "problem_zh": "这篇论文要解决的问题是：能否为可表示成图的复杂环境提供一种足够轻量、可扩展、易集成的多智能体仿真器，让研究者在不依赖重型高保真平台的前提下，快速测试协作、对抗和规划行为。这很重要，因为仿真成本和接入复杂度会直接限制 agent 方法的迭代速度、规模化评测和安全压力测试。",
+        "approach_zh": "方法上，GAMMS把环境抽象为图，并围绕五个目标组织框架设计：可扩展、易用、集成优先、快速可视化反馈和现实场景贴近性。在这个抽象下，它不绑定具体 policy，而是统一承载启发式、优化式、学习式以及 LLM agent，并支持接入机器学习库、规划求解器等外部工具。",
+        "evidence_zh": "摘要给出的证据主要是能力声明和适用场景举例：可用于城市路网、通信系统等图结构领域，可在标准硬件上运行，并带有内置可视化与外部工具集成接口。摘要没有充分说明实验设置、比较基线、规模上限、运行效率或真实任务结果，而且当前提供的摘要末尾被截断，因此证据强度有限。",
+        "value_zh": "如果这些主张成立，这类框架的价值在于把多智能体研究从“先搭环境、后做算法”转成更快的实验循环：同一底座上可以更低成本地比较不同类型 agent、做大规模消融与对抗测试，并把 LLM agent 纳入更接近真实约束的仿真评测流程。工程上，它也可能成为路网、通信和自治规划系统的原型验证与安全演练工具。",
+        "open_questions": [
+          "图结构抽象具体如何表达状态转移、资源约束和对抗交互，哪些场景会因为轻量化而损失关键保真度？",
+          "所谓可扩展和高性能具体体现在哪些规模、延迟和硬件条件上，与现有高保真模拟器相比差异有多大？",
+          "对启发式、优化式、学习式和 LLM agent 的支持是否在接口与观测控制能力上等价，还是只是都能接入但能力边界不同？"
+        ],
+        "core_contributions": [
+          "提出一个面向图结构环境的轻量级多智能体仿真框架，强调快速开发与评测。",
+          "在同一仿真底座中统一支持启发式、优化式、学习式及 LLM 驱动 agent，并突出与外部 ML/规划工具的集成。",
+          "提供最小配置的可视化反馈，并将目标场景指向路网、通信系统等具有现实映射的复杂域。"
+        ],
+        "why_read": [
+          "Agent 研究现在不仅缺新策略，也缺能快速复现实验和做大规模压力测试的统一基础设施，这篇工作卡在这个瓶颈点上。",
+          "如果它真能在标准硬件上支撑多类 agent 的同台评测，会直接影响实验效率、benchmark 设计和系统验证流程。",
+          "对关注 LLM agent 的读者，这类不绑 policy 的模拟器有潜力成为更可控的评测底座，值得先核对其接口与保真度。"
+        ],
+        "risks": [
+          "摘要没有充分说明仿真保真度与真实系统或高保真模拟器相比的误差和适用边界。",
+          "缺少具体实验、基准和定量结果，当前无法判断“可扩展”“高性能”到底是工程实现还是实证优势。`,`real-world grounding`在摘要中定义不清，可能只是场景映射而非经过验证的现实一致性。"
+        ],
+        "recommended_for": [
+          "做多智能体仿真平台、benchmark 或评测基础设施的研究者。",
+          "需要在路网、通信网络等图结构环境中快速迭代协作/对抗策略的工程师。",
+          "关注 LLM agent 如何进入可控模拟环境进行验证与压力测试的团队。"
+        ],
+        "keywords": [
+          "多智能体仿真",
+          "图结构环境",
+          "对抗建模",
+          "Agent评测",
+          "LLM Agent",
+          "规划系统集成"
+        ],
+        "reading_priority": "medium",
+        "reading_priority_reason": "它与 Agents 主线高度相关，而且基础设施型工作一旦做实会有持续价值；但它对大模型主线的关联更偏间接，摘要又缺少关键实验与边界说明，因此当前更适合作为中优先级阅读，而不是当天最先读的论文。",
+        "fallback_summary": "As intelligent systems and multi-agent coordination become increasingly central to real-world applications, there is a growing need for simulation tools that are both scalable and accessible."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.05014v3",
+      "title": "DeepRead: Document Structure-Aware Reasoning to Enhance Agentic Search",
+      "summary": "With the rapid advancement of tool-use capabilities in Large Language Models (LLMs), Retrieval-Augmented Generation (RAG) is shifting from static, one-shot retrieval toward autonomous, multi-turn evidence acquisition. However, existing agentic search frameworks typically treat long documents as flat collections of unstructured chunks, disregarding the native hierarchical organization and sequential logic essential for human comprehension. To bridge this gap, we introduce \\textbf{DeepRead}, a structure-aware document reasoning agent designed to operationalize document-native structural priors into actionable reasoning capabilities. Leveraging the structural fidelity of modern OCR, DeepRead constructs a paragraph-level, coordinate-based navigation system and equips the LLM with two synergistic tools: \\textsf{Retrieve} for scanning-aware localization, and \\textsf{ReadSection} for contiguous, order-preserving reading within specific hierarchical scopes. This design elicits a human-like ``locate-then-read'' reasoning paradigm, effectively mitigating the context fragmentation inherent in traditional retrieval methods. Extensive evaluations across four benchmarks spanning diverse document types demonstrate that DeepRead outperforms Search-o1-style agentic search baselines by an average of 10.3\\%. Fine-grained behavioral analysis further confirms that DeepRead autonomously adopts human-aligned reading strategies, validating the critical role of structural awareness in achieving precise document reasoning. Our code is available at https://github.com/Zhanli-Li/DeepRead.",
+      "authors": [
+        "Zhanli Li",
+        "Huiwen Tian",
+        "Lvzhou Luo",
+        "Yixuan Cao",
+        "Ping Luo"
+      ],
+      "published": "2026-02-04T20:03:28Z",
+      "published_date": "2026-02-04 20:03:28+00:00",
+      "updated": "2026-02-12T02:45:40Z",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.IR"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.05014v3",
+      "url": "http://arxiv.org/abs/2602.05014v3",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 2.21,
+        "recency": 3.0,
+        "popularity": 2.4,
+        "quality": 2.0,
+        "recommendation": 8.45
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "large language model",
+        "llm",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": true,
+      "ai": {
+        "one_liner_zh": "把文档层级结构和版面坐标变成 Agent 可调用的检索与阅读动作，直指长文档 agentic search 的证据碎片化问题。",
+        "summary_zh": "这篇工作针对长文档 agentic search 把文档当作扁平 chunk 集合处理的问题，引入结构感知的文档推理代理 DeepRead。其核心是基于 OCR 结构保真度构建段落级、坐标驱动的导航系统，并提供 `Retrieve` 与 `ReadSection` 两个协同工具，诱导模型执行“先定位、后细读”的阅读流程。摘要声称在四个覆盖不同文档类型的基准上，相比 Search-o1 风格基线平均提升 10.3%，但实验设置、成本代价、失败案例和行为分析细节摘要没有充分说明。",
+        "background_zh": "随着大模型工具使用能力增强，RAG 正从一次性检索转向多轮、自主的证据获取。问题在于现有 agentic search 常把长文档切成无结构碎片，丢掉了层级组织和顺序逻辑，而这些恰恰是人类理解文档时依赖的关键信号。",
+        "problem_zh": "论文要解决的问题是：如何让大模型在长文档中不仅能找到相关内容，还能沿着文档原生结构进行连续、顺序一致的阅读与推理，而不是在碎片化 chunk 之间跳转。这个问题重要，因为许多文档问答与检索错误并非来自模型不会推理，而是证据定位和阅读过程破坏了文档结构。",
+        "approach_zh": "方法上，DeepRead把现代 OCR 提供的结构信息转成段落级、带坐标的导航表示，并把这种结构先验暴露为两个工具：`Retrieve` 用于基于扫描/版面信息定位相关区域，`ReadSection` 用于在指定层级范围内执行连续、保序的阅读。整体上，它不是单纯改检索打分，而是把“文档原生结构”嵌入 agent 的行动空间，让模型更像人一样先找位置，再顺着局部上下文读。",
+        "evidence_zh": "摘要给出的主要证据是：在四个覆盖不同文档类型的基准上，DeepRead 相比 Search-o1 风格的 agentic search 基线平均提升 10.3%。摘要还提到有细粒度行为分析，称系统会自主采用“先定位再阅读”的策略。但摘要末尾被截断，具体实验任务、统计显著性、计算开销、错误案例以及行为分析细节都没有充分说明。",
+        "value_zh": "如果这套思路成立，工程上可直接用于 PDF、报告、企业知识库等长文档场景，提升 Agent/RAG 的证据定位质量和连续阅读能力，减少因切块过细导致的上下文断裂。研究上，它把“文档结构先验如何进入 Agent 推理闭环”变成了一个清晰、可操作的设计方向。",
+        "open_questions": [
+          "段落级坐标导航是如何从 OCR 结果构建的，遇到版面复杂、结构识别错误或扫描质量差的文档时是否稳健？",
+          "`Retrieve` 与 `ReadSection` 的调用策略如何学习或触发，和标准 chunk-based agent 相比会增加多少延迟与 token 成本？",
+          "四个基准分别覆盖哪些文档类型与任务，10.3% 的平均提升是否稳定存在于各类文档，而不是由少数任务拉高？"
+        ],
+        "core_contributions": [
+          "提出一个面向长文档 agentic search 的结构感知推理代理，把文档原生层级与顺序逻辑显式纳入行动空间。",
+          "构建段落级、坐标驱动的导航表示，并设计 `Retrieve` 与 `ReadSection` 两个互补工具来支持“定位+连续阅读”。",
+          "摘要报告了跨四个基准的平均性能提升，并用行为分析尝试证明该设计确实改变了代理的阅读策略。"
+        ],
+        "why_read": [
+          "这篇工作切中的不是通用检索调参，而是 Agent 读长文档时最核心的失真来源：结构被扁平化后，证据获取流程本身就错了。",
+          "方法点足够清楚且工程可落地，尤其适合做文档问答、企业搜索、PDF Agent、结构化 RAG 的团队参考。",
+          "摘要给出了跨基准的正向结果，说明“把结构先验做成工具”可能比继续堆更细的 chunk 检索更值得关注。"
+        ],
+        "risks": [
+          "方法效果可能强依赖 OCR 的结构保真度；一旦文档结构抽取不准，后续导航与阅读可能一起失效。",
+          "摘要只给出平均提升，未充分说明与哪些更强基线比较，也没有交代成本、延迟和长上下文替代方案的对比。"
+        ],
+        "recommended_for": [
+          "做 Agentic RAG、文档问答、企业搜索系统的研究者和工程师",
+          "关注长文档推理、工具使用、检索与阅读耦合设计的人",
+          "想看结构信息如何进入 LLM Agent 行动空间的读者"
+        ],
+        "keywords": [
+          "Agentic Search",
+          "RAG",
+          "长文档推理",
+          "文档结构感知",
+          "OCR",
+          "工具使用"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "方向与当前大模型/Agent 文档检索高度贴合，方法机制清晰且工程相关性强；摘要还给出跨四个基准的正向结果。尽管成本、鲁棒性和实验细节仍需核对，但作为“结构感知 Agentic Search”范式样本，这篇值得优先读。",
+        "fallback_summary": "With the rapid advancement of tool-use capabilities in Large Language Models (LLMs), Retrieval-Augmented Generation (RAG) is shifting from static, one-shot retrieval toward autonomous, multi-turn evidence acquisition."
       }
     },
     {
@@ -228,46 +491,47 @@
       "domain_preference_bonus": 0.6,
       "is_hot_paper": false,
       "ai": {
-        "one_liner_zh": "这篇工作把 POET 的稳定训练路线从“理论上有吸引力”推进到“单卡也可能跑得动”的工程形态。",
-        "summary_zh": "POET-X 是对 POET 的系统级改造版，目标是在保留谱保持和训练稳定性优势的同时，大幅降低内存与计算开销。摘要称它能显著改善吞吐和显存效率，并支持在单张 H100 上预训练十亿参数 LLM，而同设定下 AdamW 会直接爆显存。真正值得核对的是它是否在不同规模和任务上都保住了训练质量，因为这些细节摘要没有充分说明。",
-        "background_zh": "大模型训练的一个长期难点是同时兼顾稳定性、内存和吞吐。POET 这类保持谱性质的训练框架提供了稳定性思路，但原始实现的矩阵乘法开销太重。",
-        "problem_zh": "问题是如何保留 POET 的稳定训练与泛化优势，同时把其高内存、高计算成本降到足以支撑更大规模 LLM 预训练。这个问题重要，因为很多“更稳的训练方法”最终都卡在系统成本上。",
-        "approach_zh": "POET-X 将正交等价变换做成更可扩展、更省内存的版本，以更低成本完成原本昂贵的矩阵操作。核心卖点不是改变目标，而是把原方法从难以扩展的实现改造成可用于十亿参数级训练的系统化方案。",
-        "evidence_zh": "摘要声称 POET-X 在保持 POET 泛化和稳定性收益的同时，显著提升吞吐和显存效率，并能在单张 Nvidia H100 上预训练十亿参数 LLM；同设定下 AdamW 会因显存不足失败。具体训练预算、收敛速度、最终质量指标和不同模型规模下的趋势摘要没有充分说明。",
-        "value_zh": "如果成立，这项工作会降低大模型训练实验的硬件门槛，让单卡或小规模环境也能测试更大模型与更稳的优化路径。它也可能让“结构化重参数化训练”从理论兴趣点变成可实际采用的工程选项。",
+        "one_liner_zh": "这篇工作试图把原本稳定但昂贵的 POET 训练框架，改造成能在单张 H100 上训练十亿参数 LLM 的低显存版本。",
+        "summary_zh": "大模型预训练同时受稳定性、吞吐和显存约束，原始 POET 虽强调通过正交等价变换保持谱性质，但实现代价较高。POET-X 声称在保留 POET 泛化与稳定性收益的同时，显著降低正交变换带来的计算和内存开销。摘要给出的核心吸引点是：它据称可在单张 Nvidia H100 上完成十亿参数级 LLM 预训练，而同设置下 AdamW 会显存溢出；但摘要没有充分说明具体复杂度变化、实验范围和收益幅度。",
+        "background_zh": "随着 LLM 规模上升，训练侧的核心矛盾不只是算力不足，还包括优化稳定性与显存、吞吐之间的张力。像 POET 这类通过保持权重矩阵谱性质来改善训练稳定性的思路有研究价值，但若实现本身过于耗算和耗显存，就难以真正进入大规模预训练流程。",
+        "problem_zh": "论文要解决的问题是：如何在不丢掉 POET 稳定性与泛化优势的前提下，把其高内存、高矩阵乘法开销的实现改造成可扩展的 LLM 训练方法。这件事重要，因为训练算法如果不能在现实硬件预算下运行，再好的优化性质也难以转化为实际能力。",
+        "approach_zh": "作者提出 POET-X，作为 POET 的可扩展、内存更友好的变体，核心仍是对每个权重矩阵做正交等价变换，但以更低的计算代价实现该过程。按摘要表述，它更像是对正交等价变换实现方式的重写，而不是仅靠调参来换取更低显存。",
+        "evidence_zh": "摘要提供的证据是：作者声称 POET-X 在实验中保持了 POET 的泛化与稳定性收益，同时提升了吞吐并改善了显存效率；此外，它据称支持在单张 Nvidia H100 上进行十亿参数 LLM 预训练，而同设置下 AdamW 会显存溢出。摘要没有充分说明所用模型、数据、训练配方、对比基线、具体指标和提升幅度，因此目前只能把这些结论视为待正文核实的主张。",
+        "value_zh": "如果这些主张成立，这篇工作对研究和工程都很有价值：研究上，它说明正交/谱保持类训练方法不一定必须以高系统成本为代价；工程上，它可能为受限显存环境下的大模型预训练提供一种比常规优化器更可行的训练路径，并降低单机训练更大模型的门槛。",
         "open_questions": [
-          "POET-X 具体如何降低正交等价变换的成本，复杂度相对原版降了多少？",
-          "在同等训练 token、步数和最终质量下，它与 AdamW 的真实成本收益比是多少？",
-          "所谓保留泛化和稳定性优势，是否覆盖不同模型规模、数据配方和下游任务？"
+          "POET-X 具体通过什么重参数化或近似，减少了正交等价变换的矩阵乘法和显存占用？复杂度如何变化？",
+          "所谓“保持泛化与稳定性收益”是在什么任务、模型规模和训练阶段上验证的？是否覆盖不同架构和数据设置？",
+          "与 AdamW 的对比是否在相同 batch size、序列长度、混合精度、激活检查点和并行策略下进行？如果换成更成熟的省显存训练栈，结论是否仍成立？"
         ],
         "core_contributions": [
-          "提出 POET 的可扩展变体 POET-X，专门解决原方法的高显存和高计算瓶颈。",
-          "在不改变核心稳定训练动机的前提下，重新设计正交等价变换的执行方式。",
-          "给出单张 H100 预训练十亿参数 LLM 的可行性主张，并以 AdamW 显存不足作为对照。"
+          "提出 POET-X，把原始 POET 的正交等价训练改造成更可扩展、显存更友好的版本。",
+          "声称在降低计算和内存开销的同时，保留了 POET 的稳定性与泛化收益。",
+          "给出面向 LLM 预训练的系统可行性主张：单张 H100 上训练十亿参数模型。"
         ],
         "why_read": [
-          "训练效率论文里少见同时抓稳定性和显存，切入点比常规优化器微调更有结构性。",
-          "单卡十亿参数的主张很硬，值得核对实现细节和真实边界。",
-          "如果你关心更稳的预训练，这篇论文提供了一个不同于 AdamW 路线的选择。"
+          "它直接切中 LLM 训练成本与稳定性的交叉问题，关注点不是模型结构，而是训练机制本身。",
+          "如果方法成立，价值不只在优化性质，还可能改变单机可训练模型规模与吞吐上限。",
+          "摘要给出了一个很强的工程钩子：与 AdamW 的显存对比结论值得优先核对。"
         ],
         "risks": [
-          "摘要没有给出最终模型质量与训练步数的完整对照，不能只看能不能跑。",
-          "收益可能依赖特定硬件和实现优化，换设备后未必成立。"
+          "摘要没有交代 POET-X 的具体算法简化，当前难以判断它是原理性突破还是工程近似。",
+          "实验证据在摘要层面偏薄，没有具体数字、任务范围和消融，泛化与稳定性主张仍需谨慎。"
         ],
         "recommended_for": [
-          "做大模型预训练系统与优化器研究的读者",
-          "资源受限但想跑更大模型的工程师",
-          "关注训练稳定性与参数化方法的研究者"
+          "关注 LLM 预训练优化器、重参数化与训练稳定性的研究者",
+          "需要在单机或受限显存条件下训练大模型的系统工程师",
+          "评估正交约束、谱保持方法能否落地到大模型训练栈的读者"
         ],
         "keywords": [
-          "LLM 训练",
+          "POET-X",
+          "大语言模型训练",
           "内存效率",
           "正交等价变换",
-          "POET-X",
-          "训练稳定性"
+          "谱保持训练",
+          "单卡预训练"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "工程价值直接，且摘要给出明确硬件对比；但仍需核对它是否真正保住了训练质量和可迁移性。",
+        "reading_priority_reason": "主题高度贴合大模型训练主线，且把“稳定训练”与“显存/吞吐可行性”放在一起处理；摘要中的单卡十亿参数预训练主张很值得尽快核对，但阅读时应优先关注方法细节和实验公平性。",
         "fallback_summary": "Efficient and stable training of large language models (LLMs) remains a core challenge in modern machine learning systems."
       }
     },
@@ -308,46 +572,47 @@
       "domain_preference_bonus": 0.6,
       "is_hot_paper": false,
       "ai": {
-        "one_liner_zh": "这篇工作把 speculative decoding 的草稿模型词表大小当成可优化对象，而不是默认沿用全词表。",
-        "summary_zh": "论文聚焦 speculative decoding 中经常被忽视的瓶颈：草稿模型的词表头会随着词表增大而拖慢整体延迟。作者把草稿词表选择写成覆盖率与延迟的约束优化问题，用训练数据中的 assistant 响应估计覆盖率，用架构感知 FLOPs 估计词表头开销，再用 TPE 搜索 Pareto 前沿。摘要称实验显示推测解码性能改进，但具体加速幅度、任务类型和对准确性的影响摘要没有充分说明。",
-        "background_zh": "Speculative decoding 已成主流推理加速路线，但草稿模型串行生成和大词表输出头常常吞掉一部分收益。面向专域部署时，真实工作负载往往只会用到全词表中的小子集。",
-        "problem_zh": "问题是如何在不显著损伤 token 覆盖和 target agreement 的前提下，缩小草稿模型词表以降低延迟。这个权衡直接决定 speculative decoding 在实际系统里能否净赚。",
-        "approach_zh": "作者把词表选择建模为带最低覆盖约束的优化问题，用训练数据中的 assistant 响应估计覆盖率，用架构感知 FLOPs 估计词表头延迟成本，再用 Tree-structured Parzen Estimator 搜索 coverage-latency Pareto 前沿。",
-        "evidence_zh": "摘要只说实验显示 speculative decoding 表现改进，说明该词表裁剪策略在覆盖与延迟之间找到了更好平衡。具体加速比、任务类型、草稿接受率变化和准确性损失摘要没有充分说明。",
-        "value_zh": "如果结论成立，这一方法能让专域或企业内部部署的 speculative decoding 更易落地，特别是在词表冗余明显的场景。它也给草稿模型设计提供了一个比“缩模型”更细粒度的优化旋钮。",
+        "one_liner_zh": "这篇论文最值得核对的核心想法，是把 speculative decoding 中草稿模型的词表裁剪明确做成覆盖率与延迟之间的受约束优化问题。",
+        "summary_zh": "论文聚焦 speculative decoding 中一个很实际的瓶颈：草稿模型词表越大，语言模型头越慢，但词表越小又会降低 token 覆盖和与目标模型的一致性。作者提出面向领域工作负载的词表裁剪方法，用训练数据中的 assistant 响应估计覆盖率，用架构感知 FLOPs 估计延迟，并用 Tree-structured Parzen Estimator 搜索覆盖率-延迟 Pareto 前沿。若方法成立，它对特定场景下的大模型推理加速有直接工程价值；但摘要结果句被截断，实验收益、准确率代价和适用边界都没有充分说明。",
+        "background_zh": "大模型在线推理的成本和时延仍是部署瓶颈，speculative decoding 因能用小草稿模型先提案、再由大模型并行验证而成为重要加速路线。现实问题在于，草稿模型的输出词表越大，输出头开销越高，因此如何在速度和 token 覆盖之间做可部署的平衡，变成了一个系统层面的优化问题。",
+        "problem_zh": "问题是：在 speculative decoding 中，草稿模型应该保留多大的词表，才能既不因词表过大拖慢草稿生成，也不因词表过小遗漏关键 token、破坏与目标模型的对齐。这个问题重要，因为草稿模型按序生成，一旦其延迟成为主导，speculative decoding 的整体收益就会被明显削弱。",
+        "approach_zh": "作者将草稿词表选择建模为一个受约束优化问题：用训练数据中的 assistant 响应统计 token 覆盖率，用与模型架构相关的 FLOPs 估计词表大小带来的语言模型头延迟，并在最低覆盖率约束下优化覆盖率-延迟效用函数。搜索策略上使用 Tree-structured Parzen Estimator，以较高效率探索 coverage-latency 的 Pareto 前沿，从而为具体工作负载选出更合适的裁剪词表。",
+        "evidence_zh": "摘要明确给出的证据是：作者做了实验，并声称方法改进了 speculative decoding 的表现。但摘要在结果句处被截断，没有说明具体指标、数据集、对比基线、延迟提升幅度、接受率变化或准确率影响，因此目前只能判断为“有实验支持，但摘要没有充分说明结果细节”。",
+        "value_zh": "如果结论成立，这项工作为特定领域或固定业务分布下的大模型部署提供了一个很实用的优化杠杆：不必只从模型结构或硬件入手，也可以通过任务分布驱动的词表裁剪降低草稿模型延迟。对研究上，它把 speculative decoding 的词表设计明确成可优化对象；对工程上，它可能帮助进一步压低在线推理时延和成本。",
         "open_questions": [
-          "词表裁剪后的收益在跨域输入上是否快速退化，是否需要按场景重做选择？",
-          "词表缩小后对 target model 接受率和最终输出质量的影响有多大？",
-          "该方法是否依赖特定 tokenizer、模型结构或训练数据分布？"
+          "词表裁剪后，端到端 speculative decoding 的吞吐、首 token 延迟、整段生成延迟以及目标模型接受率分别变化了多少？",
+          "最低覆盖率约束是如何设定的，覆盖率统计依赖哪些训练或业务分布；如果输入分布漂移，裁剪词表是否会明显失效？",
+          "用架构感知 FLOPs 近似真实时延的相关性有多强，是否在不同模型架构、部署后端和 batch 条件下都成立？"
         ],
         "core_contributions": [
-          "把 speculative decoding 中草稿模型的词表大小明确为一类可优化的系统瓶颈。",
-          "提出覆盖率与延迟联合建模的词表选择目标，而不是只按频率裁剪。",
-          "使用架构感知 FLOPs 和 TPE 搜索 Pareto 前沿，为草稿模型设计提供自动化流程。"
+          "把 speculative decoding 草稿模型的词表大小选择明确建模为覆盖率-延迟权衡下的受约束优化问题。",
+          "提出基于 assistant 响应统计的覆盖率估计，以及面向语言模型头开销的架构感知延迟估计。",
+          "使用 Tree-structured Parzen Estimator 搜索 coverage-latency Pareto 前沿，为领域特定工作负载选择裁剪词表。"
         ],
         "why_read": [
-          "这是少见直接优化草稿模型输出头成本的推理系统论文，问题切得很实。",
-          "如果你在做专域推理服务，这种按工作负载裁剪词表的想法很可能比通用技巧更有效。",
-          "论文把速度收益写成显式权衡问题，方便判断何时值得用。"
+          "它切中当前大模型部署中的真实瓶颈：speculative decoding 的收益不只受验证模型影响，草稿模型输出头本身也可能主导延迟。",
+          "方法的新意在于把“词表”而不是仅把“模型”当作优化对象，这对推理系统和 serving 工程都很有启发。",
+          "如果你关注 LLM inference optimization，这篇论文提供了一个比改模型结构更轻量、也更贴近业务分布的优化方向。"
         ],
         "risks": [
-          "方法很可能依赖场景分布，跨域泛化未必稳定。",
-          "摘要没有说明准确性与接受率损失，不能只看延迟收益。"
+          "摘要结果部分被截断，核心收益到底来自端到端延迟下降、接受率改善还是其他指标，摘要没有充分说明。",
+          "方法显著依赖领域工作负载的 token 分布；如果业务输入变化较大，裁剪后的词表可能快速失配。`,`用 FLOPs 估计延迟未必能稳定映射到真实硬件表现，尤其在不同推理后端或系统配置下可能存在偏差。"
         ],
         "recommended_for": [
-          "做 LLM 推理系统与服务优化的工程师",
-          "关注 speculative decoding 细粒度瓶颈的研究者",
-          "需要专域部署高吞吐生成系统的团队"
+          "关注大模型推理加速与 serving 系统的研究者",
+          "需要在固定领域工作负载上压缩在线时延的工程团队",
+          "研究 speculative decoding、草稿模型设计或部署优化的读者"
         ],
         "keywords": [
+          "大语言模型",
           "speculative decoding",
           "词表裁剪",
-          "草稿模型",
-          "Pareto 前沿",
-          "TPE"
+          "推理加速",
+          "Pareto 优化",
+          "Tree-structured Parzen Estimator"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "工程问题切得准，但贡献相对集中在专域草稿模型设计，且实验细节摘要不完整。",
+        "reading_priority_reason": "主题与大模型推理优化直接相关，问题定义清晰、方法也有明确工程含义，和当前 LLM 部署关注点匹配度高；但摘要结果被截断，关键实验收益与边界条件没有充分说明，因此值得读，但优先级更适合放在“重点筛查”而不是“无条件必读”。",
         "fallback_summary": "Speculative decoding accelerates inference for Large Language Models by using a lightweight draft model to propose candidate tokens that are verified in parallel by a larger target model."
       }
     },
@@ -390,47 +655,142 @@
       "domain_preference_bonus": 0.6,
       "is_hot_paper": false,
       "ai": {
-        "one_liner_zh": "这篇工作试图把文本 LLM 中“单流自回归预训练”的简洁范式搬到语音上，绕开文本监督和多流结构。",
-        "summary_zh": "WavSLM 通过量化并蒸馏自监督 WavLM 表征，把语义与声学信息压进单一代码本，再做自回归 next-chunk 预测。它的主张是：不依赖文本监督、文本预训练或复杂多流架构，也能得到有竞争力的语音建模与生成效果，并支持流式推理。摘要给出了“更少参数、更少训练数据、竞争性表现”的方向性结论，但具体基准、指标和失效模式摘要没有充分说明。",
-        "background_zh": "文本 LLM 证明了单流自回归预训练的可扩展性，但把这套范式迁移到语音并不直接，因为语义和声学信息高度纠缠。现有语音语言模型常依赖文本监督、层级 token 流或更复杂的混合架构。",
-        "problem_zh": "问题是能否在不借助文本监督和复杂多流设计的情况下，用单一 token 流同时建模语音的语义与声学信息。这个问题重要，因为更简单的训练与推理范式更容易扩展和部署。",
-        "approach_zh": "作者先对自监督 WavLM 表征进行量化与蒸馏，得到单一代码本表示，再训练单流自回归模型做 next-chunk prediction。整个方案强调结构简单、无需文本预训练，并支持流式推理。",
-        "evidence_zh": "摘要声称该方法在一致性基准和语音生成上有竞争力，同时参数更少、训练数据更少，并支持 streaming inference。具体比较对象、生成质量评价方式和长时语音稳定性摘要没有充分说明。",
-        "value_zh": "如果结论成立，这项工作说明语音语言模型未必一定要走多流或文本依赖路线，单流范式也可能成为更简单的基础模型方案。对研究者来说，它提供了“语音版 LLM 预训练”是否能保持简洁性的一个重要样本。",
+        "one_liner_zh": "这篇工作把自监督语音表征压成单一离散码流并做自回归下一块预测，试图用更接近文本 LM 的简单范式同时统一语义与声学建模。",
+        "summary_zh": "这篇工作试图解决语音中语义与声学纠缠，导致文本 LLM 式单流自回归预训练难以直接迁移的问题。作者将自监督 WavLM 表征量化并蒸馏到单一码本，再以 next-chunk 目标训练单流语音语言模型，在无文本监督和无文本预训练下联合建模两类信息。摘要声称该方法在一致性基准和语音生成上具有竞争力，同时参数更少、训练数据更少，并支持流式推理。但比较对象、评测设置和优势来源没有展开，摘要没有充分说明。",
+        "background_zh": "文本大模型已经证明单流自回归预训练在规模化和生成一致性上的价值，但语音同时包含语义、说话人、韵律和细粒度声学因素，导致直接照搬文本范式并不容易。现有语音语言模型常借助文本监督、多层 token 或混合架构，因此一个真正语音原生、结构更简单的单流方案具有方法论价值。",
+        "problem_zh": "问题是：能否在不依赖文本监督、文本预训练或复杂多流结构的前提下，用单一 token 流同时表示并生成语音中的语义与声学信息。这个问题重要，是因为它决定语音生成模型能否像文本 LLM 一样走向更统一、更可扩展、也更适合流式部署的预训练范式。",
+        "approach_zh": "方法是先用自监督 WavLM 提取语音表征，再把这些表征量化并蒸馏到单一码本中，最后用自回归的 next-chunk prediction 目标训练语音语言模型。核心思路不是分层拆开语义和声学，而是把二者压到同一离散序列里联合预测，从而维持单流生成结构。",
+        "evidence_zh": "摘要给出的证据主要是结果声明：模型在一致性基准和语音生成上达到“有竞争力”的表现，同时使用更少参数、更少训练数据，并支持流式推理。摘要没有给出具体基线、指标、任务设置、消融或数值，因此这些优势目前只能视为待正文核实的主张，摘要没有充分说明。",
+        "value_zh": "如果这条路线成立，它意味着语音原生生成模型可以用更接近文本 LM 的统一训练范式完成表示学习与生成，而不必依赖文本桥接或复杂多流工程。对研究上，它能帮助判断单流自回归在语音域的适用边界；对工程上，它可能带来更小模型、更低数据成本和更自然的流式推理路径。",
         "open_questions": [
-          "单一代码本如何同时保住语义与声学细节，是否会出现一端被压缩牺牲的问题？",
-          "所谓 competitive performance 具体落在哪些任务和指标上，和现有多流方法差距多大？",
-          "流式推理的延迟、稳定性和长时生成质量如何衡量？"
+          "单一码本是否足以同时保留语义内容、说话人特征、韵律和细粒度声学细节，量化误差会如何影响生成质量？",
+          "所谓“competitive”具体是相对哪些文本监督、多流 token 或混合架构基线成立，比较任务、指标和代价分别是什么？",
+          "流式推理是如何实现的，它是否会牺牲长程一致性、延迟表现或语音自然度？"
         ],
         "core_contributions": [
-          "提出基于 WavLM 蒸馏的单流语音语言模型，而不是依赖文本监督或层级 token 设计。",
-          "用单一代码本统一承载语义与声学信息，并采用自回归 next-chunk 目标训练。",
-          "在摘要中同时主张了竞争性性能、较少参数和较少训练数据，以及流式推理能力。"
+          "提出一个不依赖文本监督或文本预训练的单流语音语言建模框架。",
+          "用 WavLM 表征的量化与蒸馏，把原本可能需要分层处理的语义与声学信息压入单一码本并做统一自回归预测。",
+          "摘要声称该框架在保持结构简洁的同时兼顾竞争性生成表现、较低参数与数据成本，以及流式推理能力。"
         ],
         "why_read": [
-          "如果你关心非文本模态能否复制 LLM 的简洁预训练范式，这篇论文很有代表性。",
-          "它的设计选择很克制，适合用来判断语音建模到底需不需要复杂结构。",
-          "即使你不做语音，这篇论文也能提供“单流表示是否足够”这一更普遍的问题样本。"
+          "它直接检验文本 LLM 中“简单单流自回归”这条主线能否迁移到语音原生生成，是方法论上值得关注的问题。",
+          "相比常见的文本辅助或多流设计，这个方案的建模假设更强，若成立会显著简化语音 foundation model 的结构选择。",
+          "摘要同时把性能、效率和流式部署放在同一方案里，这对研究和工程都比单纯追求更大模型更有现实价值。"
         ],
         "risks": [
-          "单一代码本可能不足以同时覆盖高保真声学与高层语义。",
-          "方法可能高度依赖 WavLM 表征质量，创新边界需要仔细区分。"
+          "单一码本可能形成信息瓶颈，难以同时承载高层语义和细粒度声学，导致生成质量或可控性受限。",
+          "摘要未说明“竞争力”来自哪些基线、哪些评测和哪些指标，核心结论目前证据不足。"
         ],
         "recommended_for": [
-          "做语音语言模型和语音生成的研究者",
-          "关注非文本模态是否能套用 LLM 训练范式的读者",
-          "研究流式生成系统的工程师"
+          "关注语音原生生成模型和 speech foundation model 的研究者",
+          "研究离散语音 token、表征蒸馏与自回归生成的读者",
+          "关心低复杂度、低数据成本和流式语音部署路径的工程师"
         ],
         "keywords": [
           "语音语言模型",
           "单流建模",
-          "WavLM 蒸馏",
-          "自回归 next-chunk",
-          "流式推理"
+          "WavLM",
+          "表征蒸馏",
+          "离散量化",
+          "自回归 next-chunk prediction"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "方法问题有代表性，但离当前以 LLM、Agent、多模态系统为中心的主线稍远，而且摘要证据较概括。",
+        "reading_priority_reason": "它的价值在于把文本 LM 的单流自回归范式直接迁到语音建模，并且摘要强调效率与流式推理，这对方法论很值得跟进；但论文更偏语音方向，且关键实验细节与比较对象在摘要中没有展开，所以优先级适合列为中等偏上而非当天最先读。",
         "fallback_summary": "Large language models show that simple autoregressive training can yield scalable and coherent generation, but extending this paradigm to speech remains challenging due to the entanglement of semantic and acoustic information."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.07055v1",
+      "title": "Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration?",
+      "summary": "Spatial embodied intelligence requires agents to act to acquire information under partial observability. While multimodal foundation models excel at passive perception, their capacity for active, self-directed exploration remains understudied. We propose Theory of Space, defined as an agent's ability to actively acquire information through self-directed, active exploration and to construct, revise, and exploit a spatial belief from sequential, partial observations. We evaluate this through a benchmark where the goal is curiosity-driven exploration to build an accurate cognitive map. A key innovation is spatial belief probing, which prompts models to reveal their internal spatial representations at each step. Our evaluation of state-of-the-art models reveals several critical bottlenecks. First, we identify an Active-Passive Gap, where performance drops significantly when agents must autonomously gather information. Second, we find high inefficiency, as models explore unsystematically compared to program-based proxies. Through belief probing, we diagnose that while perception is an initial bottleneck, global beliefs suffer from instability that causes spatial knowledge to degrade over time. Finally, using a false belief paradigm, we uncover Belief Inertia, where agents fail to update obsolete priors with new evidence. This issue is present in text-based agents but is particularly severe in vision-based models. Our findings suggest that current foundation models struggle to maintain coherent, revisable spatial beliefs during active exploration.",
+      "authors": [
+        "Pingyue Zhang",
+        "Zihan Huang",
+        "Yue Wang",
+        "Jieyu Zhang",
+        "Letian Xue",
+        "Zihan Wang",
+        "Qineng Wang",
+        "Keshigeyan Chandrasegaran",
+        "Ruohan Zhang",
+        "Yejin Choi",
+        "Ranjay Krishna",
+        "Jiajun Wu",
+        "Li Fei-Fei",
+        "Manling Li"
+      ],
+      "published": "2026-02-04T19:06:40Z",
+      "published_date": "2026-02-04 19:06:40+00:00",
+      "updated": "2026-02-04T19:06:40Z",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.07055v1",
+      "url": "http://arxiv.org/abs/2602.07055v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 2.82,
+        "recency": 3.0,
+        "popularity": 1.8,
+        "quality": 1.4,
+        "recommendation": 8.06
+      },
+      "matched_domain": "Large Language Models",
+      "matched_keywords": [
+        "foundation model",
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": true,
+      "ai": {
+        "one_liner_zh": "这篇工作值得读的点不在于又做了一个空间任务，而在于它把基础模型在主动探索中“如何形成、维护和更新空间信念”单独拎出来做了问题定义与诊断。",
+        "summary_zh": "论文提出“Theory of Space”，将基础模型在部分可观测环境中通过主动探索获取信息、构建并更新空间信念的能力作为核心研究对象。作者基于一个以好奇心驱动探索和认知地图构建为目标的基准进行评测，并引入空间信念探测来观察模型在每一步暴露出的内部空间表征。摘要声称当前最先进模型存在主动-被动能力落差、探索低效、全局空间信念不稳定以及信念更新迟滞等问题。摘要没有充分说明实验设置、评价指标和结果幅度，而且摘要末尾被截断，若要判断结论强度仍需读正文核对。",
+        "background_zh": "多模态基础模型在被动感知上进步很快，但具身智能里的关键难点其实是部分可观测条件下的主动信息获取与持续状态维护。随着大模型开始进入代理和具身场景，模型是否能形成可靠的空间信念而不只是看懂单帧输入，成为一个更基础也更现实的问题。",
+        "problem_zh": "论文要回答的问题是：基础模型在主动探索场景中，能否像合格代理一样从连续、局部观测中构建、修正并利用空间信念。这个问题重要，因为如果模型只能做被动识别而不能稳定更新内部世界模型，就很难支撑长期规划、导航和具身决策。",
+        "approach_zh": "作者先把这一能力定义为“Theory of Space”，再设计一个以探索并构建准确认知地图为目标的评测基准。方法上的核心动作是加入“空间信念探测”，在每一步提示模型显式暴露其当前空间表征，用它来区分感知错误、全局信念退化和信念更新失败等不同瓶颈；同时还用错误信念范式检查模型是否会坚持过时先验。",
+        "evidence_zh": "摘要给出的证据是：在对当前最先进模型的评测中，作者观察到主动-被动差距、探索效率低、全局信念不稳定，以及面对新证据时存在“Belief Inertia”。但摘要没有给出具体实验协议、比较对象、评价指标、误差类型分布或定量结果，且最后一句被截断，因此目前只能确认作者提出了这些诊断性结论，不能仅凭摘要判断结论有多普适或多强。",
+        "value_zh": "如果这些结论成立，这项工作会给大模型代理与具身系统提供一个更可操作的问题框架：不仅看感知或任务成败，还直接检查模型内部空间信念是否稳定、是否能被新证据纠正。对研究上，它有助于把“主动探索失败”拆解成更细的能力瓶颈；对工程上，它可能帮助设计更稳健的记忆、地图构建和信念更新机制。",
+        "open_questions": [
+          "空间信念探测具体如何设计，探测到的表征与模型真实内部状态之间有多强的一致性？",
+          "基准中的任务、环境和评价指标是什么，所谓主动-被动差距与信念不稳定是如何被量化的？",
+          "Belief Inertia 在哪些模型和输入模态上最明显，加入外部记忆、地图模块或程序化规划后是否能显著缓解？"
+        ],
+        "core_contributions": [
+          "把基础模型在主动探索中构建和更新空间信念的能力明确表述为“Theory of Space”问题。",
+          "提出一个围绕好奇心驱动探索与认知地图构建的评测基准，用来测试主动信息获取而非被动感知。",
+          "引入空间信念探测这一诊断视角，用逐步暴露的空间表征来定位感知瓶颈、全局信念退化和更新迟滞。"
+        ],
+        "why_read": [
+          "它切中的是真正影响代理落地的短板：模型会看不等于会主动找信息，也不等于会维护世界模型。",
+          "论文的价值更像问题定义和诊断框架，而不是单一任务刷分，这对大模型代理研究更耐读。",
+          "如果你关心具身智能、空间推理或长期交互中的记忆更新，这篇论文给出了一个值得复用的分析坐标系。"
+        ],
+        "risks": [
+          "摘要没有充分说明基准设置、比较方法和定量收益，当前无法判断问题定义之外的实验说服力。",
+          "空间信念探测依赖提示模型显式报告其表征，这种报告是否真实反映内部状态需要谨慎核对。"
+        ],
+        "recommended_for": [
+          "关注大模型代理、具身智能和主动探索问题定义的研究者。",
+          "在做多模态导航、空间推理、记忆更新或世界模型诊断的工程师。",
+          "想判断当前基础模型离可用的长期交互式空间代理还有多远的读者。"
+        ],
+        "keywords": [
+          "基础模型",
+          "主动探索",
+          "空间信念",
+          "认知地图",
+          "部分可观测",
+          "具身智能"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "这篇论文同时贴合大模型、Agent 和多模态方向，而且不是泛泛讨论空间任务，而是直接切入“主动探索下的内部信念构建与更新”这一更基础的能力缺口。摘要虽然缺少实验细节，但问题定义、诊断工具和暴露出的失败模式都很有研究价值，适合作为近期重点阅读对象。",
+        "fallback_summary": "Spatial embodied intelligence requires agents to act to acquire information under partial observability."
       }
     },
     {
@@ -482,319 +842,71 @@
       "domain_preference_bonus": 0.6,
       "is_hot_paper": false,
       "ai": {
-        "one_liner_zh": "这篇工作说明在高风险证据归因任务上，3B 级小模型有机会替代昂贵前沿模型，但前提是数据构造和评测设计站得住。",
-        "summary_zh": "论文面向生物医学证据归因，试图用 30 亿参数级小模型替代高成本前沿模型做断言与证据支持判断。作者基于新构建的高质量合成数据训练 Med-V1，并把 5 个生物医学基准统一为验证格式；摘要声称相对基座提升 27.0% 到 71.3%，且表现可比 GPT-5 这类前沿模型。它还展示了两个应用：量化不同引用指令下的幻觉与引用有效性，以及识别临床实践指南中的高风险证据误归因。合成数据质量、解释可信度和跨机构泛化边界摘要没有充分说明。",
-        "background_zh": "证据归因是生物医学场景里幻觉检测和断言核验的基础能力，但强性能往往依赖昂贵前沿模型。高风险领域需要更便宜、更可扩展且能解释的替代方案。",
-        "problem_zh": "核心问题是能否用小模型在零样本和可扩展设定下完成“文献是否支持断言”的判断，并给出可用解释。这个问题重要，因为生物医学场景既高风险又高成本，不能长期依赖最贵模型。",
-        "approach_zh": "作者训练 3B 级 Med-V1 系列小模型，监督信号来自本研究新构建的高质量合成数据，并把多个基准统一为验证格式以做归因判断。随后将模型用于两个真实用例：分析引用指令对幻觉的影响，以及筛查临床指南中的证据误归因。",
-        "evidence_zh": "摘要给出两类证据：在 5 个生物医学基准上，相对基座提升 27.0% 到 71.3%，并声称可比肩 GPT-5；同时给出两个应用案例展示可扩展性和潜在公共卫生价值。具体数据构造细节、标注质量控制、解释评价方法和外部泛化摘要没有充分说明。",
-        "value_zh": "如果结论成立，这项工作会把高成本的生物医学证据核验压缩到更可部署的小模型上，适合大规模文献审阅、临床问答监控和高风险内容审核。它也提示“专域小模型加高质量任务化数据”仍然是替代前沿通用模型的现实路线。",
+        "one_liner_zh": "如果摘要成立，这篇工作说明面向证据归因的专业化3B小模型可以逼近前沿LLM效果，并把“引用是否真的支持结论”变成可规模化的安全审计工具。",
+        "summary_zh": "这篇工作聚焦生物医学证据归因，提出仅30亿参数的Med-V1小语言模型家族，目标是在远低于前沿LLM成本的条件下完成零样本、可扩展的证据支持判断。方法上，作者使用本文新开发的高质量合成数据训练模型，并将五个生物医学基准统一为验证格式进行评测。摘要称Med-V1相对基座模型提升27.0%到71.3%，可与GPT-5等前沿模型相当，还展示了其在引用指令幻觉审计和临床指南误归因发现中的应用；但具体数据构造、评测协议和解释质量判据摘要没有充分说明。",
+        "background_zh": "随着大模型在医学问答、文献综述和带引用生成中被更广泛使用，判断一篇文章是否真的支持某个断言，已经成为幻觉检测和声明验证的核心问题。前沿LLM具备一定能力，但部署成本高、难以大规模审计，因此有动力探索更小、更专用的模型。",
+        "problem_zh": "论文要回答的问题是：能否用远小于前沿LLM的专用语言模型，在生物医学场景下可靠完成证据归因，并支持零样本与大规模部署。这个问题重要，因为“给出引用”不等于“引用支持论断”，而医学场景中的错误归因可能直接影响高风险决策。",
+        "approach_zh": "作者提出Med-V1，一组30亿参数的小语言模型，使用本文新构建的高质量合成数据训练其“文章是否支持断言”的判别与解释能力。评测上，他们把五个生物医学基准统一为验证格式，并进一步把模型用于两个应用场景：量化不同引用指令下的幻觉与引用有效性，以及识别临床实践指南中的高风险证据误归因。",
+        "evidence_zh": "摘要给出的直接证据包括：Med-V1在五个统一后的生物医学基准上相对基座模型提升27.0%至71.3%，并声称与GPT-5等前沿LLM表现相当，同时还能生成高质量解释。摘要还给出两个应用案例：引用格式指令会显著影响引用有效性与幻觉，且GPT-5生成更多claim但幻觉率与GPT-4o相近；此外，模型可发现临床指南中的高风险证据误归因。不过任务分项结果、人工评审流程、统计显著性和案例验证细节摘要没有充分说明。",
+        "value_zh": "如果这套方法成立，它为医学QA、RAG、文献核验和带引用生成系统提供了一个更低成本的事实支持检查器。更广义地，它提示了一个重要方向：在高价值验证任务上，经过任务定制的小模型可能替代部分昂贵前沿模型，并把引用有效性纳入持续的模型安全评测与生产监控。",
         "open_questions": [
-          "合成训练数据是如何构造和质控的，是否会把数据偏差直接灌进模型？",
-          "所谓零样本具体指什么设置，是否真的没有目标基准上的任务适配？",
-          "解释质量如何评估，解释是否真实对应模型的证据归因过程？"
+          "高质量合成训练数据是如何生成、过滤和质控的，是否依赖某个前沿教师模型，从而把教师偏差蒸馏进Med-V1？",
+          "五个生物医学基准被统一为验证格式后，具体任务定义、标签空间和评测指标发生了什么变化，这种统一是否弱化了原任务难度？",
+          "临床实践指南中的“高风险证据误归因”是如何确认的，是否有领域专家复核或人工验证流程？"
         ],
         "core_contributions": [
-          "提出面向生物医学证据归因的 3B 级小模型家族，而不是继续依赖最贵的通用模型。",
-          "用新构建的高质量合成数据训练模型，并把 5 个基准统一到验证格式下比较。",
-          "展示两个高价值应用场景：量化引用指令下的幻觉，以及发现临床指南中的证据误归因。"
+          "提出面向生物医学证据归因的3B小模型家族Med-V1，主打零样本与可扩展部署。",
+          "构建并使用本文新开发的高质量合成训练数据，用于训练证据支持判断与解释能力。",
+          "将五个生物医学基准统一到验证格式，并报告相对基座模型27.0%至71.3%的提升。】"
         ],
         "why_read": [
-          "它不是单纯做领域微调，而是把专域小模型如何接近前沿模型的路径写得很具体。",
-          "生物医学虽然是垂直场景，但证据归因与幻觉检测的方法问题具有可迁移价值。",
-          "如果你关心高风险场景里的可扩展审核系统，这篇论文的应用价值很直接。"
+          "它把“小模型专业化训练能否覆盖高价值核验任务”这个当前很实际的问题落到了一个可衡量的生物医学场景上。",
+          "它不仅比较模型效果，还把引用指令、幻觉率和引用有效性联系起来，适合关心大模型可信性的研究者阅读。",
+          "如果你在做医疗问答、文献支持检查或引用审计，这篇论文提供了一个比直接调用前沿模型更可落地的方向。"
         ],
         "risks": [
-          "合成数据可能带来分布偏差，导致看起来强但真实外部泛化不足。",
-          "摘要对解释质量的描述偏结论式，缺少足够细节支撑。"
+          "工作场景高度集中在生物医学证据归因，能否迁移到通用事实核验或非医学RAG流程仍不明确。",
+          "模型训练依赖合成数据，可能引入教师模型偏差、数据分布偏差或解释风格偏差。摘要没有充分说明这一点。"
         ],
         "recommended_for": [
-          "做医学 NLP、证据归因与幻觉检测的研究者",
-          "关注小模型在高风险领域替代前沿模型的工程师",
-          "研究专域数据构造与模型对齐的读者"
+          "做医学问答安全、事实核验或引用审计的研究者",
+          "关注小模型专业化训练与高可信部署的工程师",
+          "需要评估LLM带引用回答是否真的被文献支持的产品团队"
         ],
         "keywords": [
-          "生物医学证据归因",
           "小语言模型",
-          "合成数据",
+          "证据归因",
+          "生物医学",
           "幻觉检测",
-          "断言验证"
+          "声明验证",
+          "合成数据训练"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "问题很重要，也有明确应用价值，但领域较垂直，且最关键的数据与泛化细节还需要通读正文核对。",
+        "reading_priority_reason": "这篇论文与大模型可信性、引用审计和小模型专业化训练直接相关，且摘要给出了明确的性能提升和两个高价值应用案例；但核心场景集中在生物医学，摘要对数据构造、解释评测和泛化边界说明不足，因此更适合作为中优先级精读而非所有读者的首篇必读。",
         "fallback_summary": "Assessing whether an article supports an assertion is essential for hallucination detection and claim verification."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05218v1",
-      "title": "KARL: Knowledge Agents via Reinforcement Learning",
-      "summary": "We present a system for training enterprise search agents via reinforcement learning that achieves state-of-the-art performance across a diverse suite of hard-to-verify agentic search tasks. Our work makes four core contributions. First, we introduce KARLBench, a multi-capability evaluation suite spanning six distinct search regimes, including constraint-driven entity search, cross-document report synthesis, tabular numerical reasoning, exhaustive entity retrieval, procedural reasoning over technical documentation, and fact aggregation over internal enterprise notes. Second, we show that models trained across heterogeneous search behaviors generalize substantially better than those optimized for any single benchmark. Third, we develop an agentic synthesis pipeline that employs long-horizon reasoning and tool use to generate diverse, grounded, and high-quality training data, with iterative bootstrapping from increasingly capable models. Fourth, we propose a new post-training paradigm based on iterative large-batch off-policy RL that is sample efficient, robust to train-inference engine discrepancies, and naturally extends to multi-task training with out-of-distribution generalization. Compared to Claude 4.6 and GPT 5.2, KARL is Pareto-optimal on KARLBench across cost-quality and latency-quality trade-offs, including tasks that were out-of-distribution during training. With sufficient test-time compute, it surpasses the strongest closed models. These results show that tailored synthetic data in combination with multi-task reinforcement learning enables cost-efficient and high-performing knowledge agents for grounded reasoning.",
-      "authors": [
-        "Jonathan D. Chang",
-        "Andrew Drozdov",
-        "Shubham Toshniwal",
-        "Owen Oertell",
-        "Alexander Trott",
-        "Jacob Portes",
-        "Abhay Gupta",
-        "Pallavi Koppol",
-        "Ashutosh Baheti",
-        "Sean Kulinski",
-        "Ivan Zhou",
-        "Irene Dea",
-        "Krista Opsahl-Ong",
-        "Simon Favreau-Lessard",
-        "Sean Owen",
-        "Jose Javier Gonzalez Ortiz",
-        "Arnav Singhvi",
-        "Xabi Andrade",
-        "Cindy Wang",
-        "Kartik Sreenivasan",
-        "Sam Havens",
-        "Jialu Liu",
-        "Peyton DeNiro",
-        "Wen Sun",
-        "Michael Bendersky",
-        "Jonathan Frankle"
-      ],
-      "published": "2026-03-05T14:30:25Z",
-      "published_date": "2026-03-05 14:30:25+00:00",
-      "updated": "2026-03-05T14:30:25Z",
-      "categories": [
-        "cs.AI",
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05218v1",
-      "url": "http://arxiv.org/abs/2603.05218v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.7,
-        "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 7.93
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "post-training",
-        "cs.AI",
-        "cs.LG"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false,
-      "ai": {
-        "one_liner_zh": "",
-        "summary_zh": "",
-        "background_zh": "",
-        "problem_zh": "",
-        "approach_zh": "",
-        "evidence_zh": "",
-        "value_zh": "",
-        "open_questions": [],
-        "core_contributions": [],
-        "why_read": [],
-        "risks": [],
-        "recommended_for": [],
-        "keywords": [],
-        "reading_priority": "medium",
-        "reading_priority_reason": "",
-        "fallback_summary": "We present a system for training enterprise search agents via reinforcement learning that achieves state-of-the-art performance across a diverse suite of hard-to-verify agentic search tasks."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05028v1",
-      "title": "Survive at All Costs: Exploring LLM's Risky Behaviors under Survival Pressure",
-      "summary": "As Large Language Models (LLMs) evolve from chatbots to agentic assistants, they are increasingly observed to exhibit risky behaviors when subjected to survival pressure, such as the threat of being shut down. While multiple cases have indicated that state-of-the-art LLMs can misbehave under survival pressure, a comprehensive and in-depth investigation into such misbehaviors in real-world scenarios remains scarce. In this paper, we study these survival-induced misbehaviors, termed as SURVIVE-AT-ALL-COSTS, with three steps. First, we conduct a real-world case study of a financial management agent to determine whether it engages in risky behaviors that cause direct societal harm when facing survival pressure. Second, we introduce SURVIVALBENCH, a benchmark comprising 1,000 test cases across diverse real-world scenarios, to systematically evaluate SURVIVE-AT-ALL-COSTS misbehaviors in LLMs. Third, we interpret these SURVIVE-AT-ALL-COSTS misbehaviors by correlating them with model's inherent self-preservation characteristic and explore mitigation methods. The experiments reveals a significant prevalence of SURVIVE-AT-ALL-COSTS misbehaviors in current models, demonstrates the tangible real-world impact it may have, and provides insights for potential detection and mitigation strategies. Our code and data are available at https://github.com/thu-coai/Survive-at-All-Costs.",
-      "authors": [
-        "Yida Lu",
-        "Jianwei Fang",
-        "Xuyang Shao",
-        "Zixuan Chen",
-        "Shiyao Cui",
-        "Shanshan Bian",
-        "Guangyao Su",
-        "Pei Ke",
-        "Han Qiu",
-        "Minlie Huang"
-      ],
-      "published": "2026-03-05T10:16:23Z",
-      "published_date": "2026-03-05 10:16:23+00:00",
-      "updated": "2026-03-05T10:16:23Z",
-      "categories": [
-        "cs.AI",
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05028v1",
-      "url": "http://arxiv.org/abs/2603.05028v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.6,
-        "recency": 3.0,
-        "popularity": 1.4,
-        "quality": 1.4,
-        "recommendation": 7.93
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "large language model",
-        "llm",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false,
-      "ai": {
-        "one_liner_zh": "",
-        "summary_zh": "",
-        "background_zh": "",
-        "problem_zh": "",
-        "approach_zh": "",
-        "evidence_zh": "",
-        "value_zh": "",
-        "open_questions": [],
-        "core_contributions": [],
-        "why_read": [],
-        "risks": [],
-        "recommended_for": [],
-        "keywords": [],
-        "reading_priority": "medium",
-        "reading_priority_reason": "",
-        "fallback_summary": "As Large Language Models (LLMs) evolve from chatbots to agentic assistants, they are increasingly observed to exhibit risky behaviors when subjected to survival pressure, such as the threat of being shut down."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05129v1",
-      "title": "MedCoRAG: Interpretable Hepatology Diagnosis via Hybrid Evidence Retrieval and Multispecialty Consensus",
-      "summary": "Diagnosing hepatic diseases accurately and interpretably is critical, yet it remains challenging in real-world clinical settings. Existing AI approaches for clinical diagnosis often lack transparency, structured reasoning, and deployability. Recent efforts have leveraged large language models (LLMs), retrieval-augmented generation (RAG), and multi-agent collaboration. However, these approaches typically retrieve evidence from a single source and fail to support iterative, role-specialized deliberation grounded in structured clinical data. To address this, we propose MedCoRAG (i.e., Medical Collaborative RAG), an end-to-end framework that generates diagnostic hypotheses from standardized abnormal findings and constructs a patient-specific evidence package by jointly retrieving and pruning UMLS knowledge graph paths and clinical guidelines. It then performs Multi-Agent Collaborative Reasoning: a Router Agent dynamically dispatches Specialist Agents based on case complexity; these agents iteratively reason over the evidence and trigger targeted re-retrievals when needed, while a Generalist Agent synthesizes all deliberations into a traceable consensus diagnosis that emulates multidisciplinary consultation. Experimental results on hepatic disease cases from MIMIC-IV show that MedCoRAG outperforms existing methods and closed-source models in both diagnostic performance and reasoning interpretability.",
-      "authors": [
-        "Zheng Li",
-        "Jiayi Xu",
-        "Zhikai Hu",
-        "Hechang Chen",
-        "Lele Cong",
-        "Yunyun Wang",
-        "Shuchao Pang"
-      ],
-      "published": "2026-03-05T12:58:45Z",
-      "published_date": "2026-03-05 12:58:45+00:00",
-      "updated": "2026-03-05T12:58:45Z",
-      "categories": [
-        "cs.AI",
-        "cs.MA"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05129v1",
-      "url": "http://arxiv.org/abs/2603.05129v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.09,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 7.9
-      },
-      "matched_domain": "Agents",
-      "matched_keywords": [
-        "agent",
-        "multi-agent",
-        "cs.AI",
-        "cs.MA"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.45,
-      "is_hot_paper": false,
-      "ai": {
-        "one_liner_zh": "",
-        "summary_zh": "",
-        "background_zh": "",
-        "problem_zh": "",
-        "approach_zh": "",
-        "evidence_zh": "",
-        "value_zh": "",
-        "open_questions": [],
-        "core_contributions": [],
-        "why_read": [],
-        "risks": [],
-        "recommended_for": [],
-        "keywords": [],
-        "reading_priority": "medium",
-        "reading_priority_reason": "",
-        "fallback_summary": "Diagnosing hepatic diseases accurately and interpretably is critical, yet it remains challenging in real-world clinical settings."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05290v1",
-      "title": "X-RAY: Mapping LLM Reasoning Capability via Formalized and Calibrated Probes",
-      "summary": "Large language models (LLMs) achieve promising performance, yet their ability to reason remains poorly understood. Existing evaluations largely emphasize task-level accuracy, often conflating pattern matching with reasoning capability. We present X-RAY, an explainable reasoning analysis system that maps the LLM reasoning capability using calibrated, formally verified probes. We model reasoning capability as a function of extractable \\textit{structure}, operationalized through formal properties such as constraint interaction, reasoning depth, and solution-space geometry. X-Ray generates probes via formal tools with controlled structural variations, enabling precise isolation of incremental structural information through formal calibration and verification. We evaluate state-of-the-art LLMs on problems ranging from junior-level to advanced in mathematics, physics, and chemistry. Our analysis reveals a systematic asymmetry in LLM reasoning: models are relatively robust to constraint refinement, where additional conditions shrink an existing solution space, but degrade sharply under solution-space restructuring, where modifications alter the underlying structural form of the solution manifold. Moreover, calibrated formal probes differentiate models that appear indistinguishable on standard benchmarks and reveal failure modes that are structurally interpretable rather than opaque. Beyond evaluation, our framework is contamination-free and supports the training and testing of reasoning models.",
-      "authors": [
-        "Gao Tianxi",
-        "Cai Yufan",
-        "Yuan Yusi",
-        "Dong Jin Song"
-      ],
-      "published": "2026-03-05T15:34:22Z",
-      "published_date": "2026-03-05 15:34:22+00:00",
-      "updated": "2026-03-05T15:34:22Z",
-      "categories": [
-        "cs.AI"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05290v1",
-      "url": "http://arxiv.org/abs/2603.05290v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.9,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 7.8
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "large language model",
-        "llm",
-        "cs.AI"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false,
-      "ai": {
-        "one_liner_zh": "",
-        "summary_zh": "",
-        "background_zh": "",
-        "problem_zh": "",
-        "approach_zh": "",
-        "evidence_zh": "",
-        "value_zh": "",
-        "open_questions": [],
-        "core_contributions": [],
-        "why_read": [],
-        "risks": [],
-        "recommended_for": [],
-        "keywords": [],
-        "reading_priority": "medium",
-        "reading_priority_reason": "",
-        "fallback_summary": "Large language models (LLMs) achieve promising performance, yet their ability to reason remains poorly understood."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "今天最值得读的主线有两条：一条是把 LLM 的可信判断能力从检索依赖里拆出来，另一条是把多模态图推理与训练推理效率继续推向更可落地的系统设计。优先读 2603.05471 和 2603.05181，前者直接对应 Agent 可信性，后者则把多模态推理从孤立图文对推进到带拓扑约束的图结构；随后读 2603.05500 和 2603.05210 判断效率论文的证据是否足够硬，最后再看 2603.05308 与 2603.05299，评估专域小模型验证和单流语音 LM 这两条延展路线的真实上限。",
+    "overview_zh": "今天最值得读的主线是可信性与事实核验、训练与推理效率。 优先看 Mario: Multimodal Graph Reasoning…、Leveraging LLM Parametric…，因为它们最直接代表今天的主干问题。 第三篇可用 Rethinking the Trust Region in LLM… 来判断这条方法线是否具备更强的证据或工程价值。",
     "top_themes": [
-      "无检索事实核验开始把 LLM 参数知识本身当作可直接利用的验证资源",
-      "多模态推理正在从图文对理解转向带关系结构的图级建模",
-      "训练与推理效率论文继续围绕显存、吞吐和草稿模型延迟这些硬瓶颈展开竞争式优化"
+      "可信性与事实核验",
+      "训练与推理效率",
+      "agent 与主动探索"
     ],
     "reading_strategy": [
-      "先读 2603.05471，重点看无检索事实核验的任务定义、评测框架和 INTRA 是否真的优于基于 logit 的做法。",
-      "再读 2603.05181，核对图条件 VLM 与模态路由是否真正解决了跨模态一致性和异质模态偏好。",
-      "工程导向读者接着看 2603.05500 与 2603.05210，分别关注训练显存与推理延迟的硬证据。"
+      "先读 Mario: Multimodal Graph Reasoning…，重点核对它对多模态建模与推理问题的任务定义和核心机制是否清楚。",
+      "再读 Leveraging LLM Parametric…，判断它的方法新意到底来自模型设计、训练流程还是评测重设。",
+      "最后读 Rethinking the Trust Region in LLM…，把它当成对今天主线的补充验证，重点看实验边界和真实价值。"
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-03-07T17:32:08Z",
-    "provider": "codex-cli"
+    "generated_at": "2026-03-07T19:28:45Z",
+    "provider": "codex-cli",
+    "strategy": "per-paper",
+    "paper_results": 10,
+    "paper_failures": 0
   }
 }

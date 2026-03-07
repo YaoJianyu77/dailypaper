@@ -74,6 +74,8 @@ def normalize_paper_id(raw: str) -> str:
 def normalize_model_text(value: Any) -> str:
     text = str(value or '').replace('\r', ' ').replace('\n', ' ').strip()
     text = re.sub(r'【[^】]*oops[^】]*】', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'【INVALID JSON】.*$', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\]\}\]\}\"?$', '', text)
     text = re.sub(r'\s+', ' ', text).strip()
     if len(text) >= 2 and text[0] == text[-1] and text[0] in {"'", '"'}:
         text = text[1:-1].strip()
@@ -97,6 +99,233 @@ def short_fallback_summary(paper: Dict[str, Any]) -> str:
     if not sentence.endswith('.'):
         sentence += '.'
     return sentence
+
+
+def split_sentences(text: str) -> List[str]:
+    cleaned = re.sub(r'\s+', ' ', str(text or '')).strip()
+    if not cleaned:
+        return []
+    parts = re.split(r'(?<=[.!?。！？])\s+', cleaned)
+    return [part.strip() for part in parts if part.strip()]
+
+
+def clip_text(text: str, max_chars: int = 180) -> str:
+    value = re.sub(r'\s+', ' ', str(text or '')).strip()
+    if len(value) <= max_chars:
+        return value
+    clipped = value[: max(0, max_chars - 1)].rsplit(' ', 1)[0].strip()
+    if not clipped:
+        clipped = value[: max(0, max_chars - 1)].strip()
+    return clipped + '…'
+
+
+def pick_sentence(sentences: List[str], keywords: List[str]) -> str:
+    lowered_keywords = [keyword.lower() for keyword in keywords]
+    for sentence in sentences:
+        text = sentence.lower()
+        if any(keyword in text for keyword in lowered_keywords):
+            return sentence
+    return ''
+
+
+def fallback_keywords(paper: Dict[str, Any]) -> List[str]:
+    items: List[str] = []
+    domain = str(paper.get('matched_domain') or '').strip()
+    if domain:
+        items.append(domain)
+    for key in paper.get('matched_keywords') or []:
+        text = str(key).strip()
+        if text and text not in items:
+            items.append(text)
+    for category in paper.get('categories') or []:
+        text = str(category).strip()
+        if text and text not in items:
+            items.append(text)
+    return items[:6]
+
+
+def infer_focus_label(paper: Dict[str, Any]) -> str:
+    title = str(paper.get('title') or '').lower()
+    abstract = str(paper.get('summary') or paper.get('abstract') or '').lower()
+    text = f'{title} {abstract}'
+    if any(token in text for token in ['hallucination', 'fact', 'verify', 'verification', 'citation', 'evidence attribution', 'misattribution']):
+        return '可信性与事实核验'
+    if any(token in text for token in ['latency', 'memory', 'throughput', 'speculative', 'training', 'inference', 'scaling', 'vocabulary']):
+        return '训练与推理效率'
+    if any(token in text for token in ['multimodal', 'vision-language', 'image', 'speech', 'audio', 'graph reasoning']):
+        return '多模态建模与推理'
+    if any(token in text for token in ['agent', 'planning', 'exploration', 'belief', 'spatial']):
+        return 'agent 与主动探索'
+    if any(token in text for token in ['biomedical', 'clinical', 'medical']):
+        return '医疗与生物医药证据'
+    domain = str(paper.get('matched_domain') or '').strip()
+    if domain:
+        return domain
+    return '当前研究重点问题'
+
+
+def fallback_value_text(paper: Dict[str, Any], focus_label: str) -> str:
+    title = str(paper.get('title') or '')
+    text = title.lower() + ' ' + str(paper.get('summary') or paper.get('abstract') or '').lower()
+    if any(token in text for token in ['latency', 'memory', 'throughput', 'training', 'inference', 'speculative']):
+        return '如果方法成立，它的直接价值是把训练或推理成本进一步压低，并把效率收益变成更可落地的系统设计选择。'
+    if any(token in text for token in ['hallucination', 'fact', 'verify', 'evidence', 'citation']):
+        return '如果方法成立，它会提升模型输出的可核验性，价值不只在 benchmark，而在真实高风险场景里的可信使用。'
+    if any(token in text for token in ['multimodal', 'vision', 'speech', 'audio', 'graph']):
+        return '如果方法成立，它的价值在于把跨模态建模从单一配对任务推进到更强约束、更复杂结构或更低成本的设置。'
+    if any(token in text for token in ['agent', 'planning', 'exploration', 'belief']):
+        return '如果方法成立，它的价值在于让 agent 在需要持续观察、更新状态和决策的环境里更可靠。'
+    return f'如果方法成立，它对{focus_label}方向的研究和工程都有直接参考价值，但关键收益仍要靠正文实验核对。'
+
+
+def fallback_open_questions(paper: Dict[str, Any], evidence_sentence: str) -> List[str]:
+    title = str(paper.get('title') or '').lower()
+    questions = [
+        '关键增益到底来自核心方法本身，还是来自数据构造、训练配方或评测口径？',
+        '作者是否和足够强的基线做了公平比较，并覆盖了真正困难的设置？',
+    ]
+    if any(token in title for token in ['latency', 'memory', 'training', 'inference', 'speculative']):
+        questions.append('效率收益在更大模型、更长上下文或更真实部署条件下是否仍然成立？')
+    elif any(token in title for token in ['hallucination', 'verify', 'evidence', 'fact', 'citation']):
+        questions.append('方法在分布外事实、复杂证据冲突和高风险场景下是否仍然可靠？')
+    elif any(token in title for token in ['multimodal', 'vision', 'speech', 'audio']):
+        questions.append('方法在跨模态冲突、噪声输入或更复杂任务链路上是否仍然稳定？')
+    else:
+        questions.append('摘要没有充分说明实验边界，正文是否明确交代失败案例、消融和适用范围？')
+    if not evidence_sentence:
+        questions[1] = '摘要没有充分说明证据，正文是否给出足够清楚的实验设置、指标和结果？'
+    return questions[:3]
+
+
+def fallback_recommended_for(paper: Dict[str, Any], focus_label: str) -> List[str]:
+    domain = str(paper.get('matched_domain') or '').strip()
+    items = [f'关注{focus_label}的研究者']
+    if domain:
+        items.append(f'{domain}系统与方法工程师')
+    items.append('需要快速判断论文是否值得全文阅读的读者')
+    return items[:3]
+
+
+def fallback_reading_priority(paper: Dict[str, Any], focus_label: str) -> tuple[str, str]:
+    score = float(paper.get('scores', {}).get('recommendation', 0) or 0)
+    if score >= 8.5:
+        return 'high', f'推荐分较高，而且它直接落在{focus_label}主线上，值得优先阅读全文。'
+    if score >= 7.5:
+        return 'medium', f'主题相关性不错，但是否值得深读仍取决于正文能否支撑摘要里的关键主张。'
+    return 'low', '可以先保留在候选清单里，等确认主线论文后再决定是否投入全文阅读时间。'
+
+
+def fallback_paper_ai(paper: Dict[str, Any]) -> Dict[str, Any]:
+    abstract = str(paper.get('summary') or paper.get('abstract') or '').strip()
+    sentences = split_sentences(abstract)
+    intro_sentence = sentences[0] if sentences else short_fallback_summary(paper)
+    problem_sentence = pick_sentence(
+        sentences,
+        ['challenge', 'problem', 'task', 'goal', 'requires', 'whether', 'essential', 'understudied'],
+    ) or intro_sentence
+    method_sentence = pick_sentence(
+        sentences,
+        ['we propose', 'we introduce', 'we present', 'we develop', 'we address', 'we cast', 'our method', 'in this work'],
+    ) or (sentences[1] if len(sentences) > 1 else intro_sentence)
+    evidence_sentence = pick_sentence(
+        sentences,
+        ['experiments show', 'results show', 'achieves', 'outperforms', 'competitive', 'benchmark', 'use case', 'demo samples'],
+    )
+    focus_label = infer_focus_label(paper)
+    keywords = fallback_keywords(paper)
+    reading_priority, reading_reason = fallback_reading_priority(paper, focus_label)
+
+    one_liner = f"这篇工作聚焦{focus_label}，重点在于用更明确的方法机制去处理“{clip_text(problem_sentence, 72)}”这类问题。"
+    summary_parts = [
+        f"这篇论文聚焦{focus_label}，摘要把核心问题放在“{clip_text(problem_sentence, 110)}”上。",
+        f"它给出的主要做法是“{clip_text(method_sentence, 110)}”。",
+    ]
+    if evidence_sentence:
+        summary_parts.append(f"摘要提到的证据是“{clip_text(evidence_sentence, 100)}”，但具体实验细节仍需要阅读全文确认。")
+    else:
+        summary_parts.append('摘要没有充分说明实验设置和结果细节，因此当前更适合把它当成值得核对的方法线索，而不是已被完全证实的结论。')
+
+    background = (
+        f"这篇工作位于{str(paper.get('matched_domain') or '相关').strip()}方向，摘要把背景放在“{clip_text(intro_sentence, 150)}”这一类问题上。"
+        f"它对应当前{focus_label}研究里对能力、效率或可靠性的持续需求。"
+    )
+    problem = f"论文想解决的核心问题是：{clip_text(problem_sentence, 180)}"
+    approach = f"摘要给出的主要方法线索是：{clip_text(method_sentence, 180)}"
+    if evidence_sentence:
+        evidence = f"摘要里提到的证据主要是：{clip_text(evidence_sentence, 180)}"
+    else:
+        evidence = '摘要没有充分说明实验设置、对比基线和结果细节，目前只能确认作者声称方法在目标任务上有效。'
+
+    return {
+        'one_liner_zh': one_liner,
+        'summary_zh': ' '.join(summary_parts),
+        'background_zh': background,
+        'problem_zh': problem,
+        'approach_zh': approach,
+        'evidence_zh': evidence,
+        'value_zh': fallback_value_text(paper, focus_label),
+        'open_questions': fallback_open_questions(paper, evidence_sentence),
+        'core_contributions': [
+            f'把问题明确放到{focus_label}这条主线上。',
+            f'提出了摘要里最核心的方法动作：{clip_text(method_sentence, 80)}',
+            '给出了一组需要进一步核对的结果或应用声称。',
+        ],
+        'why_read': [
+            f'它直接命中{focus_label}这个当前仍在快速演化的主题。',
+            '摘要至少给出了可复述的方法动作，值得核对正文是否真的站得住。',
+            '即使最终结论一般，这篇论文也可能提供问题定义、评测或系统设计上的参考。',
+        ],
+        'risks': [
+            '摘要层面的信息仍然有限，很多关键结论必须靠正文实验和消融确认。',
+            '如果摘要里的收益主要来自数据、训练细节或评测口径，方法本身的通用价值可能会被高估。',
+        ],
+        'recommended_for': fallback_recommended_for(paper, focus_label),
+        'keywords': keywords,
+        'reading_priority': reading_priority,
+        'reading_priority_reason': reading_reason,
+        'fallback_summary': short_fallback_summary(paper),
+    }
+
+
+def fallback_daily_brief(papers: List[Dict[str, Any]]) -> Dict[str, Any]:
+    if not papers:
+        return {
+            'overview_zh': '',
+            'top_themes': [],
+            'reading_strategy': [],
+        }
+
+    theme_counts: Dict[str, int] = {}
+    for paper in papers:
+        label = infer_focus_label(paper)
+        theme_counts[label] = theme_counts.get(label, 0) + 1
+    top_themes = [theme for theme, _ in sorted(theme_counts.items(), key=lambda item: (-item[1], item[0]))[:3]]
+
+    lead_titles = [clip_text(str(paper.get('title') or normalize_paper_id(paper.get('id') or '')), 36) for paper in papers[:3]]
+    overview_bits = []
+    if top_themes:
+        overview_bits.append('今天最值得读的主线是' + '、'.join(top_themes[:2]) + '。')
+    if lead_titles:
+        overview_bits.append('优先看 ' + '、'.join(lead_titles[:2]) + '，因为它们最直接代表今天的主干问题。')
+    if len(lead_titles) >= 3:
+        overview_bits.append(f'第三篇可用 {lead_titles[2]} 来判断这条方法线是否具备更强的证据或工程价值。')
+
+    reading_strategy: List[str] = []
+    for index, paper in enumerate(papers[:3], start=1):
+        label = clip_text(str(paper.get('title') or normalize_paper_id(paper.get('id') or '')), 36)
+        focus_label = infer_focus_label(paper)
+        if index == 1:
+            reading_strategy.append(f'先读 {label}，重点核对它对{focus_label}问题的任务定义和核心机制是否清楚。')
+        elif index == 2:
+            reading_strategy.append(f'再读 {label}，判断它的方法新意到底来自模型设计、训练流程还是评测重设。')
+        else:
+            reading_strategy.append(f'最后读 {label}，把它当成对今天主线的补充验证，重点看实验边界和真实价值。')
+
+    return {
+        'overview_zh': ' '.join(overview_bits).strip(),
+        'top_themes': top_themes[:3],
+        'reading_strategy': reading_strategy[:3],
+    }
 
 
 def trim_text(text: str, max_chars: int) -> str:
@@ -492,11 +721,22 @@ def coerce_string_list(value: Any, *, min_items: int = 0, max_items: int = 10, f
     return items
 
 
-def normalize_daily_brief(data: Dict[str, Any]) -> Dict[str, Any]:
+def normalize_daily_brief(data: Dict[str, Any], papers: List[Dict[str, Any]] | None = None) -> Dict[str, Any]:
     daily = data.get('daily_brief', {}) if isinstance(data, dict) else {}
-    overview = str(daily.get('overview_zh') or '').strip()
-    top_themes = coerce_string_list(daily.get('top_themes'), min_items=0, max_items=3)
-    reading_strategy = coerce_string_list(daily.get('reading_strategy'), min_items=0, max_items=3)
+    fallback = fallback_daily_brief(papers or [])
+    overview = str(daily.get('overview_zh') or fallback.get('overview_zh') or '').strip()
+    top_themes = coerce_string_list(
+        daily.get('top_themes'),
+        min_items=min(3, len(fallback.get('top_themes', []))),
+        max_items=3,
+        fallback=fallback.get('top_themes', []),
+    )
+    reading_strategy = coerce_string_list(
+        daily.get('reading_strategy'),
+        min_items=min(3, len(fallback.get('reading_strategy', []))),
+        max_items=3,
+        fallback=fallback.get('reading_strategy', []),
+    )
     return {
         'overview_zh': overview,
         'top_themes': top_themes,
@@ -505,6 +745,7 @@ def normalize_daily_brief(data: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def normalize_paper_ai(item: Dict[str, Any], fallback_paper: Dict[str, Any]) -> Dict[str, Any]:
+    fallback_ai = fallback_paper_ai(fallback_paper)
     summary = normalize_model_text(item.get('summary_zh') or '')
     background = normalize_model_text(item.get('background_zh') or '')
     problem = normalize_model_text(item.get('problem_zh') or '')
@@ -512,29 +753,29 @@ def normalize_paper_ai(item: Dict[str, Any], fallback_paper: Dict[str, Any]) -> 
     evidence = normalize_model_text(item.get('evidence_zh') or '')
     value = normalize_model_text(item.get('value_zh') or '')
     return {
-        'one_liner_zh': normalize_model_text(item.get('one_liner_zh') or ''),
-        'summary_zh': summary,
-        'background_zh': background,
-        'problem_zh': problem,
-        'approach_zh': approach,
-        'evidence_zh': evidence,
-        'value_zh': value,
-        'open_questions': coerce_string_list(item.get('open_questions'), max_items=3),
-        'core_contributions': coerce_string_list(item.get('core_contributions'), max_items=3),
-        'why_read': coerce_string_list(item.get('why_read'), max_items=3),
-        'risks': coerce_string_list(item.get('risks'), max_items=2),
-        'recommended_for': coerce_string_list(item.get('recommended_for'), max_items=3),
-        'keywords': coerce_string_list(item.get('keywords'), max_items=6),
-        'reading_priority': normalize_model_text(item.get('reading_priority') or 'medium').lower() or 'medium',
-        'reading_priority_reason': normalize_model_text(item.get('reading_priority_reason') or ''),
-        'fallback_summary': short_fallback_summary(fallback_paper),
+        'one_liner_zh': normalize_model_text(item.get('one_liner_zh') or '') or fallback_ai['one_liner_zh'],
+        'summary_zh': summary or fallback_ai['summary_zh'],
+        'background_zh': background or fallback_ai['background_zh'],
+        'problem_zh': problem or fallback_ai['problem_zh'],
+        'approach_zh': approach or fallback_ai['approach_zh'],
+        'evidence_zh': evidence or fallback_ai['evidence_zh'],
+        'value_zh': value or fallback_ai['value_zh'],
+        'open_questions': coerce_string_list(item.get('open_questions'), min_items=3, max_items=3, fallback=fallback_ai['open_questions']),
+        'core_contributions': coerce_string_list(item.get('core_contributions'), min_items=3, max_items=3, fallback=fallback_ai['core_contributions']),
+        'why_read': coerce_string_list(item.get('why_read'), min_items=3, max_items=3, fallback=fallback_ai['why_read']),
+        'risks': coerce_string_list(item.get('risks'), min_items=2, max_items=2, fallback=fallback_ai['risks']),
+        'recommended_for': coerce_string_list(item.get('recommended_for'), min_items=3, max_items=3, fallback=fallback_ai['recommended_for']),
+        'keywords': coerce_string_list(item.get('keywords'), min_items=min(4, len(fallback_ai['keywords'])), max_items=6, fallback=fallback_ai['keywords']),
+        'reading_priority': normalize_model_text(item.get('reading_priority') or fallback_ai['reading_priority']).lower() or fallback_ai['reading_priority'],
+        'reading_priority_reason': normalize_model_text(item.get('reading_priority_reason') or '') or fallback_ai['reading_priority_reason'],
+        'fallback_summary': fallback_ai['fallback_summary'],
     }
 
 
 def merge_enrichment(payload: Dict[str, Any], raw_ai: Dict[str, Any], model: str) -> Dict[str, Any]:
     enriched = copy.deepcopy(payload)
     papers = enriched.get('top_papers', [])
-    normalized_daily = normalize_daily_brief(raw_ai)
+    normalized_daily = normalize_daily_brief(raw_ai, papers)
     ai_by_id: Dict[str, Dict[str, Any]] = {}
 
     for item in raw_ai.get('papers', []) if isinstance(raw_ai, dict) else []:
@@ -559,30 +800,9 @@ def merge_enrichment(payload: Dict[str, Any], raw_ai: Dict[str, Any], model: str
 
 def passthrough_payload(payload: Dict[str, Any], reason: str) -> Dict[str, Any]:
     result = copy.deepcopy(payload)
-    result['daily_brief'] = result.get('daily_brief', {
-        'overview_zh': '',
-        'top_themes': [],
-        'reading_strategy': [],
-    })
+    result['daily_brief'] = fallback_daily_brief(result.get('top_papers', []))
     for paper in result.get('top_papers', []):
-        paper.setdefault('ai', {
-            'one_liner_zh': '',
-            'summary_zh': '',
-            'background_zh': '',
-            'problem_zh': '',
-            'approach_zh': '',
-            'evidence_zh': '',
-            'value_zh': '',
-            'open_questions': [],
-            'core_contributions': [],
-            'why_read': [],
-            'risks': [],
-            'recommended_for': [],
-            'keywords': [],
-            'reading_priority': 'medium',
-            'reading_priority_reason': '',
-            'fallback_summary': short_fallback_summary(paper),
-        })
+        paper['ai'] = fallback_paper_ai(paper)
     result['ai_enrichment'] = {
         'enabled': False,
         'reason': reason,

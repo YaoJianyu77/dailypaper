@@ -13,7 +13,10 @@
     "main_results_zh",
     "strengths",
     "limitations",
+    "technical_route_zh",
     "relation_to_prior_work_zh",
+    "related_work_comparisons",
+    "score_card",
     "practical_value_zh",
     "future_work",
     "reading_checklist",
@@ -62,8 +65,77 @@
       },
       "maxItems": 4
     },
+    "technical_route_zh": {
+      "type": "string"
+    },
     "relation_to_prior_work_zh": {
       "type": "string"
+    },
+    "related_work_comparisons": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "paper_id",
+          "title",
+          "relation",
+          "comparison_zh"
+        ],
+        "properties": {
+          "paper_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "relation": {
+            "type": "string"
+          },
+          "comparison_zh": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "score_card": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "innovation",
+        "technical_quality",
+        "experimental_rigor",
+        "writing_clarity",
+        "practical_value"
+      ],
+      "properties": {
+        "innovation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "technical_quality": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "experimental_rigor": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "writing_clarity": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "practical_value": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        }
+      }
     },
     "practical_value_zh": {
       "type": "string"
