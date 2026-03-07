@@ -3,7 +3,7 @@
 ## 1. Install
 
 ```bash
-pip install -r requirements.txt
+uv --version
 ```
 
 ## 2. Configure
@@ -34,7 +34,7 @@ Requirements for unattended local runs:
 Run the full local pipeline:
 
 ```bash
-python scripts/run_local_daily.py
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py
 ```
 
 This will:
@@ -49,11 +49,11 @@ This will:
 Useful variants:
 
 ```bash
-python scripts/run_local_daily.py --skip-push
-python scripts/run_local_daily.py --target-date 2026-03-07
-python scripts/run_local_daily.py --enricher openai
-python scripts/run_local_daily.py --enricher none
-python scripts/run_local_daily.py --remote origin
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --skip-push
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --target-date 2026-03-07
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --enricher openai
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --enricher none
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --remote origin
 ```
 
 ## 5. Install the daily 07:00 cron job
@@ -125,5 +125,5 @@ python extract-paper-images/scripts/extract_images.py \
 If you still want to inspect the generated site before pushing:
 
 ```bash
-python -m http.server 8000 -d dist
+uv run --with-requirements requirements.txt python -m http.server 8000 -d dist
 ```

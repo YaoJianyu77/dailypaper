@@ -45,13 +45,13 @@ dist/
 Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+uv --version
 ```
 
 Search papers:
 
 ```bash
-python start-my-day/scripts/search_arxiv.py \
+uv run --with-requirements requirements.txt python start-my-day/scripts/search_arxiv.py \
   --config config.example.yaml \
   --output state/arxiv_filtered.json
 ```
@@ -59,19 +59,19 @@ python start-my-day/scripts/search_arxiv.py \
 Publish the daily report into `content/`:
 
 ```bash
-python scripts/publish_daily.py --input state/arxiv_filtered.json
+uv run --with-requirements requirements.txt python scripts/publish_daily.py --input state/arxiv_filtered.json
 ```
 
 Build the static site:
 
 ```bash
-python scripts/build_site.py --output-dir dist
+uv run --with-requirements requirements.txt python scripts/build_site.py --output-dir dist
 ```
 
 Serve it locally:
 
 ```bash
-python -m http.server 8000 -d dist
+uv run --with-requirements requirements.txt python -m http.server 8000 -d dist
 ```
 
 Then open `http://localhost:8000`.
@@ -99,17 +99,17 @@ Install the local 7am cron job:
 Run the full local pipeline immediately:
 
 ```bash
-python scripts/run_local_daily.py
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py
 ```
 
 Useful variants:
 
 ```bash
-python scripts/run_local_daily.py --target-date 2026-03-07
-python scripts/run_local_daily.py --skip-push
-python scripts/run_local_daily.py --enricher openai
-python scripts/run_local_daily.py --enricher none
-python scripts/run_local_daily.py --remote origin
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --target-date 2026-03-07
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --skip-push
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --enricher openai
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --enricher none
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --remote origin
 ```
 
 By default the script auto-detects the active Git remote. Use `--remote` only if your clone does not track the correct remote.
@@ -281,11 +281,11 @@ You can also run it locally:
 
 ```bash
 export OPENAI_API_KEY=\"your-key\"
-python scripts/ai_enrich.py \
+uv run --with-requirements requirements.txt python scripts/ai_enrich.py \
   --config config.yaml \
   --input state/arxiv_filtered.json \
   --output state/arxiv_enriched.json
-python scripts/publish_daily.py --input state/arxiv_enriched.json
+uv run --with-requirements requirements.txt python scripts/publish_daily.py --input state/arxiv_enriched.json
 ```
 
 ## Notes on Legacy Files
@@ -295,16 +295,15 @@ The repository still contains `skill.md` files and some original helper scripts 
 ## Minimal Local Flow
 
 ```bash
-pip install -r requirements.txt
-python start-my-day/scripts/search_arxiv.py --config config.example.yaml --output state/arxiv_filtered.json
-python scripts/publish_daily.py --input state/arxiv_filtered.json
-python scripts/build_site.py --output-dir dist
+uv run --with-requirements requirements.txt python start-my-day/scripts/search_arxiv.py --config config.example.yaml --output state/arxiv_filtered.json
+uv run --with-requirements requirements.txt python scripts/publish_daily.py --input state/arxiv_filtered.json
+uv run --with-requirements requirements.txt python scripts/build_site.py --output-dir dist
 ```
 
 For the local Codex CLI path, replace the middle steps with:
 
 ```bash
-python scripts/run_local_daily.py --skip-push
+uv run --with-requirements requirements.txt python scripts/run_local_daily.py --skip-push
 ```
 
 ## Main Files
