@@ -36,6 +36,7 @@ ARXIV_NS = {
 
 SEMANTIC_SCHOLAR_API_URL = "https://api.semanticscholar.org/graph/v1/paper/search"
 SEMANTIC_SCHOLAR_FIELDS = "title,abstract,publicationDate,citationCount,influentialCitationCount,url,authors,externalIds"
+SEMANTIC_SCHOLAR_QUERY_LIMIT = 60
 
 ARXIV_CATEGORY_KEYWORDS = {
     "cs.AI": "artificial intelligence",
@@ -91,18 +92,22 @@ S2_RATE_LIMIT_WAIT = 30
 S2_CATEGORY_REQUEST_INTERVAL = 3
 
 
+class SemanticScholarRateLimitError(RuntimeError):
+    """Raised when Semantic Scholar rate limits and the caller should degrade gracefully."""
+
+
 def load_research_config(config_path: str) -> Dict:
     """
     从 YAML 文件加载研究兴趣配置
-    
+
     Args:
         config_path: 配置文件路径
-        
+
     Returns:
         研究配置字典
     """
     import yaml
-    
+
     try:
         with open(config_path, 'r', encoding='utf-8') as f:
             config = yaml.safe_load(f)
@@ -128,10 +133,10 @@ def load_research_config(config_path: str) -> Dict:
 def calculate_date_windows(target_date: Optional[datetime] = None) -> Tuple[datetime, datetime, datetime, datetime]:
     """
     计算两个时间窗口：最近30天和过去一年（除去最近30天）
-    
+
     Args:
         target_date: 基准日期，如果为 None 则使用当前日期
-        
+
     Returns:
         (window_30d_start, window_30d_end, window_1y_start, window_1y_end)
         - window_30d_start: 30天窗口开始日期
@@ -141,15 +146,15 @@ def calculate_date_windows(target_date: Optional[datetime] = None) -> Tuple[date
     """
     if target_date is None:
         target_date = datetime.now()
-    
+
     # 最近30天窗口: [target_date - 30 days, target_date]
     window_30d_start = target_date - timedelta(days=30)
     window_30d_end = target_date
-    
+
     # 过去一年窗口（除去最近30天）: [target_date - 365 days, target_date - 31 days]
     window_1y_start = target_date - timedelta(days=365)
     window_1y_end = target_date - timedelta(days=31)
-    
+
     return window_30d_start, window_30d_end, window_1y_start, window_1y_end
 
 
@@ -162,26 +167,26 @@ def search_arxiv_by_date_range(
 ) -> List[Dict]:
     """
     使用 arXiv API 搜索指定日期范围内的论文
-    
+
     Args:
         categories: arXiv 分类列表
         start_date: 开始日期
         end_date: 结束日期
         max_results: 最大结果数
         max_retries: 最大重试次数
-        
+
     Returns:
         论文列表
     """
     # 构建分类查询
     category_query = "+OR+".join([f"cat:{cat}" for cat in categories])
-    
+
     # 构建日期范围查询 (arXiv 使用 YYYYMMDD 格式)
     date_query = f"submittedDate:[{start_date.strftime('%Y%m%d')}0000+TO+{end_date.strftime('%Y%m%d')}2359]"
-    
+
     # 组合查询
     full_query = f"({category_query})+AND+{date_query}"
-    
+
     # 构建 URL
     url = (
         f"https://export.arxiv.org/api/query?"
@@ -190,10 +195,10 @@ def search_arxiv_by_date_range(
         f"sortBy=submittedDate&"
         f"sortOrder=descending"
     )
-    
+
     logger.info("[arXiv] Searching papers from %s to %s", start_date.date(), end_date.date())
     logger.debug("[arXiv] URL: %s...", url[:120])
-    
+
     for attempt in range(max_retries):
         try:
             with urllib.request.urlopen(url, timeout=60) as response:
@@ -210,7 +215,7 @@ def search_arxiv_by_date_range(
             else:
                 logger.error("[arXiv] Failed after %d attempts", max_retries)
                 return []
-    
+
     return []
 
 
@@ -223,35 +228,38 @@ def search_semantic_scholar_hot_papers(
 ) -> List[Dict]:
     """
     使用 Semantic Scholar API 搜索指定时间范围内的高影响力论文
-    
+
     Args:
         query: 搜索关键词
         start_date: 开始日期
         end_date: 结束日期
         top_k: 返回前 K 篇高影响力论文
         max_retries: 最大重试次数
-        
+
     Returns:
         按高影响力引用数排序的论文列表
     """
     # 构建日期范围 (Semantic Scholar 使用 YYYY-MM-DD:YYYY-MM-DD 格式)
     date_range = f"{start_date.strftime('%Y-%m-%d')}:{end_date.strftime('%Y-%m-%d')}"
-    
+
     # 构建请求参数
     params = {
         "query": query,
         "publicationDateOrYear": date_range,
-        "limit": 100,  # 先拉取100篇相关度最高的
+        "limit": SEMANTIC_SCHOLAR_QUERY_LIMIT,
         "fields": SEMANTIC_SCHOLAR_FIELDS
     }
-    
+
     headers = {
         "User-Agent": "StartMyDay-PaperFetcher/1.0"
     }
-    
+    api_key = os.environ.get("SEMANTIC_SCHOLAR_API_KEY", "").strip()
+    if api_key:
+        headers["x-api-key"] = api_key
+
     logger.info("[S2] Searching hot papers from %s to %s", start_date.date(), end_date.date())
     logger.info("[S2] Query: '%s'", query)
-    
+
     for attempt in range(max_retries):
         try:
             if HAS_REQUESTS:
@@ -270,62 +278,72 @@ def search_semantic_scholar_hot_papers(
                 req = urllib.request.Request(url, headers=headers)
                 with urllib.request.urlopen(req, timeout=15) as response:
                     data = json.loads(response.read().decode('utf-8'))
-            
+
             papers = data.get("data", [])
             if not papers:
                 logger.info("[S2] No papers found")
                 return []
-            
+
             # 本地二次过滤与排序
             valid_papers = []
             for p in papers:
                 # 过滤掉没有标题或摘要的无效条目
                 if not p.get("title") or not p.get("abstract"):
                     continue
-                
+
                 # 处理可能的 None 值
                 inf_cit = p.get("influentialCitationCount") or 0
                 cit = p.get("citationCount") or 0
-                
+
                 p["influentialCitationCount"] = inf_cit
                 p["citationCount"] = cit
-                
+
                 # 标记来源
                 p["source"] = "semantic_scholar"
                 p["hot_score"] = inf_cit  # 使用高影响力引用数作为热度分数
-                
+
                 valid_papers.append(p)
-            
+
             # 按高影响力引用数倒序排列
             sorted_papers = sorted(
                 valid_papers,
                 key=lambda x: x["influentialCitationCount"],
                 reverse=True
             )
-            
+
             logger.info("[S2] Found %d valid papers, returning top %d", len(sorted_papers), top_k)
             return sorted_papers[:top_k]
-            
+
         except Exception as e:
             error_msg = str(e)
             logger.warning("[S2] Error (attempt %d/%d): %s", attempt + 1, max_retries, e)
-            
+
             # 检查是否是 429 错误（Too Many Requests）
-            is_rate_limit = "429" in error_msg or "Too Many Requests" in error_msg
-            
+            status_code = getattr(getattr(e, "response", None), "status_code", None)
+            retry_after = getattr(getattr(e, "response", None), "headers", {}).get("Retry-After")
+            is_rate_limit = status_code == 429 or "429" in error_msg or "Too Many Requests" in error_msg
+
             if attempt < max_retries - 1:
                 # 对于 429 错误，使用更长的等待时间
                 if is_rate_limit:
-                    wait_time = S2_RATE_LIMIT_WAIT
+                    if not api_key:
+                        raise SemanticScholarRateLimitError(
+                            "Semantic Scholar rate limited unauthenticated requests"
+                        ) from e
+                    wait_time = int(retry_after) if retry_after and str(retry_after).isdigit() else S2_RATE_LIMIT_WAIT
                     logger.warning("[S2] Rate limit hit. Waiting %d seconds...", wait_time)
                 else:
                     wait_time = (2 ** attempt) * 2
                     logger.info("[S2] Retrying in %d seconds...", wait_time)
                 time.sleep(wait_time)
             else:
+                if is_rate_limit and not api_key:
+                    raise SemanticScholarRateLimitError(
+                        "Semantic Scholar rate limited unauthenticated requests"
+                    ) from e
                 logger.error("[S2] Failed after %d attempts", max_retries)
                 return []
-    
+
     return []
 
 
@@ -337,72 +355,78 @@ def search_hot_papers_from_categories(
 ) -> List[Dict]:
     """
     为多个 arXiv 分类搜索高影响力论文
-    
+
     Args:
         categories: arXiv 分类列表
         start_date: 开始日期
         end_date: 结束日期
         top_k_per_category: 每个分类返回的论文数
-        
+
     Returns:
         合并后的高影响力论文列表
     """
     all_hot_papers = []
     seen_arxiv_ids = set()
-    
+
     for category in categories:
         # 获取对应的关键词
         query = ARXIV_CATEGORY_KEYWORDS.get(category, category)
-        
-        papers = search_semantic_scholar_hot_papers(
-            query=query,
-            start_date=start_date,
-            end_date=end_date,
-            top_k=top_k_per_category
-        )
-        
+
+        try:
+            papers = search_semantic_scholar_hot_papers(
+                query=query,
+                start_date=start_date,
+                end_date=end_date,
+                top_k=top_k_per_category
+            )
+        except SemanticScholarRateLimitError:
+            logger.warning(
+                "[S2] Rate limit encountered without API key. Stopping hot-paper search early and continuing with current results."
+            )
+            break
+
         # 去重（基于 arXiv ID）
         for p in papers:
             # 安全地从 externalIds 字典中提取 ArXiv 编号
             arxiv_id = p.get("externalIds", {}).get("ArXiv") if p.get("externalIds") else None
-            
+
             # 统一写入 arxiv_id 字段，方便最后 Step 3 的全局去重
             p["arxiv_id"] = arxiv_id
-            
+
             if arxiv_id and arxiv_id not in seen_arxiv_ids:
                 seen_arxiv_ids.add(arxiv_id)
                 all_hot_papers.append(p)
             elif not arxiv_id:
                 # 没有 arXiv ID 的也保留（可能是其他来源的论文）
                 all_hot_papers.append(p)
-        
+
         time.sleep(S2_CATEGORY_REQUEST_INTERVAL)
-    
+
     # 最终按影响力引用数排序
     all_hot_papers.sort(key=lambda x: x.get("influentialCitationCount", 0), reverse=True)
-    
+
     return all_hot_papers
 
 
 def parse_arxiv_xml(xml_content: str) -> List[Dict]:
     """
     解析 arXiv XML 结果
-    
+
     Args:
         xml_content: XML 内容
-        
+
     Returns:
         论文列表，每篇论文包含 ID、标题、作者、摘要等信息
     """
     papers = []
-    
+
     try:
         root = ET.fromstring(xml_content)
-        
+
         # 查找所有 entry 元素
         for entry in root.findall('atom:entry', ARXIV_NS):
             paper = {}
-            
+
             # 提取 ID
             id_elem = entry.find('atom:id', ARXIV_NS)
             if id_elem is not None:
@@ -415,17 +439,17 @@ def parse_arxiv_xml(xml_content: str) -> List[Dict]:
                     match = re.search(r'/(\d+\.\d+)$', paper['id'])
                     if match:
                         paper['arxiv_id'] = match.group(1)
-            
+
             # 提取标题
             title_elem = entry.find('atom:title', ARXIV_NS)
             if title_elem is not None:
                 paper['title'] = title_elem.text.strip()
-            
+
             # 提取摘要
             summary_elem = entry.find('atom:summary', ARXIV_NS)
             if summary_elem is not None:
                 paper['summary'] = summary_elem.text.strip()
-            
+
             # 提取作者
             authors = []
             for author in entry.findall('atom:author', ARXIV_NS):
@@ -433,7 +457,7 @@ def parse_arxiv_xml(xml_content: str) -> List[Dict]:
                 if name_elem is not None:
                     authors.append(name_elem.text)
             paper['authors'] = authors
-            
+
             # 提取发布日期
             published_elem = entry.find('atom:published', ARXIV_NS)
             if published_elem is not None:
@@ -445,12 +469,12 @@ def parse_arxiv_xml(xml_content: str) -> List[Dict]:
                     )
                 except (ValueError, TypeError):
                     paper['published_date'] = None
-            
+
             # 提取更新日期
             updated_elem = entry.find('atom:updated', ARXIV_NS)
             if updated_elem is not None:
                 paper['updated'] = updated_elem.text
-            
+
             # 提取分类
             categories = []
             for category in entry.findall('atom:category', ARXIV_NS):
@@ -458,26 +482,26 @@ def parse_arxiv_xml(xml_content: str) -> List[Dict]:
                 if term:
                     categories.append(term)
             paper['categories'] = categories
-            
+
             # 提取 PDF 链接
             for link in entry.findall('atom:link', ARXIV_NS):
                 if link.get('title') == 'pdf':
                     paper['pdf_url'] = link.get('href')
                     break
-            
+
             # 提取主页面链接
             if 'id' in paper:
                 paper['url'] = paper['id']
-            
+
             # 标记来源
             paper['source'] = 'arxiv'
-            
+
             papers.append(paper)
-            
+
     except ET.ParseError as e:
         logger.error("Error parsing XML: %s", e)
         raise
-    
+
     return papers
 
 
@@ -488,33 +512,33 @@ def calculate_relevance_score(
 ) -> Tuple[float, Optional[str], List[str]]:
     """
     计算论文与研究兴趣的相关性评分
-    
+
     Args:
         paper: 论文信息
         domains: 研究领域配置
         excluded_keywords: 排除关键词
-        
+
     Returns:
         (相关性评分, 匹配的领域, 匹配的关键词列表)
     """
     title = paper.get('title', '').lower()
     summary = paper.get('summary', '').lower() if 'summary' in paper else paper.get('abstract', '').lower()
     categories = set(paper.get('categories', []))
-    
+
     # 检查排除关键词
     for keyword in excluded_keywords:
         if keyword.lower() in title or keyword.lower() in summary:
             return 0, None, []
-    
+
     max_score = 0
     best_domain = None
     matched_keywords = []
-    
+
     # 遍历所有领域
     for domain_name, domain_config in domains.items():
         score = 0
         domain_matched_keywords = []
-        
+
         # 关键词匹配
         keywords = domain_config.get('keywords', [])
         for keyword in keywords:
@@ -525,38 +549,38 @@ def calculate_relevance_score(
             elif keyword_lower in summary:
                 score += RELEVANCE_SUMMARY_KEYWORD_BOOST
                 domain_matched_keywords.append(keyword)
-        
+
         # 类别匹配
         domain_categories = domain_config.get('arxiv_categories', [])
         for cat in domain_categories:
             if cat in categories:
                 score += RELEVANCE_CATEGORY_MATCH_BOOST
                 domain_matched_keywords.append(cat)
-        
+
         if score > max_score:
             max_score = score
             best_domain = domain_name
             matched_keywords = domain_matched_keywords
-    
+
     return max_score, best_domain, matched_keywords
 
 
 def calculate_recency_score(published_date: Optional[datetime]) -> float:
     """
     根据发布日期计算新近性评分
-    
+
     Args:
         published_date: 发布日期
-        
+
     Returns:
         新近性评分 (0-3)
     """
     if published_date is None:
         return 0
-    
+
     now = datetime.now(published_date.tzinfo) if published_date.tzinfo else datetime.now()
     days_diff = (now - published_date).days
-    
+
     for max_days, score in RECENCY_THRESHOLDS:
         if days_diff <= max_days:
             return score
@@ -822,14 +846,14 @@ def main():
     logger.info("=" * 70)
     logger.info("Step 1: Searching recent papers (last 30 days) from arXiv")
     logger.info("=" * 70)
-    
+
     recent_papers = search_arxiv_by_date_range(
         categories=categories,
         start_date=window_30d_start,
         end_date=window_30d_end,
         max_results=args.max_results
     )
-    
+
     if recent_papers:
         scored_recent = filter_and_score_papers(
             papers=recent_papers,
@@ -847,14 +871,14 @@ def main():
         logger.info("=" * 70)
         logger.info("Step 2: Searching hot papers (past year) from Semantic Scholar")
         logger.info("=" * 70)
-        
+
         hot_papers = search_hot_papers_from_categories(
             categories=categories,
             start_date=window_1y_start,
             end_date=window_1y_end,
             top_k_per_category=5
         )
-        
+
         if hot_papers:
             scored_hot = filter_and_score_papers(
                 papers=hot_papers,
@@ -873,10 +897,10 @@ def main():
     logger.info("=" * 70)
     logger.info("Step 3: Merging and ranking results")
     logger.info("=" * 70)
-    
+
     # 按推荐评分排序
     all_scored_papers.sort(key=lambda x: x['scores']['recommendation'], reverse=True)
-    
+
     # 去重（基于 arXiv ID）
     seen_ids = set()
     unique_papers = []
@@ -892,7 +916,7 @@ def main():
             if title not in seen_ids:
                 seen_ids.add(title)
                 unique_papers.append(p)
-    
+
     logger.info("Total unique papers after deduplication: %d", len(unique_papers))
 
     if len(unique_papers) == 0:

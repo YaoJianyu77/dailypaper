@@ -288,6 +288,12 @@ Optional repository variables for GitHub Actions:
 - `GITHUB_MODELS_PREFERRED_MODELS`
 - `GITHUB_MODELS_API_BASE`
 
+Optional repository secret for better Semantic Scholar stability:
+
+- `SEMANTIC_SCHOLAR_API_KEY`
+
+If this secret is missing and Semantic Scholar returns `429`, the workflow now degrades gracefully and continues with the arXiv-side results instead of burning the whole run on repeated backoff.
+
 You can still run OpenAI directly if you want:
 
 ```bash

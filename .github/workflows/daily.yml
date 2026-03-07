@@ -59,6 +59,8 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Search papers
+        env:
+          SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}
         run: |
           CONFIG_PATH="config.yaml"
           if [ ! -f "$CONFIG_PATH" ]; then

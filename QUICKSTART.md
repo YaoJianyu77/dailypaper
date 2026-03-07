@@ -39,6 +39,12 @@ Optional repository variables:
 - `GITHUB_MODELS_PREFERRED_MODELS`
 - `GITHUB_MODELS_API_BASE`
 
+Optional repository secret:
+
+- `SEMANTIC_SCHOLAR_API_KEY`
+
+If this secret is absent and Semantic Scholar rate-limits the workflow, the hot-paper pass now degrades gracefully and the run continues with arXiv results.
+
 ## 4. Trigger a manual run once
 
 Run the generation workflow manually once from the GitHub Actions web UI:
