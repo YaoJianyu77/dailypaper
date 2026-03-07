@@ -77,10 +77,11 @@ Then open `http://localhost:8000`.
 The scheduled GitHub Actions workflow does this end to end:
 
 1. Run the paper search.
-2. Generate or update daily markdown and paper pages.
-3. Commit `content/` and `state/` changes back into the repository.
-4. Build the static site.
-5. Deploy the static site to GitHub Pages.
+2. Optionally enrich the top papers with AI-generated Chinese summaries and recommendations.
+3. Generate or update daily markdown and paper pages.
+4. Commit `content/` and `state/` changes back into the repository.
+5. Build the static site.
+6. Deploy the static site to GitHub Pages.
 
 That gives you:
 
@@ -164,18 +165,67 @@ If you ever deploy behind a subpath on another platform, set:
 SITE_BASE_URL="/your-subpath"
 ```
 
-## AI Integration
+## AI Enrichment
 
-The repository is now structured so AI can be inserted into the pipeline without human intervention.
+The pipeline now includes an optional `search -> enrich -> publish` layer.
 
-The intended place is between search and publish:
+New script:
 
-1. fetch metadata
-2. enrich each paper with AI summaries/tags/related work
-3. write markdown into `content/`
-4. build and deploy the site
+- `scripts/ai_enrich.py`
 
-This refactor does not hardcode a provider-specific AI client yet. It gives you a stable repo/content/site model first, which is the prerequisite for unattended automation.
+Input:
+
+- `state/arxiv_filtered.json`
+
+Output:
+
+- `state/arxiv_enriched.json`
+
+When `OPENAI_API_KEY` is present, the script calls the OpenAI Responses API and adds:
+
+- `daily_brief.overview_zh`
+- `daily_brief.top_themes`
+- `daily_brief.reading_strategy`
+- per-paper AI fields such as:
+  - `one_liner_zh`
+  - `summary_zh`
+  - `core_contributions`
+  - `why_read`
+  - `risks`
+  - `recommended_for`
+  - `keywords`
+  - `reading_priority`
+
+When `OPENAI_API_KEY` is missing, the script degrades safely and passes the ranked papers through without failing the workflow.
+
+### GitHub Secrets
+
+To enable unattended AI enrichment in GitHub Actions:
+
+1. Open `Settings -> Secrets and variables -> Actions`
+2. Add repository secret:
+   - `OPENAI_API_KEY`
+3. Optional repository variables:
+   - `OPENAI_MODEL`
+   - `OPENAI_API_BASE`
+
+Default model in config:
+
+```yaml
+ai:
+  model: "gpt-4.1-mini"
+```
+
+You can also run it locally:
+
+```bash
+export OPENAI_API_KEY=\"your-key\"
+python scripts/ai_enrich.py \
+  --config config.yaml \
+  --input state/arxiv_filtered.json \
+  --output state/arxiv_enriched.json
+python scripts/publish_daily.py --input state/arxiv_enriched.json
+```
 
 ## Notes on Legacy Files
 
@@ -194,6 +244,7 @@ python -m http.server 8000 -d dist
 ## Main Files
 
 - `scripts/content_store.py`: shared repo path and markdown helpers
+- `scripts/ai_enrich.py`: AI-generated Chinese summaries and daily overview
 - `scripts/publish_daily.py`: generate `content/daily/` and `content/papers/`
 - `scripts/build_site.py`: static site compiler
 - `start-my-day/scripts/search_arxiv.py`: search and ranking

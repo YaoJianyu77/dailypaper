@@ -46,8 +46,23 @@ jobs:
             --top-n 10 \
             --categories "cs.AI,cs.LG,cs.CL,cs.CV,cs.MM,cs.MA,cs.RO"
 
+      - name: AI enrich papers
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          OPENAI_API_BASE: ${{ vars.OPENAI_API_BASE }}
+        run: |
+          CONFIG_PATH="config.yaml"
+          if [ ! -f "$CONFIG_PATH" ]; then
+            CONFIG_PATH="config.example.yaml"
+          fi
+          python scripts/ai_enrich.py \
+            --config "$CONFIG_PATH" \
+            --input state/arxiv_filtered.json \
+            --output state/arxiv_enriched.json
+
       - name: Publish daily content
-        run: python scripts/publish_daily.py --input state/arxiv_filtered.json
+        run: python scripts/publish_daily.py --input state/arxiv_enriched.json
 
       - name: Build static site
         run: |

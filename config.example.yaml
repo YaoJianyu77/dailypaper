@@ -9,6 +9,13 @@ build:
   output_dir: "dist"
   content_dir: "content"
 
+ai:
+  enabled: true
+  model: "gpt-4.1-mini"
+  api_base: "https://api.openai.com/v1"
+  timeout_seconds: 180
+  max_output_tokens: 5000
+
 search:
   max_results: 200
   top_n: 10
