@@ -1,0 +1,81 @@
+name: GitHub Models Smoke Test
+
+"on":
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Model to test through GitHub Models
+        required: false
+        default: openai/gpt-4o
+
+permissions:
+  contents: read
+  models: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call GitHub Models inference API
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODEL: ${{ inputs.model }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import sys
+          import urllib.error
+          import urllib.request
+
+          model = os.environ.get("MODEL") or "openai/gpt-4o"
+          token = os.environ["GITHUB_TOKEN"]
+          payload = {
+              "model": model,
+              "messages": [
+                  {
+                      "role": "user",
+                      "content": "Reply with exactly this text and nothing else: github-models-ok"
+                  }
+              ],
+              "temperature": 0,
+              "max_tokens": 32,
+          }
+
+          request = urllib.request.Request(
+              "https://models.github.ai/inference/chat/completions",
+              data=json.dumps(payload).encode("utf-8"),
+              headers={
+                  "Content-Type": "application/json",
+                  "Authorization": f"Bearer {token}",
+              },
+              method="POST",
+          )
+
+          try:
+              with urllib.request.urlopen(request, timeout=120) as response:
+                  body = response.read().decode("utf-8")
+          except urllib.error.HTTPError as exc:
+              error_body = exc.read().decode("utf-8", errors="replace")
+              print(f"GitHub Models HTTP error: {exc.code}", file=sys.stderr)
+              print(error_body, file=sys.stderr)
+              raise
+
+          data = json.loads(body)
+          content = (
+              data.get("choices", [{}])[0]
+              .get("message", {})
+              .get("content", "")
+              .strip()
+          )
+
+          print(f"Model: {model}")
+          print(f"Assistant response: {content}")
+
+          if content != "github-models-ok":
+              print("Unexpected model output. The request succeeded, but the response did not match the smoke-test contract.", file=sys.stderr)
+              sys.exit(1)
+
+          print("GitHub Models smoke test passed.")
+          PY
