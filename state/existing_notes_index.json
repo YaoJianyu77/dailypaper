@@ -47,6 +47,54 @@
       ]
     },
     {
+      "title": "Multi-Token Prediction via Self-Distillation",
+      "slug": "2602-06019v1-multi-token-prediction-via-self-distillation",
+      "source_path": "content/papers/2602-06019v1-multi-token-prediction-via-self-distillation/index.md",
+      "url": "/papers/2602-06019v1-multi-token-prediction-via-self-distillation/",
+      "title_keywords": [
+        "Multi-Token Prediction via Self-Distillation"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "DFlash: Block Diffusion for Flash Speculative Decoding",
+      "slug": "2602-06036v1-dflash-block-diffusion-for-flash-speculative-dec",
+      "source_path": "content/papers/2602-06036v1-dflash-block-diffusion-for-flash-speculative-dec/index.md",
+      "url": "/papers/2602-06036v1-dflash-block-diffusion-for-flash-speculative-dec/",
+      "title_keywords": [
+        "DFlash"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "Protean Compiler: An Agile Framework to Drive Fine-grain Phase Ordering",
+      "slug": "2602-06142v2-protean-compiler-an-agile-framework-to-drive-fin",
+      "source_path": "content/papers/2602-06142v2-protean-compiler-an-agile-framework-to-drive-fin/index.md",
+      "url": "/papers/2602-06142v2-protean-compiler-an-agile-framework-to-drive-fin/",
+      "title_keywords": [
+        "Protean Compiler"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "Stop the Flip-Flop: Context-Preserving Verification for Fast Revocable Diffusion Decoding",
+      "slug": "2602-06161v1-stop-the-flip-flop-context-preserving-verificati",
+      "source_path": "content/papers/2602-06161v1-stop-the-flip-flop-context-preserving-verificati/index.md",
+      "url": "/papers/2602-06161v1-stop-the-flip-flop-context-preserving-verificati/",
+      "title_keywords": [
+        "Stop the Flip-Flop"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
       "title": "Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration?",
       "slug": "2602-07055v1-theory-of-space-can-foundation-models-construct",
       "source_path": "content/papers/2602-07055v1-theory-of-space-can-foundation-models-construct/index.md",
@@ -276,6 +324,10 @@
       "/papers/2602-04879v1-rethinking-the-trust-region-in-llm-reinforcement/",
       "/papers/2602-05014v3-deepread-document-structure-aware-reasoning-to-e/",
       "/papers/2602-05105v1-gamms-graph-based-adversarial-multiagent-modelin/",
+      "/papers/2602-06019v1-multi-token-prediction-via-self-distillation/",
+      "/papers/2602-06036v1-dflash-block-diffusion-for-flash-speculative-dec/",
+      "/papers/2602-06142v2-protean-compiler-an-agile-framework-to-drive-fin/",
+      "/papers/2602-06161v1-stop-the-flip-flop-context-preserving-verificati/",
       "/papers/2602-07055v1-theory-of-space-can-foundation-models-construct/",
       "/papers/2603-04716v1-slo-aware-compute-resource-allocation-for-prefil/",
       "/papers/2603-05028v1-survive-at-all-costs-exploring-llm-s-risky-behav/",
@@ -301,6 +353,18 @@
     ],
     "gamms": [
       "/papers/2602-05105v1-gamms-graph-based-adversarial-multiagent-modelin/"
+    ],
+    "multi-token prediction via self-distillation": [
+      "/papers/2602-06019v1-multi-token-prediction-via-self-distillation/"
+    ],
+    "dflash": [
+      "/papers/2602-06036v1-dflash-block-diffusion-for-flash-speculative-dec/"
+    ],
+    "protean compiler": [
+      "/papers/2602-06142v2-protean-compiler-an-agile-framework-to-drive-fin/"
+    ],
+    "stop the flip-flop": [
+      "/papers/2602-06161v1-stop-the-flip-flop-context-preserving-verificati/"
     ],
     "theory of space": [
       "/papers/2602-07055v1-theory-of-space-can-foundation-models-construct/"

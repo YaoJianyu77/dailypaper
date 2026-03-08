@@ -1,294 +1,127 @@
 {
-  "target_date": "2026-03-07",
+  "target_date": "2026-03-08",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-05",
-      "end": "2026-03-07"
+      "start": "2026-02-06",
+      "end": "2026-03-08"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-07",
-      "end": "2026-02-04"
+      "start": "2025-03-08",
+      "end": "2026-02-05"
     }
   },
-  "total_found": 292,
-  "total_venue": 12,
-  "total_filtered": 16,
+  "total_found": 281,
+  "total_venue": 1,
+  "total_filtered": 9,
   "total_recent": 200,
   "total_hot": 80,
-  "total_unique": 16,
+  "total_unique": 9,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
     "analysis_top_n": 1,
-    "selected_count": 6,
+    "selected_count": 4,
     "lane_counts": {
-      "fresh": 2,
-      "established": 3,
-      "classic": 1,
-      "history_filtered": 0,
+      "fresh": 4,
+      "established": 0,
+      "classic": 0,
+      "history_filtered": 5,
       "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
       "allow_full_analysis": false,
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.05232v1",
-      "arxiv_id": "2603.05232v1",
-      "title": "SlideSparse: Fast and Flexible (2N-2):2N Structured Sparsity",
-      "summary": "NVIDIA's 2:4 Sparse Tensor Cores deliver 2x throughput but demand strict 50% pruning -- a ratio that collapses LLM reasoning accuracy (Qwen3: 54% to 15%). Milder $(2N-2):2N$ patterns (e.g., 6:8, 25% pruning) preserve accuracy yet receive no hardware support, falling back to dense execution without any benefit from sparsity. We present SlideSparse, the first system to unlock Sparse Tensor Core acceleration for the $(2N-2):2N$ model family on commodity GPUs. Our Sliding Window Decomposition reconstructs any $(2N-2):2N$ weight block into $N-1$ overlapping 2:4-compliant windows without any accuracy loss; Activation Lifting fuses the corresponding activation rearrangement into per-token quantization at near-zero cost. Integrated into vLLM, SlideSparse is evaluated across various GPUs (A100, H100, B200, RTX 4090, RTX 5080, DGX-spark), precisions (FP4, INT8, FP8, BF16, FP16), and model families (Llama, Qwen, BitNet). On compute-bound workloads, the measured speedup ratio (1.33x) approaches the theoretical upper-bound $N/(N-1)=4/3$ at 6:8 weight sparsity in Qwen2.5-7B, establishing $(2N-2):2N$ as a practical path to accuracy-preserving LLM acceleration. Code available at https://github.com/bcacdwk/vllmbench.",
+      "id": "http://arxiv.org/abs/2602.06036v1",
+      "arxiv_id": "2602.06036v1",
+      "title": "DFlash: Block Diffusion for Flash Speculative Decoding",
+      "summary": "Autoregressive large language models (LLMs) deliver strong performance but require inherently sequential decoding, leading to high inference latency and poor GPU utilization. Speculative decoding mitigates this bottleneck by using a fast draft model whose outputs are verified in parallel by the target LLM; however, existing methods still rely on autoregressive drafting, which remains sequential and limits practical speedups. Diffusion LLMs offer a promising alternative by enabling parallel generation, but current diffusion models typically underperform compared with autoregressive models. In this paper, we introduce DFlash, a speculative decoding framework that employs a lightweight block diffusion model for parallel drafting. By generating draft tokens in a single forward pass and conditioning the draft model on context features extracted from the target model, DFlash enables efficient drafting with high-quality outputs and higher acceptance rates. Experiments show that DFlash achieves over 6x lossless acceleration across a range of models and tasks, delivering up to 2.5x higher speedup than the state-of-the-art speculative decoding method EAGLE-3.",
       "authors": [
-        "Hanyong Shao",
-        "Yingbo Hao",
-        "Ting Song",
-        "Yan Xia",
-        "Di Zhang",
-        "Shaohan Huang",
-        "Xun Wu",
-        "Songchen Xu",
-        "Le Xu",
-        "Li Dong",
-        "Zewen Chi",
-        "Yi Zou",
-        "Furu Wei"
+        "Jian Chen",
+        "Yesheng Liang",
+        "Zhijian Liu"
       ],
       "author_details": [
         {
-          "name": "Hanyong Shao"
+          "name": "Jian Chen"
         },
         {
-          "name": "Yingbo Hao"
+          "name": "Yesheng Liang"
         },
         {
-          "name": "Ting Song"
-        },
-        {
-          "name": "Yan Xia"
-        },
-        {
-          "name": "Di Zhang"
-        },
-        {
-          "name": "Shaohan Huang"
-        },
-        {
-          "name": "Xun Wu"
-        },
-        {
-          "name": "Songchen Xu"
-        },
-        {
-          "name": "Le Xu"
-        },
-        {
-          "name": "Li Dong"
-        },
-        {
-          "name": "Zewen Chi"
-        },
-        {
-          "name": "Yi Zou"
-        },
-        {
-          "name": "Furu Wei"
+          "name": "Zhijian Liu"
         }
       ],
-      "published": "2026-03-05T14:49:16Z",
-      "published_date": "2026-03-05 14:49:16+00:00",
-      "updated": "2026-03-05T14:49:16Z",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05232v1",
-      "url": "http://arxiv.org/abs/2603.05232v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.5,
-        "quality": 1.5,
-        "recommendation": 9.55
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "vllm",
-        "throughput",
-        "quantization",
-        "cs.LG",
-        "h100",
-        "a100",
-        "b200",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.LG"
-        ],
-        "required_signal_matches": [
-          "vllm",
-          "h100",
-          "a100",
-          "b200"
-        ],
-        "required_signal_match_count": 4,
-        "bonus_keyword_matches": [
-          "throughput",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "throughput",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.36
-      },
-      "analysis_candidate_score": 9.88,
-      "analysis_signals": [
-        "vllm",
-        "h100",
-        "a100",
-        "b200",
-        "throughput",
-        "speedup"
-      ],
-      "analysis_components": {
-        "signal_strength": 10.0,
-        "implementation_depth": 10.0,
-        "evidence_strength": 4.13,
-        "has_source_page": true,
-        "has_readable_pdf": true
-      },
-      "selection_lane": "fresh",
-      "analysis_priority_rank": 2,
-      "analysis_eligible": true,
-      "selected_for_full_analysis": false
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05451v1",
-      "arxiv_id": "2603.05451v1",
-      "title": "FlashAttention-4: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling",
-      "summary": "Attention, as a core layer of the ubiquitous Transformer architecture, is the bottleneck for large language models and long-context applications. While FlashAttention-3 optimized attention for Hopper GPUs through asynchronous execution and warp specialization, it primarily targets the H100 architecture. The AI industry has rapidly transitioned to deploying Blackwell-based systems such as the B200 and GB200, which exhibit fundamentally different performance characteristics due to asymmetric hardware scaling: tensor core throughput doubles while other functional units (shared memory bandwidth, exponential units) scale more slowly or remain unchanged. We develop several techniques to address these shifting bottlenecks on Blackwell GPUs: (1) redesigned pipelines that exploit fully asynchronous MMA operations and larger tile sizes, (2) software-emulated exponential and conditional softmax rescaling that reduces non-matmul operations, and (3) leveraging tensor memory and the 2-CTA MMA mode to reduce shared memory traffic and atomic adds in the backward pass. We demonstrate that our method, FlashAttention-4, achieves up to 1.3$\\times$ speedup over cuDNN 9.13 and 2.7$\\times$ over Triton on B200 GPUs with BF16, reaching up to 1613 TFLOPs/s (71% utilization). Beyond algorithmic innovations, we implement FlashAttention-4 entirely in CuTe-DSL embedded in Python, achieving 20-30$\\times$ faster compile times compared to traditional C++ template-based approaches while maintaining full expressivity.",
-      "authors": [
-        "Ted Zadouri",
-        "Markus Hoehnerbach",
-        "Jay Shah",
-        "Timmy Liu",
-        "Vijay Thakkar",
-        "Tri Dao"
-      ],
-      "author_details": [
-        {
-          "name": "Ted Zadouri"
-        },
-        {
-          "name": "Markus Hoehnerbach"
-        },
-        {
-          "name": "Jay Shah"
-        },
-        {
-          "name": "Timmy Liu"
-        },
-        {
-          "name": "Vijay Thakkar"
-        },
-        {
-          "name": "Tri Dao"
-        }
-      ],
-      "published": "2026-03-05T18:24:49Z",
-      "published_date": "2026-03-05 18:24:49+00:00",
-      "updated": "2026-03-05T18:24:49Z",
+      "published": "2026-02-05T18:59:30Z",
+      "published_date": "2026-02-05 18:59:30+00:00",
+      "updated": "2026-02-05T18:59:30Z",
       "primary_category": "cs.CL",
       "categories": [
         "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05451v1",
-      "url": "http://arxiv.org/abs/2603.05451v1",
-      "source": "arxiv",
+      "pdf_url": "https://arxiv.org/pdf/2602.06036v1",
+      "url": "http://arxiv.org/abs/2602.06036v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.3,
-        "quality": 1.3,
-        "recommendation": 9.38
+        "popularity": 2.4,
+        "quality": 2.0,
+        "recommendation": 9.8
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "flashattention",
-        "kernel pipelining",
-        "throughput",
+        "speculative decoding",
+        "latency",
         "cs.CL",
-        "h100",
-        "b200",
-        "memory",
-        "bandwidth",
         "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
+      "is_hot_paper": true,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 3,
+        "text_match_count": 2,
         "matched_categories": [
           "cs.CL"
         ],
         "required_signal_matches": [
-          "flashattention",
-          "kernel pipelining",
-          "h100",
-          "b200"
+          "speculative decoding"
         ],
-        "required_signal_match_count": 4,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput",
-          "memory",
-          "bandwidth",
+          "latency",
           "speedup"
         ],
-        "bonus_keyword_match_count": 4,
+        "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
-          "throughput",
-          "memory",
-          "bandwidth",
+          "latency",
           "speedup"
         ],
-        "analysis_keyword_match_count": 4,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.5
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.36
       },
-      "analysis_candidate_score": 10.0,
+      "analysis_candidate_score": 9.28,
       "analysis_signals": [
-        "flashattention",
-        "kernel pipelining",
-        "h100",
-        "b200",
-        "throughput",
-        "memory",
-        "bandwidth",
+        "speculative decoding",
+        "latency",
         "speedup"
       ],
       "analysis_components": {
-        "signal_strength": 10.0,
-        "implementation_depth": 10.0,
+        "signal_strength": 8.33,
+        "implementation_depth": 1.83,
         "evidence_strength": 10.0,
         "has_source_page": true,
         "has_readable_pdf": true
@@ -299,61 +132,310 @@
       "selected_for_full_analysis": true
     },
     {
-      "id": "dblp:conf/mlsys/0015LCKCW24",
-      "paper_id": "dblp:conf/mlsys/0015LCKCW24",
-      "title": "Q-Hitter: A Better Token Oracle for Efficient LLM Inference via Sparse-Quantized KV Cache.",
-      "summary": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs). LLMs, characterized by their extensive context length (e.g., $\\geq$4096), inherently demands vast memory resource and traffic to store and load the attention key and value embeddings within self-attention modules, referred to as the KV cache. In an effort to alleviate these resource-intensive aspects of LLM inference, techniques such as sparsification and quantization for KV cache reduction have been investigated as separate endeavors within the realm of LLMs. However, this paper illuminates the critical importance of considering the compound effects of these techniques when employed together, as a simplistic amalgamation of sparsification and quantization can yield sub-optimal performance.For instance, the \"Heavy Hitter Oracle\" has demonstrated that preserving just 20\\% of the KV cache attributed to pivotal tokens, denoted as \"Heavy Hitters\", can yield substantial memory savings while upholding the model's original performance. Furthermore, the KV cache of these \"Heavy Hitter\" tokens, which are identified as those with the highest accumulated attention scores, can be further quantized with encouraging throughput saving.Nevertheless, our investigation uncovers two primary deficiencies in such unrefined post-sparsification quantization in low-bit scenarios: (1) the application of low-bit KV cache quantization, specifically $\\leq$ 4-bit, significantly diminishes the accuracy of Heavy Hitter selection during the generation phase, particularly in deeper layers; (2) tokens selected by the \"Heavy Hitter Oracle\" are not necessarily well-suited for quantization, and their quantization can lead to sub-optimal performance. To surmount these challenges, we propose a novel rule-of-thumb for token selection during LLM generation, termed Q-Hitter. This approach combines both accumulated attention scores and \"Quantization Friendliness\" metrics for different layers, identifying tokens that are not only pivotal for preserving the generalization capabilities of LLMs but are also more amenable to KV cache quantization. Q-Hitter naturally offers a free lunch of KV cache quantization and can further escalate the affordability of state-of-the-art LLMs. Additionally, Q-Hitter empowers LLMs to effectively handle inputs of infinite sequence length. Extensive experiments conducted across various LLMs and tasks substantiate the superiority of the proposed Q-Hitter framework over the original H$_2$O framework. Remarkably, Q-Hitter achieves full model quality preservation while delivering up to a remarkable 20$\\times$ reduction in memory usage and up to 33$\\times$, 33$\\times$, 4$\\times$ and 1.3$\\times$ throughput improvements compared with the Hugginface Accelerate, DeepSpeed, FlexGen and $\\mathsf{H_2O}$, respectively. The code will be public upon acceptance.",
-      "abstract": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs). LLMs, characterized by their extensive context length (e.g., $\\geq$4096), inherently demands vast memory resource and traffic to store and load the attention key and value embeddings within self-attention modules, referred to as the KV cache. In an effort to alleviate these resource-intensive aspects of LLM inference, techniques such as sparsification and quantization for KV cache reduction have been investigated as separate endeavors within the realm of LLMs. However, this paper illuminates the critical importance of considering the compound effects of these techniques when employed together, as a simplistic amalgamation of sparsification and quantization can yield sub-optimal performance.For instance, the \"Heavy Hitter Oracle\" has demonstrated that preserving just 20\\% of the KV cache attributed to pivotal tokens, denoted as \"Heavy Hitters\", can yield substantial memory savings while upholding the model's original performance. Furthermore, the KV cache of these \"Heavy Hitter\" tokens, which are identified as those with the highest accumulated attention scores, can be further quantized with encouraging throughput saving.Nevertheless, our investigation uncovers two primary deficiencies in such unrefined post-sparsification quantization in low-bit scenarios: (1) the application of low-bit KV cache quantization, specifically $\\leq$ 4-bit, significantly diminishes the accuracy of Heavy Hitter selection during the generation phase, particularly in deeper layers; (2) tokens selected by the \"Heavy Hitter Oracle\" are not necessarily well-suited for quantization, and their quantization can lead to sub-optimal performance. To surmount these challenges, we propose a novel rule-of-thumb for token selection during LLM generation, termed Q-Hitter. This approach combines both accumulated attention scores and \"Quantization Friendliness\" metrics for different layers, identifying tokens that are not only pivotal for preserving the generalization capabilities of LLMs but are also more amenable to KV cache quantization. Q-Hitter naturally offers a free lunch of KV cache quantization and can further escalate the affordability of state-of-the-art LLMs. Additionally, Q-Hitter empowers LLMs to effectively handle inputs of infinite sequence length. Extensive experiments conducted across various LLMs and tasks substantiate the superiority of the proposed Q-Hitter framework over the original H$_2$O framework. Remarkably, Q-Hitter achieves full model quality preservation while delivering up to a remarkable 20$\\times$ reduction in memory usage and up to 33$\\times$, 33$\\times$, 4$\\times$ and 1.3$\\times$ throughput improvements compared with the Hugginface Accelerate, DeepSpeed, FlexGen and $\\mathsf{H_2O}$, respectively. The code will be public upon acceptance.",
+      "id": "http://arxiv.org/abs/2602.06019v1",
+      "arxiv_id": "2602.06019v1",
+      "title": "Multi-Token Prediction via Self-Distillation",
+      "summary": "Existing techniques for accelerating language model inference, such as speculative decoding, require training auxiliary speculator models and building and deploying complex inference pipelines. We consider a new approach for converting a pretrained autoregressive language model from a slow single next token prediction model into a fast standalone multi-token prediction model using a simple online distillation objective. The final model retains the exact same implementation as the pretrained initial checkpoint and is deployable without the addition of any auxiliary verifier or other specialized inference code. On GSM8K, our method produces models that can decode more than $3\\times$ faster on average at $<5\\%$ drop in accuracy relative to single token decoding performance.",
       "authors": [
-        "Zhenyu Zhang 0015",
-        "Shiwei Liu 0003",
-        "Runjin Chen",
-        "Bhavya Kailkhura",
-        "Beidi Chen",
-        "Atlas Wang"
+        "John Kirchenbauer",
+        "Abhimanyu Hans",
+        "Brian Bartoldson",
+        "Micah Goldblum",
+        "Ashwinee Panda",
+        "Tom Goldstein"
       ],
-      "published": "2024",
-      "published_date": "2024-07-01 00:00:00",
-      "publicationDate": "2024",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
-      "url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
-      "pdf_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Paper-Conference.pdf",
-      "venue": "MLSys",
-      "venue_source_name": "MLSys",
-      "venue_source_alias": "MLSys",
-      "dblp_key": "conf/mlsys/0015LCKCW24",
-      "doi": "",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "open",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "MLSys",
-        "venue_alias": "MLSys"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2024,
+      "author_details": [
+        {
+          "name": "John Kirchenbauer"
+        },
+        {
+          "name": "Abhimanyu Hans"
+        },
+        {
+          "name": "Brian Bartoldson"
+        },
+        {
+          "name": "Micah Goldblum"
+        },
+        {
+          "name": "Ashwinee Panda"
+        },
+        {
+          "name": "Tom Goldstein"
+        }
+      ],
+      "published": "2026-02-05T18:54:48Z",
+      "published_date": "2026-02-05 18:54:48+00:00",
+      "updated": "2026-02-05T18:54:48Z",
+      "comments": "8 pages and 5 figures in the main body",
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.06019v1",
+      "url": "http://arxiv.org/abs/2602.06019v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
       "scores": {
         "relevance": 3.0,
-        "recency": 0.0,
+        "recency": 3.0,
         "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 7.97
+        "quality": 1.6,
+        "recommendation": 9.27
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "llm inference",
-        "kv cache"
+        "language model inference",
+        "decode",
+        "speculative decoding",
+        "cs.LG",
+        "cs.CL"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
+      "is_hot_paper": true,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.LG",
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "speculative decoding",
+          "decode"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.0
+      },
+      "analysis_candidate_score": 7.57,
+      "analysis_signals": [
+        "speculative decoding",
+        "decode"
+      ],
+      "analysis_components": {
+        "signal_strength": 6.0,
+        "implementation_depth": 4.6,
+        "evidence_strength": 0.0,
+        "has_source_page": true,
+        "has_readable_pdf": true
+      },
+      "selection_lane": "fresh",
+      "analysis_priority_rank": 2,
+      "analysis_eligible": true,
+      "selected_for_full_analysis": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.06142v2",
+      "arxiv_id": "2602.06142v2",
+      "title": "Protean Compiler: An Agile Framework to Drive Fine-grain Phase Ordering",
+      "summary": "The phase ordering problem has been a long-standing challenge since the late 1970s, yet it remains an open problem due to having a vast optimization space and an unbounded nature, making it an open-ended problem without a finite solution, one can limit the scope by reducing the number and the length of optimizations. Traditionally, such locally optimized decisions are made by hand-coded algorithms tuned for a small number of benchmarks, often requiring significant effort to be retuned when the benchmark suite changes. In the past 20 years, Machine Learning has been employed to construct performance models to improve the selection and ordering of compiler optimizations, however, the approaches are not baked into the compiler seamlessly and never materialized to be leveraged at a fine-grained scope of code segments. This paper presents Protean Compiler: An agile framework to enable LLVM with built-in phase-ordering capabilities at a fine-grained scope. The framework also comprises a complete library of more than 140 handcrafted static feature collection methods at varying scopes, and the experimental results showcase speedup gains of up to 4.1% on average and up to 15.7% on select Cbench applications wrt LLVM's O3 by just incurring a few extra seconds of build time on Cbench. Additionally, Protean compiler allows for an easy integration with third-party ML frameworks and other Large Language Models, and this two-step optimization shows a gain of 10.1% and 8.5% speedup wrt O3 on Cbench's Susan and Jpeg applications. Protean compiler is seamlessly integrated into LLVM and can be used as a new, enhanced, full-fledged compiler. We plan to release the project to the open-source community in the near future.",
+      "authors": [
+        "Amir H. Ashouri",
+        "Shayan Shirahmad Gale Bagi",
+        "Kavin Satheeskumar",
+        "Tejas Srikanth",
+        "Jonathan Zhao",
+        "Ibrahim Saidoun",
+        "Ziwen Wang",
+        "Bryan Chan",
+        "Tomasz S. Czajkowski"
+      ],
+      "author_details": [
+        {
+          "name": "Amir H. Ashouri"
+        },
+        {
+          "name": "Shayan Shirahmad Gale Bagi"
+        },
+        {
+          "name": "Kavin Satheeskumar"
+        },
+        {
+          "name": "Tejas Srikanth"
+        },
+        {
+          "name": "Jonathan Zhao"
+        },
+        {
+          "name": "Ibrahim Saidoun"
+        },
+        {
+          "name": "Ziwen Wang"
+        },
+        {
+          "name": "Bryan Chan"
+        },
+        {
+          "name": "Tomasz S. Czajkowski"
+        }
+      ],
+      "published": "2026-02-05T19:24:05Z",
+      "published_date": "2026-02-05 19:24:05+00:00",
+      "updated": "2026-02-17T19:29:16Z",
+      "comments": "Version 2: Submitted for a possible publication in 2026",
+      "primary_category": "cs.PL",
+      "categories": [
+        "cs.PL",
+        "cs.AI",
+        "cs.CL",
+        "cs.LG",
+        "cs.PF"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.06142v2",
+      "url": "http://arxiv.org/abs/2602.06142v2",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 2.33,
+        "recency": 3.0,
+        "popularity": 1.3,
+        "quality": 0.9,
+        "recommendation": 7.22
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "llvm",
+        "cs.PL",
+        "cs.LG",
+        "benchmark",
+        "speedup"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": true,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [
+          "cs.PL",
+          "cs.LG"
+        ],
+        "required_signal_matches": [
+          "llvm"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "benchmark",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "analysis_candidate_score": 7.18,
+      "analysis_signals": [
+        "llvm",
+        "benchmark",
+        "speedup"
+      ],
+      "analysis_components": {
+        "signal_strength": 5.33,
+        "implementation_depth": 2.77,
+        "evidence_strength": 7.2,
+        "has_source_page": true,
+        "has_readable_pdf": true
+      },
+      "selection_lane": "fresh",
+      "analysis_priority_rank": 3,
+      "analysis_eligible": true,
+      "selected_for_full_analysis": false
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.06161v1",
+      "arxiv_id": "2602.06161v1",
+      "title": "Stop the Flip-Flop: Context-Preserving Verification for Fast Revocable Diffusion Decoding",
+      "summary": "Parallel diffusion decoding can accelerate diffusion language model inference by unmasking multiple tokens per step, but aggressive parallelism often harms quality. Revocable decoding mitigates this by rechecking earlier tokens, yet we observe that existing verification schemes frequently trigger flip-flop oscillations, where tokens are remasked and later restored unchanged. This behaviour slows inference in two ways: remasking verified positions weakens the conditioning context for parallel drafting, and repeated remask cycles consume the revision budget with little net progress. We propose COVER (Cache Override Verification for Efficient Revision), which performs leave-one-out verification and stable drafting within a single forward pass. COVER constructs two attention views via KV cache override: selected seeds are masked for verification, while their cached key value states are injected for all other queries to preserve contextual information, with a closed form diagonal correction preventing self leakage at the seed positions. COVER further prioritises seeds using a stability aware score that balances uncertainty, downstream influence, and cache drift, and it adapts the number of verified seeds per step. Across benchmarks, COVER markedly reduces unnecessary revisions and yields faster decoding while preserving output quality.",
+      "authors": [
+        "Yanzheng Xiang",
+        "Lan Wei",
+        "Yizhen Yao",
+        "Qinglin Zhu",
+        "Hanqi Yan",
+        "Chen Jin",
+        "Philip Alexander Teare",
+        "Dandan Zhang",
+        "Lin Gui",
+        "Amrutha Saseendran",
+        "Yulan He"
+      ],
+      "author_details": [
+        {
+          "name": "Yanzheng Xiang"
+        },
+        {
+          "name": "Lan Wei"
+        },
+        {
+          "name": "Yizhen Yao"
+        },
+        {
+          "name": "Qinglin Zhu"
+        },
+        {
+          "name": "Hanqi Yan"
+        },
+        {
+          "name": "Chen Jin"
+        },
+        {
+          "name": "Philip Alexander Teare"
+        },
+        {
+          "name": "Dandan Zhang"
+        },
+        {
+          "name": "Lin Gui"
+        },
+        {
+          "name": "Amrutha Saseendran"
+        },
+        {
+          "name": "Yulan He"
+        }
+      ],
+      "published": "2026-02-05T19:58:48Z",
+      "published_date": "2026-02-05 19:58:48+00:00",
+      "updated": "2026-02-05T19:58:48Z",
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.06161v1",
+      "url": "http://arxiv.org/abs/2602.06161v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 2.34,
+        "recency": 3.0,
+        "popularity": 1.1,
+        "quality": 0.7,
+        "recommendation": 6.97
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "language model inference",
+        "kv cache",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": true,
       "match_details": {
         "domain": "LLM Inference Systems",
         "text_match_count": 2,
-        "matched_categories": [],
+        "matched_categories": [
+          "cs.CL"
+        ],
         "required_signal_matches": [
           "kv cache"
         ],
@@ -365,263 +447,20 @@
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
-      "analysis_candidate_score": 7.75,
+      "analysis_candidate_score": 6.13,
       "analysis_signals": [
         "kv cache"
       ],
       "analysis_components": {
         "signal_strength": 3.0,
         "implementation_depth": 2.77,
-        "evidence_strength": 9.6,
+        "evidence_strength": 3.73,
         "has_source_page": true,
         "has_readable_pdf": true
       },
-      "selection_lane": "established",
-      "venue_metadata": {
-        "official_page_blocked": false,
-        "official_page_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
-        "abstract_source": "official_page",
-        "pdf_source": "official_page"
-      },
+      "selection_lane": "fresh",
       "analysis_priority_rank": 4,
       "analysis_eligible": true,
-      "selected_for_full_analysis": false
-    },
-    {
-      "id": "dblp:conf/isca/0004HKCL00P25",
-      "paper_id": "dblp:conf/isca/0004HKCL00P25",
-      "title": "Oaken: Fast and Efficient LLM Serving with Online-Offline Hybrid KV Cache Quantization.",
-      "summary": "Modern Large Language Model serving system batches multiple requests to achieve high throughput, while batching attention operations is challenging, rendering memory bandwidth a critical bottleneck. The community relies on high-end GPUs with multiple high-bandwidth memory channels. Unfortunately, HBM's high bandwidth often comes at the expense of limited memory capacity, which reduces core utilization and increases costs. Recent advancements enabling longer contexts for LLMs have substantially increased the key-value cache size, further intensifying the pressures on memory capacity. The literature has explored KV cache quantization techniques, which commonly use low bitwidth for most values, selectively using higher bitwidth for outlier values. While this approach helps achieve high accuracy and low bitwidth simultaneously, it comes with the limitation that cost for online outlier detection is excessively high, negating the advantages. We propose Oaken, an acceleration solution that achieves high accuracy and high performance simultaneously through co-designing algorithm and hardware. To effectively find a sweet spot in the accuracy-performance trade-off space of KV cache quantization, Oaken employs an online-offline hybrid approach, setting outlier thresholds offline, which are then used to determine the quantization scale online. To translate the proposed algorithmic technique into tangible performance gains, Oaken also comes with custom quantization engines and memory management units that can be integrated with any LLM accelerators. We built an Oaken accelerator on top of an LLM accelerator, LPU, and conducted a comprehensive evaluation. Our experiments show that for a batch size of 256, Oaken achieves up to 1.58x throughput improvement over NVIDIA A100 GPU, incurring a minimal accuracy loss of only 0.54\\% on average, compared to state-of-the-art KV cache quantization techniques.",
-      "abstract": "Modern Large Language Model serving system batches multiple requests to achieve high throughput, while batching attention operations is challenging, rendering memory bandwidth a critical bottleneck. The community relies on high-end GPUs with multiple high-bandwidth memory channels. Unfortunately, HBM's high bandwidth often comes at the expense of limited memory capacity, which reduces core utilization and increases costs. Recent advancements enabling longer contexts for LLMs have substantially increased the key-value cache size, further intensifying the pressures on memory capacity. The literature has explored KV cache quantization techniques, which commonly use low bitwidth for most values, selectively using higher bitwidth for outlier values. While this approach helps achieve high accuracy and low bitwidth simultaneously, it comes with the limitation that cost for online outlier detection is excessively high, negating the advantages. We propose Oaken, an acceleration solution that achieves high accuracy and high performance simultaneously through co-designing algorithm and hardware. To effectively find a sweet spot in the accuracy-performance trade-off space of KV cache quantization, Oaken employs an online-offline hybrid approach, setting outlier thresholds offline, which are then used to determine the quantization scale online. To translate the proposed algorithmic technique into tangible performance gains, Oaken also comes with custom quantization engines and memory management units that can be integrated with any LLM accelerators. We built an Oaken accelerator on top of an LLM accelerator, LPU, and conducted a comprehensive evaluation. Our experiments show that for a batch size of 256, Oaken achieves up to 1.58x throughput improvement over NVIDIA A100 GPU, incurring a minimal accuracy loss of only 0.54\\% on average, compared to state-of-the-art KV cache quantization techniques.",
-      "authors": [
-        "Minsu Kim 0004",
-        "Seongmin Hong",
-        "Ryeowook Ko",
-        "Soongyu Choi",
-        "Hunjong Lee",
-        "Junsoo Kim 0002",
-        "Joo-Young Kim 0001",
-        "Jongse Park"
-      ],
-      "published": "2025",
-      "published_date": "2025-07-01 00:00:00",
-      "publicationDate": "2025",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://dl.acm.org/doi/10.1145/3695053.3731019",
-      "url": "https://dl.acm.org/doi/10.1145/3695053.3731019",
-      "pdf_url": "https://dl.acm.org/doi/pdf/10.1145/3695053.3731019",
-      "venue": "ISCA",
-      "venue_source_name": "ISCA",
-      "venue_source_alias": "ISCA",
-      "dblp_key": "conf/isca/0004HKCL00P25",
-      "doi": "10.1145/3695053.3731019",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "ISCA",
-        "venue_alias": "ISCA"
-      },
-      "venue_source_priority": 4,
-      "venue_query_year": 2025,
-      "scores": {
-        "relevance": 3.0,
-        "recency": 0.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 7.97
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "llm serving",
-        "serving",
-        "kv cache",
-        "quantization"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 4,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "kv cache"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "analysis_candidate_score": 7.95,
-      "analysis_signals": [
-        "kv cache"
-      ],
-      "analysis_components": {
-        "signal_strength": 3.0,
-        "implementation_depth": 3.7,
-        "evidence_strength": 10.0,
-        "has_source_page": true,
-        "has_readable_pdf": true
-      },
-      "selection_lane": "established",
-      "citationCount": 4,
-      "institutions": [
-        "Korea Advanced Institute of Science and Technology"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://dl.acm.org/doi/10.1145/3695053.3731019",
-        "abstract_source": "openalex",
-        "pdf_source": "openalex"
-      },
-      "analysis_priority_rank": 3,
-      "analysis_eligible": true,
-      "selected_for_full_analysis": false
-    },
-    {
-      "id": "dblp:conf/cgo/GeorgakoudisPB25",
-      "paper_id": "dblp:conf/cgo/GeorgakoudisPB25",
-      "title": "Proteus: Portable Runtime Optimization of GPU Kernel Execution with Just-in-Time Compilation.",
-      "summary": "In High-performance computing (HPC) fast application execution is the primary objective. HPC software is written in high-performance languages (C/C++, Fortran) and is statically compiled Ahead-of-Time (AOT) using optimizing compilers to generate fast code. AOT compilation optimizes source code with only limited information available at compile time, which precludes possible optimization leveraging runtime information. We propose Proteus, an easy-to-use, portable, and lightweight Just-In-Time (JIT) compilation approach to optimize GPU kernels at runtime. Proteus dynamically extracts, compiles, and optimizes language-agnostic LLVM IR to reduce compilation overhead while enhancing portability and versatility compared to language-specific solutions. Using a minimally intrusive annotation-based interface, Proteus specializes GPU kernels for input arguments and launch parameters. Evaluation on a diverse set of programs on AMD and NVIDIA GPUs shows that Proteus achieves significant end-to-end speedup, up to 2.8× for AMD and 1.78× on NVIDIA, over AOT optimization, while outperforming CUDA-specific Jitify with an average 1.23× speedp, thanks to reduced overhead and faster binary code in certain cases.",
-      "abstract": "In High-performance computing (HPC) fast application execution is the primary objective. HPC software is written in high-performance languages (C/C++, Fortran) and is statically compiled Ahead-of-Time (AOT) using optimizing compilers to generate fast code. AOT compilation optimizes source code with only limited information available at compile time, which precludes possible optimization leveraging runtime information. We propose Proteus, an easy-to-use, portable, and lightweight Just-In-Time (JIT) compilation approach to optimize GPU kernels at runtime. Proteus dynamically extracts, compiles, and optimizes language-agnostic LLVM IR to reduce compilation overhead while enhancing portability and versatility compared to language-specific solutions. Using a minimally intrusive annotation-based interface, Proteus specializes GPU kernels for input arguments and launch parameters. Evaluation on a diverse set of programs on AMD and NVIDIA GPUs shows that Proteus achieves significant end-to-end speedup, up to 2.8× for AMD and 1.78× on NVIDIA, over AOT optimization, while outperforming CUDA-specific Jitify with an average 1.23× speedp, thanks to reduced overhead and faster binary code in certain cases.",
-      "authors": [
-        "Giorgis Georgakoudis",
-        "Konstantinos Parasyris",
-        "David Beckingsale"
-      ],
-      "published": "2025",
-      "published_date": "2025-07-01 00:00:00",
-      "publicationDate": "2025",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
-      "url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
-      "pdf_url": "",
-      "venue": "CGO",
-      "venue_source_name": "CGO",
-      "venue_source_alias": "CGO",
-      "dblp_key": "conf/cgo/GeorgakoudisPB25",
-      "doi": "10.1145/3696443.3708939",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "CGO",
-        "venue_alias": "CGO"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2025,
-      "scores": {
-        "relevance": 1.63,
-        "recency": 0.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 5.46
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "gpu kernel"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "gpu kernel"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "analysis_candidate_score": 5.43,
-      "analysis_signals": [
-        "gpu kernel"
-      ],
-      "analysis_components": {
-        "signal_strength": 3.0,
-        "implementation_depth": 5.57,
-        "evidence_strength": 6.13,
-        "has_source_page": true,
-        "has_readable_pdf": false
-      },
-      "selection_lane": "established",
-      "citationCount": 2,
-      "institutions": [
-        "Lawrence Livermore National Laboratory"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
-        "abstract_source": "openalex",
-        "pdf_source": ""
-      },
-      "analysis_priority_rank": 5,
-      "analysis_eligible": true,
-      "selected_for_full_analysis": false
-    },
-    {
-      "paper_id": "2210.17323",
-      "arxiv_id": "2210.17323",
-      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
-      "summary": "Introduces a scalable post-training quantization method for GPT-style models that preserves accuracy at 3-4 bit weight precision and makes much larger models deployable on limited hardware.",
-      "authors": [
-        "Elias Frantar",
-        "Saleh Ashkboos",
-        "Torsten Hoefler",
-        "Dan Alistarh"
-      ],
-      "published": "2022-10-31",
-      "published_date": "2022-10-31 00:00:00",
-      "categories": [
-        "cs.LG"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "quantization",
-        "gptq",
-        "4bit",
-        "single-gpu"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2210.17323",
-      "pdf_url": "https://arxiv.org/pdf/2210.17323.pdf",
-      "scores": {
-        "relevance": 2.9,
-        "recency": 0.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 6.83
-      },
-      "analysis_candidate_score": 4.88,
-      "analysis_signals": [],
-      "analysis_components": {
-        "signal_strength": 0.0,
-        "implementation_depth": 0.0,
-        "evidence_strength": 0.0,
-        "has_source_page": true,
-        "has_readable_pdf": true
-      },
-      "classic_rotation_score": 10.9339,
-      "analysis_priority_rank": 0,
-      "analysis_eligible": false,
       "selected_for_full_analysis": false
     }
   ]

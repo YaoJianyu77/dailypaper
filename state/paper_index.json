@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-07",
+  "last_updated": "2026-03-08",
   "papers": [
     {
       "paper_id": "2603.05210v1",
@@ -49,6 +49,38 @@
         }
       ],
       "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "2602.06036v1",
+      "title": "DFlash: Block Diffusion for Flash Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "published": "2026-02-05T18:59:30Z",
+      "source_lane": "fresh",
+      "analysis_priority_rank": 1,
+      "selected_for_full_analysis": true,
+      "topics": [
+        "speculative decoding",
+        "block diffusion",
+        "parallel drafting",
+        "LLM inference systems",
+        "latency optimization"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-08",
+      "last_seen_date": "2026-03-08",
+      "last_recommended_date": "2026-03-08",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.8,
+          "analysis_candidate": 9.28,
+          "lane": "fresh"
+        }
+      ],
+      "last_analysis_date": "2026-03-08",
+      "analyzed_count": 1,
+      "cooldown_until": "2027-03-08"
     },
     {
       "paper_id": "2603.05451v1",
@@ -198,6 +230,37 @@
       "cooldown_until": "2026-03-28"
     },
     {
+      "paper_id": "2602.06019v1",
+      "title": "Multi-Token Prediction via Self-Distillation",
+      "domain": "LLM Inference Systems",
+      "published": "2026-02-05T18:54:48Z",
+      "source_lane": "fresh",
+      "analysis_priority_rank": 2,
+      "selected_for_full_analysis": false,
+      "topics": [
+        "LLM推理系统",
+        "多token预测",
+        "在线自蒸馏",
+        "解码加速",
+        "自回归语言模型",
+        "speculative decoding替代"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-08",
+      "last_seen_date": "2026-03-08",
+      "last_recommended_date": "2026-03-08",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.27,
+          "analysis_candidate": 7.57,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-07"
+    },
+    {
       "paper_id": "dblp:conf/isca/0004HKCL00P25",
       "title": "Oaken: Fast and Efficient LLM Serving with Online-Offline Hybrid KV Cache Quantization.",
       "domain": "LLM Inference Systems",
@@ -245,6 +308,37 @@
         }
       ],
       "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "2602.06142v2",
+      "title": "Protean Compiler: An Agile Framework to Drive Fine-grain Phase Ordering",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-02-05T19:24:05Z",
+      "source_lane": "fresh",
+      "analysis_priority_rank": 3,
+      "selected_for_full_analysis": false,
+      "topics": [
+        "LLVM",
+        "phase ordering",
+        "编译优化",
+        "静态特征",
+        "ML for compilers",
+        "Cbench"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-08",
+      "last_seen_date": "2026-03-08",
+      "last_recommended_date": "2026-03-08",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 7.22,
+          "analysis_candidate": 7.18,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-07"
     },
     {
       "paper_id": "dblp:conf/cgo/GeorgakoudisPB25",
@@ -464,6 +558,37 @@
         }
       ],
       "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "2602.06161v1",
+      "title": "Stop the Flip-Flop: Context-Preserving Verification for Fast Revocable Diffusion Decoding",
+      "domain": "LLM Inference Systems",
+      "published": "2026-02-05T19:58:48Z",
+      "source_lane": "fresh",
+      "analysis_priority_rank": 4,
+      "selected_for_full_analysis": false,
+      "topics": [
+        "diffusion 语言模型",
+        "可撤销解码",
+        "并行解码",
+        "验证机制",
+        "KV cache",
+        "推理加速"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-08",
+      "last_seen_date": "2026-03-08",
+      "last_recommended_date": "2026-03-08",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 6.97,
+          "analysis_candidate": 6.13,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-07"
     }
   ]
 }

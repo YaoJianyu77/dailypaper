@@ -1,338 +1,127 @@
 {
-  "target_date": "2026-03-07",
+  "target_date": "2026-03-08",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-05",
-      "end": "2026-03-07"
+      "start": "2026-02-06",
+      "end": "2026-03-08"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-07",
-      "end": "2026-02-04"
+      "start": "2025-03-08",
+      "end": "2026-02-05"
     }
   },
-  "total_found": 292,
-  "total_venue": 12,
-  "total_filtered": 16,
+  "total_found": 281,
+  "total_venue": 1,
+  "total_filtered": 9,
   "total_recent": 200,
   "total_hot": 80,
-  "total_unique": 16,
+  "total_unique": 9,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
     "analysis_top_n": 1,
-    "selected_count": 6,
+    "selected_count": 4,
     "lane_counts": {
-      "fresh": 2,
-      "established": 3,
-      "classic": 1,
-      "history_filtered": 0,
+      "fresh": 4,
+      "established": 0,
+      "classic": 0,
+      "history_filtered": 5,
       "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
       "allow_full_analysis": false,
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.05232v1",
-      "arxiv_id": "2603.05232v1",
-      "title": "SlideSparse: Fast and Flexible (2N-2):2N Structured Sparsity",
-      "summary": "NVIDIA's 2:4 Sparse Tensor Cores deliver 2x throughput but demand strict 50% pruning -- a ratio that collapses LLM reasoning accuracy (Qwen3: 54% to 15%). Milder $(2N-2):2N$ patterns (e.g., 6:8, 25% pruning) preserve accuracy yet receive no hardware support, falling back to dense execution without any benefit from sparsity. We present SlideSparse, the first system to unlock Sparse Tensor Core acceleration for the $(2N-2):2N$ model family on commodity GPUs. Our Sliding Window Decomposition reconstructs any $(2N-2):2N$ weight block into $N-1$ overlapping 2:4-compliant windows without any accuracy loss; Activation Lifting fuses the corresponding activation rearrangement into per-token quantization at near-zero cost. Integrated into vLLM, SlideSparse is evaluated across various GPUs (A100, H100, B200, RTX 4090, RTX 5080, DGX-spark), precisions (FP4, INT8, FP8, BF16, FP16), and model families (Llama, Qwen, BitNet). On compute-bound workloads, the measured speedup ratio (1.33x) approaches the theoretical upper-bound $N/(N-1)=4/3$ at 6:8 weight sparsity in Qwen2.5-7B, establishing $(2N-2):2N$ as a practical path to accuracy-preserving LLM acceleration. Code available at https://github.com/bcacdwk/vllmbench.",
+      "id": "http://arxiv.org/abs/2602.06036v1",
+      "arxiv_id": "2602.06036v1",
+      "title": "DFlash: Block Diffusion for Flash Speculative Decoding",
+      "summary": "Autoregressive large language models (LLMs) deliver strong performance but require inherently sequential decoding, leading to high inference latency and poor GPU utilization. Speculative decoding mitigates this bottleneck by using a fast draft model whose outputs are verified in parallel by the target LLM; however, existing methods still rely on autoregressive drafting, which remains sequential and limits practical speedups. Diffusion LLMs offer a promising alternative by enabling parallel generation, but current diffusion models typically underperform compared with autoregressive models. In this paper, we introduce DFlash, a speculative decoding framework that employs a lightweight block diffusion model for parallel drafting. By generating draft tokens in a single forward pass and conditioning the draft model on context features extracted from the target model, DFlash enables efficient drafting with high-quality outputs and higher acceptance rates. Experiments show that DFlash achieves over 6x lossless acceleration across a range of models and tasks, delivering up to 2.5x higher speedup than the state-of-the-art speculative decoding method EAGLE-3.",
       "authors": [
-        "Hanyong Shao",
-        "Yingbo Hao",
-        "Ting Song",
-        "Yan Xia",
-        "Di Zhang",
-        "Shaohan Huang",
-        "Xun Wu",
-        "Songchen Xu",
-        "Le Xu",
-        "Li Dong",
-        "Zewen Chi",
-        "Yi Zou",
-        "Furu Wei"
+        "Jian Chen",
+        "Yesheng Liang",
+        "Zhijian Liu"
       ],
       "author_details": [
         {
-          "name": "Hanyong Shao"
+          "name": "Jian Chen"
         },
         {
-          "name": "Yingbo Hao"
+          "name": "Yesheng Liang"
         },
         {
-          "name": "Ting Song"
-        },
-        {
-          "name": "Yan Xia"
-        },
-        {
-          "name": "Di Zhang"
-        },
-        {
-          "name": "Shaohan Huang"
-        },
-        {
-          "name": "Xun Wu"
-        },
-        {
-          "name": "Songchen Xu"
-        },
-        {
-          "name": "Le Xu"
-        },
-        {
-          "name": "Li Dong"
-        },
-        {
-          "name": "Zewen Chi"
-        },
-        {
-          "name": "Yi Zou"
-        },
-        {
-          "name": "Furu Wei"
+          "name": "Zhijian Liu"
         }
       ],
-      "published": "2026-03-05T14:49:16Z",
-      "published_date": "2026-03-05 14:49:16+00:00",
-      "updated": "2026-03-05T14:49:16Z",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05232v1",
-      "url": "http://arxiv.org/abs/2603.05232v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.5,
-        "quality": 1.5,
-        "recommendation": 9.55
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "vllm",
-        "throughput",
-        "quantization",
-        "cs.LG",
-        "h100",
-        "a100",
-        "b200",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.LG"
-        ],
-        "required_signal_matches": [
-          "vllm",
-          "h100",
-          "a100",
-          "b200"
-        ],
-        "required_signal_match_count": 4,
-        "bonus_keyword_matches": [
-          "throughput",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "throughput",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.36
-      },
-      "analysis_candidate_score": 9.88,
-      "analysis_signals": [
-        "vllm",
-        "h100",
-        "a100",
-        "b200",
-        "throughput",
-        "speedup"
-      ],
-      "analysis_components": {
-        "signal_strength": 10.0,
-        "implementation_depth": 10.0,
-        "evidence_strength": 4.13,
-        "has_source_page": true,
-        "has_readable_pdf": true
-      },
-      "selection_lane": "fresh",
-      "analysis_priority_rank": 2,
-      "analysis_eligible": true,
-      "selected_for_full_analysis": false,
-      "ai": {
-        "one_liner_zh": "核心点不是再提一种稀疏模式，而是把 6:8 这类更保精度的结构化稀疏真正映射到现有 NVIDIA 2:4 Sparse Tensor Core 执行路径。",
-        "summary_zh": "这篇工作针对 LLM 推理里的一个直接痛点：6:8 这类较温和结构化稀疏更可能保住精度，但现有 NVIDIA Sparse Tensor Core 只原生支持 2:4，所以这类模型通常只能按 dense 跑。作者提出 SlideSparse，用 Sliding Window Decomposition 把任意 (2N-2):2N 权重块重构成 N-1 个重叠的 2:4 窗口，再用 Activation Lifting 把激活重排并入 per-token quantization，试图以很低额外代价复用硬件稀疏加速。摘要声称该方法已接入 vLLM，并在多种 GPU、精度和模型上评测，在 compute-bound 场景下 Qwen2.5-7B 的 6:8 稀疏实测速比达到 1.33x，接近理论上界 4/3；但端到端 serving 条件、额外带宽/显存代价和 baseline 公平性仍需正文核对。",
-        "background_zh": "在 LLM 推理系统里，结构化稀疏之所以重新重要，是因为它有机会直接换来 matmul 吞吐收益，而不仅仅是参数压缩。问题在于硬件原生支持的 2:4 稀疏过于刚性，50% pruning 可能明显伤害推理精度，而更温和的 6:8 等模式又缺少可直接落地的硬件执行路径。",
-        "problem_zh": "这篇工作的核心问题是：如何在不要求新硬件的前提下，让 (2N-2):2N 这类更保精度的结构化稀疏真正映射到现有 NVIDIA 2:4 Sparse Tensor Core，而不是因为不满足原生约束而退化成 dense 执行。对 LLM serving 来说，这决定了稀疏是否能从离线剪枝结果变成真实的延迟或吞吐收益。",
-        "approach_zh": "作者的核心做法是提出 Sliding Window Decomposition，把每个 (2N-2):2N 权重块分解为 N-1 个彼此重叠但各自满足 2:4 约束的窗口表示，从而复用现有 Sparse Tensor Core 的执行路径。为降低激活侧重排成本，论文再提出 Activation Lifting，把对应的 activation rearrangement 融入 per-token quantization 流程，并将整条路径接入 vLLM。",
-        "evidence_zh": "摘要给出的证据包括：方法已集成到 vLLM；评测覆盖 A100、H100、B200、RTX 4090、RTX 5080 和 DGX-spark，多种数值精度，以及 Llama、Qwen、BitNet 等模型；在 compute-bound 工作负载下，Qwen2.5-7B 的 6:8 稀疏实测速比为 1.33x，接近理论上界 4/3。摘要还用 Qwen3 从 54% 到 15% 的例子说明严格 2:4 剪枝可能严重伤害推理精度，但摘要没有充分说明端到端延迟、不同 batch 或 sequence length 下的表现、以及 accuracy 评测设置。",
-        "value_zh": "如果这些结论成立，这项工作提供了一条非常务实的系统路线：不等新的稀疏硬件支持，也不被迫接受 2:4 带来的精度损失，就能把更温和的结构化稀疏转成现有 NVIDIA GPU 上可部署的推理优化。对工程侧，它可能把稀疏从理论上的压缩手段推进到 vLLM 等 serving 框架里的真实吞吐提升；对研究侧，它展示了一个通过表示重写和运行时融合来扩展硬件原生稀疏能力的思路。",
-        "open_questions": [
-          "Sliding Window Decomposition 在 kernel 层到底如何映射到 Sparse Tensor Core 指令路径，额外的 packing、indexing 和 launch 开销有多大？",
-          "Activation Lifting 融入 per-token quantization 后，在不同精度、batch size 和 sequence length 下是否仍接近零成本，还是只在特定 compute-bound 场景成立？",
-          "与 dense、原生 2:4 sparse 以及其他稀疏实现的比较是否公平，是否把剪枝、校准和精度恢复成本一并算入？"
-        ],
-        "core_contributions": [
-          "提出首个面向 (2N-2):2N 结构化稀疏家族、可复用现有 2:4 Sparse Tensor Core 的系统执行方案。",
-          "提出 Sliding Window Decomposition，把 6:8 等模式重写成 N-1 个重叠的 2:4 合规窗口，并给出理论速度上界 N/(N-1)。",
-          "提出 Activation Lifting，将激活重排与 per-token quantization 融合，并将整套方法接入 vLLM 进行实际系统评测。"
-        ],
-        "why_read": [
-          "它直接命中 LLM inference systems 的现实问题：更保精度的结构化稀疏如何在现有 GPU 上获得真实加速，而不是停留在剪枝层面。",
-          "摘要给出的系统机制是具体的，不是泛泛稀疏论文：稀疏模式重写、激活重排融合、vLLM 集成、跨多代 NVIDIA GPU 验证。",
-          "如果你关心吞吐收益到底来自哪里，这篇文章值得细读，因为它把收益来源明确指向对 2:4 Sparse Tensor Core 路径的复用，而非单纯模型压缩。"
-        ],
-        "risks": [
-          "从摘要看，方法明显依赖 NVIDIA 的 2:4 Sparse Tensor Core 路径及其软件栈，对非 NVIDIA 硬件或没有对应稀疏单元的后端可迁移性有限。",
-          "1.33x 的结果是在 compute-bound workload 下给出的；真实线上 serving 若更多受 memory、KV cache、调度或小 batch 影响，端到端收益可能明显缩水。"
-        ],
-        "recommended_for": [
-          "做 vLLM、serving runtime 或 GPU inference kernel 优化的工程师",
-          "研究结构化稀疏、量化与 kernel/runtime 协同设计的系统研究者",
-          "关注 NVIDIA GPU 上 LLM 推理吞吐与精度折中的编译器和低层代码生成研究者"
-        ],
-        "keywords": [
-          "LLM推理系统",
-          "结构化稀疏",
-          "2:4 Sparse Tensor Core",
-          "6:8稀疏",
-          "vLLM",
-          "量化融合耦合执行路径"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "这篇工作与 LLM inference acceleration 和 serving efficiency 高度对齐，系统点集中在现有 NVIDIA 稀疏硬件路径复用、vLLM 集成和可验证的吞吐收益上，且推荐分数很高。虽然仍需核对硬件前提、端到端条件和 baseline 公平性，但它明显属于今天应优先精读的 systems 主线。",
-        "fallback_summary": "NVIDIA's 2:4 Sparse Tensor Cores deliver 2x throughput but demand strict 50% pruning -- a ratio that collapses LLM reasoning accuracy (Qwen3: 54% to 15%)."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05451v1",
-      "arxiv_id": "2603.05451v1",
-      "title": "FlashAttention-4: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling",
-      "summary": "Attention, as a core layer of the ubiquitous Transformer architecture, is the bottleneck for large language models and long-context applications. While FlashAttention-3 optimized attention for Hopper GPUs through asynchronous execution and warp specialization, it primarily targets the H100 architecture. The AI industry has rapidly transitioned to deploying Blackwell-based systems such as the B200 and GB200, which exhibit fundamentally different performance characteristics due to asymmetric hardware scaling: tensor core throughput doubles while other functional units (shared memory bandwidth, exponential units) scale more slowly or remain unchanged. We develop several techniques to address these shifting bottlenecks on Blackwell GPUs: (1) redesigned pipelines that exploit fully asynchronous MMA operations and larger tile sizes, (2) software-emulated exponential and conditional softmax rescaling that reduces non-matmul operations, and (3) leveraging tensor memory and the 2-CTA MMA mode to reduce shared memory traffic and atomic adds in the backward pass. We demonstrate that our method, FlashAttention-4, achieves up to 1.3$\\times$ speedup over cuDNN 9.13 and 2.7$\\times$ over Triton on B200 GPUs with BF16, reaching up to 1613 TFLOPs/s (71% utilization). Beyond algorithmic innovations, we implement FlashAttention-4 entirely in CuTe-DSL embedded in Python, achieving 20-30$\\times$ faster compile times compared to traditional C++ template-based approaches while maintaining full expressivity.",
-      "authors": [
-        "Ted Zadouri",
-        "Markus Hoehnerbach",
-        "Jay Shah",
-        "Timmy Liu",
-        "Vijay Thakkar",
-        "Tri Dao"
-      ],
-      "author_details": [
-        {
-          "name": "Ted Zadouri"
-        },
-        {
-          "name": "Markus Hoehnerbach"
-        },
-        {
-          "name": "Jay Shah"
-        },
-        {
-          "name": "Timmy Liu"
-        },
-        {
-          "name": "Vijay Thakkar"
-        },
-        {
-          "name": "Tri Dao"
-        }
-      ],
-      "published": "2026-03-05T18:24:49Z",
-      "published_date": "2026-03-05 18:24:49+00:00",
-      "updated": "2026-03-05T18:24:49Z",
+      "published": "2026-02-05T18:59:30Z",
+      "published_date": "2026-02-05 18:59:30+00:00",
+      "updated": "2026-02-05T18:59:30Z",
       "primary_category": "cs.CL",
       "categories": [
         "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05451v1",
-      "url": "http://arxiv.org/abs/2603.05451v1",
-      "source": "arxiv",
+      "pdf_url": "https://arxiv.org/pdf/2602.06036v1",
+      "url": "http://arxiv.org/abs/2602.06036v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.3,
-        "quality": 1.3,
-        "recommendation": 9.38
+        "popularity": 2.4,
+        "quality": 2.0,
+        "recommendation": 9.8
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "flashattention",
-        "kernel pipelining",
-        "throughput",
+        "speculative decoding",
+        "latency",
         "cs.CL",
-        "h100",
-        "b200",
-        "memory",
-        "bandwidth",
         "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
+      "is_hot_paper": true,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 3,
+        "text_match_count": 2,
         "matched_categories": [
           "cs.CL"
         ],
         "required_signal_matches": [
-          "flashattention",
-          "kernel pipelining",
-          "h100",
-          "b200"
+          "speculative decoding"
         ],
-        "required_signal_match_count": 4,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput",
-          "memory",
-          "bandwidth",
+          "latency",
           "speedup"
         ],
-        "bonus_keyword_match_count": 4,
+        "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
-          "throughput",
-          "memory",
-          "bandwidth",
+          "latency",
           "speedup"
         ],
-        "analysis_keyword_match_count": 4,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.5
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.36
       },
-      "analysis_candidate_score": 10.0,
+      "analysis_candidate_score": 9.28,
       "analysis_signals": [
-        "flashattention",
-        "kernel pipelining",
-        "h100",
-        "b200",
-        "throughput",
-        "memory",
-        "bandwidth",
+        "speculative decoding",
+        "latency",
         "speedup"
       ],
       "analysis_components": {
-        "signal_strength": 10.0,
-        "implementation_depth": 10.0,
+        "signal_strength": 8.33,
+        "implementation_depth": 1.83,
         "evidence_strength": 10.0,
         "has_source_page": true,
         "has_readable_pdf": true
@@ -342,278 +131,667 @@
       "analysis_eligible": true,
       "selected_for_full_analysis": true,
       "ai": {
-        "one_liner_zh": "这篇工作把注意力优化从面向 H100 的 kernel 调参，推进到面向 Blackwell 非对称硬件扩展的算法与流水线协同设计。",
-        "summary_zh": "这篇论文针对 Blackwell GPU 上 tensor core 吞吐增长快于 shared memory 带宽和 exponential 单元的“非对称扩展”问题，重新设计了 attention 的算法与 kernel 流水线。核心做法包括利用全异步 MMA 和更大 tile 的新流水线、用软件模拟 exponential 与条件式 softmax rescaling 减少非 matmul 操作，以及借助 tensor memory 和 2-CTA MMA 降低反向传播中的 shared memory 流量与 atomic add。摘要称其在 B200 的 BF16 设置下相对 cuDNN 9.13 最多提速 1.3 倍、相对 Triton 最多提速 2.7 倍，并达到 1613 TFLOPs/s（71% 利用率）；同时用 CuTe-DSL 实现后，编译时间相对传统 C++ 模板方式快 20-30 倍。摘要没有充分说明不同序列长度、batch/head 配置、端到端 serving 指标和基线公平性。",
-        "background_zh": "Transformer attention 仍是 LLM 和长上下文系统中的核心瓶颈，而 GPU 代际切换会改变算力、带宽和特殊函数单元之间的相对瓶颈。Blackwell 上 tensor core 扩展明显快于 shared memory 带宽和 exponential 单元，这使得为 H100 优化的 attention 内核设计不再是自然最优。",
-        "problem_zh": "问题是：在 Blackwell 这类存在明显非对称硬件扩展的 GPU 上，如何重新设计 attention，使瓶颈不再卡在 shared memory、exp 相关非 matmul 操作以及 backward 中的原子更新，而不是继续沿用主要针对 H100 的优化路径。这个问题重要，因为它直接关系到 LLM attention kernel 能否把新一代 GPU 的峰值算力转化为真实吞吐、延迟和利用率收益。",
-        "approach_zh": "方法是做算法与 kernel 流水线协同设计，而不是只微调已有实现。具体包括三部分：一是基于全异步 MMA 和更大 tile 重新设计流水线；二是通过软件模拟 exponential 和条件式 softmax rescaling，压缩非 matmul 开销；三是在 backward 中利用 tensor memory 和 2-CTA MMA，减少 shared memory 读写与 atomic add 压力。作者还将整套实现放在嵌入 Python 的 CuTe-DSL 中，以降低高性能 kernel 的编译开销。",
-        "evidence_zh": "摘要给出的证据主要是 B200 GPU、BF16 设置下与 cuDNN 9.13 和 Triton 的速度对比，以及 1613 TFLOPs/s、71% 利用率和 20-30 倍编译时间改进这几类结果。这些证据支持其在目标硬件上的 kernel 级收益主张，但摘要没有充分说明测试覆盖了哪些序列长度、head 维度、batch 规模、前向或前后向场景，也没有充分说明与 FlashAttention-3 及其他基线的公平比较设置。",
-        "value_zh": "如果这些结果成立，这项工作会为 Blackwell 时代的 attention kernel 提供新的默认设计思路：收益不再主要来自单点 kernel 技巧，而是来自围绕硬件失衡重写 softmax 路径、流水线组织和数据移动方式。对研究而言，它说明 attention 优化需要跟随硬件瓶颈迁移；对工程而言，它可能直接改善 B200/GB200 上的 LLM serving 或训练相关 attention 内核效率，并降低高性能 kernel 仅能依赖重模板 C++ 实现的门槛。",
+        "one_liner_zh": "这篇工作把 speculative decoding 的草稿阶段从自回归改成并行 block diffusion，试图突破现有方法“验证可并行、起草仍串行”的速度上限。",
+        "summary_zh": "这篇工作针对 LLM 推理里 speculative decoding 的串行 drafting 瓶颈，提出用轻量级 block diffusion 模型一次前向并行生成候选 token，并利用从目标模型提取的上下文特征提高草稿质量和接受率。摘要声称该框架在多种模型与任务上实现了超过 6x 的无损加速，并且相对 EAGLE-3 最高可达到 2.5x 更高 speedup。对推理系统而言，这是很直接的低时延路线，但摘要没有充分说明硬件前提、训练与部署开销，以及收益究竟主要来自哪里。",
+        "background_zh": "自回归 LLM 的解码天然逐 token 串行，导致推理延迟高、GPU 利用率不足，因此 speculative decoding 成为近年的关键提速方向。问题在于很多方法虽然把验证做并行了，但草稿生成本身仍是自回归，这会继续限制端到端 speedup。",
+        "problem_zh": "这篇论文要解决的问题是：能否在保持输出无损一致性的前提下，把 speculative decoding 的草稿阶段也并行化，从而进一步降低 LLM 解码延迟。如果 drafting 仍然串行，那么 target model 侧的并行验证收益会被草稿端吞掉，系统上限很快触顶。",
+        "approach_zh": "DFlash 用一个轻量级 block diffusion 草稿模型替代传统自回归 draft model，在单次前向中并行生成一块候选 token。与此同时，它让草稿模型条件化于从目标模型提取的上下文特征，以提升候选质量和接受率。核心思路不是把 diffusion LLM 当主生成器，而是把其并行生成能力嵌入 speculative decoding 流水线。",
+        "evidence_zh": "摘要给出的证据是：在一系列模型和任务上的实验中，DFlash 实现了超过 6x 的无损加速，并且相对当前最先进的 speculative decoding 方法 EAGLE-3，最高有 2.5x 更高的 speedup。摘要没有充分说明实验使用的 GPU、模型规模、batch/序列长度设置、接受率细节，以及速度收益到底主要来自 draft 端并行化还是其他系统因素。",
+        "value_zh": "如果这些结果在公平 baseline 和真实 serving 设置下成立，这项工作对 LLM inference 的实际价值很高：它提供了一条继续压低 decode latency、提高 GPU 利用率并改善吞吐/延迟折中的新路径。对研究上，它也说明 diffusion-style 并行生成未必要替代自回归主模型，而可以作为 runtime 协同模块发挥系统收益。",
         "open_questions": [
-          "软件模拟 exponential 与条件式 softmax rescaling 的数值稳定性、精度影响和适用序列长度范围如何？",
-          "相对 cuDNN、Triton 以及前代 FlashAttention 的对比，是否在相同精度、相同工作负载和相同并行配置下公平进行？",
-          "这些优化对 Blackwell 特性的依赖有多强，是否必须依赖 tensor memory、2-CTA MMA 等机制，迁移到 H100 或其他 Blackwell SKU 时收益是否仍成立？"
+          "从目标模型提取上下文特征给草稿模型带来的额外计算与通信开销是多少，是否会抵消并行 drafting 的收益？",
+          "摘要中的“超过 6x 无损加速”和“相对 EAGLE-3 最高 2.5x”是在什么 GPU、模型规模、batch size、输出长度和服务模式下得到的？",
+          "block diffusion 草稿模型的接受率、训练成本和部署复杂度如何，baseline 对比是否在相同硬件和相同 lossless 约束下公平进行？"
         ],
         "core_contributions": [
-          "把 attention 优化目标从面向 Hopper 的异步执行与 warp specialization，转成面向 Blackwell 非对称硬件扩展的算法-流水线协同设计。",
-          "提出减少非 matmul 开销的 softmax 路径，包括软件模拟 exponential 与条件式 rescaling，以适配 exp 单元扩展较慢的硬件现实。",
-          "在 backward 中引入 tensor memory 与 2-CTA MMA 的配合，针对 shared memory 流量和 atomic add 开销做定向优化。"
+          "提出用轻量级 block diffusion 模型做 speculative decoding 的并行草稿生成，而不是继续依赖自回归 draft model。",
+          "通过单次前向生成一个 token block，并结合来自目标模型的上下文特征来提升草稿质量与接受率。",
+          "摘要声称在多模型多任务上实现超过 6x 的无损加速，并在 speedup 上超过 EAGLE-3。"
         ],
         "why_read": [
-          "它直接命中当前 B200/GB200 上 attention kernel 的实际瓶颈迁移，和 LLM systems 的硬件代际切换高度相关。",
-          "摘要同时给出 kernel 性能指标和实现形态变化，既能看吞吐/利用率收益，也能看 CuTe-DSL 对高性能内核开发效率的潜在影响。",
-          "如果你关注 Blackwell 上的 low-level kernel 设计，这篇论文很可能提供 shared memory、exp 单元与 MMA 管线如何重新平衡的具体范式。"
+          "它直接命中当前 LLM serving 的核心瓶颈之一：speculative decoding 里仍然残留的串行 drafting。",
+          "如果论文细节站得住，这可能是比常规 draft-model 优化更有潜力的系统级提速方向。",
+          "它把 diffusion 的价值重新放回 inference runtime 协同设计，而不是泛泛讨论生成模型替代路线。"
         ],
         "risks": [
-          "结果明显依赖 Blackwell 硬件特性；摘要没有充分说明离开 B200/GB200 后的可迁移性。",
-          "摘要给出的主要是内核级速度和利用率，不能直接推出完整 LLM serving 延迟或端到端吞吐一定同步改善。"
+          "摘要没有充分说明硬件假设、实验设置和 speedup 分解，系统收益的可迁移性目前无法判断。",
+          "草稿模型的训练与部署成本没有交代，真实工程收益可能受到额外模型维护复杂度影响。"
         ],
         "recommended_for": [
-          "做 LLM inference 或 serving kernel 优化的工程师",
-          "关注 Blackwell/Hopper GPU 上 attention 内核迁移的系统研究者",
-          "研究 CUDA kernel 生成、CuTe/Triton DSL 或低层代码生成的编译器工程师"
+          "做 speculative decoding、serving runtime 和 decode latency 优化的 LLM systems 研究者。",
+          "关注 acceptance rate、吞吐/延迟折中以及草稿模型设计的推理工程师。",
+          "想评估 diffusion-style 并行生成是否适合作为 inference 协同模块的人。"
         ],
         "keywords": [
-          "FlashAttention",
-          "Blackwell GPU",
-          "B200",
-          "GB200",
-          "attention kernel",
-          "kernel pipelining"
+          "speculative decoding",
+          "block diffusion",
+          "parallel drafting",
+          "LLM inference systems",
+          "latency optimization"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "这篇论文与当前 Blackwell 代的 LLM inference/attention kernel 优化高度相关，直接命中本项目最关心的硬件假设、kernel 级收益和低层实现路径。摘要已经给出明确的吞吐、利用率和编译时间信号，值得优先读全文核对其实验公平性、数值稳定性和硬件依赖边界。",
-        "fallback_summary": "Attention, as a core layer of the ubiquitous Transformer architecture, is the bottleneck for large language models and long-context applications."
+        "reading_priority_reason": "与当前关注方向高度吻合：它直接面向 LLM inference latency 和 serving efficiency，并且给出了很强的 speedup claim。优先级高的原因不是摘要已经充分证明一切，而是它值得尽快核对硬件前提、lossless 定义、接受率机制以及与 EAGLE-3 的比较是否公平。",
+        "fallback_summary": "Autoregressive large language models (LLMs) deliver strong performance but require inherently sequential decoding, leading to high inference latency and poor GPU utilization."
       },
       "full_analysis": {
         "enabled": true,
         "source_kind": "arxiv_source",
-        "text_char_count": 22141,
+        "text_char_count": 31473,
         "figure_context": [
           {
-            "image_ref": "../Figures/fa4_fwd_causalFalse_hdim128_updated.png",
-            "image_token": "fa4fwdcausalfalsehdim128updated",
-            "caption": "Forward pass TFLOPS on B200 (FP16/BF16) with head dimension 128. Left: non-causal attention. Right: causal attention. FA4 achieves 1.1-1.3 speedup over cuDNN 9.13.0 and 2.1-2.7 over Triton across sequence lengths. Since the initial release of our implementation, newer versions of cuDNN have incorporated many of the techniques described in this paper, yielding similar performance to FA4.",
+            "image_ref": "figures/dflash_speedup.pdf",
+            "image_token": "dflashspeedup",
+            "caption": "Speedup comparison between DFlash, EAGLE-3 against Autoregressive Decoding on Qwen3-8B~ with the Transformers backend. Overall, DFlash achieves more than 2.5× higher speedup than EAGLE-3.",
             "role_hint": "results"
           },
           {
-            "image_ref": "../Figures/fa4_fwd_causalTrue_hdim128_updated.png",
-            "image_token": "fa4fwdcausaltruehdim128updated",
-            "caption": "Forward pass TFLOPS on B200 (FP16/BF16) with head dimension 128. Left: non-causal attention. Right: causal attention. FA4 achieves 1.1-1.3 speedup over cuDNN 9.13.0 and 2.1-2.7 over Triton across sequence lengths. Since the initial release of our implementation, newer versions of cuDNN have incorporated many of the techniques described in this paper, yielding similar performance to FA4.",
-            "role_hint": "results"
-          },
-          {
-            "image_ref": "../Figures/fa4_fwd_causalTrue_hdim192128_updated.png",
-            "image_token": "fa4fwdcausaltruehdim192128updated",
-            "caption": "Forward pass TFLOPS comparison between cuDNN and FA4 on B200 (FP16/BF16) with head dimension (192, 128) for causal attention (typically used in DeepSeek V3 architecture)",
+            "image_ref": "figures/dflash_inference_design.pdf",
+            "image_token": "dflashinferencedesign",
+            "caption": "DFlash Inference Design. Hidden context features extracted from the target model are fused and injected into each draft layer's Key-Value cache to enable conditional speculation.",
             "role_hint": "method"
           },
           {
-            "image_ref": "../Figures/fa4_bwd_causalFalse_hdim128_updated.png",
-            "image_token": "fa4bwdcausalfalsehdim128updated",
-            "caption": "Backward pass TFLOPS on B200 (FP16/BF16) with head dimension 128. Left: non-causal attention. Right: causal attention.",
+            "image_ref": "figures/draft_latency_bar.pdf",
+            "image_token": "draftlatencybar",
+            "caption": "Draft cost of 1, 3, 5-layer DFlash and 1-layer EAGLE-3.",
             "role_hint": "other"
           },
           {
-            "image_ref": "../Figures/fa4_bwd_causalTrue_hdim128_updated.png",
-            "image_token": "fa4bwdcausaltruehdim128updated",
-            "caption": "Backward pass TFLOPS on B200 (FP16/BF16) with head dimension 128. Left: non-causal attention. Right: causal attention.",
+            "image_ref": "figures/dflash_attn.pdf",
+            "image_token": "dflashattn",
+            "caption": "DFlash training attention. The target model provides context features (blue) that condition the draft model. The input consists of clean prompt tokens and clean response tokens . Within each masked block, a subset of clean response tokens (yellow) is randomly sampled as anchors, while mask tokens (green) mark positions for parallel prediction. Invisible tokens (white) denote the attention mask, which enforces causal consistency and prevents inter-block information leakage during training.",
+            "role_hint": "method"
+          },
+          {
+            "image_ref": "figures/acceptance_length_vs_epoch.pdf",
+            "image_token": "acceptancelengthvsepoch",
+            "caption": "The loss decay makes training converge faster and better.",
             "role_hint": "other"
-          },
-          {
-            "image_ref": "../Figures/causal_bwd_det_FA4.png",
-            "image_token": "causalbwddetfa4",
-            "caption": "Ablations for Deterministic Backward pass on B200 (FP16/BF16) with head dimension 128. Causal attention -- SPT, LPT with reverse mblock order, LPT, and naive with no batch/head swizzle.",
-            "role_hint": "results"
-          },
-          {
-            "image_ref": "../Figures/non-causal_bwd_det_FA4.png",
-            "image_token": "noncausalbwddetfa4",
-            "caption": "Ablations for Deterministic Backward pass on B200 with head dimension 128. Non-causal attention with batch/head swizzle versus naive. Right: causal attention -- SPT, LPT with reverse mblock order, LPT, and naive with no batch/head swizzle.",
-            "role_hint": "results"
-          },
-          {
-            "image_ref": "../Figures/causal_bwd_det_FA4.png",
-            "image_token": "causalbwddetfa4",
-            "caption": "Ablations for Deterministic Backward pass on B200 with head dimension 128. Non-causal attention with batch/head swizzle versus naive. Right: causal attention -- SPT, LPT with reverse mblock order, LPT, and naive with no batch/head swizzle.",
-            "role_hint": "results"
           }
         ],
         "table_context": [
           {
-            "caption": "Compile time for a single kernel: FA3 (C++ templates) and FA4\n (CuTe-DSL). Typically FA2 and FA3 require precompiling hundreds of kernels\n for different attention variants.",
-            "label": "table:compile_time",
-            "role_hint": "other",
+            "caption": "Throughput (tok/s), speedup over baseline, and average acceptance length on SGLang (FA4 backend).",
+            "label": "tab:sglang-all",
+            "role_hint": "results",
             "rows": [
-              "Method | Forward pass | Backward pass",
-              "55s | 45s",
-              "2.5s | 1.4s",
-              "Speedup | 22 | 32"
+              "2 [2] * Task | 2 [2] * Method | Concurrency | 2 [2] * Avg.",
+              "(lr) 3-7 | 1 | 4 | 8 | 16 | 32",
+              "8 l Qwen3-4B",
+              "3 [2] * Math500 | Baseline | 316 | 1145 | 2201 | 4100 | 7136 | --",
+              "1531 | 4943 | 9066 | 14477 | 20417 | 8.01",
+              "4.8 | 4.3 | 4.1 | 3.5 | 2.9",
+              "3 [2] * Human-",
+              "Eval | Baseline | 312 | 1162 | 2217 | 4184 | 7143 | --"
+            ]
+          },
+          {
+            "caption": "Speedup over baseline and average acceptance length for LLaMA-3.1-8B-Instruct on SGLang (Flashinfer backend, single B200 GPU). Baseline reports absolute throughput (TPS; tokens/s). EAGLE-3 uses 7 draft steps with top- and either 10 or 60 draft tokens. DFlash uses block size 10.",
+            "label": "tab:dflash_vs_eagle3_llama31_acc",
+            "role_hint": "results",
+            "rows": [
+              "2 [2] * Method | Concurrency | 2 [2] * Avg.",
+              "(lr) 2-6 | 1 | 4 | 8 | 16 | 32",
+              "7 l GSM8K",
+              "Baseline (TPS) | 249 | 923 | 1739 | 3245 | 5349 | --",
+              "EAGLE-3 (10) | 1.6 | 1.5 | 1.4 | 1.2 | 1.0 | 3.49",
+              "EAGLE-3 (60) | 1.9 | 1.6 | 1.3 | 0.9 | 0.6 | 4.55",
+              "DFlash (10) | 2.4 | 2.2 | 2.1 | 1.8 | 1.6 | 4.32",
+              "7 l HumanEval"
+            ]
+          },
+          {
+            "caption": "5-layer draft model has the best average speedup. All DFlash draft models are trained with block size 16 and hidden features extracted from 5 layers of the target model.",
+            "label": "tab:ablation_draft_layers",
+            "role_hint": "results",
+            "rows": [
+              "2 [2] * Setting | Math500 | HumanEval | MT-Bench",
+              "Speedup | Speedup | Speedup",
+              "3-L | 4.69 | 5.64 | 3.90 | 4.61 | 2.38 | 3.18",
+              "5-L | 4.71 | 5.99 | 3.96 | 4.94 | 2.35 | 3.37",
+              "8-L | 4.64 | 6.33 | 3.96 | 5.29 | 2.23 | 3.50"
+            ]
+          },
+          {
+            "caption": "More hidden features from target model increases the acceptance length. All DFlash draft models use 3 draft layers and are trained with block size 16.",
+            "label": "tab:ablation_target_hiddens",
+            "role_hint": "results",
+            "rows": [
+              "2 [2] * Setting | Math500 | HumanEval | MT-Bench",
+              "Speedup | Speedup | Speedup",
+              "3-H | 4.49 | 5.38 | 3.80 | 4.47 | 2.32 | 3.07",
+              "5-H | 4.69 | 5.64 | 3.90 | 4.61 | 2.38 | 3.18"
+            ]
+          },
+          {
+            "caption": "Ablation study of training–inference block size (BS) mismatch. All draft models use 8 layers and 5 target hidden features.",
+            "label": "tab:ablation_block_size",
+            "role_hint": "ablation",
+            "rows": [
+              "2 [2] * Train",
+              "BS | 2 [2] * Test",
+              "BS | Math500 | HumanEval | MT-Bench",
+              "() 3-8 | Speedup | Speedup | Speedup",
+              "b16 | b16 | 4.64x | 6.33 | 3.96x | 5.29 | 2.23x | 3.50",
+              "b16 | b8 | 3.87x | 5.09 | 3.39x | 4.44 | 2.12x | 3.18",
+              "b8 | b16 | 3.78x | 5.02 | 3.24x | 4.28 | 2.09x | 3.09",
+              "b8 | b8 | 3.97x | 5.21 | 3.53x | 4.61 | 2.22x | 3.29"
+            ]
+          },
+          {
+            "caption": "A 5-layer block diffusion draft model without target context features. The draft model achieves only modest acceptance length speedup.",
+            "label": "tab:naive_diffusion",
+            "role_hint": "results",
+            "rows": [
+              "Temp | GSM8K | Math500 | AIME24 | AIME25",
+              "Speedup / | Speedup / | Speedup / | Speedup /",
+              "0 | 2.83 / 3.38 | 3.73 / 4.61 | 3.43 / 4.12 | 3.35 / 4.07",
+              "1 | 2.76 / 3.29 | 3.31 / 4.12 | 2.66 / 3.23 | 2.65 / 3.24"
+            ]
+          },
+          {
+            "caption": "Randomly sample anchor tokens to construct masked blocks during training effectively augments the training data and leads to higher acceptance length and better speedup. Both draft models use three layers and extract five hidden features from the target model. The block size is 16. We use the 100K data introduced in sec:exp-ablation to train both models.",
+            "label": "tab:ablation_sample_block",
+            "role_hint": "ablation",
+            "rows": [
+              "Setting | Math500 | HumanEval | MT-Bench",
+              "(lr) 2-3 (lr) 4-5 (lr) 6-7 | Speedup | Speedup | Speedup",
+              "Standard | 4.13x | 4.94 | 3.29x | 3.86 | 2.13x | 2.80",
+              "Sample | 4.69x | 5.64 | 3.90x | 4.61 | 2.38x | 3.18"
             ]
           }
         ],
         "metadata": {
-          "institutions": [
-            "Princeton University",
-            "Colfax Research",
-            "NVIDIA"
-          ]
+          "institutions": []
         },
         "content": {
-          "abstract_translation_zh": "注意力作为普遍使用的 Transformer 架构中的核心层，是大语言模型和长上下文应用的瓶颈。尽管 FlashAttention-3 通过异步执行和 warp specialization 针对 Hopper GPU 优化了 attention，但它主要面向 H100 架构。AI 行业已经迅速转向部署基于 Blackwell 的系统，例如 B200 和 GB200；由于非对称硬件扩展，这些系统呈现出根本不同的性能特征：tensor core 吞吐翻倍，而 shared memory 带宽和 exponential 单元扩展较慢或基本不变。我们提出了若干技术来应对 Blackwell GPU 上这些转移后的瓶颈：(1) 重新设计流水线，利用完全异步的 MMA 操作和更大的 tile；(2) 用软件模拟 exponential 与条件式 softmax rescaling，减少非 matmul 操作；(3) 利用 tensor memory 和 2-CTA MMA 模式，在反向传播中减少 shared memory 流量和 atomic add。我们表明，FlashAttention-4 在 B200 GPU 的 BF16 设置下，相比 cuDNN 9.13 最多快 1.3 倍、相比 Triton 最多快 2.7 倍，并达到最高 1613 TFLOPs/s（71% 利用率）。除算法创新外，我们还将 FlashAttention-4 完全实现为嵌入 Python 的 CuTe-DSL，在保持完整表达能力的同时，相比传统基于 C++ 模板的方法实现了 20-30 倍更快的编译时间。",
-          "background_zh": "这篇论文的背景是，attention 仍然是 Transformer 系统里最稳定、最难绕开的高成本算子，而 GPU 代际升级并不会让所有硬件单元同步变快。Blackwell 上 tensor core 吞吐提升明显快于 shared memory、exp 单元和一般 ALU，因此原本围绕 matmul 组织的 attention kernel 设计开始被非 matmul 路径卡住。",
-          "problem_zh": "论文要解决的问题是：在 Blackwell 这类“算得更快、但 shared memory 和 exponential 不够快”的非对称硬件上，如何重写 attention 的前后向 kernel，使真实瓶颈从 shared memory 流量、softmax 相关操作和反向原子归约中释放出来，而不是继续沿用主要为 H100/Hopper 调过参的实现。这个问题直接关系到 B200/GB200 上 dense attention 能否把更高的 tensor core 峰值转成实际 TFLOPs、吞吐和可用 kernel。",
-          "method_overview_zh": "FlashAttention-4 的核心不是单点 kernel trick，而是把 attention 视为一个需要围绕 Blackwell 资源失衡重新设计的算法-流水线协同问题。方法一方面重构前后向的软件流水线，让 fully asynchronous MMA、softmax 计算和数据搬运尽量重叠；另一方面专门削减 Blackwell 上更容易暴露出来的非 matmul 成本，包括 exponential 路径、shared memory 流量、以及 backward 中的 atomic reduction。实现层面则用 CuTe-DSL 取代重模板 C++，把低层控制能力和更快编译周期结合起来。",
+          "abstract_translation_zh": "自回归大语言模型虽然性能强，但解码天然串行，因此推理延迟高、GPU 利用率差。Speculative decoding 通过先用快速 draft model 生成候选、再由 target LLM 并行验证来缓解这一瓶颈，但现有方法的 drafting 仍多为自回归，串行性依旧限制了实际加速。Diffusion LLM 具备并行生成能力，是一个有前景的替代方向，但现有 diffusion 模型通常生成质量弱于自回归模型。本文提出 DFlash：用轻量级 block diffusion model 做并行 drafting，并利用从 target model 提取的上下文特征来提高草稿质量和接受率。摘要声称，DFlash 在多种模型和任务上实现了超过 6 倍的无损加速，并且相对当前最强 speculative decoding 方法 EAGLE-3，最高达到 2.5 倍更高的 speedup。",
+          "background_zh": "自回归 LLM 的 decode 阶段逐 token 串行，既拉高延迟，也让推理更偏 memory-bound，难以充分利用 GPU。Speculative decoding 已能把验证阶段并行化，但主流方案的草稿生成仍是自回归，因此系统瓶颈开始集中到 drafting 端，长链路推理时尤其明显。",
+          "problem_zh": "论文聚焦 speculative decoding 的核心上限：如果 draft model 仍逐步生成，那么 drafting cost 会随 speculation budget 线性增长，小 drafter 的容量也会让 acceptance length 很快饱和，最终限制端到端 speedup。作者要解决的是，能否在保持 lossless verification 的前提下，把 drafting 也改成并行 block 生成，同时保持足够高的 acceptance length。",
+          "method_overview_zh": "DFlash 将 diffusion LLM 重新定位为 speculative decoding 中的并行 drafter，而不是独立生成器。系统先让 target model 做标准 prefill，并从多个层抽取 hidden features；这些特征被融合后注入 draft model 每一层的 KV 投影，作为持续存在的条件上下文。随后，一个轻量级 block diffusion draft model 在单次前向中并行预测整个 token block，target model 再按 speculative decoding 机制并行验证，从而把 diffusion 的并行生成能力与自回归 target 的 lossless 保真结合起来。",
           "method_details": [
-            "为前向和反向分别重写软件流水线，利用 Blackwell 的 fully asynchronous MMA 和更大 tile，在 tensor core、softmax 计算与内存操作之间做更强重叠。",
-            "在前向中用基于 FMA 单元的多项式近似来软件模拟 exponential，绕开 MUFU/exponential 单元吞吐不足的问题。",
-            "引入 conditional softmax rescaling，在不必要时跳过 rescaling，进一步减少 softmax 路径中的非 matmul 操作。",
-            "利用每个 SM 的 256 KB tensor memory（TMEM）存放更多 tensor core 中间结果，降低 shared memory 流量和寄存器压力，并支撑更大 tile。",
-            "在反向中利用 2-CTA MMA 模式让 CTA 对协同完成一次 MMA、各自只 staging 一半 operand B，同时重构 dQ 步骤，把全局 atomic reductions 数量减半；文中还配套了面向 Blackwell 资源约束的 CTA 调度、寄存器分配和 deterministic mode。"
+            "Target model 在 prefill 后从若干浅到深的层提取 hidden states，将其拼接并通过轻量投影层融合成紧凑的 context feature。",
+            "DFlash 不像 EAGLE-3 那样只把 target feature 当输入拼到 token embedding 上，而是把融合后的 context feature 直接注入 draft model 每一层的 Key/Value 投影，并缓存在 draft KV cache 中复用。",
+            "Draft model 是轻量级 block diffusion 模型，一次前向并行预测一个 block 内所有 masked 位置，从而把 drafting cost 从随 token 数增长的串行多步调用，改成更接近固定开销的块级生成。",
+            "训练时不按固定分块直接做标准 block diffusion，而是随机采样 response 中的 anchor token，把 anchor 作为 block 首位、其后位置设为 mask，以匹配推理时“由 target 产出的干净 token 作为条件再并行预测后续 token”的行为。",
+            "训练采用稀疏注意力把多个 draft blocks 拼成一个序列联合优化，并对 block 内更靠前 token 施加更高的交叉熵权重；同时共享并冻结 target model 的 embedding 和 LM head，仅训练 draft Transformer 层。"
           ],
-          "experiment_setup_zh": "实验主要是 attention 单算子基准，而不是端到端 LLM serving。正文多处写在 B200 GPU 上测试 BF16/FP16 attention；附加实验细节段又写“B100 180GB SXM6 (1000W)”，硬件标注存在不一致，需要回原文核对。基准覆盖 causal/non-causal、head dimension 64、128 和 (192,128)，序列长度从 1k 到 32k，总 token 数固定为 32k，并随序列长度调整 batch size；hidden dimension 设为 2048。forward 和 backward 都报告性能，计时采用 5 次 warmup、10 次重复取平均；此外还包含 deterministic backward 的调度消融，以及 FA3（C++ templates）对比 FA4（CuTe-DSL）的单 kernel 编译时间表。",
+          "experiment_setup_zh": "实验在 LLaMA-3.1-Instruct-8B 与 Qwen3 系列（4B、8B、Coder-30B-A3B-Instruct）上进行，任务覆盖数学、代码和对话三类。正文说明大多数实验在 NVIDIA H200 上完成；SGLang 实验使用单张 B200 GPU，其中一组使用 FlashAttention-4 backend 并开启 Spec-v2 scheduling overlap，LLaMA-3.1 对比实验则在 SGLang/Flashinfer backend 上做。主要指标是平均 acceptance length、相对自回归 baseline 的端到端 speedup，以及 SGLang 吞吐。训练数据约 800K，来自 NVIDIA Nemotron Post-Training Dataset V2 和 CodeAlpaca，并用 target model 生成的响应重构训练样本；默认 draft model 为 5 层（Qwen3 Coder 为 8 层），block size 通常为 16（LLaMA-3.1 为 10），target hidden features 默认取 5 层。",
           "datasets_or_benchmarks": [
-            "B200/BF16（正文主述）attention kernel benchmark：sequence length 1k-32k，total tokens 固定 32k，比较 causal 与 non-causal、head dim 64/128/(192,128) 的前向与反向性能。",
-            "Deterministic backward benchmark：B200、head dim 128，下比较不同调度与 swizzle 策略在 causal/non-causal 条件下的性能。",
-            "单 kernel 编译时间 benchmark：FA3（C++ templates）对比 FA4（CuTe-DSL），分别统计 forward 和 backward 的编译耗时。"
+            "训练数据：约 800K 样本，来自 NVIDIA Nemotron Post-Training Dataset V2 与 CodeAlpaca，训练响应由 target model 生成以提升 target alignment。",
+            "训练数据（LLaMA-3.1 对比实验）：UltraChat、ShareGPT。",
+            "数学评测：GSM8K、MATH、AIME24、AIME25、Math500。",
+            "代码评测：HumanEval、MBPP、LiveCodeBench。",
+            "对话评测：MT-Bench、Alpaca。"
           ],
           "baselines": [
-            "PyTorch 标准 attention 实现",
-            "Triton 实现",
-            "Gluon",
-            "cuDNN 9.13",
-            "cuDNN 9.19.1.2",
-            "FlashAttention-3（仅在编译时间表中作为 C++ templates 基线）"
+            "Vanilla autoregressive decoding。",
+            "EAGLE-3；Qwen3 instruct 实验中比较了 tree size 16 和 60，两者都设定 7 个 draft steps 与 top-k 10。",
+            "无 target context feature 的 5-layer block diffusion drafter（作为方法消融对照）。"
           ],
           "metrics": [
-            "平均运行时间（5 次 warmup 后 10 次重复取均值）",
-            "TFLOPs/s",
-            "相对 cuDNN / Triton 的 speedup",
-            "理论峰值利用率",
-            "单 kernel 编译时间",
-            "deterministic backward 相对 nondeterministic backward 的速度比例"
+            "端到端 decoding speedup（相对 autoregressive baseline）。",
+            "平均 acceptance length。",
+            "SGLang 吞吐（tok/s 或 TPS）。"
           ],
           "ablation_or_analysis": [
-            "Roofline 分析：文中称在 Blackwell 的典型 attention 工作负载中，shared memory traffic 和 exponential operations 的时间开销比 MMA 计算高 25%-60%。",
-            "Deterministic backward 调度消融：比较 SPT、LPT with reverse mblock order、LPT，以及 naive no batch/head swizzle。",
-            "Non-causal deterministic backward 还比较了 batch/head swizzle 与 naive 调度。",
-            "编译时间表：FA3 前向 55s、反向 45s；FA4 前向 2.5s、反向 1.4s；对应 speedup 为 22x 和 32x。"
+            "无 target context feature 的 5 层 diffusion drafter只能得到较温和 speedup，说明 target hidden feature conditioning 是 acceptance 的关键来源。",
+            "Draft layer 数量存在成本-质量折中：8 层通常带来更长 acceptance，但 5 层在平均 speedup 上最好。",
+            "增加 target hidden features（3-H 到 5-H）会提升 acceptance length 与 speedup，但离线缓存 hidden state 的存储成本线性增加。",
+            "训练时随机采样 anchor 构造 masked blocks，优于标准均匀分块，表中在 Math500、HumanEval、MT-Bench 上都带来更高 speedup 与 acceptance。"
           ],
           "evaluation_validity": [
-            "kernel benchmark 的序列长度、head dimension、mask 形态、总 token 数和 FLOPs 计算方式给得较具体，单算子实验设置相对清楚。",
-            "主要证据集中在 operator-level runtime 与 TFLOPs/s；提取文本没有充分说明端到端 LLM serving latency/throughput、完整训练 step 时间或系统级资源占用。",
-            "正文主文多次写 B200，但补充实验段写 B100 180GB SXM6，硬件标注不一致，会影响读者对结果平台的判断。",
-            "对 cuDNN 的领先幅度具有时间敏感性；图注明确写到较新的 cuDNN 已吸收本文许多技巧，性能与 FA4 接近。"
+            "实验覆盖 Qwen3 与 LLaMA-3.1 两个 target family，并包含数学、代码、对话、instruct、reasoning 和 SGLang serving 场景，覆盖面相对完整。",
+            "硬件与 serving 条件写得比较明确：正文说明大多数实验在 H200 上，SGLang 实验在单张 B200 上，并注明了 FA4、Flashinfer、Spec-v1/v2 等后端或调度设置。",
+            "与 EAGLE-3 的对比给出了公开 checkpoint 来源，并在 Qwen3 上比较了 tree size 16 与 60 两种设置，有助于覆盖不同 drafting/verification trade-off。",
+            "未直接对比 DiffuSpec、SpecDiff-2 等 diffusion-based speculative decoding 方法，作者给出的原因是缺少开源实现，因此它在同类 diffusion drafter 内部的相对位置仍不完全清楚。"
           ],
-          "main_results_zh": "提取文本支持的主要结论是：在 B200 上的 BF16/FP16 attention kernel 基准中，FA4 前向相对 cuDNN 9.13 达到 1.1-1.3x、相对 Triton 达到 2.1-2.7x，最高达到约 1613 TFLOPs/s，约为理论峰值的 71%。正文称在中长序列（4k 及以上）下，FA4 前向在不同 head dimension 和 causal/non-causal 设置中持续优于基线；反向在长序列和 causal masking 下也有一致加速，但提取文本没有给出精确倍数。Deterministic backward 最多达到 nondeterministic 1-CTA backward 约 75% 的速度。表格还显示，单 kernel 编译时间从 FA3 的前向 55s/反向 45s 降到 FA4 的前向 2.5s/反向 1.4s。与此同时，图注也说明更新版 cuDNN 已吸收许多本文技巧，性能与 FA4 接近。",
+          "main_results_zh": "提取文本支持的主要结论是：DFlash 在多模型多任务上实现了超过 6x 的 lossless acceleration，文中还明确给出在 Qwen3-8B 上最高 6.1x speedup；相对 EAGLE-3，整体上可达到接近 2.5x 的更高 speedup。在 Qwen3 instruct setting 下，greedy decoding 的平均 speedup 为 4.9x，temperature=1 时为 4.1x，并且都优于 EAGLE-3；正文还指出其也超过了 tree size 60 的 EAGLE-3 设定。在 reasoning model 上，文本给出 speedup 约为 4.5x 和 3.9x。在 SGLang 单 B200、FA4 backend、concurrency 1 到 32 的实验中，Qwen3-8B 最高达到 5.1x speedup。消融结果进一步表明，5 层 draft model 的平均 speedup 最好，更多 target hidden features、随机采样 anchor 的训练方式和合适的 block size 设计都能提升 acceptance 与端到端效率。",
           "strengths": [
-            "问题抓得准：不是泛泛讲 attention 快，而是明确识别 Blackwell 上从 MMA 转向 shared memory 和 exponential 单元的瓶颈迁移。",
-            "方法是成体系的 co-design，而不是只调 kernel 参数；前向、反向、softmax 路径、TMEM/2-CTA 和调度策略之间有一致的硬件逻辑。",
-            "对 systems 读者价值高：给出了 TMEM、fully asynchronous MMA、2-CTA tensor core 这些 Blackwell 新原语如何改变 attention 设计空间。",
-            "除了性能，还给出 CuTe-DSL 相对 C++ templates 的编译时间证据，说明实现路径本身也是论文贡献的一部分。"
+            "问题抓得很准：它直接针对 speculative decoding 中仍然残留的串行 drafting 瓶颈，而不是泛泛做更快的小模型。",
+            "方法链路清晰：并行 block diffusion drafting + target hidden feature conditioning + speculative verification，系统因果关系比较自洽。",
+            "KV 注入而不是浅层输入拼接，是相对常见 feature-guided drafter 路线的一个关键差异点，也有对应的层数消融支持。",
+            "实验不只停留在离线 Transformers 结果，还覆盖 SGLang、reasoning mode 和不同 concurrency，说明作者在意真实 serving 场景。"
           ],
           "limitations": [
-            "强依赖 Blackwell 特性，尤其是 TMEM、fully asynchronous MMA 和 2-CTA MMA；离开 B200/GB200 后收益边界不清楚。",
-            "提取文本没有充分说明软件模拟 exponential 和 conditional rescaling 的数值稳定性、误差边界以及模型质量影响。",
-            "实验主要是单算子 benchmark，提取文本没有充分说明端到端 LLM serving 或训练吞吐/延迟收益。",
-            "基线公平性存在需要核对的地方：较新的 cuDNN 已接近 FA4，而正文主结果强调的是 cuDNN 9.13。"
+            "未与其他 diffusion-based speculative decoding 方法直接比较，因此“比同类 diffusion drafter 更强”这一层结论目前不能下得太满。",
+            "方法依赖 target model 内部 hidden features，并且训练数据用 target model 自生成响应构造，说明它较强依赖 target-specific 协同；跨模型复用边界不清楚。",
+            "正文虽然给出 speedup 和部分 throughput/acceptance，但显存占用、feature cache 成本、hidden extraction 开销的完整系统 breakdown 提取文本没有充分说明。",
+            "实验主要围绕单 GPU 的 H200/B200 设置，多卡部署、跨硬件可迁移性、极长上下文下的收益边界，提取文本没有充分说明。"
           ],
-          "technical_route_zh": "这篇论文属于 LLM 系统里的算子级低层加速路线，更具体地说是 dense attention kernel 的算法-内核-编译器协同优化。它解决的是从 Blackwell 硬件原语到 attention 前后向 kernel 实现这一段链路中的问题：如何把更高的 tensor core 峰值真正转化为可观测吞吐，同时压低 softmax 的非 matmul 开销、shared memory 流量和 backward 原子归约成本。它不是 KV cache、调度器或 serving orchestrator 层面的工作，而是更底层的 operator/kernel 层。",
-          "relation_to_prior_work_zh": "相对早期 FlashAttention/FlashAttention-2 主要围绕 IO-aware tiling、kernel fusion 和序列维并行来减少 HBM 访问、提高 occupancy 的路线，这篇工作把核心矛盾转到了 Blackwell 上更突出的非 MMA 瓶颈。相对面向 Hopper 的 FlashAttention-3，它不只是继续强化异步执行和 warp specialization，而是显式围绕 fully asynchronous MMA、TMEM 和 2-CTA MMA 重写前后向流水线。相对 SageAttention 一类主要依赖低精度量化换吞吐的路线，FA4 仍然聚焦 BF16/FP16 dense attention，本质上是通过 softmax 路径改写、shared memory 流量压缩和原子操作重构来追求速度，而不是靠模型近似或权重量化。",
+          "technical_route_zh": "这篇论文属于 LLM inference runtime / speculative decoding 加速路线，具体处在“草稿生成器设计”这一段，而不是主模型架构创新、kernel 优化或编译器代码生成。它试图解决的不是 verification 并行化本身，而是 speculative decoding 链路里剩余的串行 drafting 瓶颈：用轻量 block diffusion drafter 在单次前向中并行生成 token block，再由自回归 target 做 lossless 验证。系统收益的核心假设是单卡 GPU 上块级并行比多次串行草稿更高效，同时 target hidden feature 可显著提高 acceptance。",
+          "relation_to_prior_work_zh": "相对常见的 speculative decoding 路线，DFlash 的差异不在于继续压缩 autoregressive drafter，而在于把 drafting 本身改成 block-level diffusion 并行生成。相对 EAGLE-3 这类 feature-guided AR drafter，它不是把 target hidden feature 只作为浅层输入，而是把融合后的 target context 持续注入每一层 draft KV，使更深的 drafter 仍能稳定利用 target 信息。相对把 diffusion 当作完整生成器、或直接使用大体量 diffusion drafter 的路线，DFlash 明确把 diffusion 限制在 drafting 阶段，借助 AR target 做 lossless 验证，因此它更像 runtime 协同设计，而不是用 diffusion 取代 autoregressive LLM。",
           "related_work_comparisons": [
             {
-              "paper_id": "2603.05232v1",
-              "title": "SlideSparse: Fast and Flexible (2N-2):2N Structured Sparsity",
-              "relation": "同属 LLM inference systems，但技术层级不同",
-              "comparison_zh": "SlideSparse 通过把较温和的结构化稀疏模式重写为硬件可执行的 2:4 稀疏窗口来复用 sparse tensor core，收益来源是模型/算子层的稀疏化；FA4 不改变 attention 的 dense 语义，而是在 Blackwell 上围绕 TMEM、2-CTA MMA 和 softmax 非 matmul 路径做 kernel 共设计。前者更像“改变计算内容”，后者更像“重写计算执行方式”。"
+              "paper_id": "2602.06019v1",
+              "title": "Multi-Token Prediction via Self-Distillation",
+              "relation": "同为 LLM 解码加速",
+              "comparison_zh": "该文的摘要路线是把原始自回归模型训练成可直接做 multi-token prediction 的单模型部署形态，核心变化发生在主模型训练目标上；DFlash 则保留 draft-verifier 两阶段 speculative decoding，只把 drafting 从自回归改成 block diffusion，并通过 target hidden feature 提高 acceptance。前者更像单模型训练后部署路线，后者更像推理时的 runtime 协同与 lossless speculative 系统设计。"
             },
             {
-              "paper_id": "dblp:conf/isca/0004HKCL00P25",
-              "title": "Oaken: Fast and Efficient LLM Serving with Online-Offline Hybrid KV Cache Quantization.",
-              "relation": "同属 serving efficiency，但关注的瓶颈不同",
-              "comparison_zh": "Oaken 处理的是长上下文 serving 中 KV cache 的容量与带宽瓶颈，位于系统级内存管理/量化层；FA4 处理的是 attention 算子内部 compute-SMEM-MUFU 失衡，位于 operator/kernel 层。两者并非替代关系，理论上可以叠加：Oaken 减 cache 压力，FA4 提升 dense attention kernel 本身的执行效率。"
+              "paper_id": "2602.06161v1",
+              "title": "Stop the Flip-Flop: Context-Preserving Verification for Fast Revocable Diffusion Decoding",
+              "relation": "都涉及 diffusion 风格并行解码",
+              "comparison_zh": "COVER 面向 diffusion decoding 自身的 revocable verification，解决的是 flip-flop 导致的上下文破坏问题，关键机制是验证阶段的 KV cache override；DFlash 则把 diffusion 限定为 speculative drafting 的并行候选生成器，再由自回归 target 验证，目标是打破 AR drafter 的串行速度上限。两者都关心并行生成时的上下文利用，但 DFlash 解决的是 AR serving 链路中的 draft latency/acceptance trade-off，而不是 diffusion decoder 的 revision 稳定性。"
             }
           ],
           "score_card": {
             "innovation": 7,
-            "technical_quality": 8,
+            "technical_quality": 7,
             "experimental_rigor": 6,
             "writing_clarity": 8,
             "practical_value": 8
           },
-          "practical_value_zh": "对正在适配 B200/GB200 的工程团队，这篇论文的实际价值很高：它给出了一套相当具体的 dense attention 默认设计范式，解释性能到底来自哪里，尤其是 TMEM、2-CTA、softmax 路径和调度重构如何一起起作用。对编译器和 kernel 开发者，CuTe-DSL 的实现也说明高性能 attention 不一定非得依赖重模板 C++。但若部署栈已经能使用较新的 cuDNN，直接可兑现的额外速度空间可能没有摘要数字看上去那么大。",
+          "practical_value_zh": "如果文中的 speedup 在公平 baseline 和真实 serving 负载下成立，这项工作的工程价值很直接：它给 speculative decoding 增加了一条新的高收益草稿路线，不需要替换 target autoregressive model，就有机会同时改善 latency、throughput 和 GPU 利用率。对研究者来说，它更重要的启发是把 diffusion 从“要不要取代 AR 生成器”转成“如何作为高并行 runtime 模块服务 AR 推理”。但它的实用性仍明显依赖硬件前提、target hidden feature 接入能力，以及额外训练与缓存开销是否可接受。",
           "future_work": [
-            "在更新版 cuDNN 和更多 Blackwell SKU（如 GB200、后续 B300）上重新评估领先幅度与可迁移性。",
-            "补上端到端 LLM serving 或训练指标，验证单算子 TFLOPs 提升能否稳定转化为系统级 latency/throughput 收益。",
-            "系统评估软件模拟 exponential 与 conditional rescaling 的精度、稳定性和适用工作负载边界。",
-            "探索这些针对非 matmul 瓶颈的设计能否迁移到其他 attention 变体或其他加速器。"
+            "做自适应 block-size scheduling，在 compute-bound 场景下根据 batch/concurrency 动态切换 block size。",
+            "补齐与 DiffuSpec、SpecDiff-2 等 diffusion-based speculative decoding 方法的直接公平比较。",
+            "量化 target hidden feature 提取、KV 注入和离线缓存带来的显存、带宽与训练/部署成本。",
+            "验证在更多 target family、多卡 serving、长上下文和更复杂采样设置下的稳定性与收益边界。"
           ],
           "reading_checklist": [
-            "先核对 roofline 分析到底如何得出 shared memory / exponential 比 MMA 高 25%-60%，以及这个结论覆盖哪些具体 workload。",
-            "重点看 forward/backward pipeline 图，确认 fully asynchronous MMA 和更大 tile 的 overlap 是如何实现的。",
-            "仔细读软件模拟 exponential 的多项式近似、conditional rescaling 的触发条件，以及数值稳定性讨论；提取文本没有充分说明这一部分。",
-            "核对 2-CTA MMA 与 TMEM 的具体数据布局、CTA pairing 约束，以及 dQ atomic reduction 减半是怎样落到 kernel 结构上的。"
+            "先核对 DFlash 的单次 block diffusion forward 在实现上到底有多少 denoising 步，以及 speedup 主要来自 draft latency 降低还是 acceptance 提升。",
+            "检查 KV injection 的代价：抽 5 层 target hidden feature、做 projection 并写入每层 draft KV cache，会增加多少额外显存和带宽。",
+            "核对与 EAGLE-3 的公平性，尤其是 tree size 16/60、verification overhead、backend 差异以及是否在相同 lossless 约束下比较。",
+            "关注 target-aligned 训练数据的构造方式：target model 自生成响应是否让方法对特定 target 过拟合，换模型是否需要重训。"
           ],
-          "overall_assessment_zh": "这是一篇很强的算子级 systems 论文候选，最值得信的是它对 Blackwell 非对称硬件扩展导致瓶颈迁移的判断，以及围绕 TMEM、fully asynchronous MMA、2-CTA 和 softmax 非 matmul 路径组织出的整套 kernel 方案；这些内容和给出的 benchmark 设定、编译时间表彼此一致，可信度较高。最该怀疑的是实验外推范围和比较边界：提取文本没有充分说明数值稳定性、模型精度、端到端 serving 收益，也没有充分说明在最新 cuDNN 下还剩多少真实优势，且 B200/B100 的硬件标注不一致需要核对。整体上，我会把它视为一篇对 Blackwell dense attention kernel 设计范式非常有参考价值的论文，但还不是一篇已经把通用系统收益完全坐实的结论性工作。"
+          "overall_assessment_zh": "从提取文本看，这是一篇很典型、也很值得 systems 方向优先核对的 LLM inference 论文：它不是泛泛把 diffusion 搬到语言模型上，而是准确切入 speculative decoding 中最难再提速的一段，即串行 drafting。最值得信的部分，是方法-收益链路相对闭环：并行 block drafting、target hidden feature 的层间持续条件化、以及围绕层数/hidden features/block 构造的消融，基本都支持“acceptance 提升 + drafting latency 降低”这个主叙事。最该怀疑的部分，是外部可迁移性和完整系统成本：作者没有与其他 diffusion speculative 方法直接比较，单卡 H200/B200 之外的硬件和部署边界不清楚，target hidden feature 抽取与缓存的额外代价也没有被充分拆开。因此，这篇论文当前最像一条非常有潜力的 runtime 协同路线，而不是已经被完全验证的通用 serving 方案。"
         }
       }
     },
     {
-      "id": "dblp:conf/mlsys/0015LCKCW24",
-      "paper_id": "dblp:conf/mlsys/0015LCKCW24",
-      "title": "Q-Hitter: A Better Token Oracle for Efficient LLM Inference via Sparse-Quantized KV Cache.",
-      "summary": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs). LLMs, characterized by their extensive context length (e.g., $\\geq$4096), inherently demands vast memory resource and traffic to store and load the attention key and value embeddings within self-attention modules, referred to as the KV cache. In an effort to alleviate these resource-intensive aspects of LLM inference, techniques such as sparsification and quantization for KV cache reduction have been investigated as separate endeavors within the realm of LLMs. However, this paper illuminates the critical importance of considering the compound effects of these techniques when employed together, as a simplistic amalgamation of sparsification and quantization can yield sub-optimal performance.For instance, the \"Heavy Hitter Oracle\" has demonstrated that preserving just 20\\% of the KV cache attributed to pivotal tokens, denoted as \"Heavy Hitters\", can yield substantial memory savings while upholding the model's original performance. Furthermore, the KV cache of these \"Heavy Hitter\" tokens, which are identified as those with the highest accumulated attention scores, can be further quantized with encouraging throughput saving.Nevertheless, our investigation uncovers two primary deficiencies in such unrefined post-sparsification quantization in low-bit scenarios: (1) the application of low-bit KV cache quantization, specifically $\\leq$ 4-bit, significantly diminishes the accuracy of Heavy Hitter selection during the generation phase, particularly in deeper layers; (2) tokens selected by the \"Heavy Hitter Oracle\" are not necessarily well-suited for quantization, and their quantization can lead to sub-optimal performance. To surmount these challenges, we propose a novel rule-of-thumb for token selection during LLM generation, termed Q-Hitter. This approach combines both accumulated attention scores and \"Quantization Friendliness\" metrics for different layers, identifying tokens that are not only pivotal for preserving the generalization capabilities of LLMs but are also more amenable to KV cache quantization. Q-Hitter naturally offers a free lunch of KV cache quantization and can further escalate the affordability of state-of-the-art LLMs. Additionally, Q-Hitter empowers LLMs to effectively handle inputs of infinite sequence length. Extensive experiments conducted across various LLMs and tasks substantiate the superiority of the proposed Q-Hitter framework over the original H$_2$O framework. Remarkably, Q-Hitter achieves full model quality preservation while delivering up to a remarkable 20$\\times$ reduction in memory usage and up to 33$\\times$, 33$\\times$, 4$\\times$ and 1.3$\\times$ throughput improvements compared with the Hugginface Accelerate, DeepSpeed, FlexGen and $\\mathsf{H_2O}$, respectively. The code will be public upon acceptance.",
-      "abstract": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs). LLMs, characterized by their extensive context length (e.g., $\\geq$4096), inherently demands vast memory resource and traffic to store and load the attention key and value embeddings within self-attention modules, referred to as the KV cache. In an effort to alleviate these resource-intensive aspects of LLM inference, techniques such as sparsification and quantization for KV cache reduction have been investigated as separate endeavors within the realm of LLMs. However, this paper illuminates the critical importance of considering the compound effects of these techniques when employed together, as a simplistic amalgamation of sparsification and quantization can yield sub-optimal performance.For instance, the \"Heavy Hitter Oracle\" has demonstrated that preserving just 20\\% of the KV cache attributed to pivotal tokens, denoted as \"Heavy Hitters\", can yield substantial memory savings while upholding the model's original performance. Furthermore, the KV cache of these \"Heavy Hitter\" tokens, which are identified as those with the highest accumulated attention scores, can be further quantized with encouraging throughput saving.Nevertheless, our investigation uncovers two primary deficiencies in such unrefined post-sparsification quantization in low-bit scenarios: (1) the application of low-bit KV cache quantization, specifically $\\leq$ 4-bit, significantly diminishes the accuracy of Heavy Hitter selection during the generation phase, particularly in deeper layers; (2) tokens selected by the \"Heavy Hitter Oracle\" are not necessarily well-suited for quantization, and their quantization can lead to sub-optimal performance. To surmount these challenges, we propose a novel rule-of-thumb for token selection during LLM generation, termed Q-Hitter. This approach combines both accumulated attention scores and \"Quantization Friendliness\" metrics for different layers, identifying tokens that are not only pivotal for preserving the generalization capabilities of LLMs but are also more amenable to KV cache quantization. Q-Hitter naturally offers a free lunch of KV cache quantization and can further escalate the affordability of state-of-the-art LLMs. Additionally, Q-Hitter empowers LLMs to effectively handle inputs of infinite sequence length. Extensive experiments conducted across various LLMs and tasks substantiate the superiority of the proposed Q-Hitter framework over the original H$_2$O framework. Remarkably, Q-Hitter achieves full model quality preservation while delivering up to a remarkable 20$\\times$ reduction in memory usage and up to 33$\\times$, 33$\\times$, 4$\\times$ and 1.3$\\times$ throughput improvements compared with the Hugginface Accelerate, DeepSpeed, FlexGen and $\\mathsf{H_2O}$, respectively. The code will be public upon acceptance.",
+      "id": "http://arxiv.org/abs/2602.06019v1",
+      "arxiv_id": "2602.06019v1",
+      "title": "Multi-Token Prediction via Self-Distillation",
+      "summary": "Existing techniques for accelerating language model inference, such as speculative decoding, require training auxiliary speculator models and building and deploying complex inference pipelines. We consider a new approach for converting a pretrained autoregressive language model from a slow single next token prediction model into a fast standalone multi-token prediction model using a simple online distillation objective. The final model retains the exact same implementation as the pretrained initial checkpoint and is deployable without the addition of any auxiliary verifier or other specialized inference code. On GSM8K, our method produces models that can decode more than $3\\times$ faster on average at $<5\\%$ drop in accuracy relative to single token decoding performance.",
       "authors": [
-        "Zhenyu Zhang 0015",
-        "Shiwei Liu 0003",
-        "Runjin Chen",
-        "Bhavya Kailkhura",
-        "Beidi Chen",
-        "Atlas Wang"
+        "John Kirchenbauer",
+        "Abhimanyu Hans",
+        "Brian Bartoldson",
+        "Micah Goldblum",
+        "Ashwinee Panda",
+        "Tom Goldstein"
       ],
-      "published": "2024",
-      "published_date": "2024-07-01 00:00:00",
-      "publicationDate": "2024",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
-      "url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
-      "pdf_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Paper-Conference.pdf",
-      "venue": "MLSys",
-      "venue_source_name": "MLSys",
-      "venue_source_alias": "MLSys",
-      "dblp_key": "conf/mlsys/0015LCKCW24",
-      "doi": "",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "open",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "MLSys",
-        "venue_alias": "MLSys"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2024,
+      "author_details": [
+        {
+          "name": "John Kirchenbauer"
+        },
+        {
+          "name": "Abhimanyu Hans"
+        },
+        {
+          "name": "Brian Bartoldson"
+        },
+        {
+          "name": "Micah Goldblum"
+        },
+        {
+          "name": "Ashwinee Panda"
+        },
+        {
+          "name": "Tom Goldstein"
+        }
+      ],
+      "published": "2026-02-05T18:54:48Z",
+      "published_date": "2026-02-05 18:54:48+00:00",
+      "updated": "2026-02-05T18:54:48Z",
+      "comments": "8 pages and 5 figures in the main body",
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.06019v1",
+      "url": "http://arxiv.org/abs/2602.06019v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
       "scores": {
         "relevance": 3.0,
-        "recency": 0.0,
+        "recency": 3.0,
         "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 7.97
+        "quality": 1.6,
+        "recommendation": 9.27
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "llm inference",
-        "kv cache"
+        "language model inference",
+        "decode",
+        "speculative decoding",
+        "cs.LG",
+        "cs.CL"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
+      "is_hot_paper": true,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.LG",
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "speculative decoding",
+          "decode"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.0
+      },
+      "analysis_candidate_score": 7.57,
+      "analysis_signals": [
+        "speculative decoding",
+        "decode"
+      ],
+      "analysis_components": {
+        "signal_strength": 6.0,
+        "implementation_depth": 4.6,
+        "evidence_strength": 0.0,
+        "has_source_page": true,
+        "has_readable_pdf": true
+      },
+      "selection_lane": "fresh",
+      "analysis_priority_rank": 2,
+      "analysis_eligible": true,
+      "selected_for_full_analysis": false,
+      "ai": {
+        "one_liner_zh": "这篇工作试图用在线自蒸馏把现成自回归语言模型直接改造成可一次预测多个 token 的单模型解码器，以换取推理加速而不引入 speculative decoding 所需的辅模和验证流水线。",
+        "summary_zh": "论文把推理加速问题从“额外加一个 speculator 和 verifier”改成“直接把原始自回归模型训练成可做多 token 预测的单模型”。核心做法是对预训练 checkpoint 施加简单的在线蒸馏目标，得到一个实现形态不变、可直接部署的 standalone multi-token prediction model。摘要给出的主要结果是在 GSM8K 上平均解码速度超过 3 倍，同时相对单 token 解码的准确率下降小于 5%，但硬件前提、训练开销和与强 baseline 的公平比较摘要没有充分说明。",
+        "background_zh": "LLM 推理的主要瓶颈仍是逐 token 自回归解码，其延迟和吞吐通常受串行生成过程限制。现有 speculative decoding 虽然能加速，但往往需要额外模型、验证步骤和更复杂的 serving pipeline，因此工程接入和部署成本不低。",
+        "problem_zh": "问题是：能否不引入辅助模型、不改造复杂推理栈，只通过训练把一个现成的单步 next-token 自回归模型转成可直接做多 token 预测的单模型，从而显著降低解码延迟，同时尽量保住任务准确率。这个问题重要，因为它直接关系到 LLM serving 的系统复杂度、部署门槛，以及加速收益能否稳定落地。",
+        "approach_zh": "方法是对预训练自回归语言模型施加一个简单的在线自蒸馏目标，把原本“每步预测下一个 token”的模型转成“每步预测多个 token”的 standalone 模型。按摘要描述，最终模型保留与初始 checkpoint 相同的实现形态，部署时不需要额外 verifier、speculator 或专门的推理代码。",
+        "evidence_zh": "摘要给出的证据主要是任务级结果：在 GSM8K 上，所述方法相对单 token 解码平均可实现超过 3 倍的解码加速，且准确率下降小于 5%。但摘要没有充分说明模型规模、硬件平台、batch 或上下文长度、训练成本、解码细节，以及与 speculative decoding 或其他强基线的公平比较方式。",
+        "value_zh": "如果这些结论在更广泛任务和真实 serving 环境中成立，这项工作有望把解码加速从“复杂多模型推理流水线”收敛为“单模型能力升级”，减少部署和维护负担。对研究上，它提供了把训练目标与推理路径联动设计的方向；对工程上，它可能带来更简单的低延迟推理栈，但实际吞吐收益、显存或带宽影响、以及是否依赖特定 GPU，摘要没有充分说明。",
+        "open_questions": [
+          "在线自蒸馏目标具体如何构造？多 token 预测的监督信号、损失设计和训练稳定性机制是什么？",
+          "超过 3 倍加速是在什么模型规模、GPU/硬件、batch size、上下文长度和解码设置下测得的？与优化良好的 speculative decoding 基线是否公平？",
+          "除了 GSM8K，这种多 token 预测模型在开放式生成、长文本和不同领域任务上的准确率、校准和退化模式如何？"
+        ],
+        "core_contributions": [
+          "提出一种把预训练自回归语言模型直接转成 standalone 多 token 预测模型的在线自蒸馏思路。",
+          "把推理加速设计成不依赖辅助 speculator 或 verifier 的单模型部署路径，避免额外专用推理代码。",
+          "在摘要中报告了 GSM8K 上平均超过 3 倍的解码速度提升，并将准确率损失控制在 5% 以内。"
+        ],
+        "why_read": [
+          "它直接针对 LLM inference acceleration，而不是泛化代码任务；核心价值在于能否用训练替代复杂 decoding pipeline。",
+          "如果单模型多 token 预测成立，serving 栈会比 speculative decoding 更简单，这对线上部署和维护成本很关键。",
+          "这篇论文适合和现有 speculative decoding 工作对照阅读，重点核查速度收益到底来自模型能力还是评测设定。"
+        ],
+        "risks": [
+          "系统信息缺口很大：摘要没有给出硬件前提、吞吐或延迟统计口径、显存或带宽影响。",
+          "证据目前集中在 GSM8K，这更像特定任务验证；对通用文本生成和真实服务流量的外推风险较高。"
+        ],
+        "recommended_for": [
+          "关注 LLM 推理解码与 serving 简化的研究者",
+          "评估 speculative decoding 替代路线的系统工程师",
+          "研究训练目标与推理路径协同设计的团队"
+        ],
+        "keywords": [
+          "LLM推理系统",
+          "多token预测",
+          "在线自蒸馏",
+          "解码加速",
+          "自回归语言模型",
+          "speculative decoding替代"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "主题与 LLM Inference Systems 高度吻合，且摘要直接声称在不引入辅模的前提下实现超过 3 倍解码加速，这对 serving efficiency 很值得优先核查。虽然硬件、baseline 公平性和训练成本细节摘要没有充分说明，但它仍是今天应优先读正文的方法型论文。",
+        "fallback_summary": "Existing techniques for accelerating language model inference, such as speculative decoding, require training auxiliary speculator models and building and deploying complex inference pipelines."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.06142v2",
+      "arxiv_id": "2602.06142v2",
+      "title": "Protean Compiler: An Agile Framework to Drive Fine-grain Phase Ordering",
+      "summary": "The phase ordering problem has been a long-standing challenge since the late 1970s, yet it remains an open problem due to having a vast optimization space and an unbounded nature, making it an open-ended problem without a finite solution, one can limit the scope by reducing the number and the length of optimizations. Traditionally, such locally optimized decisions are made by hand-coded algorithms tuned for a small number of benchmarks, often requiring significant effort to be retuned when the benchmark suite changes. In the past 20 years, Machine Learning has been employed to construct performance models to improve the selection and ordering of compiler optimizations, however, the approaches are not baked into the compiler seamlessly and never materialized to be leveraged at a fine-grained scope of code segments. This paper presents Protean Compiler: An agile framework to enable LLVM with built-in phase-ordering capabilities at a fine-grained scope. The framework also comprises a complete library of more than 140 handcrafted static feature collection methods at varying scopes, and the experimental results showcase speedup gains of up to 4.1% on average and up to 15.7% on select Cbench applications wrt LLVM's O3 by just incurring a few extra seconds of build time on Cbench. Additionally, Protean compiler allows for an easy integration with third-party ML frameworks and other Large Language Models, and this two-step optimization shows a gain of 10.1% and 8.5% speedup wrt O3 on Cbench's Susan and Jpeg applications. Protean compiler is seamlessly integrated into LLVM and can be used as a new, enhanced, full-fledged compiler. We plan to release the project to the open-source community in the near future.",
+      "authors": [
+        "Amir H. Ashouri",
+        "Shayan Shirahmad Gale Bagi",
+        "Kavin Satheeskumar",
+        "Tejas Srikanth",
+        "Jonathan Zhao",
+        "Ibrahim Saidoun",
+        "Ziwen Wang",
+        "Bryan Chan",
+        "Tomasz S. Czajkowski"
+      ],
+      "author_details": [
+        {
+          "name": "Amir H. Ashouri"
+        },
+        {
+          "name": "Shayan Shirahmad Gale Bagi"
+        },
+        {
+          "name": "Kavin Satheeskumar"
+        },
+        {
+          "name": "Tejas Srikanth"
+        },
+        {
+          "name": "Jonathan Zhao"
+        },
+        {
+          "name": "Ibrahim Saidoun"
+        },
+        {
+          "name": "Ziwen Wang"
+        },
+        {
+          "name": "Bryan Chan"
+        },
+        {
+          "name": "Tomasz S. Czajkowski"
+        }
+      ],
+      "published": "2026-02-05T19:24:05Z",
+      "published_date": "2026-02-05 19:24:05+00:00",
+      "updated": "2026-02-17T19:29:16Z",
+      "comments": "Version 2: Submitted for a possible publication in 2026",
+      "primary_category": "cs.PL",
+      "categories": [
+        "cs.PL",
+        "cs.AI",
+        "cs.CL",
+        "cs.LG",
+        "cs.PF"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.06142v2",
+      "url": "http://arxiv.org/abs/2602.06142v2",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 2.33,
+        "recency": 3.0,
+        "popularity": 1.3,
+        "quality": 0.9,
+        "recommendation": 7.22
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "llvm",
+        "cs.PL",
+        "cs.LG",
+        "benchmark",
+        "speedup"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": true,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [
+          "cs.PL",
+          "cs.LG"
+        ],
+        "required_signal_matches": [
+          "llvm"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "benchmark",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "analysis_candidate_score": 7.18,
+      "analysis_signals": [
+        "llvm",
+        "benchmark",
+        "speedup"
+      ],
+      "analysis_components": {
+        "signal_strength": 5.33,
+        "implementation_depth": 2.77,
+        "evidence_strength": 7.2,
+        "has_source_page": true,
+        "has_readable_pdf": true
+      },
+      "selection_lane": "fresh",
+      "analysis_priority_rank": 3,
+      "analysis_eligible": true,
+      "selected_for_full_analysis": false,
+      "ai": {
+        "one_liner_zh": "这是一篇把细粒度 phase ordering 直接做进 LLVM 的编译器框架论文，亮点是内建特征与可插拔 ML/LLM 接口，但与 LLM inference 或 CUDA kernel 的直接关联较弱。",
+        "summary_zh": "这篇论文针对经典的 compiler phase ordering 难题，提出一个直接集成到 LLVM 的细粒度优化框架 Protean Compiler。摘要称其内置 140 多种静态特征采集方法，并支持接入第三方 ML 框架和 LLM 做两步优化，相对 LLVM O3 在 Cbench 上取得平均最高 4.1%、个别应用最高 15.7% 的速度提升，代价是额外数秒编译时间。它更像一篇通用编译优化基础设施论文，而不是面向 LLM inference 或 CUDA kernel generation 的 systems paper；硬件前提、模型细节和 baseline 公平性仍需通读正文核对。",
+        "background_zh": "编译器 phase ordering 自上世纪以来一直难解，因为优化空间巨大，而且不同程序、不同代码区域往往需要不同的 pass 顺序。过去的 ML for compilers 工作不少，但很多方法没有无缝进入编译器主干，也难在更细粒度代码段上稳定落地。",
+        "problem_zh": "论文要解决的是：如何把 phase ordering 从手工规则或外置模型，变成 LLVM 内部可用的细粒度能力，并在可接受的编译开销下改进最终代码性能。这个问题重要，因为固定的 O3 式优化流水线难以适配不同程序特征，而 pass 顺序又会直接影响生成代码质量。",
+        "approach_zh": "作者提出 Protean Compiler，把 phase-ordering 能力直接内建到 LLVM。核心组成包括一个覆盖不同作用域的 140 多种手工静态特征采集库，以及便于接入第三方 ML 框架和 LLM 的接口；摘要还提到一种两步优化流程，但没有充分说明具体搜索策略、模型形式和与 LLVM pass 管理机制的交互细节。",
+        "evidence_zh": "摘要给出的证据主要是 Cbench 上相对 LLVM O3 的性能结果：平均最高 4.1% 加速，部分应用最高 15.7%，代价是额外数秒构建时间；另外在 Susan 和 Jpeg 上，接入第三方 ML/LLM 的两步优化分别报告 10.1% 和 8.5% 提升。摘要没有充分说明硬件平台、统计方式、训练与推理成本、baseline 公平性，也没有说明对 GPU kernel 或 LLM workloads 的适用性。",
+        "value_zh": "如果方法成立，它的实际价值在于把 phase ordering 从固定编译级别升级为可学习、可扩展、可插拔的 LLVM 能力，为低层代码生成提供更细粒度的性能调优入口。对研究者，它提供了把模型驱动优化真正嵌入编译器的基础设施；对工程侧，它可能意味着无需重写整条编译链，就能针对特定 workload 增量引入更有针对性的优化决策。",
+        "open_questions": [
+          "细粒度 scope 到底是 function、loop、basic block 还是更小代码段，phase-ordering 决策在 LLVM 流水线中的触发点是什么？",
+          "相对 O3 的比较是否把特征提取、模型推理、搜索时间都算入编译开销，额外数秒在更大程序或真实工程构建中会如何放大？",
+          "第三方 ML/LLM 的两步优化具体如何接入，是否需要离线训练或在线推理，能否迁移到 GPU kernel / PTX 级代码生成场景？"
+        ],
+        "core_contributions": [
+          "提出 Protean Compiler，把细粒度 phase ordering 作为 LLVM 内建能力而不是外部附加工具。",
+          "提供覆盖不同作用域的 140 多种手工静态特征采集方法，作为优化决策输入。",
+          "给出与第三方 ML 框架和 LLM 的接入路径，并报告相对 O3 的初步性能收益。"
+        ],
+        "why_read": [
+          "想看它如何把 phase ordering 真正做进 LLVM 主体，而不是停留在离线模型或研究原型层面。",
+          "想评估细粒度特征采集和局部优化决策是否能成为后续低层代码生成、自动调优或编译器-模型协同设计的基础设施。",
+          "想核对摘要中的收益是否来自更好的 pass 顺序本身，而不是 benchmark 选择、范围限制或 baseline 设定。"
+        ],
+        "risks": [
+          "与当前关注方向的贴合度有限：摘要没有说明 CUDA、PTX/SASS、特定 GPU 或 LLM inference serving 场景。",
+          "实验证据主要来自 Cbench；对大模型推理、kernel 生成或真实生产编译流水线的外推性不清楚。"
+        ],
+        "recommended_for": [
+          "做 LLVM pass、phase ordering、ML for compilers 的研究者。",
+          "关注编译器基础设施如何接入外部模型或 LLM 的工程师。",
+          "想把通用编译优化思路迁移到低层代码生成系统的人，但不适合只关心 LLM serving 的读者优先阅读。"
+        ],
+        "keywords": [
+          "LLVM",
+          "phase ordering",
+          "编译优化",
+          "静态特征",
+          "ML for compilers",
+          "Cbench"
+        ],
+        "reading_priority": "low",
+        "reading_priority_reason": "这篇论文在编译器方法上有一定价值，但摘要没有显示其直接面向 LLM inference、CUDA kernel generation、PTX/SASS 或特定 GPU，因此与当前 systems 主线的贴合度偏低，更适合作为外围 LLVM 优化参考。",
+        "fallback_summary": "The phase ordering problem has been a long-standing challenge since the late 1970s, yet it remains an open problem due to having a vast optimization space and an unbounded nature, making it an open-ended problem without a finite solution, one can limit the scope by reducing the number and the length of optimizations."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.06161v1",
+      "arxiv_id": "2602.06161v1",
+      "title": "Stop the Flip-Flop: Context-Preserving Verification for Fast Revocable Diffusion Decoding",
+      "summary": "Parallel diffusion decoding can accelerate diffusion language model inference by unmasking multiple tokens per step, but aggressive parallelism often harms quality. Revocable decoding mitigates this by rechecking earlier tokens, yet we observe that existing verification schemes frequently trigger flip-flop oscillations, where tokens are remasked and later restored unchanged. This behaviour slows inference in two ways: remasking verified positions weakens the conditioning context for parallel drafting, and repeated remask cycles consume the revision budget with little net progress. We propose COVER (Cache Override Verification for Efficient Revision), which performs leave-one-out verification and stable drafting within a single forward pass. COVER constructs two attention views via KV cache override: selected seeds are masked for verification, while their cached key value states are injected for all other queries to preserve contextual information, with a closed form diagonal correction preventing self leakage at the seed positions. COVER further prioritises seeds using a stability aware score that balances uncertainty, downstream influence, and cache drift, and it adapts the number of verified seeds per step. Across benchmarks, COVER markedly reduces unnecessary revisions and yields faster decoding while preserving output quality.",
+      "authors": [
+        "Yanzheng Xiang",
+        "Lan Wei",
+        "Yizhen Yao",
+        "Qinglin Zhu",
+        "Hanqi Yan",
+        "Chen Jin",
+        "Philip Alexander Teare",
+        "Dandan Zhang",
+        "Lin Gui",
+        "Amrutha Saseendran",
+        "Yulan He"
+      ],
+      "author_details": [
+        {
+          "name": "Yanzheng Xiang"
+        },
+        {
+          "name": "Lan Wei"
+        },
+        {
+          "name": "Yizhen Yao"
+        },
+        {
+          "name": "Qinglin Zhu"
+        },
+        {
+          "name": "Hanqi Yan"
+        },
+        {
+          "name": "Chen Jin"
+        },
+        {
+          "name": "Philip Alexander Teare"
+        },
+        {
+          "name": "Dandan Zhang"
+        },
+        {
+          "name": "Lin Gui"
+        },
+        {
+          "name": "Amrutha Saseendran"
+        },
+        {
+          "name": "Yulan He"
+        }
+      ],
+      "published": "2026-02-05T19:58:48Z",
+      "published_date": "2026-02-05 19:58:48+00:00",
+      "updated": "2026-02-05T19:58:48Z",
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.06161v1",
+      "url": "http://arxiv.org/abs/2602.06161v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 2.34,
+        "recency": 3.0,
+        "popularity": 1.1,
+        "quality": 0.7,
+        "recommendation": 6.97
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "language model inference",
+        "kv cache",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": true,
       "match_details": {
         "domain": "LLM Inference Systems",
         "text_match_count": 2,
-        "matched_categories": [],
+        "matched_categories": [
+          "cs.CL"
+        ],
         "required_signal_matches": [
           "kv cache"
         ],
@@ -625,459 +803,87 @@
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
-      "analysis_candidate_score": 7.75,
+      "analysis_candidate_score": 6.13,
       "analysis_signals": [
         "kv cache"
       ],
       "analysis_components": {
         "signal_strength": 3.0,
         "implementation_depth": 2.77,
-        "evidence_strength": 9.6,
+        "evidence_strength": 3.73,
         "has_source_page": true,
         "has_readable_pdf": true
       },
-      "selection_lane": "established",
-      "venue_metadata": {
-        "official_page_blocked": false,
-        "official_page_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
-        "abstract_source": "official_page",
-        "pdf_source": "official_page"
-      },
+      "selection_lane": "fresh",
       "analysis_priority_rank": 4,
       "analysis_eligible": true,
       "selected_for_full_analysis": false,
       "ai": {
-        "one_liner_zh": "这项工作把KV cache的稀疏保留与低比特量化联合建模，核心点是优先保留既关键又更适合量化的token，而不是只按注意力分数做选择。",
-        "summary_zh": "这篇论文关注长上下文LLM推理中的KV cache显存占用和带宽开销，核心观点是稀疏化与量化不能简单串接。作者指出，低比特量化会破坏基于累计注意力的Heavy Hitter选择，且被选中的关键token并不一定适合量化，因此提出同时考虑注意力重要性与“量化友好度”的Q-Hitter规则。对做LLM serving的人来说，这个思路的价值在于把token选择从单一重要性指标扩展为面向实际压缩路径的联合准则，但给定摘要没有充分说明具体吞吐、延迟、精度和硬件结果。",
-        "background_zh": "随着LLM上下文长度增长，KV cache逐渐成为推理阶段最直接的显存和带宽瓶颈，尤其影响长序列生成的可部署性。已有工作分别尝试做token级稀疏保留和低比特量化，但两者联用时的相互作用并不清楚，这正是该工作的动机。",
-        "problem_zh": "论文要解决的问题是：在不明显破坏模型效果的前提下，如何同时利用KV cache稀疏化和低比特量化来降低LLM推理成本，并避免二者简单叠加后出现的选择失真。更具体地说，作者关心的是生成阶段该保留哪些token的KV，以及这些token是否真的适合被量化。",
-        "approach_zh": "作者从Heavy Hitter式token保留规则出发，先指出仅按累计注意力分数选token再做低比特量化会出问题，然后提出Q-Hitter作为新的经验性选择规则。其核心机制是把token的重要性与分层的“Quantization Friendliness”联合考虑，优先保留那些既对生成关键、又更适合低比特KV量化的token。",
-        "evidence_zh": "给定摘要提供的证据主要是问题诊断而不是完整结果：作者声称在<=4-bit场景下，后置量化会降低Heavy Hitter选择准确性，且深层更明显，同时被Heavy Hitter选中的token未必适合量化。关于Q-Hitter最终带来的吞吐、延迟、显存节省、精度保持，以及这些结论对应的模型规模和GPU设置，摘要没有充分说明。",
-        "value_zh": "如果这套联合选择规则成立，它的实际价值在于让KV cache压缩更接近可部署的系统优化，而不是单点压缩技巧：同样的显存预算下，可能获得更稳的精度-吞吐折中，并减少长上下文生成中的带宽压力。对研究上，它也提醒后续工作把“保留什么”和“如何量化”作为耦合设计，而不是各自独立优化。",
+        "one_liner_zh": "这篇工作瞄准可撤销 diffusion 解码里的 flip-flop 振荡，试图用保留上下文的单次前向验证把 revision 浪费直接转化为推理效率收益。",
+        "summary_zh": "论文关注 diffusion language model 的并行解码：一次解开多个 token 虽然有潜在加速，但激进并行会伤害质量，因此已有 revocable decoding 需要反复验证早先 token。作者指出现有验证常出现 flip-flop，即 token 被重新 mask 后又恢复原值，这既削弱后续并行起草所依赖的上下文，也浪费 revision 预算。为此提出 COVER，用 KV cache override 在单次前向里同时构造验证视图和稳定起草视图，并配合对角修正避免 seed 位置自泄漏。摘要声称它在多个基准上减少了无效 revision、加快了解码且保持质量，但没有给出具体延迟/吞吐数字、硬件前提或 baseline 细节。",
+        "background_zh": "扩散式语言模型希望通过并行 unmask 多个 token 打破自回归解码的串行瓶颈，因此在推理系统里有潜在延迟优势。问题在于并行草稿越激进，越容易引入错误，于是需要 revocable/verification 机制在速度和质量之间折中。",
+        "problem_zh": "问题是：在 revocable diffusion decoding 中，如何验证部分早先 token 而不破坏其余位置可用的上下文，从而避免反复 remask-restore 的 flip-flop 振荡？这很关键，因为无效 revision 不只增加步数，还会削弱下一轮并行起草的条件信息，直接影响解码延迟和实际系统收益。",
+        "approach_zh": "方法是 COVER（Cache Override Verification for Efficient Revision）。它在一次前向中通过 KV cache override 同时构造两个 attention 视图：对选中的 seed 做 leave-one-out 验证，对其他 query 注入这些 seed 的缓存键值以保留上下文；同时加入闭式对角修正避免 seed 位置出现自泄漏。作者还设计了稳定性感知的 seed 评分，综合不确定性、下游影响和 cache drift，并自适应决定每步验证多少 seed。",
+        "evidence_zh": "摘要给出的证据是：在多个 benchmark 上，COVER 能明显减少不必要的 revision，并在保持输出质量的同时实现更快解码。摘要没有充分说明具体实验设置、比较对象、延迟或吞吐指标、GPU/硬件条件，以及“质量保持”是如何度量的。",
+        "value_zh": "如果结论成立，这项工作对 diffusion LLM serving 的实际价值在于：把验证成本压缩到单次前向并尽量保住可用上下文，有机会减少总解码步数和无效计算，从而改善端到端延迟。对研究上，它也提供了一种把 KV cache 操作、验证策略和 revision 调度联动设计的思路，可作为后续 diffusion inference runtime/co-design 的基础。",
         "open_questions": [
-          "“Quantization Friendliness”具体如何定义、是否需要在线估计、额外开销有多大？",
-          "相对Heavy Hitter和简单的稀疏+量化串接基线，Q-Hitter在吞吐、延迟、显存和任务精度上的收益分别是多少？",
-          "效果是否依赖特定模型、上下文长度、层深、bitwidth或GPU平台，尤其深层退化问题是否普遍存在？"
+          "单次前向的 KV cache override 和对角修正具体如何实现，额外显存/带宽开销是否抵消了解码步数收益？",
+          "摘要所说的“更快”对应的是 wall-clock latency、tokens/s，还是 step 数减少？在不同 batch size 和不同 GPU 上是否稳定成立？",
+          "与现有 revocable decoding baseline 相比，seed 选择和自适应验证数的贡献分别有多大，flip-flop 减少是否来自算法本身而非调参？"
         ],
         "core_contributions": [
-          "指出KV cache稀疏化与低比特量化存在耦合效应，简单串接会在生成阶段产生次优结果。",
-          "分析了Heavy Hitter式token选择在<=4-bit量化下的两类缺陷：选择准确性下降，以及被选token未必量化友好。",
-          "提出Q-Hitter规则，把累计注意力与量化友好度联合用于token选择，目标是更稳地兼顾压缩与模型效果。"
+          "把 revocable diffusion decoding 中的 flip-flop 振荡明确提出为效率瓶颈，并解释其如何同时浪费 revision 预算和破坏后续起草上下文。",
+          "提出 COVER：在单次前向中联合 leave-one-out 验证与稳定起草，核心机制是基于 KV cache override 构造双 attention 视图。",
+          "引入闭式对角修正以避免 seed 位置自泄漏，并加入稳定性感知的 seed 优先级与自适应验证规模控制。"
         ],
         "why_read": [
-          "它直接命中LLM inference系统里的KV cache显存和带宽瓶颈，题目与摘要都高度贴合serving效率主线。",
-          "论文关注的是“哪些token值得留给低比特KV cache”这一联合决策，而不是孤立地做稀疏或量化，问题设定本身有系统意义。",
-          "如果你在看长上下文推理或KV压缩方案，这篇可以用来检查现有heavy-hitter类方法在低bit场景下为什么会失效。"
+          "它直接命中 diffusion LLM inference 的系统痛点，不是泛泛的文本生成质量优化。",
+          "方法核心围绕 KV cache 与验证调度展开，适合关注 serving runtime 设计的人快速判断其是否值得落地。",
+          "如果实验可靠，这可能是一条把并行解码速度优势真正转化为端到端收益的关键补丁。"
         ],
         "risks": [
-          "给定摘要没有提供具体实验数字，当前无法判断收益是否主要体现在吞吐、延迟、显存还是仅体现在存储占用。",
-          "Q-Hitter可能需要额外的打分或统计逻辑；如果在线开销不低，系统净收益可能被抵消。 硬件前提、量化格式、实现细节和baseline公平性在摘要中都不清楚，复现与工程落地风险较高。"
+          "摘要没有给出 wall-clock 指标、硬件依赖或 cache 操作开销，系统收益可能主要停留在 step-level 而非真实时延。",
+          "方法依赖特定的 attention/KV cache 操作和 seed 验证流程，工程实现复杂度可能较高，对现有推理栈兼容性未说明。"
         ],
         "recommended_for": [
-          "做LLM serving、KV cache管理和长上下文推理优化的研究者",
-          "评估稀疏化与低比特量化联合设计的系统工程师",
-          "关注推理带宽瓶颈、token选择策略和缓存压缩机制的读者"
+          "研究 diffusion language model inference 与并行解码的系统研究者",
+          "关注 KV cache、verification policy、runtime co-design 的 LLM serving 工程师",
+          "想判断这类方法是否能转化为真实延迟收益的性能优化读者"
         ],
         "keywords": [
-          "LLM推理",
+          "diffusion 语言模型",
+          "可撤销解码",
+          "并行解码",
+          "验证机制",
           "KV cache",
-          "稀疏化",
-          "低比特量化",
-          "Heavy Hitter",
-          "长上下文"
+          "推理加速"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "主题与当前LLM inference systems主线高度一致，直接围绕KV cache的显存和带宽成本展开，并提出了稀疏化/量化耦合这一值得核实的系统问题。虽然给定摘要没有充分说明硬件设置和最终性能结果，但仍值得优先阅读全文确认其吞吐与精度证据。",
-        "fallback_summary": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs)."
-      }
-    },
-    {
-      "id": "dblp:conf/isca/0004HKCL00P25",
-      "paper_id": "dblp:conf/isca/0004HKCL00P25",
-      "title": "Oaken: Fast and Efficient LLM Serving with Online-Offline Hybrid KV Cache Quantization.",
-      "summary": "Modern Large Language Model serving system batches multiple requests to achieve high throughput, while batching attention operations is challenging, rendering memory bandwidth a critical bottleneck. The community relies on high-end GPUs with multiple high-bandwidth memory channels. Unfortunately, HBM's high bandwidth often comes at the expense of limited memory capacity, which reduces core utilization and increases costs. Recent advancements enabling longer contexts for LLMs have substantially increased the key-value cache size, further intensifying the pressures on memory capacity. The literature has explored KV cache quantization techniques, which commonly use low bitwidth for most values, selectively using higher bitwidth for outlier values. While this approach helps achieve high accuracy and low bitwidth simultaneously, it comes with the limitation that cost for online outlier detection is excessively high, negating the advantages. We propose Oaken, an acceleration solution that achieves high accuracy and high performance simultaneously through co-designing algorithm and hardware. To effectively find a sweet spot in the accuracy-performance trade-off space of KV cache quantization, Oaken employs an online-offline hybrid approach, setting outlier thresholds offline, which are then used to determine the quantization scale online. To translate the proposed algorithmic technique into tangible performance gains, Oaken also comes with custom quantization engines and memory management units that can be integrated with any LLM accelerators. We built an Oaken accelerator on top of an LLM accelerator, LPU, and conducted a comprehensive evaluation. Our experiments show that for a batch size of 256, Oaken achieves up to 1.58x throughput improvement over NVIDIA A100 GPU, incurring a minimal accuracy loss of only 0.54\\% on average, compared to state-of-the-art KV cache quantization techniques.",
-      "abstract": "Modern Large Language Model serving system batches multiple requests to achieve high throughput, while batching attention operations is challenging, rendering memory bandwidth a critical bottleneck. The community relies on high-end GPUs with multiple high-bandwidth memory channels. Unfortunately, HBM's high bandwidth often comes at the expense of limited memory capacity, which reduces core utilization and increases costs. Recent advancements enabling longer contexts for LLMs have substantially increased the key-value cache size, further intensifying the pressures on memory capacity. The literature has explored KV cache quantization techniques, which commonly use low bitwidth for most values, selectively using higher bitwidth for outlier values. While this approach helps achieve high accuracy and low bitwidth simultaneously, it comes with the limitation that cost for online outlier detection is excessively high, negating the advantages. We propose Oaken, an acceleration solution that achieves high accuracy and high performance simultaneously through co-designing algorithm and hardware. To effectively find a sweet spot in the accuracy-performance trade-off space of KV cache quantization, Oaken employs an online-offline hybrid approach, setting outlier thresholds offline, which are then used to determine the quantization scale online. To translate the proposed algorithmic technique into tangible performance gains, Oaken also comes with custom quantization engines and memory management units that can be integrated with any LLM accelerators. We built an Oaken accelerator on top of an LLM accelerator, LPU, and conducted a comprehensive evaluation. Our experiments show that for a batch size of 256, Oaken achieves up to 1.58x throughput improvement over NVIDIA A100 GPU, incurring a minimal accuracy loss of only 0.54\\% on average, compared to state-of-the-art KV cache quantization techniques.",
-      "authors": [
-        "Minsu Kim 0004",
-        "Seongmin Hong",
-        "Ryeowook Ko",
-        "Soongyu Choi",
-        "Hunjong Lee",
-        "Junsoo Kim 0002",
-        "Joo-Young Kim 0001",
-        "Jongse Park"
-      ],
-      "published": "2025",
-      "published_date": "2025-07-01 00:00:00",
-      "publicationDate": "2025",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://dl.acm.org/doi/10.1145/3695053.3731019",
-      "url": "https://dl.acm.org/doi/10.1145/3695053.3731019",
-      "pdf_url": "https://dl.acm.org/doi/pdf/10.1145/3695053.3731019",
-      "venue": "ISCA",
-      "venue_source_name": "ISCA",
-      "venue_source_alias": "ISCA",
-      "dblp_key": "conf/isca/0004HKCL00P25",
-      "doi": "10.1145/3695053.3731019",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "ISCA",
-        "venue_alias": "ISCA"
-      },
-      "venue_source_priority": 4,
-      "venue_query_year": 2025,
-      "scores": {
-        "relevance": 3.0,
-        "recency": 0.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 7.97
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "llm serving",
-        "serving",
-        "kv cache",
-        "quantization"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 4,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "kv cache"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "analysis_candidate_score": 7.95,
-      "analysis_signals": [
-        "kv cache"
-      ],
-      "analysis_components": {
-        "signal_strength": 3.0,
-        "implementation_depth": 3.7,
-        "evidence_strength": 10.0,
-        "has_source_page": true,
-        "has_readable_pdf": true
-      },
-      "selection_lane": "established",
-      "citationCount": 4,
-      "institutions": [
-        "Korea Advanced Institute of Science and Technology"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://dl.acm.org/doi/10.1145/3695053.3731019",
-        "abstract_source": "openalex",
-        "pdf_source": "openalex"
-      },
-      "analysis_priority_rank": 3,
-      "analysis_eligible": true,
-      "selected_for_full_analysis": false,
-      "ai": {
-        "one_liner_zh": "这篇工作把 KV cache 量化中高成本的离群值检测尽量前移到离线阶段，并用专用量化与内存单元把压缩收益转成实际 serving 吞吐。",
-        "summary_zh": "这篇工作面向长上下文 LLM serving 中 KV cache 膨胀带来的显存容量与带宽瓶颈，针对现有离群值感知量化在线检测开销过高的问题提出在线-离线混合方案。Oaken先离线设置离群阈值，在线再用这些阈值决定量化尺度，同时配套自定义量化引擎和内存管理单元，把算法与硬件一起设计。摘要声称其在基于 LPU 的实现中，batch size 为 256 时相对 NVIDIA A100 GPU 吞吐最高提升 1.58x，并且相对现有 KV cache 量化技术平均精度损失仅 0.54%；但硬件前提、baseline 公平性与不同工作负载下的稳定性仍需通读正文核对。",
-        "background_zh": "LLM serving 依赖批处理提升吞吐，但 attention 尤其是 KV cache 访问常受显存带宽限制。随着长上下文推理普及，KV cache 容量快速增长，使得高带宽但容量受限的 HBM 配置更容易成为成本和利用率瓶颈。",
-        "problem_zh": "问题是如何在尽量保持模型精度的同时，把 KV cache 压到更低比特，并避免离群值检测本身的在线开销吞掉量化带来的系统收益。这个问题重要，因为如果量化只能在算法上省带宽、却在运行时增加大量额外处理，LLM serving 的真实吞吐和成本就不会改善。",
-        "approach_zh": "Oaken采用在线-离线混合 KV cache 量化：先离线确定离群值阈值，再在线利用这些阈值选择量化尺度，从而规避纯在线离群检测的高开销。为把该策略落到系统实现上，作者还设计了可集成到 LLM 加速器中的自定义量化引擎和内存管理单元，并在 LPU 加速器基础上构建实现。",
-        "evidence_zh": "摘要给出的证据是一次基于 LPU 的综合评估：在 batch size 为 256 时，Oaken相对 NVIDIA A100 GPU 吞吐最高提升 1.58x，并且相对现有 KV cache 量化技术平均精度损失仅 0.54%。但摘要没有充分说明测试所用模型、上下文长度、延迟指标、功耗或面积开销，也没有展开 baseline 的具体设置与公平性控制。",
-        "value_zh": "如果这些结果成立，这项工作对 LLM inference engineering 的价值在于同时缓解 KV cache 的带宽和容量压力，让长上下文 serving 能在较小精度代价下获得更高吞吐。对系统研究而言，它也提示一个关键点：量化是否有价值，不只取决于压缩率，还取决于在线元开销能否通过算法-硬件协同被真正压下去。",
-        "open_questions": [
-          "离线阈值是如何生成和更新的，是否需要按模型、层、头或上下文长度分别校准，迁移到新模型时成本多大？",
-          "吞吐提升主要来自哪一部分：更低的 KV 传输带宽、更高的有效容量带来的更大 batch，还是专用量化/内存单元减少了在线处理开销？",
-          "与 A100 和现有 KV cache 量化 baseline 的比较是否在相同模型、batch、上下文长度、精度目标和硬件资源约束下进行，额外硬件面积与功耗代价是多少？"
-        ],
-        "core_contributions": [
-          "提出在线-离线混合 KV cache 量化思路，用离线阈值替代高成本的纯在线离群值检测。",
-          "给出与量化算法配套的自定义量化引擎和内存管理单元，强调算法与加速器协同而非单点压缩技巧。",
-          "在基于 LPU 的实现上展示吞吐与精度权衡，试图证明 KV cache 量化可以兑现为实际 serving 收益。"
-        ],
-        "why_read": [
-          "直接命中 LLM serving 的 KV cache、带宽和容量瓶颈，属于当前 systems 主线而不是泛泛压缩工作。",
-          "它关注的是量化元开销会不会抵消系统收益，这比单看压缩精度更接近真实部署问题。",
-          "摘要同时涉及算法策略和硬件实现，适合核对吞吐提升到底来自数据表示变化还是来自专用数据通路设计。"
-        ],
-        "risks": [
-          "结果明显依赖专用加速器实现，迁移到通用 GPU 或不同内存层次结构上的收益可能有限。",
-          "离线阈值若对模型分布、层级特性或工作负载敏感，可能削弱方法在多模型和动态场景中的鲁棒性。"
-        ],
-        "recommended_for": [
-          "做 LLM serving、KV cache 管理与量化优化的系统研究者和工程师。",
-          "关注 accelerator/compiler/runtime co-design、尤其是 memory bottleneck 的硬件系统读者。",
-          "需要评估长上下文推理成本、吞吐与精度权衡的推理基础设施团队。"
-        ],
-        "keywords": [
-          "LLM serving",
-          "KV cache",
-          "量化",
-          "离群值检测",
-          "长上下文推理",
-          "显存带宽瓶颈"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "这篇论文与当前关注的 LLM inference acceleration 和 serving efficiency 高度贴合，且摘要直接给出 KV cache 量化、吞吐提升、精度代价和硬件协同这几条关键信号。更重要的是，它讨论的是系统层面收益如何兑现，而不是只在算法层面做泛化压缩，因此值得优先读正文核对收益来源、硬件假设和 baseline 公平性。",
-        "fallback_summary": "Modern Large Language Model serving system batches multiple requests to achieve high throughput, while batching attention operations is challenging, rendering memory bandwidth a critical bottleneck."
-      }
-    },
-    {
-      "id": "dblp:conf/cgo/GeorgakoudisPB25",
-      "paper_id": "dblp:conf/cgo/GeorgakoudisPB25",
-      "title": "Proteus: Portable Runtime Optimization of GPU Kernel Execution with Just-in-Time Compilation.",
-      "summary": "In High-performance computing (HPC) fast application execution is the primary objective. HPC software is written in high-performance languages (C/C++, Fortran) and is statically compiled Ahead-of-Time (AOT) using optimizing compilers to generate fast code. AOT compilation optimizes source code with only limited information available at compile time, which precludes possible optimization leveraging runtime information. We propose Proteus, an easy-to-use, portable, and lightweight Just-In-Time (JIT) compilation approach to optimize GPU kernels at runtime. Proteus dynamically extracts, compiles, and optimizes language-agnostic LLVM IR to reduce compilation overhead while enhancing portability and versatility compared to language-specific solutions. Using a minimally intrusive annotation-based interface, Proteus specializes GPU kernels for input arguments and launch parameters. Evaluation on a diverse set of programs on AMD and NVIDIA GPUs shows that Proteus achieves significant end-to-end speedup, up to 2.8× for AMD and 1.78× on NVIDIA, over AOT optimization, while outperforming CUDA-specific Jitify with an average 1.23× speedp, thanks to reduced overhead and faster binary code in certain cases.",
-      "abstract": "In High-performance computing (HPC) fast application execution is the primary objective. HPC software is written in high-performance languages (C/C++, Fortran) and is statically compiled Ahead-of-Time (AOT) using optimizing compilers to generate fast code. AOT compilation optimizes source code with only limited information available at compile time, which precludes possible optimization leveraging runtime information. We propose Proteus, an easy-to-use, portable, and lightweight Just-In-Time (JIT) compilation approach to optimize GPU kernels at runtime. Proteus dynamically extracts, compiles, and optimizes language-agnostic LLVM IR to reduce compilation overhead while enhancing portability and versatility compared to language-specific solutions. Using a minimally intrusive annotation-based interface, Proteus specializes GPU kernels for input arguments and launch parameters. Evaluation on a diverse set of programs on AMD and NVIDIA GPUs shows that Proteus achieves significant end-to-end speedup, up to 2.8× for AMD and 1.78× on NVIDIA, over AOT optimization, while outperforming CUDA-specific Jitify with an average 1.23× speedp, thanks to reduced overhead and faster binary code in certain cases.",
-      "authors": [
-        "Giorgis Georgakoudis",
-        "Konstantinos Parasyris",
-        "David Beckingsale"
-      ],
-      "published": "2025",
-      "published_date": "2025-07-01 00:00:00",
-      "publicationDate": "2025",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
-      "url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
-      "pdf_url": "",
-      "venue": "CGO",
-      "venue_source_name": "CGO",
-      "venue_source_alias": "CGO",
-      "dblp_key": "conf/cgo/GeorgakoudisPB25",
-      "doi": "10.1145/3696443.3708939",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "CGO",
-        "venue_alias": "CGO"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2025,
-      "scores": {
-        "relevance": 1.63,
-        "recency": 0.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 5.46
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "gpu kernel"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "gpu kernel"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "analysis_candidate_score": 5.43,
-      "analysis_signals": [
-        "gpu kernel"
-      ],
-      "analysis_components": {
-        "signal_strength": 3.0,
-        "implementation_depth": 5.57,
-        "evidence_strength": 6.13,
-        "has_source_page": true,
-        "has_readable_pdf": false
-      },
-      "selection_lane": "established",
-      "citationCount": 2,
-      "institutions": [
-        "Lawrence Livermore National Laboratory"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
-        "abstract_source": "openalex",
-        "pdf_source": ""
-      },
-      "analysis_priority_rank": 5,
-      "analysis_eligible": true,
-      "selected_for_full_analysis": false,
-      "ai": {
-        "one_liner_zh": "用语言无关 LLVM IR 做 GPU kernel 运行时特化，目标是在 AMD 和 NVIDIA 上以较低 JIT 开销换取比 AOT 更好的端到端性能。",
-        "summary_zh": "Proteus 试图把 GPU kernel 的运行时特化做成一个轻量、可移植的 JIT 流程：动态提取语言无关 LLVM IR，再按输入参数和 launch 参数重新编译优化。摘要声称它在 AMD 和 NVIDIA GPU 上都能相对 AOT 获得端到端加速，并平均优于 CUDA 专用的 Jitify，说明作者把重点放在降低 JIT 开销同时生成更合适的目标代码。对 systems 读者，这篇的看点是跨厂商 GPU 的 runtime/compiler 协同设计；但收益到底来自哪些 kernel、哪些运行时信息、以及 baseline 是否公平，摘要没有充分说明。",
-        "background_zh": "GPU/HPC 程序通常依赖 AOT 编译，而 AOT 在编译时拿不到真实输入、launch 参数和运行环境，因此会错过很多只在运行时才成立的优化机会。随着异构 GPU 与多语言生态并存，研究者希望用更可移植的运行时编译框架补上这部分信息缺口。",
-        "problem_zh": "这篇工作要解决的问题是：能否在不过度侵入现有代码、也不绑定单一语言或单一 GPU 厂商工具链的前提下，在运行时利用输入参数和 launch 参数对 GPU kernel 做特化，并把 JIT 开销压到足以换回端到端收益。这个问题重要，因为很多 kernel 的最佳代码形态依赖运行时信息，而过重或过于厂商绑定的 JIT 会直接限制工程可用性。",
-        "approach_zh": "Proteus 的核心做法是动态提取语言无关的 LLVM IR，只在运行时对相关 GPU kernel 重新编译和优化，并通过最小侵入的注解接口把输入参数与 launch 参数暴露给特化流程。相比语言或平台专用方案，它把可移植性放在 LLVM IR 层，同时试图通过降低编译对象和编译流程开销来控制 JIT 成本。",
-        "evidence_zh": "摘要给出的证据是：在一组多样化程序上、覆盖 AMD 和 NVIDIA GPU，Proteus 相对 AOT 获得最高 2.8×（AMD）和 1.78×（NVIDIA）的端到端加速，并相对 CUDA 专用 Jitify 达到平均 1.23× 提升。摘要将收益归因于更低的编译开销以及在某些情况下更快的二进制代码，但 benchmark 构成、GPU 型号、开销拆分、baseline 配置和受益 kernel 分布，摘要没有充分说明。",
-        "value_zh": "如果结论成立，这项工作说明 GPU kernel 的 runtime specialization 可以在不强绑定单一语言或单一 GPU 生态的情况下带来实用收益，对跨厂商加速库、编译器与运行时协同设计，以及未来面向 LLM inference kernel 的动态代码生成都有直接工程启发。它的实际价值在于把“何时值得 JIT”和“如何可移植地 JIT”结合成一个可落地框架。",
-        "open_questions": [
-          "端到端加速里，编译开销下降、kernel 执行时间下降、以及 launch 参数特化三者各自贡献了多少？",
-          "Proteus 需要开发者添加哪些注解；这些注解在不同语言、编程模型或框架边界上会不会削弱其“语言无关”主张？",
-          "AMD 与 NVIDIA 上使用了哪些硬件和编译后端，和 AOT/Jitify 的对比是否在缓存、预热和测量口径上保持公平？"
-        ],
-        "core_contributions": [
-          "提出一个面向 GPU kernel 的轻量 JIT 框架，可在运行时提取并利用语言无关 LLVM IR。",
-          "通过最小侵入的注解接口，让 kernel 能按输入参数和 launch 参数进行运行时特化。",
-          "在 AMD 和 NVIDIA GPU 上对比 AOT 与 CUDA 专用 Jitify，主张其兼顾可移植性、较低开销与性能收益。"
-        ],
-        "why_read": [
-          "它直接回答一个 systems 核心问题：runtime specialization 的收益能否覆盖 JIT 成本。",
-          "跨 AMD/NVIDIA 的设计比只讨论 CUDA 工具链更有参考价值，适合评估可移植 GPU 编译/runtime 路线。",
-          "如果你关心 LLM inference kernel 或低层代码生成，这篇可以作为通用 GPU JIT 框架的对照，帮助判断哪些机制值得迁移到 serving 场景。"
-        ],
-        "risks": [
-          "论文场景来自通用 HPC 程序，不是 LLM inference/serving；任务形态迁移性需要谨慎判断。",
-          "收益可能集中在少数特定输入分布、launch 参数或 kernel 类型上，摘要没有充分说明覆盖面。"
-        ],
-        "recommended_for": [
-          "GPU 编译器与运行时研究者",
-          "做 CUDA/HIP/LLVM kernel 优化的工程师",
-          "评估 LLM inference kernel 动态特化可行性的系统研究者"
-        ],
-        "keywords": [
-          "GPU kernel JIT",
-          "LLVM IR",
-          "运行时特化",
-          "跨厂商 GPU",
-          "AOT 与 JIT 比较"
-        ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "这篇与 GPU kernel runtime specialization、LLVM IR 级可移植 JIT、以及跨 AMD/NVIDIA 的低层优化直接相关，和当前关注的 kernel 生成与系统优化方向有交集；但它并非面向 LLM inference/serving 的专门工作，收益来源、硬件前提和 baseline 公平性仍需通读确认。",
-        "fallback_summary": "In High-performance computing (HPC) fast application execution is the primary objective."
-      }
-    },
-    {
-      "paper_id": "2210.17323",
-      "arxiv_id": "2210.17323",
-      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
-      "summary": "Introduces a scalable post-training quantization method for GPT-style models that preserves accuracy at 3-4 bit weight precision and makes much larger models deployable on limited hardware.",
-      "authors": [
-        "Elias Frantar",
-        "Saleh Ashkboos",
-        "Torsten Hoefler",
-        "Dan Alistarh"
-      ],
-      "published": "2022-10-31",
-      "published_date": "2022-10-31 00:00:00",
-      "categories": [
-        "cs.LG"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "quantization",
-        "gptq",
-        "4bit",
-        "single-gpu"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2210.17323",
-      "pdf_url": "https://arxiv.org/pdf/2210.17323.pdf",
-      "scores": {
-        "relevance": 2.9,
-        "recency": 0.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 6.83
-      },
-      "analysis_candidate_score": 4.88,
-      "analysis_signals": [],
-      "analysis_components": {
-        "signal_strength": 0.0,
-        "implementation_depth": 0.0,
-        "evidence_strength": 0.0,
-        "has_source_page": true,
-        "has_readable_pdf": true
-      },
-      "classic_rotation_score": 10.9339,
-      "analysis_priority_rank": 0,
-      "analysis_eligible": false,
-      "selected_for_full_analysis": false,
-      "ai": {
-        "one_liner_zh": "核心点是把 GPT 类模型做成 3-4 bit 的后训练量化，同时尽量保持精度，以降低大模型在受限硬件上的部署门槛。",
-        "summary_zh": "这篇工作提出一种面向 GPT 风格模型的可扩展后训练量化方法，目标是在 3-4 bit 权重精度下尽量保持准确性。摘要声称该方法能让更大的模型部署到受限硬件上，因此对大模型推理的存储与部署成本有直接意义。摘要没有充分说明量化误差控制机制、实验设置和系统指标，所以真实收益仍需要通过正文核对。",
-        "background_zh": "大语言模型部署常被权重存储和硬件容量限制，而后训练量化之所以重要，是因为它试图在不重训的前提下降低部署成本。对于生成式 Transformer，如果低比特量化还能保住精度，就会直接影响受限硬件上可部署的模型规模。",
-        "problem_zh": "这篇工作要解决的问题是：能否把 GPT 类模型的权重量化到 3-4 bit，而不显著破坏模型准确性。这个问题重要，因为如果低比特量化带来明显精度退化，资源节省就很难转化成可接受的实际部署方案。",
-        "approach_zh": "摘要表明作者提出了一种可扩展的后训练量化方法，直接面向 GPT 风格模型，在训练完成后把权重量化到 3-4 bit，同时把“尽量保持准确性”作为核心目标。摘要没有充分说明其具体误差建模、量化粒度或求解过程。",
-        "evidence_zh": "摘要给出的证据是高层结论：在 3-4 bit 权重精度下仍能保持准确性，并让更大的模型可以部署到受限硬件上。摘要没有充分说明实验设置、对比基线、硬件平台，也没有给出延迟、吞吐、显存或带宽等系统指标。",
-        "value_zh": "如果这些结论成立，这项工作对研究和工程都有实际价值：它提供了一条不依赖重训的低比特部署路线，可直接降低大模型的存储与部署门槛，并为资源受限环境中的模型落地提供基础方法。对后续量化推理系统而言，它也有潜力成为评估低比特可行性的关键参考点。",
-        "open_questions": [
-          "具体的量化误差是如何建模和补偿的，为什么 3-4 bit 下还能保持 GPT 类模型精度？",
-          "量化后到底改善了哪些系统指标：显存占用、可部署模型规模、延迟还是吞吐？",
-          "实验覆盖了哪些模型规模、任务和硬件平台，对比 baseline 是否足够公平？"
-        ],
-        "core_contributions": [
-          "提出面向 GPT 类模型的可扩展后训练量化方法。",
-          "把目标位宽压到 3-4 bit 权重精度，同时强调尽量保持模型准确性。",
-          "将量化结果直接落到“更大模型可在受限硬件部署”这一实际部署目标上。"
-        ],
-        "why_read": [
-          "后训练量化不要求重新训练，工程进入门槛相对低，直接对应现有模型的部署改造。",
-          "3-4 bit 是低比特部署的关键区间，若精度真能保住，对模型存储成本和部署可行性影响很大。",
-          "它聚焦的是“低比特且保精度”这一核心矛盾，适合作为判断量化路线是否值得进入系统实现层的起点。"
-        ],
-        "risks": [
-          "摘要没有充分说明量化机制，当前还看不出精度保持来自哪些具体设计。",
-          "摘要没有给出延迟、吞吐、显存或带宽数据，因此系统收益目前主要停留在可部署性陈述。"
-        ],
-        "recommended_for": [
-          "做大模型推理部署和量化落地的系统工程师。",
-          "评估低比特后训练量化是否值得进入生产路径的研究者。",
-          "需要判断受限硬件上可部署模型规模上限的团队。"
-        ],
-        "keywords": [
-          "后训练量化",
-          "GPTQ",
-          "3-4 bit 权重量化",
-          "GPT 类模型",
-          "受限硬件部署"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "推荐分为 6.83，且主题与大模型推理部署直接相关；虽然这是 2022-10-31 的经典工作、时效性分数为 0，摘要也缺少系统细节，但它覆盖了 3-4 bit 低比特量化这一基础问题，对当前 LLM inference 读者仍属高优先级补课。",
-        "fallback_summary": "Introduces a scalable post-training quantization method for GPT-style models that preserves accuracy at 3-4 bit weight precision and makes much larger models deployable on limited hardware."
+        "reading_priority_reason": "主题与 LLM inference acceleration 高度贴合，机制也具体到 KV cache 与 verification path；虽然摘要缺少硬件和时延细节，但这类信息正是判断 diffusion decoding 能否落地的关键，因此值得优先核对全文。",
+        "fallback_summary": "Parallel diffusion decoding can accelerate diffusion language model inference by unmasking multiple tokens per step, but aggressive parallelism often harms quality."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "今天最值得读的主线是训练与推理效率、LLM Code Generation For CUDA Kernels。 优先看 SlideSparse: Fast and Flexible…、FlashAttention-4: Algorithm and…，因为它们最直接代表今天的主干问题。 第三篇可用 Q-Hitter: A Better Token Oracle… 来判断这条方法线是否具备更强的证据或工程价值。",
+    "overview_zh": "今天最值得读的主线是训练与推理效率、LLM Code Generation For CUDA Kernels。 优先看 DFlash: Block Diffusion for Flash…、Multi-Token Prediction via…，因为它们最直接代表今天的主干问题。 第三篇可用 Protean Compiler: An Agile… 来判断这条方法线是否具备更强的证据或工程价值。",
     "top_themes": [
       "训练与推理效率",
-      "LLM Code Generation For CUDA Kernels"
+      "LLM Code Generation For CUDA Kernels",
+      "可信性与事实核验"
     ],
     "reading_strategy": [
-      "先读 SlideSparse: Fast and Flexible…，重点核对它对训练与推理效率问题的任务定义和核心机制是否清楚。",
-      "再读 FlashAttention-4: Algorithm and…，判断它的方法新意到底来自模型设计、训练流程还是评测重设。",
-      "最后读 Q-Hitter: A Better Token Oracle…，把它当成对今天主线的补充验证，重点看实验边界和真实价值。"
+      "先读 DFlash: Block Diffusion for Flash…，重点核对它对训练与推理效率问题的任务定义和核心机制是否清楚。",
+      "再读 Multi-Token Prediction via…，判断它的方法新意到底来自模型设计、训练流程还是评测重设。",
+      "最后读 Protean Compiler: An Agile…，把它当成对今天主线的补充验证，重点看实验边界和真实价值。"
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-03-08T05:15:15Z",
+    "generated_at": "2026-03-08T11:09:33Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 6,
+    "paper_results": 4,
     "paper_failures": 0
   }
 }
