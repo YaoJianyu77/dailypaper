@@ -50,9 +50,8 @@ tail -f /home/y/dailypaper/state/logs/local_daily.log
 - The project title was updated to `DailyPaper`.
 - The local remote used by the workflow is `dailypaper`.
 - Local SSH push to `git@github.com:YaoJianyu77/dailypaper.git` is configured.
-- Current product-shape requirements for the homepage, daily report, and on-demand deep dives live in `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`.
+- Current product-shape requirements for the homepage and daily report live in `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`.
 - The default public artifact is the daily report under `content/daily/`, not a generated page for every recommended paper.
-- On-demand deep dives are published under `content/deep-dives/`.
 - Shared figures used by the daily report now live under `content/assets/papers/` instead of depending on `content/papers/*/images`.
 - The local pipeline was repaired after a `codex_enrich.py` prompt-builder signature mismatch.
 - Semantic Scholar rate limits are now handled gracefully.
@@ -84,4 +83,4 @@ Project path is /home/y/dailypaper. Read PROJECT_STATE.md first. The primary wor
 - The active automation path is code-driven through Python scripts.
 - Active repo-level skills now live under `skills/`.
 - `scripts/codex_enrich.py` and `scripts/ai_enrich.py` now load all active repo skills in `ai.skill_paths` by default.
-- Repo-level `AGENTS.md` tells future Codex runs which skill to use for search, enrichment, note search, deep analysis, and image extraction tasks.
+- Repo-level `AGENTS.md` tells future Codex runs which skill to use for search, enrichment, note search, and image extraction tasks.

@@ -3,7 +3,6 @@ site:
   timezone: "America/New_York"
   base_url: ""
   show_papers_nav: false
-  show_deep_dives_nav: false
 
 build:
   output_dir: "dist"
@@ -17,7 +16,6 @@ ai:
     - "skills/daily-paper-search/SKILL.md"
     - "skills/daily-paper-editor/SKILL.md"
     - "skills/paper-note-search/SKILL.md"
-    - "skills/paper-deep-analysis/SKILL.md"
     - "skills/paper-image-extractor/SKILL.md"
   github_models_api_base: "https://models.github.ai"
   github_models_paper_limit: 6
@@ -34,31 +32,22 @@ ai:
   max_output_tokens: 7000
   editorial_preferences:
     audience: "关注 LLM systems、推理加速、编译器与低层代码生成的研究者和工程师"
-    tone: "简洁、直接、高信息密度，像 systems reading notes"
-    overview_goal: "优先指出今天最值得读的 systems 主线，再给出先读哪两篇全文分析的建议"
+    tone: "简洁、直接、判断导向，像 systems reading notes"
+    overview_goal: "优先指出今天最值得看的 systems 主线，再给出最清楚的阅读顺序"
     daily_brief_style: "像系统研究组内部日报，不像宣传文案"
     prioritize:
+      - "把每篇论文压成一段短而准的 mini analysis，帮助快速判断读不读"
       - "延迟、吞吐、显存、带宽或 kernel 级收益到底来自哪里"
-      - "方法是否真的面向 LLM inference / code generation systems，而不是泛泛代码任务"
       - "硬件假设、实验设置、baseline 公平性和可复现性"
     avoid:
       - "空泛赞美"
       - "复述标题"
+      - "字段之间重复改写同一个意思"
       - "把普通代码生成说成系统创新"
       - "编造实验细节、数字或作者背景"
-    custom_instruction: "优先关注 LLM inference acceleration、serving efficiency、CUDA kernel generation、PTX/SASS/assembly-level code generation、compiler/runtime co-design。对 systems paper 明确指出硬件前提、kernel 细节、吞吐/延迟指标、是否依赖特定 GPU。"
-
-analysis:
-  enabled: true
-  top_n: 1
-  auto_run_in_daily: false
-  refresh_existing: false
-  max_full_text_chars: 36000
-  section_char_budget: 7000
-  pdf_page_limit: 20
+    custom_instruction: "优先关注 LLM inference acceleration、serving efficiency、CUDA kernel generation、PTX/SASS/assembly-level code generation、compiler/runtime co-design。summary_zh 要能直接作为日报里的主体短评；background/problem/approach/evidence/value 各写一条互补信息，不要重复铺陈。"
 
 publish:
-  generate_deep_dives: false
   link_keywords_to_notes: false
 
 search:
@@ -92,13 +81,11 @@ search:
     classic_backlog_path: "state/classic_backlog.json"
     recommended_cooldown_days: 60
     classic_recommended_cooldown_days: 21
-    analyzed_cooldown_days: 365
   classics:
     enabled: true
     cadence_days: 3
     anchor_date: "2026-03-07"
     random_seed: "systems-classics-v1"
-    allow_full_analysis: false
   venue_sources:
     enabled: true
     provider: "dblp"

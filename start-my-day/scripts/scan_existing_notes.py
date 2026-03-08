@@ -16,7 +16,6 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import yaml
 
 from content_store import (
-    get_deep_dives_root,
     get_papers_root,
     get_repo_root,
     iter_markdown_files,
@@ -61,10 +60,7 @@ def normalize_tags(value) -> List[str]:
 
 def scan_notes(repo_root: Path) -> List[Dict]:
     notes: List[Dict] = []
-    note_roots = [
-        get_deep_dives_root(repo_root),
-        get_papers_root(repo_root),
-    ]
+    note_roots = [get_papers_root(repo_root)]
 
     seen_urls = set()
     for root in note_roots:

@@ -22,7 +22,6 @@
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "analysis_top_n": 1,
     "selected_count": 4,
     "lane_counts": {
       "fresh": 4,
@@ -36,7 +35,6 @@
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "allow_full_analysis": false,
       "slot_active_today": false
     }
   },
@@ -113,23 +111,7 @@
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.36
       },
-      "analysis_candidate_score": 9.28,
-      "analysis_signals": [
-        "speculative decoding",
-        "latency",
-        "speedup"
-      ],
-      "analysis_components": {
-        "signal_strength": 8.33,
-        "implementation_depth": 1.83,
-        "evidence_strength": 10.0,
-        "has_source_page": true,
-        "has_readable_pdf": true
-      },
-      "selection_lane": "fresh",
-      "analysis_priority_rank": 1,
-      "analysis_eligible": true,
-      "selected_for_full_analysis": true
+      "selection_lane": "fresh"
     },
     {
       "id": "http://arxiv.org/abs/2602.06019v1",
@@ -214,22 +196,7 @@
         "signal_bonus": 0.7,
         "bonus_keyword_bonus": 0.0
       },
-      "analysis_candidate_score": 7.57,
-      "analysis_signals": [
-        "speculative decoding",
-        "decode"
-      ],
-      "analysis_components": {
-        "signal_strength": 6.0,
-        "implementation_depth": 4.6,
-        "evidence_strength": 0.0,
-        "has_source_page": true,
-        "has_readable_pdf": true
-      },
-      "selection_lane": "fresh",
-      "analysis_priority_rank": 2,
-      "analysis_eligible": true,
-      "selected_for_full_analysis": false
+      "selection_lane": "fresh"
     },
     {
       "id": "http://arxiv.org/abs/2602.06142v2",
@@ -331,23 +298,7 @@
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
-      "analysis_candidate_score": 7.18,
-      "analysis_signals": [
-        "llvm",
-        "benchmark",
-        "speedup"
-      ],
-      "analysis_components": {
-        "signal_strength": 5.33,
-        "implementation_depth": 2.77,
-        "evidence_strength": 7.2,
-        "has_source_page": true,
-        "has_readable_pdf": true
-      },
-      "selection_lane": "fresh",
-      "analysis_priority_rank": 3,
-      "analysis_eligible": true,
-      "selected_for_full_analysis": false
+      "selection_lane": "fresh"
     },
     {
       "id": "http://arxiv.org/abs/2602.06161v1",
@@ -447,21 +398,7 @@
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
-      "analysis_candidate_score": 6.13,
-      "analysis_signals": [
-        "kv cache"
-      ],
-      "analysis_components": {
-        "signal_strength": 3.0,
-        "implementation_depth": 2.77,
-        "evidence_strength": 3.73,
-        "has_source_page": true,
-        "has_readable_pdf": true
-      },
-      "selection_lane": "fresh",
-      "analysis_priority_rank": 4,
-      "analysis_eligible": true,
-      "selected_for_full_analysis": false
+      "selection_lane": "fresh"
     }
   ]
 }

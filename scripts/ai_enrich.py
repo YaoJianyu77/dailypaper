@@ -45,22 +45,22 @@ DEFAULT_SKILL_PATHS = [
     'skills/daily-paper-search/SKILL.md',
     'skills/daily-paper-editor/SKILL.md',
     'skills/paper-note-search/SKILL.md',
-    'skills/paper-deep-analysis/SKILL.md',
     'skills/paper-image-extractor/SKILL.md',
 ]
 DEFAULT_EDITORIAL_PREFERENCES = {
-    'audience': '关注大模型、Agent、多模态系统与高价值方法论文的研究者和工程师',
-    'tone': '简洁、直接、高信息密度，少空话',
-    'overview_goal': '先点出今天最值得读的主线，再给阅读顺序建议',
+    'audience': '关注 LLM systems、推理加速、编译器与低层代码生成的研究者和工程师',
+    'tone': '简洁、直接、判断导向，像系统组内部读论文短评',
+    'overview_goal': '先点出今天最值得看的 systems 主线，再给一个清楚的阅读顺序',
     'daily_brief_style': '像研究日报编辑，不像宣传文案',
     'prioritize': [
-        '为什么这篇论文现在值得读',
-        '方法或问题定义的新意在哪里',
-        '最大的风险、边界或摘要未说明之处',
+        '把一篇论文压成一段可直接判断值不值得继续读的 mini analysis',
+        '方法到底改了哪一层系统路径，收益主张靠什么证据支撑',
+        '最大的风险、边界、硬件前提或摘要未说明之处',
     ],
     'avoid': [
         '空泛赞美',
         '复述标题',
+        '字段之间重复改写同一个意思',
         '编造实验细节、数字或作者背景',
     ],
     'custom_instruction': '',
@@ -212,7 +212,7 @@ def fallback_recommended_for(paper: Dict[str, Any], focus_label: str) -> List[st
 def fallback_reading_priority(paper: Dict[str, Any], focus_label: str) -> tuple[str, str]:
     score = float(paper.get('scores', {}).get('recommendation', 0) or 0)
     if score >= 8.5:
-        return 'high', f'推荐分较高，而且它直接落在{focus_label}主线上，值得优先阅读全文。'
+        return 'high', f'推荐分较高，而且它直接落在{focus_label}主线上，值得优先判断是否继续跟进。'
     if score >= 7.5:
         return 'medium', f'主题相关性不错，但是否值得深读仍取决于正文能否支撑摘要里的关键主张。'
     return 'low', '可以先保留在候选清单里，等确认主线论文后再决定是否投入全文阅读时间。'
@@ -238,26 +238,23 @@ def fallback_paper_ai(paper: Dict[str, Any]) -> Dict[str, Any]:
     keywords = fallback_keywords(paper)
     reading_priority, reading_reason = fallback_reading_priority(paper, focus_label)
 
-    one_liner = f"这篇工作聚焦{focus_label}，重点在于用更明确的方法机制去处理“{clip_text(problem_sentence, 72)}”这类问题。"
+    one_liner = f"它把{focus_label}里的关键瓶颈压缩成一个更可验证的方法动作。"
     summary_parts = [
-        f"这篇论文聚焦{focus_label}，摘要把核心问题放在“{clip_text(problem_sentence, 110)}”上。",
-        f"它给出的主要做法是“{clip_text(method_sentence, 110)}”。",
+        f"这篇论文把问题放在“{clip_text(problem_sentence, 88)}”上。",
+        f"核心做法是“{clip_text(method_sentence, 92)}”。",
     ]
     if evidence_sentence:
-        summary_parts.append(f"摘要提到的证据是“{clip_text(evidence_sentence, 100)}”，但具体实验细节仍需要阅读全文确认。")
+        summary_parts.append(f"摘要给出的证据是“{clip_text(evidence_sentence, 84)}”，但关键实验前提仍需正文核对。")
     else:
-        summary_parts.append('摘要没有充分说明实验设置和结果细节，因此当前更适合把它当成值得核对的方法线索，而不是已被完全证实的结论。')
+        summary_parts.append('摘要没有充分说明实验设置和结果细节，因此目前更适合把它当成值得核对的方法线索。')
 
-    background = (
-        f"这篇工作位于{str(paper.get('matched_domain') or '相关').strip()}方向，摘要把背景放在“{clip_text(intro_sentence, 150)}”这一类问题上。"
-        f"它对应当前{focus_label}研究里对能力、效率或可靠性的持续需求。"
-    )
-    problem = f"论文想解决的核心问题是：{clip_text(problem_sentence, 180)}"
-    approach = f"摘要给出的主要方法线索是：{clip_text(method_sentence, 180)}"
+    background = f"背景是{focus_label}当前仍受“{clip_text(intro_sentence, 96)}”这类瓶颈约束。"
+    problem = f"论文要解决的是：{clip_text(problem_sentence, 118)}"
+    approach = f"方法线索是：{clip_text(method_sentence, 118)}"
     if evidence_sentence:
-        evidence = f"摘要里提到的证据主要是：{clip_text(evidence_sentence, 180)}"
+        evidence = f"摘要证据是：{clip_text(evidence_sentence, 118)}"
     else:
-        evidence = '摘要没有充分说明实验设置、对比基线和结果细节，目前只能确认作者声称方法在目标任务上有效。'
+        evidence = '摘要没有充分说明实验设置、对比基线和结果细节，目前只能确认作者声称方法有效。'
 
     return {
         'one_liner_zh': one_liner,
@@ -436,6 +433,7 @@ def build_editorial_instruction_text(config: Dict[str, Any]) -> str:
         f"Tone: {preferences['tone']}",
         f"Daily brief goal: {preferences['overview_goal']}",
         f"Daily brief style: {preferences['daily_brief_style']}",
+        'Mini-analysis target: each paper should be compressible into one compact evaluation note with minimal repetition.',
         'Prioritize:',
     ]
     lines.extend(f"- {item}" for item in preferences['prioritize'])
@@ -514,16 +512,15 @@ def build_messages(
         'Return valid JSON only. '
         'The JSON object must have keys daily_brief and papers. '
         'daily_brief must contain overview_zh (string), top_themes (array of 3 short strings), and reading_strategy (array of 3 short strings). '
-        'papers must be an array where each item contains: paper_id (string), one_liner_zh (string), summary_zh (string, 2-4 sentences), '
+        'papers must be an array where each item contains: paper_id (string), one_liner_zh (string), summary_zh (string, 2-3 sentences), '
         'background_zh (string), problem_zh (string), approach_zh (string), evidence_zh (string), value_zh (string), open_questions (array of 2-3 strings), '
         'core_contributions (array of 3 strings), why_read (array of 3 strings), risks (array of 2 strings), '
         'recommended_for (array of 2-3 strings), keywords (array of 4-6 short strings), reading_priority (one of high, medium, low), '
         'and reading_priority_reason (string). '
-        'background_zh should explain the field context and motivation in 1-2 sentences. '
-        'problem_zh should explain the task and why it matters now. '
-        'approach_zh should explain the main mechanism or modeling move. '
+        'The fields must be short and non-overlapping so they can be recomposed into one concise mini-analysis. '
+        'background_zh, problem_zh, approach_zh, evidence_zh, value_zh should each stay to one high-signal sentence. '
+        'summary_zh should already read like a compact editor assessment instead of a field dump. '
         'evidence_zh should state what the abstract actually claims about evaluation, or say the abstract does not make it clear. '
-        'value_zh should explain the likely research or engineering value if the paper works as claimed. '
         'open_questions should list the most important things to verify when reading the full paper.'
     )
     editorial_instructions = build_editorial_instruction_text(config)

@@ -45,11 +45,12 @@ def build_instruction_blocks(repo_root: Path, config: Dict[str, Any]) -> List[st
         '2. 不要编造实验细节、性能数字、作者背景、代码链接。\n'
         '3. 如果摘要信息不足，要明确写出“摘要没有充分说明”。\n'
         '4. JSON 结构必须匹配提供的 schema。\n'
-        '5. `summary_zh` 控制在 2 到 4 句。\n'
-        '6. `background_zh` 要先交代研究背景和动机，`problem_zh`、`approach_zh`、`evidence_zh` 要分别回答“问题是什么/方法是什么/摘要给了什么证据”。\n'
-        '7. `value_zh` 要说明这篇工作如果成立，对研究或工程有什么实际价值。\n'
+        '5. `summary_zh` 控制在 2 到 3 句，写成一段可直接放上日报的短评。\n'
+        '6. `background_zh`、`problem_zh`、`approach_zh`、`evidence_zh`、`value_zh` 都尽量各用 1 句，并且彼此不要重复改写同一个意思。\n'
+        '7. `evidence_zh` 只说摘要真的提供了什么证据；如果没有讲清楚，就直接写“摘要没有充分说明”。\n'
         '8. `open_questions` 给出 2 到 3 个读论文时最该核对的具体问题。\n'
-        '9. `core_contributions`、`why_read`、`risks` 都尽量具体，避免泛泛而谈。',
+        '9. `core_contributions`、`why_read`、`risks` 都尽量具体，避免泛泛而谈。\n'
+        '10. 目标不是把字段写满，而是让这些字段最后能拼成一则短而准的 mini analysis。',
     ]
     if editorial_instructions:
         instruction_blocks.append('仓库编辑偏好：\n' + editorial_instructions)

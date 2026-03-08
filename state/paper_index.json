@@ -7,8 +7,6 @@
       "domain": "LLM Inference Systems",
       "published": "2026-03-05T14:20:22Z",
       "source_lane": "fresh",
-      "analysis_priority_rank": 4,
-      "selected_for_full_analysis": false,
       "topics": [
         "speculative decoding",
         "vocabulary trimming",
@@ -26,25 +24,21 @@
         {
           "date": "2026-03-07",
           "recommendation": 9.3,
-          "analysis_candidate": 7.45,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.3,
-          "analysis_candidate": 7.45,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.3,
-          "analysis_candidate": 7.45,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.3,
-          "analysis_candidate": 7.45,
           "lane": "fresh"
         }
       ],
@@ -56,60 +50,66 @@
       "domain": "LLM Inference Systems",
       "published": "2026-02-05T18:59:30Z",
       "source_lane": "fresh",
-      "analysis_priority_rank": 1,
-      "selected_for_full_analysis": true,
       "topics": [
+        "LLM 推理系统",
         "speculative decoding",
-        "block diffusion",
-        "parallel drafting",
-        "LLM inference systems",
-        "latency optimization"
+        "块扩散模型",
+        "并行草稿生成",
+        "acceptance rate",
+        "低时延推理"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 6,
+      "recommended_count": 9,
       "scores_history": [
         {
           "date": "2026-03-08",
           "recommendation": 9.8,
-          "analysis_candidate": 9.28,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 9.8,
-          "analysis_candidate": 9.28,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 9.8,
-          "analysis_candidate": 9.28,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 9.8,
-          "analysis_candidate": 9.28,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 9.8,
-          "analysis_candidate": 9.28,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 9.8,
-          "analysis_candidate": 9.28,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.8,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.8,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.8,
           "lane": "fresh"
         }
       ],
-      "last_analysis_date": "2026-03-08",
-      "analyzed_count": 1,
       "cooldown_until": "2026-05-07"
     },
     {
@@ -118,8 +118,6 @@
       "domain": "LLM Inference Systems",
       "published": "2026-03-05T18:24:49Z",
       "source_lane": "fresh",
-      "analysis_priority_rank": 1,
-      "selected_for_full_analysis": true,
       "topics": [
         "FlashAttention",
         "Blackwell GPU",
@@ -137,54 +135,44 @@
         {
           "date": "2026-03-07",
           "recommendation": 9.38,
-          "analysis_candidate": 9.81,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.38,
-          "analysis_candidate": 9.81,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.38,
-          "analysis_candidate": 9.81,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.38,
-          "analysis_candidate": 9.81,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.38,
-          "analysis_candidate": 10.0,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.38,
-          "analysis_candidate": 10.0,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.38,
-          "analysis_candidate": 10.0,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.38,
-          "analysis_candidate": 10.0,
           "lane": "fresh"
         }
       ],
-      "last_analysis_date": "2026-03-07",
-      "analyzed_count": 8,
       "cooldown_until": "2027-03-07"
     },
     {
@@ -193,8 +181,6 @@
       "domain": "LLM Inference Systems",
       "published": "2022-10-31",
       "source_lane": "classic",
-      "analysis_priority_rank": 0,
-      "selected_for_full_analysis": false,
       "topics": [
         "后训练量化",
         "GPTQ",
@@ -211,49 +197,41 @@
         {
           "date": "2026-03-07",
           "recommendation": 9.45,
-          "analysis_candidate": 9.94,
           "lane": "classic"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.45,
-          "analysis_candidate": 9.94,
           "lane": "classic"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.45,
-          "analysis_candidate": 9.94,
           "lane": "classic"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.45,
-          "analysis_candidate": 9.94,
           "lane": "classic"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.45,
-          "analysis_candidate": 9.94,
           "lane": "classic"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.45,
-          "analysis_candidate": 9.94,
           "lane": "classic"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.45,
-          "analysis_candidate": 9.94,
           "lane": "classic"
         },
         {
           "date": "2026-03-07",
           "recommendation": 6.83,
-          "analysis_candidate": 4.88,
           "lane": "classic"
         }
       ],
@@ -265,56 +243,63 @@
       "domain": "LLM Inference Systems",
       "published": "2026-02-05T18:54:48Z",
       "source_lane": "fresh",
-      "analysis_priority_rank": 2,
-      "selected_for_full_analysis": false,
       "topics": [
-        "LLM推理系统",
+        "LLM推理",
         "多token预测",
-        "在线自蒸馏",
+        "自蒸馏",
         "解码加速",
-        "自回归语言模型",
-        "speculative decoding替代"
+        "speculative decoding",
+        "serving效率"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 6,
+      "recommended_count": 9,
       "scores_history": [
         {
           "date": "2026-03-08",
           "recommendation": 9.27,
-          "analysis_candidate": 7.57,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 9.27,
-          "analysis_candidate": 7.57,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 9.27,
-          "analysis_candidate": 7.57,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 9.27,
-          "analysis_candidate": 7.57,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 9.27,
-          "analysis_candidate": 7.57,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 9.27,
-          "analysis_candidate": 7.57,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.27,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.27,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.27,
           "lane": "fresh"
         }
       ],
@@ -326,8 +311,6 @@
       "domain": "LLM Inference Systems",
       "published": "2025",
       "source_lane": "established",
-      "analysis_priority_rank": 3,
-      "selected_for_full_analysis": false,
       "topics": [
         "LLM serving",
         "KV cache",
@@ -345,25 +328,21 @@
         {
           "date": "2026-03-07",
           "recommendation": 6.3,
-          "analysis_candidate": 5.25,
           "lane": "established"
         },
         {
           "date": "2026-03-07",
           "recommendation": 6.3,
-          "analysis_candidate": 5.25,
           "lane": "established"
         },
         {
           "date": "2026-03-07",
           "recommendation": 6.3,
-          "analysis_candidate": 5.25,
           "lane": "established"
         },
         {
           "date": "2026-03-07",
           "recommendation": 7.97,
-          "analysis_candidate": 7.95,
           "lane": "established"
         }
       ],
@@ -375,56 +354,63 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "published": "2026-02-05T19:24:05Z",
       "source_lane": "fresh",
-      "analysis_priority_rank": 3,
-      "selected_for_full_analysis": false,
       "topics": [
         "LLVM",
         "phase ordering",
-        "编译优化",
+        "细粒度优化",
+        "编译器优化",
         "静态特征",
-        "ML for compilers",
-        "Cbench"
+        "ML/LLM 编译优化"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 6,
+      "recommended_count": 9,
       "scores_history": [
         {
           "date": "2026-03-08",
           "recommendation": 7.22,
-          "analysis_candidate": 7.18,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 7.22,
-          "analysis_candidate": 7.18,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 7.22,
-          "analysis_candidate": 7.18,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 7.22,
-          "analysis_candidate": 7.18,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 7.22,
-          "analysis_candidate": 7.18,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 7.22,
-          "analysis_candidate": 7.18,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 7.22,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 7.22,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 7.22,
           "lane": "fresh"
         }
       ],
@@ -436,8 +422,6 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "published": "2025",
       "source_lane": "established",
-      "analysis_priority_rank": 5,
-      "selected_for_full_analysis": false,
       "topics": [
         "GPU kernel JIT",
         "LLVM IR",
@@ -454,25 +438,21 @@
         {
           "date": "2026-03-07",
           "recommendation": 3.79,
-          "analysis_candidate": 3.73,
           "lane": "established"
         },
         {
           "date": "2026-03-07",
           "recommendation": 3.79,
-          "analysis_candidate": 3.73,
           "lane": "established"
         },
         {
           "date": "2026-03-07",
           "recommendation": 3.79,
-          "analysis_candidate": 3.73,
           "lane": "established"
         },
         {
           "date": "2026-03-07",
           "recommendation": 5.46,
-          "analysis_candidate": 5.43,
           "lane": "established"
         }
       ],
@@ -484,8 +464,6 @@
       "domain": "LLM Inference Systems",
       "published": "2024",
       "source_lane": "established",
-      "analysis_priority_rank": 4,
-      "selected_for_full_analysis": false,
       "topics": [
         "LLM推理",
         "KV cache",
@@ -503,25 +481,21 @@
         {
           "date": "2026-03-07",
           "recommendation": 6.3,
-          "analysis_candidate": 5.8,
           "lane": "established"
         },
         {
           "date": "2026-03-07",
           "recommendation": 6.3,
-          "analysis_candidate": 5.8,
           "lane": "established"
         },
         {
           "date": "2026-03-07",
           "recommendation": 6.3,
-          "analysis_candidate": 5.8,
           "lane": "established"
         },
         {
           "date": "2026-03-07",
           "recommendation": 7.97,
-          "analysis_candidate": 7.75,
           "lane": "established"
         }
       ],
@@ -533,8 +507,6 @@
       "domain": "LLM Inference Systems",
       "published": "2026-03-05T14:49:16Z",
       "source_lane": "fresh",
-      "analysis_priority_rank": 2,
-      "selected_for_full_analysis": false,
       "topics": [
         "LLM推理系统",
         "结构化稀疏",
@@ -552,49 +524,41 @@
         {
           "date": "2026-03-07",
           "recommendation": 9.55,
-          "analysis_candidate": 8.98,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.55,
-          "analysis_candidate": 8.98,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.55,
-          "analysis_candidate": 8.98,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.55,
-          "analysis_candidate": 8.98,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.55,
-          "analysis_candidate": 9.88,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.55,
-          "analysis_candidate": 9.88,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.55,
-          "analysis_candidate": 9.88,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.55,
-          "analysis_candidate": 9.88,
           "lane": "fresh"
         }
       ],
@@ -606,8 +570,6 @@
       "domain": "LLM Inference Systems",
       "published": "2026-03-05T01:41:09Z",
       "source_lane": "fresh",
-      "analysis_priority_rank": 3,
-      "selected_for_full_analysis": false,
       "topics": [
         "LLM 推理系统",
         "Prefill-Decode 解耦",
@@ -625,25 +587,21 @@
         {
           "date": "2026-03-07",
           "recommendation": 9.22,
-          "analysis_candidate": 7.89,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.22,
-          "analysis_candidate": 7.89,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.22,
-          "analysis_candidate": 7.89,
           "lane": "fresh"
         },
         {
           "date": "2026-03-07",
           "recommendation": 9.22,
-          "analysis_candidate": 7.89,
           "lane": "fresh"
         }
       ],
@@ -655,12 +613,10 @@
       "domain": "LLM Inference Systems",
       "published": "2026-02-05T19:58:48Z",
       "source_lane": "fresh",
-      "analysis_priority_rank": 4,
-      "selected_for_full_analysis": false,
       "topics": [
-        "diffusion 语言模型",
-        "可撤销解码",
+        "扩散语言模型",
         "并行解码",
+        "可撤销解码",
         "验证机制",
         "KV cache",
         "推理加速"
@@ -669,42 +625,51 @@
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 6,
+      "recommended_count": 9,
       "scores_history": [
         {
           "date": "2026-03-08",
           "recommendation": 6.97,
-          "analysis_candidate": 6.13,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 6.97,
-          "analysis_candidate": 6.13,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 6.97,
-          "analysis_candidate": 6.13,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 6.97,
-          "analysis_candidate": 6.13,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 6.97,
-          "analysis_candidate": 6.13,
           "lane": "fresh"
         },
         {
           "date": "2026-03-08",
           "recommendation": 6.97,
-          "analysis_candidate": 6.13,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 6.97,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 6.97,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 6.97,
           "lane": "fresh"
         }
       ],

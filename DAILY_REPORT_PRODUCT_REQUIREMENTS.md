@@ -1,8 +1,8 @@
 # Daily Report Product Requirements
 
-Status: active product requirements agreed on 2026-03-08.
+Status: active product requirements agreed on 2026-03-08, updated to remove full-paper-analysis features.
 
-This file is the source of truth for future homepage, daily report, and deep-dive behavior. If older code paths or docs assume "generate a paper page for every recommended paper", these requirements override that assumption.
+This file is the source of truth for future homepage and daily report behavior. If older code paths or docs assume "generate a paper page for every recommended paper" or any separate full-analysis product, these requirements override that assumption.
 
 ## Primary Product Shape
 
@@ -12,8 +12,7 @@ Target information architecture:
 
 - Default output: `content/daily/YYYY-MM-DD.md`
 - Default reading experience: one strong daily report that already supports read / skip decisions
-- Optional deep analysis output: only generated when the user explicitly asks for it
-- Preferred deep-analysis path: `content/deep-dives/`
+- No separate full-analysis output as part of the product
 
 ## Confirmed User Preferences
 
@@ -58,15 +57,15 @@ Requirements:
 - The daily page should contain the main analysis for all recommended papers.
 - If a lightweight internal state artifact is useful for indexing or caching, it may exist, but it should not define the public reading experience.
 
-### 4. Full paper analysis should be on-demand only
+### 4. No separate full paper analysis product
 
-The most detailed analysis should be generated only when the user is interested in a specific paper.
+The product should not include a separate full-paper-analysis workflow or public page type.
 
 Requirements:
 
-- No automatic full-analysis page is required during the normal daily pipeline.
-- When the user explicitly requests a deep read of a paper, generate the most complete analysis available.
-- Deep-dive pages are a secondary product, not the default daily output.
+- Do not maintain a dedicated full-analysis generation stage in the daily pipeline.
+- Do not expose a separate deep-dive or full-analysis page type in the public site.
+- The daily report itself should carry the recommendation value.
 
 ### 5. Images and tables must serve the analysis
 
@@ -117,7 +116,7 @@ Requirements:
 
 - A classic paper may appear periodically on the daily page.
 - Classics should help build long-term systems background.
-- Classics do not need automatic full analysis by default.
+- Classics should stay lightweight and recommendation-oriented.
 
 ### 9. Quality is more important than time or token saving
 
@@ -144,6 +143,5 @@ Future code changes should move the repo toward this shape:
 1. Make the daily report the main public artifact.
 2. Expand each daily paper entry into a cohesive mini-analysis.
 3. Reduce dependence on default `content/papers/*` publication.
-4. Add an explicit on-demand deep-dive flow for user-selected papers.
-5. Keep images/tables only when they materially improve a daily recommendation.
-6. Keep the site navigation centered on daily reports and user-requested deep dives.
+4. Keep images/tables only when they materially improve a daily recommendation.
+5. Keep the site navigation centered on daily reports only.

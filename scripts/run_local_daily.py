@@ -29,17 +29,6 @@ def load_config(repo_root: Path) -> tuple[Path, Dict[str, Any]]:
     config = yaml.safe_load(config_path.read_text(encoding='utf-8')) or {}
     return config_path, config
 
-
-def auto_run_full_analysis(config: Dict[str, Any]) -> bool:
-    analysis = config.get('analysis', {}) if isinstance(config, dict) else {}
-    if not isinstance(analysis, dict):
-        return False
-    enabled = bool(analysis.get('enabled', True))
-    auto_run = bool(analysis.get('auto_run_in_daily', False))
-    top_n = int(analysis.get('top_n', 0) or 0)
-    return enabled and auto_run and top_n > 0
-
-
 def run(cmd: List[str], *, cwd: Path, env: Dict[str, str] | None = None) -> None:
     logger.info('Running: %s', ' '.join(cmd))
     subprocess.run(cmd, cwd=str(cwd), check=True, env=env)
@@ -165,23 +154,11 @@ def main() -> int:
     else:
         enriched_file = 'state/arxiv_filtered.json'
 
-    analyzed_file = enriched_file
-    if args.enricher == 'codex' and auto_run_full_analysis(config):
-        analyzed_file = 'state/arxiv_analyzed.json'
-        run([
-            sys.executable,
-            str(repo_root / 'scripts' / 'codex_full_paper_analysis.py'),
-            '--config', str(config_path),
-            '--input', enriched_file,
-            '--output', analyzed_file,
-            '--strict',
-        ], cwd=repo_root, env={**os.environ, 'PATH': f"{Path.home() / '.npm-global' / 'bin'}:{os.environ.get('PATH', '')}"})
-
     run([
         sys.executable,
         str(repo_root / 'scripts' / 'publish_daily.py'),
         '--config', str(config_path),
-        '--input', analyzed_file,
+        '--input', enriched_file,
     ], cwd=repo_root)
 
     if not args.skip_build:

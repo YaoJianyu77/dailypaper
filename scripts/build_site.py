@@ -16,13 +16,10 @@ import yaml
 from content_store import (
     get_content_root,
     get_daily_root,
-    get_deep_dives_root,
     get_meta_root,
     get_paper_assets_root,
     get_papers_root,
     get_repo_root,
-    iter_deep_dive_files,
-    iter_paper_note_files,
     load_markdown,
     read_json,
 )
@@ -376,10 +373,7 @@ def copy_asset_dirs(repo_root: Path, dist_root: Path) -> None:
 def build_sidebar(
     latest: Dict,
     daily_index: List[Dict],
-    deep_dives: List[Tuple[Dict, Path]],
     base_url: str,
-    *,
-    show_deep_dives: bool,
 ) -> str:
     latest_html = '<p class="meta">No daily report published yet.</p>'
     if latest:
@@ -394,19 +388,6 @@ def build_sidebar(
         '<h3>Recent Reports</h3>'
         f'<ul class="list">{archive_items}</ul>'
     ]
-
-    if show_deep_dives:
-        paper_item_parts = []
-        for frontmatter, path in deep_dives[:12]:
-            slug = frontmatter.get('slug', path.parent.name)
-            title = html.escape(frontmatter.get('title', path.parent.name))
-            href = apply_base_url(f'/deep-dives/{slug}/', base_url)
-            paper_item_parts.append(f'<li><a href="{href}">{title}</a></li>')
-        paper_items = ''.join(paper_item_parts) or '<li class="meta">No deep dives yet.</li>'
-        sections.extend([
-            '<h3>Deep Dives</h3>',
-            f'<ul class="list">{paper_items}</ul>',
-        ])
 
     return ''.join(sections)
 
@@ -426,17 +407,6 @@ def build_page(
     out_path.write_text(html_text, encoding='utf-8')
 
 
-def paper_doc_sort_key(item: Tuple[Dict, Path]) -> Tuple[int, int, str, str]:
-    frontmatter, path = item
-    selected = 1 if frontmatter.get('selected_for_full_analysis') else 0
-    try:
-        analysis_rank = int(frontmatter.get('analysis_priority_rank', 9999) or 9999)
-    except (TypeError, ValueError):
-        analysis_rank = 9999
-    updated = str(frontmatter.get('updated', '') or '')
-    return (-selected, analysis_rank, updated, path.as_posix())
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description='Build the static paper site')
     parser.add_argument('--repo-root', default=None, help='Repository root path')
@@ -448,8 +418,6 @@ def main() -> int:
     site_settings = settings.get('site', {})
     site_title = os.environ.get('SITE_TITLE', site_settings.get('title', DEFAULT_SITE_TITLE))
     base_url = normalize_base_url(os.environ.get('SITE_BASE_URL', site_settings.get('base_url', '')))
-    show_papers_nav = bool(site_settings.get('show_papers_nav', False))
-    show_deep_dives_nav = bool(site_settings.get('show_deep_dives_nav', False))
 
     dist_root = Path(args.output_dir)
     if not dist_root.is_absolute():
@@ -465,35 +433,13 @@ def main() -> int:
     latest = read_json(get_meta_root(repo_root) / 'latest.json', {}) or {}
     daily_index = read_json(get_meta_root(repo_root) / 'daily-index.json', []) or []
 
-    paper_docs = []
-    for path in iter_paper_note_files(get_papers_root(repo_root)):
-        frontmatter, body = load_markdown(path)
-        paper_docs.append((frontmatter, path))
-    paper_docs.sort(key=paper_doc_sort_key)
-
-    deep_dive_docs = []
-    for path in iter_deep_dive_files(get_deep_dives_root(repo_root)):
-        frontmatter, body = load_markdown(path)
-        deep_dive_docs.append((frontmatter, path))
-    deep_dive_docs.sort(key=paper_doc_sort_key)
-
     nav_links = [
         f'<a href="{apply_base_url("/", base_url)}">Home</a>',
         f'<a href="{apply_base_url("/archive/", base_url)}">Archive</a>',
     ]
-    if show_deep_dives_nav:
-        nav_links.append(f'<a href="{apply_base_url("/deep-dives/", base_url)}">Deep Dives</a>')
-    if show_papers_nav:
-        nav_links.append(f'<a href="{apply_base_url("/papers/", base_url)}">Papers</a>')
     nav_html = ''.join(nav_links)
 
-    sidebar_html = build_sidebar(
-        latest,
-        daily_index,
-        deep_dive_docs,
-        base_url,
-        show_deep_dives=show_deep_dives_nav,
-    )
+    sidebar_html = build_sidebar(latest, daily_index, base_url)
 
     daily_docs = []
     for path in sorted(get_daily_root(repo_root).glob('*.md'), reverse=True):
@@ -538,45 +484,6 @@ def main() -> int:
         f'- [{item["date"]}]({item["path"]})' for item in daily_index
     )
     build_page(dist_root, dist_root / 'archive' / 'index.html', site_title, 'Archive', archive_md, sidebar_html, nav_html, base_url)
-
-    deep_dives_md = '# Deep Dives\n\n' + '\n'.join(
-        f'- [{frontmatter.get("title", path.parent.name)}](/deep-dives/{frontmatter.get("slug", path.parent.name)}/)'
-        for frontmatter, path in deep_dive_docs
-    )
-    build_page(dist_root, dist_root / 'deep-dives' / 'index.html', site_title, 'Deep Dives', deep_dives_md, sidebar_html, nav_html, base_url)
-
-    for frontmatter, path in deep_dive_docs:
-        _, body = load_markdown(path)
-        slug = frontmatter.get('slug', path.parent.name)
-        build_page(
-            dist_root,
-            dist_root / 'deep-dives' / slug / 'index.html',
-            site_title,
-            frontmatter.get('title', slug),
-            body,
-            sidebar_html,
-            nav_html,
-            base_url,
-        )
-
-    papers_md = '# Papers\n\n' + '\n'.join(
-        f'- [{frontmatter.get("title", path.parent.name)}](/papers/{frontmatter.get("slug", path.parent.name)}/)' for frontmatter, path in paper_docs
-    )
-    build_page(dist_root, dist_root / 'papers' / 'index.html', site_title, 'Papers', papers_md, sidebar_html, nav_html, base_url)
-
-    for frontmatter, path in paper_docs:
-        _, body = load_markdown(path)
-        slug = frontmatter.get('slug', path.parent.name)
-        build_page(
-            dist_root,
-            dist_root / 'papers' / slug / 'index.html',
-            site_title,
-            frontmatter.get('title', slug),
-            body,
-            sidebar_html,
-            nav_html,
-            base_url,
-        )
 
     if content_root.exists():
         copy_asset_dirs(repo_root, dist_root)

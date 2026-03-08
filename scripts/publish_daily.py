@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Publish the daily report and optional deep-dive pages into the content store."""
+"""Publish the daily report into the content store."""
 
 from __future__ import annotations
 
@@ -20,13 +20,11 @@ import yaml
 from content_store import (
     get_content_root,
     get_daily_root,
-    get_deep_dives_root,
     get_meta_root,
     get_paper_assets_root,
     get_papers_root,
     get_repo_root,
     paper_slug,
-    relative_site_url,
     write_json,
     write_markdown,
 )
@@ -115,64 +113,6 @@ def paper_urls(paper_id: str, paper: Dict[str, Any] | None = None) -> tuple[str,
 def ai_fields(paper: Dict[str, Any]) -> Dict[str, Any]:
     return paper.get('ai', {}) if isinstance(paper.get('ai'), dict) else {}
 
-
-def full_analysis_fields(paper: Dict[str, Any]) -> Dict[str, Any]:
-    raw = paper.get('full_analysis', {})
-    if not isinstance(raw, dict) or not raw.get('enabled'):
-        return {}
-    content = raw.get('content', {})
-    return content if isinstance(content, dict) else {}
-
-
-def full_analysis_metadata(paper: Dict[str, Any]) -> Dict[str, Any]:
-    raw = paper.get('full_analysis', {})
-    if not isinstance(raw, dict) or not raw.get('enabled'):
-        return {}
-    metadata = raw.get('metadata', {})
-    return metadata if isinstance(metadata, dict) else {}
-
-
-def full_analysis_figure_context(paper: Dict[str, Any]) -> List[Dict[str, Any]]:
-    raw = paper.get('full_analysis', {})
-    if not isinstance(raw, dict) or not raw.get('enabled'):
-        return []
-    context = raw.get('figure_context', [])
-    if not isinstance(context, list):
-        return []
-    return [item for item in context if isinstance(item, dict)]
-
-
-def full_analysis_table_context(paper: Dict[str, Any]) -> List[Dict[str, Any]]:
-    raw = paper.get('full_analysis', {})
-    if not isinstance(raw, dict) or not raw.get('enabled'):
-        return []
-    context = raw.get('table_context', [])
-    if not isinstance(context, list):
-        return []
-    return [item for item in context if isinstance(item, dict)]
-
-
-def full_analysis_score_card(paper: Dict[str, Any]) -> Dict[str, int]:
-    full = full_analysis_fields(paper)
-    card = full.get('score_card', {})
-    if not isinstance(card, dict):
-        return {}
-    result: Dict[str, int] = {}
-    for key in ['innovation', 'technical_quality', 'experimental_rigor', 'writing_clarity', 'practical_value']:
-        value = card.get(key)
-        if isinstance(value, int):
-            result[key] = max(1, min(10, value))
-    return result
-
-
-def full_analysis_related_work(paper: Dict[str, Any]) -> List[Dict[str, str]]:
-    full = full_analysis_fields(paper)
-    value = full.get('related_work_comparisons', [])
-    if not isinstance(value, list):
-        return []
-    return [item for item in value if isinstance(item, dict)]
-
-
 def clean_render_text(value: Any) -> str:
     text = str(value or '').replace('\r', ' ').replace('\n', ' ').replace('\u200b', ' ').strip()
     text = re.sub(r'\s+', ' ', text)
@@ -180,6 +120,16 @@ def clean_render_text(value: Any) -> str:
     if len(text) >= 2 and text[0] == text[-1] and text[0] in {"'", '"', '`'}:
         text = text[1:-1].strip()
     return text.strip(' ,;:|')
+
+
+def clip_text(text: str, max_chars: int) -> str:
+    value = clean_render_text(text)
+    if len(value) <= max_chars:
+        return value
+    clipped = value[: max(0, max_chars - 1)].rsplit(' ', 1)[0].strip()
+    if not clipped:
+        clipped = value[: max(0, max_chars - 1)].strip()
+    return clipped + '…'
 
 
 def clean_institution_name(value: Any) -> str:
@@ -279,8 +229,7 @@ def paper_institutions(paper: Dict[str, Any]) -> List[str]:
         if institutions:
             return institutions
 
-    metadata = full_analysis_metadata(paper)
-    return normalize_string_list(metadata.get('institutions'), limit=8, cleaner=clean_institution_name)
+    return []
 
 
 def paper_venue_or_journal(paper: Dict[str, Any]) -> str:
@@ -370,29 +319,25 @@ def join_analysis_text(values: List[Any], limit: int | None = None) -> str:
 
 def daily_context_text(paper: Dict[str, Any]) -> str:
     ai = ai_fields(paper)
-    full = full_analysis_fields(paper)
     return join_analysis_text([
-        analysis_value(full, ai, 'background_zh', 'background_zh'),
-        analysis_value(full, ai, 'problem_zh', 'problem_zh'),
+        ai.get('background_zh'),
+        ai.get('problem_zh'),
     ])
 
 
 def daily_method_evidence_text(paper: Dict[str, Any]) -> str:
     ai = ai_fields(paper)
-    full = full_analysis_fields(paper)
     return join_analysis_text([
-        analysis_value(full, ai, 'method_overview_zh', 'approach_zh'),
-        analysis_value(full, ai, 'experiment_setup_zh', 'evidence_zh'),
-        full.get('main_results_zh'),
+        ai.get('approach_zh'),
+        ai.get('evidence_zh'),
     ])
 
 
 def daily_value_text(paper: Dict[str, Any]) -> str:
     ai = ai_fields(paper)
-    full = full_analysis_fields(paper)
     why_read = normalize_string_list(ai.get('why_read', []), limit=2)
     return join_analysis_text([
-        analysis_value(full, ai, 'practical_value_zh', 'value_zh'),
+        ai.get('value_zh'),
         ai.get('reading_priority_reason'),
         '；'.join(why_read) if why_read else '',
     ])
@@ -400,9 +345,35 @@ def daily_value_text(paper: Dict[str, Any]) -> str:
 
 def daily_risk_text(paper: Dict[str, Any]) -> str:
     ai = ai_fields(paper)
-    full = full_analysis_fields(paper)
-    risks = normalize_string_list(full.get('limitations', []) or ai.get('risks', []), limit=3)
+    risks = normalize_string_list(ai.get('risks', []), limit=3)
     return '；'.join(unique_texts(risks, limit=3))
+
+
+def compact_analysis_text(paper: Dict[str, Any]) -> str:
+    primary = detail_summary(paper)
+    parts: List[str] = []
+    if primary and primary != summarize_paper(paper):
+        parts.append(primary)
+    else:
+        parts.extend([
+            daily_context_text(paper),
+            daily_method_evidence_text(paper),
+        ])
+    return clip_text(join_analysis_text(parts, limit=3), 420)
+
+
+def compact_evaluation_text(paper: Dict[str, Any]) -> str:
+    ai = ai_fields(paper)
+    why_read = normalize_string_list(ai.get('why_read', []), limit=1)
+    parts = [
+        ai.get('value_zh'),
+        why_read[0] if why_read else '',
+    ]
+    value_text = join_analysis_text(parts, limit=2)
+    risk_text = daily_risk_text(paper)
+    if value_text and risk_text:
+        return clip_text(f'{value_text} 但要先核对：{risk_text}', 280)
+    return clip_text(value_text or risk_text, 280)
 
 
 def selection_lane(paper: Dict[str, Any]) -> str:
@@ -438,16 +409,14 @@ def split_daily_papers(papers: List[Dict[str, Any]]) -> tuple[List[Dict[str, Any
     return primary, classics
 
 
-def deep_dive_paper(papers: List[Dict[str, Any]]) -> Dict[str, Any] | None:
-    candidates = [paper for paper in papers if selected_for_full_analysis(paper)]
-    if not candidates:
-        return papers[0] if papers else None
-    return min(
-        candidates,
+def lead_paper(papers: List[Dict[str, Any]]) -> Dict[str, Any] | None:
+    if not papers:
+        return None
+    return max(
+        papers,
         key=lambda paper: (
-            analysis_priority_rank(paper, 9999),
-            -float(paper.get('analysis_candidate_score', 0) or 0),
-            -float(paper.get('scores', {}).get('recommendation', 0) or 0),
+            float(paper.get('scores', {}).get('recommendation', 0) or 0),
+            str(paper.get('title') or '').lower(),
         ),
     )
 
@@ -457,22 +426,21 @@ def ordered_primary_papers(papers: List[Dict[str, Any]]) -> List[Dict[str, Any]]
     if not primary:
         return []
 
-    deep_dive = deep_dive_paper(primary)
+    lead = lead_paper(primary)
     remaining = [
         paper for paper in primary
         if normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
-        != normalize_paper_id((deep_dive or {}).get('arxiv_id') or (deep_dive or {}).get('arxivId') or (deep_dive or {}).get('id', ''))
+        != normalize_paper_id((lead or {}).get('arxiv_id') or (lead or {}).get('arxivId') or (lead or {}).get('id', ''))
     ]
     lane_rank = {'fresh': 0, 'established': 1, 'classic': 2}
     remaining.sort(
         key=lambda paper: (
             lane_rank.get(selection_lane(paper), 9),
             -float(paper.get('scores', {}).get('recommendation', 0) or 0),
-            -float(paper.get('analysis_candidate_score', 0) or 0),
             str(paper.get('title') or '').lower(),
         )
     )
-    return ([deep_dive] if deep_dive else []) + remaining
+    return ([lead] if lead else []) + remaining
 
 
 def inferred_top_themes(papers: List[Dict[str, Any]]) -> List[str]:
@@ -511,7 +479,7 @@ def build_overview(papers: List[Dict[str, Any]], paper_meta_map: Dict[str, Dict[
     primary, classics = split_daily_papers(papers)
     lane_counts = Counter(selection_lane(paper) for paper in papers)
     themes = inferred_top_themes(papers)
-    deep_dive = deep_dive_paper(papers)
+    lead = lead_paper(papers)
     parts: List[str] = []
 
     if themes:
@@ -527,95 +495,19 @@ def build_overview(papers: List[Dict[str, Any]], paper_meta_map: Dict[str, Dict[
     if mix:
         parts.append(f'本轮实际保留了{"、".join(mix)}，没有为凑数强行补满。')
 
-    if deep_dive:
-        paper_id = normalize_paper_id(deep_dive.get('arxiv_id') or deep_dive.get('arxivId') or deep_dive.get('id', ''))
-        page_url = paper_meta_map.get(paper_id, {}).get('page_url')
-        title = str(deep_dive.get('title') or 'Untitled Paper')
-        if page_url and full_analysis_fields(deep_dive):
-            parts.append(f'如果你今天只想深读一篇，优先看 [{title}]({page_url})。')
-        else:
-            parts.append(f'如果你今天只完整读一篇，优先从 {title} 开始。')
+    if lead:
+        title = str(lead.get('title') or 'Untitled Paper')
+        parts.append(f'如果你今天只想先判断一篇值不值得继续跟进，优先从 {title} 开始。')
 
     if classics:
         classic = classics[0]
         title = str(classic.get('title') or 'Untitled Paper')
-        parts.append(f'经典补课位是 {title}，主要用来补路线背景，不要求今天投入全文精读预算。')
+        parts.append(f'经典补课位是 {title}，主要用来补路线背景，不需要放到今天的优先阅读队列最前面。')
 
     if not primary and classics:
         parts.append('今天的新论文候选偏弱，因此结果以经典补课为主。')
 
     return ' '.join(parts)
-
-
-def analysis_value(full: Dict[str, Any], ai: Dict[str, Any], full_key: str, ai_key: str | None = None) -> Any:
-    value = full.get(full_key)
-    if value:
-        return value
-    if ai_key:
-        return ai.get(ai_key)
-    return None
-
-
-def paper_url_by_id(repo_root: Path, papers: List[Dict[str, Any]], paper_id: str, fallback_title: str = '') -> str | None:
-    normalized = normalize_paper_id(paper_id)
-    if not normalized:
-        return None
-    for paper in papers:
-        current_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
-        if current_id == normalized:
-            slug = paper_slug(current_id, str(paper.get('title') or fallback_title or 'paper'))
-            deep_dive_path = get_deep_dives_root(repo_root) / slug / 'index.md'
-            if deep_dive_path.exists():
-                return relative_site_url(deep_dive_path, repo_root)
-            legacy_path = get_papers_root(repo_root) / slug / 'index.md'
-            if legacy_path.exists():
-                return relative_site_url(legacy_path, repo_root)
-    if fallback_title:
-        slug = paper_slug(normalized, fallback_title)
-        for root in (get_deep_dives_root(repo_root), get_papers_root(repo_root)):
-            path = root / slug / 'index.md'
-            if path.exists():
-                return relative_site_url(path, repo_root)
-    return None
-
-
-def scorecard_lines(score_card: Dict[str, int]) -> List[str]:
-    if not score_card:
-        return []
-    labels = {
-        'innovation': 'Innovation',
-        'technical_quality': 'Technical Quality',
-        'experimental_rigor': 'Experimental Rigor',
-        'writing_clarity': 'Writing Clarity',
-        'practical_value': 'Practical Value',
-    }
-    avg = round(sum(score_card.values()) / len(score_card), 1)
-    lines = [
-        '',
-        '## Scorecard',
-        f'- Overall: {avg}/10',
-    ]
-    for key in ['innovation', 'technical_quality', 'experimental_rigor', 'writing_clarity', 'practical_value']:
-        if key in score_card:
-            lines.append(f'- {labels[key]}: {score_card[key]}/10')
-    return lines
-
-
-def related_work_lines(repo_root: Path, papers: List[Dict[str, Any]], comparisons: List[Dict[str, str]]) -> List[str]:
-    if not comparisons:
-        return []
-    lines = ['', '## Related Paper Comparisons']
-    for item in comparisons[:3]:
-        paper_id = normalize_paper_id(item.get('paper_id') or '')
-        title = clean_render_text(item.get('title') or paper_id or 'Related paper')
-        relation = clean_render_text(item.get('relation') or 'related')
-        comparison = clean_render_text(item.get('comparison_zh') or '')
-        url = paper_url_by_id(repo_root, papers, paper_id, title)
-        if url:
-            lines.append(f'- [{title}]({url}) ({relation}): {comparison}')
-        else:
-            lines.append(f'- {title} ({relation}): {comparison}')
-    return lines
 
 
 def author_text(paper: Dict[str, Any]) -> str:
@@ -701,11 +593,7 @@ def publish_settings(config: Dict[str, Any]) -> Dict[str, Any]:
     raw = config.get('publish', {}) if isinstance(config, dict) else {}
     if not isinstance(raw, dict):
         raw = {}
-    generate_deep_dives = raw.get('generate_deep_dives')
-    if generate_deep_dives is None:
-        generate_deep_dives = raw.get('generate_paper_pages', False)
     return {
-        'generate_deep_dives': bool(generate_deep_dives),
         'link_keywords_to_notes': bool(raw.get('link_keywords_to_notes', False)),
     }
 
@@ -718,7 +606,6 @@ def history_settings(config: Dict[str, Any]) -> Dict[str, Any]:
         'index_path': str(raw.get('index_path') or 'state/paper_index.json').strip() or 'state/paper_index.json',
         'recommended_cooldown_days': max(0, int(raw.get('recommended_cooldown_days', 60))),
         'classic_recommended_cooldown_days': max(0, int(raw.get('classic_recommended_cooldown_days', 21))),
-        'analyzed_cooldown_days': max(0, int(raw.get('analyzed_cooldown_days', 365))),
     }
 
 
@@ -766,12 +653,14 @@ def update_paper_index(repo_root: Path, config: Dict[str, Any], papers: List[Dic
         item['domain'] = str(paper.get('matched_domain') or item.get('domain') or '').strip()
         item['published'] = str(paper.get('published') or paper.get('publicationDate') or item.get('published') or '').strip()
         item['source_lane'] = str(paper.get('selection_lane') or item.get('source_lane') or '').strip()
-        item['analysis_priority_rank'] = analysis_priority_rank(paper)
-        item['selected_for_full_analysis'] = bool(paper.get('selected_for_full_analysis'))
         item['topics'] = normalize_string_list(
             ai_fields(paper).get('keywords') or paper.get('matched_keywords') or item.get('topics') or [],
             limit=12,
         )
+        item.pop('analysis_priority_rank', None)
+        item.pop('selected_for_full_analysis', None)
+        item.pop('last_analysis_date', None)
+        item.pop('analyzed_count', None)
         item['reading_status'] = str(item.get('reading_status') or 'unread')
         item['first_seen_date'] = str(item.get('first_seen_date') or report_date)
         item['last_seen_date'] = report_date
@@ -784,21 +673,14 @@ def update_paper_index(repo_root: Path, config: Dict[str, Any], papers: List[Dic
         scores_history.append({
             'date': report_date,
             'recommendation': float(paper.get('scores', {}).get('recommendation', 0) or 0),
-            'analysis_candidate': float(paper.get('analysis_candidate_score', 0) or 0),
             'lane': item['source_lane'],
         })
         item['scores_history'] = scores_history[-12:]
 
-        full_analysis = paper.get('full_analysis', {})
-        if isinstance(full_analysis, dict) and full_analysis.get('enabled'):
-            item['last_analysis_date'] = report_date
-            item['analyzed_count'] = int(item.get('analyzed_count', 0)) + 1
-            cooldown = report_dt + timedelta(days=settings['analyzed_cooldown_days'])
-        else:
-            recommended_cooldown_days = settings['recommended_cooldown_days']
-            if item['source_lane'] == 'classic':
-                recommended_cooldown_days = settings['classic_recommended_cooldown_days']
-            cooldown = report_dt + timedelta(days=recommended_cooldown_days)
+        recommended_cooldown_days = settings['recommended_cooldown_days']
+        if item['source_lane'] == 'classic':
+            recommended_cooldown_days = settings['classic_recommended_cooldown_days']
+        cooldown = report_dt + timedelta(days=recommended_cooldown_days)
         item['cooldown_until'] = cooldown.strftime('%Y-%m-%d')
         existing[key] = item
 
@@ -837,25 +719,10 @@ def related_paper_ids(current_paper: Dict[str, Any], papers: List[Dict[str, Any]
     return [paper_id for _, _, paper_id in scored[:limit]]
 
 
-def analysis_priority_rank(paper: Dict[str, Any], fallback_rank: int = 0) -> int:
-    try:
-        rank = int(paper.get('analysis_priority_rank', 0) or 0)
-    except (TypeError, ValueError):
-        rank = 0
-    return rank if rank > 0 else fallback_rank
-
-
-def selected_for_full_analysis(paper: Dict[str, Any], fallback_rank: int = 0) -> bool:
-    if bool(paper.get('selected_for_full_analysis')):
-        return True
-    rank = analysis_priority_rank(paper, fallback_rank)
-    return bool(rank and rank <= 1)
-
-
 def rich_asset_enabled(paper: Dict[str, Any], settings: Dict[str, Any], fallback_rank: int) -> bool:
     if not settings['enabled']:
         return False
-    return analysis_priority_rank(paper, fallback_rank) <= settings['auto_extract_top_n']
+    return fallback_rank <= settings['auto_extract_top_n']
 
 
 def normalize_graph_edge_type(value: str) -> str:
@@ -1028,33 +895,6 @@ def contextual_figure_entries(repo_root: Path, asset_dir: Path, paper: Dict[str,
 
     entries: List[Dict[str, Any]] = []
     used_paths: set[str] = set()
-    for item in full_analysis_figure_context(paper):
-        image_path = resolve_image_file(image_files, item.get('image_token') or item.get('image_ref') or '')
-        if not image_path or str(image_path) in used_paths:
-            continue
-        used_paths.add(str(image_path))
-        caption = str(item.get('caption') or '').strip()
-        inferred_role = classify_figure_role(f'{caption} {image_path.stem}')
-        role = inferred_role if inferred_role != 'other' else str(item.get('role_hint') or '').strip() or 'other'
-        entries.append({
-            'path': image_path,
-            'url': relative_asset_url(image_path, repo_root),
-            'caption': caption,
-            'role': role,
-        })
-
-    if entries:
-        for path in image_files:
-            if str(path) in used_paths:
-                continue
-            entries.append({
-                'path': path,
-                'url': relative_asset_url(path, repo_root),
-                'caption': '',
-                'role': classify_figure_role(path.stem),
-            })
-        return entries[:limit] if limit else entries
-
     fallback_files = image_files[:limit] if limit else image_files
     for path in fallback_files:
         entries.append({
@@ -1188,8 +1028,10 @@ def daily_feature_figure(repo_root: Path, asset_dir: Path, paper: Dict[str, Any]
 
 
 def daily_feature_table(paper: Dict[str, Any]) -> Dict[str, Any]:
-    entries = full_analysis_table_context(paper)
+    entries = paper.get('daily_tables')
     if not entries:
+        return {}
+    if not isinstance(entries, list):
         return {}
     used: set[int] = set()
     preferred = (
@@ -1223,24 +1065,9 @@ def maybe_update_graph(repo_root: Path, paper: Dict[str, Any], papers: List[Dict
         '--domain', str(paper.get('matched_domain') or 'Uncategorized'),
         '--score', str(float(paper.get('scores', {}).get('recommendation', 0) or 0)),
     ]
-    semantic_targets = {
-        normalize_paper_id(item.get('paper_id') or '')
-        for item in full_analysis_related_work(paper)
-        if normalize_paper_id(item.get('paper_id') or '')
-    }
-    related = [
-        item for item in related_paper_ids(paper, papers, settings['max_graph_related'])
-        if item not in semantic_targets
-    ]
+    related = related_paper_ids(paper, papers, settings['max_graph_related'])
     if related:
         cmd.extend(['--related', *related])
-    for item in full_analysis_related_work(paper):
-        target_id = normalize_paper_id(item.get('paper_id') or '')
-        if not target_id:
-            continue
-        edge_type = normalize_graph_edge_type(item.get('relation') or '')
-        weight = 0.8 if edge_type in {'improves', 'extends'} else 0.7
-        cmd.extend(['--related-spec', f'{target_id}|{edge_type}|{weight}'])
 
     try:
         subprocess.run(cmd, check=True, capture_output=True, text=True)
@@ -1258,19 +1085,8 @@ def legacy_paper_note_dir(repo_root: Path, paper: Dict[str, Any]) -> Path:
     return get_papers_root(repo_root) / paper_storage_slug(paper)
 
 
-def deep_dive_note_dir(repo_root: Path, paper: Dict[str, Any]) -> Path:
-    return get_deep_dives_root(repo_root) / paper_storage_slug(paper)
-
-
 def paper_asset_dir(repo_root: Path, paper: Dict[str, Any]) -> Path:
     return get_paper_assets_root(repo_root) / paper_storage_slug(paper)
-
-
-def should_publish_deep_dive(paper: Dict[str, Any], publish_cfg: Dict[str, Any]) -> bool:
-    if publish_cfg.get('generate_deep_dives'):
-        return True
-    return bool(full_analysis_fields(paper))
-
 
 def collect_daily_publication_meta(
     repo_root: Path,
@@ -1285,244 +1101,8 @@ def collect_daily_publication_meta(
 
     enable_rich_assets = rich_asset_enabled(paper, settings, rank)
     daily_figure = daily_feature_figure(repo_root, asset_dir, paper, settings) if enable_rich_assets else {}
-    daily_table = daily_feature_table(paper) if full_analysis_fields(paper) else {}
+    daily_table = daily_feature_table(paper)
     result: Dict[str, str] = {}
-    if daily_figure.get('url'):
-        result['daily_figure_url'] = daily_figure['url']
-    if daily_figure.get('caption'):
-        result['daily_figure_caption'] = daily_figure['caption']
-    if daily_figure.get('alt'):
-        result['daily_figure_alt'] = daily_figure['alt']
-    if daily_figure.get('role'):
-        result['daily_figure_role'] = daily_figure['role']
-    if daily_table.get('caption'):
-        result['daily_table_caption'] = daily_table['caption']
-    if daily_table.get('rows'):
-        result['daily_table_rows'] = daily_table['rows']
-    if daily_table.get('role'):
-        result['daily_table_role'] = daily_table['role']
-    return result
-
-
-def ensure_deep_dive_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[str, Any]], settings: Dict[str, Any], rank: int) -> Dict[str, str]:
-    paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
-    title = paper.get('title', 'Untitled Paper').strip()
-    note_dir = deep_dive_note_dir(repo_root, paper)
-    asset_dir = paper_asset_dir(repo_root, paper)
-    slug = note_dir.name
-    note_path = note_dir / 'index.md'
-    source_url, pdf_url = paper_urls(paper_id, paper)
-    ai = ai_fields(paper)
-    full = full_analysis_fields(paper)
-    institutions = paper_institutions(paper)
-    venue_or_journal = paper_venue_or_journal(paper)
-    citation_summary = paper_citation_summary(paper)
-
-    maybe_extract_images(repo_root, asset_dir, paper, settings, rank)
-    maybe_update_graph(repo_root, paper, papers, settings)
-
-    enable_rich_assets = rich_asset_enabled(paper, settings, rank)
-    figure_entries = contextual_figure_entries(repo_root, asset_dir, paper, settings['max_images_per_paper']) if enable_rich_assets else []
-    table_entries = full_analysis_table_context(paper)[:3]
-    used_figure_paths: set[str] = set()
-    used_table_indexes: set[int] = set()
-    method_figure = pick_figure(figure_entries, ['method', 'other', 'examples'], used_figure_paths)
-    results_figure = pick_figure(figure_entries, ['results', 'examples', 'other'], used_figure_paths)
-    analysis_figure = pick_figure(figure_entries, ['results', 'examples', 'other'], used_figure_paths)
-    method_table = pick_table(table_entries, ['method', 'other'], used_table_indexes) if table_entries else None
-    results_table = pick_table(table_entries, ['results', 'other'], used_table_indexes) if table_entries else None
-    remaining_figures = [
-        entry for entry in figure_entries
-        if str(entry['path']) not in used_figure_paths
-    ]
-    daily_figure = daily_feature_figure(repo_root, asset_dir, paper, settings) if enable_rich_assets else {}
-    daily_table = daily_feature_table(paper) if full else {}
-
-    frontmatter = {
-        'paper_id': paper_id,
-        'title': title,
-        'authors': paper.get('authors', []) if isinstance(paper.get('authors', []), list) else [author_text(paper)],
-        'domain': paper.get('matched_domain', 'Uncategorized'),
-        'slug': slug,
-        'published': paper.get('published', paper.get('publicationDate', '')),
-        'summary': summarize_paper(paper),
-        'source_url': source_url,
-        'pdf_url': pdf_url,
-        'scores': paper.get('scores', {}),
-        'tags': ['deep-dive'],
-        'status': 'generated',
-        'updated': datetime.now().strftime('%Y-%m-%d'),
-    }
-    if institutions:
-        frontmatter['institutions'] = institutions
-    if venue_or_journal:
-        frontmatter['venue_or_journal'] = venue_or_journal
-    frontmatter['citation_summary'] = citation_summary
-    if ai.get('keywords'):
-        frontmatter['keywords'] = ai.get('keywords', [])
-    if ai.get('reading_priority'):
-        frontmatter['reading_priority'] = ai.get('reading_priority')
-    frontmatter['analysis_priority_rank'] = analysis_priority_rank(paper, rank)
-    frontmatter['selected_for_full_analysis'] = selected_for_full_analysis(paper, rank)
-    if figure_entries:
-        frontmatter['image_count'] = len(figure_entries)
-    if table_entries:
-        frontmatter['table_count'] = len(table_entries)
-    if full:
-        frontmatter['analysis_depth'] = 'full'
-        frontmatter['full_analysis_source'] = str(paper.get('full_analysis', {}).get('source_kind') or '')
-
-    body_lines = [
-        f'# {title}',
-        '',
-        '## TL;DR',
-        summarize_paper(paper),
-        '',
-        '## 中文摘要',
-        detail_summary(paper),
-        '',
-        '## Quick Facts',
-        f'- Paper ID: `{paper_id}`',
-        f'- Authors: {author_text(paper) or "Unknown"}',
-        f'- Institutions: {", ".join(institutions) if institutions else "Institution information not extracted"}',
-        f'- Domain: {paper.get("matched_domain", "Uncategorized")}',
-        f'- Venue / Journal: {venue_or_journal}',
-        f'- Citations: {citation_summary}',
-        f'- Published: {paper.get("published", paper.get("publicationDate", "Unknown"))}',
-        f'- Source page: [open]({source_url})',
-        f'- PDF: [download]({pdf_url})' if pdf_url else '- PDF: not found from current source metadata',
-        f'- Reading priority: {ai.get("reading_priority", "medium")}',
-    ]
-
-    if ai.get('reading_priority_reason'):
-        body_lines.append(f'- Why this priority: {ai.get("reading_priority_reason")}')
-
-    if full.get('abstract_translation_zh'):
-        body_lines.extend([
-            '',
-            '## Abstract Translation',
-            full.get('abstract_translation_zh', ''),
-        ])
-    if analysis_value(full, ai, 'background_zh', 'background_zh'):
-        body_lines.extend([
-            '',
-            '## Research Background And Motivation',
-            analysis_value(full, ai, 'background_zh', 'background_zh'),
-        ])
-    if analysis_value(full, ai, 'problem_zh', 'problem_zh'):
-        body_lines.extend([
-            '',
-            '## Problem Framing',
-            analysis_value(full, ai, 'problem_zh', 'problem_zh'),
-        ])
-    if analysis_value(full, ai, 'method_overview_zh', 'approach_zh'):
-        body_lines.extend([
-            '',
-            '## Method Overview',
-            analysis_value(full, ai, 'method_overview_zh', 'approach_zh'),
-        ])
-        if method_figure:
-            body_lines.extend(figure_block('Method Figure', method_figure))
-        if method_table:
-            body_lines.extend(table_block('Implementation Table', method_table))
-    bullet_section(body_lines, 'Method Details', full.get('method_details', []), limit=5)
-    if analysis_value(full, ai, 'experiment_setup_zh', 'evidence_zh'):
-        body_lines.extend([
-            '',
-            '## Experimental Setup And Evidence',
-            analysis_value(full, ai, 'experiment_setup_zh', 'evidence_zh'),
-        ])
-        if results_figure:
-            body_lines.extend(figure_block('Experiment Figure', results_figure))
-        if results_table:
-            body_lines.extend(table_block('Evidence Table', results_table))
-    bullet_section(body_lines, 'Datasets And Benchmarks', full.get('datasets_or_benchmarks', []), limit=6)
-    bullet_section(body_lines, 'Baselines', full.get('baselines', []), limit=6)
-    bullet_section(body_lines, 'Metrics', full.get('metrics', []), limit=6)
-    bullet_section(body_lines, 'Ablations And Analysis', full.get('ablation_or_analysis', []), limit=4)
-    if analysis_figure:
-        body_lines.extend(figure_block('Analysis Figure', analysis_figure))
-    bullet_section(body_lines, 'Evaluation Validity And Fairness', full.get('evaluation_validity', []), limit=4)
-    if full.get('main_results_zh'):
-        body_lines.extend([
-            '',
-            '## Main Results And Claims',
-            full.get('main_results_zh', ''),
-        ])
-        if results_figure and '### Experiment Figure' not in body_lines:
-            body_lines.extend(figure_block('Results Figure', results_figure))
-    if analysis_value(full, ai, 'practical_value_zh', 'value_zh'):
-        body_lines.extend([
-            '',
-            '## Research Or Engineering Value',
-            analysis_value(full, ai, 'practical_value_zh', 'value_zh'),
-        ])
-    if full.get('relation_to_prior_work_zh'):
-        body_lines.extend([
-            '',
-            '## Relation To Prior Work',
-            full.get('relation_to_prior_work_zh', ''),
-        ])
-    if full.get('overall_assessment_zh'):
-        body_lines.extend([
-            '',
-            '## Overall Assessment',
-            full.get('overall_assessment_zh', ''),
-        ])
-    if full.get('technical_route_zh'):
-        body_lines.extend([
-            '',
-            '## Technical Route Positioning',
-            full.get('technical_route_zh', ''),
-        ])
-    body_lines.extend(scorecard_lines(full_analysis_score_card(paper)))
-    body_lines.extend(related_work_lines(repo_root, papers, full_analysis_related_work(paper)))
-    bullet_section(body_lines, 'Strengths', full.get('strengths', []), limit=4)
-    bullet_section(body_lines, 'Future Work', full.get('future_work', []), limit=4)
-    bullet_section(body_lines, 'Reading Checklist', full.get('reading_checklist', []) or ai.get('open_questions', []), limit=4)
-
-    bullet_section(body_lines, 'Core Contributions', ai.get('core_contributions', []), limit=3)
-    bullet_section(body_lines, 'Why Read It', ai.get('why_read', []), limit=3)
-    bullet_section(body_lines, 'Risks Or Limits', full.get('limitations', []) or ai.get('risks', []), limit=4)
-    bullet_section(body_lines, 'Recommended For', ai.get('recommended_for', []), limit=3)
-    bullet_section(body_lines, 'Keywords', ai.get('keywords', []), limit=6)
-
-    if remaining_figures:
-        body_lines.extend([
-            '',
-            '## Additional Assets',
-            '- 其余提取到的 figures 已保存在共享 assets 目录中，页面默认不全部展开，避免让资产列表主导阅读。',
-        ])
-
-    body_lines.extend([
-        '',
-        '## Abstract',
-        (paper.get('summary') or paper.get('abstract') or 'No abstract available.').strip(),
-        '',
-        '## Recommendation Signals',
-        f'- Recommendation score: {paper.get("scores", {}).get("recommendation", "N/A")}',
-        f'- Relevance score: {paper.get("scores", {}).get("relevance", "N/A")}',
-        f'- Recency score: {paper.get("scores", {}).get("recency", "N/A")}',
-        f'- Popularity score: {paper.get("scores", {}).get("popularity", "N/A")}',
-        f'- Quality score: {paper.get("scores", {}).get("quality", "N/A")}',
-        f'- Analysis candidate score: {paper.get("analysis_candidate_score", "N/A")}',
-        f'- Analysis priority rank: {analysis_priority_rank(paper, rank)}',
-    ])
-    analysis_signals = paper.get('analysis_signals', [])
-    if isinstance(analysis_signals, list) and analysis_signals:
-        body_lines.append(f'- Analysis signals: {", ".join(str(item) for item in analysis_signals[:8])}')
-
-    if available_image_files(asset_dir):
-        body_lines.extend([
-            '',
-            '## Assets',
-            '- Extracted figures and tables are stored in the shared asset store used by the daily report and this deep dive.',
-        ])
-
-    write_markdown(note_path, frontmatter, '\n'.join(body_lines) + '\n')
-    result = {
-        'page_url': relative_site_url(note_path, repo_root),
-    }
     if daily_figure.get('url'):
         result['daily_figure_url'] = daily_figure['url']
     if daily_figure.get('caption'):
@@ -1557,41 +1137,32 @@ def build_reading_strategy(papers: List[Dict[str, Any]], paper_meta_map: Dict[st
         return []
 
     primary, classics = split_daily_papers(papers)
-    deep_dive = deep_dive_paper(papers)
+    lead = lead_paper(papers)
     steps: List[str] = []
 
     def paper_link(paper: Dict[str, Any]) -> str:
-        paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
-        url = paper_meta_map.get(paper_id, {}).get('page_url')
-        title = str(paper.get('title') or 'Untitled Paper')
-        return f'[{title}]({url})' if url else title
+        return str(paper.get('title') or 'Untitled Paper')
 
-    if deep_dive:
-        steps.append(
-            f'先看 {paper_link(deep_dive)}，它最适合当今天唯一一篇需要投入完整阅读时间的候选。'
-        )
+    if lead:
+        steps.append(f'先看 {paper_link(lead)}，它最适合作为今天的起始判断样本。')
 
     follow_up = [
         paper for paper in primary
         if normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
-        != normalize_paper_id((deep_dive or {}).get('arxiv_id') or (deep_dive or {}).get('arxivId') or (deep_dive or {}).get('id', ''))
+        != normalize_paper_id((lead or {}).get('arxiv_id') or (lead or {}).get('arxivId') or (lead or {}).get('id', ''))
     ]
     if follow_up:
         titles = '、'.join(paper_link(paper) for paper in follow_up[:2])
         steps.append(f'再浏览 {titles}，判断它们是值得继续跟进的 systems 机会，还是只停留在局部优化。')
 
     if classics:
-        steps.append(f'最后把 {paper_link(classics[0])} 当成经典补课位，重点补路线背景，不和今天的完整精读名额竞争。')
+        steps.append(f'最后把 {paper_link(classics[0])} 当成经典补课位，重点补路线背景，不需要和今天的新论文争夺第一阅读顺位。')
 
     return steps[:3]
 
 
 def recommendation_score(paper: Dict[str, Any]) -> float:
     return float(paper.get('scores', {}).get('recommendation', 0) or 0)
-
-
-def analysis_candidate_score(paper: Dict[str, Any]) -> float:
-    return float(paper.get('analysis_candidate_score', 0) or 0)
 
 
 def short_paper_title(paper: Dict[str, Any]) -> str:
@@ -1606,19 +1177,18 @@ def build_ordering_rationale(papers: List[Dict[str, Any]]) -> List[str]:
     lead = ordered_primary_papers(papers)[0]
     lead_title = short_paper_title(lead)
     lead_recommendation = recommendation_score(lead)
-    lead_analysis = analysis_candidate_score(lead)
 
     highest_recommendation_paper = max(primary, key=recommendation_score)
     highest_recommendation_title = short_paper_title(highest_recommendation_paper)
     highest_recommendation = recommendation_score(highest_recommendation_paper)
 
     lines = [
-        f'- 主推位先放 {lead_title}。这里不只看推荐分，还看它是否最适合当今天唯一一篇需要投入完整阅读时间的候选；它当前的推荐分是 {lead_recommendation:.2f}，analysis candidate score 是 {lead_analysis:.2f}。'
+        f'- 主推位先放 {lead_title}。这里优先看它是否最适合作为今天最先判断的一篇，同时兼顾推荐分和方向贴合度；它当前的推荐分是 {lead_recommendation:.2f}。'
     ]
 
     if normalize_paper_id(lead.get('arxiv_id') or lead.get('arxivId') or lead.get('id', '')) != normalize_paper_id(highest_recommendation_paper.get('arxiv_id') or highest_recommendation_paper.get('arxivId') or highest_recommendation_paper.get('id', '')):
         lines.append(
-            f'- 推荐分最高的是 {highest_recommendation_title}（{highest_recommendation:.2f}），但它被放在继续跟进位，因为首页第一位更强调“今天最值得完整读哪一篇”，不是机械按分数排第一。'
+            f'- 推荐分最高的是 {highest_recommendation_title}（{highest_recommendation:.2f}），但它被放在继续跟进位，因为首页第一位更强调“今天最值得先判断哪一篇”，不是机械按分数排第一。'
         )
     else:
         lines.append(f'- 其余新论文按推荐分和 lane 顺序继续往后排，所以主推位同时也是今天分数最高、最值得先读的条目。')
@@ -1709,7 +1279,6 @@ def render_daily_paper_entry(
     paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
     title = paper.get('title', 'Untitled Paper')
     paper_meta = paper_meta_map.get(paper_id, {})
-    deep_dive_url = paper_meta.get('page_url', '')
     abs_url, pdf_url = paper_urls(paper_id, paper)
     ai = ai_fields(paper)
     score = paper.get('scores', {}).get('recommendation', 'N/A')
@@ -1737,24 +1306,16 @@ def render_daily_paper_entry(
         f'> {summarize_paper(paper)}',
     ])
 
-    summary = detail_summary(paper)
-    if summary and summary != summarize_paper(paper):
-        lines.extend(['', summary])
+    analysis_text = compact_analysis_text(paper)
+    if analysis_text:
+        lines.extend(['', analysis_text])
 
-    context_text = daily_context_text(paper)
-    if context_text:
-        lines.extend(['', f'**背景与问题：** {context_text}'])
-
-    method_text = daily_method_evidence_text(paper)
-    if method_text:
-        lines.extend(['', f'**方法与证据：** {method_text}'])
-
-    if role == 'lead':
+    if paper_meta:
         render_daily_asset(lines, paper_meta, title)
 
-    judgment_text = daily_reading_judgment_text(paper)
+    judgment_text = compact_evaluation_text(paper)
     if judgment_text:
-        lines.extend(['', f'**阅读判断：** {judgment_text}'])
+        lines.extend(['', f'**评估：** {judgment_text}'])
 
     link_parts = [f'[Source]({abs_url})']
     if pdf_url:
@@ -1769,12 +1330,10 @@ def render_daily_paper_entry(
     lines.extend(['', f'**来源与上下文：** {" · ".join(part for part in context_line if part)}'])
     lines.append(f'**链接：** {" | ".join(link_parts)}')
 
-    if deep_dive_url and full_analysis_fields(paper):
-        lines.append(f'**精读入口：** [详细分析]({deep_dive_url})')
-    elif selected_for_full_analysis(paper):
-        lines.append('**阅读建议：** 如果今天只完整读一篇，优先从这篇开始。')
+    if role == 'lead':
+        lines.append('**阅读建议：** 如果时间有限，先从这篇开始。')
     elif is_classic_section:
-        lines.append('**阅读建议：** 这篇更适合作为补路线背景的经典阅读，不需要和今天的新论文争夺全文精读时间。')
+        lines.append('**阅读建议：** 这篇更适合作为补路线背景的经典阅读，不需要和今天的新论文争夺最前面的阅读顺位。')
 
 
 def build_daily_body(
@@ -1899,10 +1458,7 @@ def main() -> int:
     paper_page_meta: Dict[str, Dict[str, str]] = {}
     for rank, paper in enumerate(papers, start=1):
         paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
-        if should_publish_deep_dive(paper, publication):
-            paper_page_meta[paper_id] = ensure_deep_dive_page(repo_root, paper, papers, settings, rank)
-        else:
-            paper_page_meta[paper_id] = collect_daily_publication_meta(repo_root, paper, papers, settings, rank)
+        paper_page_meta[paper_id] = collect_daily_publication_meta(repo_root, paper, papers, settings, rank)
 
     daily_path = get_daily_root(repo_root) / f'{report_date}.md'
     frontmatter = {

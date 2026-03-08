@@ -68,14 +68,12 @@ DEFAULT_HISTORY_SETTINGS = {
     'classic_backlog_path': 'state/classic_backlog.json',
     'recommended_cooldown_days': 60,
     'classic_recommended_cooldown_days': 21,
-    'analyzed_cooldown_days': 365,
 }
 DEFAULT_CLASSIC_SETTINGS = {
     'enabled': True,
     'cadence_days': 3,
     'anchor_date': '2026-03-07',
     'random_seed': 'systems-classics-v1',
-    'allow_full_analysis': False,
 }
 DEFAULT_VENUE_SOURCE_SETTINGS = {
     'enabled': True,
@@ -279,7 +277,6 @@ def get_history_settings(config: Dict[str, Any]) -> Dict[str, Any]:
         'classic_backlog_path': str(raw.get('classic_backlog_path') or DEFAULT_HISTORY_SETTINGS['classic_backlog_path']).strip() or DEFAULT_HISTORY_SETTINGS['classic_backlog_path'],
         'recommended_cooldown_days': get_config_int(raw, 'recommended_cooldown_days', DEFAULT_HISTORY_SETTINGS['recommended_cooldown_days']),
         'classic_recommended_cooldown_days': get_config_int(raw, 'classic_recommended_cooldown_days', DEFAULT_HISTORY_SETTINGS['classic_recommended_cooldown_days']),
-        'analyzed_cooldown_days': get_config_int(raw, 'analyzed_cooldown_days', DEFAULT_HISTORY_SETTINGS['analyzed_cooldown_days']),
     }
 
 
@@ -292,7 +289,6 @@ def get_classic_settings(config: Dict[str, Any]) -> Dict[str, Any]:
         'cadence_days': max(1, get_config_int(raw, 'cadence_days', DEFAULT_CLASSIC_SETTINGS['cadence_days'])),
         'anchor_date': str(raw.get('anchor_date') or DEFAULT_CLASSIC_SETTINGS['anchor_date']).strip() or DEFAULT_CLASSIC_SETTINGS['anchor_date'],
         'random_seed': str(raw.get('random_seed') or DEFAULT_CLASSIC_SETTINGS['random_seed']).strip() or DEFAULT_CLASSIC_SETTINGS['random_seed'],
-        'allow_full_analysis': get_config_bool(raw, 'allow_full_analysis', DEFAULT_CLASSIC_SETTINGS['allow_full_analysis']),
     }
 
 
@@ -836,16 +832,6 @@ def refresh_selected_paper_scores(
         current_scores['popularity'] = round(min(popularity, SCORE_MAX), 2)
         current_scores['recommendation'] = recommendation_score
         paper['scores'] = current_scores
-
-        match_details = paper.get('match_details', {}) if isinstance(paper.get('match_details'), dict) else {}
-        analysis_candidate_score, analysis_components = calculate_analysis_candidate_score(paper, match_details)
-        paper['analysis_candidate_score'] = analysis_candidate_score
-        paper['analysis_signals'] = analysis_components.get('analysis_signals', [])
-        paper['analysis_components'] = {
-            key: value
-            for key, value in analysis_components.items()
-            if key != 'analysis_signals'
-        }
 
 
 def load_paper_index_entries(path: Path) -> Dict[str, Dict[str, Any]]:
@@ -1476,16 +1462,12 @@ def paper_in_cooldown(
 
     entry = index_entries[key]
     reference = reference_date.date()
-    last_analysis = parse_date_flexible(entry.get('last_analysis_date'))
     last_recommended = parse_date_flexible(entry.get('last_recommended_date'))
-    if (last_analysis and last_analysis.date() == reference) or (last_recommended and last_recommended.date() == reference):
+    if last_recommended and last_recommended.date() == reference:
         return False
 
     cooldown_until = parse_date_flexible(entry.get('cooldown_until'))
     if cooldown_until and cooldown_until.date() >= reference:
-        return True
-
-    if last_analysis and (reference - last_analysis.date()).days < max(0, history_settings['analyzed_cooldown_days']):
         return True
 
     recommended_cooldown_days = history_settings['recommended_cooldown_days']
@@ -1558,13 +1540,6 @@ def backlog_paper_to_candidate(item: Dict[str, Any]) -> Optional[Dict[str, Any]]
             'popularity': round(min(1.0 + priority * 0.25, SCORE_MAX), 2),
             'quality': round(min(1.4 + priority * 0.25, SCORE_MAX), 2),
             'recommendation': recommendation,
-        },
-        'analysis_candidate_score': round(min(recommendation * 0.92 + priority * 0.25, 10.0), 2),
-        'analysis_signals': unique_terms_preserve_order(item.get('topic_tags', []))[:10],
-        'analysis_components': {
-            'signal_strength': round(min(6.0 + priority * 0.7, 10.0), 2),
-            'implementation_depth': round(min(5.5 + priority * 0.6, 10.0), 2),
-            'evidence_strength': round(min(5.0 + priority * 0.5, 10.0), 2),
         },
     }
     return candidate
@@ -2855,125 +2830,6 @@ def calculate_recommendation_score(
     return round(min(final_score, 10.0), 2)
 
 
-ANALYSIS_EVIDENCE_INDICATORS = [
-    'benchmark', 'benchmarks', 'baseline', 'baselines', 'evaluation', 'experiment',
-    'experiments', 'ablation', 'ablation study', 'compare', 'compared', 'comparison',
-]
-ANALYSIS_METRIC_INDICATORS = [
-    'latency', 'throughput', 'memory', 'bandwidth', 'speedup', 'tokens/s', 'token/s',
-    'ms', 'seconds', 'gb', 'gb/s', 'tflops', 'occupancy',
-]
-ANALYSIS_IMPLEMENTATION_INDICATORS = [
-    'kernel', 'runtime', 'compiler', 'cuda', 'triton', 'ptx', 'sass', 'warp',
-    'tensor core', 'prefill', 'decode', 'kv cache', 'h100', 'a100', 'b200',
-]
-
-
-def normalized_score_10(value: float) -> float:
-    return (min(max(value, 0.0), SCORE_MAX) / SCORE_MAX) * 10
-
-
-def count_indicator_hits(text: str, indicators: List[str]) -> int:
-    lowered = str(text or '').lower()
-    return sum(1 for indicator in indicators if indicator in lowered)
-
-
-def calculate_analysis_candidate_score(
-    paper: Dict[str, Any],
-    match_details: Dict[str, Any],
-) -> Tuple[float, Dict[str, Any]]:
-    title = str(paper.get('title') or '').lower()
-    summary = str(paper.get('summary') or paper.get('abstract') or '').lower()
-    combined_text = f'{title}\n{summary}'
-
-    required_signal_count = int(match_details.get('required_signal_match_count', 0) or 0)
-    bonus_keyword_count = int(match_details.get('bonus_keyword_match_count', 0) or 0)
-    analysis_keyword_count = int(match_details.get('analysis_keyword_match_count', 0) or 0)
-    evidence_hits = count_indicator_hits(combined_text, ANALYSIS_EVIDENCE_INDICATORS)
-    metric_hits = count_indicator_hits(combined_text, ANALYSIS_METRIC_INDICATORS)
-    implementation_hits = count_indicator_hits(combined_text, ANALYSIS_IMPLEMENTATION_INDICATORS)
-    has_quantitative_claim = bool(
-        re.search(r'\b\d+(\.\d+)?x\b', combined_text)
-        or re.search(r'\b\d+(\.\d+)?%\b', combined_text)
-    )
-    paper_id = str(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('paper_id') or paper.get('id') or '').strip()
-    pdf_url = str(paper.get('pdf_url') or '').strip()
-    source_url = str(paper.get('source_url') or paper.get('url') or '').strip()
-    has_readable_pdf = (
-        looks_like_pdf_url(pdf_url)
-        or looks_like_pdf_url(source_url)
-        or looks_like_arxiv_id(paper_id)
-    )
-    has_source_page = bool(source_url)
-
-    signal_strength = min(
-        required_signal_count * 0.9 + bonus_keyword_count * 0.45 + analysis_keyword_count * 0.35,
-        SCORE_MAX,
-    )
-    implementation_depth = min(
-        required_signal_count * 0.55 + implementation_hits * 0.28,
-        SCORE_MAX,
-    )
-    evidence_strength = min(
-        evidence_hits * 0.4 + metric_hits * 0.32 + (0.6 if has_quantitative_claim else 0.0),
-        SCORE_MAX,
-    )
-
-    recommendation = float(paper.get('scores', {}).get('recommendation', 0) or 0)
-    relevance = float(paper.get('scores', {}).get('relevance', 0) or 0)
-    final_score = (
-        recommendation * 0.30
-        + normalized_score_10(relevance) * 0.20
-        + normalized_score_10(signal_strength) * 0.20
-        + normalized_score_10(implementation_depth) * 0.15
-        + normalized_score_10(evidence_strength) * 0.15
-        + (0.35 if has_source_page else 0.0)
-        + (0.55 if has_readable_pdf else 0.0)
-    )
-    analysis_signals = unique_terms_preserve_order(
-        list(match_details.get('required_signal_matches', []))
-        + list(match_details.get('bonus_keyword_matches', []))
-        + list(match_details.get('analysis_keyword_matches', []))
-    )
-    components = {
-        'signal_strength': round(normalized_score_10(signal_strength), 2),
-        'implementation_depth': round(normalized_score_10(implementation_depth), 2),
-        'evidence_strength': round(normalized_score_10(evidence_strength), 2),
-        'has_source_page': has_source_page,
-        'has_readable_pdf': has_readable_pdf,
-        'analysis_signals': analysis_signals[:10],
-    }
-    return round(min(final_score, 10.0), 2), components
-
-
-def annotate_analysis_priority(
-    papers: List[Dict[str, Any]],
-    analysis_top_n: int,
-    classic_settings: Optional[Dict[str, Any]] = None,
-) -> None:
-    allow_classic_full_analysis = bool((classic_settings or {}).get('allow_full_analysis', False))
-    eligible = [
-        paper for paper in papers
-        if allow_classic_full_analysis or str(paper.get('selection_lane') or '').strip().lower() != 'classic'
-    ]
-    ranked_pool = eligible or papers
-    ranked = sorted(
-        ranked_pool,
-        key=lambda item: (
-            float(item.get('analysis_candidate_score', 0) or 0),
-            float(item.get('scores', {}).get('recommendation', 0) or 0),
-        ),
-        reverse=True,
-    )
-    id_to_rank: Dict[int, int] = {id(paper): index for index, paper in enumerate(ranked, start=1)}
-    eligible_ids = {id(candidate) for candidate in ranked_pool}
-    for paper in papers:
-        rank = id_to_rank.get(id(paper), 0)
-        paper['analysis_priority_rank'] = rank
-        paper['analysis_eligible'] = id(paper) in eligible_ids
-        paper['selected_for_full_analysis'] = bool(rank and rank <= max(0, analysis_top_n))
-
-
 def filter_and_score_papers(
     papers: List[Dict],
     config: Dict,
@@ -3100,15 +2956,6 @@ def filter_and_score_papers(
         paper['domain_preference_bonus'] = round(priority_bonus, 2)
         paper['is_hot_paper'] = is_hot_paper_batch
         paper['match_details'] = match_details
-        analysis_candidate_score, analysis_components = calculate_analysis_candidate_score(paper, match_details)
-        paper['analysis_candidate_score'] = analysis_candidate_score
-        paper['analysis_signals'] = analysis_components.get('analysis_signals', [])
-        paper['analysis_components'] = {
-            key: value
-            for key, value in analysis_components.items()
-            if key != 'analysis_signals'
-        }
-
         scored_papers.append(paper)
 
     # 按推荐评分排序
@@ -3165,11 +3012,9 @@ def main():
     classic_settings = get_classic_settings(config)
     venue_settings = get_venue_source_settings(config)
     history_settings = get_history_settings(config)
-    analysis_settings = config.get('analysis', {}) if isinstance(config, dict) else {}
 
     max_results = args.max_results if args.max_results is not None else get_config_int(search_settings, 'max_results', 200)
     top_n = args.top_n if args.top_n is not None else get_config_int(search_settings, 'top_n', 10)
-    analysis_top_n = get_config_int(analysis_settings, 'top_n', 1)
 
     # 解析目标日期
     target_date = None
@@ -3363,8 +3208,6 @@ def main():
     refresh_selected_paper_scores(top_papers, config, target_date=target_date)
     hydrate_papers_with_semantic_scholar_metadata(top_papers)
     hydrate_papers_with_google_scholar_metadata(top_papers, config)
-    annotate_analysis_priority(top_papers, analysis_top_n, classic_settings)
-
     # 准备输出
     output = {
         'target_date': args.target_date or target_date.strftime('%Y-%m-%d'),
@@ -3390,14 +3233,12 @@ def main():
         'total_classic_backlog_candidates': len(classic_candidates),
         'selection': {
             'max_recommendations': top_n,
-            'analysis_top_n': analysis_top_n,
             'selected_count': len(top_papers),
             'lane_counts': lane_counts,
             'classic_policy': {
                 'enabled': classic_settings['enabled'],
                 'cadence_days': classic_settings['cadence_days'],
                 'anchor_date': classic_settings['anchor_date'],
-                'allow_full_analysis': classic_settings['allow_full_analysis'],
                 'slot_active_today': bool(lane_counts.get('classic_slot_active')),
             },
         },
@@ -3413,14 +3254,6 @@ def main():
     for i, p in enumerate(top_papers, 1):
         hot_marker = " [HOT]" if p.get('is_hot_paper') else ""
         logger.info("  %d. %s... (Score: %s)%s", i, p.get('title', 'N/A')[:60], p['scores']['recommendation'], hot_marker)
-    deep_dive = next((paper for paper in top_papers if paper.get('selected_for_full_analysis')), None)
-    if deep_dive:
-        logger.info(
-            "Deep-dive candidate: %s (analysis score: %s)",
-            deep_dive.get('title', 'N/A')[:80],
-            deep_dive.get('analysis_candidate_score', 'N/A'),
-        )
-
     # 同时输出到 stdout
     print(json.dumps(output, ensure_ascii=False, indent=2, default=str))
 

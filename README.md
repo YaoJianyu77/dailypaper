@@ -130,7 +130,6 @@ That gives you:
 
 - a homepage that shows the latest daily report
 - an archive page for older reports
-- one page per paper
 - git history for every generated artifact
 - a site you can browse on GitHub Pages or locally after `git clone`
 
@@ -140,16 +139,16 @@ Recommended policy:
 
 - Keep markdown, metadata, and compressed web-ready images in the repository.
 - Do not store every raw PDF or very large source asset in git.
-- For each paper, keep only the few images you actually want to browse on the website.
-- Use `extract-paper-images/scripts/extract_images.py` to populate `content/papers/<slug>/images/`.
+- For each recommended paper, keep only the few images you actually want to surface on the daily report.
+- Use `extract-paper-images/scripts/extract_images.py` to populate the shared asset store under `content/assets/papers/<slug>/images/`.
 
 Example:
 
 ```bash
 python extract-paper-images/scripts/extract_images.py \
   2602.12345 \
-  content/papers/2602-12345-some-paper-title/images \
-  content/papers/2602-12345-some-paper-title/images/index.md
+  content/assets/papers/2602-12345-some-paper-title/images \
+  content/assets/papers/2602-12345-some-paper-title/images/index.md
 ```
 
 ## Configuration
@@ -257,7 +256,6 @@ The local Codex and hosted-model enrichment paths now share the same preference 
   - `skills/daily-paper-search/SKILL.md`
   - `skills/daily-paper-editor/SKILL.md`
   - `skills/paper-note-search/SKILL.md`
-  - `skills/paper-deep-analysis/SKILL.md`
   - `skills/paper-image-extractor/SKILL.md`
 - repo `AGENTS.md` points future Codex runs at the same curation skill
 
@@ -333,10 +331,10 @@ uv run --with-requirements requirements.txt python scripts/run_local_daily.py --
 
 - `scripts/content_store.py`: shared repo path and markdown helpers
 - `scripts/ai_enrich.py`: AI-generated Chinese summaries and daily overview
-- `scripts/publish_daily.py`: generate `content/daily/`, optional `content/deep-dives/`, and shared `content/assets/`
+- `scripts/publish_daily.py`: generate `content/daily/` and shared `content/assets/`
 - `scripts/build_site.py`: static site compiler
 - `start-my-day/scripts/search_arxiv.py`: search and ranking
-- `start-my-day/scripts/scan_existing_notes.py`: build keyword index from published deep dives and legacy note pages
+- `start-my-day/scripts/scan_existing_notes.py`: build keyword index from legacy note pages
 - `start-my-day/scripts/link_keywords.py`: replace keywords with standard markdown links
-- `paper-analyze/scripts/generate_note.py`: generate a legacy repository paper page
+- `paper-analyze/scripts/generate_note.py`: legacy note generator kept only for historical reference
 - `paper-analyze/scripts/update_graph.py`: update `content/meta/graph_data.json`

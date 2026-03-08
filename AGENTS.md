@@ -5,9 +5,8 @@ Read `PROJECT_STATE.md` first.
 Use the minimal relevant repo skill:
 - `skills/daily-paper-search/SKILL.md` for paper search, ranking, daily curation, and keyword-linking tasks
 - `skills/daily-paper-editor/SKILL.md` for AI enrichment prompts, daily brief wording, and reading-priority logic
-- `skills/paper-note-search/SKILL.md` for searching existing paper pages and daily reports
-- `skills/paper-deep-analysis/SKILL.md` for generating or extending individual paper pages and graph metadata
-- `skills/paper-image-extractor/SKILL.md` for extracting paper assets into `content/papers/*/images`
+- `skills/paper-note-search/SKILL.md` for searching existing legacy notes and daily reports
+- `skills/paper-image-extractor/SKILL.md` for extracting paper assets into `content/assets/papers/*/images`
 - `skills/daily-paper-curator/SKILL.md` is a compatibility umbrella that points to the active skills above
 
 Working rules:
