@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Enrich ranked paper results with AI-generated Chinese summaries and editorial guidance."""
+"""Enrich ranked paper results with AI-generated English summaries and editorial guidance."""
 
 from __future__ import annotations
 
@@ -48,20 +48,21 @@ DEFAULT_SKILL_PATHS = [
     'skills/paper-image-extractor/SKILL.md',
 ]
 DEFAULT_EDITORIAL_PREFERENCES = {
-    'audience': '关注 LLM systems、推理加速、编译器与低层代码生成的研究者和工程师',
-    'tone': '简洁、直接、判断导向，像系统组内部读论文短评',
-    'overview_goal': '先点出今天最值得看的 systems 主线，再给一个清楚的阅读顺序',
-    'daily_brief_style': '像研究日报编辑，不像宣传文案',
+    'audience': 'Researchers and engineers working on LLM systems, inference acceleration, compilers, and low-level code generation',
+    'tone': 'Concise, direct, and judgment-oriented, like an internal systems reading memo',
+    'overview_goal': "Summarize the day's systems threads without adding reading-order advice",
+    'daily_brief_style': "Read like a research editor's note, not a marketing blurb",
     'prioritize': [
-        '把一篇论文压成一段可直接判断值不值得继续读的 mini analysis',
-        '方法到底改了哪一层系统路径，收益主张靠什么证据支撑',
-        '最大的风险、边界、硬件前提或摘要未说明之处',
+        'Compress each paper into a compact mini analysis that helps decide whether to read further',
+        'Explain which system path changes, and what evidence supports the claimed gains',
+        'Surface the biggest boundary, hardware assumption, or missing detail in the abstract',
     ],
     'avoid': [
-        '空泛赞美',
-        '复述标题',
-        '字段之间重复改写同一个意思',
-        '编造实验细节、数字或作者背景',
+        'Generic praise',
+        'Restating the title',
+        'Repeating the same point across fields',
+        'Recommendation slogans such as "worth reading first" or "read this before others"',
+        'Inventing experiment details, numbers, or author background',
     ],
     'custom_instruction': '',
 }
@@ -97,7 +98,7 @@ def load_config(config_path: str | None) -> Dict[str, Any]:
 def short_fallback_summary(paper: Dict[str, Any]) -> str:
     text = (paper.get('summary') or paper.get('abstract') or '').replace('\n', ' ').strip()
     if not text:
-        return '摘要未提供足够信息。'
+        return 'The abstract does not provide enough information.'
     sentence = text.split('. ')[0].strip()
     if not sentence.endswith('.'):
         sentence += '.'
@@ -152,70 +153,70 @@ def infer_focus_label(paper: Dict[str, Any]) -> str:
     abstract = str(paper.get('summary') or paper.get('abstract') or '').lower()
     text = f'{title} {abstract}'
     if any(token in text for token in ['hallucination', 'fact', 'verify', 'verification', 'citation', 'evidence attribution', 'misattribution']):
-        return '可信性与事实核验'
+        return 'factual reliability and verification'
     if any(token in text for token in ['latency', 'memory', 'throughput', 'speculative', 'training', 'inference', 'scaling', 'vocabulary']):
-        return '训练与推理效率'
+        return 'training and inference efficiency'
     if any(token in text for token in ['multimodal', 'vision-language', 'image', 'speech', 'audio', 'graph reasoning']):
-        return '多模态建模与推理'
+        return 'multimodal modeling and reasoning'
     if any(token in text for token in ['agent', 'planning', 'exploration', 'belief', 'spatial']):
-        return 'agent 与主动探索'
+        return 'agents and active exploration'
     if any(token in text for token in ['biomedical', 'clinical', 'medical']):
-        return '医疗与生物医药证据'
+        return 'medical and biomedical evidence'
     domain = str(paper.get('matched_domain') or '').strip()
     if domain:
         return domain
-    return '当前研究重点问题'
+    return 'the main problem behind this paper'
 
 
 def fallback_value_text(paper: Dict[str, Any], focus_label: str) -> str:
     title = str(paper.get('title') or '')
     text = title.lower() + ' ' + str(paper.get('summary') or paper.get('abstract') or '').lower()
     if any(token in text for token in ['latency', 'memory', 'throughput', 'training', 'inference', 'speculative']):
-        return '如果方法成立，它的直接价值是把训练或推理成本进一步压低，并把效率收益变成更可落地的系统设计选择。'
+        return 'If the method works as claimed, its main value is lower training or inference cost and a more practical efficiency tradeoff for real systems.'
     if any(token in text for token in ['hallucination', 'fact', 'verify', 'evidence', 'citation']):
-        return '如果方法成立，它会提升模型输出的可核验性，价值不只在 benchmark，而在真实高风险场景里的可信使用。'
+        return 'If the method works as claimed, it could improve verifiability beyond benchmarks and matter in higher-risk real deployments.'
     if any(token in text for token in ['multimodal', 'vision', 'speech', 'audio', 'graph']):
-        return '如果方法成立，它的价值在于把跨模态建模从单一配对任务推进到更强约束、更复杂结构或更低成本的设置。'
+        return 'If the method works as claimed, it may push multimodal modeling toward stronger constraints, richer structure, or lower-cost deployment.'
     if any(token in text for token in ['agent', 'planning', 'exploration', 'belief']):
-        return '如果方法成立，它的价值在于让 agent 在需要持续观察、更新状态和决策的环境里更可靠。'
-    return f'如果方法成立，它对{focus_label}方向的研究和工程都有直接参考价值，但关键收益仍要靠正文实验核对。'
+        return 'If the method works as claimed, it could make agents more reliable in environments that require persistent observation, state updates, and decisions.'
+    return f'If the method works as claimed, it could matter for both research and engineering in {focus_label}, but the key gains still need to be checked in the full paper.'
 
 
 def fallback_open_questions(paper: Dict[str, Any], evidence_sentence: str) -> List[str]:
     title = str(paper.get('title') or '').lower()
     questions = [
-        '关键增益到底来自核心方法本身，还是来自数据构造、训练配方或评测口径？',
-        '作者是否和足够强的基线做了公平比较，并覆盖了真正困难的设置？',
+        'Do the gains come from the core method itself, or from data construction, training choices, or evaluation setup?',
+        'Do the authors compare against strong enough baselines under genuinely difficult settings?',
     ]
     if any(token in title for token in ['latency', 'memory', 'training', 'inference', 'speculative']):
-        questions.append('效率收益在更大模型、更长上下文或更真实部署条件下是否仍然成立？')
+        questions.append('Do the efficiency gains still hold for larger models, longer contexts, or more realistic deployment settings?')
     elif any(token in title for token in ['hallucination', 'verify', 'evidence', 'fact', 'citation']):
-        questions.append('方法在分布外事实、复杂证据冲突和高风险场景下是否仍然可靠？')
+        questions.append('Does the method remain reliable under out-of-distribution facts, conflicting evidence, or higher-risk scenarios?')
     elif any(token in title for token in ['multimodal', 'vision', 'speech', 'audio']):
-        questions.append('方法在跨模态冲突、噪声输入或更复杂任务链路上是否仍然稳定？')
+        questions.append('Does the method stay stable under cross-modal conflict, noisy input, or more complex task pipelines?')
     else:
-        questions.append('摘要没有充分说明实验边界，正文是否明确交代失败案例、消融和适用范围？')
+        questions.append('The abstract does not define the experimental boundary well; does the paper clearly report failure cases, ablations, and scope?')
     if not evidence_sentence:
-        questions[1] = '摘要没有充分说明证据，正文是否给出足够清楚的实验设置、指标和结果？'
+        questions[1] = 'The abstract does not describe the evidence clearly; does the paper give a concrete setup, metrics, and results?'
     return questions[:3]
 
 
 def fallback_recommended_for(paper: Dict[str, Any], focus_label: str) -> List[str]:
     domain = str(paper.get('matched_domain') or '').strip()
-    items = [f'关注{focus_label}的研究者']
+    items = [f'Researchers tracking {focus_label}']
     if domain:
-        items.append(f'{domain}系统与方法工程师')
-    items.append('需要快速判断论文是否值得全文阅读的读者')
+        items.append(f'Engineers working on {domain} systems and methods')
+    items.append('Readers who need a fast judgment on whether the paper deserves a full read')
     return items[:3]
 
 
 def fallback_reading_priority(paper: Dict[str, Any], focus_label: str) -> tuple[str, str]:
     score = float(paper.get('scores', {}).get('recommendation', 0) or 0)
     if score >= 8.5:
-        return 'high', f'推荐分较高，而且它直接落在{focus_label}主线上，值得优先判断是否继续跟进。'
+        return 'high', f'The paper scores well and lands directly on the {focus_label} line.'
     if score >= 7.5:
-        return 'medium', f'主题相关性不错，但是否值得深读仍取决于正文能否支撑摘要里的关键主张。'
-    return 'low', '可以先保留在候选清单里，等确认主线论文后再决定是否投入全文阅读时间。'
+        return 'medium', f'The topic fit is good, but the abstract still leaves open whether the full paper can support the central claim.'
+    return 'low', 'Keep it in the candidate set for now and decide later whether it deserves full reading time.'
 
 
 def fallback_paper_ai(paper: Dict[str, Any]) -> Dict[str, Any]:
@@ -238,23 +239,23 @@ def fallback_paper_ai(paper: Dict[str, Any]) -> Dict[str, Any]:
     keywords = fallback_keywords(paper)
     reading_priority, reading_reason = fallback_reading_priority(paper, focus_label)
 
-    one_liner = f"它把{focus_label}里的关键瓶颈压缩成一个更可验证的方法动作。"
+    one_liner = f'The paper turns a key bottleneck in {focus_label} into a more concrete and testable method change.'
     summary_parts = [
-        f"这篇论文把问题放在“{clip_text(problem_sentence, 88)}”上。",
-        f"核心做法是“{clip_text(method_sentence, 92)}”。",
+        f'The paper frames the problem around "{clip_text(problem_sentence, 88)}."',
+        f'The central move is "{clip_text(method_sentence, 92)}."',
     ]
     if evidence_sentence:
-        summary_parts.append(f"摘要给出的证据是“{clip_text(evidence_sentence, 84)}”，但关键实验前提仍需正文核对。")
+        summary_parts.append(f'The abstract cites evidence that "{clip_text(evidence_sentence, 84)}," but the key experimental assumptions still need to be checked in the full paper.')
     else:
-        summary_parts.append('摘要没有充分说明实验设置和结果细节，因此目前更适合把它当成值得核对的方法线索。')
+        summary_parts.append('The abstract does not explain the setup or results clearly, so this is best treated as a method lead rather than a settled result.')
 
-    background = f"背景是{focus_label}当前仍受“{clip_text(intro_sentence, 96)}”这类瓶颈约束。"
-    problem = f"论文要解决的是：{clip_text(problem_sentence, 118)}"
-    approach = f"方法线索是：{clip_text(method_sentence, 118)}"
+    background = f'The surrounding context is that {focus_label} is still constrained by issues such as "{clip_text(intro_sentence, 96)}."'
+    problem = f'The concrete problem is: {clip_text(problem_sentence, 118)}'
+    approach = f'The method signal is: {clip_text(method_sentence, 118)}'
     if evidence_sentence:
-        evidence = f"摘要证据是：{clip_text(evidence_sentence, 118)}"
+        evidence = f'The abstract-level evidence is: {clip_text(evidence_sentence, 118)}'
     else:
-        evidence = '摘要没有充分说明实验设置、对比基线和结果细节，目前只能确认作者声称方法有效。'
+        evidence = 'The abstract does not clearly specify the setup, comparison baselines, or result details, so only the claimed direction is clear so far.'
 
     return {
         'one_liner_zh': one_liner,
@@ -266,18 +267,18 @@ def fallback_paper_ai(paper: Dict[str, Any]) -> Dict[str, Any]:
         'value_zh': fallback_value_text(paper, focus_label),
         'open_questions': fallback_open_questions(paper, evidence_sentence),
         'core_contributions': [
-            f'把问题明确放到{focus_label}这条主线上。',
-            f'提出了摘要里最核心的方法动作：{clip_text(method_sentence, 80)}',
-            '给出了一组需要进一步核对的结果或应用声称。',
+            f'It places the problem squarely on the {focus_label} line.',
+            f'It proposes the core method move signaled in the abstract: {clip_text(method_sentence, 80)}',
+            'It puts forward a set of results or application claims that require deeper verification.',
         ],
         'why_read': [
-            f'它直接命中{focus_label}这个当前仍在快速演化的主题。',
-            '摘要至少给出了可复述的方法动作，值得核对正文是否真的站得住。',
-            '即使最终结论一般，这篇论文也可能提供问题定义、评测或系统设计上的参考。',
+            f'It lands directly on the still-fast-moving topic of {focus_label}.',
+            'The abstract at least exposes a concrete method move that can be checked against the full paper.',
+            'Even if the final results are modest, the paper may still be useful for problem framing, evaluation, or system design.',
         ],
         'risks': [
-            '摘要层面的信息仍然有限，很多关键结论必须靠正文实验和消融确认。',
-            '如果摘要里的收益主要来自数据、训练细节或评测口径，方法本身的通用价值可能会被高估。',
+            'The abstract-level evidence is limited, so many key conclusions still depend on the full experiments and ablations.',
+            'If the gains depend mostly on data choices, training details, or evaluation setup, the method itself may be less generally useful than it appears.',
         ],
         'recommended_for': fallback_recommended_for(paper, focus_label),
         'keywords': keywords,
@@ -304,22 +305,22 @@ def fallback_daily_brief(papers: List[Dict[str, Any]]) -> Dict[str, Any]:
     lead_titles = [clip_text(str(paper.get('title') or normalize_paper_id(paper.get('id') or '')), 36) for paper in papers[:3]]
     overview_bits = []
     if top_themes:
-        overview_bits.append('今天最值得读的主线是' + '、'.join(top_themes[:2]) + '。')
+        overview_bits.append('Today\'s main threads are ' + ', '.join(top_themes[:2]) + '.')
     if lead_titles:
-        overview_bits.append('优先看 ' + '、'.join(lead_titles[:2]) + '，因为它们最直接代表今天的主干问题。')
+        overview_bits.append('The set is anchored by ' + ' and '.join(lead_titles[:2]) + '.')
     if len(lead_titles) >= 3:
-        overview_bits.append(f'第三篇可用 {lead_titles[2]} 来判断这条方法线是否具备更强的证据或工程价值。')
+        overview_bits.append(f'{lead_titles[2]} adds another data point on whether the same line of work carries stronger evidence or engineering value.')
 
     reading_strategy: List[str] = []
     for index, paper in enumerate(papers[:3], start=1):
         label = clip_text(str(paper.get('title') or normalize_paper_id(paper.get('id') or '')), 36)
         focus_label = infer_focus_label(paper)
         if index == 1:
-            reading_strategy.append(f'先读 {label}，重点核对它对{focus_label}问题的任务定义和核心机制是否清楚。')
+            reading_strategy.append(f'Start with {label} and verify whether it defines the {focus_label} problem clearly and exposes a real mechanism.')
         elif index == 2:
-            reading_strategy.append(f'再读 {label}，判断它的方法新意到底来自模型设计、训练流程还是评测重设。')
+            reading_strategy.append(f'Then read {label} to see whether the novelty comes from model design, training procedure, or evaluation reframing.')
         else:
-            reading_strategy.append(f'最后读 {label}，把它当成对今天主线的补充验证，重点看实验边界和真实价值。')
+            reading_strategy.append(f'Use {label} as a final cross-check on experimental boundaries and practical value.')
 
     return {
         'overview_zh': ' '.join(overview_bits).strip(),
@@ -488,7 +489,7 @@ def build_prompt_payload(
 
     return {
         'report_date': report_date,
-        'preferred_language': 'zh-CN',
+        'preferred_language': 'en-US',
         'research_domains': domains,
         'editorial_preferences': normalize_editorial_preferences(config),
         'papers': prompt_papers,
@@ -506,7 +507,7 @@ def build_messages(
     max_authors: int = 4,
 ) -> List[Dict[str, str]]:
     system_prompt = (
-        'You are a rigorous research editor producing a high-signal daily paper digest in Simplified Chinese. '
+        'You are a rigorous research editor producing a high-signal daily paper digest in English. '
         'Use only the metadata and abstracts provided. Do not invent metrics, experiments, authors, or claims not present in the input. '
         'If the abstract is vague, explicitly say the abstract does not make the point clear. '
         'Return valid JSON only. '
@@ -520,6 +521,8 @@ def build_messages(
         'The fields must be short and non-overlapping so they can be recomposed into one concise mini-analysis. '
         'background_zh, problem_zh, approach_zh, evidence_zh, value_zh should each stay to one high-signal sentence. '
         'summary_zh should already read like a compact editor assessment instead of a field dump. '
+        'All string fields should be written in English even though the field names end with _zh for compatibility. '
+        'one_liner_zh and summary_zh should describe the paper itself, not use recommendation slogans such as "worth reading first" or "read this before others." '
         'evidence_zh should state what the abstract actually claims about evaluation, or say the abstract does not make it clear. '
         'open_questions should list the most important things to verify when reading the full paper.'
     )

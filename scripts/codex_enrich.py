@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Use local Codex CLI to enrich ranked papers into structured daily digest content."""
+"""Use local Codex CLI to enrich ranked papers into structured English daily digest content."""
 
 from __future__ import annotations
 
@@ -38,19 +38,20 @@ def build_instruction_blocks(repo_root: Path, config: Dict[str, Any]) -> List[st
     editorial_instructions = build_editorial_instruction_text(config)
     skill_instructions = build_skill_prompt_text(repo_root, config)
     instruction_blocks = [
-        '你是一个严格的研究论文编辑。请只基于给定的论文标题、作者、摘要和评分信息，输出一个 JSON 对象，不要输出任何额外解释。',
-        '禁止事项：不要读取仓库文件，不要运行任何命令，不要调用任何工具，不要自行搜索额外信息。你需要的规则和输入都已经在下面给出。',
-        '要求：\n'
-        '1. 输出语言为简体中文。\n'
-        '2. 不要编造实验细节、性能数字、作者背景、代码链接。\n'
-        '3. 如果摘要信息不足，要明确写出“摘要没有充分说明”。\n'
-        '4. JSON 结构必须匹配提供的 schema。\n'
-        '5. `summary_zh` 控制在 2 到 3 句，写成一段可直接放上日报的短评。\n'
-        '6. `background_zh`、`problem_zh`、`approach_zh`、`evidence_zh`、`value_zh` 都尽量各用 1 句，并且彼此不要重复改写同一个意思。\n'
-        '7. `evidence_zh` 只说摘要真的提供了什么证据；如果没有讲清楚，就直接写“摘要没有充分说明”。\n'
-        '8. `open_questions` 给出 2 到 3 个读论文时最该核对的具体问题。\n'
-        '9. `core_contributions`、`why_read`、`risks` 都尽量具体，避免泛泛而谈。\n'
-        '10. 目标不是把字段写满，而是让这些字段最后能拼成一则短而准的 mini analysis。',
+        'You are a strict research-paper editor. Use only the provided title, authors, abstract, and score signals, and return a JSON object with no extra explanation.',
+        'Do not read repository files, run commands, call tools, or search for outside information. The rules and input you need are already provided below.',
+        'Requirements:\n'
+        '1. Write every string field in English, even though the field names end with `_zh` for compatibility.\n'
+        '2. Do not invent experiment details, performance numbers, author background, or code links.\n'
+        '3. If the abstract is underspecified, say so directly.\n'
+        '4. The JSON structure must match the provided schema.\n'
+        '5. Keep `summary_zh` to 2-3 sentences and make it usable as the main paragraph in the daily report.\n'
+        '6. `background_zh`, `problem_zh`, `approach_zh`, `evidence_zh`, and `value_zh` should each stay close to one sentence, with minimal overlap.\n'
+        '7. `evidence_zh` should state only what the abstract actually supports; if the evidence is unclear, say the abstract does not make it clear.\n'
+        '8. `open_questions` should contain 2-3 concrete checks for a full read.\n'
+        '9. `core_contributions`, `why_read`, and `risks` should stay concrete and specific.\n'
+        '10. `one_liner_zh` and `summary_zh` should describe the paper itself, not use recommendation slogans such as "worth reading first" or "read this before others."\n'
+        '11. The goal is not to fill every field, but to make the fields combine into one short, precise mini analysis.',
     ]
     if editorial_instructions:
         instruction_blocks.append('仓库编辑偏好：\n' + editorial_instructions)

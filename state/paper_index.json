@@ -51,19 +51,34 @@
       "published": "2026-02-05T18:59:30Z",
       "source_lane": "fresh",
       "topics": [
-        "LLM 推理系统",
         "speculative decoding",
-        "块扩散模型",
-        "并行草稿生成",
-        "acceptance rate",
-        "低时延推理"
+        "diffusion LLM",
+        "block diffusion",
+        "LLM inference",
+        "latency reduction",
+        "GPU utilization"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 9,
+      "recommended_count": 12,
       "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.8,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.8,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.8,
+          "lane": "fresh"
+        },
         {
           "date": "2026-03-08",
           "recommendation": 9.8,
@@ -244,19 +259,33 @@
       "published": "2026-02-05T18:54:48Z",
       "source_lane": "fresh",
       "topics": [
-        "LLM推理",
-        "多token预测",
-        "自蒸馏",
-        "解码加速",
+        "LLM inference",
+        "multi-token prediction",
+        "self-distillation",
         "speculative decoding",
-        "serving效率"
+        "decoding speedup"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 9,
+      "recommended_count": 12,
       "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.27,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.27,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.27,
+          "lane": "fresh"
+        },
         {
           "date": "2026-03-08",
           "recommendation": 9.27,
@@ -356,18 +385,33 @@
       "source_lane": "fresh",
       "topics": [
         "LLVM",
-        "phase ordering",
-        "细粒度优化",
-        "编译器优化",
-        "静态特征",
-        "ML/LLM 编译优化"
+        "compiler phase ordering",
+        "fine-grained optimization",
+        "static features",
+        "machine learning for compilers",
+        "LLM-assisted optimization"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 9,
+      "recommended_count": 12,
       "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 7.22,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 7.22,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 7.22,
+          "lane": "fresh"
+        },
         {
           "date": "2026-03-08",
           "recommendation": 7.22,
@@ -614,19 +658,34 @@
       "published": "2026-02-05T19:58:48Z",
       "source_lane": "fresh",
       "topics": [
-        "扩散语言模型",
-        "并行解码",
-        "可撤销解码",
-        "验证机制",
+        "diffusion language models",
+        "parallel diffusion decoding",
+        "revocable decoding",
+        "verification",
         "KV cache",
-        "推理加速"
+        "leave-one-out verification"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 9,
+      "recommended_count": 12,
       "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 6.97,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 6.97,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-08",
+          "recommendation": 6.97,
+          "lane": "fresh"
+        },
         {
           "date": "2026-03-08",
           "recommendation": 6.97,

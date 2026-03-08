@@ -113,47 +113,47 @@
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "核心看点是把 speculative decoding 的草稿阶段改成块级并行生成，直接针对残余串行瓶颈。",
-        "summary_zh": "这篇工作把 speculative decoding 的主要残余串行段从自回归草稿端切开：用轻量级块扩散模型一次前向并行提出候选，再让目标模型并行验证。摘要声称通过目标模型上下文特征条件化草稿模型，既提高草稿质量也提高 acceptance rate，并在多模型多任务上实现超过 6x 的无损加速、相对 EAGLE-3 最高再提 2.5x。对做 LLM serving 的人，这篇最该核对的是这些收益到底来自草稿并行化本身，还是来自特定实现和实验设定。",
-        "background_zh": "LLM 推理延迟长期受自回归逐 token 解码限制，即使 speculative decoding 已能并行验证，草稿端往往仍是剩余瓶颈。",
-        "problem_zh": "论文要解决的是如何在不牺牲输出一致性的前提下，把 speculative decoding 中仍然串行的 drafting 过程改成高并行度流程。",
-        "approach_zh": "作者提出 DFlash，用轻量级块扩散模型一次前向生成块级草稿 token，并利用目标模型提取的上下文特征对草稿过程进行条件化。",
-        "evidence_zh": "摘要称其实验在一系列模型和任务上实现了超过 6x 的无损加速，并且相对 EAGLE-3 最高获得 2.5x 更高的加速。",
-        "value_zh": "如果这些结果在公平实现和常见 serving 设定下成立，它说明并行生成式草稿模型可能成为 speculative decoding 的更强系统部件。",
+        "one_liner_zh": "This paper replaces sequential autoregressive drafting in speculative decoding with a lightweight block diffusion model that proposes token blocks in one forward pass.",
+        "summary_zh": "DFlash targets a core speculative-decoding bottleneck: in most prior methods, the draft stage is still sequential, so end-to-end gains remain limited even when verification is parallel. It uses a lightweight block diffusion draft model, conditioned on context features from the target model, to generate draft tokens in a single pass and improve acceptance while keeping decoding lossless. The abstract reports over 6x acceleration across models and tasks and up to 2.5x more speedup than EAGLE-3, but it does not make the hardware setup, draft-model overhead, or baseline fairness clear.",
+        "background_zh": "Speculative decoding is a major path for reducing autoregressive LLM latency, but many systems still pay a sequential cost on the draft side.",
+        "problem_zh": "The paper asks whether speculative drafting can be parallelized without degrading final outputs, since sequential drafting caps practical speedup and GPU utilization.",
+        "approach_zh": "It introduces a lightweight block diffusion draft model that generates multiple draft tokens in one pass and conditions that model on target-model context features to improve draft quality.",
+        "evidence_zh": "The abstract claims experiments across multiple models and tasks with over 6x lossless acceleration and up to 2.5x higher speedup than EAGLE-3, but the evaluation setup and ablations are not made clear.",
+        "value_zh": "If the method generalizes, it could remove a key sequential bottleneck in speculative decoding and make low-latency LLM serving more parallel and efficient.",
         "open_questions": [
-          "目标模型的上下文特征是如何抽取并注入块扩散草稿模型的，这部分额外开销是否会吞掉一部分端到端收益？",
-          "摘要里的超过 6x 无损加速对应哪些硬件、模型组合、序列长度和批大小，长上下文或高并发场景下是否仍成立？",
-          "与 EAGLE-3 的比较是否建立在相同验证规则、KV cache 策略和工程优化水平上，baseline 公平性是否站得住？"
+          "What block size, diffusion schedule, and draft-model architecture are required for the reported gains, and how sensitive are results to those choices?",
+          "How much end-to-end speedup remains after including target-model feature extraction, draft-model compute, and memory overhead on real serving hardware?",
+          "Are the comparisons to EAGLE-3 matched on target model, acceptance rule, batch setting, and implementation quality, or could setup differences explain part of the gain?"
         ],
         "core_contributions": [
-          "提出以轻量级块扩散模型替代自回归草稿模型，把 speculative decoding 的 drafting 变为一次前向的并行生成。",
-          "通过目标模型上下文特征条件化草稿模型，试图同时提升草稿质量与 acceptance rate。",
-          "摘要报告了跨模型跨任务的无损加速结果，并给出相对现有方法 EAGLE-3 的速度优势。"
+          "Recasts speculative drafting as parallel block generation with a lightweight diffusion model instead of token-by-token autoregressive drafting.",
+          "Uses target-model context features to condition the draft model and improve acceptance in the speculative pipeline.",
+          "Reports lossless acceleration gains and direct speedup comparisons against a strong speculative decoding baseline."
         ],
         "why_read": [
-          "它直接命中 speculative decoding 里最顽固的串行部分，比只在验证侧做优化更接近系统瓶颈本身。",
-          "如果方法成立，说明扩散式并行生成不必单独追求完整语言建模能力，也能作为高效 draft 模块发挥系统价值。",
-          "与当前 LLM inference acceleration 和 serving efficiency 主线高度贴合，值得优先核对其实验设定和真实收益来源。"
+          "It focuses on the draft-side bottleneck in speculative decoding, which is a real systems limit for latency reduction.",
+          "It tests whether diffusion-style generation is more useful as an auxiliary inference component than as a standalone LLM replacement.",
+          "It is directly relevant to LLM serving work that cares about parallelism, utilization, and verifier-compatible draft quality."
         ],
         "risks": [
-          "加速幅度可能强依赖特定硬件、目标模型与草稿模型配对以及实现细节，摘要未说明泛化边界。",
-          "目标模型特征条件化会增加系统耦合和额外计算路径，端到端复杂度可能高于看上去的算法描述。"
+          "The abstract does not say how large the draft model is or how much extra compute and memory its conditioning path adds.",
+          "The reported speedups may depend heavily on hardware, batch size, and systems implementation details that are not disclosed here."
         ],
         "recommended_for": [
-          "关注 speculative decoding、低时延推理和在线 serving 的系统研究者与工程师",
-          "评估 draft-verify 协同设计和并行生成替代自回归助手模型的读者",
-          "需要判断新加速收益究竟来自算法还是实现细节的人"
+          "Researchers working on speculative decoding and LLM serving latency",
+          "Engineers evaluating draft-model tradeoffs in inference stacks",
+          "Systems readers interested in parallel generation mechanisms for autoregressive LLM serving"
         ],
         "keywords": [
-          "LLM 推理系统",
           "speculative decoding",
-          "块扩散模型",
-          "并行草稿生成",
-          "acceptance rate",
-          "低时延推理"
+          "diffusion LLM",
+          "block diffusion",
+          "LLM inference",
+          "latency reduction",
+          "GPU utilization"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "与当前关注的 LLM inference acceleration 主线高度一致，且摘要直接报告显著无损加速和对强 baseline 的优势；不过硬件假设、额外开销与 baseline 公平性仍需正文重点核对。",
+        "reading_priority_reason": "This is a strong fit for LLM inference systems work because it attacks a known draft-stage bottleneck in speculative decoding and claims large lossless speedups, even though the abstract leaves hardware and baseline details underspecified.",
         "fallback_summary": "Autoregressive large language models (LLMs) deliver strong performance but require inherently sequential decoding, leading to high inference latency and poor GPU utilization."
       }
     },
@@ -242,47 +242,46 @@
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "这篇工作值得优先看，因为它试图把多 token 解码收益直接蒸馏进原模型本体，绕开 speculative decoding 的附加模型和复杂 serving 流水线。",
-        "summary_zh": "论文瞄准的是推理侧一个很实际的问题：现有加速方法常依赖额外 speculator 与 verifier，系统集成和部署成本都不低。作者提出用简单的在线自蒸馏，把预训练自回归模型从单步预测改造成可独立部署的多 token 预测模型，同时保持与原始 checkpoint 相同的实现形态。摘要给出的核心结果是在 GSM8K 上平均解码速度超过 3 倍，准确率相对单 token 解码下降小于 5%，但泛化范围、硬件条件和 baseline 公平性仍需通读正文核对。",
-        "background_zh": "LLM 推理加速当前常靠 speculative decoding 一类方法，但这类方案往往把算法收益建立在额外模型与更复杂的 serving 栈之上。",
-        "problem_zh": "作者要解决的是，能否在不引入辅助 speculator、verifier 或专门推理代码的前提下，让现成自回归模型直接具备更快的多 token 解码能力。",
-        "approach_zh": "核心做法是对预训练模型施加一种简单的在线自蒸馏目标，把单 next-token 预测模型转换为独立的 multi-token prediction 模型。",
-        "evidence_zh": "摘要报告在 GSM8K 上，相对单 token 解码可实现平均超过 3 倍的解码加速，且准确率下降小于 5%。",
-        "value_zh": "如果结论成立，这意味着多 token 解码收益可以以内生方式并入模型本体，从而减少推理系统复杂度并降低部署门槛。",
+        "one_liner_zh": "Turns a pretrained autoregressive LM into a standalone multi-token predictor with online self-distillation, aiming to capture decode speedups without auxiliary models or a specialized serving pipeline.",
+        "summary_zh": "The paper proposes converting a standard next-token LM into a standalone multi-token predictor through an online self-distillation objective, while keeping deployment identical to the original checkpoint and avoiding speculator-verifier pipelines. The abstract presents this as a simpler alternative to speculative decoding and reports more than 3x average decoding speedup on GSM8K with under 5% accuracy loss relative to single-token decoding. The main unresolved points are how the multi-token objective is implemented, what runtime conditions produce the gain, and how fairly it compares against other acceleration baselines.",
+        "background_zh": "Autoregressive LM inference is slow because decoding is inherently sequential, and current acceleration methods such as speculative decoding often add extra models and serving complexity.",
+        "problem_zh": "The paper asks whether a pretrained single-token LM can be adapted into a faster multi-token decoder without auxiliary models or custom inference machinery.",
+        "approach_zh": "It applies a simple online distillation objective to transform a pretrained autoregressive checkpoint into a standalone multi-token prediction model while preserving the same implementation and deployment path.",
+        "evidence_zh": "The abstract reports GSM8K results with more than 3x average decoding speedup and less than 5% accuracy drop versus single-token decoding, but it does not make the hardware setup, baseline coverage, or evaluation breadth clear.",
+        "value_zh": "If the result generalizes, this offers a cleaner inference-systems tradeoff: move complexity into training and keep serving close to the original model path.",
         "open_questions": [
-          "在线自蒸馏目标的具体形式是什么，训练时引入了多少额外算力与数据成本？",
-          "超过 3 倍的速度提升是在什么硬件、batch 设定和解码配置下得到的，比较 baseline 是否公平？",
-          "这种方法除了 GSM8K 之外，在开放式生成、长上下文或不同模型规模上是否还能保持速度与质量权衡？"
+          "How is the online self-distillation target defined, and how does it stabilize multi-token prediction during training?",
+          "What hardware, batch size, sequence lengths, and decoding configuration underlie the reported speedup?",
+          "How does the method compare directly against speculative decoding and other acceleration baselines under matched serving conditions?"
         ],
         "core_contributions": [
-          "提出一种基于在线自蒸馏的方案，把预训练自回归模型直接改造成可独立部署的多 token 预测模型。",
-          "避免了 speculative decoding 常见的辅助 speculator、verifier 以及额外专用推理流水线。",
-          "摘要给出 GSM8K 上平均超过 3 倍解码加速且准确率下降小于 5% 的初步结果。"
+          "Poses multi-token prediction as a self-distillation adaptation of an existing autoregressive LM.",
+          "Targets inference speedup without adding auxiliary speculator or verifier models.",
+          "Reports a concrete speed-accuracy tradeoff on GSM8K for the standalone converted model."
         ],
         "why_read": [
-          "对 LLM inference systems 很贴题，因为它把算法收益和 serving 简化放在同一个设计目标里。",
-          "如果你关心部署复杂度，这篇比单纯追求 decode 提速更值得看，因为它声称不需要额外辅助模型。",
-          "它提供了一个与 speculative decoding 不同的路线：不是外挂推理组件，而是直接改造模型本体。"
+          "It is directly relevant to LLM inference systems because it targets decode speed while simplifying deployment.",
+          "It tests a different systems tradeoff from speculative decoding: training-time adaptation instead of inference-time pipeline complexity.",
+          "It may matter operationally if the claimed gains preserve existing runtime and kernel paths."
         ],
         "risks": [
-          "证据目前在摘要里只明确覆盖 GSM8K，任务范围偏窄。",
-          "速度收益可能强依赖具体硬件、实现细节和解码配置，摘要没有充分说明。"
+          "The abstract only names GSM8K, so generalization to broader generation workloads is unclear.",
+          "The reported speedup may depend strongly on unstated hardware and decoding settings, making reproducibility hard to judge from the abstract alone."
         ],
         "recommended_for": [
-          "做 LLM 推理加速与 serving 系统的研究者和工程师",
-          "关注 speculative decoding 替代路线的人",
-          "需要在系统复杂度与解码速度之间做权衡的模型部署团队"
+          "Researchers working on LLM inference acceleration and decoding algorithms.",
+          "Engineers evaluating alternatives to speculative decoding in production serving stacks.",
+          "Compiler and runtime practitioners interested in methods that preserve the base deployment path."
         ],
         "keywords": [
-          "LLM推理",
-          "多token预测",
-          "自蒸馏",
-          "解码加速",
+          "LLM inference",
+          "multi-token prediction",
+          "self-distillation",
           "speculative decoding",
-          "serving效率"
+          "decoding speedup"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "主题与 LLM inference acceleration 高度一致，且摘要直接触及系统侧最关心的部署复杂度与解码速度权衡；同时它给出了明确的速度/精度信号，足以作为今天的优先阅读对象。",
+        "reading_priority_reason": "High fit with the stated focus on LLM inference systems: it targets decoding throughput directly, claims a simpler serving path than speculative decoding, and reports a concrete speed-accuracy tradeoff, though the evaluation details remain underspecified.",
         "fallback_summary": "Existing techniques for accelerating language model inference, such as speculative decoding, require training auxiliary speculator models and building and deploying complex inference pipelines."
       }
     },
@@ -388,47 +387,47 @@
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "真正值得看的不是又一个选 pass 模型，而是它试图把细粒度 phase ordering 直接做成 LLVM 内建能力。",
-        "summary_zh": "真正值得看的不是又一个 compiler-ML 原型，而是它试图把细粒度 phase ordering 直接做成 LLVM 内建能力。摘要声称依靠 140+ 手工静态特征和可接第三方 ML/LLM 的框架，Protean 在 Cbench 上相对 O3 平均提升 4.1%，部分程序最高 15.7%，代价是多出几秒构建时间。对 systems 读者，关键是看这种集成式设计是否真比编译器外部调参更可复用、更可扩展；但泛化范围和 baseline 公平性还要靠正文核对。",
-        "background_zh": "phase ordering 是编译器长期未解问题，因为优化序列组合空间极大，而手工启发式通常只对有限基准集有效。",
-        "problem_zh": "作者要解决的是如何把 phase ordering 从编译器外部实验工具，变成能在 LLVM 内对细粒度代码段直接生效的内建能力。",
-        "approach_zh": "Protean 将细粒度 phase-ordering 框架、140 多种手工静态特征提取方法，以及对第三方 ML/LLM 的接入接口统一集成到 LLVM 中。",
-        "evidence_zh": "摘要报告其在 Cbench 上相对 LLVM O3 平均加速 4.1%、部分应用最高 15.7%，并称两步式第三方 ML/LLM 优化在 Susan 和 Jpeg 上分别达到 10.1% 和 8.5% 提升，额外编译时间为几秒。",
-        "value_zh": "如果实现足够稳健，这类内建式 phase ordering 框架的价值在于让优化搜索更接近真实编译流程，并降低把新模型或启发式接入 LLVM 的工程门槛。",
+        "one_liner_zh": "An LLVM-integrated framework for fine-grained phase ordering that exposes static features and pluggable ML or LLM hooks, with reported gains over O3 on Cbench.",
+        "summary_zh": "This paper presents Protean Compiler, a version of LLVM with built-in fine-grained phase-ordering support rather than an external tuning loop. The main mechanism is a large static-feature library plus interfaces for third-party ML frameworks and LLM-driven two-step optimization. The abstract reports modest average gains over O3 on Cbench, larger wins on selected applications, and a small build-time cost, but it leaves evaluation breadth, baseline fairness, and transfer beyond Cbench unclear.",
+        "background_zh": "Compiler phase ordering remains hard because the optimization space is large, benchmark-sensitive, and usually handled with brittle hand-tuned heuristics or loosely attached ML models.",
+        "problem_zh": "The paper asks how to make phase-ordering decisions a first-class, fine-grained capability inside LLVM instead of an external research pipeline that is hard to reuse in practice.",
+        "approach_zh": "Protean integrates phase-ordering control directly into LLVM, adds more than 140 handcrafted static feature extractors at multiple scopes, and supports external ML or LLM components for optimization selection.",
+        "evidence_zh": "The abstract claims up to 4.1% average speedup and up to 15.7% on selected Cbench programs versus LLVM O3, plus two application-specific gains from a two-step optimization flow, but it does not make the full evaluation setup or fairness details clear.",
+        "value_zh": "If the integration is robust, this could make fine-grained compiler optimization easier to study and deploy, especially for workflows that want compiler-native hooks for learned or LLM-assisted decisions.",
         "open_questions": [
-          "细粒度作用域具体落在函数、循环、基本块还是更小片段，切分与插入点如何决定？",
-          "与 O3 的比较是否控制了编译时预算、训练或调参成本，以及 benchmark 泄漏风险，baseline 是否公平？",
-          "140+ 静态特征和第三方 ML/LLM 接口在非 Cbench、不同架构与更新 workload 上的泛化如何？"
+          "What exact optimization scope and decision points inside LLVM are controlled by Protean, and how are phase sequences represented?",
+          "How broad and fair is the evaluation beyond Cbench, including baseline tuning, ablations on the feature library, and compile-time overhead across workloads?",
+          "What role do the external ML frameworks and LLMs actually play in the two-step optimization path, and how reproducible are those results?"
         ],
         "core_contributions": [
-          "把 phase ordering 作为 LLVM 内建能力而非外部原型框架来实现。",
-          "提供覆盖不同作用域的 140 多种手工静态特征收集库。",
-          "给出可接第三方 ML/LLM 的两步式优化路径，并在摘要中报告相对 O3 的性能收益。"
+          "A compiler-native framework that embeds fine-grained phase-ordering support directly into LLVM.",
+          "A library of more than 140 handcrafted static feature collection methods across multiple code scopes.",
+          "A pluggable interface for third-party ML frameworks and LLM-assisted optimization on top of the LLVM integration."
         ],
         "why_read": [
-          "想看 phase ordering 如何真正落地到编译器实现，而不是只停留在模型选 pass 的论文原型。",
-          "关心 LLVM 内可扩展特征工程和优化决策接口，这篇可能提供可复用的系统结构。",
-          "对 LLM/ML 参与编译优化感兴趣时，这篇至少给了一个接入点，而不只是概念性表述。"
+          "It turns phase ordering from an external autotuning experiment into an LLVM-integrated system design question.",
+          "It may be useful if you care about compiler/runtime co-design or learned optimization hooks inside production compiler flows.",
+          "It provides a concrete data point on how much gain fine-grained ordering can deliver relative to O3 with limited extra build time."
         ],
         "risks": [
-          "实验主要落在 Cbench，是否能代表现代系统或更贴近当前热点的 workload 存疑。",
-          "摘要没有说明训练流程、推理开销、失败案例和稳定性，收益边界不清楚。"
+          "The reported average gain is modest, and the larger wins appear concentrated in selected benchmarks.",
+          "The abstract is underspecified on hardware, benchmark diversity, baseline fairness, and reproducibility details for the ML or LLM path."
         ],
         "recommended_for": [
-          "做 LLVM、编译优化策略或可学习编译器研究的人。",
-          "关心 phase ordering、autotuning 和编译器内建优化接口的工程师。",
-          "想评估 ML/LLM 是否能进入真实编译流水线的人。"
+          "Researchers working on LLVM optimization and phase-ordering methods.",
+          "Engineers exploring learned compiler heuristics or LLM-assisted optimization tooling.",
+          "Readers interested in compiler infrastructure more than direct LLM inference serving gains."
         ],
         "keywords": [
           "LLVM",
-          "phase ordering",
-          "细粒度优化",
-          "编译器优化",
-          "静态特征",
-          "ML/LLM 编译优化"
+          "compiler phase ordering",
+          "fine-grained optimization",
+          "static features",
+          "machine learning for compilers",
+          "LLM-assisted optimization"
         ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "编译器系统视角下这篇有明确实做点，且把 phase ordering 内建进 LLVM 的方向值得看；但它与当前最核心的 LLM inference acceleration、serving efficiency、CUDA kernel generation 主线仍有距离，实验范围也主要停留在 Cbench。",
+        "reading_priority": "low",
+        "reading_priority_reason": "The paper is relevant at the compiler-infrastructure level, but it is not directly about LLM inference acceleration, CUDA kernel generation, or low-level assembly generation, which are the main focus areas here.",
         "fallback_summary": "The phase ordering problem has been a long-standing challenge since the late 1970s, yet it remains an open problem due to having a vast optimization space and an unbounded nature, making it an open-ended problem without a finite solution, one can limit the scope by reducing the number and the length of optimizations."
       }
     },
@@ -532,68 +531,68 @@
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "这篇工作把 revocable diffusion decoding 里的 flip-flop 无效修订当成核心系统瓶颈，并尝试用基于 KV cache override 的单次前向验证来把它压掉。",
-        "summary_zh": "这篇工作抓住 revocable diffusion decoding 里反复 remask/restore 的 flip-flop 现象，认为它既削弱并行草拟时的上下文，又浪费 revision budget，是扩散语言模型加速里的实际瓶颈。方法上，COVER 用 KV cache override 在一次前向里同时做 leave-one-out 验证和稳定草拟，并配合稳定性感知的 seed 选择与自适应验证数量。摘要声称它在多个基准上减少无效修订、加快解码且不损失质量，但具体收益来源、额外开销和 baseline 公平性还需要读正文核对。",
-        "background_zh": "扩散语言模型通常依赖并行 unmask 提速，但并行度提高后容易带来质量退化，因此验证与修订机制会直接决定实际推理效率。",
-        "problem_zh": "现有 revocable decoding 的验证流程会产生 flip-flop：一些 token 被重遮盖后又原样恢复，既破坏后续草拟所需的上下文，也把修订预算耗在无效循环里。",
-        "approach_zh": "COVER 在单次前向中借助 KV cache override 构造验证视图和保留上下文的草拟视图，用对角修正避免 seed 自泄漏，并用稳定性感知打分与自适应 seed 数控制每步验证。",
-        "evidence_zh": "摘要称该方法在多个基准上减少了不必要的 revisions、实现更快解码并保持输出质量，但没有给出具体指标、硬件环境或对比设置。",
-        "value_zh": "如果正文证明其额外实现开销可控，这个思路的价值在于把加速收益落到减少无效修订和维持条件上下文质量上，而不是只靠更激进的并行草拟。",
+        "one_liner_zh": "The paper targets a specific inefficiency in revocable diffusion decoding by preserving context during verification so repeated remask-restore cycles do not erase useful parallel progress.",
+        "summary_zh": "The paper studies a failure mode in parallel diffusion decoding where revocable verification causes flip-flop oscillations: tokens are remasked and later restored unchanged, which both weakens conditioning context and wastes revision budget. It proposes COVER, a single-pass verification scheme that uses KV cache override to verify selected seeds while preserving their context for other queries, plus stability-aware seed selection and an adaptive verification count. The abstract claims faster decoding with preserved output quality across benchmarks, but it does not specify the benchmark setup, baseline fairness, or the size of the gains.",
+        "background_zh": "Diffusion language model decoding gets speed from parallel token updates, but that parallelism is only useful if verification can correct mistakes without destroying the context needed for later drafting.",
+        "problem_zh": "Existing revocable verification can repeatedly remask tokens that later return to the same value, creating oscillations that consume revision steps and reduce the quality of the context seen by parallel decoding.",
+        "approach_zh": "COVER performs leave-one-out verification and stable drafting in one forward pass by masking selected seeds only for verification while injecting their cached key-value states for other queries, adds a diagonal correction to prevent self leakage, and chooses how many seeds to verify using a stability-aware score.",
+        "evidence_zh": "The abstract says the method reduces unnecessary revisions and improves decoding speed while preserving output quality across benchmarks, but it does not make the workloads, baselines, hardware assumptions, or effect sizes clear.",
+        "value_zh": "If the mechanism is efficient in practice, it offers a decoding-level way to recover more parallel speed in diffusion LMs by fixing verification churn rather than changing the model itself.",
         "open_questions": [
-          "KV cache override 与对角修正的实际计算和显存开销是多少，是否真的优于额外做一次验证前向？",
-          "所谓稳定性感知的 seed 打分具体如何定义，各组成项对速度和质量的敏感性如何？",
-          "实验里的 baseline 是否在相同 revision budget、并行度和质量目标下公平比较，收益是否在不同模型规模与任务上稳定？"
+          "What are the actual latency or throughput gains versus prior revocable verification schemes, and on which diffusion LM models and tasks are they measured?",
+          "What extra runtime or memory cost comes from maintaining the two attention views and KV cache override machinery during inference?",
+          "How are the stability-aware seed score and adaptive verification budget defined, and how sensitive are results to those design choices?"
         ],
         "core_contributions": [
-          "指出 revocable diffusion decoding 中 flip-flop oscillation 是影响速度和上下文质量的关键低效来源。",
-          "提出单次前向的 context-preserving verification：在验证部分 seed 的同时尽量保留其余位置可用的上下文信息。",
-          "引入稳定性感知的 seed 优先级与自适应验证数量，试图把修订预算集中到更可能产生净收益的位置。"
+          "Identifies flip-flop oscillation as a concrete failure mode in revocable diffusion decoding.",
+          "Introduces a context-preserving single-pass verification mechanism based on KV cache override and diagonal self-leakage correction.",
+          "Adds stability-aware seed prioritization and adaptive verification count control to reduce low-value revisions."
         ],
         "why_read": [
-          "它讨论的不是泛泛的解码加速，而是验证阶段如何反过来破坏并行草拟上下文，这个切口比较系统化。",
-          "方法里的核心机制直接落在 attention/KV cache 操作层，和推理系统工程师关心的状态复用与额外前向成本相关。",
-          "如果你在跟踪扩散 LM 推理，这篇论文值得先看方法与实验部分，因为摘要已经明确给出了速度收益的候选来源。"
+          "It isolates where diffusion LM decoding can lose speed even when parallel drafting is available: revision churn rather than token generation itself.",
+          "The KV-cache-based verification design is a concrete systems mechanism, not just a decoding heuristic at the token level.",
+          "It is relevant if you are comparing control strategies for speculative, revocable, or other multi-token decoding schemes."
         ],
         "risks": [
-          "摘要没有说明绝对 latency/throughput 改善、额外 kernel 或 cache 操作成本，真实系统收益可能被实现细节吞掉。",
-          "适用范围可能偏向 diffusion LM 的 revocable decoding 设定，未必能外推到更常见的自回归推理栈。"
+          "The abstract does not quantify the speed-quality tradeoff or specify whether comparisons are against strong and fair baselines.",
+          "The practical gain may depend on whether the cache-override verification path is cheap enough to implement on real inference stacks for diffusion LMs only rather than standard autoregressive LLMs, so transferability to broader LLM serving is unclear from the abstract alone, but the paper still fits the inference-systems focus and the recommendation signal is reasonably strong."
         ],
         "recommended_for": [
-          "关注扩散语言模型推理与解码控制的研究者。",
-          "研究 KV cache、attention 状态操作与推理效率关系的系统工程师。",
-          "想比较 verification/revision 类加速方法真实收益来源的人。"
+          "Researchers working on diffusion language model inference and decoding control.",
+          "Engineers studying KV-cache-aware inference optimizations.",
+          "Readers evaluating verification mechanisms for parallel or revision-based generation."
         ],
         "keywords": [
-          "扩散语言模型",
-          "并行解码",
-          "可撤销解码",
-          "验证机制",
+          "diffusion language models",
+          "parallel diffusion decoding",
+          "revocable decoding",
+          "verification",
           "KV cache",
-          "推理加速"
+          "leave-one-out verification"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "它与 LLM inference systems 主线高度相关，而且摘要给出的机制层内容比较具体：核心不是普通采样技巧，而是用 KV cache override 把验证和草拟压进单次前向，并直接针对无效 revision 带来的速度损失。虽然实验细节仍不足，但从方法切口和系统相关性看，值得优先核对正文中的开销模型与基线比较。",
+        "reading_priority_reason": "High because it directly targets inference efficiency in a priority domain, proposes a cache-level verification mechanism rather than a generic modeling tweak, and has a solid overall recommendation signal, even though the abstract leaves key evaluation details unclear.",
         "fallback_summary": "Parallel diffusion decoding can accelerate diffusion language model inference by unmasking multiple tokens per step, but aggressive parallelism often harms quality."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "今天最值得读的主线是训练与推理效率、LLM Code Generation For CUDA Kernels。 优先看 DFlash: Block Diffusion for Flash…、Multi-Token Prediction via…，因为它们最直接代表今天的主干问题。 第三篇可用 Protean Compiler: An Agile… 来判断这条方法线是否具备更强的证据或工程价值。",
+    "overview_zh": "Today's main threads are training and inference efficiency, LLM Code Generation For CUDA Kernels. The set is anchored by DFlash: Block Diffusion for Flash… and Multi-Token Prediction via…. Protean Compiler: An Agile… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
-      "训练与推理效率",
+      "training and inference efficiency",
       "LLM Code Generation For CUDA Kernels",
-      "可信性与事实核验"
+      "factual reliability and verification"
     ],
     "reading_strategy": [
-      "先读 DFlash: Block Diffusion for Flash…，重点核对它对训练与推理效率问题的任务定义和核心机制是否清楚。",
-      "再读 Multi-Token Prediction via…，判断它的方法新意到底来自模型设计、训练流程还是评测重设。",
-      "最后读 Protean Compiler: An Agile…，把它当成对今天主线的补充验证，重点看实验边界和真实价值。"
+      "Start with DFlash: Block Diffusion for Flash… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
+      "Then read Multi-Token Prediction via… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use Protean Compiler: An Agile… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-03-08T15:24:15Z",
+    "generated_at": "2026-03-08T15:45:19Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
     "paper_results": 4,

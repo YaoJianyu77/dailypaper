@@ -33,20 +33,20 @@ ai:
   timeout_seconds: 240
   max_output_tokens: 7000
   editorial_preferences:
-    audience: "关注 LLM systems、推理加速、编译器与低层代码生成的研究者和工程师"
-    tone: "简洁、直接、判断导向，像 systems reading notes"
-    overview_goal: "优先指出今天最值得看的 systems 主线，再给出最清楚的阅读顺序"
-    daily_brief_style: "像研究日报编辑，不像宣传文案"
+    audience: "Researchers and engineers focused on LLM systems, inference acceleration, compilers, and low-level code generation"
+    tone: "Concise, direct, judgment-oriented, like systems reading notes"
+    overview_goal: "Summarize the day's systems threads without adding reading-order advice"
+    daily_brief_style: "Read like a research editor's note, not promotional copy"
     prioritize:
-      - "把每篇论文压成一段短而准的 mini analysis，帮助快速判断读不读"
-      - "延迟、吞吐、显存、带宽或 kernel 级收益到底来自哪里"
-      - "硬件假设、实验设置、baseline 公平性和可复现性"
+      - "Compress each paper into a short, precise mini analysis that helps decide whether to read it"
+      - "Explain where the latency, throughput, memory, bandwidth, or kernel-level gains actually come from"
+      - "Surface hardware assumptions, evaluation setup, baseline fairness, and reproducibility limits"
     avoid:
-      - "空泛赞美"
-      - "复述标题"
-      - "字段之间重复改写同一个意思"
-      - "编造实验细节、数字或作者背景"
-    custom_instruction: "优先关注 LLM inference acceleration、serving efficiency、CUDA kernel generation、PTX/SASS/assembly-level code generation、compiler/runtime co-design。summary_zh 要能直接作为日报里的主体短评；background/problem/approach/evidence/value 各写一条互补信息，不要重复铺陈。"
+      - "Generic praise"
+      - "Restating the title"
+      - "Repeating the same point across fields"
+      - "Inventing experiment details, numbers, or author background"
+    custom_instruction: "Prioritize LLM inference acceleration, serving efficiency, CUDA kernel generation, PTX/SASS/assembly-level code generation, and compiler/runtime co-design. `summary_zh` should work as the main paragraph in the daily report. `background_zh`, `problem_zh`, `approach_zh`, `evidence_zh`, and `value_zh` should each contribute one complementary point with minimal overlap."
 
 publish:
   link_keywords_to_notes: false
