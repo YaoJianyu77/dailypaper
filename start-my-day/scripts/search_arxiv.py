@@ -48,6 +48,14 @@ OPENALEX_WORKS_API_URL = "https://api.openalex.org/works"
 GOOGLE_SCHOLAR_SEARCH_URL = "https://scholar.google.com/scholar"
 GOOGLE_SCHOLAR_REQUEST_INTERVAL = 4.0
 GOOGLE_SCHOLAR_MIN_TITLE_SIMILARITY = 0.72
+VENUE_PAGE_TIMEOUT_SECONDS = 30
+VENUE_PAGE_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+    ),
+    "Accept-Language": "en-US,en;q=0.9",
+}
 DEFAULT_LANE_SETTINGS = {
     'fresh': {'max_age_days': 90, 'quota': 3},
     'established': {'max_age_days': 1095, 'quota': 2},
@@ -576,6 +584,46 @@ def search_openalex_source(venue_alias: str) -> Optional[Dict[str, Any]]:
     return best_source if best_score >= 0.55 else None
 
 
+def search_openalex_work_by_doi_or_title(*, doi: str = '', title: str = '') -> Optional[Dict[str, Any]]:
+    doi = str(doi or '').strip()
+    title = str(title or '').strip()
+    urls: List[str] = []
+    if doi:
+        doi_value = doi if doi.startswith('http') else f'https://doi.org/{doi}'
+        urls.append(f"{OPENALEX_WORKS_API_URL}?{urllib.parse.urlencode({'filter': f'doi:{doi_value}', 'per-page': '1'})}")
+    if title:
+        urls.append(f"{OPENALEX_WORKS_API_URL}?{urllib.parse.urlencode({'search': title, 'per-page': '5'})}")
+
+    for url in urls:
+        try:
+            payload = fetch_json_url(url, timeout_seconds=45)
+        except Exception as exc:
+            logger.warning("OpenAlex work lookup failed for %s: %s", title or doi or url, exc)
+            continue
+        results = payload.get('results', []) if isinstance(payload, dict) else []
+        if not isinstance(results, list) or not results:
+            continue
+        if doi:
+            return results[0] if isinstance(results[0], dict) else None
+        ranked = [
+            (
+                SequenceMatcher(
+                    None,
+                    str(item.get('display_name') or '').lower(),
+                    title.lower(),
+                ).ratio(),
+                item,
+            )
+            for item in results
+            if isinstance(item, dict)
+        ]
+        ranked = [item for item in ranked if item[0] >= 0.72]
+        if ranked:
+            ranked.sort(key=lambda pair: pair[0], reverse=True)
+            return ranked[0][1]
+    return None
+
+
 def openalex_work_to_candidate(
     work: Dict[str, Any],
     *,
@@ -663,6 +711,141 @@ def openalex_work_to_candidate(
         },
     }
     return candidate
+
+
+def hydrate_papers_with_venue_metadata(papers: List[Dict[str, Any]]) -> None:
+    for paper in papers:
+        source = str(paper.get('source') or '').strip().lower()
+        if source not in {'dblp_venue', 'openalex_venue'}:
+            continue
+
+        official = fetch_official_venue_metadata(str(paper.get('source_url') or paper.get('url') or '').strip())
+        abstract = str(official.get('abstract') or '').strip()
+        pdf_url = str(official.get('pdf_url') or '').strip()
+        landing_page_url = str(official.get('landing_page_url') or paper.get('source_url') or paper.get('url') or '').strip()
+
+        openalex_work: Optional[Dict[str, Any]] = None
+        needs_openalex = (
+            not abstract
+            or not pdf_url
+            or paper.get('citationCount') is None
+            or not str(paper.get('venue') or paper.get('journal_ref') or '').strip()
+        )
+        if needs_openalex:
+            openalex_work = search_openalex_work_by_doi_or_title(
+                doi=str(paper.get('doi') or '').strip(),
+                title=str(paper.get('title') or '').strip(),
+            )
+
+        if openalex_work:
+            if not abstract:
+                abstract = openalex_inverted_index_to_text(openalex_work.get('abstract_inverted_index'))
+            primary_location = openalex_work.get('primary_location', {}) if isinstance(openalex_work.get('primary_location'), dict) else {}
+            best_oa_location = openalex_work.get('best_oa_location', {}) if isinstance(openalex_work.get('best_oa_location'), dict) else {}
+            if not landing_page_url:
+                landing_page_url = first_non_empty_url(
+                    primary_location.get('landing_page_url'),
+                    best_oa_location.get('landing_page_url'),
+                    openalex_work.get('id'),
+                )
+            if not pdf_url:
+                pdf_url = first_non_empty_url(
+                    primary_location.get('pdf_url'),
+                    best_oa_location.get('pdf_url'),
+                )
+            source_info = primary_location.get('source', {}) if isinstance(primary_location.get('source'), dict) else {}
+            openalex_venue = str(source_info.get('display_name') or '').strip()
+            if openalex_venue and not str(paper.get('venue') or paper.get('journal_ref') or '').strip():
+                paper['venue'] = openalex_venue
+            cited_by = openalex_work.get('cited_by_count')
+            if cited_by is not None and paper.get('citationCount') is None:
+                paper['citationCount'] = cited_by
+            authorships = openalex_work.get('authorships', [])
+            if isinstance(authorships, list) and not paper.get('institutions'):
+                institutions: List[str] = []
+                for authorship in authorships:
+                    if not isinstance(authorship, dict):
+                        continue
+                    for inst in authorship.get('institutions', []) if isinstance(authorship.get('institutions'), list) else []:
+                        if not isinstance(inst, dict):
+                            continue
+                        name = str(inst.get('display_name') or '').strip()
+                        if name and name not in institutions:
+                            institutions.append(name)
+                if institutions:
+                    paper['institutions'] = institutions[:8]
+
+        current_summary = str(paper.get('summary') or paper.get('abstract') or '').strip()
+        if abstract and (not current_summary or len(abstract) > len(current_summary) + 80):
+            paper['summary'] = abstract
+            paper['abstract'] = abstract
+        if pdf_url and not str(paper.get('pdf_url') or '').strip():
+            paper['pdf_url'] = pdf_url
+        if landing_page_url:
+            paper['source_url'] = landing_page_url
+            paper['url'] = landing_page_url
+        if official or openalex_work:
+            paper['venue_metadata'] = {
+                'official_page_blocked': bool(official.get('blocked')),
+                'official_page_url': landing_page_url,
+                'abstract_source': 'official_page' if official.get('abstract') else ('openalex' if openalex_work else ''),
+                'pdf_source': 'official_page' if official.get('pdf_url') else ('openalex' if openalex_work and pdf_url else ''),
+            }
+
+
+def refresh_selected_paper_scores(
+    papers: List[Dict[str, Any]],
+    config: Dict[str, Any],
+    *,
+    target_date: Optional[datetime] = None,
+) -> None:
+    scoring_settings = get_search_scoring_settings(config)
+    weights_normal = get_recommendation_weights(scoring_settings, 'weights_normal', WEIGHTS_NORMAL)
+    weights_hot = get_recommendation_weights(scoring_settings, 'weights_hot', WEIGHTS_HOT)
+    recency_thresholds = get_recency_thresholds(config)
+    for paper in papers:
+        summary = str(paper.get('summary') or paper.get('abstract') or '').strip()
+        current_scores = paper.get('scores', {})
+        if not summary or not isinstance(current_scores, dict):
+            continue
+
+        quality = min(calculate_quality_score(summary), SCORE_MAX)
+        relevance = min(float(current_scores.get('relevance', 0) or 0), SCORE_MAX)
+        recency = float(current_scores.get('recency', 0) or 0)
+        if recency <= 0:
+            published_date = parse_date_flexible(paper.get('published_date') or paper.get('publicationDate') or paper.get('published'))
+            recency = calculate_recency_score(
+                published_date,
+                reference_date=target_date,
+                thresholds=recency_thresholds,
+            )
+        popularity = float(current_scores.get('popularity', 0) or 0)
+        if not paper.get('is_hot_paper'):
+            popularity = quality
+        recommendation_score = calculate_recommendation_score(
+            relevance,
+            min(recency, SCORE_MAX),
+            min(popularity, SCORE_MAX),
+            quality,
+            bool(paper.get('is_hot_paper')),
+            priority_bonus=float(paper.get('domain_preference_bonus', 0) or 0),
+            weights_normal=weights_normal,
+            weights_hot=weights_hot,
+        )
+        current_scores['quality'] = round(quality, 2)
+        current_scores['popularity'] = round(min(popularity, SCORE_MAX), 2)
+        current_scores['recommendation'] = recommendation_score
+        paper['scores'] = current_scores
+
+        match_details = paper.get('match_details', {}) if isinstance(paper.get('match_details'), dict) else {}
+        analysis_candidate_score, analysis_components = calculate_analysis_candidate_score(paper, match_details)
+        paper['analysis_candidate_score'] = analysis_candidate_score
+        paper['analysis_signals'] = analysis_components.get('analysis_signals', [])
+        paper['analysis_components'] = {
+            key: value
+            for key, value in analysis_components.items()
+            if key != 'analysis_signals'
+        }
 
 
 def load_paper_index_entries(path: Path) -> Dict[str, Dict[str, Any]]:
@@ -891,6 +1074,149 @@ def fetch_json_url(url: str, *, timeout_seconds: int = 45) -> Dict[str, Any]:
         if exc.code == 429:
             raise SemanticScholarRateLimitError('dblp-rate-limit') from exc
         raise
+
+
+def fetch_text_url(
+    url: str,
+    *,
+    timeout_seconds: int = VENUE_PAGE_TIMEOUT_SECONDS,
+    headers: Optional[Dict[str, str]] = None,
+) -> Tuple[str, str, int]:
+    request_headers = headers or VENUE_PAGE_HEADERS
+    if HAS_REQUESTS:
+        response = requests.get(url, timeout=timeout_seconds, headers=request_headers, allow_redirects=True)
+        if response.status_code == 429:
+            raise SemanticScholarRateLimitError('venue-page-rate-limit')
+        return response.text, response.url, int(response.status_code)
+
+    req = urllib.request.Request(url, headers=request_headers)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout_seconds) as response:
+            return (
+                response.read().decode('utf-8', errors='ignore'),
+                response.geturl(),
+                int(getattr(response, 'status', 200) or 200),
+            )
+    except urllib.error.HTTPError as exc:
+        if exc.code == 429:
+            raise SemanticScholarRateLimitError('venue-page-rate-limit') from exc
+        return exc.read().decode('utf-8', errors='ignore'), exc.geturl() or url, int(exc.code)
+
+
+def _clean_html_fragment(raw: str) -> str:
+    text = re.sub(r'(?is)<(?:script|style)[^>]*>.*?</(?:script|style)>', ' ', raw or '')
+    text = re.sub(r'(?is)<br\s*/?>', ' ', text)
+    text = re.sub(r'(?is)</p>', ' ', text)
+    text = re.sub(r'(?is)<[^>]+>', ' ', text)
+    text = html.unescape(text)
+    text = re.sub(r'\s+', ' ', text)
+    return text.strip()
+
+
+def html_meta_content(html_text: str, *keys: str) -> str:
+    for key in keys:
+        escaped = re.escape(str(key or ''))
+        patterns = [
+            rf'<meta[^>]+name=["\']{escaped}["\'][^>]+content=["\']([^"\']+)["\']',
+            rf'<meta[^>]+property=["\']{escaped}["\'][^>]+content=["\']([^"\']+)["\']',
+            rf'<meta[^>]+content=["\']([^"\']+)["\'][^>]+name=["\']{escaped}["\']',
+            rf'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']{escaped}["\']',
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, html_text, flags=re.IGNORECASE)
+            if match:
+                return _clean_html_fragment(match.group(1))
+    return ''
+
+
+def looks_like_bot_wall(html_text: str, status_code: int) -> bool:
+    lowered = str(html_text or '').lower()
+    if status_code in {401, 403}:
+        return True
+    blockers = [
+        'just a moment',
+        'cf-browser-verification',
+        'enable javascript and cookies',
+        'captcha',
+        'access denied',
+    ]
+    return any(token in lowered for token in blockers)
+
+
+def extract_abstract_from_html(html_text: str) -> str:
+    meta_abstract = html_meta_content(
+        html_text,
+        'citation_abstract',
+        'dc.description',
+        'description',
+        'og:description',
+        'twitter:description',
+    )
+    if len(meta_abstract) >= 80:
+        return meta_abstract
+
+    patterns = [
+        r'(?is)<section[^>]*class=["\'][^"\']*paper-section[^"\']*["\'][^>]*>.*?<h[1-6][^>]*>\s*Abstract\s*</h[1-6]>.*?<p[^>]*class=["\'][^"\']*paper-abstract[^"\']*["\'][^>]*>(.*?)</p>',
+        r'(?is)<p[^>]*class=["\'][^"\']*(?:paper-abstract|abstractInFull|abstract|article__abstract)[^"\']*["\'][^>]*>(.*?)</p>',
+        r'(?is)<section[^>]*id=["\']abstract["\'][^>]*>(.*?)</section>',
+        r'(?is)<div[^>]*id=["\']abstract["\'][^>]*>(.*?)</div>',
+        r'(?is)<section[^>]*>.*?<h[1-6][^>]*>\s*Abstract\s*</h[1-6]>(.*?)</section>',
+        r'(?is)<div[^>]*class=["\'][^"\']*abstract[^"\']*["\'][^>]*>(.*?)</div>',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, html_text)
+        if not match:
+            continue
+        text = _clean_html_fragment(match.group(1))
+        if len(text) >= 80:
+            return text
+    return ''
+
+
+def extract_pdf_url_from_html(html_text: str, page_url: str) -> str:
+    meta_pdf = html_meta_content(html_text, 'citation_pdf_url', 'pdf_url')
+    if meta_pdf:
+        return urllib.parse.urljoin(page_url, meta_pdf)
+
+    patterns = [
+        r'(?is)<a[^>]+href=["\']([^"\']+\.pdf(?:\?[^"\']*)?)["\']',
+        r'(?is)<a[^>]+href=["\']([^"\']+)["\'][^>]*>\s*(?:paper|pdf|download pdf|full text pdf)\s*</a>',
+        r'(?is)<iframe[^>]+src=["\']([^"\']+\.pdf(?:\?[^"\']*)?)["\']',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, html_text)
+        if not match:
+            continue
+        url = urllib.parse.urljoin(page_url, str(match.group(1) or '').strip())
+        if looks_like_pdf_url(url):
+            return url
+    return ''
+
+
+def fetch_official_venue_metadata(source_url: str) -> Dict[str, Any]:
+    url = str(source_url or '').strip()
+    if not url:
+        return {}
+    try:
+        html_text, final_url, status_code = fetch_text_url(url, timeout_seconds=VENUE_PAGE_TIMEOUT_SECONDS)
+    except Exception as exc:
+        logger.warning("Official venue fetch failed for %s: %s", url, exc)
+        return {}
+
+    if looks_like_bot_wall(html_text, status_code):
+        return {'blocked': True, 'landing_page_url': final_url or url}
+
+    abstract = extract_abstract_from_html(html_text)
+    pdf_url = extract_pdf_url_from_html(html_text, final_url or url)
+    result = {
+        'landing_page_url': final_url or url,
+        'blocked': False,
+    }
+    if abstract:
+        result['abstract'] = abstract
+    if pdf_url:
+        result['pdf_url'] = pdf_url
+    return result
 
 
 def dblp_hit_to_candidate(
@@ -3033,6 +3359,8 @@ def main():
         index_entries=index_entries,
         reference_date=target_date,
     )
+    hydrate_papers_with_venue_metadata(top_papers)
+    refresh_selected_paper_scores(top_papers, config, target_date=target_date)
     hydrate_papers_with_semantic_scholar_metadata(top_papers)
     hydrate_papers_with_google_scholar_metadata(top_papers, config)
     annotate_analysis_priority(top_papers, analysis_top_n, classic_settings)

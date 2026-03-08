@@ -333,6 +333,17 @@ def build_page(dist_root: Path, out_path: Path, site_title: str, title: str, bod
     out_path.write_text(html_text, encoding='utf-8')
 
 
+def paper_doc_sort_key(item: Tuple[Dict, Path]) -> Tuple[int, int, str, str]:
+    frontmatter, path = item
+    selected = 1 if frontmatter.get('selected_for_full_analysis') else 0
+    try:
+        analysis_rank = int(frontmatter.get('analysis_priority_rank', 9999) or 9999)
+    except (TypeError, ValueError):
+        analysis_rank = 9999
+    updated = str(frontmatter.get('updated', '') or '')
+    return (-selected, analysis_rank, updated, path.as_posix())
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description='Build the static paper site')
     parser.add_argument('--repo-root', default=None, help='Repository root path')
@@ -363,6 +374,7 @@ def main() -> int:
     for path in iter_markdown_files(get_papers_root(repo_root)):
         frontmatter, body = load_markdown(path)
         paper_docs.append((frontmatter, path))
+    paper_docs.sort(key=paper_doc_sort_key)
 
     sidebar_html = build_sidebar(latest, daily_index, paper_docs, base_url)
 

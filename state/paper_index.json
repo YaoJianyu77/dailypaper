@@ -62,15 +62,15 @@
         "FlashAttention",
         "Blackwell GPU",
         "B200",
+        "GB200",
         "attention kernel",
-        "kernel pipelining",
-        "asymmetric hardware scaling"
+        "kernel pipelining"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
       "last_seen_date": "2026-03-07",
       "last_recommended_date": "2026-03-07",
-      "recommended_count": 7,
+      "recommended_count": 8,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -94,6 +94,12 @@
           "date": "2026-03-07",
           "recommendation": 9.38,
           "analysis_candidate": 9.81,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.38,
+          "analysis_candidate": 10.0,
           "lane": "fresh"
         },
         {
@@ -116,7 +122,7 @@
         }
       ],
       "last_analysis_date": "2026-03-07",
-      "analyzed_count": 7,
+      "analyzed_count": 8,
       "cooldown_until": "2027-03-07"
     },
     {
@@ -128,16 +134,17 @@
       "analysis_priority_rank": 0,
       "selected_for_full_analysis": false,
       "topics": [
-        "LLM Inference Systems",
-        "quantization",
-        "gptq",
-        "4bit"
+        "后训练量化",
+        "GPTQ",
+        "3-4 bit 权重量化",
+        "GPT 类模型",
+        "受限硬件部署"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
       "last_seen_date": "2026-03-07",
       "last_recommended_date": "2026-03-07",
-      "recommended_count": 7,
+      "recommended_count": 8,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -179,6 +186,12 @@
           "date": "2026-03-07",
           "recommendation": 9.45,
           "analysis_candidate": 9.94,
+          "lane": "classic"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 6.83,
+          "analysis_candidate": 4.88,
           "lane": "classic"
         }
       ],
@@ -190,19 +203,21 @@
       "domain": "LLM Inference Systems",
       "published": "2025",
       "source_lane": "established",
-      "analysis_priority_rank": 4,
+      "analysis_priority_rank": 3,
       "selected_for_full_analysis": false,
       "topics": [
-        "LLM 服务",
+        "LLM serving",
         "KV cache",
         "量化",
-        "在线-离线混合"
+        "离群值检测",
+        "长上下文推理",
+        "显存带宽瓶颈"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
       "last_seen_date": "2026-03-07",
       "last_recommended_date": "2026-03-07",
-      "recommended_count": 3,
+      "recommended_count": 4,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -220,6 +235,12 @@
           "date": "2026-03-07",
           "recommendation": 6.3,
           "analysis_candidate": 5.25,
+          "lane": "established"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 7.97,
+          "analysis_candidate": 7.95,
           "lane": "established"
         }
       ],
@@ -234,17 +255,17 @@
       "analysis_priority_rank": 5,
       "selected_for_full_analysis": false,
       "topics": [
-        "GPU kernel",
-        "JIT 编译",
-        "运行时优化",
-        "性能可移植性",
-        "编译器/运行时协同"
+        "GPU kernel JIT",
+        "LLVM IR",
+        "运行时特化",
+        "跨厂商 GPU",
+        "AOT 与 JIT 比较"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
       "last_seen_date": "2026-03-07",
       "last_recommended_date": "2026-03-07",
-      "recommended_count": 3,
+      "recommended_count": 4,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -262,6 +283,12 @@
           "date": "2026-03-07",
           "recommendation": 3.79,
           "analysis_candidate": 3.73,
+          "lane": "established"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 5.46,
+          "analysis_candidate": 5.43,
           "lane": "established"
         }
       ],
@@ -273,20 +300,21 @@
       "domain": "LLM Inference Systems",
       "published": "2024",
       "source_lane": "established",
-      "analysis_priority_rank": 3,
+      "analysis_priority_rank": 4,
       "selected_for_full_analysis": false,
       "topics": [
         "LLM推理",
         "KV cache",
         "稀疏化",
-        "量化",
-        "token oracle"
+        "低比特量化",
+        "Heavy Hitter",
+        "长上下文"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
       "last_seen_date": "2026-03-07",
       "last_recommended_date": "2026-03-07",
-      "recommended_count": 3,
+      "recommended_count": 4,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -304,6 +332,12 @@
           "date": "2026-03-07",
           "recommendation": 6.3,
           "analysis_candidate": 5.8,
+          "lane": "established"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 7.97,
+          "analysis_candidate": 7.75,
           "lane": "established"
         }
       ],
@@ -323,13 +357,13 @@
         "2:4 Sparse Tensor Core",
         "6:8稀疏",
         "vLLM",
-        "GPU推理加速"
+        "量化融合耦合执行路径"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
       "last_seen_date": "2026-03-07",
       "last_recommended_date": "2026-03-07",
-      "recommended_count": 7,
+      "recommended_count": 8,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -353,6 +387,12 @@
           "date": "2026-03-07",
           "recommendation": 9.55,
           "analysis_candidate": 8.98,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.55,
+          "analysis_candidate": 9.88,
           "lane": "fresh"
         },
         {

@@ -104,7 +104,7 @@ def paper_urls(paper_id: str, paper: Dict[str, Any] | None = None) -> tuple[str,
         source_url = clean_render_text(paper.get('source_url') or paper.get('url') or '')
         pdf_url = clean_render_text(paper.get('pdf_url') or '')
         if source_url or pdf_url:
-            return source_url or pdf_url, pdf_url or source_url
+            return source_url or pdf_url, pdf_url
     pid = normalize_paper_id(paper_id)
     return f'https://arxiv.org/abs/{pid}', f'https://arxiv.org/pdf/{pid}.pdf'
 
@@ -377,6 +377,29 @@ def deep_dive_paper(papers: List[Dict[str, Any]]) -> Dict[str, Any] | None:
             -float(paper.get('scores', {}).get('recommendation', 0) or 0),
         ),
     )
+
+
+def ordered_primary_papers(papers: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    primary, _ = split_daily_papers(papers)
+    if not primary:
+        return []
+
+    deep_dive = deep_dive_paper(primary)
+    remaining = [
+        paper for paper in primary
+        if normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
+        != normalize_paper_id((deep_dive or {}).get('arxiv_id') or (deep_dive or {}).get('arxivId') or (deep_dive or {}).get('id', ''))
+    ]
+    lane_rank = {'fresh': 0, 'established': 1, 'classic': 2}
+    remaining.sort(
+        key=lambda paper: (
+            lane_rank.get(selection_lane(paper), 9),
+            -float(paper.get('scores', {}).get('recommendation', 0) or 0),
+            -float(paper.get('analysis_candidate_score', 0) or 0),
+            str(paper.get('title') or '').lower(),
+        )
+    )
+    return ([deep_dive] if deep_dive else []) + remaining
 
 
 def inferred_top_themes(papers: List[Dict[str, Any]]) -> List[str]:
@@ -967,11 +990,75 @@ def table_block(title: str, entry: Dict[str, Any]) -> List[str]:
     return lines
 
 
+def classify_table_role(entry: Dict[str, Any]) -> str:
+    role = clean_render_text(entry.get('role_hint') or '').lower()
+    if role in {'method', 'results', 'examples'}:
+        return role
+    text = ' '.join(
+        [
+            clean_render_text(entry.get('caption') or ''),
+            *[
+                clean_render_text(item)
+                for item in entry.get('rows', [])[:3]
+                if clean_render_text(item)
+            ],
+        ]
+    ).lower()
+    if any(token in text for token in ['compile', 'implementation', 'compiler', 'kernel', 'cute', 'dsl', 'latency breakdown']):
+        return 'method'
+    if any(token in text for token in ['speedup', 'throughput', 'latency', 'accuracy', 'result', 'benchmark', 'memory', 'tflops', 'utilization']):
+        return 'results'
+    return 'other'
+
+
+def table_priority(entry: Dict[str, Any], target: str) -> int:
+    text = ' '.join(
+        [
+            clean_render_text(entry.get('caption') or ''),
+            *[
+                clean_render_text(item)
+                for item in entry.get('rows', [])[:3]
+                if clean_render_text(item)
+            ],
+        ]
+    ).lower()
+    if target == 'method':
+        score = 0
+        if any(token in text for token in ['compile', 'implementation', 'cute', 'dsl', 'kernel', 'algorithm', 'pipeline']):
+            score += 5
+        if any(token in text for token in ['speedup', 'throughput', 'latency', 'accuracy']):
+            score -= 2
+        return score
+    if target == 'results':
+        score = 0
+        if any(token in text for token in ['speedup', 'throughput', 'latency', 'accuracy', 'memory', 'benchmark', 'tflops', 'utilization']):
+            score += 5
+        if any(token in text for token in ['compile', 'implementation', 'cute', 'dsl']):
+            score -= 1
+        return score
+    return 0
+
+
+def pick_table(entries: List[Dict[str, Any]], preferred_roles: List[str], used: set[int]) -> Dict[str, Any] | None:
+    indexed_entries = list(enumerate(entries))
+    for role in preferred_roles:
+        candidates = [
+            (index, entry)
+            for index, entry in indexed_entries
+            if index not in used and classify_table_role(entry) == role
+        ]
+        if candidates:
+            candidates.sort(key=lambda item: (-table_priority(item[1], role), item[0]))
+            used.add(candidates[0][0])
+            return candidates[0][1]
+    return None
+
+
 def daily_feature_figure(repo_root: Path, note_dir: Path, paper: Dict[str, Any], settings: Dict[str, Any]) -> Dict[str, str]:
     entries = contextual_figure_entries(note_dir, paper, settings['max_images_per_paper'])
     used: set[str] = set()
     preferred = (
-        pick_figure(entries, ['method', 'results', 'examples', 'other'], used)
+        pick_figure(entries, ['results', 'method', 'examples', 'other'], used)
         or (entries[0] if entries else None)
     )
     if not preferred:
@@ -980,6 +1067,24 @@ def daily_feature_figure(repo_root: Path, note_dir: Path, paper: Dict[str, Any],
         'url': relative_asset_url(preferred['path'], repo_root),
         'caption': str(preferred.get('caption') or '').strip(),
         'alt': preferred['path'].stem,
+    }
+
+
+def daily_feature_table(paper: Dict[str, Any]) -> Dict[str, Any]:
+    entries = full_analysis_table_context(paper)
+    if not entries:
+        return {}
+    used: set[int] = set()
+    preferred = (
+        pick_table(entries, ['results', 'method', 'other'], used)
+        or entries[0]
+    )
+    rows = preferred.get('rows', [])
+    if not isinstance(rows, list):
+        rows = []
+    return {
+        'caption': clean_render_text(preferred.get('caption') or ''),
+        'rows': [clean_render_text(row) for row in rows[:4] if clean_render_text(row)],
     }
 
 
@@ -1045,13 +1150,18 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
     figure_entries = contextual_figure_entries(note_dir, paper, settings['max_images_per_paper']) if enable_rich_assets else []
     table_entries = full_analysis_table_context(paper)[:3]
     used_figure_paths: set[str] = set()
+    used_table_indexes: set[int] = set()
     method_figure = pick_figure(figure_entries, ['method', 'other', 'examples'], used_figure_paths)
     results_figure = pick_figure(figure_entries, ['results', 'examples', 'other'], used_figure_paths)
+    analysis_figure = pick_figure(figure_entries, ['results', 'examples', 'other'], used_figure_paths)
+    method_table = pick_table(table_entries, ['method', 'other'], used_table_indexes) if table_entries else None
+    results_table = pick_table(table_entries, ['results', 'other'], used_table_indexes) if table_entries else None
     remaining_figures = [
         entry for entry in figure_entries
         if str(entry['path']) not in used_figure_paths
     ]
     daily_figure = daily_feature_figure(repo_root, note_dir, paper, settings) if enable_rich_assets else {}
+    daily_table = daily_feature_table(paper) if full else {}
 
     frontmatter = {
         'paper_id': paper_id,
@@ -1105,7 +1215,7 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
         f'- Citations: {citation_summary}',
         f'- Published: {paper.get("published", paper.get("publicationDate", "Unknown"))}',
         f'- Source page: [open]({source_url})',
-        f'- PDF: [download]({pdf_url})',
+        f'- PDF: [download]({pdf_url})' if pdf_url else '- PDF: not found from current source metadata',
         f'- Reading priority: {ai.get("reading_priority", "medium")}',
     ]
 
@@ -1138,6 +1248,8 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
         ])
         if method_figure:
             body_lines.extend(figure_block('Method Figure', method_figure))
+        if method_table:
+            body_lines.extend(table_block('Implementation Table', method_table))
     bullet_section(body_lines, 'Method Details', full.get('method_details', []), limit=5)
     if analysis_value(full, ai, 'experiment_setup_zh', 'evidence_zh'):
         body_lines.extend([
@@ -1147,14 +1259,14 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
         ])
         if results_figure:
             body_lines.extend(figure_block('Experiment Figure', results_figure))
-    if table_entries:
-        body_lines.extend(['', '## Key Tables'])
-        for index, entry in enumerate(table_entries, start=1):
-            body_lines.extend(table_block(f'Table {index}', entry))
+        if results_table:
+            body_lines.extend(table_block('Evidence Table', results_table))
     bullet_section(body_lines, 'Datasets And Benchmarks', full.get('datasets_or_benchmarks', []), limit=6)
     bullet_section(body_lines, 'Baselines', full.get('baselines', []), limit=6)
     bullet_section(body_lines, 'Metrics', full.get('metrics', []), limit=6)
     bullet_section(body_lines, 'Ablations And Analysis', full.get('ablation_or_analysis', []), limit=4)
+    if analysis_figure:
+        body_lines.extend(figure_block('Analysis Figure', analysis_figure))
     bullet_section(body_lines, 'Evaluation Validity And Fairness', full.get('evaluation_validity', []), limit=4)
     if full.get('main_results_zh'):
         body_lines.extend([
@@ -1201,16 +1313,12 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
     bullet_section(body_lines, 'Keywords', ai.get('keywords', []), limit=6)
 
     if remaining_figures:
-        body_lines.extend(['', '## Additional Figures'])
-        for entry in remaining_figures:
-            body_lines.extend([
-                '',
-                f'![{entry["path"].stem}](images/{entry["path"].name})',
-                '',
-            ])
-            if entry.get('caption'):
-                body_lines.append(f'*Figure cue:* {entry["caption"]}')
-        body_lines.append('- Full asset manifest: [images/index.md](images/index.md)')
+        body_lines.extend([
+            '',
+            '## Additional Assets',
+            '- 其余提取到的 figures 保存在 `images/` 目录，默认不全部展开，避免让页面被资产列表主导。',
+            '- Full asset manifest: [images/index.md](images/index.md)',
+        ])
 
     body_lines.extend([
         '',
@@ -1249,6 +1357,10 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
         result['daily_figure_caption'] = daily_figure['caption']
     if daily_figure.get('alt'):
         result['daily_figure_alt'] = daily_figure['alt']
+    if daily_table.get('caption'):
+        result['daily_table_caption'] = daily_table['caption']
+    if daily_table.get('rows'):
+        result['daily_table_rows'] = daily_table['rows']
     return result
 
 
@@ -1310,12 +1422,48 @@ def daily_mix_lines(papers: List[Dict[str, Any]]) -> List[str]:
     return lines
 
 
+def compressed_author_text(paper: Dict[str, Any], limit: int = 4) -> str:
+    authors = paper.get('authors', [])
+    if not isinstance(authors, list) or not authors:
+        text = author_text(paper)
+        return clean_render_text(text)
+    cleaned = [clean_render_text(item) for item in authors if clean_render_text(item)]
+    if len(cleaned) <= limit:
+        return ', '.join(cleaned)
+    return ', '.join(cleaned[:limit]) + ' et al.'
+
+
+def render_daily_asset(lines: List[str], paper_meta: Dict[str, Any], title: str) -> None:
+    figure_url = paper_meta.get('daily_figure_url')
+    if figure_url:
+        lines.extend([
+            '',
+            f'![{paper_meta.get("daily_figure_alt", title)}]({figure_url})',
+            '',
+        ])
+        if paper_meta.get('daily_figure_caption'):
+            lines.append(f'*Visual cue:* {paper_meta["daily_figure_caption"]}')
+        return
+
+    rows = paper_meta.get('daily_table_rows')
+    if isinstance(rows, list) and rows:
+        lines.extend(['', '```text'])
+        for row in rows[:4]:
+            text = clean_render_text(row)
+            if text:
+                lines.append(text)
+        lines.append('```')
+        if paper_meta.get('daily_table_caption'):
+            lines.append(f'*Table cue:* {paper_meta["daily_table_caption"]}')
+
+
 def render_daily_paper_entry(
     lines: List[str],
     paper: Dict[str, Any],
     paper_meta_map: Dict[str, Dict[str, str]],
     index_label: str,
     is_classic_section: bool = False,
+    role: str = 'supporting',
 ) -> None:
     paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
     title = paper.get('title', 'Untitled Paper')
@@ -1326,51 +1474,60 @@ def render_daily_paper_entry(
     score = paper.get('scores', {}).get('recommendation', 'N/A')
     institutions = paper_institutions(paper)
     source_label = daily_source_label(paper)
-    heading = f'### {index_label}. [{title}]({url})' if index_label else f'### [{title}]({url})'
+    heading_prefix = 'Lead' if role == 'lead' else index_label
+    heading = f'### {heading_prefix}. [{title}]({url})' if heading_prefix else f'### [{title}]({url})'
+    published = clean_render_text(paper.get('published', paper.get('publicationDate', 'Unknown')))
+    priority = clean_render_text(ai.get('reading_priority', 'medium'))
+    meta_bits = [
+        lane_label(paper),
+        f'score {score}',
+        f'{priority} priority',
+        source_label,
+        published,
+        compressed_author_text(paper),
+    ]
 
     lines.extend([
         '',
         heading,
-        f'- Score: **{score}**',
-        f'- Domain: {paper.get("matched_domain", "Uncategorized")}',
-        f'- Lane: {lane_label(paper)}',
-        f'- Reading priority: {ai.get("reading_priority", "medium")}',
-        f'- Authors: {author_text(paper) or "Unknown"}',
-        f'- Institution: {", ".join(institutions) if institutions else "Institution information not extracted"}',
-        f'- Source: {source_label}',
-        f'- Published: {paper.get("published", paper.get("publicationDate", "Unknown"))}',
-        f'- Links: [Source]({abs_url}) | [PDF]({pdf_url})',
-        f'- Note: [paper page]({url})',
-        f'- One-line view: {summarize_paper(paper)}',
-        f'- Summary: {detail_summary(paper)}',
+        '',
+        f'*{" | ".join(bit for bit in meta_bits if bit)}*',
+        '',
+        summarize_paper(paper),
     ])
+
+    summary = detail_summary(paper)
+    if summary and summary != summarize_paper(paper):
+        lines.extend(['', summary])
+
+    if role == 'lead':
+        render_daily_asset(lines, paper_meta, title)
+
+    why_now = clean_render_text(ai.get('reading_priority_reason') or '')
+    if why_now:
+        lines.extend(['', f'Why it matters today: {why_now}'])
+
+    note_links = [f'[paper page]({url})', f'[Source]({abs_url})']
+    if pdf_url:
+        note_links.append(f'[PDF]({pdf_url})')
+    else:
+        note_links.append('PDF unavailable')
+    lines.append(f'- Institution: {", ".join(institutions) if institutions else "Institution information not extracted"}')
+    lines.append(f'- Source: {source_label}')
+    lines.append(f'- Note: {" | ".join(note_links)}')
+
+    why_read = normalize_string_list(ai.get('why_read', []), limit=2)
+    if why_read:
+        lines.append(f'- Why read: {"；".join(why_read[:2])}')
+
+    risks = normalize_string_list(full_analysis_fields(paper).get('limitations', []) or ai.get('risks', []), limit=2)
+    if risks:
+        lines.append(f'- What to verify: {"；".join(risks[:2])}')
+
     if selected_for_full_analysis(paper):
-        lines.append("- Deep-dive: this is today's full paper analysis target")
+        lines.append("- Reading mode: today's full paper analysis target")
     elif is_classic_section:
-        lines.append('- Classic slot: scheduled background reading, not today\'s full analysis target')
-    if ai.get('background_zh'):
-        lines.append(f'- Background: {ai.get("background_zh")}')
-    if ai.get('approach_zh'):
-        lines.append(f'- Method: {ai.get("approach_zh")}')
-    if ai.get('evidence_zh'):
-        lines.append(f'- Evidence: {ai.get("evidence_zh")}')
-    if selected_for_full_analysis(paper):
-        if paper_meta.get('daily_figure_url'):
-            lines.extend([
-                '',
-                f'![{paper_meta.get("daily_figure_alt", title)}]({paper_meta["daily_figure_url"]})',
-                '',
-            ])
-            if paper_meta.get('daily_figure_caption'):
-                lines.append(f'*Figure cue:* {paper_meta["daily_figure_caption"]}')
-    if ai.get('reading_priority_reason'):
-        lines.append(f'- Why now: {ai.get("reading_priority_reason")}')
-    lines.extend(inline_bullets('Core contribution', ai.get('core_contributions', []), limit=3))
-    lines.extend(inline_bullets('Why read', ai.get('why_read', []), limit=3))
-    lines.extend(inline_bullets('Risk', ai.get('risks', []), limit=2))
-    recommended_for = ai.get('recommended_for', [])
-    if recommended_for:
-        lines.append(f'- Recommended for: {", ".join(recommended_for[:3])}')
+        lines.append("- Reading mode: classic background reading slot, not today's deep-dive target")
 
 
 def build_daily_body(
@@ -1379,9 +1536,8 @@ def build_daily_body(
     papers: List[Dict[str, Any]],
     paper_meta_map: Dict[str, Dict[str, str]],
 ) -> str:
-    primary_papers, classic_papers = split_daily_papers(papers)
-    deep_dive = deep_dive_paper(papers)
-    reading_strategy = build_reading_strategy(papers, paper_meta_map)
+    primary_papers = ordered_primary_papers(papers)
+    classic_papers = [paper for paper in papers if selection_lane(paper) == 'classic']
     lines = [
         f'# Daily Paper Report - {report_date}',
         '',
@@ -1389,35 +1545,20 @@ def build_daily_body(
         build_overview(papers, paper_meta_map),
     ]
 
-    mix_lines = daily_mix_lines(papers)
-    if mix_lines:
-        lines.extend(['', '## Selection Mix'])
-        lines.extend(mix_lines)
-
-    if deep_dive:
-        deep_id = normalize_paper_id(deep_dive.get('arxiv_id') or deep_dive.get('arxivId') or deep_dive.get('id', ''))
-        deep_url = paper_meta_map.get(deep_id, {}).get('page_url', '#')
-        lines.extend([
-            '',
-            '## Today\'s Deep Dive',
-            f'- Paper: [{deep_dive.get("title", "Untitled Paper")}]({deep_url})',
-            f'- Why this one: {ai_fields(deep_dive).get("reading_priority_reason") or summarize_paper(deep_dive)}',
-            f'- Selection rule: highest analysis candidate score among today\'s non-classic picks ({deep_dive.get("analysis_candidate_score", "N/A")})',
-        ])
-    if reading_strategy:
-        lines.extend(['', '## Reading Strategy'])
-        lines.extend(f'- {step}' for step in reading_strategy[:3])
-
     if primary_papers:
-        lines.extend(['', '## Systems Picks'])
-        for index, paper in enumerate(primary_papers, start=1):
-            render_daily_paper_entry(lines, paper, paper_meta_map, str(index))
+        lines.extend(['', '## Lead Paper'])
+        render_daily_paper_entry(lines, primary_papers[0], paper_meta_map, '', role='lead')
+        supporting = primary_papers[1:]
+        if supporting:
+            lines.extend(['', '## Supporting Reads'])
+            for index, paper in enumerate(supporting, start=1):
+                render_daily_paper_entry(lines, paper, paper_meta_map, str(index), role='supporting')
 
     if classic_papers:
-        title = '## Classic Pick' if len(classic_papers) == 1 else '## Classic Picks'
+        title = '## Classic Revisit' if len(classic_papers) == 1 else '## Classic Revisits'
         lines.extend(['', title])
         for paper in classic_papers:
-            render_daily_paper_entry(lines, paper, paper_meta_map, '', is_classic_section=True)
+            render_daily_paper_entry(lines, paper, paper_meta_map, '', is_classic_section=True, role='classic')
 
     return '\n'.join(lines) + '\n'
 
@@ -1527,3 +1668,8 @@ def main() -> int:
 
 if __name__ == '__main__':
     raise SystemExit(main())
+    note_links = [f'[paper page]({url})', f'[Source]({abs_url})']
+    if pdf_url:
+        note_links.append(f'[PDF]({pdf_url})')
+    else:
+        note_links.append('PDF unavailable')
