@@ -18,6 +18,15 @@ from content_store import get_meta_root, get_repo_root, read_json, write_json
 logger = logging.getLogger(__name__)
 
 
+RELATION_PRIORITY = {
+    'related': 0,
+    'compares': 1,
+    'extends': 2,
+    'follows': 4,
+    'improves': 5,
+}
+
+
 def main() -> int:
     logging.basicConfig(
         level=logging.INFO,
@@ -65,7 +74,7 @@ def main() -> int:
     else:
         graph['nodes'].append(node)
 
-    existing_edges = {(edge['source'], edge['target']) for edge in graph['edges']}
+    existing_edges = {(edge['source'], edge['target']): index for index, edge in enumerate(graph['edges'])}
     for related in args.related:
         if related and (args.paper_id, related) not in existing_edges:
             graph['edges'].append({
@@ -74,7 +83,7 @@ def main() -> int:
                 'type': 'related',
                 'weight': 0.7,
             })
-            existing_edges.add((args.paper_id, related))
+            existing_edges[(args.paper_id, related)] = len(graph['edges']) - 1
 
     for raw_spec in args.related_spec:
         if not raw_spec:
@@ -83,19 +92,28 @@ def main() -> int:
         if len(parts) != 3:
             continue
         target_id, edge_type, raw_weight = [part.strip() for part in parts]
-        if not target_id or (args.paper_id, target_id) in existing_edges:
+        if not target_id:
             continue
         try:
             weight = float(raw_weight)
         except ValueError:
             weight = 0.7
-        graph['edges'].append({
+        edge = {
             'source': args.paper_id,
             'target': target_id,
             'type': edge_type or 'related',
             'weight': max(0.1, min(1.0, weight)),
-        })
-        existing_edges.add((args.paper_id, target_id))
+        }
+        existing_index = existing_edges.get((args.paper_id, target_id))
+        if existing_index is None:
+            graph['edges'].append(edge)
+            existing_edges[(args.paper_id, target_id)] = len(graph['edges']) - 1
+            continue
+        current = graph['edges'][existing_index]
+        current_priority = RELATION_PRIORITY.get(str(current.get('type') or 'related'), 0)
+        new_priority = RELATION_PRIORITY.get(edge['type'], 0)
+        if new_priority >= current_priority:
+            graph['edges'][existing_index] = edge
 
     graph['last_updated'] = date
     write_json(graph_path, graph)

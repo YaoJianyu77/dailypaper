@@ -56,6 +56,18 @@ DEFAULT_SCORE_CARD = {
     'writing_clarity': 6,
     'practical_value': 6,
 }
+INSTITUTION_HINTS = (
+    'university', 'institute', 'laboratory', 'lab', 'school', 'college', 'department',
+    'academy', 'hospital', 'centre', 'center', 'research', 'microsoft', 'google',
+    'deepmind', 'meta', 'openai', 'anthropic', 'nvidia', 'amazon', 'alibaba', 'tencent',
+)
+RELATION_PRIORITY = {
+    'related': 0,
+    'follows': 1,
+    'extends': 2,
+    'compares': 3,
+    'improves': 4,
+}
 
 
 def normalize_image_token(value: str) -> str:
@@ -70,6 +82,18 @@ def normalize_image_token(value: str) -> str:
 
 def normalize_paper_id(raw: str) -> str:
     return str(raw or '').replace('http://arxiv.org/abs/', '').replace('https://arxiv.org/abs/', '').replace('arXiv:', '').strip()
+
+
+def looks_like_arxiv_id(value: str) -> bool:
+    return bool(re.fullmatch(r'\d{4}\.\d+(?:v\d+)?', str(value or '').strip()))
+
+
+def analysis_priority_rank(paper: Dict[str, Any]) -> int:
+    try:
+        rank = int(paper.get('analysis_priority_rank', 0) or 0)
+    except (TypeError, ValueError):
+        rank = 0
+    return rank if rank > 0 else 10**6
 
 
 def coerce_string_list(value: Any, max_items: int) -> List[str]:
@@ -266,6 +290,88 @@ def command_argument(block: str, command: str) -> str:
     return value
 
 
+def command_arguments(block: str, command: str) -> List[str]:
+    values: List[str] = []
+    for match in re.finditer(rf'\\{command}\*?(?:\[[^\]]*\])?\{{', block):
+        start = match.end() - 1
+        value, _ = extract_braced_value(block, start)
+        if value:
+            values.append(value)
+    return values
+
+
+def clean_metadata_text(text: str) -> str:
+    value = latex_to_text(text)
+    value = re.sub(r'\b[\w.\-]+@[\w.\-]+\b', '', value)
+    value = value.replace('\u200b', ' ')
+    value = re.sub(r'^[\d\W_]+(?=[A-Za-z])', '', value)
+    value = re.sub(
+        r'\b(?:equal contribution|corresponding author|work done during.*|internship)\b.*$',
+        '',
+        value,
+        flags=re.IGNORECASE,
+    )
+    value = re.sub(r'\s+', ' ', value).strip(' ,;:-')
+    return value.strip()
+
+
+def split_metadata_candidates(text: str) -> List[str]:
+    parts = re.split(r'(?:\\\\|\\and|;|\n|\|)', text)
+    return [clean_metadata_text(part) for part in parts if clean_metadata_text(part)]
+
+
+def looks_like_institution(text: str) -> bool:
+    normalized = text.lower()
+    if len(normalized) < 5:
+        return False
+    return any(token in normalized for token in INSTITUTION_HINTS)
+
+
+def dedupe_texts(items: Iterable[str], max_items: int) -> List[str]:
+    seen: set[str] = set()
+    result: List[str] = []
+    for item in items:
+        cleaned = clean_metadata_text(item)
+        key = cleaned.lower()
+        if not cleaned or key in seen:
+            continue
+        seen.add(key)
+        result.append(cleaned)
+        if len(result) >= max_items:
+            break
+    return result
+
+
+def extract_source_metadata_from_latex(latex_source: str) -> Dict[str, Any]:
+    institutions: List[str] = []
+
+    simple_commands = [
+        'affiliation', 'affiliations', 'institute', 'institution', 'affaddr', 'address', 'affil'
+    ]
+    for command in simple_commands:
+        for raw in command_arguments(latex_source, command):
+            institutions.extend(
+                candidate for candidate in split_metadata_candidates(raw)
+                if looks_like_institution(candidate)
+            )
+
+    for raw in re.findall(r'\\icmlaffiliation\*?(?:\[[^\]]*\])?\{[^{}]*\}\{([^{}]+)\}', latex_source):
+        institutions.extend(
+            candidate for candidate in split_metadata_candidates(raw)
+            if looks_like_institution(candidate)
+        )
+
+    if not institutions:
+        author_block = command_argument(latex_source, 'author')
+        for candidate in split_metadata_candidates(author_block):
+            if looks_like_institution(candidate):
+                institutions.append(candidate)
+
+    return {
+        'institutions': dedupe_texts(institutions, 8),
+    }
+
+
 def classify_figure_role(text: str) -> str:
     normalized = normalize_heading(text)
     if any(token in normalized for token in ['framework', 'pipeline', 'overview', 'architecture', 'method', 'model', 'system', 'workflow']):
@@ -275,6 +381,78 @@ def classify_figure_role(text: str) -> str:
     if any(token in normalized for token in ['dataset', 'example', 'case', 'visual', 'qualitative']):
         return 'examples'
     return 'other'
+
+
+def classify_table_role(text: str) -> str:
+    normalized = normalize_heading(text)
+    if any(token in normalized for token in ['ablation', 'analysis', 'sensitivity']):
+        return 'ablation'
+    if any(token in normalized for token in ['result', 'performance', 'benchmark', 'evaluation', 'latency', 'throughput', 'memory', 'speedup', 'comparison']):
+        return 'results'
+    if any(token in normalized for token in ['setup', 'configuration', 'dataset', 'hyperparameter']):
+        return 'setup'
+    return 'other'
+
+
+def compact_latex_inline(text: str) -> str:
+    value = latex_to_text(text)
+    value = re.sub(r'\s+', ' ', value).strip(' |')
+    return value
+
+
+def strip_latex_table_commands(text: str) -> str:
+    cleaned = text
+    cleaned = re.sub(r'\\(?:toprule|midrule|bottomrule|cmidrule(?:\[[^\]]*\])?\{[^}]*\}|hline|cline\{[^}]*\}|addlinespace)', '', cleaned)
+    cleaned = re.sub(r'\\(?:small|footnotesize|scriptsize|tiny|centering|resizebox(?:\[[^\]]*\])?\{[^}]*\}\{[^}]*\})', '', cleaned)
+    cleaned = re.sub(r'\\(?:label|caption)\{[^{}]*\}', '', cleaned)
+    cleaned = re.sub(r'\\(?:multirow|multicolumn)(?:\[[^\]]*\])?\{[^{}]*\}\{[^{}]*\}\{([^{}]*)\}', r'\1', cleaned)
+    return cleaned
+
+
+def extract_table_rows_from_block(block: str) -> List[str]:
+    tabular_match = re.search(r'\\begin\{tabular\*?\}(?:\[[^\]]*\])?\{.*?\}(.*?)\\end\{tabular\*?\}', block, flags=re.DOTALL)
+    if not tabular_match:
+        tabular_match = re.search(r'\\begin\{array\}(?:\[[^\]]*\])?\{.*?\}(.*?)\\end\{array\}', block, flags=re.DOTALL)
+    if not tabular_match:
+        return []
+
+    tabular = strip_latex_table_commands(tabular_match.group(1))
+    raw_rows = [row.strip() for row in re.split(r'\\\\', tabular) if row.strip()]
+    rows: List[str] = []
+    for row in raw_rows:
+        cells = [compact_latex_inline(cell) for cell in row.split('&')]
+        cells = [cell for cell in cells if cell]
+        if len(cells) >= 2:
+            rows.append(' | '.join(cells))
+        elif cells:
+            rows.append(cells[0])
+        if len(rows) >= 8:
+            break
+    return rows
+
+
+def extract_table_context(latex_source: str) -> List[Dict[str, Any]]:
+    entries: List[Dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    table_blocks = re.finditer(r'\\begin\{table\*?\}(.*?)\\end\{table\*?\}', latex_source, flags=re.DOTALL)
+
+    for match in table_blocks:
+        block = match.group(1)
+        caption_raw = command_argument(block, 'caption')
+        caption = latex_to_text(caption_raw)[:500] if caption_raw else ''
+        label = command_argument(block, 'label')
+        rows = extract_table_rows_from_block(block)
+        key = (caption, '\n'.join(rows[:3]))
+        if key in seen or (not caption and not rows):
+            continue
+        seen.add(key)
+        entries.append({
+            'caption': caption,
+            'label': label,
+            'role_hint': classify_table_role(caption + ' ' + ' '.join(rows[:2])),
+            'rows': rows[:8],
+        })
+    return entries[:12]
 
 
 def extract_figure_context(latex_source: str) -> List[Dict[str, Any]]:
@@ -318,13 +496,18 @@ def score_tex_file(path: Path) -> tuple[int, int]:
     return score, len(text)
 
 
-def extract_text_and_figures_from_source_tree(root: Path) -> tuple[str, List[Dict[str, Any]]]:
+def extract_text_figures_and_metadata_from_source_tree(root: Path) -> tuple[str, List[Dict[str, Any]], List[Dict[str, Any]], Dict[str, Any]]:
     tex_files = [path for path in root.rglob('*.tex') if path.is_file()]
     if not tex_files:
-        return '', []
+        return '', [], [], {'institutions': []}
     main_tex = sorted(tex_files, key=score_tex_file, reverse=True)[0]
     expanded = expand_tex_file(main_tex, seen=set())
-    return latex_to_text(expanded), extract_figure_context(expanded)
+    return (
+        latex_to_text(expanded),
+        extract_figure_context(expanded),
+        extract_table_context(expanded),
+        extract_source_metadata_from_latex(expanded),
+    )
 
 
 def extract_text_from_pdf(pdf_path: Path, page_limit: int) -> str:
@@ -396,6 +579,10 @@ def extract_paper_context(paper: Dict[str, Any], settings: Dict[str, Any]) -> Di
             'source_kind': 'none',
             'text_context': build_text_context('', settings['max_full_text_chars'], settings['section_char_budget']),
             'figure_context': [],
+            'table_context': [],
+            'metadata': {
+                'institutions': [],
+            },
         }
 
     with tempfile.TemporaryDirectory(prefix='full-paper-analysis-') as tmp:
@@ -406,21 +593,35 @@ def extract_paper_context(paper: Dict[str, Any], settings: Dict[str, Any]) -> Di
         text = ''
         source_kind = 'none'
         figure_context: List[Dict[str, Any]] = []
+        table_context: List[Dict[str, Any]] = []
+        metadata: Dict[str, Any] = {
+            'institutions': [],
+        }
 
-        try:
-            download_to_path(f'https://arxiv.org/e-print/{paper_id}', source_path)
-            extract_dir = tmp_dir / 'source'
-            extract_dir.mkdir(parents=True, exist_ok=True)
-            safe_extract_tarball(source_path, extract_dir)
-            text, figure_context = extract_text_and_figures_from_source_tree(extract_dir)
-            if text:
-                source_kind = 'arxiv_source'
-        except Exception as exc:
-            logger.warning('Source extraction failed for %s: %s', paper_id, exc)
+        if looks_like_arxiv_id(paper_id):
+            try:
+                download_to_path(f'https://arxiv.org/e-print/{paper_id}', source_path)
+                extract_dir = tmp_dir / 'source'
+                extract_dir.mkdir(parents=True, exist_ok=True)
+                safe_extract_tarball(source_path, extract_dir)
+                text, figure_context, table_context, metadata = extract_text_figures_and_metadata_from_source_tree(extract_dir)
+                if text:
+                    source_kind = 'arxiv_source'
+            except Exception as exc:
+                logger.warning('Source extraction failed for %s: %s', paper_id, exc)
 
         if not text:
             try:
-                download_to_path(f'https://arxiv.org/pdf/{paper_id}.pdf', pdf_path)
+                pdf_source = str(paper.get('pdf_url') or '').strip()
+                if not pdf_source:
+                    source_url = str(paper.get('source_url') or paper.get('url') or '').strip()
+                    if source_url.lower().endswith('.pdf'):
+                        pdf_source = source_url
+                if not pdf_source and looks_like_arxiv_id(paper_id):
+                    pdf_source = f'https://arxiv.org/pdf/{paper_id}.pdf'
+                if not pdf_source:
+                    raise FileNotFoundError('no pdf source available')
+                download_to_path(pdf_source, pdf_path)
                 text = extract_text_from_pdf(pdf_path, settings['pdf_page_limit'])
                 if text:
                     source_kind = 'pdf'
@@ -433,6 +634,8 @@ def extract_paper_context(paper: Dict[str, Any], settings: Dict[str, Any]) -> Di
             'text_context': text_context,
             'text_char_count': len(text),
             'figure_context': figure_context[:12],
+            'table_context': table_context[:8],
+            'metadata': metadata,
         }
 
 
@@ -486,6 +689,170 @@ def related_paper_candidates(current_paper: Dict[str, Any], papers: List[Dict[st
     return candidates
 
 
+def infer_relation_label(current_paper: Dict[str, Any], candidate: Dict[str, Any]) -> str:
+    current_text = ' '.join([
+        str(current_paper.get('title') or ''),
+        str(current_paper.get('summary') or ''),
+        str(current_paper.get('ai', {}).get('summary_zh') or ''),
+    ]).lower()
+    candidate_text = ' '.join([
+        str(candidate.get('title') or ''),
+        str(candidate.get('summary') or ''),
+    ]).lower()
+
+    if any(token in current_text for token in ['benchmark', 'evaluation', 'probe', 'mapping', 'analysis', 'rethinking', 'compare']):
+        return 'compares'
+    if any(token in current_text for token in ['extend', 'build on', 'adapter', 'augment']):
+        return 'extends'
+    if any(token in current_text for token in ['faster', 'efficient', 'improve', 'enhance', 'memory-efficient', 'scaling', 'better']):
+        if any(token in candidate_text for token in ['training', 'inference', 'reinforcement', 'reasoning', 'retrieval']):
+            return 'improves'
+    return 'compares'
+
+
+def fallback_related_work_comparisons(
+    current_paper: Dict[str, Any],
+    candidates: List[Dict[str, Any]],
+    analysis: Dict[str, Any],
+) -> List[Dict[str, str]]:
+    if not candidates:
+        return []
+
+    route = normalize_model_text(analysis.get('technical_route_zh') or '')
+    comparisons: List[Dict[str, str]] = []
+    for candidate in candidates[:2]:
+        relation = infer_relation_label(current_paper, candidate)
+        title = str(candidate.get('title') or '').strip()
+        paper_id = normalize_paper_id(candidate.get('paper_id') or '')
+        candidate_summary = normalize_model_text(candidate.get('summary') or '')
+        if not title or not paper_id:
+            continue
+        comparison = (
+            f"两篇都落在{str(current_paper.get('matched_domain') or '相近问题').strip()}方向。"
+            f"当前论文更侧重{route or '当前这条方法链路'}，而《{title}》更像是“{candidate_summary[:80]}”这一路线，"
+            f"因此更适合作为横向比较而不是直接替代。"
+        )
+        comparisons.append({
+            'paper_id': paper_id,
+            'title': title,
+            'relation': relation,
+            'comparison_zh': comparison,
+        })
+    return comparisons[:3]
+
+
+def infer_technical_route_from_paper(paper: Dict[str, Any]) -> str:
+    text = ' '.join([
+        str(paper.get('title') or ''),
+        str(paper.get('matched_domain') or ''),
+        ' '.join(str(item) for item in (paper.get('matched_keywords') or [])),
+    ]).lower()
+    if any(token in text for token in ['flashattention', 'attention kernel', 'kernel', 'cuda', 'triton', 'ptx', 'sass']):
+        return '这篇论文属于算子级 / kernel 级 GPU 加速路线，主要解决 attention 或 GPU kernel 的底层执行效率问题。'
+    if any(token in text for token in ['kv cache', 'serving', 'prefill', 'decode', 'runtime']):
+        return '这篇论文属于 serving runtime / KV cache 优化路线，主要解决 LLM 推理链路中的缓存与执行效率问题。'
+    if any(token in text for token in ['quantization', '4bit', '4-bit', 'gptq']):
+        return '这篇论文属于量化推理路线，主要通过更低比特表示来降低部署成本并提升推理可行性。'
+    return '这篇论文属于 systems 导向的方法路线，但提取文本没有充分说明它在完整系统栈中的精确位置。'
+
+
+def load_existing_full_analysis_map(path: Path) -> Dict[str, Dict[str, Any]]:
+    if not path.exists():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding='utf-8'))
+    except Exception:
+        return {}
+
+    result: Dict[str, Dict[str, Any]] = {}
+    papers = payload.get('top_papers', []) if isinstance(payload, dict) else []
+    if not isinstance(papers, list):
+        return result
+    for paper in papers:
+        if not isinstance(paper, dict):
+            continue
+        paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('paper_id') or paper.get('id', ''))
+        full_analysis = paper.get('full_analysis')
+        if paper_id and isinstance(full_analysis, dict):
+            result[paper_id] = full_analysis
+    return result
+
+
+def merge_analysis_metadata(previous: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
+    merged = copy.deepcopy(previous.get('metadata', {})) if isinstance(previous.get('metadata'), dict) else {}
+    fresh = context.get('metadata', {})
+    if isinstance(fresh, dict):
+        for key, value in fresh.items():
+            if value:
+                merged[key] = value
+    return merged
+
+
+def reuse_previous_full_analysis(previous: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
+    reused = copy.deepcopy(previous)
+    reused['enabled'] = True
+    reused['source_kind'] = context.get('source_kind') or previous.get('source_kind', 'none')
+    reused['text_char_count'] = context.get('text_char_count') or previous.get('text_char_count', 0)
+    reused['figure_context'] = context.get('figure_context') or previous.get('figure_context', [])
+    reused['table_context'] = context.get('table_context') or previous.get('table_context', [])
+    reused['metadata'] = merge_analysis_metadata(previous, context)
+    reused['reused_from_previous'] = True
+    return reused
+
+
+def heuristic_full_analysis(
+    paper: Dict[str, Any],
+    context: Dict[str, Any],
+    related_candidates: List[Dict[str, Any]],
+    reason: str,
+) -> Dict[str, Any]:
+    ai = paper.get('ai', {}) if isinstance(paper.get('ai'), dict) else {}
+    content = normalize_full_analysis({
+        'abstract_translation_zh': ai.get('summary_zh') or ai.get('fallback_summary') or '',
+        'background_zh': ai.get('background_zh') or '',
+        'problem_zh': ai.get('problem_zh') or '',
+        'method_overview_zh': ai.get('approach_zh') or '',
+        'method_details': ai.get('core_contributions') or [],
+        'experiment_setup_zh': ai.get('evidence_zh') or '提取文本没有充分说明实验设置。',
+        'datasets_or_benchmarks': [],
+        'baselines': [],
+        'metrics': [],
+        'ablation_or_analysis': [],
+        'evaluation_validity': ai.get('risks') or ['提取文本没有充分说明 baseline 公平性与实验边界。'],
+        'main_results_zh': ai.get('evidence_zh') or '提取文本没有充分说明主要结果。',
+        'strengths': ai.get('why_read') or [],
+        'limitations': ai.get('risks') or [],
+        'technical_route_zh': infer_technical_route_from_paper(paper),
+        'relation_to_prior_work_zh': '当前未能调用模型完成全文比较，因此这里只保守保留基于题目、摘要与候选论文的路线级比较。',
+        'related_work_comparisons': [],
+        'score_card': DEFAULT_SCORE_CARD,
+        'practical_value_zh': ai.get('value_zh') or '',
+        'future_work': ai.get('open_questions') or [],
+        'reading_checklist': ai.get('open_questions') or [],
+        'overall_assessment_zh': (
+            f"{normalize_model_text(ai.get('value_zh') or '')} "
+            f"当前由于 {reason} 未能生成新的模型级全文分析，因此这份 memo 主要复用已有摘要信息与提取上下文，"
+            "可信度应按保守草稿理解。"
+        ).strip(),
+    })
+    if not content.get('related_work_comparisons'):
+        content['related_work_comparisons'] = fallback_related_work_comparisons(
+            paper,
+            related_candidates,
+            content,
+        )
+    return {
+        'enabled': True,
+        'source_kind': context.get('source_kind', 'none'),
+        'text_char_count': context.get('text_char_count', 0),
+        'figure_context': context.get('figure_context', []),
+        'table_context': context.get('table_context', []),
+        'metadata': context.get('metadata', {}),
+        'content': content,
+        'fallback_reason': reason,
+    }
+
+
 def build_prompt(
     repo_root: Path,
     config: Dict[str, Any],
@@ -502,6 +869,11 @@ def build_prompt(
             'authors': paper.get('authors', [])[:12],
             'domain': paper.get('matched_domain', 'Uncategorized'),
             'published': paper.get('published', paper.get('publicationDate', '')),
+            'venue': paper.get('venue', ''),
+            'journal_ref': paper.get('journal_ref', ''),
+            'comments': paper.get('comments', ''),
+            'citation_count': paper.get('citationCount'),
+            'influential_citation_count': paper.get('influentialCitationCount'),
             'abstract': paper.get('summary') or paper.get('abstract') or '',
             'categories': paper.get('categories', [])[:8],
             'matched_keywords': paper.get('matched_keywords', [])[:8],
@@ -511,6 +883,7 @@ def build_prompt(
         },
         'full_text_context': context,
         'figure_context': context.get('figure_context', [])[:8],
+        'table_context': context.get('table_context', [])[:6],
         'related_paper_candidates': related_candidates[:3],
     }
 
@@ -529,7 +902,9 @@ def build_prompt(
         '9. `overall_assessment_zh` 要给出一段客观评价，指出最值得信和最该怀疑的地方。\n'
         '10. `technical_route_zh` 要说明这篇论文属于哪条技术路线、解决链路中的哪一段问题。\n'
         '11. `score_card` 必须保守打分，1 到 10 的整数，分别评价创新性、技术质量、实验严谨性、写作清晰度和实用价值。\n'
-        '12. `related_work_comparisons` 只允许对给定的候选论文做比较；如果不适合比较，可以返回空数组。',
+        '12. `related_work_comparisons` 只允许对给定的候选论文做比较；如果候选论文与当前论文明显同领域或同问题，优先给出 1 到 2 条保守比较，而不是全部留空。\n'
+        '13. `datasets_or_benchmarks`、`baselines`、`metrics`、`ablation_or_analysis`、`evaluation_validity` 要尽量做结构化抽取；只写提取文本明确支持的条目。\n'
+        '14. 如果输入里提供了 table_context，要优先从表格 caption 和行内容中抽取实验设置、基线、指标和结果边界。',
     ]
     if editorial:
         instructions.append('仓库编辑偏好：\n' + editorial)
@@ -547,6 +922,11 @@ def normalize_full_analysis(raw: Dict[str, Any]) -> Dict[str, Any]:
         'method_overview_zh': normalize_model_text(raw.get('method_overview_zh') or ''),
         'method_details': coerce_string_list(raw.get('method_details'), 5),
         'experiment_setup_zh': normalize_model_text(raw.get('experiment_setup_zh') or ''),
+        'datasets_or_benchmarks': coerce_string_list(raw.get('datasets_or_benchmarks'), 6),
+        'baselines': coerce_string_list(raw.get('baselines'), 6),
+        'metrics': coerce_string_list(raw.get('metrics'), 6),
+        'ablation_or_analysis': coerce_string_list(raw.get('ablation_or_analysis'), 4),
+        'evaluation_validity': coerce_string_list(raw.get('evaluation_validity'), 4),
         'main_results_zh': normalize_model_text(raw.get('main_results_zh') or ''),
         'strengths': coerce_string_list(raw.get('strengths'), 4),
         'limitations': coerce_string_list(raw.get('limitations'), 4),
@@ -569,12 +949,13 @@ def analyze_paper(
     codex_path: str,
 ) -> Dict[str, Any]:
     context = extract_paper_context(paper, normalize_analysis_settings(config))
+    related_candidates = related_paper_candidates(paper, papers)
     prompt = build_prompt(
         repo_root,
         config,
         paper,
         context,
-        related_paper_candidates(paper, papers),
+        related_candidates,
     )
     schema_path = repo_root / 'scripts' / 'full_paper_analysis_schema.json'
 
@@ -594,12 +975,21 @@ def analyze_paper(
     try:
         subprocess.run(cmd, check=True)
         raw = json.loads(tmp_path.read_text(encoding='utf-8'))
+        normalized = normalize_full_analysis(raw)
+        if not normalized.get('related_work_comparisons'):
+            normalized['related_work_comparisons'] = fallback_related_work_comparisons(
+                paper,
+                related_candidates,
+                normalized,
+            )
         return {
             'enabled': True,
             'source_kind': context.get('source_kind', 'none'),
             'text_char_count': context.get('text_char_count', 0),
             'figure_context': context.get('figure_context', []),
-            'content': normalize_full_analysis(raw),
+            'table_context': context.get('table_context', []),
+            'metadata': context.get('metadata', {}),
+            'content': normalized,
         }
     finally:
         try:
@@ -648,25 +1038,62 @@ def main() -> int:
         write_json(output_path, payload)
         return 0
 
+    existing_full_analysis_map = load_existing_full_analysis_map(output_path)
     result = copy.deepcopy(payload)
 
-    for index, paper in enumerate(result.get('top_papers', []), start=1):
+    ranked_papers = sorted(
+        result.get('top_papers', []),
+        key=lambda paper: (
+            analysis_priority_rank(paper),
+            -float(paper.get('analysis_candidate_score', 0) or 0),
+            -float(paper.get('scores', {}).get('recommendation', 0) or 0),
+        ),
+    )
+
+    for paper in result.get('top_papers', []):
+        paper['selected_for_full_analysis'] = False
+
+    for index, paper in enumerate(ranked_papers, start=1):
         if index > settings['top_n']:
             break
+        paper['selected_for_full_analysis'] = True
         if paper.get('full_analysis', {}).get('enabled') and not settings['refresh_existing']:
             continue
         paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
-        logger.info('Running full-paper analysis for %s', paper_id or f'paper-{index}')
+        logger.info(
+            'Running full-paper analysis for %s (analysis rank=%s, score=%s)',
+            paper_id or f'paper-{index}',
+            paper.get('analysis_priority_rank', index),
+            paper.get('analysis_candidate_score', 'N/A'),
+        )
         try:
             paper['full_analysis'] = analyze_paper(repo_root, config, paper, result.get('top_papers', []), codex_path)
         except Exception as exc:
             logger.exception('Full-paper analysis failed for %s: %s', paper_id, exc)
             if args.strict:
                 raise
-            paper['full_analysis'] = {
-                'enabled': False,
-                'reason': f'error:{type(exc).__name__}',
+            context: Dict[str, Any] = {
+                'source_kind': 'none',
+                'text_char_count': 0,
+                'figure_context': [],
+                'table_context': [],
+                'metadata': {},
             }
+            try:
+                context = extract_paper_context(paper, settings)
+            except Exception:
+                logger.warning('Context extraction also failed for %s during fallback', paper_id)
+            previous = existing_full_analysis_map.get(paper_id)
+            if isinstance(previous, dict) and previous.get('enabled'):
+                paper['full_analysis'] = reuse_previous_full_analysis(previous, context)
+                paper['full_analysis']['fallback_reason'] = f'reused_previous:{type(exc).__name__}'
+            else:
+                paper['full_analysis'] = heuristic_full_analysis(
+                    paper,
+                    context,
+                    related_paper_candidates(paper, result.get('top_papers', [])),
+                    f'error:{type(exc).__name__}',
+                )
 
     write_json(output_path, result)
     logger.info('Full-paper analysis completed')

@@ -13,438 +13,593 @@
       "end": "2026-02-04"
     }
   },
+  "total_found": 292,
+  "total_venue": 12,
+  "total_filtered": 16,
   "total_recent": 200,
-  "total_hot": 100,
-  "total_unique": 82,
+  "total_hot": 80,
+  "total_unique": 16,
+  "total_classic_backlog_candidates": 11,
+  "selection": {
+    "max_recommendations": 6,
+    "analysis_top_n": 1,
+    "selected_count": 6,
+    "lane_counts": {
+      "fresh": 2,
+      "established": 3,
+      "classic": 1,
+      "history_filtered": 0,
+      "history_relaxed": 0,
+      "classic_slot_active": 1
+    },
+    "classic_policy": {
+      "enabled": true,
+      "cadence_days": 3,
+      "anchor_date": "2026-03-07",
+      "allow_full_analysis": false,
+      "slot_active_today": true
+    }
+  },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.05181v1",
-      "title": "Mario: Multimodal Graph Reasoning with Large Language Models",
-      "summary": "Recent advances in large language models (LLMs) have opened new avenues for multimodal reasoning. Yet, most existing methods still rely on pretrained vision-language models (VLMs) to encode image-text pairs in isolation, ignoring the relational structure that real-world multimodal data naturally form. This motivates reasoning on multimodal graphs (MMGs), where each node has textual and visual attributes and edges provide structural cues. Enabling LLM-based reasoning on such heterogeneous multimodal signals while preserving graph topology introduces two key challenges: resolving weak cross-modal consistency and handling heterogeneous modality preference. To address this, we propose Mario, a unified framework that simultaneously resolves the two above challenges and enables effective LLM-based reasoning over MMGs. Mario consists of two innovative stages. Firstly, a graph-conditioned VLM design that jointly refines textual and visual features through fine-grained cross-modal contrastive learning guided by graph topology. Secondly, a modality-adaptive graph instruction tuning mechanism that organizes aligned multimodal features into graph-aware instruction views and employs a learnable router to surface, for each node and its neighborhood, the most informative modality configuration to the LLM. Extensive experiments across diverse MMG benchmarks demonstrate that Mario consistently outperforms state-of-the-art graph models in both supervised and zero-shot scenarios for node classification and link prediction. The code will be made available at https://github.com/sunyuanfu/Mario.",
+      "id": "http://arxiv.org/abs/2603.05232v1",
+      "arxiv_id": "2603.05232v1",
+      "title": "SlideSparse: Fast and Flexible (2N-2):2N Structured Sparsity",
+      "summary": "NVIDIA's 2:4 Sparse Tensor Cores deliver 2x throughput but demand strict 50% pruning -- a ratio that collapses LLM reasoning accuracy (Qwen3: 54% to 15%). Milder $(2N-2):2N$ patterns (e.g., 6:8, 25% pruning) preserve accuracy yet receive no hardware support, falling back to dense execution without any benefit from sparsity. We present SlideSparse, the first system to unlock Sparse Tensor Core acceleration for the $(2N-2):2N$ model family on commodity GPUs. Our Sliding Window Decomposition reconstructs any $(2N-2):2N$ weight block into $N-1$ overlapping 2:4-compliant windows without any accuracy loss; Activation Lifting fuses the corresponding activation rearrangement into per-token quantization at near-zero cost. Integrated into vLLM, SlideSparse is evaluated across various GPUs (A100, H100, B200, RTX 4090, RTX 5080, DGX-spark), precisions (FP4, INT8, FP8, BF16, FP16), and model families (Llama, Qwen, BitNet). On compute-bound workloads, the measured speedup ratio (1.33x) approaches the theoretical upper-bound $N/(N-1)=4/3$ at 6:8 weight sparsity in Qwen2.5-7B, establishing $(2N-2):2N$ as a practical path to accuracy-preserving LLM acceleration. Code available at https://github.com/bcacdwk/vllmbench.",
       "authors": [
-        "Yuanfu Sun",
-        "Kang Li",
-        "Pengkang Guo",
-        "Jiajin Liu",
-        "Qiaoyu Tan"
+        "Hanyong Shao",
+        "Yingbo Hao",
+        "Ting Song",
+        "Yan Xia",
+        "Di Zhang",
+        "Shaohan Huang",
+        "Xun Wu",
+        "Songchen Xu",
+        "Le Xu",
+        "Li Dong",
+        "Zewen Chi",
+        "Yi Zou",
+        "Furu Wei"
       ],
-      "published": "2026-03-05T13:49:41Z",
-      "published_date": "2026-03-05 13:49:41+00:00",
-      "updated": "2026-03-05T13:49:41Z",
+      "author_details": [
+        {
+          "name": "Hanyong Shao"
+        },
+        {
+          "name": "Yingbo Hao"
+        },
+        {
+          "name": "Ting Song"
+        },
+        {
+          "name": "Yan Xia"
+        },
+        {
+          "name": "Di Zhang"
+        },
+        {
+          "name": "Shaohan Huang"
+        },
+        {
+          "name": "Xun Wu"
+        },
+        {
+          "name": "Songchen Xu"
+        },
+        {
+          "name": "Le Xu"
+        },
+        {
+          "name": "Li Dong"
+        },
+        {
+          "name": "Zewen Chi"
+        },
+        {
+          "name": "Yi Zou"
+        },
+        {
+          "name": "Furu Wei"
+        }
+      ],
+      "published": "2026-03-05T14:49:16Z",
+      "published_date": "2026-03-05 14:49:16+00:00",
+      "updated": "2026-03-05T14:49:16Z",
+      "primary_category": "cs.LG",
       "categories": [
-        "cs.CV"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05181v1",
-      "url": "http://arxiv.org/abs/2603.05181v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.47,
-        "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 8.81
-      },
-      "matched_domain": "Multimodal",
-      "matched_keywords": [
-        "multimodal",
-        "vision-language",
-        "image-text",
-        "cross-modal",
-        "cs.CV"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.45,
-      "is_hot_paper": false
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05471v1",
-      "title": "Leveraging LLM Parametric Knowledge for Fact Checking without Retrieval",
-      "summary": "Trustworthiness is a core research challenge for agentic AI systems built on Large Language Models (LLMs). To enhance trust, natural language claims from diverse sources, including human-written text, web content, and model outputs, are commonly checked for factuality by retrieving external knowledge and using an LLM to verify the faithfulness of claims to the retrieved evidence. As a result, such methods are constrained by retrieval errors and external data availability, while leaving the models intrinsic fact-verification capabilities largely unused. We propose the task of fact-checking without retrieval, focusing on the verification of arbitrary natural language claims, independent of their source. To study this setting, we introduce a comprehensive evaluation framework focused on generalization, testing robustness to (i) long-tail knowledge, (ii) variation in claim sources, (iii) multilinguality, and (iv) long-form generation. Across 9 datasets, 18 methods and 3 models, our experiments indicate that logit-based approaches often underperform compared to those that leverage internal model representations. Building on this finding, we introduce INTRA, a method that exploits interactions between internal representations and achieves state-of-the-art performance with strong generalization. More broadly, our work establishes fact-checking without retrieval as a promising research direction that can complement retrieval-based frameworks, improve scalability, and enable the use of such systems as reward signals during training or as components integrated into the generation process.",
-      "authors": [
-        "Artem Vazhentsev",
-        "Maria Marina",
-        "Daniil Moskovskiy",
-        "Sergey Pletenev",
-        "Mikhail Seleznyov",
-        "Mikhail Salnikov",
-        "Elena Tutubalina",
-        "Vasily Konovalov",
-        "Irina Nikishina",
-        "Alexander Panchenko",
-        "Viktor Moskvoretskii"
-      ],
-      "published": "2026-03-05T18:42:51Z",
-      "published_date": "2026-03-05 18:42:51+00:00",
-      "updated": "2026-03-05T18:42:51Z",
-      "categories": [
-        "cs.CL",
-        "cs.AI"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05471v1",
-      "url": "http://arxiv.org/abs/2603.05471v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.6,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 8.73
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "large language model",
-        "llm",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false
-    },
-    {
-      "id": "http://arxiv.org/abs/2602.04879v1",
-      "title": "Rethinking the Trust Region in LLM Reinforcement Learning",
-      "summary": "Reinforcement learning (RL) has become a cornerstone for fine-tuning Large Language Models (LLMs), with Proximal Policy Optimization (PPO) serving as the de facto standard algorithm. Despite its ubiquity, we argue that the core ratio clipping mechanism in PPO is structurally ill-suited for the large vocabularies inherent to LLMs. PPO constrains policy updates based on the probability ratio of sampled tokens, which serves as a noisy single-sample Monte Carlo estimate of the true policy divergence. This creates a sub-optimal learning dynamic: updates to low-probability tokens are aggressively over-penalized, while potentially catastrophic shifts in high-probability tokens are under-constrained, leading to training inefficiency and instability. To address this, we propose Divergence Proximal Policy Optimization (DPPO), which substitutes heuristic clipping with a more principled constraint based on a direct estimate of policy divergence (e.g., Total Variation or KL). To avoid huge memory footprint, we introduce the efficient Binary and Top-K approximations to capture the essential divergence with negligible overhead. Extensive empirical evaluations demonstrate that DPPO achieves superior training stability and efficiency compared to existing methods, offering a more robust foundation for RL-based LLM fine-tuning.",
-      "authors": [
-        "Penghui Qi",
-        "Xiangxin Zhou",
-        "Zichen Liu",
-        "Tianyu Pang",
-        "Chao Du",
-        "Min Lin",
-        "Wee Sun Lee"
-      ],
-      "published": "2026-02-04T18:59:04Z",
-      "published_date": "2026-02-04 18:59:04+00:00",
-      "updated": "2026-02-04T18:59:04Z",
-      "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2602.04879v1",
-      "url": "http://arxiv.org/abs/2602.04879v1",
-      "source": "arxiv_hot_fallback",
-      "hot_score": 0,
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 1.6,
-        "recommendation": 8.63
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "large language model",
-        "llm",
-        "cs.AI",
-        "cs.LG",
-        "cs.CL"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": true
-    },
-    {
-      "id": "http://arxiv.org/abs/2602.05105v1",
-      "title": "GAMMS: Graph based Adversarial Multiagent Modeling Simulator",
-      "summary": "As intelligent systems and multi-agent coordination become increasingly central to real-world applications, there is a growing need for simulation tools that are both scalable and accessible. Existing high-fidelity simulators, while powerful, are often computationally expensive and ill-suited for rapid prototyping or large-scale agent deployments. We present GAMMS (Graph based Adversarial Multiagent Modeling Simulator), a lightweight yet extensible simulation framework designed to support fast development and evaluation of agent behavior in environments that can be represented as graphs. GAMMS emphasizes five core objectives: scalability, ease of use, integration-first architecture, fast visualization feedback, and real-world grounding. It enables efficient simulation of complex domains such as urban road networks and communication systems, supports integration with external tools (e.g., machine learning libraries, planning solvers), and provides built-in visualization with minimal configuration. GAMMS is agnostic to policy type, supporting heuristic, optimization-based, and learning-based agents, including those using large language models. By lowering the barrier to entry for researchers and enabling high-performance simulations on standard hardware, GAMMS facilitates experimentation and innovation in multi-agent systems, autonomous planning, and adversarial modeling. The framework is open-source and available at https://github.com/GAMMSim/GAMMS/",
-      "authors": [
-        "Rohan Patil",
-        "Jai Malegaonkar",
-        "Xiao Jiang",
-        "Andre Dion",
-        "Gaurav S. Sukhatme",
-        "Henrik I. Christensen"
-      ],
-      "published": "2026-02-04T22:38:51Z",
-      "published_date": "2026-02-04 22:38:51+00:00",
-      "updated": "2026-02-04T22:38:51Z",
-      "categories": [
-        "cs.AI",
-        "cs.RO",
-        "cs.SE"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2602.05105v1",
-      "url": "http://arxiv.org/abs/2602.05105v1",
-      "source": "arxiv_hot_fallback",
-      "hot_score": 0,
-      "scores": {
-        "relevance": 2.99,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 1.6,
-        "recommendation": 8.47
-      },
-      "matched_domain": "Agents",
-      "matched_keywords": [
-        "agent",
-        "multi-agent",
-        "autonomous",
-        "planning",
-        "cs.AI",
-        "cs.RO"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.45,
-      "is_hot_paper": true
-    },
-    {
-      "id": "http://arxiv.org/abs/2602.05014v3",
-      "title": "DeepRead: Document Structure-Aware Reasoning to Enhance Agentic Search",
-      "summary": "With the rapid advancement of tool-use capabilities in Large Language Models (LLMs), Retrieval-Augmented Generation (RAG) is shifting from static, one-shot retrieval toward autonomous, multi-turn evidence acquisition. However, existing agentic search frameworks typically treat long documents as flat collections of unstructured chunks, disregarding the native hierarchical organization and sequential logic essential for human comprehension. To bridge this gap, we introduce \\textbf{DeepRead}, a structure-aware document reasoning agent designed to operationalize document-native structural priors into actionable reasoning capabilities. Leveraging the structural fidelity of modern OCR, DeepRead constructs a paragraph-level, coordinate-based navigation system and equips the LLM with two synergistic tools: \\textsf{Retrieve} for scanning-aware localization, and \\textsf{ReadSection} for contiguous, order-preserving reading within specific hierarchical scopes. This design elicits a human-like ``locate-then-read'' reasoning paradigm, effectively mitigating the context fragmentation inherent in traditional retrieval methods. Extensive evaluations across four benchmarks spanning diverse document types demonstrate that DeepRead outperforms Search-o1-style agentic search baselines by an average of 10.3\\%. Fine-grained behavioral analysis further confirms that DeepRead autonomously adopts human-aligned reading strategies, validating the critical role of structural awareness in achieving precise document reasoning. Our code is available at https://github.com/Zhanli-Li/DeepRead.",
-      "authors": [
-        "Zhanli Li",
-        "Huiwen Tian",
-        "Lvzhou Luo",
-        "Yixuan Cao",
-        "Ping Luo"
-      ],
-      "published": "2026-02-04T20:03:28Z",
-      "published_date": "2026-02-04 20:03:28+00:00",
-      "updated": "2026-02-12T02:45:40Z",
-      "categories": [
-        "cs.AI",
-        "cs.CL",
-        "cs.IR"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2602.05014v3",
-      "url": "http://arxiv.org/abs/2602.05014v3",
-      "source": "arxiv_hot_fallback",
-      "hot_score": 0,
-      "scores": {
-        "relevance": 2.21,
-        "recency": 3.0,
-        "popularity": 2.4,
-        "quality": 2.0,
-        "recommendation": 8.45
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "large language model",
-        "llm",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": true
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05500v1",
-      "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
-      "summary": "Efficient and stable training of large language models (LLMs) remains a core challenge in modern machine learning systems. To address this challenge, Reparameterized Orthogonal Equivalence Training (POET), a spectrum-preserving framework that optimizes each weight matrix through orthogonal equivalence transformation, has been proposed. Although POET provides strong training stability, its original implementation incurs high memory consumption and computational overhead due to intensive matrix multiplications. To overcome these limitations, we introduce POET-X, a scalable and memory-efficient variant that performs orthogonal equivalence transformations with significantly reduced computational cost. POET-X maintains the generalization and stability benefits of POET while achieving substantial improvements in throughput and memory efficiency. In our experiments, POET-X enables the pretraining of billion-parameter LLMs on a single Nvidia H100 GPU, and in contrast, standard optimizers such as AdamW run out of memory under the same settings.",
-      "authors": [
-        "Zeju Qiu",
-        "Lixin Liu",
-        "Adrian Weller",
-        "Han Shi",
-        "Weiyang Liu"
-      ],
-      "published": "2026-03-05T18:59:23Z",
-      "published_date": "2026-03-05 18:59:23+00:00",
-      "updated": "2026-03-05T18:59:23Z",
-      "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05500v1",
-      "url": "http://arxiv.org/abs/2603.05500v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 8.2
-      },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "large language model",
-        "llm",
-        "cs.AI",
-        "cs.LG",
-        "cs.CL"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05210v1",
-      "title": "Balancing Coverage and Draft Latency in Vocabulary Trimming for Faster Speculative Decoding",
-      "summary": "Speculative decoding accelerates inference for Large Language Models by using a lightweight draft model to propose candidate tokens that are verified in parallel by a larger target model. Prior work shows that the draft model often dominates speculative decoding latency, since it generates tokens sequentially and incurs high cost from its language modeling head as vocabulary size grows. This exposes a fundamental trade-off in draft model design: larger vocabularies improve token coverage and agreement with the target model, but incur higher draft latency, while smaller vocabularies reduce latency at the risk of missing tokens required for accurate draft generation. We address this trade-off through vocabulary trimming for draft models, motivated by the observation that domain-specific workloads use only a small fraction of the full vocabulary. We cast draft vocabulary selection as a constrained optimization problem that balances token coverage and draft latency. Coverage is computed over assistant responses in the training data, while latency is estimated using architecture-aware FLOPs that capture the cost of the language modeling head as a function of vocabulary size. We optimize a utility function with a Tree-structured Parzen Estimator to efficiently explore the coverage-latency Pareto frontier under a minimum coverage constraint. Experiments show improved speculative decoding throughput while reducing draft vocabularies by up to 97% with high coverage. On domain-specific tasks, we achieve up to 16% latency reduction and 20% throughput improvement, and up to 6.7% throughput gains on diverse out-of-distribution tasks.",
-      "authors": [
-        "Ofir Ben Shoham"
-      ],
-      "published": "2026-03-05T14:20:22Z",
-      "published_date": "2026-03-05 14:20:22+00:00",
-      "updated": "2026-03-05T14:20:22Z",
-      "categories": [
-        "cs.CL",
-        "cs.AI",
         "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05210v1",
-      "url": "http://arxiv.org/abs/2603.05210v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.05232v1",
+      "url": "http://arxiv.org/abs/2603.05232v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 8.2
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 9.55
       },
-      "matched_domain": "Large Language Models",
+      "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "large language model",
-        "speculative decoding",
-        "cs.AI",
+        "vllm",
+        "throughput",
+        "quantization",
         "cs.LG",
-        "cs.CL"
+        "h100",
+        "a100",
+        "b200",
+        "speedup"
       ],
       "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.LG"
+        ],
+        "required_signal_matches": [
+          "vllm",
+          "h100",
+          "a100",
+          "b200"
+        ],
+        "required_signal_match_count": 4,
+        "bonus_keyword_matches": [
+          "throughput",
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "throughput",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.9,
+        "bonus_keyword_bonus": 0.36
+      },
+      "analysis_candidate_score": 9.88,
+      "analysis_signals": [
+        "vllm",
+        "h100",
+        "a100",
+        "b200",
+        "throughput",
+        "speedup"
+      ],
+      "analysis_components": {
+        "signal_strength": 10.0,
+        "implementation_depth": 10.0,
+        "evidence_strength": 4.13,
+        "has_source_page": true,
+        "has_readable_pdf": true
+      },
+      "selection_lane": "fresh",
+      "analysis_priority_rank": 2,
+      "analysis_eligible": true,
+      "selected_for_full_analysis": false
     },
     {
-      "id": "http://arxiv.org/abs/2603.05299v1",
-      "title": "WavSLM: Single-Stream Speech Language Modeling via WavLM Distillation",
-      "summary": "Large language models show that simple autoregressive training can yield scalable and coherent generation, but extending this paradigm to speech remains challenging due to the entanglement of semantic and acoustic information. Most existing speech language models rely on text supervision, hierarchical token streams, or complex hybrid architectures, departing from the single-stream generative pretraining paradigm that has proven effective in text. In this work, we introduce WavSLM, a speech language model trained by quantizing and distilling self-supervised WavLM representations into a single codebook and optimizing an autoregressive next-chunk prediction objective. WavSLM jointly models semantic and acoustic information within a single token stream without text supervision or text pretraining. Despite its simplicity, it achieves competitive performance on consistency benchmarks and speech generation while using fewer parameters, less training data, and supporting streaming inference. Demo samples are available at https://lucadellalib.github.io/wavslm-web/.",
+      "id": "http://arxiv.org/abs/2603.05451v1",
+      "arxiv_id": "2603.05451v1",
+      "title": "FlashAttention-4: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling",
+      "summary": "Attention, as a core layer of the ubiquitous Transformer architecture, is the bottleneck for large language models and long-context applications. While FlashAttention-3 optimized attention for Hopper GPUs through asynchronous execution and warp specialization, it primarily targets the H100 architecture. The AI industry has rapidly transitioned to deploying Blackwell-based systems such as the B200 and GB200, which exhibit fundamentally different performance characteristics due to asymmetric hardware scaling: tensor core throughput doubles while other functional units (shared memory bandwidth, exponential units) scale more slowly or remain unchanged. We develop several techniques to address these shifting bottlenecks on Blackwell GPUs: (1) redesigned pipelines that exploit fully asynchronous MMA operations and larger tile sizes, (2) software-emulated exponential and conditional softmax rescaling that reduces non-matmul operations, and (3) leveraging tensor memory and the 2-CTA MMA mode to reduce shared memory traffic and atomic adds in the backward pass. We demonstrate that our method, FlashAttention-4, achieves up to 1.3$\\times$ speedup over cuDNN 9.13 and 2.7$\\times$ over Triton on B200 GPUs with BF16, reaching up to 1613 TFLOPs/s (71% utilization). Beyond algorithmic innovations, we implement FlashAttention-4 entirely in CuTe-DSL embedded in Python, achieving 20-30$\\times$ faster compile times compared to traditional C++ template-based approaches while maintaining full expressivity.",
       "authors": [
-        "Luca Della Libera",
-        "Cem Subakan",
-        "Mirco Ravanelli"
+        "Ted Zadouri",
+        "Markus Hoehnerbach",
+        "Jay Shah",
+        "Timmy Liu",
+        "Vijay Thakkar",
+        "Tri Dao"
       ],
-      "published": "2026-03-05T15:39:54Z",
-      "published_date": "2026-03-05 15:39:54+00:00",
-      "updated": "2026-03-05T15:39:54Z",
+      "author_details": [
+        {
+          "name": "Ted Zadouri"
+        },
+        {
+          "name": "Markus Hoehnerbach"
+        },
+        {
+          "name": "Jay Shah"
+        },
+        {
+          "name": "Timmy Liu"
+        },
+        {
+          "name": "Vijay Thakkar"
+        },
+        {
+          "name": "Tri Dao"
+        }
+      ],
+      "published": "2026-03-05T18:24:49Z",
+      "published_date": "2026-03-05 18:24:49+00:00",
+      "updated": "2026-03-05T18:24:49Z",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL",
-        "cs.SD"
+        "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05299v1",
-      "url": "http://arxiv.org/abs/2603.05299v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.05451v1",
+      "url": "http://arxiv.org/abs/2603.05451v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.52,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 8.09
+        "popularity": 1.3,
+        "quality": 1.3,
+        "recommendation": 9.38
       },
-      "matched_domain": "Large Language Models",
+      "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "large language model",
-        "cs.AI",
-        "cs.LG",
-        "cs.CL"
+        "flashattention",
+        "kernel pipelining",
+        "throughput",
+        "cs.CL",
+        "h100",
+        "b200",
+        "memory",
+        "bandwidth",
+        "speedup"
       ],
       "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "flashattention",
+          "kernel pipelining",
+          "h100",
+          "b200"
+        ],
+        "required_signal_match_count": 4,
+        "bonus_keyword_matches": [
+          "throughput",
+          "memory",
+          "bandwidth",
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 4,
+        "analysis_keyword_matches": [
+          "throughput",
+          "memory",
+          "bandwidth",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 4,
+        "signal_bonus": 0.9,
+        "bonus_keyword_bonus": 0.5
+      },
+      "analysis_candidate_score": 10.0,
+      "analysis_signals": [
+        "flashattention",
+        "kernel pipelining",
+        "h100",
+        "b200",
+        "throughput",
+        "memory",
+        "bandwidth",
+        "speedup"
+      ],
+      "analysis_components": {
+        "signal_strength": 10.0,
+        "implementation_depth": 10.0,
+        "evidence_strength": 10.0,
+        "has_source_page": true,
+        "has_readable_pdf": true
+      },
+      "selection_lane": "fresh",
+      "analysis_priority_rank": 1,
+      "analysis_eligible": true,
+      "selected_for_full_analysis": true
     },
     {
-      "id": "http://arxiv.org/abs/2602.07055v1",
-      "title": "Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration?",
-      "summary": "Spatial embodied intelligence requires agents to act to acquire information under partial observability. While multimodal foundation models excel at passive perception, their capacity for active, self-directed exploration remains understudied. We propose Theory of Space, defined as an agent's ability to actively acquire information through self-directed, active exploration and to construct, revise, and exploit a spatial belief from sequential, partial observations. We evaluate this through a benchmark where the goal is curiosity-driven exploration to build an accurate cognitive map. A key innovation is spatial belief probing, which prompts models to reveal their internal spatial representations at each step. Our evaluation of state-of-the-art models reveals several critical bottlenecks. First, we identify an Active-Passive Gap, where performance drops significantly when agents must autonomously gather information. Second, we find high inefficiency, as models explore unsystematically compared to program-based proxies. Through belief probing, we diagnose that while perception is an initial bottleneck, global beliefs suffer from instability that causes spatial knowledge to degrade over time. Finally, using a false belief paradigm, we uncover Belief Inertia, where agents fail to update obsolete priors with new evidence. This issue is present in text-based agents but is particularly severe in vision-based models. Our findings suggest that current foundation models struggle to maintain coherent, revisable spatial beliefs during active exploration.",
+      "id": "dblp:conf/mlsys/0015LCKCW24",
+      "paper_id": "dblp:conf/mlsys/0015LCKCW24",
+      "title": "Q-Hitter: A Better Token Oracle for Efficient LLM Inference via Sparse-Quantized KV Cache.",
+      "summary": "",
+      "abstract": "",
       "authors": [
-        "Pingyue Zhang",
-        "Zihan Huang",
-        "Yue Wang",
-        "Jieyu Zhang",
-        "Letian Xue",
-        "Zihan Wang",
-        "Qineng Wang",
-        "Keshigeyan Chandrasegaran",
-        "Ruohan Zhang",
-        "Yejin Choi",
-        "Ranjay Krishna",
-        "Jiajun Wu",
-        "Li Fei-Fei",
-        "Manling Li"
+        "Zhenyu Zhang 0015",
+        "Shiwei Liu 0003",
+        "Runjin Chen",
+        "Bhavya Kailkhura",
+        "Beidi Chen",
+        "Atlas Wang"
       ],
-      "published": "2026-02-04T19:06:40Z",
-      "published_date": "2026-02-04 19:06:40+00:00",
-      "updated": "2026-02-04T19:06:40Z",
+      "published": "2024",
+      "published_date": "2024-07-01 00:00:00",
+      "publicationDate": "2024",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
+      "url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
+      "pdf_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Paper-Conference.pdf",
+      "venue": "MLSys",
+      "venue_source_name": "MLSys",
+      "venue_source_alias": "MLSys",
+      "dblp_key": "conf/mlsys/0015LCKCW24",
+      "doi": "",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "open",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "MLSys",
+        "venue_alias": "MLSys"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2024,
+      "scores": {
+        "relevance": 3.0,
+        "recency": 0.0,
+        "popularity": 0.0,
+        "quality": 0.0,
+        "recommendation": 6.3
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm inference",
+        "kv cache"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 2,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "kv cache"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "analysis_candidate_score": 5.8,
+      "analysis_signals": [
+        "kv cache"
+      ],
+      "analysis_components": {
+        "signal_strength": 3.0,
+        "implementation_depth": 2.77,
+        "evidence_strength": 0.0,
+        "has_source_page": true,
+        "has_readable_pdf": true
+      },
+      "selection_lane": "established",
+      "analysis_priority_rank": 3,
+      "analysis_eligible": true,
+      "selected_for_full_analysis": false
+    },
+    {
+      "id": "dblp:conf/isca/0004HKCL00P25",
+      "paper_id": "dblp:conf/isca/0004HKCL00P25",
+      "title": "Oaken: Fast and Efficient LLM Serving with Online-Offline Hybrid KV Cache Quantization.",
+      "summary": "",
+      "abstract": "",
+      "authors": [
+        "Minsu Kim 0004",
+        "Seongmin Hong",
+        "Ryeowook Ko",
+        "Soongyu Choi",
+        "Hunjong Lee",
+        "Junsoo Kim 0002",
+        "Joo-Young Kim 0001",
+        "Jongse Park"
+      ],
+      "published": "2025",
+      "published_date": "2025-07-01 00:00:00",
+      "publicationDate": "2025",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://doi.org/10.1145/3695053.3731019",
+      "url": "https://doi.org/10.1145/3695053.3731019",
+      "pdf_url": "",
+      "venue": "ISCA",
+      "venue_source_name": "ISCA",
+      "venue_source_alias": "ISCA",
+      "dblp_key": "conf/isca/0004HKCL00P25",
+      "doi": "10.1145/3695053.3731019",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "ISCA",
+        "venue_alias": "ISCA"
+      },
+      "venue_source_priority": 4,
+      "venue_query_year": 2025,
+      "scores": {
+        "relevance": 3.0,
+        "recency": 0.0,
+        "popularity": 0.0,
+        "quality": 0.0,
+        "recommendation": 6.3
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm serving",
+        "serving",
+        "kv cache",
+        "quantization"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 4,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "kv cache"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "analysis_candidate_score": 5.25,
+      "analysis_signals": [
+        "kv cache"
+      ],
+      "analysis_components": {
+        "signal_strength": 3.0,
+        "implementation_depth": 2.77,
+        "evidence_strength": 0.0,
+        "has_source_page": true,
+        "has_readable_pdf": false
+      },
+      "selection_lane": "established",
+      "analysis_priority_rank": 4,
+      "analysis_eligible": true,
+      "selected_for_full_analysis": false
+    },
+    {
+      "id": "dblp:conf/cgo/GeorgakoudisPB25",
+      "paper_id": "dblp:conf/cgo/GeorgakoudisPB25",
+      "title": "Proteus: Portable Runtime Optimization of GPU Kernel Execution with Just-in-Time Compilation.",
+      "summary": "",
+      "abstract": "",
+      "authors": [
+        "Giorgis Georgakoudis",
+        "Konstantinos Parasyris",
+        "David Beckingsale"
+      ],
+      "published": "2025",
+      "published_date": "2025-07-01 00:00:00",
+      "publicationDate": "2025",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://doi.org/10.1145/3696443.3708939",
+      "url": "https://doi.org/10.1145/3696443.3708939",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/GeorgakoudisPB25",
+      "doi": "10.1145/3696443.3708939",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2025,
+      "scores": {
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 0.0,
+        "quality": 0.0,
+        "recommendation": 3.79
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "gpu kernel"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "gpu kernel"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "analysis_candidate_score": 3.73,
+      "analysis_signals": [
+        "gpu kernel"
+      ],
+      "analysis_components": {
+        "signal_strength": 3.0,
+        "implementation_depth": 3.7,
+        "evidence_strength": 0.0,
+        "has_source_page": true,
+        "has_readable_pdf": false
+      },
+      "selection_lane": "established",
+      "analysis_priority_rank": 5,
+      "analysis_eligible": true,
+      "selected_for_full_analysis": false
+    },
+    {
+      "paper_id": "2210.17323",
+      "arxiv_id": "2210.17323",
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "summary": "Introduces a scalable post-training quantization method for GPT-style models that preserves accuracy at 3-4 bit weight precision and makes much larger models deployable on limited hardware.",
+      "authors": [
+        "Elias Frantar",
+        "Saleh Ashkboos",
+        "Torsten Hoefler",
+        "Dan Alistarh"
+      ],
+      "published": "2022-10-31",
+      "published_date": "2022-10-31 00:00:00",
       "categories": [
-        "cs.AI",
-        "cs.CL",
         "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2602.07055v1",
-      "url": "http://arxiv.org/abs/2602.07055v1",
-      "source": "arxiv_hot_fallback",
-      "hot_score": 0,
-      "scores": {
-        "relevance": 2.82,
-        "recency": 3.0,
-        "popularity": 1.8,
-        "quality": 1.4,
-        "recommendation": 8.06
-      },
-      "matched_domain": "Large Language Models",
+      "source": "classic_backlog",
+      "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "foundation model",
-        "cs.AI",
-        "cs.LG",
-        "cs.CL"
+        "quantization",
+        "gptq",
+        "4bit",
+        "single-gpu"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.6,
-      "is_hot_paper": true
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.05308v1",
-      "title": "Med-V1: Small Language Models for Zero-shot and Scalable Biomedical Evidence Attribution",
-      "summary": "Assessing whether an article supports an assertion is essential for hallucination detection and claim verification. While large language models (LLMs) have the potential to automate this task, achieving strong performance requires frontier models such as GPT-5 that are prohibitively expensive to deploy at scale. To efficiently perform biomedical evidence attribution, we present Med-V1, a family of small language models with only three billion parameters. Trained on high-quality synthetic data newly developed in this study, Med-V1 substantially outperforms (+27.0% to +71.3%) its base models on five biomedical benchmarks unified into a verification format. Despite its smaller size, Med-V1 performs comparably to frontier LLMs such as GPT-5, along with high-quality explanations for its predictions. We use Med-V1 to conduct a first-of-its-kind use case study that quantifies hallucinations in LLM-generated answers under different citation instructions. Results show that the format instruction strongly affects citation validity and hallucination, with GPT-5 generating more claims but exhibiting hallucination rates similar to GPT-4o. Additionally, we present a second use case showing that Med-V1 can automatically identify high-stakes evidence misattributions in clinical practice guidelines, revealing potentially negative public health impacts that are otherwise challenging to identify at scale. Overall, Med-V1 provides an efficient and accurate lightweight alternative to frontier LLMs for practical and real-world applications in biomedical evidence attribution and verification tasks. Med-V1 is available at https://github.com/ncbi-nlp/Med-V1.",
-      "authors": [
-        "Qiao Jin",
-        "Yin Fang",
-        "Lauren He",
-        "Yifan Yang",
-        "Guangzhi Xiong",
-        "Zhizheng Wang",
-        "Nicholas Wan",
-        "Joey Chan",
-        "Donald C. Comeau",
-        "Robert Leaman",
-        "Charalampos S. Floudas",
-        "Aidong Zhang",
-        "Michael F. Chiang",
-        "Yifan Peng",
-        "Zhiyong Lu"
-      ],
-      "published": "2026-03-05T15:48:43Z",
-      "published_date": "2026-03-05 15:48:43+00:00",
-      "updated": "2026-03-05T15:48:43Z",
-      "categories": [
-        "cs.CL",
-        "cs.AI"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.05308v1",
-      "url": "http://arxiv.org/abs/2603.05308v1",
-      "source": "arxiv",
+      "selection_lane": "classic",
+      "is_hot_paper": false,
+      "source_url": "https://arxiv.org/abs/2210.17323",
+      "pdf_url": "https://arxiv.org/pdf/2210.17323.pdf",
       "scores": {
-        "relevance": 2.21,
-        "recency": 3.0,
-        "popularity": 1.8,
-        "quality": 1.8,
-        "recommendation": 7.95
+        "relevance": 2.9,
+        "recency": 0.0,
+        "popularity": 2.25,
+        "quality": 2.65,
+        "recommendation": 9.45
       },
-      "matched_domain": "Large Language Models",
-      "matched_keywords": [
-        "large language model",
-        "llm",
-        "cs.AI",
-        "cs.CL"
+      "analysis_candidate_score": 9.94,
+      "analysis_signals": [
+        "quantization",
+        "gptq",
+        "4bit",
+        "single-gpu"
       ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false
+      "analysis_components": {
+        "signal_strength": 9.5,
+        "implementation_depth": 8.5,
+        "evidence_strength": 7.5
+      },
+      "classic_rotation_score": 10.9339,
+      "analysis_priority_rank": 0,
+      "analysis_eligible": false,
+      "selected_for_full_analysis": false
     }
   ]
 }

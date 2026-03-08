@@ -1,14 +1,16 @@
 {
   "notes": [
     {
-      "title": "images",
-      "slug": "images",
-      "source_path": "content/papers/2602-04879v1-rethinking-the-trust-region-in-llm-reinforcement/images/index.md",
-      "url": "/papers/2602-04879v1-rethinking-the-trust-region-in-llm-reinforcement/images/",
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "slug": "2210-17323-gptq-accurate-post-training-quantization-for-gen",
+      "source_path": "content/papers/2210-17323-gptq-accurate-post-training-quantization-for-gen/index.md",
+      "url": "/papers/2210-17323-gptq-accurate-post-training-quantization-for-gen/",
       "title_keywords": [
-        "images"
+        "GPTQ"
       ],
-      "tag_keywords": []
+      "tag_keywords": [
+        "paper-note"
+      ]
     },
     {
       "title": "Rethinking the Trust Region in LLM Reinforcement Learning",
@@ -26,8 +28,7 @@
       "source_path": "content/papers/2602-05014v3-deepread-document-structure-aware-reasoning-to-e/index.md",
       "url": "/papers/2602-05014v3-deepread-document-structure-aware-reasoning-to-e/",
       "title_keywords": [
-        "DeepRead",
-        "Structure-Aware"
+        "DeepRead"
       ],
       "tag_keywords": [
         "paper-note"
@@ -53,6 +54,16 @@
       "title_keywords": [
         "Theory of Space"
       ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "SLO-Aware Compute Resource Allocation for Prefill-Decode Disaggregated LLM Inference",
+      "slug": "2603-04716v1-slo-aware-compute-resource-allocation-for-prefil",
+      "source_path": "content/papers/2603-04716v1-slo-aware-compute-resource-allocation-for-prefil/index.md",
+      "url": "/papers/2603-04716v1-slo-aware-compute-resource-allocation-for-prefil/",
+      "title_keywords": [],
       "tag_keywords": [
         "paper-note"
       ]
@@ -94,16 +105,6 @@
       ]
     },
     {
-      "title": "images",
-      "slug": "images",
-      "source_path": "content/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/images/index.md",
-      "url": "/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/images/",
-      "title_keywords": [
-        "images"
-      ],
-      "tag_keywords": []
-    },
-    {
       "title": "Mario: Multimodal Graph Reasoning with Large Language Models",
       "slug": "2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang",
       "source_path": "content/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/index.md",
@@ -130,10 +131,7 @@
       "slug": "2603-05212v1-early-warning-of-intraoperative-adverse-events-v",
       "source_path": "content/papers/2603-05212v1-early-warning-of-intraoperative-adverse-events-v/index.md",
       "url": "/papers/2603-05212v1-early-warning-of-intraoperative-adverse-events-v/",
-      "title_keywords": [
-        "Transformer-Driven",
-        "Multi-Label"
-      ],
+      "title_keywords": [],
       "tag_keywords": [
         "paper-note"
       ]
@@ -145,6 +143,18 @@
       "url": "/papers/2603-05218v1-karl-knowledge-agents-via-reinforcement-learning/",
       "title_keywords": [
         "KARL"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "SlideSparse: Fast and Flexible (2N-2):2N Structured Sparsity",
+      "slug": "2603-05232v1-slidesparse-fast-and-flexible-2n-2-2n-structured",
+      "source_path": "content/papers/2603-05232v1-slidesparse-fast-and-flexible-2n-2-2n-structured/index.md",
+      "url": "/papers/2603-05232v1-slidesparse-fast-and-flexible-2n-2-2n-structured/",
+      "title_keywords": [
+        "SlideSparse"
       ],
       "tag_keywords": [
         "paper-note"
@@ -168,8 +178,7 @@
       "source_path": "content/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/index.md",
       "url": "/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/",
       "title_keywords": [
-        "WavSLM",
-        "Single-Stream"
+        "WavSLM"
       ],
       "tag_keywords": [
         "paper-note"
@@ -188,14 +197,16 @@
       ]
     },
     {
-      "title": "images",
-      "slug": "images",
-      "source_path": "content/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/images/index.md",
-      "url": "/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/images/",
+      "title": "FlashAttention-4: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling",
+      "slug": "2603-05451v1-flashattention-4-algorithm-and-kernel-pipelining",
+      "source_path": "content/papers/2603-05451v1-flashattention-4-algorithm-and-kernel-pipelining/index.md",
+      "url": "/papers/2603-05451v1-flashattention-4-algorithm-and-kernel-pipelining/",
       "title_keywords": [
-        "images"
+        "FlashAttention-4"
       ],
-      "tag_keywords": []
+      "tag_keywords": [
+        "paper-note"
+      ]
     },
     {
       "title": "Leveraging LLM Parametric Knowledge for Fact Checking without Retrieval",
@@ -208,16 +219,6 @@
       ]
     },
     {
-      "title": "images",
-      "slug": "images",
-      "source_path": "content/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/images/index.md",
-      "url": "/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/images/",
-      "title_keywords": [
-        "images"
-      ],
-      "tag_keywords": []
-    },
-    {
       "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
       "slug": "2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling",
       "source_path": "content/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/index.md",
@@ -228,20 +229,55 @@
       "tag_keywords": [
         "paper-note"
       ]
+    },
+    {
+      "title": "Proteus: Portable Runtime Optimization of GPU Kernel Execution with Just-in-Time Compilation.",
+      "slug": "dblp-conf-cgo-georgakoudispb25-proteus-portable-runtime-optimization-of-gpu-ker",
+      "source_path": "content/papers/dblp-conf-cgo-georgakoudispb25-proteus-portable-runtime-optimization-of-gpu-ker/index.md",
+      "url": "/papers/dblp-conf-cgo-georgakoudispb25-proteus-portable-runtime-optimization-of-gpu-ker/",
+      "title_keywords": [
+        "Proteus"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "Oaken: Fast and Efficient LLM Serving with Online-Offline Hybrid KV Cache Quantization.",
+      "slug": "dblp-conf-isca-0004hkcl00p25-oaken-fast-and-efficient-llm-serving-with-online",
+      "source_path": "content/papers/dblp-conf-isca-0004hkcl00p25-oaken-fast-and-efficient-llm-serving-with-online/index.md",
+      "url": "/papers/dblp-conf-isca-0004hkcl00p25-oaken-fast-and-efficient-llm-serving-with-online/",
+      "title_keywords": [
+        "Oaken"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
+    },
+    {
+      "title": "Q-Hitter: A Better Token Oracle for Efficient LLM Inference via Sparse-Quantized KV Cache.",
+      "slug": "dblp-conf-mlsys-0015lckcw24-q-hitter-a-better-token-oracle-for-efficient-llm",
+      "source_path": "content/papers/dblp-conf-mlsys-0015lckcw24-q-hitter-a-better-token-oracle-for-efficient-llm/index.md",
+      "url": "/papers/dblp-conf-mlsys-0015lckcw24-q-hitter-a-better-token-oracle-for-efficient-llm/",
+      "title_keywords": [
+        "Q-Hitter"
+      ],
+      "tag_keywords": [
+        "paper-note"
+      ]
     }
   ],
   "keyword_to_notes": {
-    "images": [
-      "/papers/2602-04879v1-rethinking-the-trust-region-in-llm-reinforcement/images/",
-      "/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/images/",
-      "/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/images/",
-      "/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/images/"
+    "gptq": [
+      "/papers/2210-17323-gptq-accurate-post-training-quantization-for-gen/"
     ],
     "paper-note": [
+      "/papers/2210-17323-gptq-accurate-post-training-quantization-for-gen/",
       "/papers/2602-04879v1-rethinking-the-trust-region-in-llm-reinforcement/",
       "/papers/2602-05014v3-deepread-document-structure-aware-reasoning-to-e/",
       "/papers/2602-05105v1-gamms-graph-based-adversarial-multiagent-modelin/",
       "/papers/2602-07055v1-theory-of-space-can-foundation-models-construct/",
+      "/papers/2603-04716v1-slo-aware-compute-resource-allocation-for-prefil/",
       "/papers/2603-05028v1-survive-at-all-costs-exploring-llm-s-risky-behav/",
       "/papers/2603-05092v1-aura-universal-multi-dimensional-exogenous-integ/",
       "/papers/2603-05129v1-medcorag-interpretable-hepatology-diagnosis-via/",
@@ -249,16 +285,18 @@
       "/papers/2603-05210v1-balancing-coverage-and-draft-latency-in-vocabula/",
       "/papers/2603-05212v1-early-warning-of-intraoperative-adverse-events-v/",
       "/papers/2603-05218v1-karl-knowledge-agents-via-reinforcement-learning/",
+      "/papers/2603-05232v1-slidesparse-fast-and-flexible-2n-2-2n-structured/",
       "/papers/2603-05290v1-x-ray-mapping-llm-reasoning-capability-via-forma/",
       "/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/",
       "/papers/2603-05308v1-med-v1-small-language-models-for-zero-shot-and-s/",
+      "/papers/2603-05451v1-flashattention-4-algorithm-and-kernel-pipelining/",
       "/papers/2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che/",
-      "/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/"
+      "/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/",
+      "/papers/dblp-conf-cgo-georgakoudispb25-proteus-portable-runtime-optimization-of-gpu-ker/",
+      "/papers/dblp-conf-isca-0004hkcl00p25-oaken-fast-and-efficient-llm-serving-with-online/",
+      "/papers/dblp-conf-mlsys-0015lckcw24-q-hitter-a-better-token-oracle-for-efficient-llm/"
     ],
     "deepread": [
-      "/papers/2602-05014v3-deepread-document-structure-aware-reasoning-to-e/"
-    ],
-    "structure-aware": [
       "/papers/2602-05014v3-deepread-document-structure-aware-reasoning-to-e/"
     ],
     "gamms": [
@@ -279,14 +317,11 @@
     "mario": [
       "/papers/2603-05181v1-mario-multimodal-graph-reasoning-with-large-lang/"
     ],
-    "transformer-driven": [
-      "/papers/2603-05212v1-early-warning-of-intraoperative-adverse-events-v/"
-    ],
-    "multi-label": [
-      "/papers/2603-05212v1-early-warning-of-intraoperative-adverse-events-v/"
-    ],
     "karl": [
       "/papers/2603-05218v1-karl-knowledge-agents-via-reinforcement-learning/"
+    ],
+    "slidesparse": [
+      "/papers/2603-05232v1-slidesparse-fast-and-flexible-2n-2-2n-structured/"
     ],
     "x-ray": [
       "/papers/2603-05290v1-x-ray-mapping-llm-reasoning-capability-via-forma/"
@@ -294,14 +329,23 @@
     "wavslm": [
       "/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/"
     ],
-    "single-stream": [
-      "/papers/2603-05299v1-wavslm-single-stream-speech-language-modeling-vi/"
-    ],
     "med-v1": [
       "/papers/2603-05308v1-med-v1-small-language-models-for-zero-shot-and-s/"
     ],
+    "flashattention-4": [
+      "/papers/2603-05451v1-flashattention-4-algorithm-and-kernel-pipelining/"
+    ],
     "poet-x": [
       "/papers/2603-05500v1-poet-x-memory-efficient-llm-training-by-scaling/"
+    ],
+    "proteus": [
+      "/papers/dblp-conf-cgo-georgakoudispb25-proteus-portable-runtime-optimization-of-gpu-ker/"
+    ],
+    "oaken": [
+      "/papers/dblp-conf-isca-0004hkcl00p25-oaken-fast-and-efficient-llm-serving-with-online/"
+    ],
+    "q-hitter": [
+      "/papers/dblp-conf-mlsys-0015lckcw24-q-hitter-a-better-token-oracle-for-efficient-llm/"
     ]
   }
 }

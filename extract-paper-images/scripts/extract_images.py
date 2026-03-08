@@ -20,6 +20,11 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
+IMAGE_EXTS = {'.png', '.jpg', '.jpeg', '.pdf', '.eps', '.svg'}
+RASTER_EXTS = {'.png', '.jpg', '.jpeg', '.svg'}
+FIGURE_DIR_HINTS = {'pics', 'figures', 'figure', 'fig', 'images', 'img'}
+IGNORE_FILE_HINTS = {'logo', 'icon', 'favicon', 'avatar'}
+
 try:
     import fitz  # PyMuPDF
     HAS_FITZ = True
@@ -37,84 +42,173 @@ except ImportError:
     logger.warning("requests not found, using urllib")
 
 
-def extract_arxiv_source(arxiv_id, temp_dir):
-    """下载并提取arXiv源码包"""
-    source_url = f"https://arxiv.org/e-print/{arxiv_id}"
-    print(f"正在下载arXiv源码包: {source_url}")
-
+def download_url(url, output_path, timeout=60):
+    """下载URL到指定路径"""
     try:
         if HAS_REQUESTS:
-            response = requests.get(source_url, timeout=60)
+            response = requests.get(url, timeout=timeout)
             content = response.content if response.status_code == 200 else None
             status = response.status_code
         else:
-            req = urllib.request.urlopen(source_url, timeout=60)
+            req = urllib.request.urlopen(url, timeout=timeout)
             content = req.read()
             status = req.status
 
         if status == 200 and content:
-            tar_path = os.path.join(temp_dir, f"{arxiv_id}.tar.gz")
-            with open(tar_path, 'wb') as f:
+            with open(output_path, 'wb') as f:
                 f.write(content)
-            print(f"源码包已下载: {tar_path}")
-
-            with tarfile.open(tar_path, 'r:gz') as tar:
-                # 过滤危险路径，防止路径遍历攻击
-                safe_members = []
-                for member in tar.getmembers():
-                    if member.name.startswith('/') or '..' in member.name:
-                        continue
-                    safe_members.append(member)
-                tar.extractall(path=temp_dir, members=safe_members)
-            print(f"源码已提取到: {temp_dir}")
             return True
-        else:
-            print(f"下载失败: HTTP {status}")
-            return False
+        print(f"下载失败: HTTP {status}")
+        return False
     except Exception as e:
-        logger.error("下载源码包失败: %s", e)
+        logger.error("下载失败 (%s): %s", url, e)
         return False
 
 
+def extract_arxiv_source(arxiv_id, temp_dir):
+    """下载并提取arXiv源码包"""
+    source_url = f"https://arxiv.org/e-print/{arxiv_id}"
+    print(f"正在下载arXiv源码包: {source_url}")
+    tar_path = os.path.join(temp_dir, f"{arxiv_id}.src")
+
+    if not download_url(source_url, tar_path, timeout=60):
+        return False
+
+    print(f"源码包已下载: {tar_path}")
+
+    try:
+        with tarfile.open(tar_path, 'r:*') as tar:
+            safe_members = []
+            for member in tar.getmembers():
+                if member.name.startswith('/') or '..' in Path(member.name).parts:
+                    continue
+                safe_members.append(member)
+            tar.extractall(path=temp_dir, members=safe_members)
+        print(f"源码已提取到: {temp_dir}")
+        return True
+    except tarfile.TarError as e:
+        logger.error("解压源码包失败: %s", e)
+        return False
+
+
+def download_arxiv_pdf(arxiv_id, output_path):
+    pdf_url = f"https://arxiv.org/pdf/{arxiv_id}.pdf"
+    print(f"正在下载PDF: {pdf_url}")
+    return download_url(pdf_url, output_path, timeout=60)
+
+
+def normalize_ref_token(value):
+    token = str(value or '').replace('\\', '/').strip()
+    token = re.sub(r'^\./', '', token)
+    return token
+
+
+def resolve_graphics_ref(base_dir, ref):
+    raw_ref = normalize_ref_token(ref)
+    if not raw_ref:
+        return None
+    raw_path = Path(raw_ref)
+    candidates = []
+    if raw_path.suffix:
+        candidates.append(base_dir / raw_path)
+    else:
+        candidates.append(base_dir / raw_path)
+        for ext in ['.png', '.jpg', '.jpeg', '.pdf', '.eps', '.svg']:
+            candidates.append(base_dir / f"{raw_ref}{ext}")
+
+    for candidate in candidates:
+        if candidate.exists() and candidate.is_file():
+            return candidate.resolve()
+    return None
+
+
+def find_graphics_refs(temp_dir):
+    refs = []
+    seen = set()
+    tex_files = sorted(Path(temp_dir).rglob('*.tex'))
+    pattern = re.compile(r'\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}')
+
+    for tex_file in tex_files:
+        try:
+            text = tex_file.read_text(encoding='utf-8', errors='ignore')
+        except Exception:
+            continue
+        for ref in pattern.findall(text):
+            resolved = resolve_graphics_ref(tex_file.parent, ref)
+            if not resolved:
+                continue
+            key = str(resolved)
+            if key in seen:
+                continue
+            seen.add(key)
+            refs.append({
+                'type': 'source',
+                'source': 'latex-figure-ref',
+                'path': str(resolved),
+                'filename': resolved.name,
+            })
+    return refs
+
+
+def should_ignore_file(path):
+    lowered = path.name.lower()
+    return any(token in lowered for token in IGNORE_FILE_HINTS)
+
+
 def find_figures_from_source(temp_dir):
-    """从源码目录中查找图片（搜索所有匹配的目录）"""
+    """从源码目录中递归查找图片，优先 LaTeX 明确引用的 figure 文件"""
     figures = []
-    seen_files = set()
+    seen_paths = set()
 
-    figure_dirs = ['pics', 'figures', 'fig', 'images', 'img']
+    for item in find_graphics_refs(temp_dir):
+        key = item['path']
+        if key in seen_paths:
+            continue
+        seen_paths.add(key)
+        figures.append(item)
 
-    for fig_dir in figure_dirs:
-        fig_path = os.path.join(temp_dir, fig_dir)
-        if os.path.exists(fig_path):
-            print(f"找到图片目录: {fig_path}")
-            for filename in os.listdir(fig_path):
-                file_path = os.path.join(fig_path, filename)
-                if os.path.isfile(file_path) and filename not in seen_files:
-                    ext = os.path.splitext(filename)[1].lower()
-                    if ext in ['.png', '.jpg', '.jpeg', '.pdf', '.eps', '.svg']:
-                        seen_files.add(filename)
-                        figures.append({
-                            'type': 'source',
-                            'source': 'arxiv-source',
-                            'path': file_path,
-                            'filename': filename
-                        })
+    ranked = []
+    root_path = Path(temp_dir)
+    for path in root_path.rglob('*'):
+        if not path.is_file():
+            continue
+        if path.suffix.lower() not in IMAGE_EXTS:
+            continue
+        if should_ignore_file(path):
+            continue
+        lowered_parts = {part.lower() for part in path.parts}
+        dir_score = 3 if lowered_parts & FIGURE_DIR_HINTS else 0
+        if path.suffix.lower() == '.pdf':
+            dir_score -= 1
+        ranked.append((dir_score, len(path.parts), path))
 
-    # 如果没有找到单独的目录，检查根目录的图片文件
-    if not figures:
-        for filename in os.listdir(temp_dir):
-            file_path = os.path.join(temp_dir, filename)
-            if os.path.isfile(file_path):
-                ext = os.path.splitext(filename)[1].lower()
-                if ext in ['.png', '.jpg', '.jpeg'] and 'logo' not in filename.lower() and 'icon' not in filename.lower():
-                    figures.append({
-                        'type': 'source',
-                        'source': 'arxiv-source',
-                        'path': file_path,
-                        'filename': filename
-                    })
+    for _, _, path in sorted(ranked, key=lambda item: (-item[0], item[1], item[2].name.lower())):
+        key = str(path.resolve())
+        if key in seen_paths:
+            continue
+        seen_paths.add(key)
+        figures.append({
+            'type': 'source',
+            'source': 'arxiv-source',
+            'path': str(path.resolve()),
+            'filename': path.name,
+        })
 
     return figures
+
+
+def unique_output_path(output_dir, filename):
+    path = Path(output_dir) / filename
+    if not path.exists():
+        return path
+    stem = path.stem
+    suffix = path.suffix
+    counter = 2
+    while True:
+        candidate = Path(output_dir) / f"{stem}_{counter}{suffix}"
+        if not candidate.exists():
+            return candidate
+        counter += 1
 
 
 def extract_pdf_figures(pdf_path, output_dir):
@@ -237,19 +331,24 @@ def main():
                 if source_figures:
                     print(f"\n从arXiv源码找到 {len(source_figures)} 个图片文件")
                     for fig in source_figures:
-                        output_file = os.path.join(output_dir, fig['filename'])
+                        output_file = unique_output_path(output_dir, fig['filename'])
                         shutil.copy2(fig['path'], output_file)
 
                         all_figures.append({
-                            'filename': fig['filename'],
-                            'path': f'images/{fig["filename"]}',
+                            'filename': output_file.name,
+                            'path': f'images/{output_file.name}',
                             'size': os.path.getsize(output_file),
-                            'ext': os.path.splitext(fig['filename'])[1][1:].lower(),
+                            'ext': output_file.suffix[1:].lower(),
                             'source': fig['source']
                         })
-                        print(f"  - {fig['filename']}")
+                        print(f"  - {output_file.name}")
 
         # 步骤2: 如果源码包中没有找到足够的图片，从PDF中提取
+        if len(all_figures) < 3 and not pdf_path and arxiv_id:
+            candidate_pdf = os.path.join(temp_dir, f'{arxiv_id}.pdf')
+            if download_arxiv_pdf(arxiv_id, candidate_pdf):
+                pdf_path = candidate_pdf
+
         if len(all_figures) < 3 and pdf_path:
             print(f"\n找到的图片数量较少，从PDF直接提取...")
             pdf_figures = extract_pdf_figures(pdf_path, output_dir)
@@ -261,8 +360,13 @@ def main():
         if arxiv_id and os.path.exists(temp_dir):
             for root, dirs, files in os.walk(temp_dir):
                 for file in files:
-                    if file.endswith('.pdf') and 'logo' not in file.lower() and file != f'{arxiv_id}.tar.gz':
-                        pdf_fig_path = os.path.join(root, file)
+                    pdf_fig_path = os.path.join(root, file)
+                    if (
+                        file.endswith('.pdf')
+                        and 'logo' not in file.lower()
+                        and file != f'{arxiv_id}.tar.gz'
+                        and os.path.abspath(pdf_fig_path) != os.path.abspath(pdf_path or '')
+                    ):
                         try:
                             extracted = extract_from_pdf_figures(pdf_fig_path, output_dir)
                             for fig in extracted:

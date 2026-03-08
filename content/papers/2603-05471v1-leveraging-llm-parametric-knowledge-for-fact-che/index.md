@@ -16,7 +16,7 @@ authors:
 domain: Large Language Models
 slug: 2603-05471v1-leveraging-llm-parametric-knowledge-for-fact-che
 published: '2026-03-05T18:42:51Z'
-summary: 这篇论文值得读的关键不在于又做了一个核查器，而在于它把“LLM 的参数知识能否独立承担事实核查”从检索范式中单独拉出来，并给出了一条偏内部表征的路线。
+summary: 这篇工作试图把事实核查从依赖外部检索，转向直接调用LLM参数知识与内部表征来判断陈述真伪。
 source_url: https://arxiv.org/abs/2603.05471v1
 pdf_url: https://arxiv.org/pdf/2603.05471v1.pdf
 scores:
@@ -29,13 +29,17 @@ tags:
 - paper-note
 status: generated
 updated: '2026-03-07'
+institutions:
+- Independent Researcher
+venue_or_journal: arXiv preprint
+citation_summary: Citation count unavailable
 keywords:
+- 无检索事实核查
 - 大语言模型
-- 事实核查
-- 无检索验证
 - 参数知识
-- 内部表征
-- INTRA
+- 内部表征交互
+- Agent可信性
+- 多语言泛化
 reading_priority: high
 image_count: 6
 analysis_depth: full
@@ -45,32 +49,35 @@ full_analysis_source: arxiv_source
 # Leveraging LLM Parametric Knowledge for Fact Checking without Retrieval
 
 ## TL;DR
-这篇论文值得读的关键不在于又做了一个核查器，而在于它把“LLM 的参数知识能否独立承担事实核查”从检索范式中单独拉出来，并给出了一条偏内部表征的路线。
+这篇工作试图把事实核查从依赖外部检索，转向直接调用LLM参数知识与内部表征来判断陈述真伪。
 
 ## 中文摘要
-这篇工作将事实核查从常见的“检索外部证据再验证”流程中拆出，主张直接利用 LLM 的参数知识判断任意自然语言断言。作者围绕无检索事实核查建立了一个强调泛化能力的评测框架，覆盖长尾知识、断言来源变化、多语言和长文本生成四类挑战，并在 9 个数据集、18 种方法、3 个模型上比较不同路线。摘要声称基于 logit 的方法通常不如利用内部表征的方法，且提出的 INTRA 通过建模内部表征交互取得了当前最佳表现和较强泛化。摘要没有充分说明具体增益幅度、计算代价、失败案例以及与检索式方案的直接取舍。
+论文提出“无检索事实核查”任务，目标是在不依赖外部证据检索的情况下，直接用LLM的参数知识验证任意自然语言陈述。作者构建了一个强调泛化的评测框架，覆盖长尾知识、声明来源变化、多语言和长文本生成四个维度。摘要称在9个数据集、18种方法、3个模型上的实验显示，基于logit的方法通常不如利用内部表征的方法，所提INTRA通过内部表征交互达到SOTA并表现出较强泛化；但摘要没有充分说明具体提升幅度、代价和失败案例。
 
 ## Quick Facts
 - Paper ID: `2603.05471v1`
 - Authors: Artem Vazhentsev, Maria Marina, Daniil Moskovskiy, Sergey Pletenev, Mikhail Seleznyov, Mikhail Salnikov, Elena Tutubalina, Vasily Konovalov, Irina Nikishina, Alexander Panchenko, Viktor Moskvoretskii
+- Institutions: Independent Researcher
 - Domain: Large Language Models
+- Venue / Journal: arXiv preprint
+- Citations: Citation count unavailable
 - Published: 2026-03-05T18:42:51Z
 - arXiv: [abstract](https://arxiv.org/abs/2603.05471v1)
 - PDF: [download](https://arxiv.org/pdf/2603.05471v1.pdf)
 - Reading priority: high
-- Why this priority: 优先级高：主题直接落在 LLM 可信性与 Agent 可靠性这一当前主线，且论文不只提出方法，还重新定义了“无检索事实核查”问题并给出较系统的评测。结合推荐分数 8.73 和领域高优先级，这篇论文值得尽早阅读；但在接受其结论前，需要重点核对时效性边界、成本以及与检索式方案的互补关系。
+- Why this priority: 这篇论文同时贴合大模型与Agent可信性主线，又试图去掉事实核查里最脆弱、最昂贵的检索环节，问题定义和方法方向都值得优先核对。摘要还给出了较完整的评测广度信号，但关键价值取决于其泛化是否真实、代价是否可接受，因此很适合高优先级阅读。
 
 ## Abstract Translation
-可信性是构建在大语言模型（LLM）之上的 Agent 系统的核心研究挑战。为了提升可信性，来自人工文本、网页内容和模型输出的自然语言断言，通常通过检索外部知识，再由 LLM 判断断言是否忠实于检索到的证据来做事实核查。因此，这类方法受到检索错误和外部数据可用性的限制，同时也没有充分利用模型自身的事实验证能力。本文提出“无检索事实核查”任务，关注在不依赖外部检索的前提下验证任意自然语言断言，并构建了一个强调泛化能力的综合评测框架，考察其在长尾知识、断言来源变化、多语言和长文本生成上的鲁棒性。在 9 个数据集、18 种方法和 3 个模型上的实验表明，基于 logit 的方法通常不如利用内部表征的方法。基于这一发现，作者提出 INTRA，通过建模内部表征之间的交互取得了当前最优表现和较强泛化。更广泛地说，这项工作将无检索事实核查确立为一个有前景的研究方向，可与检索式框架互补、提升可扩展性，并支持把这类系统作为训练奖励信号或生成过程中的组成模块。
+在以大语言模型为基础的 Agent AI 系统中，可信性是核心研究挑战。为了提升可信度，来自人工文本、网页内容和模型输出的自然语言陈述，通常通过检索外部知识并利用 LLM 判断其是否忠实于检索证据来做事实核查。因此，这类方法受制于检索错误和外部数据可用性，也没有充分利用模型自身的事实验证能力。本文提出“无检索事实核查”任务，关注在不依赖外部检索的情况下验证任意来源的自然语言陈述。为研究这一设定，作者构建了一个强调泛化的综合评测框架，考察其在长尾知识、陈述来源变化、多语言和长文本生成上的鲁棒性。在 9 个数据集、18 种方法和 3 个模型上的实验表明，基于 logit 的方法往往不如利用内部表征的方法。基于这一发现，作者提出 INTRA，通过利用内部表征之间的交互取得了最优表现并展现出较强泛化。更广泛地看，这项工作把无检索事实核查建立为一条有前景的研究方向，可作为检索式框架的补充、提升可扩展性，并支持把这类系统作为训练奖励信号或集成到生成过程中。
 
 ## Research Background And Motivation
-在 LLM Agent 场景里，事实性判断正在从“生成后做检索核对”扩展到“模型自身能否先做真假判断”。现有检索式事实核查虽然常用，但会受检索质量、知识库覆盖和时延约束，因此有必要单独研究参数知识能否承担 claim-level 事实判断。
+Agent 系统越来越频繁地消费和生成自然语言陈述，事实核查从“可选组件”变成了可信性基础设施。现有主流路线依赖先检索再验证，但这条链路把性能压在检索质量、知识库覆盖和系统时延上，也弱化了 LLM 参数知识本身的利用。
 
 ## Problem Framing
-论文要解决的是：当输入只是一个任意来源的原子化自然语言断言时，能否不依赖外部证据、原始提示词或完整生成过程，只凭模型参数知识与内部信号判断其真假。这个问题重要，因为它对应事实核查链路里最基础的 verifier 环节，若能成立，就能减少对检索系统的依赖，并更直接评估 LLM 内生事实能力的上限与边界。
+论文研究的问题是：在拿不到外部证据、原始 prompt 或完整生成上下文时，能否仅凭 LLM 的参数知识和内部信号，对任意 atomic claim 给出可靠的真实性分数，而且这种能力能否跨长尾知识、不同 claim 来源、多语言、长文本和 cross-model 设置保持泛化。这件事重要，因为它对应的是 Agent 可信性链路里一个高频、低延迟、可规模化的判别环节。
 
 ## Method Overview
-作者先把“无检索事实核查”明确成一个独立任务，并围绕泛化而非单一基准最优构建评测框架。方法上，论文系统比较了概率/logit 路线、内部表征探针路线、注意力相关路线和 verbalized 判断路线，随后提出 INTRA。INTRA 的核心做法是：先在每一层把 token 级 hidden states 聚合成序列表征，再对各层分别输出 truthfulness score，最后只融合中间层的层级分数，并在融合前做分位数归一化。整个系统只看 claim 文本，不需要外部检索，也不要求访问生成该 claim 的 prompt 或完整输出。
+论文先把任务定义为仅依赖 claim 文本本身、输出 truthfulness score 的判别问题，然后系统比较概率/不确定性方法、内部表征探针、注意力方法和检索增强方法。在此基础上提出 INTRA：从每层 token hidden states 学习 sequence embedding，先做层内线性真实性判别，再对中间层分数做归一化与回归融合，核心目标不是堆复杂 head，而是在简单结构下提高跨数据集泛化。
 
 ### Method Figure
 ![ICLR_scheme_bright-2.drawio_page1](images/ICLR_scheme_bright-2.drawio_page1.png)
@@ -78,88 +85,125 @@ full_analysis_source: arxiv_source
 *Figure cue:* The task setting of fact-checking without retrieval. Claims from any source (human or LLMs) can be verified without having access to a knowledge base.
 
 ## Method Details
-- 把任务定义为对任意来源的 atomic claim 输出真值分数，而且该分数只能由 claim 文本本身决定；不允许使用上下文、原始提示词、完整生成或任何外部知识。
-- 对每一层，INTRA 不只取单个 token 或单层固定向量，而是对该层全部 token 的 hidden states 施加可学习权重，经 softmax 归一化后汇聚成 sequence-level embedding。
-- 在每个层级 embedding 之上训练轻量线性分类器，得到该层的 truthfulness probability，并使用标准 cross-entropy 训练，以保持结构简单、降低对特定模式过拟合的风险。
-- 跨层融合时只使用中间层而非首尾层，并在回归融合前对各层概率做 quantile normalization，以缓解不同层分数尺度不一致的问题。
+- INTRA 不依赖外部知识、检索结果、原始 prompt 或完整生成，只把单条 atomic claim 作为输入并输出 truthfulness score。
+- 方法从 LLM 的各层各 token hidden states 出发，用可学习的 token 权重经 softmax 聚合为每层的 sequence embedding，而不是只取首尾 token 或简单平均。
+- 在每一层的 sequence embedding 上训练独立的线性分类器，得到 layer-wise factuality probability；训练目标是标准交叉熵，作者明确避免复杂训练头以减少对特定模式的过拟合。
+- 最终融合时不使用全部层，而是只取中间层信息；文中给出的示例是对 Llama 3.1-8B-Instruct 使用第 11 到 22 层。
+- 跨层融合前先对各层概率做 quantile normalization，再训练回归器得到最终分数；训练数据被拆成两部分，前一部分用于层内参数，后一部分用于最终回归器。
 
 ## Experimental Setup And Evidence
-论文在 9 个数据集、18 种方法、3 个模型上评测无检索 claim verification，报告 ROC-AUC 和 PR-AUC。评测维度覆盖长尾知识、人工与模型生成 claim 的来源变化、多语言、长文本生成以及 cross-model claims；其中 PopQA 被当作 in-domain 训练来源，其余数据集用于 out-of-domain 泛化评估。数据集构成上，提取文本明确提到 AC-PopQA、AC-WH、AVeriTeC、X-Fact、Cities、Companies、CounterFact、UHead、Common Claims 等来源；模型侧明确出现 Llama 3.1、Ministral、Phi-4，且 UHead 仅有适用于 Llama 3.1 的公开 checkpoint。具体数据规模、完整超参数、统计显著性和所有数据清洗细节，提取文本没有充分说明。
+评测围绕 claim-level、无检索 factuality scoring 展开。作者在 9 个数据集、18 种方法和 3 个模型上报告 ROC-AUC 与 PR-AUC；监督方法使用 PopQA 的训练划分，因此 PopQA 被视为 in-domain，其余数据集视为 out-of-domain。数据侧，AC-PopQA 和 AC-WH 由已有 benchmark 派生：答案由 Llama 3.1-8B-Instruct 生成，短答案正确性用 InAccuracy 判定，长答案先拆成 atomic claims，再由 Llama 3.1-70B-Instruct 按类似 FActScore 的流程验证。对照中还包含 Verb+RAG，它使用 Google Serper API 检索 top-5 snippets；其余训练超参、样本规模和统计检验，提取文本没有充分说明。
 
 ### Experiment Figure
 ![best_vs_mean_per_language_group_roc_auc_fin_v3_page1](images/best_vs_mean_per_language_group_roc_auc_fin_v3_page1.png)
 
 *Figure cue:* ROC-AUC on PopQA, split into five popularity groups. The green arrow shows the percent improvement of the top method (INTRA) over the runner-up.
 
+## Datasets And Benchmarks
+- AC-PopQA：由 PopQA 派生的 atomic-claim 长尾知识基准，可按实体流行度分组分析。
+- AC-WH：由 Wild Hallucinations 派生的 atomic-claim 基准，覆盖长尾事实和长文本生成场景。
+- AVeriTeC：人工撰写的真实世界事实 claims。
+- X-Fact：覆盖 25 种语言的多语言 crowd-sourced claims。
+- Cities：基于 Wikipedia 模板构造的规则生成 claims。
+- Companies：基于 Wikipedia 模板构造的规则生成 claims。
+
+## Baselines
+- Sequence Probability (SP)
+- Perplexity (PPL)
+- Mean Token Entropy (MTE)
+- Focus
+- Claim-Conditioned Probability (CCP)
+- RAUQ
+
+## Metrics
+- ROC-AUC
+- PR-AUC
+
+## Ablations And Analysis
+- 层范围消融：文中说明比较了不同 layer range，并报告中间层更有效。
+- 单层性能分析：`layer_wise_scores` 图展示了 INTRA 各层的 ROC-AUC。
+- 长尾知识分析：PopQA 按实体流行度分成 5 组，比较不同方法在热门到长尾区间的 ROC-AUC。
+- 跨数据集泛化分析：MM 在原始 benchmark 上表现强，但在 WH/UHead 等长文本场景失效；UHead 在长文本相关设置领先，但其他设置落后。
+
+## Evaluation Validity And Fairness
+- 作者显式把 PopQA 之外的数据集视为 out-of-domain，评测目标瞄准泛化而非单一 benchmark 拟合。
+- 监督方法用 PopQA 训练 split 训练，因此总体结果同时混合了 in-domain 与 out-of-domain 表现。
+- AC-PopQA 和 AC-WH 的 claim 构造与标注依赖 InAccuracy 和 Llama 3.1-70B-Instruct，可能引入自动标注噪声。
+- UHead 只有 Llama 3.1 的公开 checkpoint，跨模型比较并不完全对称。
+
 ## Main Results And Claims
-实验表明，监督式内部表征方法整体明显强于无监督的无检索方法以及检索式基线；同时，除 SP 外，多数基于 logit/uncertainty 的方法表现偏弱。INTRA 取得最高平均表现：在 Llama 3.1 上，其最高 ROC-AUC 比第二名 Sheeps 高 0.5%，跨数据集平均 ROC-AUC 高 2.7%；跨全部模型的平均提升为 1.3%。与 Verb+RAG 相比，INTRA 在 ROC-AUC 上基本持平，但平均 PR-AUC 高 3%，计算时间约少 20 倍。Verbalized 方法是最强无监督路线之一，但计算开销高，而且在非英语输入上拒答率最高可达 58%。论文还指出，一些规则生成数据集可能已出现饱和或污染，这会影响部分基准结果的解释。
+提取文本明确支持的结论是：内部表征驱动的方法整体上优于基于 logit 的不确定性信号；大多数监督式方法显著强于无监督的无检索和检索式基线。Verb 是表现最强的无监督路线，但计算更重，而且在非英语输入上拒答严重。INTRA 取得了最高平均表现并显示出更稳健的跨数据集鲁棒性；文本还指出它在 ROC-AUC 上可与 Verb+RAG 持平，在 PR-AUC 上平均高 3%，且计算时间约低 20 倍。关于 INTRA 相对 Sheeps 的 ROC-AUC 提升，提取文本分别给出 0.5% 和 2.7% 两种口径，具体统计口径没有充分说明。
 
 ## Research Or Engineering Value
-如果你在做 Agent guardrail、事实性 reward model 或低时延自检模块，这篇论文的实际价值很明确：它给出了一条不依赖外部检索的 claim verifier 路线，而且相对 Verb+RAG 展示出更好的速度-性能折中。它尤其适合检索不可用、成本敏感或希望把 truthfulness signal 直接接入训练/生成过程的场景；但在必须提供外部证据链的产品流程里，它更像补充层，不像最终裁决器。
+如果正文细节能支撑摘要中的泛化结论，这项工作的工程价值在于提供一个单次前向、无外部检索依赖的 claim verifier，可作为 Agent 输出的首轮事实筛查、长文本拆 claim 后的批量打分器，或检索系统前的 gating 模块。研究上，它也把“参数知识能否直接支撑事实核查”变成了可系统比较的问题，并为 truthfulness reward model 提供了更直接的候选实现；但从现有提取文本看，它更适合作为检索式系统的补充，而不是直接替代。
 
 ## Relation To Prior Work
-相对主流的 RAG 事实核查，这篇论文把目标从“是否忠实于已检索证据”改成“claim 本身是否为真”，因此直接绕开了检索误差、知识库覆盖和额外时延。相对常见 uncertainty estimation，它不是只估计模型对自己生成内容的置信度，而是要求对任意来源的 claim 做真值判断；论文的实验也表明，hidden-state/internal-representation 路线通常比单纯 logit 信号更可靠。相对早期只抓某一层、某个 token，或依赖 prompt/完整生成过程的检测器，INTRA 的差异在于用 token 级表示汇聚形成层内判断，再用中间层的标准化分数做跨层融合，重点是提升跨数据集、跨来源、跨语言的泛化，而不是针对单一生成场景做特化。
+相对主流 retrieval-based fact checking，这篇论文把目标从“判断 claim 是否被检索证据支持”改成“在没有证据时直接判断 claim 是否真实”，因此不再把性能主要押在检索质量、知识库覆盖和延迟上。相对把 hallucination detection 视为自信度估计的路线，它也不是只看输出 logit 或 entropy，更不要求拿到原始 prompt 或完整生成；它把任意 atomic claim 送入模型，利用 hidden states 的 token 聚合、层内判别和跨层融合来抽取 factuality signal。
 
 ## Overall Assessment
-这篇论文最值得信的地方，是它把“无检索事实核查”作为独立问题正式化，并用较大范围的比较给出一个相当清晰的经验结论：在任意 claim 的真假判断上，内部表征通常比简单的 logit/uncertainty 信号更有价值，INTRA 也确实体现出较好的平均表现与效率。最该怀疑的地方不在任务设定本身，而在边界条件：无检索方法对知识过时、争议事实、证据可追溯性和模型可访问性的适应性仍不清楚，而且论文自己也指出部分 benchmark 可能已被污染或做得过熟。因此，这更像是一篇把“参数知识可否承担 verifier 职责”讲明白并推前一步的论文，而不是已经证明可以全面替代检索式事实核查的终局方案。
+这篇论文最值得信的部分，是它把无检索事实核查清晰地定义成独立问题，并用较大范围的 benchmark 比较支撑了一个稳定观察：内部表征往往比原始 logit/entropy 更适合做 claim 级 factuality 判断，且 INTRA 在精度与成本的折中上看起来比 Verb+RAG 更实用。最该怀疑的部分，是评测本身的洁净度和外推边界：监督训练锚定 PopQA、部分标签来自其他模型、作者也承认部分规则数据集可能污染，因此“强泛化”和“SOTA”需要结合每个子集与汇总口径细看；同时，提取文本并没有证明这条路线可以替代强检索系统，尤其在时效性事实、超长尾知识和真实开放域部署上仍应保守看待。
 
 ## Technical Route Positioning
-这篇论文属于 LLM 真实性评估/幻觉检测中的“参数知识内省”路线，关注的是 claim-level verifier，而不是检索器或生成器本身。它试图在事实核查链路中，用模型内部表征直接估计断言真假，替代或补充传统“先检索证据，再判定是否忠实”的环节。
+这篇论文属于 LLM 内部信号驱动的 factuality detection / hallucination detection 路线，解决的是 Agent 可信性链路中“atomic claim 级判别器”这一中间环节：在模型生成之后或训练过程中，直接基于 hidden states、层间分数和少量判别头给 claim 打 truthfulness score，而不是先构建检索器、再做证据对齐。
 
 ## Scorecard
-- Overall: 7.2/10
+- Overall: 7.0/10
 - Innovation: 7/10
 - Technical Quality: 7/10
-- Experimental Rigor: 7/10
+- Experimental Rigor: 6/10
 - Writing Clarity: 7/10
 - Practical Value: 8/10
 
+## Related Paper Comparisons
+- [DeepRead: Document Structure-Aware Reasoning to Enhance Agentic Search](/papers/2602-05014v3-deepread-document-structure-aware-reasoning-to-e/) (互补：检索增强系统 vs 无检索事实核查): DeepRead 试图把 agentic search 中“找到并连续阅读外部证据”的过程做得更可靠，核心仍然是强化检索和文档导航；本文则研究在没有外部证据时，LLM 参数知识能否直接完成 claim 级核查。两者不是直接替代关系，而是可形成前后级联：先用无检索判别器做低成本初筛，再把高风险样本交给结构化检索。
+- [Rethinking the Trust Region in LLM Reinforcement Learning](/papers/2602-04879v1-rethinking-the-trust-region-in-llm-reinforcement/) (下游衔接：事实性 reward model vs RL 优化器): 本文把无检索事实性判别器定位成可用于训练的 reward signal；DPPO 关注的则是拿到 reward 之后，如何更稳定地优化 LLM 策略。前者解决“truthfulness 奖励如何构造”，后者解决“如何用奖励更新模型”，处在同一训练链路的相邻环节，但并非同一问题。
+
 ## Strengths
-- 问题定义很清楚：把“对检索证据是否忠实”和“claim 本身是否为真”明确拆开，单独研究后者。
-- 评测覆盖面较大，不只报一个新方法，而是在 9 个数据集、18 种方法、3 个模型上比较不同技术路线。
-- INTRA 的结构相对克制，核心依赖 hidden states 的层内聚合与跨层融合，而不是高度特化的复杂头部设计。
-- 结果同时给出性能与效率信号：相对 Verb+RAG，INTRA 保持竞争力的同时显著更快，说明这条路线有现实工程吸引力。
+- 把“事实正确性”与“对检索证据的忠实性”明确区分，问题定义比传统检索式事实核查更贴近无检索和低延迟场景。
+- 评测面较宽，覆盖长尾知识、claim 来源变化、多语言、长文本和 cross-model 等泛化压力。
+- INTRA 的结构克制而清晰：层内简单判别器加跨层融合，方法论上更像在追求稳健表示而非复杂技巧。
+- 结果分析不只给平均分，还涉及层分析、长尾分组、跨数据集失效模式、非英语拒答和计算开销，信息密度较高。
 
 ## Future Work
-- 围绕中间层做更系统的特征学习与训练目标设计，验证“中间层最有信息量”的结论是否稳定。
-- 把 claim 在长文本中的位置、生成长度等结构特征纳入 detector，增强对长文本生成错误的识别。
-- 按语言、知识稀有度或 claim 来源做 detector routing，而不是假设单一检测器在所有条件下都最优。
-- 专门评测知识时效性、争议事实和证据可追溯性要求高的场景，明确无检索路线的失效边界。
+- 围绕中间层表征做更针对性的训练与选择，而不是均匀使用全部层。
+- 把 claim 位置、生成长度等结构特征显式纳入长文本 hallucination detection。
+- 按语言、实体稀有度或 claim 来源做 detector routing 或 targeted selection。
+- 把 retrieval-free factuality signal 直接接入 RL、reward modeling 或 generation-time monitoring。
 
 ## Reading Checklist
-- 先核对 INTRA 的两级结构：层内 token 汇聚怎么做、跨层回归如何训练、为什么只用中间层。
-- 重点看 9 个数据集分别对应哪些泛化维度，尤其是人工 claim、模型生成 claim、长尾知识和长文本生成之间的差异。
-- 检查 INTRA 的优势是否在多语言、长尾和 long-form setting 都稳定成立，而不只是集中在 PopQA 或少数数据集。
-- 留意 Verb 和 Verb+RAG 的计算代价与非英语拒答问题，判断这些比较在工程上是否公平可比。
+- 先核对 INTRA 的两阶段训练细节：token 聚合参数、layer-wise classifier、quantile normalization 与最终回归器分别如何拟合。
+- 再看 9 个数据集的拆分与标签构造，尤其是 AC-PopQA 和 AC-WH 的 atomic claim 生成与验证流程。
+- 重点检查中间层优于首末层的证据是否稳定，以及 layer range ablation 的具体幅度。
+- 核对 INTRA 相对 Sheeps 的提升口径，正文摘录里同时出现了 0.5% 和 2.7% 两种说法。
 
 ## Core Contributions
-- 提出“无检索事实核查”任务，将断言真假判断与外部证据检索明确解耦。
-- 构建以泛化为核心的评测框架，显式覆盖长尾知识、断言来源变化、多语言和长文本生成四类挑战。
-- 在 9 个数据集、18 种方法、3 个模型上的比较中，总结出基于 logit 的路线通常不如利用内部表征的路线。
+- 把“无需外部检索的事实核查”明确提出为独立研究任务，而不是检索式事实核查的附属变体。
+- 构建一个强调泛化能力的评测框架，明确覆盖长尾知识、声明来源变化、多语言和长文本生成四个压力维度。
+- 提出INTRA，用内部表征交互而非仅靠logit信号进行判断，并在摘要声称的对比实验中取得SOTA。
 
 ## Why Read It
-- 它直接挑战了“事实核查必须先检索”的默认假设，对 LLM 可信性与 Agent 可靠性研究有方法论意义。
-- 摘要显示这不是只报一个新模型，而是在较大范围内系统比较了无检索事实核查的可行路线。
-- 如果你关注模型内省、参数知识利用或低依赖外部工具的 Agent 设计，这篇论文可能提供可迁移的思路。
+- 它直接切中Agent可信性中的一个高成本瓶颈：事实核查是否必须依赖脆弱的检索链路。
+- 论文不只给新方法，还给出一个更像“研究基准面”的问题定义和泛化评测框架，后续工作容易在其上比较。
+- 如果你关心LLM内部表征究竟能否承载更强的验证能力，这篇论文给出了一个很具体的切入点。
 
 ## Risks Or Limits
-- 无检索路线天然受参数知识时效性和覆盖范围限制；面对新近事实、争议性断言和必须提供可追溯证据的任务，提取文本没有充分说明。
-- INTRA 依赖访问中间层 hidden states 和层级输出，这对闭源模型或受限推理接口并不总是可行。
-- 监督训练以 PopQA 为 in-domain，尽管论文强调 OOD 泛化，但训练分布与测试分布之间的依赖关系仍值得警惕。
-- 作者自己指出部分规则生成 benchmark 可能存在污染或饱和，这意味着某些方法优劣差异可能部分来自数据历史，而不完全是方法本身。
+- 无检索设定天然受参数知识的时效性和覆盖率约束，但提取文本没有充分说明这类失败边界。
+- 监督方法以 PopQA 为训练内域，其余数据集为外域；总体平均分数对真实部署可迁移性的解释仍需细看。
+- 部分数据构造与标注依赖其他模型和自动流程，标签噪声与评测偏置风险存在。
+- 作者自己指出 rule-generated 数据集可能已饱和或受污染，这会抬高某些方法的表观效果。
 
 ## Recommended For
-- 关注 LLM 可信性、事实核查与幻觉缓解的研究者
-- 在做 Agent 评测、守护栏或自检模块的工程师
-- 研究模型内部表征、参数知识利用与无检索方法的读者
+- 研究Agent可靠性、事实核查与LLM安全性的研究者
+- 关注LLM内部表征、参数知识利用和判别机制的研究者
+- 需要设计低延迟、离线或检索不稳定场景校验链路的工程师
 
 ## Keywords
+- 无检索事实核查
 - 大语言模型
-- 事实核查
-- 无检索验证
 - 参数知识
-- 内部表征
-- INTRA
+- 内部表征交互
+- Agent可信性
+- 多语言泛化
 
 ## Additional Figures
 

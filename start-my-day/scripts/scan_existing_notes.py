@@ -34,10 +34,6 @@ def extract_keywords_from_title(title: str) -> List[str]:
     if 3 <= len(before_colon) <= 48:
         keywords.append(before_colon)
 
-    for term in re.findall(r'\b[A-Z][A-Za-z0-9]+(?:-[A-Z][A-Za-z0-9]+)+\b', title):
-        if term.lower() not in COMMON_WORDS:
-            keywords.append(term)
-
     return list(dict.fromkeys(keywords))
 
 
@@ -60,6 +56,8 @@ def scan_notes(repo_root: Path) -> List[Dict]:
     papers_root = get_papers_root(repo_root)
 
     for md_file in iter_markdown_files(papers_root):
+        if md_file.parent.name == 'images':
+            continue
         frontmatter, _ = load_markdown(md_file)
         title = frontmatter.get('title', md_file.parent.name)
         tags = normalize_tags(frontmatter.get('tags', []))

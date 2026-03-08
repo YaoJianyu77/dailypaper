@@ -72,13 +72,16 @@ def normalize_paper_id(raw: str) -> str:
 
 
 def normalize_model_text(value: Any) -> str:
-    text = str(value or '').replace('\r', ' ').replace('\n', ' ').strip()
+    text = str(value or '').replace('\r', ' ').replace('\n', ' ').replace('\u200b', ' ').strip()
     text = re.sub(r'【[^】]*oops[^】]*】', '', text, flags=re.IGNORECASE)
     text = re.sub(r'【INVALID JSON】.*$', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\]\}\]\}\"?$', '', text)
     text = re.sub(r'\s+', ' ', text).strip()
-    if len(text) >= 2 and text[0] == text[-1] and text[0] in {"'", '"'}:
+    text = re.sub(r'\s*(?:\?{2,}|`{2,}|"{2,}|\'{2,})\s*$', '', text)
+    if len(text) >= 2 and text[0] == text[-1] and text[0] in {"'", '"', '`'}:
         text = text[1:-1].strip()
+    text = re.sub(r"^[\s'\"`,]+", '', text)
+    text = re.sub(r"[\s'\"`,]+$", '', text)
     return text
 
 
@@ -709,13 +712,29 @@ def coerce_string_list(value: Any, *, min_items: int = 0, max_items: int = 10, f
             if not raw:
                 continue
             pieces = [raw]
-            for pattern in (r"'\s*,\s*'", r'"\s*,\s*"'):
+            for pattern in (
+                r"'\s*,\s*'",
+                r'"\s*,\s*"',
+                r'`\s*,\s*`',
+                r"[\"'`]\s*,\s*[\"'`]",
+            ):
                 next_pieces = []
                 for piece in pieces:
                     next_pieces.extend(re.split(pattern, piece))
                 pieces = next_pieces
-            items.extend(normalize_model_text(piece) for piece in pieces if normalize_model_text(piece))
-    items = items[:max_items]
+            for piece in pieces:
+                cleaned = normalize_model_text(piece)
+                if cleaned:
+                    items.append(cleaned)
+    deduped: List[str] = []
+    seen: set[str] = set()
+    for item in items:
+        key = item.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(item)
+    items = deduped[:max_items]
     if len(items) < min_items:
         items.extend(fallback[: max(0, min_items - len(items))])
     return items

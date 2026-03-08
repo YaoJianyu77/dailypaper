@@ -1,0 +1,429 @@
+{
+  "last_updated": "2026-03-07",
+  "papers": [
+    {
+      "paper_id": "2603.05210v1",
+      "title": "Balancing Coverage and Draft Latency in Vocabulary Trimming for Faster Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-05T14:20:22Z",
+      "source_lane": "fresh",
+      "analysis_priority_rank": 4,
+      "selected_for_full_analysis": false,
+      "topics": [
+        "speculative decoding",
+        "vocabulary trimming",
+        "draft model",
+        "latency",
+        "throughput",
+        "language modeling head"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-07",
+      "last_seen_date": "2026-03-07",
+      "last_recommended_date": "2026-03-07",
+      "recommended_count": 4,
+      "scores_history": [
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.3,
+          "analysis_candidate": 7.45,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.3,
+          "analysis_candidate": 7.45,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.3,
+          "analysis_candidate": 7.45,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.3,
+          "analysis_candidate": 7.45,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "2603.05451v1",
+      "title": "FlashAttention-4: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-05T18:24:49Z",
+      "source_lane": "fresh",
+      "analysis_priority_rank": 1,
+      "selected_for_full_analysis": true,
+      "topics": [
+        "FlashAttention",
+        "Blackwell GPU",
+        "B200",
+        "attention kernel",
+        "kernel pipelining",
+        "asymmetric hardware scaling"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-07",
+      "last_seen_date": "2026-03-07",
+      "last_recommended_date": "2026-03-07",
+      "recommended_count": 7,
+      "scores_history": [
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.38,
+          "analysis_candidate": 9.81,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.38,
+          "analysis_candidate": 9.81,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.38,
+          "analysis_candidate": 9.81,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.38,
+          "analysis_candidate": 9.81,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.38,
+          "analysis_candidate": 10.0,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.38,
+          "analysis_candidate": 10.0,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.38,
+          "analysis_candidate": 10.0,
+          "lane": "fresh"
+        }
+      ],
+      "last_analysis_date": "2026-03-07",
+      "analyzed_count": 7,
+      "cooldown_until": "2027-03-07"
+    },
+    {
+      "paper_id": "2210.17323",
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "domain": "LLM Inference Systems",
+      "published": "2022-10-31",
+      "source_lane": "classic",
+      "analysis_priority_rank": 0,
+      "selected_for_full_analysis": false,
+      "topics": [
+        "LLM Inference Systems",
+        "quantization",
+        "gptq",
+        "4bit"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-07",
+      "last_seen_date": "2026-03-07",
+      "last_recommended_date": "2026-03-07",
+      "recommended_count": 7,
+      "scores_history": [
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.45,
+          "analysis_candidate": 9.94,
+          "lane": "classic"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.45,
+          "analysis_candidate": 9.94,
+          "lane": "classic"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.45,
+          "analysis_candidate": 9.94,
+          "lane": "classic"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.45,
+          "analysis_candidate": 9.94,
+          "lane": "classic"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.45,
+          "analysis_candidate": 9.94,
+          "lane": "classic"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.45,
+          "analysis_candidate": 9.94,
+          "lane": "classic"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.45,
+          "analysis_candidate": 9.94,
+          "lane": "classic"
+        }
+      ],
+      "cooldown_until": "2026-03-28"
+    },
+    {
+      "paper_id": "dblp:conf/isca/0004HKCL00P25",
+      "title": "Oaken: Fast and Efficient LLM Serving with Online-Offline Hybrid KV Cache Quantization.",
+      "domain": "LLM Inference Systems",
+      "published": "2025",
+      "source_lane": "established",
+      "analysis_priority_rank": 4,
+      "selected_for_full_analysis": false,
+      "topics": [
+        "LLM 服务",
+        "KV cache",
+        "量化",
+        "在线-离线混合"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-07",
+      "last_seen_date": "2026-03-07",
+      "last_recommended_date": "2026-03-07",
+      "recommended_count": 3,
+      "scores_history": [
+        {
+          "date": "2026-03-07",
+          "recommendation": 6.3,
+          "analysis_candidate": 5.25,
+          "lane": "established"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 6.3,
+          "analysis_candidate": 5.25,
+          "lane": "established"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 6.3,
+          "analysis_candidate": 5.25,
+          "lane": "established"
+        }
+      ],
+      "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "dblp:conf/cgo/GeorgakoudisPB25",
+      "title": "Proteus: Portable Runtime Optimization of GPU Kernel Execution with Just-in-Time Compilation.",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2025",
+      "source_lane": "established",
+      "analysis_priority_rank": 5,
+      "selected_for_full_analysis": false,
+      "topics": [
+        "GPU kernel",
+        "JIT 编译",
+        "运行时优化",
+        "性能可移植性",
+        "编译器/运行时协同"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-07",
+      "last_seen_date": "2026-03-07",
+      "last_recommended_date": "2026-03-07",
+      "recommended_count": 3,
+      "scores_history": [
+        {
+          "date": "2026-03-07",
+          "recommendation": 3.79,
+          "analysis_candidate": 3.73,
+          "lane": "established"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 3.79,
+          "analysis_candidate": 3.73,
+          "lane": "established"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 3.79,
+          "analysis_candidate": 3.73,
+          "lane": "established"
+        }
+      ],
+      "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "dblp:conf/mlsys/0015LCKCW24",
+      "title": "Q-Hitter: A Better Token Oracle for Efficient LLM Inference via Sparse-Quantized KV Cache.",
+      "domain": "LLM Inference Systems",
+      "published": "2024",
+      "source_lane": "established",
+      "analysis_priority_rank": 3,
+      "selected_for_full_analysis": false,
+      "topics": [
+        "LLM推理",
+        "KV cache",
+        "稀疏化",
+        "量化",
+        "token oracle"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-07",
+      "last_seen_date": "2026-03-07",
+      "last_recommended_date": "2026-03-07",
+      "recommended_count": 3,
+      "scores_history": [
+        {
+          "date": "2026-03-07",
+          "recommendation": 6.3,
+          "analysis_candidate": 5.8,
+          "lane": "established"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 6.3,
+          "analysis_candidate": 5.8,
+          "lane": "established"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 6.3,
+          "analysis_candidate": 5.8,
+          "lane": "established"
+        }
+      ],
+      "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "2603.05232v1",
+      "title": "SlideSparse: Fast and Flexible (2N-2):2N Structured Sparsity",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-05T14:49:16Z",
+      "source_lane": "fresh",
+      "analysis_priority_rank": 2,
+      "selected_for_full_analysis": false,
+      "topics": [
+        "LLM推理系统",
+        "结构化稀疏",
+        "2:4 Sparse Tensor Core",
+        "6:8稀疏",
+        "vLLM",
+        "GPU推理加速"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-07",
+      "last_seen_date": "2026-03-07",
+      "last_recommended_date": "2026-03-07",
+      "recommended_count": 7,
+      "scores_history": [
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.55,
+          "analysis_candidate": 8.98,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.55,
+          "analysis_candidate": 8.98,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.55,
+          "analysis_candidate": 8.98,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.55,
+          "analysis_candidate": 8.98,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.55,
+          "analysis_candidate": 9.88,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.55,
+          "analysis_candidate": 9.88,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.55,
+          "analysis_candidate": 9.88,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "2603.04716v1",
+      "title": "SLO-Aware Compute Resource Allocation for Prefill-Decode Disaggregated LLM Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-05T01:41:09Z",
+      "source_lane": "fresh",
+      "analysis_priority_rank": 3,
+      "selected_for_full_analysis": false,
+      "topics": [
+        "LLM 推理系统",
+        "Prefill-Decode 解耦",
+        "资源分配",
+        "SLO",
+        "TTFT",
+        "TPOT"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-07",
+      "last_seen_date": "2026-03-07",
+      "last_recommended_date": "2026-03-07",
+      "recommended_count": 4,
+      "scores_history": [
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.22,
+          "analysis_candidate": 7.89,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.22,
+          "analysis_candidate": 7.89,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.22,
+          "analysis_candidate": 7.89,
+          "lane": "fresh"
+        },
+        {
+          "date": "2026-03-07",
+          "recommendation": 9.22,
+          "analysis_candidate": 7.89,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-06"
+    }
+  ]
+}

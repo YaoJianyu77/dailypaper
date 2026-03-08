@@ -23,15 +23,15 @@ ai:
   github_models_paper_limit: 10
   github_models_abstract_chars: 1200
   codex_paper_limit: 10
-  codex_abstract_chars: 1400
-  codex_timeout_seconds: 600
+  codex_abstract_chars: 2200
+  codex_timeout_seconds: 1200
   preferred_models:
     - "openai/gpt-5.4"
     - "openai/gpt-5"
     - "openai/gpt-4.1"
     - "openai/gpt-4o"
-  timeout_seconds: 180
-  max_output_tokens: 5000
+  timeout_seconds: 240
+  max_output_tokens: 7000
   editorial_preferences:
     audience: "关注大模型、Agent、多模态系统与高价值方法论文的研究者和工程师"
     tone: "简洁、直接、高信息密度，少空话"
@@ -49,10 +49,10 @@ ai:
 
 analysis:
   enabled: true
-  top_n: 3
+  top_n: 1
   refresh_existing: false
-  max_full_text_chars: 24000
-  section_char_budget: 4500
+  max_full_text_chars: 36000
+  section_char_budget: 7000
   pdf_page_limit: 18
 
 search:
@@ -63,6 +63,105 @@ search:
   hot_exclude_recent_days: 30
   hot_top_k_per_category: 5
   hot_fallback_max_results: 100
+  metadata_fallbacks:
+    google_scholar_enabled: true
+    google_scholar_request_interval_seconds: 4.0
+    google_scholar_min_title_similarity: 0.72
+  lanes:
+    fresh:
+      max_age_days: 90
+      quota: 3
+    established:
+      max_age_days: 1095
+      quota: 2
+    classic:
+      quota: 1
+    fill_order:
+      - "fresh"
+      - "established"
+      - "classic"
+    allow_underfill: true
+  history:
+    index_path: "state/paper_index.json"
+    classic_backlog_path: "state/classic_backlog.json"
+    recommended_cooldown_days: 60
+    classic_recommended_cooldown_days: 21
+    analyzed_cooldown_days: 365
+  classics:
+    enabled: true
+    cadence_days: 3
+    anchor_date: "2026-03-07"
+    random_seed: "systems-classics-v1"
+    allow_full_analysis: false
+  venue_sources:
+    enabled: true
+    provider: "dblp"
+    max_hits_per_query: 25
+    max_candidates: 80
+    request_interval_seconds: 1.5
+    recent_years: 5
+    prefer_open_access_pdf: true
+    venues:
+      - name: "PLDI"
+        aliases: ["PLDI", "Programming Language Design and Implementation"]
+        query_aliases: ["PLDI"]
+        priority: 5
+      - name: "CGO"
+        aliases: ["CGO", "Code Generation and Optimization"]
+        query_aliases: ["CGO"]
+        priority: 5
+      - name: "PPoPP"
+        aliases: ["PPoPP", "Principles and Practice of Parallel Programming"]
+        query_aliases: ["PPoPP"]
+        priority: 5
+      - name: "SC"
+        aliases: ["SC", "Supercomputing"]
+        query_aliases: ["International Conference for High Performance Computing, Networking, Storage and Analysis"]
+        priority: 5
+      - name: "ASPLOS"
+        aliases: ["ASPLOS"]
+        query_aliases: ["ASPLOS"]
+        priority: 5
+      - name: "ISCA"
+        aliases: ["ISCA"]
+        query_aliases: ["ISCA"]
+        priority: 4
+      - name: "MICRO"
+        aliases: ["MICRO"]
+        query_aliases: ["MICRO"]
+        priority: 4
+      - name: "HPCA"
+        aliases: ["HPCA"]
+        query_aliases: ["HPCA"]
+        priority: 4
+      - name: "OSDI"
+        aliases: ["OSDI"]
+        query_aliases: ["OSDI"]
+        priority: 5
+      - name: "SOSP"
+        aliases: ["SOSP"]
+        query_aliases: ["SOSP"]
+        priority: 5
+      - name: "NSDI"
+        aliases: ["NSDI"]
+        query_aliases: ["NSDI"]
+        priority: 5
+      - name: "USENIX ATC"
+        aliases: ["ATC", "USENIX ATC", "USENIX Annual Technical Conference"]
+        query_aliases: ["USENIX ATC"]
+        priority: 5
+      - name: "EuroSys"
+        aliases: ["EuroSys"]
+        query_aliases: ["EuroSys"]
+        priority: 5
+      - name: "MLSys"
+        aliases: ["MLSys", "Machine Learning and Systems"]
+        query_aliases: ["MLSys"]
+        priority: 5
+    query_groups:
+      - "llm inference|serving|prefill|decode|speculative|kv cache|vllm|runtime"
+      - "flashattention|attention kernel|kernel pipelining|cuda|triton|tensor core|compiler"
+      - "quantization|4bit|ptx|sass|assembly|code generation|latency|throughput"
   categories:
     - "cs.AI"
     - "cs.LG"
@@ -99,7 +198,7 @@ search:
 
 assets:
   enabled: true
-  auto_extract_top_n: 3
+  auto_extract_top_n: 1
   max_images_per_paper: 0
   refresh_existing: false
   graph_enabled: true
@@ -134,6 +233,25 @@ research_domains:
       - term: "forecasting"
       - term: "hepatology"
       - term: "intraoperative"
+    required_signal_keywords:
+      - term: "speculative decoding"
+      - term: "kv cache"
+      - term: "flashattention"
+      - term: "serving"
+    bonus_keywords:
+      - term: "latency"
+      - term: "throughput"
+      - term: "memory"
+    analysis_keywords:
+      - term: "benchmark"
+      - term: "baseline"
+      - term: "ablation"
+      - term: "evaluation"
+    min_required_signal_matches: 1
+    required_signal_bonus_per_match: 0.35
+    max_required_signal_bonus: 0.9
+    bonus_keyword_bonus_per_match: 0.18
+    max_bonus_keyword_bonus: 0.5
     arxiv_categories:
       - "cs.AI"
       - "cs.LG"

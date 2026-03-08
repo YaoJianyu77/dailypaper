@@ -10,6 +10,11 @@
     "method_overview_zh",
     "method_details",
     "experiment_setup_zh",
+    "datasets_or_benchmarks",
+    "baselines",
+    "metrics",
+    "ablation_or_analysis",
+    "evaluation_validity",
     "main_results_zh",
     "strengths",
     "limitations",
@@ -47,6 +52,41 @@
     },
     "experiment_setup_zh": {
       "type": "string"
+    },
+    "datasets_or_benchmarks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 6
+    },
+    "baselines": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 6
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 6
+    },
+    "ablation_or_analysis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4
+    },
+    "evaluation_validity": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4
     },
     "main_results_zh": {
       "type": "string"
