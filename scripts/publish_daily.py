@@ -1183,6 +1183,7 @@ def daily_feature_figure(repo_root: Path, asset_dir: Path, paper: Dict[str, Any]
         'url': str(preferred.get('url') or relative_asset_url(preferred['path'], repo_root)),
         'caption': str(preferred.get('caption') or '').strip(),
         'alt': preferred['path'].stem,
+        'role': str(preferred.get('role') or 'other'),
     }
 
 
@@ -1201,6 +1202,7 @@ def daily_feature_table(paper: Dict[str, Any]) -> Dict[str, Any]:
     return {
         'caption': clean_render_text(preferred.get('caption') or ''),
         'rows': [clean_render_text(row) for row in rows[:4] if clean_render_text(row)],
+        'role': classify_table_role(preferred),
     }
 
 
@@ -1291,10 +1293,14 @@ def collect_daily_publication_meta(
         result['daily_figure_caption'] = daily_figure['caption']
     if daily_figure.get('alt'):
         result['daily_figure_alt'] = daily_figure['alt']
+    if daily_figure.get('role'):
+        result['daily_figure_role'] = daily_figure['role']
     if daily_table.get('caption'):
         result['daily_table_caption'] = daily_table['caption']
     if daily_table.get('rows'):
         result['daily_table_rows'] = daily_table['rows']
+    if daily_table.get('role'):
+        result['daily_table_role'] = daily_table['role']
     return result
 
 
@@ -1523,10 +1529,14 @@ def ensure_deep_dive_page(repo_root: Path, paper: Dict[str, Any], papers: List[D
         result['daily_figure_caption'] = daily_figure['caption']
     if daily_figure.get('alt'):
         result['daily_figure_alt'] = daily_figure['alt']
+    if daily_figure.get('role'):
+        result['daily_figure_role'] = daily_figure['role']
     if daily_table.get('caption'):
         result['daily_table_caption'] = daily_table['caption']
     if daily_table.get('rows'):
         result['daily_table_rows'] = daily_table['rows']
+    if daily_table.get('role'):
+        result['daily_table_role'] = daily_table['role']
     return result
 
 
@@ -1576,6 +1586,50 @@ def build_reading_strategy(papers: List[Dict[str, Any]], paper_meta_map: Dict[st
     return steps[:3]
 
 
+def recommendation_score(paper: Dict[str, Any]) -> float:
+    return float(paper.get('scores', {}).get('recommendation', 0) or 0)
+
+
+def analysis_candidate_score(paper: Dict[str, Any]) -> float:
+    return float(paper.get('analysis_candidate_score', 0) or 0)
+
+
+def short_paper_title(paper: Dict[str, Any]) -> str:
+    return clean_render_text(paper.get('title') or 'Untitled Paper')
+
+
+def build_ordering_rationale(papers: List[Dict[str, Any]]) -> List[str]:
+    primary, classics = split_daily_papers(papers)
+    if not primary:
+        return []
+
+    lead = ordered_primary_papers(papers)[0]
+    lead_title = short_paper_title(lead)
+    lead_recommendation = recommendation_score(lead)
+    lead_analysis = analysis_candidate_score(lead)
+
+    highest_recommendation_paper = max(primary, key=recommendation_score)
+    highest_recommendation_title = short_paper_title(highest_recommendation_paper)
+    highest_recommendation = recommendation_score(highest_recommendation_paper)
+
+    lines = [
+        f'- 主推位先放 {lead_title}。这里不只看推荐分，还看它是否最适合当今天唯一一篇需要投入完整阅读时间的候选；它当前的推荐分是 {lead_recommendation:.2f}，analysis candidate score 是 {lead_analysis:.2f}。'
+    ]
+
+    if normalize_paper_id(lead.get('arxiv_id') or lead.get('arxivId') or lead.get('id', '')) != normalize_paper_id(highest_recommendation_paper.get('arxiv_id') or highest_recommendation_paper.get('arxivId') or highest_recommendation_paper.get('id', '')):
+        lines.append(
+            f'- 推荐分最高的是 {highest_recommendation_title}（{highest_recommendation:.2f}），但它被放在继续跟进位，因为首页第一位更强调“今天最值得完整读哪一篇”，不是机械按分数排第一。'
+        )
+    else:
+        lines.append(f'- 其余新论文按推荐分和 lane 顺序继续往后排，所以主推位同时也是今天分数最高、最值得先读的条目。')
+
+    if len(primary) > 1:
+        lines.append('- 继续跟进位仍然按 fresh / established 的主线优先级和推荐分排序，目的是先保证方向贴合，再保证强弱顺序。')
+    if classics:
+        lines.append('- 经典补课位单独放在最后，不和今天的新论文争夺注意力。')
+    return lines
+
+
 def daily_mix_lines(papers: List[Dict[str, Any]]) -> List[str]:
     counts = Counter(selection_lane(paper) for paper in papers)
     lines: List[str] = []
@@ -1599,6 +1653,17 @@ def compressed_author_text(paper: Dict[str, Any], limit: int = 4) -> str:
     return ', '.join(cleaned[:limit]) + ' et al.'
 
 
+def daily_visual_reason(paper_meta: Dict[str, Any]) -> str:
+    role = clean_render_text(paper_meta.get('daily_figure_role') or paper_meta.get('daily_table_role')).lower()
+    if role == 'results':
+        return '这张图或表对应最直接的结果证据，先看它能最快判断收益是不是值得追。'
+    if role == 'method':
+        return '这张图或表主要用来解释方法机制，先看它能更快理解这篇论文到底改了哪一层系统路径。'
+    if role == 'examples':
+        return '这张图主要帮助你快速判断方法在具体样例里的行为是否可信。'
+    return '这里保留的视觉线索只服务正文判断，不是资产展示。'
+
+
 def render_daily_asset(lines: List[str], paper_meta: Dict[str, Any], title: str) -> None:
     figure_url = paper_meta.get('daily_figure_url')
     if figure_url:
@@ -1609,6 +1674,7 @@ def render_daily_asset(lines: List[str], paper_meta: Dict[str, Any], title: str)
         ])
         if paper_meta.get('daily_figure_caption'):
             lines.append(f'*图示线索：* {paper_meta["daily_figure_caption"]}')
+        lines.append(f'*为什么放这张图：* {daily_visual_reason(paper_meta)}')
         return
 
     rows = paper_meta.get('daily_table_rows')
@@ -1621,6 +1687,15 @@ def render_daily_asset(lines: List[str], paper_meta: Dict[str, Any], title: str)
         lines.append('```')
         if paper_meta.get('daily_table_caption'):
             lines.append(f'*表格线索：* {paper_meta["daily_table_caption"]}')
+        lines.append(f'*为什么放这张表：* {daily_visual_reason(paper_meta)}')
+
+
+def daily_reading_judgment_text(paper: Dict[str, Any]) -> str:
+    value_text = daily_value_text(paper)
+    risk_text = daily_risk_text(paper)
+    if value_text and risk_text:
+        return f'{value_text} 但要先核对：{risk_text}'
+    return value_text or risk_text
 
 
 def render_daily_paper_entry(
@@ -1659,7 +1734,7 @@ def render_daily_paper_entry(
         '',
         f'*{" | ".join(bit for bit in meta_bits if bit)}*',
         '',
-        summarize_paper(paper),
+        f'> {summarize_paper(paper)}',
     ])
 
     summary = detail_summary(paper)
@@ -1677,13 +1752,9 @@ def render_daily_paper_entry(
     if role == 'lead':
         render_daily_asset(lines, paper_meta, title)
 
-    value_text = daily_value_text(paper)
-    if value_text:
-        lines.extend(['', f'**为什么值得你读：** {value_text}'])
-
-    risk_text = daily_risk_text(paper)
-    if risk_text:
-        lines.extend(['', f'**需要核对：** {risk_text}'])
+    judgment_text = daily_reading_judgment_text(paper)
+    if judgment_text:
+        lines.extend(['', f'**阅读判断：** {judgment_text}'])
 
     link_parts = [f'[Source]({abs_url})']
     if pdf_url:
@@ -1731,6 +1802,11 @@ def build_daily_body(
         lines.extend(['', '## 今日选择结构'])
         lines.extend(mix_lines)
 
+    ordering_lines = build_ordering_rationale(papers)
+    if ordering_lines:
+        lines.extend(['', '## 排序说明'])
+        lines.extend(ordering_lines)
+
     if primary_papers:
         lines.extend(['', '## 今日主推'])
         render_daily_paper_entry(lines, primary_papers[0], paper_meta_map, '', role='lead')
@@ -1738,12 +1814,16 @@ def build_daily_body(
         if supporting:
             lines.extend(['', '## 继续跟进'])
             for index, paper in enumerate(supporting, start=1):
+                if index > 1:
+                    lines.extend(['', '---'])
                 render_daily_paper_entry(lines, paper, paper_meta_map, str(index), role='supporting')
 
     if classic_papers:
         title = '## 经典补课'
         lines.extend(['', title])
-        for paper in classic_papers:
+        for index, paper in enumerate(classic_papers, start=1):
+            if index > 1:
+                lines.extend(['', '---'])
             render_daily_paper_entry(lines, paper, paper_meta_map, '', is_classic_section=True, role='classic')
 
     return '\n'.join(lines) + '\n'

@@ -111,6 +111,29 @@ a:hover { color: var(--accent-2); }
   line-height: 1.75;
   font-size: 1.05rem;
 }
+.article h2 {
+  margin-top: 2.2rem;
+  font-size: 1.55rem;
+  line-height: 1.15;
+}
+.article h3 {
+  margin-top: 1.8rem;
+  font-size: 1.2rem;
+}
+.article p { margin: 0.9rem 0; }
+.article blockquote {
+  margin: 1rem 0 1.2rem;
+  padding: 14px 18px;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 16px 16px 0;
+  background: rgba(175, 63, 47, 0.08);
+  color: #332720;
+}
+.article hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 2rem 0;
+}
 .article img { max-width: 100%; border-radius: 18px; }
 .article pre, .article code {
   font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
@@ -206,6 +229,7 @@ def md_to_html(text: str, base_url: str) -> str:
     html_parts: List[str] = []
     paragraph: List[str] = []
     list_buffer: List[str] = []
+    quote_buffer: List[str] = []
     list_ordered = False
     in_code = False
     code_lines: List[str] = []
@@ -215,11 +239,17 @@ def md_to_html(text: str, base_url: str) -> str:
             html_parts.append(f'<p>{render_inline(" ".join(paragraph), base_url)}</p>')
             paragraph.clear()
 
+    def flush_quote() -> None:
+        if quote_buffer:
+            html_parts.append(f'<blockquote>{render_inline(" ".join(quote_buffer), base_url)}</blockquote>')
+            quote_buffer.clear()
+
     for raw_line in text.splitlines():
         line = raw_line.rstrip()
 
         if line.startswith('```'):
             flush_paragraph()
+            flush_quote()
             html_parts.append(flush_list(list_buffer, list_ordered, base_url))
             if in_code:
                 html_parts.append(f'<pre><code>{html.escape(chr(10).join(code_lines))}</code></pre>')
@@ -235,16 +265,33 @@ def md_to_html(text: str, base_url: str) -> str:
 
         if not line.strip():
             flush_paragraph()
+            flush_quote()
             html_parts.append(flush_list(list_buffer, list_ordered, base_url))
+            continue
+
+        if line.strip() == '---':
+            flush_paragraph()
+            flush_quote()
+            html_parts.append(flush_list(list_buffer, list_ordered, base_url))
+            html_parts.append('<hr>')
             continue
 
         if line.startswith('#'):
             flush_paragraph()
+            flush_quote()
             html_parts.append(flush_list(list_buffer, list_ordered, base_url))
             level = len(line) - len(line.lstrip('#'))
             title = line[level:].strip()
             html_parts.append(f'<h{level}>{render_inline(title, base_url)}</h{level}>')
             continue
+
+        quote_match = re.match(r'^>\s?(.*)', line)
+        if quote_match:
+            flush_paragraph()
+            html_parts.append(flush_list(list_buffer, list_ordered, base_url))
+            quote_buffer.append(quote_match.group(1))
+            continue
+        flush_quote()
 
         unordered_match = re.match(r'^-\s+(.*)', line)
         ordered_match = re.match(r'^\d+\.\s+(.*)', line)
@@ -266,6 +313,7 @@ def md_to_html(text: str, base_url: str) -> str:
         paragraph.append(line.strip())
 
     flush_paragraph()
+    flush_quote()
     html_parts.append(flush_list(list_buffer, list_ordered, base_url))
     if in_code:
         html_parts.append(f'<pre><code>{html.escape(chr(10).join(code_lines))}</code></pre>')
