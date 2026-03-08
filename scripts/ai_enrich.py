@@ -54,6 +54,7 @@ DEFAULT_EDITORIAL_PREFERENCES = {
     'daily_brief_style': "Read like a research editor's note, not a marketing blurb",
     'prioritize': [
         'Compress each paper into a compact mini analysis that helps decide whether to read further',
+        'Cover background, problem, mechanism, reported evidence, practical value, and the biggest missing detail',
         'Explain which system path changes, and what evidence supports the claimed gains',
         'Surface the biggest boundary, hardware assumption, or missing detail in the abstract',
     ],
@@ -76,7 +77,9 @@ def normalize_model_text(value: Any) -> str:
     text = str(value or '').replace('\r', ' ').replace('\n', ' ').replace('\u200b', ' ').strip()
     text = re.sub(r'【[^】]*oops[^】]*】', '', text, flags=re.IGNORECASE)
     text = re.sub(r'【INVALID JSON】.*$', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Wait must be English only.*$', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\]\}\]\}\"?$', '', text)
+    text = re.sub(r'[^\x00-\x7F]+', ' ', text)
     text = re.sub(r'\s+', ' ', text).strip()
     text = re.sub(r'\s*(?:\?{2,}|`{2,}|"{2,}|\'{2,})\s*$', '', text)
     if len(text) >= 2 and text[0] == text[-1] and text[0] in {"'", '"', '`'}:
@@ -513,14 +516,15 @@ def build_messages(
         'Return valid JSON only. '
         'The JSON object must have keys daily_brief and papers. '
         'daily_brief must contain overview_zh (string), top_themes (array of 3 short strings), and reading_strategy (array of 3 short strings). '
-        'papers must be an array where each item contains: paper_id (string), one_liner_zh (string), summary_zh (string, 2-3 sentences), '
+        'papers must be an array where each item contains: paper_id (string), one_liner_zh (string), summary_zh (string, 4-5 sentences), '
         'background_zh (string), problem_zh (string), approach_zh (string), evidence_zh (string), value_zh (string), open_questions (array of 2-3 strings), '
         'core_contributions (array of 3 strings), why_read (array of 3 strings), risks (array of 2 strings), '
         'recommended_for (array of 2-3 strings), keywords (array of 4-6 short strings), reading_priority (one of high, medium, low), '
         'and reading_priority_reason (string). '
         'The fields must be short and non-overlapping so they can be recomposed into one concise mini-analysis. '
         'background_zh, problem_zh, approach_zh, evidence_zh, value_zh should each stay to one high-signal sentence. '
-        'summary_zh should already read like a compact editor assessment instead of a field dump. '
+        'summary_zh should already read like a compact paper note instead of a field dump. '
+        'summary_zh should usually cover: why this problem exists now, what the paper changes, what the abstract claims as evidence, what practical value might follow, and what remains unclear. '
         'All string fields should be written in English even though the field names end with _zh for compatibility. '
         'one_liner_zh and summary_zh should describe the paper itself, not use recommendation slogans such as "worth reading first" or "read this before others." '
         'evidence_zh should state what the abstract actually claims about evaluation, or say the abstract does not make it clear. '
@@ -717,6 +721,7 @@ def coerce_string_list(value: Any, *, min_items: int = 0, max_items: int = 10, f
                 r'"\s*,\s*"',
                 r'`\s*,\s*`',
                 r"[\"'`]\s*,\s*[\"'`]",
+                r'\s*\|\s*',
             ):
                 next_pieces = []
                 for piece in pieces:

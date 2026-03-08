@@ -52,17 +52,16 @@
       "source_lane": "fresh",
       "topics": [
         "speculative decoding",
-        "diffusion LLM",
         "block diffusion",
-        "LLM inference",
-        "latency reduction",
-        "GPU utilization"
+        "parallel drafting",
+        "LLM inference systems",
+        "latency reduction"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 12,
+      "recommended_count": 15,
       "scores_history": [
         {
           "date": "2026-03-08",
@@ -262,14 +261,15 @@
         "LLM inference",
         "multi-token prediction",
         "self-distillation",
-        "speculative decoding",
-        "decoding speedup"
+        "decoding acceleration",
+        "speculative decoding alternative",
+        "serving efficiency"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 12,
+      "recommended_count": 15,
       "scores_history": [
         {
           "date": "2026-03-08",
@@ -387,15 +387,15 @@
         "LLVM",
         "compiler phase ordering",
         "fine-grained optimization",
-        "static features",
-        "machine learning for compilers",
-        "LLM-assisted optimization"
+        "ML-guided compilation",
+        "static program features",
+        "Cbench"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 12,
+      "recommended_count": 15,
       "scores_history": [
         {
           "date": "2026-03-08",
@@ -661,15 +661,15 @@
         "diffusion language models",
         "parallel diffusion decoding",
         "revocable decoding",
-        "verification",
-        "KV cache",
-        "leave-one-out verification"
+        "KV cache override",
+        "leave-one-out verification",
+        "inference acceleration"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 12,
+      "recommended_count": 15,
       "scores_history": [
         {
           "date": "2026-03-08",

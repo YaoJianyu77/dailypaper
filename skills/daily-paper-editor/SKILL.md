@@ -21,7 +21,7 @@ Rules:
 Output guidance:
 - `daily_brief.overview_zh`: summarize the main threads of the day in English.
 - `one_liner_zh`: one sentence, no title paraphrase fluff.
-- `summary_zh`: 2-4 sentences with mechanism, value, and uncertainty.
+- `summary_zh`: 4-5 sentences that cover the problem background, main mechanism, reported evidence, likely value, and biggest missing detail.
 - `background_zh`: 1-2 sentences on field context and why this problem exists now.
 - `problem_zh`: explain the actual research question and why it matters.
 - `approach_zh`: explain the core modeling move, pipeline change, or algorithmic mechanism.
@@ -38,3 +38,4 @@ Style reminders carried over from the original workflow:
 - When the abstract hints at experiments, say what kind of evidence is mentioned.
 - When the abstract does not support a deeper claim, explicitly mark that gap instead of smoothing it over.
 - The final public report should read naturally in English, without Chinese labels or recommendation slogans.
+- Each paper note should feel closer to a compact research memo than a three-line summary.

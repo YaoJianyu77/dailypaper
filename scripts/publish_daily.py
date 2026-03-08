@@ -361,18 +361,26 @@ def compact_analysis_text(paper: Dict[str, Any]) -> str:
     return clip_text(join_analysis_text(parts, limit=3), 720)
 
 
-def compact_evaluation_text(paper: Dict[str, Any]) -> str:
+def compact_followup_text(paper: Dict[str, Any]) -> str:
     ai = ai_fields(paper)
-    why_read = normalize_string_list(ai.get('why_read', []), limit=1)
-    parts = [
-        ai.get('value_zh'),
-        why_read[0] if why_read else '',
-    ]
-    value_text = join_analysis_text(parts, limit=2)
-    risk_text = daily_risk_text(paper)
-    if value_text and risk_text:
-        return clip_text(f'{value_text} 但要先核对：{risk_text}', 280)
-    return clip_text(value_text or risk_text, 280)
+    value_text = clean_render_text(ai.get('value_zh') or '')
+    risks = normalize_string_list(ai.get('risks', []), limit=2)
+    parts: List[str] = []
+
+    def risk_clause(prefix: str, risk: str) -> str:
+        text = clean_render_text(risk).rstrip('.')
+        text = text[0].lower() + text[1:] if text else text
+        return f'{prefix} {text}.'
+
+    if value_text:
+        parts.append(value_text)
+    if risks:
+        if len(risks) == 1:
+            parts.append(risk_clause('A key caveat is that', risks[0]))
+        else:
+            parts.append(risk_clause('A key caveat is that', risks[0]))
+            parts.append(risk_clause('Another caveat is that', risks[1]))
+    return ' '.join(part for part in parts if part)
 
 
 def selection_lane(paper: Dict[str, Any]) -> str:
@@ -1263,6 +1271,10 @@ def render_daily_paper_entry(
     analysis_text = compact_analysis_text(paper)
     if analysis_text:
         lines.extend(['', analysis_text])
+
+    followup_text = compact_followup_text(paper)
+    if followup_text:
+        lines.extend(['', followup_text])
 
     if paper_meta:
         render_daily_asset(lines, paper_meta, title)

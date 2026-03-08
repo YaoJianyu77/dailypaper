@@ -113,47 +113,46 @@
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper replaces sequential autoregressive drafting in speculative decoding with a lightweight block diffusion model that proposes token blocks in one forward pass.",
-        "summary_zh": "DFlash targets a core speculative-decoding bottleneck: in most prior methods, the draft stage is still sequential, so end-to-end gains remain limited even when verification is parallel. It uses a lightweight block diffusion draft model, conditioned on context features from the target model, to generate draft tokens in a single pass and improve acceptance while keeping decoding lossless. The abstract reports over 6x acceleration across models and tasks and up to 2.5x more speedup than EAGLE-3, but it does not make the hardware setup, draft-model overhead, or baseline fairness clear.",
-        "background_zh": "Speculative decoding is a major path for reducing autoregressive LLM latency, but many systems still pay a sequential cost on the draft side.",
-        "problem_zh": "The paper asks whether speculative drafting can be parallelized without degrading final outputs, since sequential drafting caps practical speedup and GPU utilization.",
-        "approach_zh": "It introduces a lightweight block diffusion draft model that generates multiple draft tokens in one pass and conditions that model on target-model context features to improve draft quality.",
-        "evidence_zh": "The abstract claims experiments across multiple models and tasks with over 6x lossless acceleration and up to 2.5x higher speedup than EAGLE-3, but the evaluation setup and ablations are not made clear.",
-        "value_zh": "If the method generalizes, it could remove a key sequential bottleneck in speculative decoding and make low-latency LLM serving more parallel and efficient.",
+        "one_liner_zh": "A speculative decoding framework that swaps sequential drafting for a lightweight block diffusion drafter to generate candidate tokens in parallel.",
+        "summary_zh": "LLM decoding remains latency-bound because both standard autoregressive decoding and many speculative decoding pipelines still draft tokens sequentially, which wastes available parallelism. This paper proposes DFlash, which uses a lightweight block diffusion model to generate a block of draft tokens in one forward pass and conditions that drafter on context features from the target model. The abstract claims this improves draft quality and acceptance rates enough to preserve lossless decoding while raising end-to-end speedup. It reports over 6x lossless acceleration across multiple models and tasks, plus up to 2.5x higher speedup than EAGLE-3, making it directly relevant to serving-side latency reduction. The biggest missing details are the hardware and evaluation setup, the overhead of extracting target-model features, and how stable the gains are across model scales and generation lengths.",
+        "background_zh": "Speculative decoding is a leading path to lower LLM inference latency, but many existing methods still keep a sequential drafting stage that limits GPU utilization and end-to-end gains.",
+        "problem_zh": "The paper asks how to remove the remaining autoregressive bottleneck in speculative decoding without degrading draft quality so much that verification acceptance and overall speedup collapse.",
+        "approach_zh": "DFlash uses a lightweight block diffusion model to draft multiple tokens in parallel in a single pass, with conditioning on target-model context features to produce better candidates for verification.",
+        "evidence_zh": "The abstract claims over 6x lossless acceleration across models and tasks and up to 2.5x more speedup than EAGLE-3, but it does not make the evaluation setup, latency accounting, or baseline fairness clear.",
+        "value_zh": "If the results hold under full scrutiny, this is a practical serving idea for increasing speculative decoding gains by replacing sequential draft generation with a parallel drafting stage.",
         "open_questions": [
-          "What block size, diffusion schedule, and draft-model architecture are required for the reported gains, and how sensitive are results to those choices?",
-          "How much end-to-end speedup remains after including target-model feature extraction, draft-model compute, and memory overhead on real serving hardware?",
-          "Are the comparisons to EAGLE-3 matched on target model, acceptance rule, batch setting, and implementation quality, or could setup differences explain part of the gain?"
+          "What hardware, batch-size, sequence-length, and target-model settings were used for the reported lossless acceleration numbers?",
+          "How much runtime overhead comes from extracting and using target-model context features, and is that overhead included in the end-to-end speedup?",
+          "How do acceptance rates and speedups vary across different model sizes, prompt types, and long-output generation regimes?"
         ],
         "core_contributions": [
-          "Recasts speculative drafting as parallel block generation with a lightweight diffusion model instead of token-by-token autoregressive drafting.",
-          "Uses target-model context features to condition the draft model and improve acceptance in the speculative pipeline.",
-          "Reports lossless acceleration gains and direct speedup comparisons against a strong speculative decoding baseline."
+          "Introduces a speculative decoding framework built around a block diffusion draft model for parallel token drafting.",
+          "Conditions the draft model on target-model context features to improve candidate quality and acceptance.",
+          "Reports lossless end-to-end acceleration and comparison against a strong speculative decoding baseline, EAGLE-3."
         ],
         "why_read": [
-          "It focuses on the draft-side bottleneck in speculative decoding, which is a real systems limit for latency reduction.",
-          "It tests whether diffusion-style generation is more useful as an auxiliary inference component than as a standalone LLM replacement.",
-          "It is directly relevant to LLM serving work that cares about parallelism, utilization, and verifier-compatible draft quality."
+          "It targets the exact bottleneck that still limits many speculative decoding systems: sequential drafting.",
+          "It tests whether diffusion-style parallel generation is useful as an inference subsystem even when standalone diffusion LLMs are weaker than autoregressive models.",
+          "The claimed gains are large enough to matter for real LLM serving if the setup and accounting are sound."
         ],
         "risks": [
-          "The abstract does not say how large the draft model is or how much extra compute and memory its conditioning path adds.",
-          "The reported speedups may depend heavily on hardware, batch size, and systems implementation details that are not disclosed here."
+          "The abstract omits hardware, implementation, and baseline-tuning details, so the reported speedups are hard to calibrate.",
+          "Conditioning on target-model features may add overhead or system coupling that reduces deployment simplicity and portability across serving stacks."
         ],
         "recommended_for": [
-          "Researchers working on speculative decoding and LLM serving latency",
-          "Engineers evaluating draft-model tradeoffs in inference stacks",
-          "Systems readers interested in parallel generation mechanisms for autoregressive LLM serving"
+          "Researchers studying speculative decoding and LLM serving latency.",
+          "Engineers evaluating new draft-model designs for high-throughput inference systems.",
+          "Readers interested in parallel generation mechanisms as components inside autoregressive decoding pipelines."
         ],
         "keywords": [
           "speculative decoding",
-          "diffusion LLM",
           "block diffusion",
-          "LLM inference",
-          "latency reduction",
-          "GPU utilization"
+          "parallel drafting",
+          "LLM inference systems",
+          "latency reduction"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "This is a strong fit for LLM inference systems work because it attacks a known draft-stage bottleneck in speculative decoding and claims large lossless speedups, even though the abstract leaves hardware and baseline details underspecified.",
+        "reading_priority_reason": "This is a strong fit for the current focus because it is directly about LLM inference acceleration, attacks the draft-stage bottleneck in speculative decoding, and claims unusually large end-to-end gains. The priority stays high despite the abstract leaving hardware assumptions, evaluation fairness, and overhead accounting underspecified.",
         "fallback_summary": "Autoregressive large language models (LLMs) deliver strong performance but require inherently sequential decoding, leading to high inference latency and poor GPU utilization."
       }
     },
@@ -242,46 +241,47 @@
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "Turns a pretrained autoregressive LM into a standalone multi-token predictor with online self-distillation, aiming to capture decode speedups without auxiliary models or a specialized serving pipeline.",
-        "summary_zh": "The paper proposes converting a standard next-token LM into a standalone multi-token predictor through an online self-distillation objective, while keeping deployment identical to the original checkpoint and avoiding speculator-verifier pipelines. The abstract presents this as a simpler alternative to speculative decoding and reports more than 3x average decoding speedup on GSM8K with under 5% accuracy loss relative to single-token decoding. The main unresolved points are how the multi-token objective is implemented, what runtime conditions produce the gain, and how fairly it compares against other acceleration baselines.",
-        "background_zh": "Autoregressive LM inference is slow because decoding is inherently sequential, and current acceleration methods such as speculative decoding often add extra models and serving complexity.",
-        "problem_zh": "The paper asks whether a pretrained single-token LM can be adapted into a faster multi-token decoder without auxiliary models or custom inference machinery.",
-        "approach_zh": "It applies a simple online distillation objective to transform a pretrained autoregressive checkpoint into a standalone multi-token prediction model while preserving the same implementation and deployment path.",
-        "evidence_zh": "The abstract reports GSM8K results with more than 3x average decoding speedup and less than 5% accuracy drop versus single-token decoding, but it does not make the hardware setup, baseline coverage, or evaluation breadth clear.",
-        "value_zh": "If the result generalizes, this offers a cleaner inference-systems tradeoff: move complexity into training and keep serving close to the original model path.",
+        "one_liner_zh": "This paper uses online self-distillation to turn a pretrained autoregressive language model into a standalone multi-token predictor, aiming to get large decoding speedups without auxiliary speculative-decoding components.",
+        "summary_zh": "Autoregressive LLM inference is often limited by token-by-token decoding, and many acceleration methods add draft models, verifiers, or custom serving logic. This paper proposes converting a pretrained next-token model into a standalone multi-token prediction model using an online self-distillation objective while keeping the deployed implementation the same as the original checkpoint. The claimed systems payoff is a simpler inference stack: no auxiliary verifier, no separate speculator, and no specialized inference pipeline. The abstract reports more than 3x average decoding speedup on GSM8K with less than 5% accuracy drop relative to single-token decoding. The main missing details are how the multi-token decoding loop works in practice, what hardware and baselines were used, and whether the result holds beyond GSM8K.",
+        "background_zh": "LLM inference acceleration is increasingly important, but common approaches such as speculative decoding often improve speed by adding extra models and more complex serving pipelines.",
+        "problem_zh": "The paper asks whether a pretrained autoregressive next-token model can be converted into a faster multi-token decoder without relying on auxiliary runtime components or changing the deployed stack.",
+        "approach_zh": "It applies an online self-distillation objective to transform the pretrained checkpoint into a standalone multi-token prediction model while preserving the same implementation footprint at deployment.",
+        "evidence_zh": "The abstract supports the claim with GSM8K results showing more than 3x average decoding speedup and less than 5% accuracy loss versus single-token decoding, but it does not make the hardware, baselines, or evaluation protocol clear.",
+        "value_zh": "If the tradeoff generalizes, this offers a cleaner path to higher decode throughput by shifting complexity into training rather than maintaining a more complicated speculative-decoding serving system.",
         "open_questions": [
-          "How is the online self-distillation target defined, and how does it stabilize multi-token prediction during training?",
-          "What hardware, batch size, sequence lengths, and decoding configuration underlie the reported speedup?",
-          "How does the method compare directly against speculative decoding and other acceleration baselines under matched serving conditions?"
+          "How is multi-token prediction executed at inference time, and what part of the decoding loop actually delivers the reported speedup?",
+          "What hardware, batching assumptions, sequence lengths, and baseline implementations were used for the GSM8K comparison?",
+          "Does the speed-versus-accuracy tradeoff persist on broader generation and reasoning workloads beyond GSM8K?"
         ],
         "core_contributions": [
-          "Poses multi-token prediction as a self-distillation adaptation of an existing autoregressive LM.",
-          "Targets inference speedup without adding auxiliary speculator or verifier models.",
-          "Reports a concrete speed-accuracy tradeoff on GSM8K for the standalone converted model."
+          "Recasts multi-token decoding as a self-distillation problem applied directly to a pretrained autoregressive model.",
+          "Targets inference acceleration without introducing auxiliary speculator or verifier models at deployment.",
+          "Reports a concrete speed and accuracy tradeoff for a standalone model on GSM8K."
         ],
         "why_read": [
-          "It is directly relevant to LLM inference systems because it targets decode speed while simplifying deployment.",
-          "It tests a different systems tradeoff from speculative decoding: training-time adaptation instead of inference-time pipeline complexity.",
-          "It may matter operationally if the claimed gains preserve existing runtime and kernel paths."
+          "It directly targets LLM inference acceleration with an approach that may reduce serving complexity rather than increase it.",
+          "The deployment claim is operationally important because it keeps the runtime path close to a standard autoregressive model.",
+          "It is relevant for comparing training-time model adaptation against runtime speculative-decoding pipelines."
         ],
         "risks": [
-          "The abstract only names GSM8K, so generalization to broader generation workloads is unclear.",
-          "The reported speedup may depend strongly on unstated hardware and decoding settings, making reproducibility hard to judge from the abstract alone."
+          "The evidence in the abstract is limited to GSM8K, so generalization to other workloads is not established.",
+          "The abstract does not specify hardware, batching, or baseline fairness, which makes the reported speedup hard to normalize against prior systems work under a common setup."
         ],
         "recommended_for": [
-          "Researchers working on LLM inference acceleration and decoding algorithms.",
-          "Engineers evaluating alternatives to speculative decoding in production serving stacks.",
-          "Compiler and runtime practitioners interested in methods that preserve the base deployment path."
+          "Researchers studying LLM inference acceleration and alternatives to speculative decoding.",
+          "Engineers evaluating whether to trade small accuracy loss for a simpler high-throughput serving path.",
+          "Readers comparing training-time adaptation methods with runtime pipeline-based decoding accelerators."
         ],
         "keywords": [
           "LLM inference",
           "multi-token prediction",
           "self-distillation",
-          "speculative decoding",
-          "decoding speedup"
+          "decoding acceleration",
+          "speculative decoding alternative",
+          "serving efficiency"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High fit with the stated focus on LLM inference systems: it targets decoding throughput directly, claims a simpler serving path than speculative decoding, and reports a concrete speed-accuracy tradeoff, though the evaluation details remain underspecified.",
+        "reading_priority_reason": "This is a strong fit for LLM inference systems work because it claims substantial decode speedup with a simpler deployment model, but a full read is needed to verify the mechanism and evaluation fairness.",
         "fallback_summary": "Existing techniques for accelerating language model inference, such as speculative decoding, require training auxiliary speculator models and building and deploying complex inference pipelines."
       }
     },
@@ -387,47 +387,47 @@
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "An LLVM-integrated framework for fine-grained phase ordering that exposes static features and pluggable ML or LLM hooks, with reported gains over O3 on Cbench.",
-        "summary_zh": "This paper presents Protean Compiler, a version of LLVM with built-in fine-grained phase-ordering support rather than an external tuning loop. The main mechanism is a large static-feature library plus interfaces for third-party ML frameworks and LLM-driven two-step optimization. The abstract reports modest average gains over O3 on Cbench, larger wins on selected applications, and a small build-time cost, but it leaves evaluation breadth, baseline fairness, and transfer beyond Cbench unclear.",
-        "background_zh": "Compiler phase ordering remains hard because the optimization space is large, benchmark-sensitive, and usually handled with brittle hand-tuned heuristics or loosely attached ML models.",
-        "problem_zh": "The paper asks how to make phase-ordering decisions a first-class, fine-grained capability inside LLVM instead of an external research pipeline that is hard to reuse in practice.",
-        "approach_zh": "Protean integrates phase-ordering control directly into LLVM, adds more than 140 handcrafted static feature extractors at multiple scopes, and supports external ML or LLM components for optimization selection.",
-        "evidence_zh": "The abstract claims up to 4.1% average speedup and up to 15.7% on selected Cbench programs versus LLVM O3, plus two application-specific gains from a two-step optimization flow, but it does not make the full evaluation setup or fairness details clear.",
-        "value_zh": "If the integration is robust, this could make fine-grained compiler optimization easier to study and deploy, especially for workflows that want compiler-native hooks for learned or LLM-assisted decisions.",
+        "one_liner_zh": "Protean turns fine-grained phase ordering into a built-in LLVM capability, backed by a large handcrafted feature library and optional ML or LLM integration, with modest average gains over O3 on Cbench.",
+        "summary_zh": "Protean targets the long-running compiler phase-ordering problem, arguing that fixed hand-tuned heuristics and loosely attached ML models do not adapt well to fine-grained code regions. The system integrates phase-ordering directly into LLVM, adds more than 140 handcrafted static feature extractors across different scopes, and provides hooks for third-party ML frameworks and LLM-assisted optimization. The abstract reports up to 4.1% average speedup and up to 15.7% on selected Cbench programs over O3 with only a few extra seconds of build time, plus 10.1% and 8.5% gains on Susan and Jpeg in a two-step setup. The practical value is less about a new optimization pass and more about making fine-grained optimization control a first-class compiler capability. The biggest missing detail is that the abstract does not explain the actual selection algorithm, evaluation breadth, or whether the approach transfers beyond Cbench and general CPU code.",
+        "background_zh": "Compiler phase ordering remains difficult because the optimization space is open-ended, while hand-tuned heuristics and coarse ML integrations are hard to retune as workloads change.",
+        "problem_zh": "The paper asks how LLVM can make phase-ordering decisions at a fine code-segment granularity instead of relying on fixed global heuristics or loosely coupled external models.",
+        "approach_zh": "Protean embeds phase-ordering inside LLVM, exposes more than 140 handcrafted static features at multiple scopes, and supports integration with third-party ML frameworks and LLM-driven optimization flows.",
+        "evidence_zh": "The abstract reports up to 4.1% average speedup and up to 15.7% on selected Cbench applications versus O3, with a few extra seconds of build time, plus 10.1% and 8.5% gains on Susan and Jpeg in a two-step setup; it does not make the broader evaluation protocol clear.",
+        "value_zh": "If the integration holds up, it could make fine-grained optimization experimentation much easier in a production compiler and reduce retuning effort when benchmark mixes change.",
         "open_questions": [
-          "What exact optimization scope and decision points inside LLVM are controlled by Protean, and how are phase sequences represented?",
-          "How broad and fair is the evaluation beyond Cbench, including baseline tuning, ablations on the feature library, and compile-time overhead across workloads?",
-          "What role do the external ML frameworks and LLMs actually play in the two-step optimization path, and how reproducible are those results?"
+          "How are phase sequences selected per code region in practice: search, learned prediction, heuristic control, or some combination, and what is the compile-time cost breakdown?",
+          "How fair are the comparisons to O3 and other autotuning or ML compiler baselines, and how broad is the evaluation beyond selected Cbench workloads?",
+          "What role do external ML models or LLMs materially play in the reported gains, and does the method transfer to GPU or kernel-generation workloads?"
         ],
         "core_contributions": [
-          "A compiler-native framework that embeds fine-grained phase-ordering support directly into LLVM.",
-          "A library of more than 140 handcrafted static feature collection methods across multiple code scopes.",
-          "A pluggable interface for third-party ML frameworks and LLM-assisted optimization on top of the LLVM integration."
+          "Direct LLVM integration for fine-grained phase ordering instead of an external offline tuner.",
+          "A library of more than 140 handcrafted static feature collection methods across multiple scopes.",
+          "An interface for third-party ML and LLM-based optimization, with reported speedups over O3 on Cbench."
         ],
         "why_read": [
-          "It turns phase ordering from an external autotuning experiment into an LLVM-integrated system design question.",
-          "It may be useful if you care about compiler/runtime co-design or learned optimization hooks inside production compiler flows.",
-          "It provides a concrete data point on how much gain fine-grained ordering can deliver relative to O3 with limited extra build time."
+          "It shows a concrete attempt to move phase-ordering research into a usable compiler path rather than a stand-alone research tool.",
+          "It is relevant to compiler and runtime engineers interested in automated optimization control inside LLVM.",
+          "It may clarify whether the gains come from finer decision granularity and integration, not from introducing new optimization passes."
         ],
         "risks": [
-          "The reported average gain is modest, and the larger wins appear concentrated in selected benchmarks.",
-          "The abstract is underspecified on hardware, benchmark diversity, baseline fairness, and reproducibility details for the ML or LLM path."
+          "The evidence is centered on Cbench, so generalization to larger systems code, accelerators, or real deployment workloads is unclear.",
+          "The abstract does not explain the search policy, model training setup, or baseline retuning, which makes fairness hard to assess from the abstract alone. The LLM angle is underspecified and may be optional, so the paper may matter more as compiler infrastructure than as low-level code generation research."
         ],
         "recommended_for": [
-          "Researchers working on LLVM optimization and phase-ordering methods.",
-          "Engineers exploring learned compiler heuristics or LLM-assisted optimization tooling.",
-          "Readers interested in compiler infrastructure more than direct LLM inference serving gains."
+          "Compiler researchers working on phase ordering and ML-guided optimization.",
+          "Engineers interested in integrating autotuning logic directly into LLVM.",
+          "Readers tracking compiler infrastructure that could later support low-level code or kernel generation workflows."
         ],
         "keywords": [
           "LLVM",
           "compiler phase ordering",
           "fine-grained optimization",
-          "static features",
-          "machine learning for compilers",
-          "LLM-assisted optimization"
+          "ML-guided compilation",
+          "static program features",
+          "Cbench"
         ],
-        "reading_priority": "low",
-        "reading_priority_reason": "The paper is relevant at the compiler-infrastructure level, but it is not directly about LLM inference acceleration, CUDA kernel generation, or low-level assembly generation, which are the main focus areas here.",
+        "reading_priority": "medium",
+        "reading_priority_reason": "Medium because this is real compiler-control infrastructure and not just generic code generation, but the abstract is still only indirectly aligned with LLM inference, CUDA kernels, and assembly-level generation, and the provided relevance signal is modest.",
         "fallback_summary": "The phase ordering problem has been a long-standing challenge since the late 1970s, yet it remains an open problem due to having a vast optimization space and an unbounded nature, making it an open-ended problem without a finite solution, one can limit the scope by reducing the number and the length of optimizations."
       }
     },
@@ -531,47 +531,47 @@
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "The paper targets a specific inefficiency in revocable diffusion decoding by preserving context during verification so repeated remask-restore cycles do not erase useful parallel progress.",
-        "summary_zh": "The paper studies a failure mode in parallel diffusion decoding where revocable verification causes flip-flop oscillations: tokens are remasked and later restored unchanged, which both weakens conditioning context and wastes revision budget. It proposes COVER, a single-pass verification scheme that uses KV cache override to verify selected seeds while preserving their context for other queries, plus stability-aware seed selection and an adaptive verification count. The abstract claims faster decoding with preserved output quality across benchmarks, but it does not specify the benchmark setup, baseline fairness, or the size of the gains.",
-        "background_zh": "Diffusion language model decoding gets speed from parallel token updates, but that parallelism is only useful if verification can correct mistakes without destroying the context needed for later drafting.",
-        "problem_zh": "Existing revocable verification can repeatedly remask tokens that later return to the same value, creating oscillations that consume revision steps and reduce the quality of the context seen by parallel decoding.",
-        "approach_zh": "COVER performs leave-one-out verification and stable drafting in one forward pass by masking selected seeds only for verification while injecting their cached key-value states for other queries, adds a diagonal correction to prevent self leakage, and chooses how many seeds to verify using a stability-aware score.",
-        "evidence_zh": "The abstract says the method reduces unnecessary revisions and improves decoding speed while preserving output quality across benchmarks, but it does not make the workloads, baselines, hardware assumptions, or effect sizes clear.",
-        "value_zh": "If the mechanism is efficient in practice, it offers a decoding-level way to recover more parallel speed in diffusion LMs by fixing verification churn rather than changing the model itself.",
+        "one_liner_zh": "A revocable diffusion decoding method that uses KV-cache override to verify tokens without breaking context, aiming to cut flip-flop remasking and wasted revision steps.",
+        "summary_zh": "Parallel diffusion decoding can improve diffusion LM throughput, but existing revocable verification can enter flip-flop cycles where tokens are remasked and later restored unchanged, wasting revision steps and degrading context for the next draft. COVER addresses this with single-pass leave-one-out verification built on KV-cache override: it masks selected seeds for verification while reusing their cached states for other queries, plus a diagonal correction to avoid self leakage at the verified positions. The method also scores seed stability and adapts how many seeds to verify each step, so the revision budget is spent on positions more likely to matter. The abstract claims fewer unnecessary revisions, faster decoding, and preserved output quality across benchmarks, but it does not specify the benchmark setup, baseline fairness, hardware, or the runtime cost of the extra cache manipulation.",
+        "background_zh": "Diffusion language models can gain inference speed from parallel token unmasking, but quality and efficiency become fragile when revision-based decoding disrupts the context used for later drafting.",
+        "problem_zh": "The paper targets flip-flop oscillations in revocable decoding, where tokens are repeatedly remasked and then restored, consuming revision budget while weakening conditioning information for parallel decoding.",
+        "approach_zh": "COVER performs leave-one-out verification and stable drafting in one forward pass by overriding KV cache views, adding a closed-form diagonal correction for seed self leakage, and prioritizing verification with a stability-aware score plus adaptive seed count.",
+        "evidence_zh": "The abstract says benchmark results show fewer unnecessary revisions, faster decoding, and preserved output quality, but it does not make the tasks, baselines, hardware, or quantitative margins clear.",
+        "value_zh": "If the extra cache handling is cheap in practice, this could make revocable diffusion decoding more latency-efficient by reducing wasted revisions without giving up useful context.",
         "open_questions": [
-          "What are the actual latency or throughput gains versus prior revocable verification schemes, and on which diffusion LM models and tasks are they measured?",
-          "What extra runtime or memory cost comes from maintaining the two attention views and KV cache override machinery during inference?",
-          "How are the stability-aware seed score and adaptive verification budget defined, and how sensitive are results to those design choices?"
+          "What models, benchmarks, and hardware are used, and are the baselines strong enough to isolate the benefit over prior revocable decoding schemes?",
+          "How much runtime and memory overhead does KV-cache override plus diagonal correction add, and when does that overhead offset the gain from fewer revision cycles?",
+          "How robust is the stability-aware seed selection across different parallelism levels, sequence lengths, and output-quality settings?"
         ],
         "core_contributions": [
-          "Identifies flip-flop oscillation as a concrete failure mode in revocable diffusion decoding.",
-          "Introduces a context-preserving single-pass verification mechanism based on KV cache override and diagonal self-leakage correction.",
-          "Adds stability-aware seed prioritization and adaptive verification count control to reduce low-value revisions."
+          "Identifies flip-flop oscillation as a concrete inefficiency in existing revocable diffusion decoding.",
+          "Introduces context-preserving single-pass verification via KV-cache override with an explicit correction to prevent seed self leakage.",
+          "Adds stability-aware seed prioritization and adaptive verification count to spend revision effort more selectively."
         ],
         "why_read": [
-          "It isolates where diffusion LM decoding can lose speed even when parallel drafting is available: revision churn rather than token generation itself.",
-          "The KV-cache-based verification design is a concrete systems mechanism, not just a decoding heuristic at the token level.",
-          "It is relevant if you are comparing control strategies for speculative, revocable, or other multi-token decoding schemes."
+          "It focuses on a real inference-systems bottleneck: verification can erase the throughput benefit of parallel diffusion decoding if revisions are wasted.",
+          "The main idea is cache-level rather than purely heuristic, which makes the mechanism more interesting than a simple scoring tweak.",
+          "It is directly relevant to readers tracking decoding-time tradeoffs between speed, context quality, and revision policy."
         ],
         "risks": [
-          "The abstract does not quantify the speed-quality tradeoff or specify whether comparisons are against strong and fair baselines.",
-          "The practical gain may depend on whether the cache-override verification path is cheap enough to implement on real inference stacks for diffusion LMs only rather than standard autoregressive LLMs, so transferability to broader LLM serving is unclear from the abstract alone, but the paper still fits the inference-systems focus and the recommendation signal is reasonably strong."
+          "The abstract does not show whether the extra cache manipulation introduces nontrivial implementation, memory, or kernel overhead.",
+          "Claims about preserved quality are underspecified without task breakdowns, failure cases, or long-context evaluation details."
         ],
         "recommended_for": [
-          "Researchers working on diffusion language model inference and decoding control.",
-          "Engineers studying KV-cache-aware inference optimizations.",
-          "Readers evaluating verification mechanisms for parallel or revision-based generation."
+          "Researchers working on diffusion language model inference and decoding algorithms.",
+          "Engineers studying KV-cache manipulation and verification policy in LLM runtimes.",
+          "Readers comparing ways to trade off parallel decoding speed against revision stability and output quality."
         ],
         "keywords": [
           "diffusion language models",
           "parallel diffusion decoding",
           "revocable decoding",
-          "verification",
-          "KV cache",
-          "leave-one-out verification"
+          "KV cache override",
+          "leave-one-out verification",
+          "inference acceleration"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High because it directly targets inference efficiency in a priority domain, proposes a cache-level verification mechanism rather than a generic modeling tweak, and has a solid overall recommendation signal, even though the abstract leaves key evaluation details unclear.",
+        "reading_priority_reason": "High because it is a strong fit for the LLM inference systems focus and proposes a concrete cache-level mechanism for decoding acceleration, even though the abstract leaves the evaluation and overhead story incomplete.",
         "fallback_summary": "Parallel diffusion decoding can accelerate diffusion language model inference by unmasking multiple tokens per step, but aggressive parallelism often harms quality."
       }
     }
@@ -592,7 +592,7 @@
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-03-08T15:45:19Z",
+    "generated_at": "2026-03-08T15:54:52Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
     "paper_results": 4,

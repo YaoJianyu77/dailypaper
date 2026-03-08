@@ -45,13 +45,14 @@ def build_instruction_blocks(repo_root: Path, config: Dict[str, Any]) -> List[st
         '2. Do not invent experiment details, performance numbers, author background, or code links.\n'
         '3. If the abstract is underspecified, say so directly.\n'
         '4. The JSON structure must match the provided schema.\n'
-        '5. Keep `summary_zh` to 2-3 sentences and make it usable as the main paragraph in the daily report.\n'
+        '5. Keep `summary_zh` to 4-5 sentences and make it usable as the main body paragraph in the daily report.\n'
         '6. `background_zh`, `problem_zh`, `approach_zh`, `evidence_zh`, and `value_zh` should each stay close to one sentence, with minimal overlap.\n'
         '7. `evidence_zh` should state only what the abstract actually supports; if the evidence is unclear, say the abstract does not make it clear.\n'
         '8. `open_questions` should contain 2-3 concrete checks for a full read.\n'
         '9. `core_contributions`, `why_read`, and `risks` should stay concrete and specific.\n'
         '10. `one_liner_zh` and `summary_zh` should describe the paper itself, not use recommendation slogans such as "worth reading first" or "read this before others."\n'
-        '11. The goal is not to fill every field, but to make the fields combine into one short, precise mini analysis.',
+        '11. `summary_zh` should usually cover background, problem, mechanism, claimed evidence, practical value, and the biggest missing detail.\n'
+        '12. The goal is not to fill every field, but to make the fields combine into one short, precise mini analysis.',
     ]
     if editorial_instructions:
         instruction_blocks.append('仓库编辑偏好：\n' + editorial_instructions)
