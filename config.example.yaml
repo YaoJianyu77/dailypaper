@@ -4,6 +4,7 @@ site:
   title: "DailyPaper"
   timezone: "America/New_York"
   base_url: ""
+  show_papers_nav: false
 
 build:
   output_dir: "dist"
@@ -50,10 +51,15 @@ ai:
 analysis:
   enabled: true
   top_n: 1
+  auto_run_in_daily: false
   refresh_existing: false
   max_full_text_chars: 36000
   section_char_budget: 7000
   pdf_page_limit: 18
+
+publish:
+  generate_paper_pages: false
+  link_keywords_to_notes: false
 
 search:
   max_results: 200

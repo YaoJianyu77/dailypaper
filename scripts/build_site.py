@@ -270,7 +270,7 @@ def md_to_html(text: str, base_url: str) -> str:
     return ''.join(part for part in html_parts if part)
 
 
-def render_layout(site_title: str, title: str, body_html: str, sidebar_html: str, base_url: str) -> str:
+def render_layout(site_title: str, title: str, body_html: str, sidebar_html: str, nav_html: str, base_url: str) -> str:
     return f"""<!doctype html>
 <html lang=\"en\">
 <head>
@@ -284,11 +284,7 @@ def render_layout(site_title: str, title: str, body_html: str, sidebar_html: str
     <section class=\"hero\">
       <h1>{html.escape(site_title)}</h1>
       <p>Automated paper watchtower. Today first, archive second, raw repository history always available.</p>
-      <nav class=\"nav\">
-        <a href=\"{apply_base_url('/', base_url)}\">Home</a>
-        <a href=\"{apply_base_url('/archive/', base_url)}\">Archive</a>
-        <a href=\"{apply_base_url('/papers/', base_url)}\">Papers</a>
-      </nav>
+      <nav class=\"nav\">{nav_html}</nav>
     </section>
     <section class=\"grid\">
       <article class=\"card article\">{body_html}</article>
@@ -310,7 +306,14 @@ def copy_asset_dirs(repo_root: Path, dist_root: Path) -> None:
         shutil.copytree(image_dir, target)
 
 
-def build_sidebar(latest: Dict, daily_index: List[Dict], papers: List[Tuple[Dict, Path]], base_url: str) -> str:
+def build_sidebar(
+    latest: Dict,
+    daily_index: List[Dict],
+    papers: List[Tuple[Dict, Path]],
+    base_url: str,
+    *,
+    show_paper_pages: bool,
+) -> str:
     latest_html = '<p class="meta">No daily report published yet.</p>'
     if latest:
         latest_html = f'<p><a href="{apply_base_url(latest["path"], base_url)}">Latest report</a></p><p class="meta">{latest.get("date", "")}</p>'
@@ -318,26 +321,40 @@ def build_sidebar(latest: Dict, daily_index: List[Dict], papers: List[Tuple[Dict
     archive_items = ''.join(
         f'<li><a href="{apply_base_url(entry["path"], base_url)}">{entry["date"]}</a></li>' for entry in daily_index[:10]
     ) or '<li class="meta">No history yet.</li>'
-    paper_item_parts = []
-    for frontmatter, path in papers[:12]:
-        slug = frontmatter.get('slug', path.parent.name)
-        title = html.escape(frontmatter.get('title', path.parent.name))
-        href = apply_base_url(f'/papers/{slug}/', base_url)
-        paper_item_parts.append(f'<li><a href="{href}">{title}</a></li>')
-    paper_items = ''.join(paper_item_parts) or '<li class="meta">No paper pages yet.</li>'
-
-    return (
+    sections = [
         '<h2>Latest</h2>'
         f'{latest_html}'
         '<h3>Recent Reports</h3>'
         f'<ul class="list">{archive_items}</ul>'
-        '<h3>Paper Pages</h3>'
-        f'<ul class="list">{paper_items}</ul>'
-    )
+    ]
+
+    if show_paper_pages:
+        paper_item_parts = []
+        for frontmatter, path in papers[:12]:
+            slug = frontmatter.get('slug', path.parent.name)
+            title = html.escape(frontmatter.get('title', path.parent.name))
+            href = apply_base_url(f'/papers/{slug}/', base_url)
+            paper_item_parts.append(f'<li><a href="{href}">{title}</a></li>')
+        paper_items = ''.join(paper_item_parts) or '<li class="meta">No paper pages yet.</li>'
+        sections.extend([
+            '<h3>Paper Pages</h3>',
+            f'<ul class="list">{paper_items}</ul>',
+        ])
+
+    return ''.join(sections)
 
 
-def build_page(dist_root: Path, out_path: Path, site_title: str, title: str, body_md: str, sidebar_html: str, base_url: str) -> None:
-    html_text = render_layout(site_title, title, md_to_html(body_md, base_url), sidebar_html, base_url)
+def build_page(
+    dist_root: Path,
+    out_path: Path,
+    site_title: str,
+    title: str,
+    body_md: str,
+    sidebar_html: str,
+    nav_html: str,
+    base_url: str,
+) -> None:
+    html_text = render_layout(site_title, title, md_to_html(body_md, base_url), sidebar_html, nav_html, base_url)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(html_text, encoding='utf-8')
 
@@ -364,6 +381,7 @@ def main() -> int:
     site_settings = settings.get('site', {})
     site_title = os.environ.get('SITE_TITLE', site_settings.get('title', DEFAULT_SITE_TITLE))
     base_url = normalize_base_url(os.environ.get('SITE_BASE_URL', site_settings.get('base_url', '')))
+    show_papers_nav = bool(site_settings.get('show_papers_nav', False))
 
     dist_root = Path(args.output_dir)
     if not dist_root.is_absolute():
@@ -385,34 +403,78 @@ def main() -> int:
         paper_docs.append((frontmatter, path))
     paper_docs.sort(key=paper_doc_sort_key)
 
-    sidebar_html = build_sidebar(latest, daily_index, paper_docs, base_url)
+    nav_links = [
+        f'<a href="{apply_base_url("/", base_url)}">Home</a>',
+        f'<a href="{apply_base_url("/archive/", base_url)}">Archive</a>',
+    ]
+    if show_papers_nav:
+        nav_links.append(f'<a href="{apply_base_url("/papers/", base_url)}">Papers</a>')
+    nav_html = ''.join(nav_links)
+
+    sidebar_html = build_sidebar(latest, daily_index, paper_docs, base_url, show_paper_pages=show_papers_nav)
 
     daily_docs = []
     for path in sorted(get_daily_root(repo_root).glob('*.md'), reverse=True):
         frontmatter, body = load_markdown(path)
         daily_docs.append((frontmatter, body, path))
-        build_page(dist_root, dist_root / 'daily' / path.stem / 'index.html', site_title, frontmatter.get('title', path.stem), body, sidebar_html, base_url)
+        build_page(
+            dist_root,
+            dist_root / 'daily' / path.stem / 'index.html',
+            site_title,
+            frontmatter.get('title', path.stem),
+            body,
+            sidebar_html,
+            nav_html,
+            base_url,
+        )
 
     if daily_docs:
         latest_frontmatter, latest_body, _ = daily_docs[0]
-        build_page(dist_root, dist_root / 'index.html', site_title, latest_frontmatter.get('title', 'Latest Report'), latest_body, sidebar_html, base_url)
+        build_page(
+            dist_root,
+            dist_root / 'index.html',
+            site_title,
+            latest_frontmatter.get('title', 'Latest Report'),
+            latest_body,
+            sidebar_html,
+            nav_html,
+            base_url,
+        )
     else:
-        build_page(dist_root, dist_root / 'index.html', site_title, 'No Report Yet', '# No report yet\n\nRun the daily workflow to publish the first report.\n', sidebar_html, base_url)
+        build_page(
+            dist_root,
+            dist_root / 'index.html',
+            site_title,
+            'No Report Yet',
+            '# No report yet\n\nRun the daily workflow to publish the first report.\n',
+            sidebar_html,
+            nav_html,
+            base_url,
+        )
 
     archive_md = '# Archive\n\n' + '\n'.join(
         f'- [{item["date"]}]({item["path"]})' for item in daily_index
     )
-    build_page(dist_root, dist_root / 'archive' / 'index.html', site_title, 'Archive', archive_md, sidebar_html, base_url)
+    build_page(dist_root, dist_root / 'archive' / 'index.html', site_title, 'Archive', archive_md, sidebar_html, nav_html, base_url)
 
     papers_md = '# Papers\n\n' + '\n'.join(
         f'- [{frontmatter.get("title", path.parent.name)}](/papers/{frontmatter.get("slug", path.parent.name)}/)' for frontmatter, path in paper_docs
     )
-    build_page(dist_root, dist_root / 'papers' / 'index.html', site_title, 'Papers', papers_md, sidebar_html, base_url)
+    build_page(dist_root, dist_root / 'papers' / 'index.html', site_title, 'Papers', papers_md, sidebar_html, nav_html, base_url)
 
     for frontmatter, path in paper_docs:
         _, body = load_markdown(path)
         slug = frontmatter.get('slug', path.parent.name)
-        build_page(dist_root, dist_root / 'papers' / slug / 'index.html', site_title, frontmatter.get('title', slug), body, sidebar_html, base_url)
+        build_page(
+            dist_root,
+            dist_root / 'papers' / slug / 'index.html',
+            site_title,
+            frontmatter.get('title', slug),
+            body,
+            sidebar_html,
+            nav_html,
+            base_url,
+        )
 
     if content_root.exists():
         copy_asset_dirs(repo_root, dist_root)

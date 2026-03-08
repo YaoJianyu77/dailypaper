@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Publish a daily report and paper pages into the repository content store."""
+"""Publish the daily report and optional deep-dive pages into the content store."""
 
 from __future__ import annotations
 
@@ -315,12 +315,12 @@ def daily_source_label(paper: Dict[str, Any]) -> str:
     if source == 'openalex_venue':
         return clean_render_text(paper.get('venue_source_name') or paper.get('venue') or 'OpenAlex venue paper')
     if source == 'classic_backlog':
-        return 'Classic systems paper'
+        return '经典 systems 论文'
     if source == 'arxiv_hot_fallback':
-        return 'arXiv hot-window candidate'
+        return 'arXiv 热门窗口候选'
     if source == 'semantic_scholar':
-        return 'Semantic Scholar hot-paper search'
-    return 'arXiv preprint'
+        return 'Semantic Scholar 热门检索'
+    return 'arXiv 预印本'
 
 
 def fallback_summary(paper: Dict[str, Any]) -> str:
@@ -343,6 +343,65 @@ def detail_summary(paper: Dict[str, Any]) -> str:
     return ai.get('summary_zh') or ai.get('fallback_summary') or fallback_summary(paper)
 
 
+def unique_texts(values: List[Any], limit: int | None = None) -> List[str]:
+    result: List[str] = []
+    seen: set[str] = set()
+    for value in values:
+        text = clean_render_text(value)
+        if not text:
+            continue
+        key = text.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(text)
+        if limit is not None and len(result) >= limit:
+            break
+    return result
+
+
+def join_analysis_text(values: List[Any], limit: int | None = None) -> str:
+    parts = unique_texts(values, limit=limit)
+    return ' '.join(parts)
+
+
+def daily_context_text(paper: Dict[str, Any]) -> str:
+    ai = ai_fields(paper)
+    full = full_analysis_fields(paper)
+    return join_analysis_text([
+        analysis_value(full, ai, 'background_zh', 'background_zh'),
+        analysis_value(full, ai, 'problem_zh', 'problem_zh'),
+    ])
+
+
+def daily_method_evidence_text(paper: Dict[str, Any]) -> str:
+    ai = ai_fields(paper)
+    full = full_analysis_fields(paper)
+    return join_analysis_text([
+        analysis_value(full, ai, 'method_overview_zh', 'approach_zh'),
+        analysis_value(full, ai, 'experiment_setup_zh', 'evidence_zh'),
+        full.get('main_results_zh'),
+    ])
+
+
+def daily_value_text(paper: Dict[str, Any]) -> str:
+    ai = ai_fields(paper)
+    full = full_analysis_fields(paper)
+    why_read = normalize_string_list(ai.get('why_read', []), limit=2)
+    return join_analysis_text([
+        analysis_value(full, ai, 'practical_value_zh', 'value_zh'),
+        ai.get('reading_priority_reason'),
+        '；'.join(why_read) if why_read else '',
+    ])
+
+
+def daily_risk_text(paper: Dict[str, Any]) -> str:
+    ai = ai_fields(paper)
+    full = full_analysis_fields(paper)
+    risks = normalize_string_list(full.get('limitations', []) or ai.get('risks', []), limit=3)
+    return '；'.join(unique_texts(risks, limit=3))
+
+
 def selection_lane(paper: Dict[str, Any]) -> str:
     lane = str(paper.get('selection_lane') or paper.get('source_lane') or '').strip().lower()
     if lane in {'fresh', 'established', 'classic'}:
@@ -357,6 +416,17 @@ def lane_label(paper: Dict[str, Any]) -> str:
     if lane == 'established':
         return '已验证的 systems 论文'
     return 'fresh systems 论文'
+
+
+def reading_priority_label(value: str) -> str:
+    text = clean_render_text(value).lower()
+    if text == 'high':
+        return '高优先级'
+    if text == 'medium':
+        return '中优先级'
+    if text == 'low':
+        return '低优先级'
+    return clean_render_text(value) or '未标注优先级'
 
 
 def split_daily_papers(papers: List[Dict[str, Any]]) -> tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
@@ -446,11 +516,11 @@ def build_overview(papers: List[Dict[str, Any]], paper_meta_map: Dict[str, Dict[
 
     mix: List[str] = []
     if lane_counts.get('fresh'):
-        mix.append(f'{lane_counts["fresh"]} 篇 fresh systems 论文')
+        mix.append(f'{lane_counts["fresh"]} 篇新论文主线')
     if lane_counts.get('established'):
-        mix.append(f'{lane_counts["established"]} 篇 established 论文')
+        mix.append(f'{lane_counts["established"]} 篇已验证论文')
     if classics:
-        mix.append(f'{len(classics)} 篇 classic 补课论文')
+        mix.append(f'{len(classics)} 篇经典补课论文')
     if mix:
         parts.append(f'本轮实际保留了{"、".join(mix)}，没有为凑数强行补满。')
 
@@ -458,20 +528,15 @@ def build_overview(papers: List[Dict[str, Any]], paper_meta_map: Dict[str, Dict[
         paper_id = normalize_paper_id(deep_dive.get('arxiv_id') or deep_dive.get('arxivId') or deep_dive.get('id', ''))
         page_url = paper_meta_map.get(paper_id, {}).get('page_url')
         title = str(deep_dive.get('title') or 'Untitled Paper')
-        if page_url:
-            parts.append(f'今天唯一的 full analysis 给到 [{title}]({page_url})。')
+        if page_url and full_analysis_fields(deep_dive):
+            parts.append(f'如果你今天只想深读一篇，优先看 [{title}]({page_url})。')
         else:
-            parts.append(f'今天唯一的 full analysis 给到 {title}。')
+            parts.append(f'如果你今天只完整读一篇，优先从 {title} 开始。')
 
     if classics:
         classic = classics[0]
-        paper_id = normalize_paper_id(classic.get('arxiv_id') or classic.get('arxivId') or classic.get('id', ''))
-        page_url = paper_meta_map.get(paper_id, {}).get('page_url')
         title = str(classic.get('title') or 'Untitled Paper')
-        if page_url:
-            parts.append(f'经典补课位是 [{title}]({page_url})，默认只做阅读调度，不占用今日 deep-dive 名额。')
-        else:
-            parts.append(f'经典补课位是 {title}，默认只做阅读调度，不占用今日 deep-dive 名额。')
+        parts.append(f'经典补课位是 {title}，主要用来补路线背景，不要求今天投入全文精读预算。')
 
     if not primary and classics:
         parts.append('今天的新论文候选偏弱，因此结果以经典补课为主。')
@@ -620,6 +685,16 @@ def asset_settings(config: Dict[str, Any]) -> Dict[str, Any]:
         'refresh_existing': bool(raw.get('refresh_existing', False)),
         'graph_enabled': bool(raw.get('graph_enabled', True)),
         'max_graph_related': max(0, int(raw.get('max_graph_related', 3))),
+    }
+
+
+def publish_settings(config: Dict[str, Any]) -> Dict[str, Any]:
+    raw = config.get('publish', {}) if isinstance(config, dict) else {}
+    if not isinstance(raw, dict):
+        raw = {}
+    return {
+        'generate_paper_pages': bool(raw.get('generate_paper_pages', False)),
+        'link_keywords_to_notes': bool(raw.get('link_keywords_to_notes', False)),
     }
 
 
@@ -1130,18 +1205,59 @@ def maybe_update_graph(repo_root: Path, paper: Dict[str, Any], papers: List[Dict
         logger.warning('Graph update failed for %s: %s', paper_id, exc.stderr.strip() or exc.stdout.strip() or exc)
 
 
+def paper_note_dir(repo_root: Path, paper: Dict[str, Any]) -> Path:
+    paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
+    title = str(paper.get('title') or 'Untitled Paper').strip()
+    slug = paper_slug(paper_id, title)
+    return get_papers_root(repo_root) / slug
+
+
+def should_publish_paper_page(paper: Dict[str, Any], publish_cfg: Dict[str, Any]) -> bool:
+    if publish_cfg.get('generate_paper_pages'):
+        return True
+    return bool(full_analysis_fields(paper))
+
+
+def collect_daily_publication_meta(
+    repo_root: Path,
+    paper: Dict[str, Any],
+    papers: List[Dict[str, Any]],
+    settings: Dict[str, Any],
+    rank: int,
+) -> Dict[str, str]:
+    note_dir = paper_note_dir(repo_root, paper)
+    maybe_extract_images(repo_root, note_dir, paper, settings, rank)
+    maybe_update_graph(repo_root, paper, papers, settings)
+
+    enable_rich_assets = rich_asset_enabled(paper, settings, rank)
+    daily_figure = daily_feature_figure(repo_root, note_dir, paper, settings) if enable_rich_assets else {}
+    daily_table = daily_feature_table(paper) if full_analysis_fields(paper) else {}
+    result: Dict[str, str] = {}
+    if daily_figure.get('url'):
+        result['daily_figure_url'] = daily_figure['url']
+    if daily_figure.get('caption'):
+        result['daily_figure_caption'] = daily_figure['caption']
+    if daily_figure.get('alt'):
+        result['daily_figure_alt'] = daily_figure['alt']
+    if daily_table.get('caption'):
+        result['daily_table_caption'] = daily_table['caption']
+    if daily_table.get('rows'):
+        result['daily_table_rows'] = daily_table['rows']
+    return result
+
+
 def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[str, Any]], settings: Dict[str, Any], rank: int) -> Dict[str, str]:
     paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
     title = paper.get('title', 'Untitled Paper').strip()
-    slug = paper_slug(paper_id, title)
-    note_path = get_papers_root(repo_root) / slug / 'index.md'
+    note_dir = paper_note_dir(repo_root, paper)
+    slug = note_dir.name
+    note_path = note_dir / 'index.md'
     source_url, pdf_url = paper_urls(paper_id, paper)
     ai = ai_fields(paper)
     full = full_analysis_fields(paper)
     institutions = paper_institutions(paper)
     venue_or_journal = paper_venue_or_journal(paper)
     citation_summary = paper_citation_summary(paper)
-    note_dir = note_path.parent
 
     maybe_extract_images(repo_root, note_dir, paper, settings, rank)
     maybe_update_graph(repo_root, paper, papers, settings)
@@ -1392,7 +1508,7 @@ def build_reading_strategy(papers: List[Dict[str, Any]], paper_meta_map: Dict[st
 
     if deep_dive:
         steps.append(
-            f'先精读 {paper_link(deep_dive)}，它是今天 analysis candidate score 最高、最适合做全文核对的一篇。'
+            f'先看 {paper_link(deep_dive)}，它最适合当今天唯一一篇需要投入完整阅读时间的候选。'
         )
 
     follow_up = [
@@ -1402,10 +1518,10 @@ def build_reading_strategy(papers: List[Dict[str, Any]], paper_meta_map: Dict[st
     ]
     if follow_up:
         titles = '、'.join(paper_link(paper) for paper in follow_up[:2])
-        steps.append(f'再快速浏览 {titles}，判断它们是 kernel/runtime 机会，还是只停留在局部优化。')
+        steps.append(f'再浏览 {titles}，判断它们是值得继续跟进的 systems 机会，还是只停留在局部优化。')
 
     if classics:
-        steps.append(f'最后把 {paper_link(classics[0])} 当成经典补课位，重点补路线背景，不和今日 deep-dive 竞争预算。')
+        steps.append(f'最后把 {paper_link(classics[0])} 当成经典补课位，重点补路线背景，不和今天的完整精读名额竞争。')
 
     return steps[:3]
 
@@ -1414,11 +1530,11 @@ def daily_mix_lines(papers: List[Dict[str, Any]]) -> List[str]:
     counts = Counter(selection_lane(paper) for paper in papers)
     lines: List[str] = []
     if counts.get('fresh'):
-        lines.append(f'- Fresh systems papers: {counts["fresh"]}')
+        lines.append(f'- 新论文主线: {counts["fresh"]} 篇')
     if counts.get('established'):
-        lines.append(f'- Established papers: {counts["established"]}')
+        lines.append(f'- 已验证论文: {counts["established"]} 篇')
     if counts.get('classic'):
-        lines.append(f'- Classic revisit papers: {counts["classic"]}')
+        lines.append(f'- 经典补课位: {counts["classic"]} 篇')
     return lines
 
 
@@ -1442,7 +1558,7 @@ def render_daily_asset(lines: List[str], paper_meta: Dict[str, Any], title: str)
             '',
         ])
         if paper_meta.get('daily_figure_caption'):
-            lines.append(f'*Visual cue:* {paper_meta["daily_figure_caption"]}')
+            lines.append(f'*图示线索：* {paper_meta["daily_figure_caption"]}')
         return
 
     rows = paper_meta.get('daily_table_rows')
@@ -1454,7 +1570,7 @@ def render_daily_asset(lines: List[str], paper_meta: Dict[str, Any], title: str)
                 lines.append(text)
         lines.append('```')
         if paper_meta.get('daily_table_caption'):
-            lines.append(f'*Table cue:* {paper_meta["daily_table_caption"]}')
+            lines.append(f'*表格线索：* {paper_meta["daily_table_caption"]}')
 
 
 def render_daily_paper_entry(
@@ -1468,20 +1584,20 @@ def render_daily_paper_entry(
     paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
     title = paper.get('title', 'Untitled Paper')
     paper_meta = paper_meta_map.get(paper_id, {})
-    url = paper_meta.get('page_url', '#')
+    deep_dive_url = paper_meta.get('page_url', '')
     abs_url, pdf_url = paper_urls(paper_id, paper)
     ai = ai_fields(paper)
     score = paper.get('scores', {}).get('recommendation', 'N/A')
     institutions = paper_institutions(paper)
     source_label = daily_source_label(paper)
-    heading_prefix = 'Lead' if role == 'lead' else index_label
-    heading = f'### {heading_prefix}. [{title}]({url})' if heading_prefix else f'### [{title}]({url})'
+    heading_prefix = '主推' if role == 'lead' else index_label
+    heading = f'### {heading_prefix}. {title}' if heading_prefix else f'### {title}'
     published = clean_render_text(paper.get('published', paper.get('publicationDate', 'Unknown')))
-    priority = clean_render_text(ai.get('reading_priority', 'medium'))
+    priority = reading_priority_label(str(ai.get('reading_priority', 'medium')))
     meta_bits = [
         lane_label(paper),
-        f'score {score}',
-        f'{priority} priority',
+        f'推荐分 {score}',
+        priority,
         source_label,
         published,
         compressed_author_text(paper),
@@ -1500,34 +1616,44 @@ def render_daily_paper_entry(
     if summary and summary != summarize_paper(paper):
         lines.extend(['', summary])
 
+    context_text = daily_context_text(paper)
+    if context_text:
+        lines.extend(['', f'**背景与问题：** {context_text}'])
+
+    method_text = daily_method_evidence_text(paper)
+    if method_text:
+        lines.extend(['', f'**方法与证据：** {method_text}'])
+
     if role == 'lead':
         render_daily_asset(lines, paper_meta, title)
 
-    why_now = clean_render_text(ai.get('reading_priority_reason') or '')
-    if why_now:
-        lines.extend(['', f'Why it matters today: {why_now}'])
+    value_text = daily_value_text(paper)
+    if value_text:
+        lines.extend(['', f'**为什么值得你读：** {value_text}'])
 
-    note_links = [f'[paper page]({url})', f'[Source]({abs_url})']
+    risk_text = daily_risk_text(paper)
+    if risk_text:
+        lines.extend(['', f'**需要核对：** {risk_text}'])
+
+    link_parts = [f'[Source]({abs_url})']
     if pdf_url:
-        note_links.append(f'[PDF]({pdf_url})')
+        link_parts.append(f'[PDF]({pdf_url})')
     else:
-        note_links.append('PDF unavailable')
-    lines.append(f'- Institution: {", ".join(institutions) if institutions else "Institution information not extracted"}')
-    lines.append(f'- Source: {source_label}')
-    lines.append(f'- Note: {" | ".join(note_links)}')
+        link_parts.append('PDF unavailable')
+    context_line = [
+        source_label,
+        ', '.join(institutions) if institutions else '',
+        published,
+    ]
+    lines.extend(['', f'**来源与上下文：** {" · ".join(part for part in context_line if part)}'])
+    lines.append(f'**链接：** {" | ".join(link_parts)}')
 
-    why_read = normalize_string_list(ai.get('why_read', []), limit=2)
-    if why_read:
-        lines.append(f'- Why read: {"；".join(why_read[:2])}')
-
-    risks = normalize_string_list(full_analysis_fields(paper).get('limitations', []) or ai.get('risks', []), limit=2)
-    if risks:
-        lines.append(f'- What to verify: {"；".join(risks[:2])}')
-
-    if selected_for_full_analysis(paper):
-        lines.append("- Reading mode: today's full paper analysis target")
+    if deep_dive_url and full_analysis_fields(paper):
+        lines.append(f'**精读入口：** [详细分析]({deep_dive_url})')
+    elif selected_for_full_analysis(paper):
+        lines.append('**阅读建议：** 如果今天只完整读一篇，优先从这篇开始。')
     elif is_classic_section:
-        lines.append("- Reading mode: classic background reading slot, not today's deep-dive target")
+        lines.append('**阅读建议：** 这篇更适合作为补路线背景的经典阅读，不需要和今天的新论文争夺全文精读时间。')
 
 
 def build_daily_body(
@@ -1541,21 +1667,31 @@ def build_daily_body(
     lines = [
         f'# Daily Paper Report - {report_date}',
         '',
-        '## Overview',
+        '## 今日概览',
         build_overview(papers, paper_meta_map),
     ]
 
+    strategy = build_reading_strategy(papers, paper_meta_map)
+    if strategy:
+        lines.extend(['', '## 今日阅读顺序'])
+        lines.extend(f'- {item}' for item in strategy)
+
+    mix_lines = daily_mix_lines(papers)
+    if mix_lines:
+        lines.extend(['', '## 今日选择结构'])
+        lines.extend(mix_lines)
+
     if primary_papers:
-        lines.extend(['', '## Lead Paper'])
+        lines.extend(['', '## 今日主推'])
         render_daily_paper_entry(lines, primary_papers[0], paper_meta_map, '', role='lead')
         supporting = primary_papers[1:]
         if supporting:
-            lines.extend(['', '## Supporting Reads'])
+            lines.extend(['', '## 继续跟进'])
             for index, paper in enumerate(supporting, start=1):
                 render_daily_paper_entry(lines, paper, paper_meta_map, str(index), role='supporting')
 
     if classic_papers:
-        title = '## Classic Revisit' if len(classic_papers) == 1 else '## Classic Revisits'
+        title = '## 经典补课'
         lines.extend(['', title])
         for paper in classic_papers:
             render_daily_paper_entry(lines, paper, paper_meta_map, '', is_classic_section=True, role='classic')
@@ -1625,6 +1761,7 @@ def main() -> int:
     repo_root = get_repo_root(args.repo_root, __file__)
     config = load_config(repo_root, args.config)
     settings = asset_settings(config)
+    publication = publish_settings(config)
     payload = json.loads(Path(args.input).read_text(encoding='utf-8'))
     report_date = payload.get('target_date') or datetime.now().strftime('%Y-%m-%d')
     papers = payload.get('top_papers', [])
@@ -1632,7 +1769,10 @@ def main() -> int:
     paper_page_meta: Dict[str, Dict[str, str]] = {}
     for rank, paper in enumerate(papers, start=1):
         paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
-        paper_page_meta[paper_id] = ensure_paper_page(repo_root, paper, papers, settings, rank)
+        if should_publish_paper_page(paper, publication):
+            paper_page_meta[paper_id] = ensure_paper_page(repo_root, paper, papers, settings, rank)
+        else:
+            paper_page_meta[paper_id] = collect_daily_publication_meta(repo_root, paper, papers, settings, rank)
 
     daily_path = get_daily_root(repo_root) / f'{report_date}.md'
     frontmatter = {
@@ -1652,7 +1792,8 @@ def main() -> int:
 
     body = build_daily_body(report_date, payload, papers, paper_page_meta)
     write_markdown(daily_path, frontmatter, body)
-    run_linking(repo_root, daily_path)
+    if publication['link_keywords_to_notes']:
+        run_linking(repo_root, daily_path)
 
     latest_entry = {
         'date': report_date,

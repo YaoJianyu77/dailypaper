@@ -1011,12 +1011,17 @@ def main() -> int:
     parser.add_argument('--output', required=True, help='Output analyzed JSON')
     parser.add_argument('--config', default=None, help='Config YAML path')
     parser.add_argument('--repo-root', default=None, help='Repository root path')
+    parser.add_argument('--paper-id', default=None, help='Analyze only the specified paper ID')
+    parser.add_argument('--top-n', type=int, default=None, help='Override how many top analysis candidates to process')
     parser.add_argument('--strict', action='store_true', help='Fail instead of falling back on errors')
     args = parser.parse_args()
 
     repo_root = get_repo_root(args.repo_root, __file__)
     config = load_config(args.config)
     settings = normalize_analysis_settings(config)
+    if args.top_n is not None:
+        settings['top_n'] = max(0, int(args.top_n))
+    target_paper_id = normalize_paper_id(args.paper_id or '')
 
     input_path = Path(args.input)
     output_path = Path(args.output)
@@ -1049,6 +1054,14 @@ def main() -> int:
             -float(paper.get('scores', {}).get('recommendation', 0) or 0),
         ),
     )
+    if target_paper_id:
+        ranked_papers = [
+            paper for paper in ranked_papers
+            if normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', '')) == target_paper_id
+        ]
+        if not ranked_papers:
+            raise SystemExit(f'Paper ID not found in input: {target_paper_id}')
+        settings['top_n'] = len(ranked_papers)
 
     for paper in result.get('top_papers', []):
         paper['selected_for_full_analysis'] = False
