@@ -15,7 +15,15 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import yaml
 
-from content_store import get_papers_root, get_repo_root, iter_markdown_files, load_markdown, relative_site_url, write_json
+from content_store import (
+    get_deep_dives_root,
+    get_papers_root,
+    get_repo_root,
+    iter_markdown_files,
+    load_markdown,
+    relative_site_url,
+    write_json,
+)
 from common_words import COMMON_WORDS
 
 logger = logging.getLogger(__name__)
@@ -53,23 +61,32 @@ def normalize_tags(value) -> List[str]:
 
 def scan_notes(repo_root: Path) -> List[Dict]:
     notes: List[Dict] = []
-    papers_root = get_papers_root(repo_root)
+    note_roots = [
+        get_deep_dives_root(repo_root),
+        get_papers_root(repo_root),
+    ]
 
-    for md_file in iter_markdown_files(papers_root):
-        if md_file.parent.name == 'images':
-            continue
-        frontmatter, _ = load_markdown(md_file)
-        title = frontmatter.get('title', md_file.parent.name)
-        tags = normalize_tags(frontmatter.get('tags', []))
-        slug = frontmatter.get('slug', md_file.parent.name)
-        notes.append({
-            'title': title,
-            'slug': slug,
-            'source_path': md_file.relative_to(repo_root).as_posix(),
-            'url': relative_site_url(md_file, repo_root),
-            'title_keywords': extract_keywords_from_title(title),
-            'tag_keywords': [tag for tag in tags if 3 <= len(tag) <= 30 and tag.lower() not in COMMON_WORDS],
-        })
+    seen_urls = set()
+    for root in note_roots:
+        for md_file in iter_markdown_files(root):
+            if md_file.parent.name == 'images':
+                continue
+            frontmatter, _ = load_markdown(md_file)
+            title = frontmatter.get('title', md_file.parent.name)
+            tags = normalize_tags(frontmatter.get('tags', []))
+            slug = frontmatter.get('slug', md_file.parent.name)
+            url = relative_site_url(md_file, repo_root)
+            if url in seen_urls:
+                continue
+            seen_urls.add(url)
+            notes.append({
+                'title': title,
+                'slug': slug,
+                'source_path': md_file.relative_to(repo_root).as_posix(),
+                'url': url,
+                'title_keywords': extract_keywords_from_title(title),
+                'tag_keywords': [tag for tag in tags if 3 <= len(tag) <= 30 and tag.lower() not in COMMON_WORDS],
+            })
 
     return notes
 

@@ -3,6 +3,7 @@ site:
   timezone: "America/New_York"
   base_url: ""
   show_papers_nav: false
+  show_deep_dives_nav: false
 
 build:
   output_dir: "dist"
@@ -57,7 +58,7 @@ analysis:
   pdf_page_limit: 20
 
 publish:
-  generate_paper_pages: false
+  generate_deep_dives: false
   link_keywords_to_notes: false
 
 search:

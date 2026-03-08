@@ -7,6 +7,7 @@ import argparse
 import json
 import logging
 import re
+import shutil
 import subprocess
 import sys
 from collections import Counter
@@ -19,7 +20,9 @@ import yaml
 from content_store import (
     get_content_root,
     get_daily_root,
+    get_deep_dives_root,
     get_meta_root,
+    get_paper_assets_root,
     get_papers_root,
     get_repo_root,
     paper_slug,
@@ -561,12 +564,18 @@ def paper_url_by_id(repo_root: Path, papers: List[Dict[str, Any]], paper_id: str
         current_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
         if current_id == normalized:
             slug = paper_slug(current_id, str(paper.get('title') or fallback_title or 'paper'))
-            path = get_papers_root(repo_root) / slug / 'index.md'
-            return relative_site_url(path, repo_root)
+            deep_dive_path = get_deep_dives_root(repo_root) / slug / 'index.md'
+            if deep_dive_path.exists():
+                return relative_site_url(deep_dive_path, repo_root)
+            legacy_path = get_papers_root(repo_root) / slug / 'index.md'
+            if legacy_path.exists():
+                return relative_site_url(legacy_path, repo_root)
     if fallback_title:
-        path = get_papers_root(repo_root) / paper_slug(normalized, fallback_title) / 'index.md'
-        if path.exists():
-            return relative_site_url(path, repo_root)
+        slug = paper_slug(normalized, fallback_title)
+        for root in (get_deep_dives_root(repo_root), get_papers_root(repo_root)):
+            path = root / slug / 'index.md'
+            if path.exists():
+                return relative_site_url(path, repo_root)
     return None
 
 
@@ -692,8 +701,11 @@ def publish_settings(config: Dict[str, Any]) -> Dict[str, Any]:
     raw = config.get('publish', {}) if isinstance(config, dict) else {}
     if not isinstance(raw, dict):
         raw = {}
+    generate_deep_dives = raw.get('generate_deep_dives')
+    if generate_deep_dives is None:
+        generate_deep_dives = raw.get('generate_paper_pages', False)
     return {
-        'generate_paper_pages': bool(raw.get('generate_paper_pages', False)),
+        'generate_deep_dives': bool(generate_deep_dives),
         'link_keywords_to_notes': bool(raw.get('link_keywords_to_notes', False)),
     }
 
@@ -859,17 +871,43 @@ def normalize_graph_edge_type(value: str) -> str:
     return 'related'
 
 
-def maybe_extract_images(repo_root: Path, note_dir: Path, paper: Dict[str, Any], settings: Dict[str, Any], rank: int) -> None:
+def maybe_copy_legacy_assets(repo_root: Path, asset_dir: Path, paper: Dict[str, Any]) -> bool:
+    image_dir = asset_dir / 'images'
+    existing_images = [
+        path for path in image_dir.iterdir()
+        if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
+    ] if image_dir.exists() else []
+    if existing_images:
+        return True
+
+    legacy_dir = legacy_paper_note_dir(repo_root, paper) / 'images'
+    if not legacy_dir.exists():
+        return False
+
+    image_dir.mkdir(parents=True, exist_ok=True)
+    copied = False
+    for path in legacy_dir.iterdir():
+        if not path.is_file():
+            continue
+        target = image_dir / path.name
+        shutil.copy2(path, target)
+        copied = True
+    return copied
+
+
+def maybe_extract_images(repo_root: Path, asset_dir: Path, paper: Dict[str, Any], settings: Dict[str, Any], rank: int) -> None:
     if not rich_asset_enabled(paper, settings, rank):
         return
 
-    image_dir = note_dir / 'images'
+    image_dir = asset_dir / 'images'
     index_path = image_dir / 'index.md'
     existing_images = [
         path for path in image_dir.iterdir()
         if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
     ] if image_dir.exists() else []
     if existing_images and index_path.exists() and not settings['refresh_existing']:
+        return
+    if maybe_copy_legacy_assets(repo_root, asset_dir, paper) and not settings['refresh_existing']:
         return
 
     paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', ''))
@@ -901,8 +939,8 @@ def maybe_extract_images(repo_root: Path, note_dir: Path, paper: Dict[str, Any],
         logger.warning('Image extraction failed for %s: %s', paper_id, exc.stderr.strip() or exc.stdout.strip() or exc)
 
 
-def image_markdown_lines(note_dir: Path, max_images: int) -> List[str]:
-    image_dir = note_dir / 'images'
+def image_markdown_lines(asset_dir: Path, max_images: int) -> List[str]:
+    image_dir = asset_dir / 'images'
     if not image_dir.exists() or max_images <= 0:
         return []
 
@@ -917,8 +955,8 @@ def image_markdown_lines(note_dir: Path, max_images: int) -> List[str]:
     return lines
 
 
-def available_image_files(note_dir: Path) -> List[Path]:
-    image_dir = note_dir / 'images'
+def available_image_files(asset_dir: Path) -> List[Path]:
+    image_dir = asset_dir / 'images'
     if not image_dir.exists():
         return []
     return [
@@ -982,8 +1020,8 @@ def resolve_image_file(image_files: List[Path], token: str) -> Path | None:
     return scored[0][1]
 
 
-def contextual_figure_entries(note_dir: Path, paper: Dict[str, Any], max_images: int) -> List[Dict[str, Any]]:
-    image_files = available_image_files(note_dir)
+def contextual_figure_entries(repo_root: Path, asset_dir: Path, paper: Dict[str, Any], max_images: int) -> List[Dict[str, Any]]:
+    image_files = available_image_files(asset_dir)
     if not image_files:
         return []
     limit = max_images if max_images > 0 else None
@@ -1000,6 +1038,7 @@ def contextual_figure_entries(note_dir: Path, paper: Dict[str, Any], max_images:
         role = inferred_role if inferred_role != 'other' else str(item.get('role_hint') or '').strip() or 'other'
         entries.append({
             'path': image_path,
+            'url': relative_asset_url(image_path, repo_root),
             'caption': caption,
             'role': role,
         })
@@ -1010,6 +1049,7 @@ def contextual_figure_entries(note_dir: Path, paper: Dict[str, Any], max_images:
                 continue
             entries.append({
                 'path': path,
+                'url': relative_asset_url(path, repo_root),
                 'caption': '',
                 'role': classify_figure_role(path.stem),
             })
@@ -1019,6 +1059,7 @@ def contextual_figure_entries(note_dir: Path, paper: Dict[str, Any], max_images:
     for path in fallback_files:
         entries.append({
             'path': path,
+            'url': relative_asset_url(path, repo_root),
             'caption': '',
             'role': classify_figure_role(path.stem),
         })
@@ -1040,7 +1081,7 @@ def pick_figure(entries: List[Dict[str, Any]], preferred_roles: List[str], used:
 
 def figure_block(title: str, entry: Dict[str, Any]) -> List[str]:
     path = entry['path']
-    lines = ['', f'### {title}', f'![{path.stem}](images/{path.name})', '']
+    lines = ['', f'### {title}', f'![{path.stem}]({entry["url"]})', '']
     caption = str(entry.get('caption') or '').strip()
     if caption:
         lines.append(f'*Figure cue:* {caption}')
@@ -1129,8 +1170,8 @@ def pick_table(entries: List[Dict[str, Any]], preferred_roles: List[str], used: 
     return None
 
 
-def daily_feature_figure(repo_root: Path, note_dir: Path, paper: Dict[str, Any], settings: Dict[str, Any]) -> Dict[str, str]:
-    entries = contextual_figure_entries(note_dir, paper, settings['max_images_per_paper'])
+def daily_feature_figure(repo_root: Path, asset_dir: Path, paper: Dict[str, Any], settings: Dict[str, Any]) -> Dict[str, str]:
+    entries = contextual_figure_entries(repo_root, asset_dir, paper, settings['max_images_per_paper'])
     used: set[str] = set()
     preferred = (
         pick_figure(entries, ['results', 'method', 'examples', 'other'], used)
@@ -1139,7 +1180,7 @@ def daily_feature_figure(repo_root: Path, note_dir: Path, paper: Dict[str, Any],
     if not preferred:
         return {}
     return {
-        'url': relative_asset_url(preferred['path'], repo_root),
+        'url': str(preferred.get('url') or relative_asset_url(preferred['path'], repo_root)),
         'caption': str(preferred.get('caption') or '').strip(),
         'alt': preferred['path'].stem,
     }
@@ -1205,15 +1246,26 @@ def maybe_update_graph(repo_root: Path, paper: Dict[str, Any], papers: List[Dict
         logger.warning('Graph update failed for %s: %s', paper_id, exc.stderr.strip() or exc.stdout.strip() or exc)
 
 
-def paper_note_dir(repo_root: Path, paper: Dict[str, Any]) -> Path:
+def paper_storage_slug(paper: Dict[str, Any]) -> str:
     paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
     title = str(paper.get('title') or 'Untitled Paper').strip()
-    slug = paper_slug(paper_id, title)
-    return get_papers_root(repo_root) / slug
+    return paper_slug(paper_id, title)
 
 
-def should_publish_paper_page(paper: Dict[str, Any], publish_cfg: Dict[str, Any]) -> bool:
-    if publish_cfg.get('generate_paper_pages'):
+def legacy_paper_note_dir(repo_root: Path, paper: Dict[str, Any]) -> Path:
+    return get_papers_root(repo_root) / paper_storage_slug(paper)
+
+
+def deep_dive_note_dir(repo_root: Path, paper: Dict[str, Any]) -> Path:
+    return get_deep_dives_root(repo_root) / paper_storage_slug(paper)
+
+
+def paper_asset_dir(repo_root: Path, paper: Dict[str, Any]) -> Path:
+    return get_paper_assets_root(repo_root) / paper_storage_slug(paper)
+
+
+def should_publish_deep_dive(paper: Dict[str, Any], publish_cfg: Dict[str, Any]) -> bool:
+    if publish_cfg.get('generate_deep_dives'):
         return True
     return bool(full_analysis_fields(paper))
 
@@ -1225,12 +1277,12 @@ def collect_daily_publication_meta(
     settings: Dict[str, Any],
     rank: int,
 ) -> Dict[str, str]:
-    note_dir = paper_note_dir(repo_root, paper)
-    maybe_extract_images(repo_root, note_dir, paper, settings, rank)
+    asset_dir = paper_asset_dir(repo_root, paper)
+    maybe_extract_images(repo_root, asset_dir, paper, settings, rank)
     maybe_update_graph(repo_root, paper, papers, settings)
 
     enable_rich_assets = rich_asset_enabled(paper, settings, rank)
-    daily_figure = daily_feature_figure(repo_root, note_dir, paper, settings) if enable_rich_assets else {}
+    daily_figure = daily_feature_figure(repo_root, asset_dir, paper, settings) if enable_rich_assets else {}
     daily_table = daily_feature_table(paper) if full_analysis_fields(paper) else {}
     result: Dict[str, str] = {}
     if daily_figure.get('url'):
@@ -1246,10 +1298,11 @@ def collect_daily_publication_meta(
     return result
 
 
-def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[str, Any]], settings: Dict[str, Any], rank: int) -> Dict[str, str]:
+def ensure_deep_dive_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[str, Any]], settings: Dict[str, Any], rank: int) -> Dict[str, str]:
     paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
     title = paper.get('title', 'Untitled Paper').strip()
-    note_dir = paper_note_dir(repo_root, paper)
+    note_dir = deep_dive_note_dir(repo_root, paper)
+    asset_dir = paper_asset_dir(repo_root, paper)
     slug = note_dir.name
     note_path = note_dir / 'index.md'
     source_url, pdf_url = paper_urls(paper_id, paper)
@@ -1259,11 +1312,11 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
     venue_or_journal = paper_venue_or_journal(paper)
     citation_summary = paper_citation_summary(paper)
 
-    maybe_extract_images(repo_root, note_dir, paper, settings, rank)
+    maybe_extract_images(repo_root, asset_dir, paper, settings, rank)
     maybe_update_graph(repo_root, paper, papers, settings)
 
     enable_rich_assets = rich_asset_enabled(paper, settings, rank)
-    figure_entries = contextual_figure_entries(note_dir, paper, settings['max_images_per_paper']) if enable_rich_assets else []
+    figure_entries = contextual_figure_entries(repo_root, asset_dir, paper, settings['max_images_per_paper']) if enable_rich_assets else []
     table_entries = full_analysis_table_context(paper)[:3]
     used_figure_paths: set[str] = set()
     used_table_indexes: set[int] = set()
@@ -1276,7 +1329,7 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
         entry for entry in figure_entries
         if str(entry['path']) not in used_figure_paths
     ]
-    daily_figure = daily_feature_figure(repo_root, note_dir, paper, settings) if enable_rich_assets else {}
+    daily_figure = daily_feature_figure(repo_root, asset_dir, paper, settings) if enable_rich_assets else {}
     daily_table = daily_feature_table(paper) if full else {}
 
     frontmatter = {
@@ -1290,7 +1343,7 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
         'source_url': source_url,
         'pdf_url': pdf_url,
         'scores': paper.get('scores', {}),
-        'tags': ['paper-note'],
+        'tags': ['deep-dive'],
         'status': 'generated',
         'updated': datetime.now().strftime('%Y-%m-%d'),
     }
@@ -1432,8 +1485,7 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
         body_lines.extend([
             '',
             '## Additional Assets',
-            '- 其余提取到的 figures 保存在 `images/` 目录，默认不全部展开，避免让页面被资产列表主导。',
-            '- Full asset manifest: [images/index.md](images/index.md)',
+            '- 其余提取到的 figures 已保存在共享 assets 目录中，页面默认不全部展开，避免让资产列表主导阅读。',
         ])
 
     body_lines.extend([
@@ -1454,13 +1506,11 @@ def ensure_paper_page(repo_root: Path, paper: Dict[str, Any], papers: List[Dict[
     if isinstance(analysis_signals, list) and analysis_signals:
         body_lines.append(f'- Analysis signals: {", ".join(str(item) for item in analysis_signals[:8])}')
 
-    images_index = note_dir / 'images' / 'index.md'
-    if images_index.exists() and available_image_files(note_dir):
+    if available_image_files(asset_dir):
         body_lines.extend([
             '',
             '## Assets',
-            '- Extracted assets are stored in the `images/` folder next to this page.',
-            '- Browse the image manifest here: [images/index.md](images/index.md)',
+            '- Extracted figures and tables are stored in the shared asset store used by the daily report and this deep dive.',
         ])
 
     write_markdown(note_path, frontmatter, '\n'.join(body_lines) + '\n')
@@ -1769,8 +1819,8 @@ def main() -> int:
     paper_page_meta: Dict[str, Dict[str, str]] = {}
     for rank, paper in enumerate(papers, start=1):
         paper_id = normalize_paper_id(paper.get('arxiv_id') or paper.get('arxivId') or paper.get('id', 'unknown'))
-        if should_publish_paper_page(paper, publication):
-            paper_page_meta[paper_id] = ensure_paper_page(repo_root, paper, papers, settings, rank)
+        if should_publish_deep_dive(paper, publication):
+            paper_page_meta[paper_id] = ensure_deep_dive_page(repo_root, paper, papers, settings, rank)
         else:
             paper_page_meta[paper_id] = collect_daily_publication_meta(repo_root, paper, papers, settings, rank)
 

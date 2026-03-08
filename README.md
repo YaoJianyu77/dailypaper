@@ -333,10 +333,10 @@ uv run --with-requirements requirements.txt python scripts/run_local_daily.py --
 
 - `scripts/content_store.py`: shared repo path and markdown helpers
 - `scripts/ai_enrich.py`: AI-generated Chinese summaries and daily overview
-- `scripts/publish_daily.py`: generate `content/daily/` and `content/papers/`
+- `scripts/publish_daily.py`: generate `content/daily/`, optional `content/deep-dives/`, and shared `content/assets/`
 - `scripts/build_site.py`: static site compiler
 - `start-my-day/scripts/search_arxiv.py`: search and ranking
-- `start-my-day/scripts/scan_existing_notes.py`: build keyword index from `content/papers/`
+- `start-my-day/scripts/scan_existing_notes.py`: build keyword index from published deep dives and legacy note pages
 - `start-my-day/scripts/link_keywords.py`: replace keywords with standard markdown links
-- `paper-analyze/scripts/generate_note.py`: generate a repository paper page
+- `paper-analyze/scripts/generate_note.py`: generate a legacy repository paper page
 - `paper-analyze/scripts/update_graph.py`: update `content/meta/graph_data.json`

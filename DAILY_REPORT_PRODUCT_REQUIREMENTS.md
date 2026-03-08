@@ -13,7 +13,7 @@ Target information architecture:
 - Default output: `content/daily/YYYY-MM-DD.md`
 - Default reading experience: one strong daily report that already supports read / skip decisions
 - Optional deep analysis output: only generated when the user explicitly asks for it
-- Preferred future path for deep analysis pages: `content/deep-dives/`
+- Preferred deep-analysis path: `content/deep-dives/`
 
 ## Confirmed User Preferences
 

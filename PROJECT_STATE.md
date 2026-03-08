@@ -51,6 +51,9 @@ tail -f /home/y/dailypaper/state/logs/local_daily.log
 - The local remote used by the workflow is `dailypaper`.
 - Local SSH push to `git@github.com:YaoJianyu77/dailypaper.git` is configured.
 - Current product-shape requirements for the homepage, daily report, and on-demand deep dives live in `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`.
+- The default public artifact is the daily report under `content/daily/`, not a generated page for every recommended paper.
+- On-demand deep dives are published under `content/deep-dives/`.
+- Shared figures used by the daily report now live under `content/assets/papers/` instead of depending on `content/papers/*/images`.
 - The local pipeline was repaired after a `codex_enrich.py` prompt-builder signature mismatch.
 - Semantic Scholar rate limits are now handled gracefully.
   - If `SEMANTIC_SCHOLAR_API_KEY` is missing and S2 returns `429`, the run continues with arXiv results.

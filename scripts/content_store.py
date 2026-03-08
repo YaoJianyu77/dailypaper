@@ -37,6 +37,18 @@ def get_papers_root(repo_root: Path) -> Path:
     return get_content_root(repo_root) / "papers"
 
 
+def get_deep_dives_root(repo_root: Path) -> Path:
+    return get_content_root(repo_root) / "deep-dives"
+
+
+def get_asset_root(repo_root: Path) -> Path:
+    return get_content_root(repo_root) / "assets"
+
+
+def get_paper_assets_root(repo_root: Path) -> Path:
+    return get_asset_root(repo_root) / "papers"
+
+
 def get_daily_root(repo_root: Path) -> Path:
     return get_content_root(repo_root) / "daily"
 
@@ -124,4 +136,10 @@ def iter_paper_note_files(root: Path) -> Iterable[Path]:
         return []
     # Paper pages live at content/papers/<slug>/index.md. Nested manifests such
     # as content/papers/<slug>/images/index.md should not be treated as papers.
+    return sorted(root.glob("*/index.md"))
+
+
+def iter_deep_dive_files(root: Path) -> Iterable[Path]:
+    if not root.exists():
+        return []
     return sorted(root.glob("*/index.md"))

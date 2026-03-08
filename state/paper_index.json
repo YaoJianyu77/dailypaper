@@ -69,8 +69,14 @@
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 4,
+      "recommended_count": 5,
       "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.8,
+          "analysis_candidate": 9.28,
+          "lane": "fresh"
+        },
         {
           "date": "2026-03-08",
           "recommendation": 9.8,
@@ -267,8 +273,14 @@
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 4,
+      "recommended_count": 5,
       "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 9.27,
+          "analysis_candidate": 7.57,
+          "lane": "fresh"
+        },
         {
           "date": "2026-03-08",
           "recommendation": 9.27,
@@ -365,8 +377,14 @@
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 4,
+      "recommended_count": 5,
       "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 7.22,
+          "analysis_candidate": 7.18,
+          "lane": "fresh"
+        },
         {
           "date": "2026-03-08",
           "recommendation": 7.22,
@@ -633,8 +651,14 @@
       "first_seen_date": "2026-03-08",
       "last_seen_date": "2026-03-08",
       "last_recommended_date": "2026-03-08",
-      "recommended_count": 4,
+      "recommended_count": 5,
       "scores_history": [
+        {
+          "date": "2026-03-08",
+          "recommendation": 6.97,
+          "analysis_candidate": 6.13,
+          "lane": "fresh"
+        },
         {
           "date": "2026-03-08",
           "recommendation": 6.97,
