@@ -13,7 +13,16 @@ from typing import Dict, List, Tuple
 
 import yaml
 
-from content_store import get_content_root, get_daily_root, get_meta_root, get_papers_root, get_repo_root, iter_markdown_files, load_markdown, read_json
+from content_store import (
+    get_content_root,
+    get_daily_root,
+    get_meta_root,
+    get_papers_root,
+    get_repo_root,
+    iter_paper_note_files,
+    load_markdown,
+    read_json,
+)
 
 DEFAULT_SITE_TITLE = 'DailyPaper'
 
@@ -371,7 +380,7 @@ def main() -> int:
     daily_index = read_json(get_meta_root(repo_root) / 'daily-index.json', []) or []
 
     paper_docs = []
-    for path in iter_markdown_files(get_papers_root(repo_root)):
+    for path in iter_paper_note_files(get_papers_root(repo_root)):
         frontmatter, body = load_markdown(path)
         paper_docs.append((frontmatter, path))
     paper_docs.sort(key=paper_doc_sort_key)

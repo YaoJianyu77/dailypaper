@@ -1668,8 +1668,3 @@ def main() -> int:
 
 if __name__ == '__main__':
     raise SystemExit(main())
-    note_links = [f'[paper page]({url})', f'[Source]({abs_url})']
-    if pdf_url:
-        note_links.append(f'[PDF]({pdf_url})')
-    else:
-        note_links.append('PDF unavailable')

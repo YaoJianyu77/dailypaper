@@ -117,3 +117,11 @@ def iter_markdown_files(root: Path) -> Iterable[Path]:
     if not root.exists():
         return []
     return sorted(root.rglob("*.md"))
+
+
+def iter_paper_note_files(root: Path) -> Iterable[Path]:
+    if not root.exists():
+        return []
+    # Paper pages live at content/papers/<slug>/index.md. Nested manifests such
+    # as content/papers/<slug>/images/index.md should not be treated as papers.
+    return sorted(root.glob("*/index.md"))
