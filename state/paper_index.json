@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-08",
+  "last_updated": "2026-03-09",
   "papers": [
     {
       "paper_id": "2603.05210v1",
@@ -43,6 +43,33 @@
         }
       ],
       "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "dblp:conf/cgo/HeY25",
+      "title": "CuAsmRL: Optimizing GPU SASS Schedules via Deep Reinforcement Learning.",
+      "domain": "Low-level Code And Assembly Generation",
+      "published": "2025",
+      "source_lane": "established",
+      "topics": [
+        "GPU SASS scheduling",
+        "CUDA kernel optimization",
+        "deep reinforcement learning",
+        "assembly-level optimization",
+        "specialized kernels"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-09",
+      "last_seen_date": "2026-03-09",
+      "last_recommended_date": "2026-03-09",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-09",
+          "recommendation": 4.34,
+          "lane": "established"
+        }
+      ],
+      "cooldown_until": "2026-05-08"
     },
     {
       "paper_id": "2602.06036v1",
@@ -250,6 +277,34 @@
         }
       ],
       "cooldown_until": "2026-03-28"
+    },
+    {
+      "paper_id": "dblp:conf/osdi/GuanF0RRY0A25",
+      "title": "KPerfIR: Towards a Open and Compiler-centric Ecosystem for GPU Kernel Performance Tooling on Modern AI Workloads.",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2025",
+      "source_lane": "established",
+      "topics": [
+        "GPU kernel profiling",
+        "compiler-centric tooling",
+        "Triton",
+        "AI workloads",
+        "performance analysis",
+        "intra-kernel optimization"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-09",
+      "last_seen_date": "2026-03-09",
+      "last_recommended_date": "2026-03-09",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-09",
+          "recommendation": 4.79,
+          "lane": "established"
+        }
+      ],
+      "cooldown_until": "2026-05-08"
     },
     {
       "paper_id": "2602.06019v1",
@@ -652,6 +707,34 @@
       "cooldown_until": "2026-05-06"
     },
     {
+      "paper_id": "2602.07223v1",
+      "title": "SpecAttn: Co-Designing Sparse Attention with Self-Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "published": "2026-02-06T22:12:52Z",
+      "source_lane": "fresh",
+      "topics": [
+        "speculative decoding",
+        "self-speculative decoding",
+        "sparse attention",
+        "KV cache",
+        "long-context inference",
+        "throughput"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-09",
+      "last_seen_date": "2026-03-09",
+      "last_recommended_date": "2026-03-09",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-09",
+          "recommendation": 9.8,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-08"
+    },
+    {
       "paper_id": "2602.06161v1",
       "title": "Stop the Flip-Flop: Context-Preserving Verification for Fast Revocable Diffusion Decoding",
       "domain": "LLM Inference Systems",
@@ -733,6 +816,90 @@
         }
       ],
       "cooldown_until": "2026-05-07"
+    },
+    {
+      "paper_id": "dblp:conf/cgo/CastelloBDIM24",
+      "title": "Tackling the Matrix Multiplication Micro-Kernel Generation with Exo.",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2024",
+      "source_lane": "established",
+      "topics": [
+        "GEMM",
+        "matrix multiplication",
+        "micro-kernel generation",
+        "Exo",
+        "performance portability",
+        "instruction-set description"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-09",
+      "last_seen_date": "2026-03-09",
+      "last_recommended_date": "2026-03-09",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-09",
+          "recommendation": 4.21,
+          "lane": "established"
+        }
+      ],
+      "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2602.06932v1",
+      "title": "When RL Meets Adaptive Speculative Training: A Unified Training-Serving System",
+      "domain": "LLM Inference Systems",
+      "published": "2026-02-06T18:28:54Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference systems",
+        "speculative decoding",
+        "online adaptation",
+        "reinforcement learning",
+        "serving efficiency",
+        "training-serving co-design"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-09",
+      "last_seen_date": "2026-03-09",
+      "last_recommended_date": "2026-03-09",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-09",
+          "recommendation": 9.27,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2602.07265v1",
+      "title": "XShare: Collaborative in-Batch Expert Sharing for Faster MoE Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-02-06T23:33:07Z",
+      "source_lane": "fresh",
+      "topics": [
+        "Mixture-of-Experts inference",
+        "batch-aware expert selection",
+        "expert sharing",
+        "speculative decoding",
+        "expert-parallel serving",
+        "GPU load reduction"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-09",
+      "last_seen_date": "2026-03-09",
+      "last_recommended_date": "2026-03-09",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-09",
+          "recommendation": 8.12,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-08"
     }
   ]
 }

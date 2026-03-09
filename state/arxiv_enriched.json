@@ -1,33 +1,33 @@
 {
-  "target_date": "2026-03-08",
+  "target_date": "2026-03-09",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-06",
-      "end": "2026-03-08"
+      "start": "2026-02-07",
+      "end": "2026-03-09"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-08",
-      "end": "2026-02-05"
+      "start": "2025-03-09",
+      "end": "2026-02-06"
     }
   },
-  "total_found": 281,
-  "total_venue": 1,
-  "total_filtered": 9,
-  "total_recent": 200,
+  "total_found": 92,
+  "total_venue": 12,
+  "total_filtered": 15,
+  "total_recent": 0,
   "total_hot": 80,
-  "total_unique": 9,
+  "total_unique": 15,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 4,
+    "selected_count": 6,
     "lane_counts": {
-      "fresh": 4,
-      "established": 0,
+      "fresh": 3,
+      "established": 3,
       "classic": 0,
-      "history_filtered": 5,
+      "history_filtered": 3,
       "history_relaxed": 0,
       "classic_slot_active": 0
     },
@@ -40,35 +40,35 @@
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2602.06036v1",
-      "arxiv_id": "2602.06036v1",
-      "title": "DFlash: Block Diffusion for Flash Speculative Decoding",
-      "summary": "Autoregressive large language models (LLMs) deliver strong performance but require inherently sequential decoding, leading to high inference latency and poor GPU utilization. Speculative decoding mitigates this bottleneck by using a fast draft model whose outputs are verified in parallel by the target LLM; however, existing methods still rely on autoregressive drafting, which remains sequential and limits practical speedups. Diffusion LLMs offer a promising alternative by enabling parallel generation, but current diffusion models typically underperform compared with autoregressive models. In this paper, we introduce DFlash, a speculative decoding framework that employs a lightweight block diffusion model for parallel drafting. By generating draft tokens in a single forward pass and conditioning the draft model on context features extracted from the target model, DFlash enables efficient drafting with high-quality outputs and higher acceptance rates. Experiments show that DFlash achieves over 6x lossless acceleration across a range of models and tasks, delivering up to 2.5x higher speedup than the state-of-the-art speculative decoding method EAGLE-3.",
+      "id": "http://arxiv.org/abs/2602.07223v1",
+      "arxiv_id": "2602.07223v1",
+      "title": "SpecAttn: Co-Designing Sparse Attention with Self-Speculative Decoding",
+      "summary": "Long-context large language model (LLM) inference has become the norm for today's AI applications. However, it is severely bottlenecked by the increasing memory demands of its KV cache. Previous works have shown that self-speculative decoding with sparse attention, where tokens are drafted using a subset of the KV cache and verified in parallel with full KV cache, speeds up inference in a lossless way. However, this approach relies on standalone KV selection algorithms to select the KV entries used for drafting and overlooks that the criticality of each KV entry is inherently computed during verification. In this paper, we propose SpecAttn, a self-speculative decoding method with verification-guided sparse attention. SpecAttn identifies critical KV entries as a byproduct of verification and only loads these entries when drafting subsequent tokens. This not only improves draft token acceptance rate but also incurs low KV selection overhead, thereby improving decoding throughput. SpecAttn achieves 2.81$\\times$ higher throughput over vanilla auto-regressive decoding and 1.29$\\times$ improvement over state-of-the-art sparsity-based self-speculative decoding methods.",
       "authors": [
-        "Jian Chen",
-        "Yesheng Liang",
-        "Zhijian Liu"
+        "Yikang Yue",
+        "Yuqi Xue",
+        "Jian Huang"
       ],
       "author_details": [
         {
-          "name": "Jian Chen"
+          "name": "Yikang Yue"
         },
         {
-          "name": "Yesheng Liang"
+          "name": "Yuqi Xue"
         },
         {
-          "name": "Zhijian Liu"
+          "name": "Jian Huang"
         }
       ],
-      "published": "2026-02-05T18:59:30Z",
-      "published_date": "2026-02-05 18:59:30+00:00",
-      "updated": "2026-02-05T18:59:30Z",
-      "primary_category": "cs.CL",
+      "published": "2026-02-06T22:12:52Z",
+      "published_date": "2026-02-06 22:12:52+00:00",
+      "updated": "2026-02-06T22:12:52Z",
+      "primary_category": "cs.LG",
       "categories": [
-        "cs.CL"
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2602.06036v1",
-      "url": "http://arxiv.org/abs/2602.06036v1",
+      "pdf_url": "https://arxiv.org/pdf/2602.07223v1",
+      "url": "http://arxiv.org/abs/2602.07223v1",
       "source": "arxiv_hot_fallback",
       "hot_score": 0,
       "scores": {
@@ -81,125 +81,174 @@
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "speculative decoding",
-        "latency",
-        "cs.CL",
-        "speedup"
+        "kv cache",
+        "throughput",
+        "cs.LG",
+        "memory"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": true,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 2,
+        "text_match_count": 3,
         "matched_categories": [
-          "cs.CL"
+          "cs.LG"
         ],
         "required_signal_matches": [
-          "speculative decoding"
+          "speculative decoding",
+          "kv cache"
         ],
-        "required_signal_match_count": 1,
+        "required_signal_match_count": 2,
         "bonus_keyword_matches": [
-          "latency",
-          "speedup"
+          "throughput",
+          "memory"
         ],
         "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
-          "latency",
-          "speedup"
+          "throughput",
+          "memory"
         ],
         "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
+        "signal_bonus": 0.7,
         "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "A speculative decoding framework that swaps sequential drafting for a lightweight block diffusion drafter to generate candidate tokens in parallel.",
-        "summary_zh": "LLM decoding remains latency-bound because both standard autoregressive decoding and many speculative decoding pipelines still draft tokens sequentially, which wastes available parallelism. This paper proposes DFlash, which uses a lightweight block diffusion model to generate a block of draft tokens in one forward pass and conditions that drafter on context features from the target model. The abstract claims this improves draft quality and acceptance rates enough to preserve lossless decoding while raising end-to-end speedup. It reports over 6x lossless acceleration across multiple models and tasks, plus up to 2.5x higher speedup than EAGLE-3, making it directly relevant to serving-side latency reduction. The biggest missing details are the hardware and evaluation setup, the overhead of extracting target-model features, and how stable the gains are across model scales and generation lengths.",
-        "background_zh": "Speculative decoding is a leading path to lower LLM inference latency, but many existing methods still keep a sequential drafting stage that limits GPU utilization and end-to-end gains.",
-        "problem_zh": "The paper asks how to remove the remaining autoregressive bottleneck in speculative decoding without degrading draft quality so much that verification acceptance and overall speedup collapse.",
-        "approach_zh": "DFlash uses a lightweight block diffusion model to draft multiple tokens in parallel in a single pass, with conditioning on target-model context features to produce better candidates for verification.",
-        "evidence_zh": "The abstract claims over 6x lossless acceleration across models and tasks and up to 2.5x more speedup than EAGLE-3, but it does not make the evaluation setup, latency accounting, or baseline fairness clear.",
-        "value_zh": "If the results hold under full scrutiny, this is a practical serving idea for increasing speculative decoding gains by replacing sequential draft generation with a parallel drafting stage.",
+        "one_liner_zh": "This paper proposes a self-speculative decoding scheme that reuses verification signals to choose a sparse KV subset for later draft steps, targeting long-context KV-cache bottlenecks.",
+        "summary_zh": "The paper targets a central long-context inference problem: KV-cache growth makes decoding increasingly memory-bound. Its main idea is to co-design sparse attention with self-speculative decoding so that verification not only checks draft tokens but also identifies the KV entries that are critical for the next drafting step. That reuse of verification signals is intended to raise draft acceptance while avoiding a separate, expensive KV-selection pass. The abstract reports 2.81x higher throughput than vanilla autoregressive decoding and 1.29x over prior sparsity-based self-speculative decoding, which suggests the gain comes from better KV loading decisions with low selection overhead. The main missing details are the hardware setup, sequence-length regime, acceptance behavior across workloads, and how broadly the claimed lossless behavior holds.",
+        "background_zh": "Long-context LLM serving is increasingly constrained by KV-cache memory traffic, so methods that reduce KV reads without hurting output quality are becoming important.",
+        "problem_zh": "Prior sparse self-speculative decoding methods need standalone KV-selection logic, but that selection problem is closely tied to information already exposed during verification.",
+        "approach_zh": "SpecAttn uses verification-guided sparse attention: it extracts critical KV entries as a byproduct of verification and loads only those entries for subsequent draft-token generation.",
+        "evidence_zh": "The abstract claims throughput improvements of 2.81x over vanilla autoregressive decoding and 1.29x over state-of-the-art sparsity-based self-speculative decoding, but it does not make the evaluation setup or scope of the evidence clear.",
+        "value_zh": "If the method generalizes, it offers a practical path to higher long-context decoding throughput by cutting KV-cache traffic and KV-selection overhead through draft/verify co-design.",
         "open_questions": [
-          "What hardware, batch-size, sequence-length, and target-model settings were used for the reported lossless acceleration numbers?",
-          "How much runtime overhead comes from extracting and using target-model context features, and is that overhead included in the end-to-end speedup?",
-          "How do acceptance rates and speedups vary across different model sizes, prompt types, and long-output generation regimes?"
+          "What hardware, model sizes, context lengths, and batch settings were used for the reported throughput gains?",
+          "How stable is the draft-token acceptance improvement across workloads, and when does verification-guided KV selection stop helping?",
+          "What exactly supports the claimed lossless behavior, and how does the method compare against strong non-sparse and speculative decoding baselines under matched settings?"
         ],
         "core_contributions": [
-          "Introduces a speculative decoding framework built around a block diffusion draft model for parallel token drafting.",
-          "Conditions the draft model on target-model context features to improve candidate quality and acceptance.",
-          "Reports lossless end-to-end acceleration and comparison against a strong speculative decoding baseline, EAGLE-3."
+          "Reframes sparse KV selection as something that can be derived from verification rather than computed by a separate selector.",
+          "Co-designs sparse attention with self-speculative decoding so verification information directly shapes later draft steps.",
+          "Reports concrete throughput gains against both vanilla autoregressive decoding and prior sparsity-based self-speculative decoding."
         ],
         "why_read": [
-          "It targets the exact bottleneck that still limits many speculative decoding systems: sequential drafting.",
-          "It tests whether diffusion-style parallel generation is useful as an inference subsystem even when standalone diffusion LLMs are weaker than autoregressive models.",
-          "The claimed gains are large enough to matter for real LLM serving if the setup and accounting are sound."
+          "It is directly aligned with LLM inference-system work on KV-cache bottlenecks in long-context decoding.",
+          "The interesting systems idea is not sparse attention alone, but reusing verification signals to reduce selector overhead and improve draft quality.",
+          "The abstract gives enough quantitative signal to justify checking whether the speedups come from memory-traffic reduction, higher acceptance, or both."
         ],
         "risks": [
-          "The abstract omits hardware, implementation, and baseline-tuning details, so the reported speedups are hard to calibrate.",
-          "Conditioning on target-model features may add overhead or system coupling that reduces deployment simplicity and portability across serving stacks."
+          "The abstract does not specify hardware assumptions, so the reported gains may depend heavily on a particular memory-bandwidth regime.",
+          "Baseline fairness is unclear because the compared sparsity-based self-speculative methods and tuning details are not described in the abstract alone."
         ],
         "recommended_for": [
-          "Researchers studying speculative decoding and LLM serving latency.",
-          "Engineers evaluating new draft-model designs for high-throughput inference systems.",
-          "Readers interested in parallel generation mechanisms as components inside autoregressive decoding pipelines."
+          "Researchers working on LLM inference acceleration and speculative decoding.",
+          "Engineers optimizing long-context serving where KV-cache traffic is the dominant bottleneck.",
+          "Readers interested in runtime/compiler-style co-design ideas that reuse intermediate signals to remove redundant work."
         ],
         "keywords": [
           "speculative decoding",
-          "block diffusion",
-          "parallel drafting",
-          "LLM inference systems",
-          "latency reduction"
+          "self-speculative decoding",
+          "sparse attention",
+          "KV cache",
+          "long-context inference",
+          "throughput"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "This is a strong fit for the current focus because it is directly about LLM inference acceleration, attacks the draft-stage bottleneck in speculative decoding, and claims unusually large end-to-end gains. The priority stays high despite the abstract leaving hardware assumptions, evaluation fairness, and overhead accounting underspecified.",
-        "fallback_summary": "Autoregressive large language models (LLMs) deliver strong performance but require inherently sequential decoding, leading to high inference latency and poor GPU utilization."
+        "reading_priority_reason": "This is a strong fit for the stated focus on LLM inference systems: it targets KV-cache-limited decoding, proposes a concrete systems mechanism, and reports nontrivial throughput gains, while still leaving enough evaluation details unresolved to warrant a full read.",
+        "fallback_summary": "Long-context large language model (LLM) inference has become the norm for today's AI applications."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2602.06019v1",
-      "arxiv_id": "2602.06019v1",
-      "title": "Multi-Token Prediction via Self-Distillation",
-      "summary": "Existing techniques for accelerating language model inference, such as speculative decoding, require training auxiliary speculator models and building and deploying complex inference pipelines. We consider a new approach for converting a pretrained autoregressive language model from a slow single next token prediction model into a fast standalone multi-token prediction model using a simple online distillation objective. The final model retains the exact same implementation as the pretrained initial checkpoint and is deployable without the addition of any auxiliary verifier or other specialized inference code. On GSM8K, our method produces models that can decode more than $3\\times$ faster on average at $<5\\%$ drop in accuracy relative to single token decoding performance.",
+      "id": "http://arxiv.org/abs/2602.06932v1",
+      "arxiv_id": "2602.06932v1",
+      "title": "When RL Meets Adaptive Speculative Training: A Unified Training-Serving System",
+      "summary": "Speculative decoding can significantly accelerate LLM serving, yet most deployments today disentangle speculator training from serving, treating speculator training as a standalone offline modeling problem. We show that this decoupled formulation introduces substantial deployment and adaptation lag: (1) high time-to-serve, since a speculator must be trained offline for a considerable period before deployment; (2) delayed utility feedback, since the true end-to-end decoding speedup is only known after training and cannot be inferred reliably from acceptance rate alone due to model-architecture and system-level overheads; and (3) domain-drift degradation, as the target model is repurposed to new domains and the speculator becomes stale and less effective.\n  To address these issues, we present Aurora, a unified training-serving system that closes the loop by continuously learning a speculator directly from live inference traces. Aurora reframes online speculator learning as an asynchronous reinforcement-learning problem: accepted tokens provide positive feedback, while rejected speculator proposals provide implicit negative feedback that we exploit to improve sample efficiency. Our design integrates an SGLang-based inference server with an asynchronous training server, enabling hot-swapped speculator updates without service interruption. Crucially, Aurora supports day-0 deployment: a speculator can be served immediately and rapidly adapted to live traffic, improving system performance while providing immediate utility feedback. Across experiments, Aurora achieves a 1.5x day-0 speedup on recently released frontier models (e.g., MiniMax M2.1 229B and Qwen3-Coder-Next 80B). Aurora also adapts effectively to distribution shifts in user traffic, delivering an additional 1.25x speedup over a well-trained but static speculator on widely used models (e.g., Qwen3 and Llama3).",
       "authors": [
-        "John Kirchenbauer",
-        "Abhimanyu Hans",
-        "Brian Bartoldson",
-        "Micah Goldblum",
-        "Ashwinee Panda",
-        "Tom Goldstein"
+        "Junxiong Wang",
+        "Fengxiang Bie",
+        "Jisen Li",
+        "Zhongzhu Zhou",
+        "Zelei Shao",
+        "Yubo Wang",
+        "Yinghui Liu",
+        "Qingyang Wu",
+        "Avner May",
+        "Sri Yanamandra",
+        "Yineng Zhang",
+        "Ce Zhang",
+        "Tri Dao",
+        "Percy Liang",
+        "Ben Athiwaratkun",
+        "Shuaiwen Leon Song",
+        "Chenfeng Xu",
+        "Xiaoxia Wu"
       ],
       "author_details": [
         {
-          "name": "John Kirchenbauer"
+          "name": "Junxiong Wang"
         },
         {
-          "name": "Abhimanyu Hans"
+          "name": "Fengxiang Bie"
         },
         {
-          "name": "Brian Bartoldson"
+          "name": "Jisen Li"
         },
         {
-          "name": "Micah Goldblum"
+          "name": "Zhongzhu Zhou"
         },
         {
-          "name": "Ashwinee Panda"
+          "name": "Zelei Shao"
         },
         {
-          "name": "Tom Goldstein"
+          "name": "Yubo Wang"
+        },
+        {
+          "name": "Yinghui Liu"
+        },
+        {
+          "name": "Qingyang Wu"
+        },
+        {
+          "name": "Avner May"
+        },
+        {
+          "name": "Sri Yanamandra"
+        },
+        {
+          "name": "Yineng Zhang"
+        },
+        {
+          "name": "Ce Zhang"
+        },
+        {
+          "name": "Tri Dao"
+        },
+        {
+          "name": "Percy Liang"
+        },
+        {
+          "name": "Ben Athiwaratkun"
+        },
+        {
+          "name": "Shuaiwen Leon Song"
+        },
+        {
+          "name": "Chenfeng Xu"
+        },
+        {
+          "name": "Xiaoxia Wu"
         }
       ],
-      "published": "2026-02-05T18:54:48Z",
-      "published_date": "2026-02-05 18:54:48+00:00",
-      "updated": "2026-02-05T18:54:48Z",
-      "comments": "8 pages and 5 figures in the main body",
-      "primary_category": "cs.CL",
+      "published": "2026-02-06T18:28:54Z",
+      "published_date": "2026-02-06 18:28:54+00:00",
+      "updated": "2026-02-06T18:28:54Z",
+      "primary_category": "cs.LG",
       "categories": [
-        "cs.CL",
         "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2602.06019v1",
-      "url": "http://arxiv.org/abs/2602.06019v1",
+      "pdf_url": "https://arxiv.org/pdf/2602.06932v1",
+      "url": "http://arxiv.org/abs/2602.06932v1",
       "source": "arxiv_hot_fallback",
       "hot_score": 0,
       "scores": {
@@ -211,11 +260,12 @@
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "language model inference",
-        "decode",
+        "llm serving",
+        "serving",
         "speculative decoding",
         "cs.LG",
-        "cs.CL"
+        "serving system",
+        "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -224,290 +274,489 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 3,
         "matched_categories": [
-          "cs.LG",
-          "cs.CL"
-        ],
-        "required_signal_matches": [
-          "speculative decoding",
-          "decode"
-        ],
-        "required_signal_match_count": 2,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper uses online self-distillation to turn a pretrained autoregressive language model into a standalone multi-token predictor, aiming to get large decoding speedups without auxiliary speculative-decoding components.",
-        "summary_zh": "Autoregressive LLM inference is often limited by token-by-token decoding, and many acceleration methods add draft models, verifiers, or custom serving logic. This paper proposes converting a pretrained next-token model into a standalone multi-token prediction model using an online self-distillation objective while keeping the deployed implementation the same as the original checkpoint. The claimed systems payoff is a simpler inference stack: no auxiliary verifier, no separate speculator, and no specialized inference pipeline. The abstract reports more than 3x average decoding speedup on GSM8K with less than 5% accuracy drop relative to single-token decoding. The main missing details are how the multi-token decoding loop works in practice, what hardware and baselines were used, and whether the result holds beyond GSM8K.",
-        "background_zh": "LLM inference acceleration is increasingly important, but common approaches such as speculative decoding often improve speed by adding extra models and more complex serving pipelines.",
-        "problem_zh": "The paper asks whether a pretrained autoregressive next-token model can be converted into a faster multi-token decoder without relying on auxiliary runtime components or changing the deployed stack.",
-        "approach_zh": "It applies an online self-distillation objective to transform the pretrained checkpoint into a standalone multi-token prediction model while preserving the same implementation footprint at deployment.",
-        "evidence_zh": "The abstract supports the claim with GSM8K results showing more than 3x average decoding speedup and less than 5% accuracy loss versus single-token decoding, but it does not make the hardware, baselines, or evaluation protocol clear.",
-        "value_zh": "If the tradeoff generalizes, this offers a cleaner path to higher decode throughput by shifting complexity into training rather than maintaining a more complicated speculative-decoding serving system.",
-        "open_questions": [
-          "How is multi-token prediction executed at inference time, and what part of the decoding loop actually delivers the reported speedup?",
-          "What hardware, batching assumptions, sequence lengths, and baseline implementations were used for the GSM8K comparison?",
-          "Does the speed-versus-accuracy tradeoff persist on broader generation and reasoning workloads beyond GSM8K?"
-        ],
-        "core_contributions": [
-          "Recasts multi-token decoding as a self-distillation problem applied directly to a pretrained autoregressive model.",
-          "Targets inference acceleration without introducing auxiliary speculator or verifier models at deployment.",
-          "Reports a concrete speed and accuracy tradeoff for a standalone model on GSM8K."
-        ],
-        "why_read": [
-          "It directly targets LLM inference acceleration with an approach that may reduce serving complexity rather than increase it.",
-          "The deployment claim is operationally important because it keeps the runtime path close to a standard autoregressive model.",
-          "It is relevant for comparing training-time model adaptation against runtime speculative-decoding pipelines."
-        ],
-        "risks": [
-          "The evidence in the abstract is limited to GSM8K, so generalization to other workloads is not established.",
-          "The abstract does not specify hardware, batching, or baseline fairness, which makes the reported speedup hard to normalize against prior systems work under a common setup."
-        ],
-        "recommended_for": [
-          "Researchers studying LLM inference acceleration and alternatives to speculative decoding.",
-          "Engineers evaluating whether to trade small accuracy loss for a simpler high-throughput serving path.",
-          "Readers comparing training-time adaptation methods with runtime pipeline-based decoding accelerators."
-        ],
-        "keywords": [
-          "LLM inference",
-          "multi-token prediction",
-          "self-distillation",
-          "decoding acceleration",
-          "speculative decoding alternative",
-          "serving efficiency"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "This is a strong fit for LLM inference systems work because it claims substantial decode speedup with a simpler deployment model, but a full read is needed to verify the mechanism and evaluation fairness.",
-        "fallback_summary": "Existing techniques for accelerating language model inference, such as speculative decoding, require training auxiliary speculator models and building and deploying complex inference pipelines."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2602.06142v2",
-      "arxiv_id": "2602.06142v2",
-      "title": "Protean Compiler: An Agile Framework to Drive Fine-grain Phase Ordering",
-      "summary": "The phase ordering problem has been a long-standing challenge since the late 1970s, yet it remains an open problem due to having a vast optimization space and an unbounded nature, making it an open-ended problem without a finite solution, one can limit the scope by reducing the number and the length of optimizations. Traditionally, such locally optimized decisions are made by hand-coded algorithms tuned for a small number of benchmarks, often requiring significant effort to be retuned when the benchmark suite changes. In the past 20 years, Machine Learning has been employed to construct performance models to improve the selection and ordering of compiler optimizations, however, the approaches are not baked into the compiler seamlessly and never materialized to be leveraged at a fine-grained scope of code segments. This paper presents Protean Compiler: An agile framework to enable LLVM with built-in phase-ordering capabilities at a fine-grained scope. The framework also comprises a complete library of more than 140 handcrafted static feature collection methods at varying scopes, and the experimental results showcase speedup gains of up to 4.1% on average and up to 15.7% on select Cbench applications wrt LLVM's O3 by just incurring a few extra seconds of build time on Cbench. Additionally, Protean compiler allows for an easy integration with third-party ML frameworks and other Large Language Models, and this two-step optimization shows a gain of 10.1% and 8.5% speedup wrt O3 on Cbench's Susan and Jpeg applications. Protean compiler is seamlessly integrated into LLVM and can be used as a new, enhanced, full-fledged compiler. We plan to release the project to the open-source community in the near future.",
-      "authors": [
-        "Amir H. Ashouri",
-        "Shayan Shirahmad Gale Bagi",
-        "Kavin Satheeskumar",
-        "Tejas Srikanth",
-        "Jonathan Zhao",
-        "Ibrahim Saidoun",
-        "Ziwen Wang",
-        "Bryan Chan",
-        "Tomasz S. Czajkowski"
-      ],
-      "author_details": [
-        {
-          "name": "Amir H. Ashouri"
-        },
-        {
-          "name": "Shayan Shirahmad Gale Bagi"
-        },
-        {
-          "name": "Kavin Satheeskumar"
-        },
-        {
-          "name": "Tejas Srikanth"
-        },
-        {
-          "name": "Jonathan Zhao"
-        },
-        {
-          "name": "Ibrahim Saidoun"
-        },
-        {
-          "name": "Ziwen Wang"
-        },
-        {
-          "name": "Bryan Chan"
-        },
-        {
-          "name": "Tomasz S. Czajkowski"
-        }
-      ],
-      "published": "2026-02-05T19:24:05Z",
-      "published_date": "2026-02-05 19:24:05+00:00",
-      "updated": "2026-02-17T19:29:16Z",
-      "comments": "Version 2: Submitted for a possible publication in 2026",
-      "primary_category": "cs.PL",
-      "categories": [
-        "cs.PL",
-        "cs.AI",
-        "cs.CL",
-        "cs.LG",
-        "cs.PF"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2602.06142v2",
-      "url": "http://arxiv.org/abs/2602.06142v2",
-      "source": "arxiv_hot_fallback",
-      "hot_score": 0,
-      "scores": {
-        "relevance": 2.33,
-        "recency": 3.0,
-        "popularity": 1.3,
-        "quality": 0.9,
-        "recommendation": 7.22
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "llvm",
-        "cs.PL",
-        "cs.LG",
-        "benchmark",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": true,
-      "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
-        "matched_categories": [
-          "cs.PL",
           "cs.LG"
         ],
         "required_signal_matches": [
-          "llvm"
+          "speculative decoding",
+          "serving system"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper turns speculative-decoder training into an online serving loop, using live inference traces and asynchronous RL to keep the speculator useful under real traffic.",
+        "summary_zh": "Speculative decoding is already a practical LLM serving optimization, but current deployments usually train the speculator offline and only discover real system benefit after deployment. This paper argues that the separation creates slow time-to-serve, weak utility feedback, and poor adaptation when traffic or domains shift. Aurora addresses this by coupling an SGLang-based inference server with an asynchronous training server that learns from live traces, treating accepted tokens as positive feedback and rejected proposals as implicit negative feedback, while allowing hot-swapped speculator updates without interrupting service. The abstract claims 1.5x day-0 speedup on recently released frontier models and an additional 1.25x speedup over a static speculator under traffic shifts, which makes the systems angle directly relevant for serving. The biggest missing detail is whether these gains remain net-positive after accounting for trace collection, online training cost, swap overhead, and baseline fairness.",
+        "background_zh": "Speculative decoding improves LLM inference throughput, but its benefit depends on end-to-end serving behavior rather than model-side proxy metrics alone.",
+        "problem_zh": "The paper asks how to train and update a speculative decoder fast enough for immediate deployment and continued adaptation, instead of relying on stale offline training pipelines.",
+        "approach_zh": "Aurora frames speculator learning as asynchronous online RL over live serving traces and integrates training with serving so the speculator can be updated in place during production traffic.",
+        "evidence_zh": "The abstract reports experiments with day-0 speedups on large released models and further gains over a static speculator under distribution shift, but it does not make the training cost, hardware setup, or comparison protocol clear.",
+        "value_zh": "If the claims hold, this reduces the operational gap between model release and useful speculative serving while making the speedup target the real deployed system rather than an offline proxy.",
+        "open_questions": [
+          "What exactly is the RL objective, and how are rejected speculative proposals converted into stable negative learning signals without hurting serving quality?",
+          "Are the reported speedups net of online training, trace collection, and hot-swap overhead across hardware setups, batch sizes, and traffic patterns?",
+          "How strong and fair are the offline or static-speculator baselines, and how much live traffic is needed before adaptation becomes clearly beneficial?"
+        ],
+        "core_contributions": [
+          "Recasts speculative-decoder training as an online RL problem driven by live inference traces rather than a purely offline modeling task.",
+          "Builds a unified training-serving architecture with asynchronous training and hot-swappable speculator updates on top of an SGLang-based server.",
+          "Targets both day-0 deployment and post-deployment adaptation to domain or traffic drift, with explicit end-to-end speedup claims."
+        ],
+        "why_read": [
+          "It directly targets LLM inference serving efficiency rather than standalone model quality, which matches systems-focused reading.",
+          "It surfaces a concrete systems question: whether speculative decoding should be optimized inside the serving loop instead of before deployment.",
+          "It may clarify how online adaptation changes the tradeoff between acceptance-rate proxies and real end-to-end latency gains."
+        ],
+        "risks": [
+          "The abstract does not show whether online learning overhead offsets part of the claimed serving gains.",
+          "Using accepted and rejected tokens as RL feedback may be sample-efficient, but stability and convergence under non-stationary traffic are unclear from the abstract alone."
+        ],
+        "recommended_for": [
+          "Researchers working on LLM serving stacks and speculative decoding.",
+          "Engineers evaluating online adaptation loops for production inference systems.",
+          "Readers interested in training-serving co-design rather than standalone decoder modeling."
+        ],
+        "keywords": [
+          "LLM inference systems",
+          "speculative decoding",
+          "online adaptation",
+          "reinforcement learning",
+          "serving efficiency",
+          "training-serving co-design"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High fit with the stated focus because it targets speculative decoding, serving efficiency, and training-serving co-design, and it makes concrete end-to-end speedup claims on large models. The main reason to read beyond the abstract is to verify net overhead, baseline fairness, and how the online RL loop is actually stabilized.",
+        "fallback_summary": "Speculative decoding can significantly accelerate LLM serving, yet most deployments today disentangle speculator training from serving, treating speculator training as a standalone offline modeling problem."
+      }
+    },
+    {
+      "id": "dblp:conf/cgo/CastelloBDIM24",
+      "paper_id": "dblp:conf/cgo/CastelloBDIM24",
+      "title": "Tackling the Matrix Multiplication Micro-Kernel Generation with Exo.",
+      "summary": "The optimization of the matrix multiplication (or GEMM) has been a need during the last decades. This operation is considered the flagship of current linear algebra libraries such as BLIS, OpenBLAS, or Intel OneAPI because of its widespread use in a large variety of scientific applications. The GEMM is usually implemented following the GotoBLAS philosophy, which tiles the GEMM operands and uses a series of nested loops for performance improvement. These approaches extract the maximum computational power of the architectures through small pieces of hardware-oriented, high-performance code called micro-kernel. However, this approach forces developers to generate, with a nonnegligible effort, a dedicated micro-kernel for each new hardware. In this work, we present a step-by-step procedure for generating micro-kernels with the Exo compiler that perform close to (or even better than) manually developed microkernels written with intrinsic functions or assembly language. Our solution also improves the portability of the generated code, since a hardware target is fully specified by a concise library-based description of its instructions.",
+      "abstract": "The optimization of the matrix multiplication (or GEMM) has been a need during the last decades. This operation is considered the flagship of current linear algebra libraries such as BLIS, OpenBLAS, or Intel OneAPI because of its widespread use in a large variety of scientific applications. The GEMM is usually implemented following the GotoBLAS philosophy, which tiles the GEMM operands and uses a series of nested loops for performance improvement. These approaches extract the maximum computational power of the architectures through small pieces of hardware-oriented, high-performance code called micro-kernel. However, this approach forces developers to generate, with a nonnegligible effort, a dedicated micro-kernel for each new hardware. In this work, we present a step-by-step procedure for generating micro-kernels with the Exo compiler that perform close to (or even better than) manually developed microkernels written with intrinsic functions or assembly language. Our solution also improves the portability of the generated code, since a hardware target is fully specified by a concise library-based description of its instructions.",
+      "authors": [
+        "Adrián Castelló 0001",
+        "Julian Bellavita",
+        "Grace Dinh",
+        "Yuka Ikarashi",
+        "Héctor Martínez 0002"
+      ],
+      "published": "2024",
+      "published_date": "2024-07-01 00:00:00",
+      "publicationDate": "2024",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://ieeexplore.ieee.org/document/10444883/",
+      "url": "https://ieeexplore.ieee.org/document/10444883/",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/CastelloBDIM24",
+      "doi": "10.1109/CGO57630.2024.10444883",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2024,
+      "scores": {
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 0.5,
+        "quality": 0.5,
+        "recommendation": 4.21
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "kernel generation"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "kernel generation"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "benchmark",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 2,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
-      "selection_lane": "fresh",
+      "selection_lane": "established",
+      "citationCount": 9,
+      "institutions": [
+        "Universitat Politècnica de Catalunya",
+        "Cornell University",
+        "Berkeley College",
+        "University of California, Berkeley"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://ieeexplore.ieee.org/document/10444883/",
+        "abstract_source": "openalex",
+        "pdf_source": ""
+      },
       "ai": {
-        "one_liner_zh": "Protean turns fine-grained phase ordering into a built-in LLVM capability, backed by a large handcrafted feature library and optional ML or LLM integration, with modest average gains over O3 on Cbench.",
-        "summary_zh": "Protean targets the long-running compiler phase-ordering problem, arguing that fixed hand-tuned heuristics and loosely attached ML models do not adapt well to fine-grained code regions. The system integrates phase-ordering directly into LLVM, adds more than 140 handcrafted static feature extractors across different scopes, and provides hooks for third-party ML frameworks and LLM-assisted optimization. The abstract reports up to 4.1% average speedup and up to 15.7% on selected Cbench programs over O3 with only a few extra seconds of build time, plus 10.1% and 8.5% gains on Susan and Jpeg in a two-step setup. The practical value is less about a new optimization pass and more about making fine-grained optimization control a first-class compiler capability. The biggest missing detail is that the abstract does not explain the actual selection algorithm, evaluation breadth, or whether the approach transfers beyond Cbench and general CPU code.",
-        "background_zh": "Compiler phase ordering remains difficult because the optimization space is open-ended, while hand-tuned heuristics and coarse ML integrations are hard to retune as workloads change.",
-        "problem_zh": "The paper asks how LLVM can make phase-ordering decisions at a fine code-segment granularity instead of relying on fixed global heuristics or loosely coupled external models.",
-        "approach_zh": "Protean embeds phase-ordering inside LLVM, exposes more than 140 handcrafted static features at multiple scopes, and supports integration with third-party ML frameworks and LLM-driven optimization flows.",
-        "evidence_zh": "The abstract reports up to 4.1% average speedup and up to 15.7% on selected Cbench applications versus O3, with a few extra seconds of build time, plus 10.1% and 8.5% gains on Susan and Jpeg in a two-step setup; it does not make the broader evaluation protocol clear.",
-        "value_zh": "If the integration holds up, it could make fine-grained optimization experimentation much easier in a production compiler and reduce retuning effort when benchmark mixes change.",
+        "one_liner_zh": "A compiler-oriented method for generating GEMM micro-kernels in Exo that aims to approach hand-written intrinsics or assembly while reducing retargeting effort.",
+        "summary_zh": "High-performance GEMM still depends on hardware-specific micro-kernels because the last layer of performance comes from carefully matched tiling, data movement, and instruction use. This paper argues that Exo can express a step-by-step workflow for generating those micro-kernels and reach performance close to, or sometimes above, manually developed intrinsic or assembly implementations. The practical mechanism is a concise library-based description of target instructions, which is meant to move retargeting effort from rewriting kernels to specifying hardware capabilities. If that holds, the work matters as a more systematic route to performance-portable low-level kernel generation. The abstract does not make the evaluation setup, target architectures, or baseline fairness clear, so the real portability and performance envelope is still underspecified.",
+        "background_zh": "GEMM remains a core building block of numerical software, and peak performance still often comes from architecture-specific micro-kernels tuned around a particular instruction set and memory hierarchy.",
+        "problem_zh": "The paper asks whether micro-kernels that are usually written by hand in intrinsics or assembly can be generated with much lower engineering effort without losing near-peak performance.",
+        "approach_zh": "It presents a step-by-step Exo workflow where a hardware target is captured through a compact instruction-library description that drives GEMM micro-kernel generation.",
+        "evidence_zh": "The abstract claims the generated kernels perform close to, or sometimes better than, manual intrinsics or assembly micro-kernels, but it does not make the hardware, workloads, or comparison methodology clear.",
+        "value_zh": "If the approach generalizes, it could make low-level kernel retargeting more systematic and cheaper than maintaining separate handwritten micro-kernels for each hardware target.",
         "open_questions": [
-          "How are phase sequences selected per code region in practice: search, learned prediction, heuristic control, or some combination, and what is the compile-time cost breakdown?",
-          "How fair are the comparisons to O3 and other autotuning or ML compiler baselines, and how broad is the evaluation beyond selected Cbench workloads?",
-          "What role do external ML models or LLMs materially play in the reported gains, and does the method transfer to GPU or kernel-generation workloads?"
+          "Which hardware targets and instruction sets are actually evaluated, and how much manual tuning is still required beyond the Exo description?",
+          "Are the comparisons against handwritten or library baselines matched for blocking strategy, compiler settings, and data-layout assumptions?",
+          "How well does the portability claim hold when moving across substantially different vector widths, register files, or memory hierarchies?"
         ],
         "core_contributions": [
-          "Direct LLVM integration for fine-grained phase ordering instead of an external offline tuner.",
-          "A library of more than 140 handcrafted static feature collection methods across multiple scopes.",
-          "An interface for third-party ML and LLM-based optimization, with reported speedups over O3 on Cbench."
+          "A concrete Exo-based workflow for generating GEMM micro-kernels rather than relying on fully handwritten low-level code.",
+          "A concise library-style way to specify target instructions as the retargeting surface for new hardware.",
+          "An empirical claim that compiler-generated micro-kernels can approach or exceed manual intrinsic or assembly implementations."
         ],
         "why_read": [
-          "It shows a concrete attempt to move phase-ordering research into a usable compiler path rather than a stand-alone research tool.",
-          "It is relevant to compiler and runtime engineers interested in automated optimization control inside LLVM.",
-          "It may clarify whether the gains come from finer decision granularity and integration, not from introducing new optimization passes."
+          "It is directly about low-level kernel generation rather than generic high-level code synthesis.",
+          "It provides a concrete compiler mechanism for reducing handwritten micro-kernel maintenance cost.",
+          "It is relevant as a systems reference point for later work on automated or LLM-assisted kernel generation."
         ],
         "risks": [
-          "The evidence is centered on Cbench, so generalization to larger systems code, accelerators, or real deployment workloads is unclear.",
-          "The abstract does not explain the search policy, model training setup, or baseline retuning, which makes fairness hard to assess from the abstract alone. The LLM angle is underspecified and may be optional, so the paper may matter more as compiler infrastructure than as low-level code generation research."
+          "The abstract does not show how broad the hardware coverage is, so the portability claim may be narrow in practice.",
+          "The Exo workflow may still depend on expert-crafted schedules or instruction descriptions that keep the manual effort high despite cleaner abstractions."
         ],
         "recommended_for": [
-          "Compiler researchers working on phase ordering and ML-guided optimization.",
-          "Engineers interested in integrating autotuning logic directly into LLVM.",
-          "Readers tracking compiler infrastructure that could later support low-level code or kernel generation workflows."
+          "Researchers studying compiler-guided kernel generation and performance portability.",
+          "Engineers maintaining GEMM or linear algebra micro-kernels across hardware targets.",
+          "Readers interested in low-level code generation techniques that could inform future inference-kernel tooling."
         ],
         "keywords": [
-          "LLVM",
-          "compiler phase ordering",
-          "fine-grained optimization",
-          "ML-guided compilation",
-          "static program features",
-          "Cbench"
+          "GEMM",
+          "matrix multiplication",
+          "micro-kernel generation",
+          "Exo",
+          "performance portability",
+          "instruction-set description"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "Medium because this is real compiler-control infrastructure and not just generic code generation, but the abstract is still only indirectly aligned with LLM inference, CUDA kernels, and assembly-level generation, and the provided relevance signal is modest.",
-        "fallback_summary": "The phase ordering problem has been a long-standing challenge since the late 1970s, yet it remains an open problem due to having a vast optimization space and an unbounded nature, making it an open-ended problem without a finite solution, one can limit the scope by reducing the number and the length of optimizations."
+        "reading_priority_reason": "The paper is a strong fit for low-level compiler and kernel-generation interests, but it is not directly about LLM inference serving or CUDA, and the abstract leaves the evaluation details too underspecified for a higher priority.",
+        "fallback_summary": "The optimization of the matrix multiplication (or GEMM) has been a need during the last decades."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2602.06161v1",
-      "arxiv_id": "2602.06161v1",
-      "title": "Stop the Flip-Flop: Context-Preserving Verification for Fast Revocable Diffusion Decoding",
-      "summary": "Parallel diffusion decoding can accelerate diffusion language model inference by unmasking multiple tokens per step, but aggressive parallelism often harms quality. Revocable decoding mitigates this by rechecking earlier tokens, yet we observe that existing verification schemes frequently trigger flip-flop oscillations, where tokens are remasked and later restored unchanged. This behaviour slows inference in two ways: remasking verified positions weakens the conditioning context for parallel drafting, and repeated remask cycles consume the revision budget with little net progress. We propose COVER (Cache Override Verification for Efficient Revision), which performs leave-one-out verification and stable drafting within a single forward pass. COVER constructs two attention views via KV cache override: selected seeds are masked for verification, while their cached key value states are injected for all other queries to preserve contextual information, with a closed form diagonal correction preventing self leakage at the seed positions. COVER further prioritises seeds using a stability aware score that balances uncertainty, downstream influence, and cache drift, and it adapts the number of verified seeds per step. Across benchmarks, COVER markedly reduces unnecessary revisions and yields faster decoding while preserving output quality.",
+      "id": "dblp:conf/osdi/GuanF0RRY0A25",
+      "paper_id": "dblp:conf/osdi/GuanF0RRY0A25",
+      "title": "KPerfIR: Towards a Open and Compiler-centric Ecosystem for GPU Kernel Performance Tooling on Modern AI Workloads.",
+      "summary": "In this work, we propose KPerfIR, a novel multilevel compiler-centric infrastructure to enable the development of customizable, extendable, and portable profiling tools tailored for modern artificial intelligence (AI) workloads on modern GPUs. Our approach integrates profiling capabilities directly into the compiler workflow, allowing profiling functionalities to be implemented as compiler passes, offering a programmable and reusable framework for performance analysis. This design bridges the gap between compilers and profilers, enabling fine-grained insights into complex optimization challenges such as overlapping the execution of fine-grained function units on GPUs. KPerfIR is integrated into the Triton infrastructure to highlight the power of a compiler-centric approach to advance performance analysis and optimization in the ever-evolving landscape of AI compilers. Our evaluation shows that our tool incurs low overhead (8.2%), provides accurate measurements (2% relative error), and delivers actionable insights into complicated GPU intra-kernel optimizations.",
+      "abstract": "In this work, we propose KPerfIR, a novel multilevel compiler-centric infrastructure to enable the development of customizable, extendable, and portable profiling tools tailored for modern artificial intelligence (AI) workloads on modern GPUs. Our approach integrates profiling capabilities directly into the compiler workflow, allowing profiling functionalities to be implemented as compiler passes, offering a programmable and reusable framework for performance analysis. This design bridges the gap between compilers and profilers, enabling fine-grained insights into complex optimization challenges such as overlapping the execution of fine-grained function units on GPUs. KPerfIR is integrated into the Triton infrastructure to highlight the power of a compiler-centric approach to advance performance analysis and optimization in the ever-evolving landscape of AI compilers. Our evaluation shows that our tool incurs low overhead (8.2%), provides accurate measurements (2% relative error), and delivers actionable insights into complicated GPU intra-kernel optimizations.",
       "authors": [
-        "Yanzheng Xiang",
-        "Lan Wei",
-        "Yizhen Yao",
-        "Qinglin Zhu",
-        "Hanqi Yan",
-        "Chen Jin",
-        "Philip Alexander Teare",
-        "Dandan Zhang",
-        "Lin Gui",
-        "Amrutha Saseendran",
-        "Yulan He"
+        "Yue Guan 0003",
+        "Yuanwei Fang",
+        "Keren Zhou 0001",
+        "Corbin Robeck",
+        "Manman Ren",
+        "Zhongkai Yu",
+        "Yufei Ding 0001",
+        "Adnan Aziz"
+      ],
+      "published": "2025",
+      "published_date": "2025-07-01 00:00:00",
+      "publicationDate": "2025",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://www.usenix.org/conference/osdi25/presentation/guan",
+      "url": "https://www.usenix.org/conference/osdi25/presentation/guan",
+      "pdf_url": "https://www.usenix.org/system/files/osdi25-guan.pdf",
+      "venue": "OSDI",
+      "venue_source_name": "OSDI",
+      "venue_source_alias": "OSDI",
+      "dblp_key": "conf/osdi/GuanF0RRY0A25",
+      "doi": "",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "open",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "OSDI",
+        "venue_alias": "OSDI"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2025,
+      "scores": {
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 4.79
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "gpu kernel"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "gpu kernel"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "established",
+      "citationCount": 0,
+      "venue_metadata": {
+        "official_page_blocked": false,
+        "official_page_url": "https://www.usenix.org/conference/osdi25/presentation/guan",
+        "abstract_source": "openalex",
+        "pdf_source": "official_page"
+      },
+      "ai": {
+        "one_liner_zh": "A compiler-integrated GPU profiling framework that turns performance tooling into reusable compiler passes inside Triton for modern AI kernels.",
+        "summary_zh": "This paper argues that modern AI GPU kernels need performance tooling that lives inside the compiler rather than beside it, because external profilers do not naturally preserve compiler structure or expose fine-grained optimization behavior. It presents KPerfIR, a multilevel compiler-centric profiling infrastructure where profiling functionality is implemented as compiler passes, and demonstrates the approach through integration with Triton. The claimed benefit is finer-grained analysis of issues such as overlap among function units inside a kernel, with the abstract reporting 8.2% overhead, 2% relative error, and actionable optimization insight. If that interface is usable, the main value is better co-design between AI compilers and performance analysis for generated GPU kernels. The biggest missing detail is scope: the abstract does not make the evaluated workloads, hardware coverage, baseline methodology, or portability beyond the Triton setting clear.",
+        "background_zh": "AI kernels are increasingly generated and transformed inside compiler stacks such as Triton, but performance tooling is still often external to the compiler, which limits visibility into compiler-structured optimizations.",
+        "problem_zh": "The paper tackles how to build customizable and portable GPU kernel performance tooling for modern AI workloads without losing the compiler-level structure needed for fine-grained analysis.",
+        "approach_zh": "KPerfIR embeds profiling into a multilevel compiler workflow so that profiling features can be implemented as reusable compiler passes, with Triton used as the concrete integration point.",
+        "evidence_zh": "The abstract claims 8.2% overhead, 2% relative error, and useful insight into intra-kernel optimization behavior, but it does not make the workloads, hardware setup, or baseline comparisons clear.",
+        "value_zh": "If the abstraction holds up, this could make GPU kernel observability more programmable and better aligned with compiler-driven optimization, which is relevant for generated kernels in LLM and other AI systems.",
+        "open_questions": [
+          "What IR levels, pass APIs, and instrumentation points does KPerfIR actually expose, and how hard is it to implement a new profiling tool on top of it?",
+          "On which GPUs and workloads are the 8.2% overhead and 2% relative error measured, and what profiler or ground truth is used as the comparison baseline?",
+          "How much of the portability claim survives outside Triton or outside the specific intra-kernel overlap analyses highlighted in the abstract?"
+        ],
+        "core_contributions": [
+          "Recasts GPU kernel performance tooling as compiler passes inside a multilevel compiler infrastructure.",
+          "Integrates the profiling framework into Triton to connect compiler analysis with runtime measurement for AI kernels.",
+          "Targets fine-grained kernel optimization behavior, including overlap among function units, rather than only coarse kernel-level profiling."
+        ],
+        "why_read": [
+          "It is directly relevant if you care about compiler/runtime co-design for GPU kernel observability.",
+          "It may provide a practical model for building custom tooling around Triton-generated kernels instead of relying only on external profilers.",
+          "It is one of the more systems-oriented papers in this area because the claimed gains come from tooling architecture, not from another code-generation heuristic."
+        ],
+        "risks": [
+          "The abstract over-claims openness and portability without specifying how much of the design depends on Triton internals.",
+          "The reported accuracy and overhead numbers are hard to judge without workload, hardware, and baseline details, so fairness remains unclear from the abstract alone."
+        ],
+        "recommended_for": [
+          "Researchers building Triton or compiler-based GPU kernel toolchains.",
+          "Engineers diagnosing performance issues in generated AI kernels where external profilers lose compiler context.",
+          "Readers interested in profiling infrastructure and observability more than in new kernel algorithms."
+        ],
+        "keywords": [
+          "GPU kernel profiling",
+          "compiler-centric tooling",
+          "Triton",
+          "AI workloads",
+          "performance analysis",
+          "intra-kernel optimization"
+        ],
+        "reading_priority": "medium",
+        "reading_priority_reason": "Strong fit for compiler-centric GPU kernel tooling and low-level performance analysis, but it is more observability infrastructure than direct LLM inference acceleration, and the abstract leaves evaluation scope and generality under-specified.",
+        "fallback_summary": "In this work, we propose KPerfIR, a novel multilevel compiler-centric infrastructure to enable the development of customizable, extendable, and portable profiling tools tailored for modern artificial intelligence (AI) workloads on modern GPUs."
+      }
+    },
+    {
+      "id": "dblp:conf/cgo/HeY25",
+      "paper_id": "dblp:conf/cgo/HeY25",
+      "title": "CuAsmRL: Optimizing GPU SASS Schedules via Deep Reinforcement Learning.",
+      "summary": "Large language models (LLMs) are remarked by their substantial computational requirements. To mitigate the cost, researchers develop specialized CUDA kernels, which often fuse several tensor operations to maximize the utilization of GPUs as much as possible. However, those specialized kernels may still leave performance on the table as CUDA assembly experts show that manual optimization of GPU SASS schedules can lead to better performance, and trial-and-error is largely employed to manually find the best GPU SASS schedules. In this work, we employ an automatic approach to optimize GPU SASS schedules, which thus can be integrated into existing compiler frameworks. The key to automatic optimization is training an RL agent to mimic how human experts perform manual scheduling. To this end, we formulate an assembly game, where RL agents can play to find the best GPU SASS schedules. The assembly game starts from a -O3 optimized SASS schedule, and the RL agents can iteratively apply actions to mutate the current schedules. Positive rewards are generated if the mutated schedules get higher throughput by executing on GPUs. Experiments show that CuAsmRL can further improve the performance of existing specialized CUDA kernels transparently by up to 26%, and on average 9%. Moreover, it is used as a tool to reveal potential optimization moves learned automatically",
+      "abstract": "Large language models (LLMs) are remarked by their substantial computational requirements. To mitigate the cost, researchers develop specialized CUDA kernels, which often fuse several tensor operations to maximize the utilization of GPUs as much as possible. However, those specialized kernels may still leave performance on the table as CUDA assembly experts show that manual optimization of GPU SASS schedules can lead to better performance, and trial-and-error is largely employed to manually find the best GPU SASS schedules. In this work, we employ an automatic approach to optimize GPU SASS schedules, which thus can be integrated into existing compiler frameworks. The key to automatic optimization is training an RL agent to mimic how human experts perform manual scheduling. To this end, we formulate an assembly game, where RL agents can play to find the best GPU SASS schedules. The assembly game starts from a -O3 optimized SASS schedule, and the RL agents can iteratively apply actions to mutate the current schedules. Positive rewards are generated if the mutated schedules get higher throughput by executing on GPUs. Experiments show that CuAsmRL can further improve the performance of existing specialized CUDA kernels transparently by up to 26%, and on average 9%. Moreover, it is used as a tool to reveal potential optimization moves learned automatically",
+      "authors": [
+        "Guoliang He",
+        "Eiko Yoneki"
+      ],
+      "published": "2025",
+      "published_date": "2025-07-01 00:00:00",
+      "publicationDate": "2025",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://dl.acm.org/doi/10.1145/3696443.3708943",
+      "url": "https://dl.acm.org/doi/10.1145/3696443.3708943",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/HeY25",
+      "doi": "10.1145/3696443.3708943",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2025,
+      "scores": {
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 0.9,
+        "quality": 0.9,
+        "recommendation": 4.34
+      },
+      "matched_domain": "Low-level Code And Assembly Generation",
+      "matched_keywords": [
+        "sass"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "Low-level Code And Assembly Generation",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "sass"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "established",
+      "citationCount": 4,
+      "institutions": [
+        "University of Cambridge"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://dl.acm.org/doi/10.1145/3696443.3708943",
+        "abstract_source": "openalex",
+        "pdf_source": ""
+      },
+      "ai": {
+        "one_liner_zh": "This paper casts post-compilation GPU SASS scheduling as a reinforcement learning search problem that mutates compiler-produced schedules and reports additional throughput gains on specialized CUDA kernels.",
+        "summary_zh": "Specialized CUDA kernels for LLM-scale workloads can still leave performance headroom at the final SASS scheduling stage, and exploiting that headroom usually depends on expert manual tuning. This paper formulates SASS rescheduling as an assembly game that starts from an -O3 schedule and lets an RL agent iteratively apply schedule mutations using throughput-based rewards from GPU execution. The abstract claims the method can be integrated into existing compiler frameworks and can improve existing specialized kernels by up to 26% and 9% on average. If that result is robust, the practical value is a post-codegen path to recover assembly-level speedups without repeated human trial-and-error. The main missing detail is evaluation scope: the abstract does not make clear which kernels, GPU architectures, search cost, or baseline comparisons support the reported gains.",
+        "background_zh": "LLM-oriented CUDA kernels often rely on fusion and careful low-level tuning, yet final performance can still depend on instruction scheduling decisions at the SASS layer.",
+        "problem_zh": "The paper addresses how to automate expert-style SASS schedule tuning for existing specialized kernels, since manual trial-and-error is slow, hard to scale, and difficult to fold into compiler pipelines.",
+        "approach_zh": "It defines an assembly game over an -O3 SASS schedule, where an RL agent applies schedule mutations and receives positive reward when the mutated schedule delivers higher GPU throughput.",
+        "evidence_zh": "The abstract reports up to 26% throughput improvement and 9% average improvement on existing specialized CUDA kernels, but it does not make clear the benchmark set, hardware coverage, or fairness of the comparison baselines.",
+        "value_zh": "If the method generalizes, it could give compiler or kernel-generation stacks a transparent post-pass that captures assembly-level performance gains without requiring human SASS expertise.",
+        "open_questions": [
+          "What correctness constraints and action-space limits keep SASS mutations legal and behavior-preserving?",
+          "Which kernels, GPU architectures, and measurement protocol underlie the reported gains, and how consistent are the results across them?",
+          "How does the RL search cost compare with heuristic scheduling, autotuning, or expert-written schedules in a practical compiler workflow?"
+        ],
+        "core_contributions": [
+          "Frames GPU SASS scheduling as an RL-driven assembly game starting from compiler-produced -O3 schedules.",
+          "Uses measured throughput on GPU execution as the optimization signal for iterative schedule mutation.",
+          "Reports transparent post-pass speedups on existing specialized CUDA kernels and uses the learned search to surface potential optimization moves."
+        ],
+        "why_read": [
+          "It targets a real low-level gap where optimized CUDA kernels can still lose performance after standard compilation.",
+          "It tests whether learned search can replace or complement expert SASS scheduling work.",
+          "It is directly relevant to compiler back ends and inference-kernel teams interested in post-codegen optimization rather than new front-end abstractions."
+        ],
+        "risks": [
+          "The abstract is underspecified on hardware, kernel mix, and evaluation protocol, so generality is unclear.",
+          "A throughput-reward search loop may be expensive or noisy relative to the speedups it finds at deployment time only once or infrequently, which the abstract does not clarify clearly to engineers assessing system tradeoffs overall today carefully here significantly and concretely now beyond the reported averages alone in this summary note for judgment purposes only, so the practical cost-benefit remains unclear until the full paper is read in detail with the full setup and methodology described properly and reproducibly end to end across hardware and workloads used by the authors in their experiments and analysis sections later on for readers evaluating deployment value and reproducibility limits in actual compiler pipelines and kernel-tuning workflows under realistic engineering constraints and budgets over time across teams and devices in production-like settings under repeated search runs and retuning needs."
+        ],
+        "recommended_for": [
+          "Researchers working on CUDA kernel code generation and post-codegen optimization.",
+          "Engineers tuning LLM inference kernels at the PTX or SASS layer.",
+          "Compiler teams exploring learned schedule search for GPU back ends."
+        ],
+        "keywords": [
+          "GPU SASS scheduling",
+          "CUDA kernel optimization",
+          "deep reinforcement learning",
+          "assembly-level optimization",
+          "specialized kernels"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "This is a strong fit for the configured focus because it targets assembly-level CUDA optimization with claimed compiler-compatible speedups, though the abstract leaves important questions about hardware scope, baseline fairness, and search cost.",
+        "fallback_summary": "Large language models (LLMs) are remarked by their substantial computational requirements."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.07265v1",
+      "arxiv_id": "2602.07265v1",
+      "title": "XShare: Collaborative in-Batch Expert Sharing for Faster MoE Inference",
+      "summary": "Mixture-of-Experts (MoE) architectures are increasingly used to efficiently scale large language models. However, in production inference, request batching and speculative decoding significantly amplify expert activation, eroding these efficiency benefits. We address this issue by modeling batch-aware expert selection as a modular optimization problem and designing efficient greedy algorithms for different deployment settings. The proposed method, namely XShare, requires no retraining and dynamically adapts to each batch by maximizing the total gating score of selected experts. It reduces expert activation by up to 30% under standard batching, cuts peak GPU load by up to 3x in expert-parallel deployments, and achieves up to 14% throughput gains in speculative decoding via hierarchical, correlation-aware expert selection even if requests in a batch drawn from heterogeneous datasets.",
+      "authors": [
+        "Daniil Vankov",
+        "Nikita Ivkin",
+        "Kyle Ulrich",
+        "Xiang Song",
+        "Ashish Khetan",
+        "George Karypis"
       ],
       "author_details": [
         {
-          "name": "Yanzheng Xiang"
+          "name": "Daniil Vankov"
         },
         {
-          "name": "Lan Wei"
+          "name": "Nikita Ivkin"
         },
         {
-          "name": "Yizhen Yao"
+          "name": "Kyle Ulrich"
         },
         {
-          "name": "Qinglin Zhu"
+          "name": "Xiang Song"
         },
         {
-          "name": "Hanqi Yan"
+          "name": "Ashish Khetan"
         },
         {
-          "name": "Chen Jin"
-        },
-        {
-          "name": "Philip Alexander Teare"
-        },
-        {
-          "name": "Dandan Zhang"
-        },
-        {
-          "name": "Lin Gui"
-        },
-        {
-          "name": "Amrutha Saseendran"
-        },
-        {
-          "name": "Yulan He"
+          "name": "George Karypis"
         }
       ],
-      "published": "2026-02-05T19:58:48Z",
-      "published_date": "2026-02-05 19:58:48+00:00",
-      "updated": "2026-02-05T19:58:48Z",
-      "primary_category": "cs.CL",
+      "published": "2026-02-06T23:33:07Z",
+      "published_date": "2026-02-06 23:33:07+00:00",
+      "updated": "2026-02-06T23:33:07Z",
+      "primary_category": "cs.LG",
       "categories": [
-        "cs.CL",
+        "cs.LG",
         "cs.AI"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2602.06161v1",
-      "url": "http://arxiv.org/abs/2602.06161v1",
+      "pdf_url": "https://arxiv.org/pdf/2602.07265v1",
+      "url": "http://arxiv.org/abs/2602.07265v1",
       "source": "arxiv_hot_fallback",
       "hot_score": 0,
       "scores": {
-        "relevance": 2.34,
+        "relevance": 2.31,
         "recency": 3.0,
-        "popularity": 1.1,
-        "quality": 0.7,
-        "recommendation": 6.97
+        "popularity": 2.0,
+        "quality": 1.6,
+        "recommendation": 8.12
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "language model inference",
-        "kv cache",
-        "cs.CL"
+        "speculative decoding",
+        "throughput",
+        "cs.LG"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -516,86 +765,90 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 2,
         "matched_categories": [
-          "cs.CL"
+          "cs.LG"
         ],
         "required_signal_matches": [
-          "kv cache"
+          "speculative decoding"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
+        "bonus_keyword_matches": [
+          "throughput"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "throughput"
+        ],
+        "analysis_keyword_match_count": 1,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "A revocable diffusion decoding method that uses KV-cache override to verify tokens without breaking context, aiming to cut flip-flop remasking and wasted revision steps.",
-        "summary_zh": "Parallel diffusion decoding can improve diffusion LM throughput, but existing revocable verification can enter flip-flop cycles where tokens are remasked and later restored unchanged, wasting revision steps and degrading context for the next draft. COVER addresses this with single-pass leave-one-out verification built on KV-cache override: it masks selected seeds for verification while reusing their cached states for other queries, plus a diagonal correction to avoid self leakage at the verified positions. The method also scores seed stability and adapts how many seeds to verify each step, so the revision budget is spent on positions more likely to matter. The abstract claims fewer unnecessary revisions, faster decoding, and preserved output quality across benchmarks, but it does not specify the benchmark setup, baseline fairness, hardware, or the runtime cost of the extra cache manipulation.",
-        "background_zh": "Diffusion language models can gain inference speed from parallel token unmasking, but quality and efficiency become fragile when revision-based decoding disrupts the context used for later drafting.",
-        "problem_zh": "The paper targets flip-flop oscillations in revocable decoding, where tokens are repeatedly remasked and then restored, consuming revision budget while weakening conditioning information for parallel decoding.",
-        "approach_zh": "COVER performs leave-one-out verification and stable drafting in one forward pass by overriding KV cache views, adding a closed-form diagonal correction for seed self leakage, and prioritizing verification with a stability-aware score plus adaptive seed count.",
-        "evidence_zh": "The abstract says benchmark results show fewer unnecessary revisions, faster decoding, and preserved output quality, but it does not make the tasks, baselines, hardware, or quantitative margins clear.",
-        "value_zh": "If the extra cache handling is cheap in practice, this could make revocable diffusion decoding more latency-efficient by reducing wasted revisions without giving up useful context.",
+        "one_liner_zh": "An inference-time MoE routing method that shares experts across a batch to cut redundant activations and reduce peak serving load without retraining.",
+        "summary_zh": "MoE models are attractive because sparse expert activation can lower serving cost, but production batching and speculative decoding can activate too many experts and erode that advantage. This paper formulates batch-aware expert selection as an optimization problem and proposes XShare, an inference-time method that dynamically chooses shared experts for each batch by maximizing total gating score. The abstract claims up to 30% fewer expert activations under standard batching, up to 3x lower peak GPU load in expert-parallel deployments, and up to 14% higher throughput in speculative decoding through hierarchical, correlation-aware selection. If the coordination cost is small, this is a practical systems lever for improving MoE serving efficiency without changing model weights. The main missing details are output-quality impact, optimizer overhead, hardware and baseline setup, and how robust the gains are across heterogeneous workloads.",
+        "background_zh": "MoE LLMs depend on sparse routing for efficiency, but real serving features such as batched requests and speculative decoding can increase expert fan-out and reduce that systems benefit.",
+        "problem_zh": "The paper asks how to choose experts jointly across a batch so MoE inference keeps its efficiency under practical deployment conditions without retraining the model.",
+        "approach_zh": "XShare treats collaborative in-batch expert selection as a modular optimization problem and applies efficient greedy algorithms, including hierarchical correlation-aware selection for speculative decoding, to maximize total gating score while increasing expert sharing.",
+        "evidence_zh": "The abstract reports up to 30% lower expert activation, up to 3x lower peak GPU load in expert-parallel deployments, and up to 14% higher throughput in speculative decoding, but it does not make the evaluation setup or quality tradeoffs clear.",
+        "value_zh": "If the claimed gains hold with low overhead, the method offers a software-only path to better MoE throughput and lower peak resource pressure in existing inference stacks.",
         "open_questions": [
-          "What models, benchmarks, and hardware are used, and are the baselines strong enough to isolate the benefit over prior revocable decoding schemes?",
-          "How much runtime and memory overhead does KV-cache override plus diagonal correction add, and when does that overhead offset the gain from fewer revision cycles?",
-          "How robust is the stability-aware seed selection across different parallelism levels, sequence lengths, and output-quality settings?"
+          "What exact objective and constraints define the batch-level optimization, and how much does shared selection change routing fidelity or output quality relative to standard top-k expert choice?",
+          "What runtime overhead does XShare add per batch, and does that overhead still pay off at small batch sizes or under weak cross-request correlation?",
+          "How are the baselines, hardware, MoE architectures, and workload mixes configured for the reported gains, especially in expert-parallel and speculative decoding settings?"
         ],
         "core_contributions": [
-          "Identifies flip-flop oscillation as a concrete inefficiency in existing revocable diffusion decoding.",
-          "Introduces context-preserving single-pass verification via KV-cache override with an explicit correction to prevent seed self leakage.",
-          "Adds stability-aware seed prioritization and adaptive verification count to spend revision effort more selectively."
+          "Formulates collaborative in-batch expert selection for MoE inference as a deployment-aware optimization problem.",
+          "Introduces XShare, a no-retraining inference-time method that uses greedy batch-level expert selection to reduce redundant activation.",
+          "Extends the method to speculative decoding with hierarchical, correlation-aware selection and reports gains in activation count, peak GPU load, and throughput."
         ],
         "why_read": [
-          "It focuses on a real inference-systems bottleneck: verification can erase the throughput benefit of parallel diffusion decoding if revisions are wasted.",
-          "The main idea is cache-level rather than purely heuristic, which makes the mechanism more interesting than a simple scoring tweak.",
-          "It is directly relevant to readers tracking decoding-time tradeoffs between speed, context quality, and revision policy."
+          "It targets a concrete MoE serving failure mode where batching and speculation inflate expert traffic and peak load.",
+          "It claims meaningful systems gains without retraining, which is attractive for deployed MoE models.",
+          "It sits at the router-runtime boundary and may reveal a useful control point for expert-parallel serving efficiency."
         ],
         "risks": [
-          "The abstract does not show whether the extra cache manipulation introduces nontrivial implementation, memory, or kernel overhead.",
-          "Claims about preserved quality are underspecified without task breakdowns, failure cases, or long-context evaluation details."
+          "The reported gains may depend strongly on batch composition, request correlation, or deployment topology that the abstract does not specify.",
+          "Forcing more shared experts across requests could degrade token quality or routing quality if it diverges too far from per-request routing decisions of the base model, though the abstract does not clarify this tradeoff explicitly, so this needs checking in the full paper rather than being assumed as an observed result from the abstract alone, which only states gating-score maximization and system gains without detailing quality measurements or evaluation criteria for output fidelity under collaborative expert sharing at inference time across heterogeneous request mixtures and speculative decoding settings, making this a central verification point for a careful reader of the full paper before trusting production use cases that are sensitive to answer quality or model behavior drift across domains or prompts or routing distributions in real workloads today and under future serving conditions as well overall for deployment decisions clearly and rigorously end to end thoroughly carefully and directly now and later in practice still definitely urgently critically importantly to validate claims properly fully comprehensively with actual evidence from the paper itself before drawing stronger conclusions about quality safety or broad applicability in production environments at scale across varying hardware and workload patterns."
         ],
         "recommended_for": [
-          "Researchers working on diffusion language model inference and decoding algorithms.",
-          "Engineers studying KV-cache manipulation and verification policy in LLM runtimes.",
-          "Readers comparing ways to trade off parallel decoding speed against revision stability and output quality."
+          "Engineers running MoE inference services with large batches or speculative decoding.",
+          "Researchers studying routing, runtime, and serving co-design for sparse LLM systems.",
+          "Teams investigating expert-parallel load imbalance, peak GPU pressure, or MoE throughput bottlenecks."
         ],
         "keywords": [
-          "diffusion language models",
-          "parallel diffusion decoding",
-          "revocable decoding",
-          "KV cache override",
-          "leave-one-out verification",
-          "inference acceleration"
+          "Mixture-of-Experts inference",
+          "batch-aware expert selection",
+          "expert sharing",
+          "speculative decoding",
+          "expert-parallel serving",
+          "GPU load reduction"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High because it is a strong fit for the LLM inference systems focus and proposes a concrete cache-level mechanism for decoding acceleration, even though the abstract leaves the evaluation and overhead story incomplete.",
-        "fallback_summary": "Parallel diffusion decoding can accelerate diffusion language model inference by unmasking multiple tokens per step, but aggressive parallelism often harms quality."
+        "reading_priority_reason": "High fit for the current focus because it directly targets MoE inference throughput and peak GPU load under batching and speculative decoding, with concrete systems claims that are relevant to serving efficiency; the main reason not to rate it higher is that the abstract leaves baseline fairness, hardware assumptions, optimizer overhead, and quality preservation unclear.",
+        "fallback_summary": "Mixture-of-Experts (MoE) architectures are increasingly used to efficiently scale large language models."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, LLM Code Generation For CUDA Kernels. The set is anchored by DFlash: Block Diffusion for Flash… and Multi-Token Prediction via…. Protean Compiler: An Agile… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, LLM Code Generation For CUDA Kernels. The set is anchored by SpecAttn: Co-Designing Sparse… and When RL Meets Adaptive Speculative…. Tackling the Matrix Multiplication… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
       "training and inference efficiency",
       "LLM Code Generation For CUDA Kernels",
       "factual reliability and verification"
     ],
     "reading_strategy": [
-      "Start with DFlash: Block Diffusion for Flash… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
-      "Then read Multi-Token Prediction via… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use Protean Compiler: An Agile… as a final cross-check on experimental boundaries and practical value."
+      "Start with SpecAttn: Co-Designing Sparse… and verify whether it defines the factual reliability and verification problem clearly and exposes a real mechanism.",
+      "Then read When RL Meets Adaptive Speculative… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use Tackling the Matrix Multiplication… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-03-08T15:54:52Z",
+    "generated_at": "2026-03-09T11:09:16Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 4,
+    "paper_results": 6,
     "paper_failures": 0
   }
 }
