@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-09",
+  "last_updated": "2026-03-10",
   "papers": [
     {
       "paper_id": "2603.05210v1",
@@ -70,6 +70,34 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2603.08065v1",
+      "title": "Deterministic Differentiable Structured Pruning for Large Language Models",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-09T07:59:17Z",
+      "source_lane": "fresh",
+      "topics": [
+        "structured pruning",
+        "LLM inference",
+        "l0 sparsity",
+        "deterministic mask optimization",
+        "vLLM",
+        "Mixture of Experts (MoE)"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-10",
+      "last_seen_date": "2026-03-10",
+      "last_recommended_date": "2026-03-10",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-10",
+          "recommendation": 9.3,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-09"
     },
     {
       "paper_id": "2602.06036v1",
@@ -217,6 +245,34 @@
       "cooldown_until": "2027-03-07"
     },
     {
+      "paper_id": "2205.14135",
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "domain": "LLM Inference Systems",
+      "published": "2022-05-30",
+      "source_lane": "classic",
+      "topics": [
+        "exact attention",
+        "IO-aware attention",
+        "HBM traffic",
+        "tiling",
+        "kernel fusion",
+        "CUDA"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-10",
+      "last_seen_date": "2026-03-10",
+      "last_recommended_date": "2026-03-10",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-10",
+          "recommendation": 6.92,
+          "lane": "classic"
+        }
+      ],
+      "cooldown_until": "2026-03-31"
+    },
+    {
       "paper_id": "2210.17323",
       "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
       "domain": "LLM Inference Systems",
@@ -305,6 +361,62 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2603.08453v1",
+      "title": "LycheeCluster: Efficient Long-Context Inference with Structure-Aware Chunking and Hierarchical KV Indexing",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-09T14:50:35Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference systems",
+        "long-context inference",
+        "KV cache management",
+        "structure-aware chunking",
+        "hierarchical indexing",
+        "triangle-inequality pruning"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-10",
+      "last_seen_date": "2026-03-10",
+      "last_recommended_date": "2026-03-10",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-10",
+          "recommendation": 10.0,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-09"
+    },
+    {
+      "paper_id": "dblp:journals/pacmpl/CaoZLSL25",
+      "title": "MarQSim: Reconciling Determinism and Randomness in Compiler Optimization for Quantum Simulation.",
+      "domain": "Low-level Code And Assembly Generation",
+      "published": "2025",
+      "source_lane": "established",
+      "topics": [
+        "quantum Hamiltonian simulation",
+        "compiler optimization",
+        "randomized compilation",
+        "deterministic compilation",
+        "Markov chain",
+        "Hamiltonian Term Transition Graph"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-10",
+      "last_seen_date": "2026-03-10",
+      "last_recommended_date": "2026-03-10",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-10",
+          "recommendation": 4.0,
+          "lane": "established"
+        }
+      ],
+      "cooldown_until": "2026-05-09"
     },
     {
       "paper_id": "2602.06019v1",
@@ -431,6 +543,34 @@
         }
       ],
       "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "2602.07721v2",
+      "title": "ParisKV: Fast and Drift-Robust KV-Cache Retrieval for Long-Context LLMs",
+      "domain": "LLM Inference Systems",
+      "published": "2026-02-07T22:26:45Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "long-context decoding",
+        "KV cache",
+        "throughput",
+        "latency",
+        "GPU-native retrieval"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-10",
+      "last_seen_date": "2026-03-10",
+      "last_recommended_date": "2026-03-10",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-10",
+          "recommendation": 10.0,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-09"
     },
     {
       "paper_id": "2602.06142v2",
@@ -599,6 +739,34 @@
         }
       ],
       "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "dblp:conf/cgo/ArmengolEstapeWCO24",
+      "title": "SLaDe: A Portable Small Language Model Decompiler for Optimized Assembly.",
+      "domain": "Low-level Code And Assembly Generation",
+      "published": "2024",
+      "source_lane": "established",
+      "topics": [
+        "decompilation",
+        "optimized assembly",
+        "small language models",
+        "sequence-to-sequence Transformer",
+        "type inference",
+        "ISA portability"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-10",
+      "last_seen_date": "2026-03-10",
+      "last_recommended_date": "2026-03-10",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-10",
+          "recommendation": 4.17,
+          "lane": "established"
+        }
+      ],
+      "cooldown_until": "2026-05-09"
     },
     {
       "paper_id": "2603.05232v1",
