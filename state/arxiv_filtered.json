@@ -1,98 +1,104 @@
 {
-  "target_date": "2026-03-10",
+  "target_date": "2026-03-11",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-08",
-      "end": "2026-03-10"
+      "start": "2026-02-09",
+      "end": "2026-03-11"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-10",
-      "end": "2026-02-07"
+      "start": "2025-03-11",
+      "end": "2026-02-08"
     }
   },
-  "total_found": 288,
-  "total_venue": 8,
-  "total_filtered": 15,
+  "total_found": 292,
+  "total_venue": 12,
+  "total_filtered": 22,
   "total_recent": 200,
   "total_hot": 80,
-  "total_unique": 15,
+  "total_unique": 22,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
     "selected_count": 6,
     "lane_counts": {
-      "fresh": 3,
-      "established": 2,
-      "classic": 1,
-      "history_filtered": 4,
+      "fresh": 5,
+      "established": 1,
+      "classic": 0,
+      "history_filtered": 8,
       "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.08453v1",
-      "arxiv_id": "2603.08453v1",
-      "title": "LycheeCluster: Efficient Long-Context Inference with Structure-Aware Chunking and Hierarchical KV Indexing",
-      "summary": "The quadratic complexity of the attention mechanism and the substantial memory footprint of the Key-Value (KV) cache present severe computational and memory challenges for Large Language Models (LLMs) processing long contexts. Existing retrieval-based methods often compromise semantic integrity through fixed-size chunking and suffer from inefficient linear scanning. In this paper, we propose LycheeCluster, a novel method for efficient KV cache management. LycheeCluster preserves local semantic coherence via boundary-aware chunking and constructs a recursive hierarchical index rooted in the triangle inequality. This design transforms cache retrieval from a linear scan into a theoretically bounded, logarithmic-time pruning process, while a lazy update strategy supports efficient streaming generation. Experiments demonstrate that LycheeCluster achieves up to a 3.6x end-to-end inference speedup with negligible degradation in model performance, outperforming state-of-the-art KV cache management methods (e.g., Quest, ClusterKV). We will release our code and kernels after publication.",
+      "id": "http://arxiv.org/abs/2603.09046v1",
+      "arxiv_id": "2603.09046v1",
+      "title": "FlexServe: A Fast and Secure LLM Serving System for Mobile Devices with Flexible Resource Isolation",
+      "summary": "Device-side Large Language Models (LLMs) have witnessed explosive growth, offering higher privacy and availability compared to cloud-side LLMs. During LLM inference, both model weights and user data are valuable, and attackers may even compromise the OS kernel to steal them. ARM TrustZone is the de facto hardware-based isolation technology on mobile devices, used to protect sensitive applications from a compromised OS. However, protecting LLM inference with TrustZone incurs significant overhead due to its inflexible isolation of memory and the NPU. To address these challenges, this paper introduces FlexServe, a fast and secure LLM serving system for mobile devices. It first introduces a Flexible Resource Isolation mechanism to construct Flexible Secure Memory (Flex-Mem) and Flexible Secure NPU (Flex-NPU). Both memory pages and the NPU can be efficiently switched between unprotected and protected modes. Based on these mechanisms, FlexServe designs a fast and secure LLM inference framework within TrustZone's secure world. The LLM-Aware Memory Management and Secure Inference Pipeline are introduced to accelerate inference. A Multi-Model Scheduler is proposed to optimize multi-model workflows. We implement a prototype of FlexServe and compare it with two TrustZone-based strawman designs. The results show that FlexServe achieves an average $10.05\\times$ speedup in Time to First Token (TTFT) compared to the strawman, and an average $2.44\\times$ TTFT speedup compared to an optimized strawman with pipeline and secure NPU enabled. For multi-model agent workflows, the end-to-end speedup is up to $24.30\\times$ and $4.05\\times$ compared to the strawman and optimized strawman, respectively.",
       "authors": [
-        "Dongfang Li",
-        "Zixuan Liu",
-        "Gang Lin",
-        "Baotian Hu",
-        "Min Zhang"
+        "Yinpeng Wu",
+        "Yitong Chen",
+        "Lixiang Wang",
+        "Jinyu Gu",
+        "Zhichao Hua",
+        "Yubin Xia"
       ],
       "author_details": [
         {
-          "name": "Dongfang Li"
+          "name": "Yinpeng Wu"
         },
         {
-          "name": "Zixuan Liu"
+          "name": "Yitong Chen"
         },
         {
-          "name": "Gang Lin"
+          "name": "Lixiang Wang"
         },
         {
-          "name": "Baotian Hu"
+          "name": "Jinyu Gu"
         },
         {
-          "name": "Min Zhang"
+          "name": "Zhichao Hua"
+        },
+        {
+          "name": "Yubin Xia"
         }
       ],
-      "published": "2026-03-09T14:50:35Z",
-      "published_date": "2026-03-09 14:50:35+00:00",
-      "updated": "2026-03-09T14:50:35Z",
-      "comments": "17 pages, 12 figures",
-      "primary_category": "cs.LG",
+      "published": "2026-03-10T00:31:25Z",
+      "published_date": "2026-03-10 00:31:25+00:00",
+      "updated": "2026-03-10T00:31:25Z",
+      "comments": "13 pages, 11 figures",
+      "primary_category": "cs.CR",
       "categories": [
+        "cs.CR",
         "cs.LG",
-        "cs.AI",
-        "cs.CL"
+        "cs.OS"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.08453v1",
-      "url": "http://arxiv.org/abs/2603.08453v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.09046v1",
+      "url": "http://arxiv.org/abs/2603.09046v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.91,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 10.0
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.97
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "kv cache",
+        "llm inference",
+        "llm serving",
+        "serving",
         "cs.LG",
-        "cs.CL",
+        "serving system",
         "memory",
         "speedup"
       ],
@@ -101,13 +107,12 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 1,
+        "text_match_count": 3,
         "matched_categories": [
-          "cs.LG",
-          "cs.CL"
+          "cs.LG"
         ],
         "required_signal_matches": [
-          "kv cache"
+          "serving system"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
@@ -126,143 +131,131 @@
       "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2602.07721v2",
-      "arxiv_id": "2602.07721v2",
-      "title": "ParisKV: Fast and Drift-Robust KV-Cache Retrieval for Long-Context LLMs",
-      "summary": "KV-cache retrieval is essential for long-context LLM inference, yet existing methods struggle with distribution drift and high latency at scale. We introduce ParisKV, a drift-robust, GPU-native KV-cache retrieval framework based on collision-based candidate selection, followed by a quantized inner-product reranking estimator. For million-token contexts, ParisKV supports CPU-offloaded KV caches via Unified Virtual Addressing (UVA), enabling on-demand top-$k$ fetching with minimal overhead. ParisKV matches or outperforms full attention quality on long-input and long-generation benchmarks. It achieves state-of-the-art long-context decoding efficiency: it matches or exceeds full attention speed even at batch size 1 for long contexts, delivers up to 2.8$\\times$ higher throughput within full attention's runnable range, and scales to million-token contexts where full attention runs out of memory. At million-token scale, ParisKV reduces decode latency by 17$\\times$ and 44$\\times$ compared to MagicPIG and PQCache, respectively, two state-of-the-art KV-cache Top-$k$ retrieval baselines.",
+      "id": "http://arxiv.org/abs/2603.08960v1",
+      "arxiv_id": "2603.08960v1",
+      "title": "The $qs$ Inequality: Quantifying the Double Penalty of Mixture-of-Experts at Inference",
+      "summary": "Mixture-of-Experts (MoE) models deliver high quality at low training FLOPs, but this efficiency often vanishes at inference. We identify a double penalty that structurally disadvantages MoE architectures during decoding: first, expert routing fragments microbatches and reduces weight reuse; second, massive resident expert pools reduce high-bandwidth memory (HBM) headroom for the KV cache. This phenomenon, formalized as reuse fragmentation, pushes feed-forward networks (FFNs) into a bandwidth-bound regime, especially at long context lengths.\n  We introduce the $qs$ inequality, a predictive criterion that identifies when MoE is structurally disadvantaged relative to a quality-matched dense model. This criterion unifies sparsity ($s$), the fraction of parameters activated per token, and the quality-equivalence factor ($q$), the size multiplier required for a dense model to match MoE performance. Our evaluation across frontier models including DeepSeek-V3, Qwen3-235B, Grok-1, and Switch-C demonstrates that this fragmentation is a general architectural phenomenon. For DeepSeek-V3 at 128k context, this results in a 4.5x throughput advantage for a quality-matched dense baseline. Crucially, massive architectures like Switch-C can become infeasible on cluster sizes where a quality-matched dense model remains viable.\n  Our results suggest that training-time FLOP efficiency is an incomplete proxy for inference-time performance in long-context serving. They also indicate that MoE may be best viewed as a training-time optimization, with distillation into dense models as a possible path toward inference-efficient deployment.",
       "authors": [
-        "Yanlin Qi",
-        "Xinhang Chen",
-        "Huiqiang Jiang",
-        "Qitong Wang",
-        "Botao Peng",
-        "Themis Palpanas"
+        "Vignesh Adhinarayanan",
+        "Nuwan Jayasena"
       ],
       "author_details": [
         {
-          "name": "Yanlin Qi"
+          "name": "Vignesh Adhinarayanan"
         },
         {
-          "name": "Xinhang Chen"
-        },
-        {
-          "name": "Huiqiang Jiang"
-        },
-        {
-          "name": "Qitong Wang"
-        },
-        {
-          "name": "Botao Peng"
-        },
-        {
-          "name": "Themis Palpanas"
+          "name": "Nuwan Jayasena"
         }
       ],
-      "published": "2026-02-07T22:26:45Z",
-      "published_date": "2026-02-07 22:26:45+00:00",
-      "updated": "2026-02-10T16:05:56Z",
-      "comments": "25 pages, 16 figures. Under review",
+      "published": "2026-03-09T21:48:04Z",
+      "published_date": "2026-03-09 21:48:04+00:00",
+      "updated": "2026-03-09T21:48:04Z",
+      "comments": "10 pages, 6 tables",
       "primary_category": "cs.LG",
       "categories": [
         "cs.LG",
-        "cs.CL",
-        "cs.DB"
+        "cs.AR",
+        "cs.DC",
+        "cs.PF"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2602.07721v2",
-      "url": "http://arxiv.org/abs/2602.07721v2",
-      "source": "arxiv_hot_fallback",
-      "hot_score": 0,
+      "pdf_url": "https://arxiv.org/pdf/2603.08960v1",
+      "url": "http://arxiv.org/abs/2603.08960v1",
+      "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 2.7,
-        "quality": 2.3,
-        "recommendation": 10.0
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 9.63
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "llm inference",
-        "decode",
+        "serving",
         "kv cache",
         "throughput",
-        "latency",
         "cs.LG",
-        "cs.CL",
-        "memory"
+        "cs.DC",
+        "cs.AR",
+        "memory",
+        "bandwidth",
+        "baseline",
+        "evaluation"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
-      "is_hot_paper": true,
+      "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 5,
+        "text_match_count": 3,
         "matched_categories": [
           "cs.LG",
-          "cs.CL"
+          "cs.DC",
+          "cs.AR"
         ],
         "required_signal_matches": [
-          "kv cache",
-          "decode"
+          "kv cache"
         ],
-        "required_signal_match_count": 2,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [
           "throughput",
-          "latency",
-          "memory"
+          "memory",
+          "bandwidth"
         ],
         "bonus_keyword_match_count": 3,
         "analysis_keyword_matches": [
+          "baseline",
+          "evaluation",
           "throughput",
-          "latency",
-          "memory"
+          "memory",
+          "bandwidth"
         ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.7,
+        "analysis_keyword_match_count": 5,
+        "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.5
       },
       "selection_lane": "fresh"
     },
     {
-      "id": "dblp:conf/cgo/ArmengolEstapeWCO24",
-      "paper_id": "dblp:conf/cgo/ArmengolEstapeWCO24",
-      "title": "SLaDe: A Portable Small Language Model Decompiler for Optimized Assembly.",
-      "summary": "Decompilation is a well-studied area with numerous high-quality tools available. These are frequently used for security tasks and to port legacy code. However, they regularly generate difficult-to-read programs and require a large amount of engineering effort to support new programming languages and ISAs. Recent interest in neural approaches has produced portable tools that generate readable code. Nevertheless, to-date such techniques are usually restricted to synthetic programs without optimization, and no models have evaluated their portability. Furthermore, while the code generated may be more readable, it is usually incorrect. This paper presents SLaDe, a Small Language model Decompiler based on a sequence-to-sequence Transformer trained over real-world code and augmented with a type inference engine. We utilize a novel tokenizer, dropout-free regularization, and type inference to generate programs that are more readable and accurate than standard analytic and recent neural approaches. Unlike standard approaches, SLaDe can infer out-of-context types and unlike neural approaches, it generates correct code. We evaluate SLaDe on over 4,000 ExeBench functions on two ISAs and at two optimization levels. SLaDe is up to 6× more accurate than Ghidra, a state-of-the-art, industrial-strength decompiler and up to 4× more accurate than the large language model ChatGPT and generates significantly more readable code than both.",
-      "abstract": "Decompilation is a well-studied area with numerous high-quality tools available. These are frequently used for security tasks and to port legacy code. However, they regularly generate difficult-to-read programs and require a large amount of engineering effort to support new programming languages and ISAs. Recent interest in neural approaches has produced portable tools that generate readable code. Nevertheless, to-date such techniques are usually restricted to synthetic programs without optimization, and no models have evaluated their portability. Furthermore, while the code generated may be more readable, it is usually incorrect. This paper presents SLaDe, a Small Language model Decompiler based on a sequence-to-sequence Transformer trained over real-world code and augmented with a type inference engine. We utilize a novel tokenizer, dropout-free regularization, and type inference to generate programs that are more readable and accurate than standard analytic and recent neural approaches. Unlike standard approaches, SLaDe can infer out-of-context types and unlike neural approaches, it generates correct code. We evaluate SLaDe on over 4,000 ExeBench functions on two ISAs and at two optimization levels. SLaDe is up to 6× more accurate than Ghidra, a state-of-the-art, industrial-strength decompiler and up to 4× more accurate than the large language model ChatGPT and generates significantly more readable code than both.",
+      "id": "dblp:journals/ral/MengSXX25",
+      "paper_id": "dblp:journals/ral/MengSXX25",
+      "title": "Efficient Fabrication of High-Aspect-Ratio Stepped-End Microneedles via Vision-Guided Assembly for Flexible Microelectrode Implantation.",
+      "summary": "This paper presents an automated assembly method for the efficient and cost-effective fabrication of high-aspect-ratio stepped-end (HARSE) microneedles for flexible neural microelectrode implantation. The core process is a novel variable stiffness insertion (VSI) method, employing a vision-guided system to assemble commercially available tungsten wires and stainless steel tubes with microscale diameters into HARSE structures. The VSI system uses a five-axis adjustment stage, gripping module, and dual-camera feedback. A finite state machine model guides the assembly process through low-stiffness and high-stiffness feeding loops, ensuring accurate construction of the stepped-end structure. Pre-processing (wire straightening) and post-processing (tip etching) steps complement the VSI process. Fabricated microneedles demonstrated precise microelectrode grasping with less than 32 <inline-formula xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><tex-math notation=\"LaTeX\">$\\bm {\\mu }$</tex-math></inline-formula>m positional shift, approximately the size of a single neuron, and required 2.3 times less force for dura mater penetration compared to flat-ended needles. With an average manufacturing time under 4 minutes per needle and use of cost-effective equipment, this method significantly reduces fabrication costs and improves efficiency compared to techniques using expensive equipment like focused ion beam or femtosecond laser machining, addressing the growing demand for implantable flexible microelectrodes in neuroscience research and brain-machine interface development.",
+      "abstract": "This paper presents an automated assembly method for the efficient and cost-effective fabrication of high-aspect-ratio stepped-end (HARSE) microneedles for flexible neural microelectrode implantation. The core process is a novel variable stiffness insertion (VSI) method, employing a vision-guided system to assemble commercially available tungsten wires and stainless steel tubes with microscale diameters into HARSE structures. The VSI system uses a five-axis adjustment stage, gripping module, and dual-camera feedback. A finite state machine model guides the assembly process through low-stiffness and high-stiffness feeding loops, ensuring accurate construction of the stepped-end structure. Pre-processing (wire straightening) and post-processing (tip etching) steps complement the VSI process. Fabricated microneedles demonstrated precise microelectrode grasping with less than 32 <inline-formula xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><tex-math notation=\"LaTeX\">$\\bm {\\mu }$</tex-math></inline-formula>m positional shift, approximately the size of a single neuron, and required 2.3 times less force for dura mater penetration compared to flat-ended needles. With an average manufacturing time under 4 minutes per needle and use of cost-effective equipment, this method significantly reduces fabrication costs and improves efficiency compared to techniques using expensive equipment like focused ion beam or femtosecond laser machining, addressing the growing demand for implantable flexible microelectrodes in neuroscience research and brain-machine interface development.",
       "authors": [
-        "Jordi Armengol-Estapé",
-        "Jackson Woodruff",
-        "Chris Cummins",
-        "Michael F. P. O&apos;Boyle"
+        "Xianghe Meng",
+        "Xingjian Shen",
+        "Yan Xu",
+        "Hui Xie 0003"
       ],
-      "published": "2024",
-      "published_date": "2024-07-01 00:00:00",
-      "publicationDate": "2024",
+      "published": "2025",
+      "published_date": "2025-07-01 00:00:00",
+      "publicationDate": "2025",
       "categories": [],
       "source": "dblp_venue",
       "source_provider": "dblp",
-      "source_url": "https://ieeexplore.ieee.org/document/10444788/",
-      "url": "https://ieeexplore.ieee.org/document/10444788/",
+      "source_url": "https://ieeexplore.ieee.org/document/10840263/",
+      "url": "https://ieeexplore.ieee.org/document/10840263/",
       "pdf_url": "",
-      "venue": "CGO",
-      "venue_source_name": "CGO",
-      "venue_source_alias": "CGO",
-      "dblp_key": "conf/cgo/ArmengolEstapeWCO24",
-      "doi": "10.1109/CGO57630.2024.10444788",
-      "dblp_type": "Conference and Workshop Papers",
+      "venue": "IEEE Robotics Autom. Lett.",
+      "venue_source_name": "MICRO",
+      "venue_source_alias": "MICRO",
+      "dblp_key": "journals/ral/MengSXX25",
+      "doi": "10.1109/LRA.2025.3529323",
+      "dblp_type": "Journal Articles",
       "access": "closed",
       "selection_signals": {
         "source": "dblp_venue",
-        "venue": "CGO",
-        "venue_alias": "CGO"
+        "venue": "MICRO",
+        "venue_alias": "MICRO"
       },
-      "venue_source_priority": 5,
-      "venue_query_year": 2024,
+      "venue_source_priority": 4,
+      "venue_query_year": 2025,
       "scores": {
         "relevance": 1.63,
         "recency": 0.0,
-        "popularity": 0.7,
-        "quality": 0.7,
-        "recommendation": 4.17
+        "popularity": 0.3,
+        "quality": 0.3,
+        "recommendation": 3.84
       },
       "matched_domain": "Low-level Code And Assembly Generation",
       "matched_keywords": [
@@ -287,221 +280,284 @@
         "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "established",
-      "citationCount": 19,
-      "institutions": [
-        "University of Edinburgh",
-        "Menlo School",
-        "Meta (United States)"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://ieeexplore.ieee.org/document/10444788/",
-        "abstract_source": "openalex",
-        "pdf_source": ""
-      }
-    },
-    {
-      "id": "dblp:journals/pacmpl/CaoZLSL25",
-      "paper_id": "dblp:journals/pacmpl/CaoZLSL25",
-      "title": "MarQSim: Reconciling Determinism and Randomness in Compiler Optimization for Quantum Simulation.",
-      "summary": "Quantum Hamiltonian simulation, fundamental in quantum algorithm design, extends far beyond its foundational roots, powering diverse quantum computing applications. However, optimizing the compilation of quantum Hamiltonian simulation poses significant challenges. Existing approaches fall short in reconciling deterministic and randomized compilation, lack appropriate intermediate representations, and struggle to guarantee correctness. Addressing these challenges, we present MarQSim, a novel compilation framework. MarQSim leverages a Markov chain-based approach, encapsulated in the Hamiltonian Term Transition Graph, adeptly reconciling deterministic and randomized compilation benefits. Furthermore, we formulate a Minimum-Cost Flow model that can tune transition matrices to enforce correctness while accommodating various optimization objectives. Experimental results demonstrate MarQSim's superiority in generating more efficient quantum circuits for simulating various quantum Hamiltonians while maintaining precision.",
-      "abstract": "Quantum Hamiltonian simulation, fundamental in quantum algorithm design, extends far beyond its foundational roots, powering diverse quantum computing applications. However, optimizing the compilation of quantum Hamiltonian simulation poses significant challenges. Existing approaches fall short in reconciling deterministic and randomized compilation, lack appropriate intermediate representations, and struggle to guarantee correctness. Addressing these challenges, we present MarQSim, a novel compilation framework. MarQSim leverages a Markov chain-based approach, encapsulated in the Hamiltonian Term Transition Graph, adeptly reconciling deterministic and randomized compilation benefits. Furthermore, we formulate a Minimum-Cost Flow model that can tune transition matrices to enforce correctness while accommodating various optimization objectives. Experimental results demonstrate MarQSim's superiority in generating more efficient quantum circuits for simulating various quantum Hamiltonians while maintaining precision.",
-      "authors": [
-        "Xiuqi Cao",
-        "Junyu Zhou 0005",
-        "Yuhao Liu 0017",
-        "Yunong Shi",
-        "Gushu Li"
-      ],
-      "published": "2025",
-      "published_date": "2025-07-01 00:00:00",
-      "publicationDate": "2025",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://dl.acm.org/doi/10.1145/3729269",
-      "url": "https://dl.acm.org/doi/10.1145/3729269",
-      "pdf_url": "",
-      "venue": "Proc. ACM Program. Lang.",
-      "venue_source_name": "PLDI",
-      "venue_source_alias": "PLDI",
-      "dblp_key": "journals/pacmpl/CaoZLSL25",
-      "doi": "10.1145/3729269",
-      "dblp_type": "Journal Articles",
-      "access": "open",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "PLDI",
-        "venue_alias": "PLDI"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2025,
-      "scores": {
-        "relevance": 1.31,
-        "recency": 0.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 4.0
-      },
-      "matched_domain": "Low-level Code And Assembly Generation",
-      "matched_keywords": [
-        "compiler optimization"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "Low-level Code And Assembly Generation",
-        "text_match_count": 1,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "compiler optimization"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "established",
       "citationCount": 2,
       "institutions": [
-        "Philadelphia University",
-        "University of Pennsylvania",
-        "Applied Quantum Technologies (United States)"
+        "Harbin Institute of Technology",
+        "State Key Laboratory of Robotics and Systems"
       ],
       "venue_metadata": {
         "official_page_blocked": true,
-        "official_page_url": "https://dl.acm.org/doi/10.1145/3729269",
+        "official_page_url": "https://ieeexplore.ieee.org/document/10840263/",
         "abstract_source": "openalex",
         "pdf_source": ""
       }
     },
     {
-      "paper_id": "2205.14135",
-      "arxiv_id": "2205.14135",
-      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
-      "summary": "Introduces an IO-aware exact attention algorithm that reduces HBM traffic with tiling and kernel fusion, setting the baseline for later FlashAttention variants and many modern attention kernels.",
+      "id": "http://arxiv.org/abs/2603.09216v1",
+      "arxiv_id": "2603.09216v1",
+      "title": "PIM-SHERPA: Software Method for On-device LLM Inference by Resolving PIM Memory Attribute and Layout Inconsistencies",
+      "summary": "On-device deployments of large language models (LLMs) are rapidly proliferating across mobile and edge platforms. LLM inference comprises a compute-intensive prefill phase and a memory bandwidth-intensive decode phase, and the decode phase has been widely recognized as well-suited to processing-in-memory (PIM) in both academia and industry. However, practical PIM-enabled systems face two obstacles between these phases, a memory attribute inconsistency in which prefill favors placing weights in a cacheable region for reuse whereas decode requires weights in a non-cacheable region to reliably trigger PIM, and a weight layout inconsistency between host-friendly and PIM-aware layouts. To address these problems, we introduce \\textit{PIM-SHERPA}, a software-only method for efficient on-device LLM inference by resolving PIM memory attribute and layout inconsistencies. PIM-SHERPA provides two approaches, DRAM double buffering (DDB), which keeps a single PIM-aware weights in the non-cacheable region while prefetching the swizzled weights of the next layer into small cacheable buffers, and online weight rearrangement with swizzled memory copy (OWR), which performs the on-demand swizzled memory copy immediately before GEMM. Compared to a baseline PIM emulation system, PIM-SHERPA achieves approximately 47.8 - 49.7\\% memory capacity savings while maintaining comparable performance to the theoretical maximum on the Llama 3.2 model. To the best of our knowledge, this is the first work to identify the memory attribute inconsistency and propose effective solutions on product-level PIM-enabled systems.",
       "authors": [
-        "Tri Dao",
-        "Daniel Y. Fu",
-        "Stefano Ermon",
-        "Atri Rudra",
-        "Christopher Re"
-      ],
-      "published": "2022-05-30",
-      "published_date": "2022-05-30 00:00:00",
-      "categories": [
-        "cs.LG",
-        "cs.AR"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "attention",
-        "kernel",
-        "memory-io",
-        "cuda"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2205.14135",
-      "pdf_url": "https://arxiv.org/pdf/2205.14135.pdf",
-      "scores": {
-        "relevance": 2.9,
-        "recency": 0.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 6.92
-      },
-      "classic_rotation_score": 10.6701,
-      "citationCount": 3733,
-      "influentialCitationCount": 353,
-      "venue": "Neural Information Processing Systems",
-      "journal_ref": "ArXiv"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.08065v1",
-      "arxiv_id": "2603.08065v1",
-      "title": "Deterministic Differentiable Structured Pruning for Large Language Models",
-      "summary": "Structured pruning reduces LLM inference cost by removing low-importance architectural components. This can be viewed as learning a multiplicative gate for each component under an l0 sparsity constraint. Due to the discreteness of the l0 norm, prior work typically adopts stochastic hard-concrete relaxations to enable differentiable optimization; however, this stochasticity can introduce a train--test mismatch when sampled masks are discretized for deployment and restricts masks to a bounded, near-binary range. To address this, we propose Deterministic Differentiable Pruning (DDP), a mask-only optimization method that eliminates stochasticity by directly optimizing a deterministic soft surrogate of the discrete l0 objective. Compared with prior approaches, DDP offers greater expressiveness, reduced train--test mismatch, and faster convergence. We apply our method to several dense and MoE models, including Qwen3-32B and Qwen3-30B-A3B, achieving a performance loss as small as 1% on downstream tasks while outperforming previous methods at 20% sparsity. We further demonstrate end-to-end inference speedups in realistic deployment settings with vLLM.",
-      "authors": [
-        "Weiyu Huang",
-        "Pengle Zhang",
-        "Xiaolu Zhang",
-        "Jun Zhou",
-        "Jun Zhu",
-        "Jianfei Chen"
+        "Sunjung Lee",
+        "Sanghoon Cha",
+        "Hyeonsu Kim",
+        "Seungwoo Seo",
+        "Yuhwan Ro",
+        "Sukhan Lee",
+        "Byeongho Kim",
+        "Yongjun Park",
+        "Kyomin Sohn",
+        "Seungwon Lee",
+        "Jaehoon Yu"
       ],
       "author_details": [
         {
-          "name": "Weiyu Huang"
+          "name": "Sunjung Lee"
         },
         {
-          "name": "Pengle Zhang"
+          "name": "Sanghoon Cha"
         },
         {
-          "name": "Xiaolu Zhang"
+          "name": "Hyeonsu Kim"
         },
         {
-          "name": "Jun Zhou"
+          "name": "Seungwoo Seo"
         },
         {
-          "name": "Jun Zhu"
+          "name": "Yuhwan Ro"
         },
         {
-          "name": "Jianfei Chen"
+          "name": "Sukhan Lee"
+        },
+        {
+          "name": "Byeongho Kim"
+        },
+        {
+          "name": "Yongjun Park"
+        },
+        {
+          "name": "Kyomin Sohn"
+        },
+        {
+          "name": "Seungwon Lee"
+        },
+        {
+          "name": "Jaehoon Yu"
         }
       ],
-      "published": "2026-03-09T07:59:17Z",
-      "published_date": "2026-03-09 07:59:17+00:00",
-      "updated": "2026-03-09T07:59:17Z",
-      "primary_category": "cs.LG",
+      "published": "2026-03-10T05:39:03Z",
+      "published_date": "2026-03-10 05:39:03+00:00",
+      "updated": "2026-03-10T05:39:03Z",
+      "comments": "13 pages, 13 figures",
+      "primary_category": "cs.DC",
       "categories": [
-        "cs.LG",
-        "cs.CL"
+        "cs.DC"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.08065v1",
-      "url": "http://arxiv.org/abs/2603.08065v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.09216v1",
+      "url": "http://arxiv.org/abs/2603.09216v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 9.3
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 9.55
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "llm inference",
-        "vllm",
-        "cs.LG",
-        "cs.CL"
+        "prefill",
+        "decode",
+        "cs.DC",
+        "memory",
+        "bandwidth",
+        "baseline"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 2,
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.DC"
+        ],
+        "required_signal_matches": [
+          "prefill",
+          "decode"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "memory",
+          "bandwidth"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "baseline",
+          "memory",
+          "bandwidth"
+        ],
+        "analysis_keyword_match_count": 3,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.36
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.08005v1",
+      "arxiv_id": "2602.08005v1",
+      "title": "DeltaKV: Residual-Based KV Cache Compression via Long-Range Similarity",
+      "summary": "The deployment of efficient long-context LLMs in applications like autonomous agents, long-chain reasoning, and creative writing is fundamentally bottlenecked by the linear growth of KV cache memory. Existing compression and eviction methods often struggle to balance accuracy, compression ratio, and hardware efficiency. We propose DeltaKV, a residual-based KV cache compression framework motivated by two empirical findings: long-range inter-token similarity and highly shared latent components in KV representations. Instead of discarding tokens, DeltaKV encodes semantic residuals relative to retrieved historical references, preserving fidelity while substantially reducing storage. To translate compression gains into real system speedups, we further introduce Sparse-vLLM, a high-performance inference engine with decoupled memory management and kernels optimized for sparse and irregular KV layouts. Experiments show that DeltaKV reduces KV cache memory to 29\\% of the original while maintaining near-lossless accuracy on LongBench, SCBench, and AIME. When integrated with Sparse-vLLM, it achieves up to 2$\\times$ throughput improvement over vLLM in long-context scenarios, demonstrating a practical path toward scalable long-context LLM deployment. Code, model checkpoints, and datasets are available at https://github.com/CURRENTF/Sparse-vLLM.",
+      "authors": [
+        "Jitai Hao",
+        "Qiang Huang",
+        "Yaowei Wang",
+        "Min Zhang",
+        "Jun Yu"
+      ],
+      "author_details": [
+        {
+          "name": "Jitai Hao"
+        },
+        {
+          "name": "Qiang Huang"
+        },
+        {
+          "name": "Yaowei Wang"
+        },
+        {
+          "name": "Min Zhang"
+        },
+        {
+          "name": "Jun Yu"
+        }
+      ],
+      "published": "2026-02-08T15:14:36Z",
+      "published_date": "2026-02-08 15:14:36+00:00",
+      "updated": "2026-02-08T15:14:36Z",
+      "comments": "preprint",
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.08005v1",
+      "url": "http://arxiv.org/abs/2602.08005v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 1.6,
+        "recommendation": 9.27
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "kv cache",
+        "vllm",
+        "throughput",
+        "cs.CL",
+        "memory"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": true,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "vllm"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "throughput",
+          "memory"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "throughput",
+          "memory"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.36
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.03310v1",
+      "arxiv_id": "2603.03310v1",
+      "title": "Entropic-Time Inference: Self-Organizing Large Language Model Decoding Beyond Attention",
+      "summary": "Modern large language model (LLM) inference engines optimize throughput and latency under fixed decoding rules, treating generation as a linear progression in token time. We propose a fundamentally different paradigm: entropic\\-time inference, where decoding is governed by the flow of uncertainty rather than token index. We introduce a self\\-organizing inference architecture that jointly couples scheduling, attention sparsification, and sampling temperature under a unified entropy control objective. Our method extends vLLM with entropy-aware scheduling, entropic pruning of paged attention blocks, and adaptive temperature control that stabilizes generation near a target entropy regime. This transforms inference into a resource\\-intelligent thermodynamic process that allocates computation where uncertainty reduction is maximized. We present a concrete systems design, pseudocode, and integration plan, demonstrating how entropy can serve as a first\\-class control signal for scalable LLM inference.",
+      "authors": [
+        "Andrew Kiruluta"
+      ],
+      "author_details": [
+        {
+          "name": "Andrew Kiruluta"
+        }
+      ],
+      "published": "2026-02-08T19:13:26Z",
+      "published_date": "2026-02-08 19:13:26+00:00",
+      "updated": "2026-02-08T19:13:26Z",
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.03310v1",
+      "url": "http://arxiv.org/abs/2603.03310v1",
+      "source": "arxiv_hot_fallback",
+      "hot_score": 0,
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.6,
+        "quality": 1.2,
+        "recommendation": 8.73
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm inference",
+        "paged attention",
+        "vllm",
+        "throughput",
+        "latency",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": true,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 5,
         "matched_categories": [
           "cs.LG",
           "cs.CL"
         ],
         "required_signal_matches": [
+          "paged attention",
           "vllm"
         ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "throughput",
+          "latency"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "throughput",
+          "latency"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh"
     }

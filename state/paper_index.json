@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-10",
+  "last_updated": "2026-03-11",
   "papers": [
     {
       "paper_id": "2603.05210v1",
@@ -70,6 +70,34 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2602.08005v1",
+      "title": "DeltaKV: Residual-Based KV Cache Compression via Long-Range Similarity",
+      "domain": "LLM Inference Systems",
+      "published": "2026-02-08T15:14:36Z",
+      "source_lane": "fresh",
+      "topics": [
+        "KV cache compression",
+        "long-context LLM serving",
+        "residual coding",
+        "long-range similarity",
+        "Sparse-vLLM",
+        "sparse KV layouts"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-11",
+      "last_seen_date": "2026-03-11",
+      "last_recommended_date": "2026-03-11",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-11",
+          "recommendation": 9.27,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-10"
     },
     {
       "paper_id": "2603.08065v1",
@@ -182,6 +210,62 @@
       "cooldown_until": "2026-05-07"
     },
     {
+      "paper_id": "dblp:journals/ral/MengSXX25",
+      "title": "Efficient Fabrication of High-Aspect-Ratio Stepped-End Microneedles via Vision-Guided Assembly for Flexible Microelectrode Implantation.",
+      "domain": "Low-level Code And Assembly Generation",
+      "published": "2025",
+      "source_lane": "established",
+      "topics": [
+        "microneedle fabrication",
+        "vision-guided assembly",
+        "variable stiffness insertion",
+        "flexible neural microelectrodes",
+        "robotic micro-assembly",
+        "implantation tooling"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-11",
+      "last_seen_date": "2026-03-11",
+      "last_recommended_date": "2026-03-11",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-11",
+          "recommendation": 3.84,
+          "lane": "established"
+        }
+      ],
+      "cooldown_until": "2026-05-10"
+    },
+    {
+      "paper_id": "2603.03310v1",
+      "title": "Entropic-Time Inference: Self-Organizing Large Language Model Decoding Beyond Attention",
+      "domain": "LLM Inference Systems",
+      "published": "2026-02-08T19:13:26Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "vLLM",
+        "paged attention",
+        "entropy-aware scheduling",
+        "attention sparsification",
+        "adaptive temperature control"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-11",
+      "last_seen_date": "2026-03-11",
+      "last_recommended_date": "2026-03-11",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-11",
+          "recommendation": 8.73,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-10"
+    },
+    {
       "paper_id": "2603.05451v1",
       "title": "FlashAttention-4: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling",
       "domain": "LLM Inference Systems",
@@ -271,6 +355,34 @@
         }
       ],
       "cooldown_until": "2026-03-31"
+    },
+    {
+      "paper_id": "2603.09046v1",
+      "title": "FlexServe: A Fast and Secure LLM Serving System for Mobile Devices with Flexible Resource Isolation",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-10T00:31:25Z",
+      "source_lane": "fresh",
+      "topics": [
+        "on-device LLM",
+        "mobile LLM serving",
+        "ARM TrustZone",
+        "secure inference",
+        "NPU isolation",
+        "TTFT"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-11",
+      "last_seen_date": "2026-03-11",
+      "last_recommended_date": "2026-03-11",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-11",
+          "recommendation": 9.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-10"
     },
     {
       "paper_id": "2210.17323",
@@ -571,6 +683,34 @@
         }
       ],
       "cooldown_until": "2026-05-09"
+    },
+    {
+      "paper_id": "2603.09216v1",
+      "title": "PIM-SHERPA: Software Method for On-device LLM Inference by Resolving PIM Memory Attribute and Layout Inconsistencies",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-10T05:39:03Z",
+      "source_lane": "fresh",
+      "topics": [
+        "processing-in-memory",
+        "on-device LLM inference",
+        "prefill/decode split",
+        "memory attribute inconsistency",
+        "weight layout inconsistency",
+        "DRAM double buffering (DDB)"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-11",
+      "last_seen_date": "2026-03-11",
+      "last_recommended_date": "2026-03-11",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-11",
+          "recommendation": 9.55,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-10"
     },
     {
       "paper_id": "2602.06142v2",
@@ -1012,6 +1152,34 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2603.08960v1",
+      "title": "The $qs$ Inequality: Quantifying the Double Penalty of Mixture-of-Experts at Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-09T21:48:04Z",
+      "source_lane": "fresh",
+      "topics": [
+        "MoE inference",
+        "LLM serving",
+        "throughput",
+        "KV cache",
+        "HBM bandwidth",
+        "long-context decoding"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-11",
+      "last_seen_date": "2026-03-11",
+      "last_recommended_date": "2026-03-11",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-11",
+          "recommendation": 9.63,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-10"
     },
     {
       "paper_id": "2602.06932v1",
