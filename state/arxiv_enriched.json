@@ -1,33 +1,33 @@
 {
-  "target_date": "2026-03-11",
+  "target_date": "2026-03-12",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-09",
-      "end": "2026-03-11"
+      "start": "2026-02-10",
+      "end": "2026-03-12"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-11",
-      "end": "2026-02-08"
+      "start": "2025-03-12",
+      "end": "2026-02-09"
     }
   },
-  "total_found": 292,
-  "total_venue": 12,
-  "total_filtered": 22,
+  "total_found": 204,
+  "total_venue": 4,
+  "total_filtered": 7,
   "total_recent": 200,
-  "total_hot": 80,
-  "total_unique": 22,
+  "total_hot": 0,
+  "total_unique": 7,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 6,
+    "selected_count": 3,
     "lane_counts": {
-      "fresh": 5,
-      "established": 1,
+      "fresh": 3,
+      "established": 0,
       "classic": 0,
-      "history_filtered": 8,
+      "history_filtered": 4,
       "history_relaxed": 0,
       "classic_slot_active": 0
     },
@@ -40,470 +40,184 @@
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.09046v1",
-      "arxiv_id": "2603.09046v1",
-      "title": "FlexServe: A Fast and Secure LLM Serving System for Mobile Devices with Flexible Resource Isolation",
-      "summary": "Device-side Large Language Models (LLMs) have witnessed explosive growth, offering higher privacy and availability compared to cloud-side LLMs. During LLM inference, both model weights and user data are valuable, and attackers may even compromise the OS kernel to steal them. ARM TrustZone is the de facto hardware-based isolation technology on mobile devices, used to protect sensitive applications from a compromised OS. However, protecting LLM inference with TrustZone incurs significant overhead due to its inflexible isolation of memory and the NPU. To address these challenges, this paper introduces FlexServe, a fast and secure LLM serving system for mobile devices. It first introduces a Flexible Resource Isolation mechanism to construct Flexible Secure Memory (Flex-Mem) and Flexible Secure NPU (Flex-NPU). Both memory pages and the NPU can be efficiently switched between unprotected and protected modes. Based on these mechanisms, FlexServe designs a fast and secure LLM inference framework within TrustZone's secure world. The LLM-Aware Memory Management and Secure Inference Pipeline are introduced to accelerate inference. A Multi-Model Scheduler is proposed to optimize multi-model workflows. We implement a prototype of FlexServe and compare it with two TrustZone-based strawman designs. The results show that FlexServe achieves an average $10.05\\times$ speedup in Time to First Token (TTFT) compared to the strawman, and an average $2.44\\times$ TTFT speedup compared to an optimized strawman with pipeline and secure NPU enabled. For multi-model agent workflows, the end-to-end speedup is up to $24.30\\times$ and $4.05\\times$ compared to the strawman and optimized strawman, respectively.",
+      "id": "http://arxiv.org/abs/2603.10899v1",
+      "arxiv_id": "2603.10899v1",
+      "title": "LookaheadKV: Fast and Accurate KV Cache Eviction by Glimpsing into the Future without Generation",
+      "summary": "Transformer-based large language models (LLMs) rely on key-value (KV) caching to avoid redundant computation during autoregressive inference. While this mechanism greatly improves efficiency, the cache size grows linearly with the input sequence length, quickly becoming a bottleneck for long-context tasks. Existing solutions mitigate this problem by evicting prompt KV that are deemed unimportant, guided by estimated importance scores. Notably, a recent line of work proposes to improve eviction quality by \"glimpsing into the future\", in which a draft generator produces a surrogate future response approximating the target model's true response, and this surrogate is subsequently used to estimate the importance of cached KV more accurately. However, these approaches rely on computationally expensive draft generation, which introduces substantial prefilling overhead and limits their practicality in real-world deployment. To address this challenge, we propose LookaheadKV, a lightweight eviction framework that leverages the strength of surrogate future response without requiring explicit draft generation. LookaheadKV augments transformer layers with parameter-efficient modules trained to predict true importance scores with high accuracy. Our design ensures negligible runtime overhead comparable to existing inexpensive heuristics, while achieving accuracy superior to more costly approximation methods. Extensive experiments on long-context understanding benchmarks, across a wide range of models, demonstrate that our method not only outperforms recent competitive baselines in various long-context understanding tasks, but also reduces the eviction cost by up to 14.5x, leading to significantly faster time-to-first-token. Our code is available at https://github.com/SamsungLabs/LookaheadKV.",
       "authors": [
-        "Yinpeng Wu",
-        "Yitong Chen",
-        "Lixiang Wang",
-        "Jinyu Gu",
-        "Zhichao Hua",
-        "Yubin Xia"
+        "Jinwoo Ahn",
+        "Ingyu Seong",
+        "Akhil Kedia",
+        "Junhan Kim",
+        "Hyemi Jang",
+        "Kangwook Lee",
+        "Yongkweon Jeon"
       ],
       "author_details": [
         {
-          "name": "Yinpeng Wu"
+          "name": "Jinwoo Ahn"
         },
         {
-          "name": "Yitong Chen"
+          "name": "Ingyu Seong"
         },
         {
-          "name": "Lixiang Wang"
+          "name": "Akhil Kedia"
         },
         {
-          "name": "Jinyu Gu"
+          "name": "Junhan Kim"
         },
         {
-          "name": "Zhichao Hua"
+          "name": "Hyemi Jang"
         },
         {
-          "name": "Yubin Xia"
+          "name": "Kangwook Lee"
+        },
+        {
+          "name": "Yongkweon Jeon"
         }
       ],
-      "published": "2026-03-10T00:31:25Z",
-      "published_date": "2026-03-10 00:31:25+00:00",
-      "updated": "2026-03-10T00:31:25Z",
-      "comments": "13 pages, 11 figures",
-      "primary_category": "cs.CR",
+      "published": "2026-03-11T15:44:32Z",
+      "published_date": "2026-03-11 15:44:32+00:00",
+      "updated": "2026-03-11T15:44:32Z",
+      "comments": "ICLR 2026",
+      "primary_category": "cs.LG",
       "categories": [
-        "cs.CR",
         "cs.LG",
-        "cs.OS"
+        "cs.AI"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.09046v1",
-      "url": "http://arxiv.org/abs/2603.09046v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.10899v1",
+      "url": "http://arxiv.org/abs/2603.10899v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 3.0,
+        "relevance": 2.86,
         "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 9.97
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 9.96
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "llm inference",
-        "llm serving",
-        "serving",
+        "kv cache",
         "cs.LG",
-        "serving system",
-        "memory",
-        "speedup"
+        "runtime"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 3,
+        "text_match_count": 1,
         "matched_categories": [
           "cs.LG"
         ],
         "required_signal_matches": [
-          "serving system"
+          "kv cache",
+          "runtime"
         ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "memory",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "memory",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "FlexServe frames secure on-device LLM serving as a resource-isolation problem and lowers TrustZone overhead by making memory and NPU protection dynamically switchable.",
-        "summary_zh": "This paper targets mobile LLM serving under a compromised OS, where ARM TrustZone can protect model weights and user data but usually adds large inference overhead. Its central idea is flexible resource isolation: memory pages and the NPU can be switched between protected and unprotected modes, then used inside a TrustZone secure-world inference stack. Around that mechanism, the system adds LLM-aware memory management, a secure inference pipeline, and a multi-model scheduler to reduce TTFT and multi-model workflow latency. The abstract reports prototype results with 10.05x average TTFT speedup over a TrustZone strawman, 2.44x over an optimized strawman, and up to 24.30x end-to-end gains for multi-model agent workflows. The main missing details are the exact threat model, device and NPU setup, baseline strength, and whether steady-state decode, memory, energy, and security costs remain acceptable.",
-        "background_zh": "On-device LLMs are increasingly attractive for privacy and availability, but existing mobile trusted-execution mechanisms were not built for the memory and accelerator behavior of LLM inference.",
-        "problem_zh": "The paper asks whether a mobile system can keep LLM inference protected from a compromised OS without paying the large latency penalty caused by TrustZone's rigid isolation of memory and NPU resources.",
-        "approach_zh": "It introduces Flex-Mem and Flex-NPU for fast protection-state switching and builds a secure-world serving stack with LLM-aware memory management, pipelined inference, and multi-model scheduling on top.",
-        "evidence_zh": "The abstract supports the claim with a prototype and large TTFT and workflow speedups against two TrustZone-based strawman designs, but it does not make hardware scope, security evaluation, or baseline fairness clear.",
-        "value_zh": "If the mechanism generalizes, it offers a practical path to lower-latency, privacy-preserving mobile LLM serving and agent-style execution under hardware-backed isolation.",
-        "open_questions": [
-          "What is the precise threat model and trusted computing base, especially for NPU control, DMA paths, and data movement between secure and non-secure worlds?",
-          "What mobile SoC, NPU, model sizes, and sequence lengths were used, and how do decode throughput, memory overhead, and energy compare beyond TTFT?",
-          "How much of the reported gain comes from flexible isolation itself versus pipeline engineering and scheduling, and are the strawman baselines competitive with prior secure serving designs?"
-        ],
-        "core_contributions": [
-          "A flexible isolation mechanism that lets memory pages and the mobile NPU switch between protected and unprotected modes.",
-          "A TrustZone secure-world LLM inference framework with LLM-aware memory management and a secure inference pipeline.",
-          "A multi-model scheduler aimed at improving end-to-end latency for secure agent-style workflows on device."
-        ],
-        "why_read": [
-          "It treats TEE overhead as a serving-systems bottleneck and connects hardware isolation policy directly to TTFT.",
-          "The work is a concrete system design for secure on-device LLM inference on mobile NPUs.",
-          "The reported gains are large enough that the implementation details and baseline choices are worth checking closely."
-        ],
-        "risks": [
-          "The evaluation is only described against strawman TrustZone baselines, so the real improvement versus strong implementations is unclear.",
-          "The design depends on ARM TrustZone and switchable NPU protection, which may limit portability and deployment scope across devices."
-        ],
-        "recommended_for": [
-          "Researchers studying secure LLM inference, TEEs, and on-device serving.",
-          "Engineers working on mobile LLM runtimes where privacy and latency both matter.",
-          "Systems readers interested in hardware-security and serving-runtime co-design."
-        ],
-        "keywords": [
-          "on-device LLM",
-          "mobile LLM serving",
-          "ARM TrustZone",
-          "secure inference",
-          "NPU isolation",
-          "TTFT"
-        ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "Strong fit on LLM serving latency and system design, but the paper is specialized to TrustZone-based mobile security rather than general-purpose inference acceleration.",
-        "fallback_summary": "Device-side Large Language Models (LLMs) have witnessed explosive growth, offering higher privacy and availability compared to cloud-side LLMs."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.08960v1",
-      "arxiv_id": "2603.08960v1",
-      "title": "The $qs$ Inequality: Quantifying the Double Penalty of Mixture-of-Experts at Inference",
-      "summary": "Mixture-of-Experts (MoE) models deliver high quality at low training FLOPs, but this efficiency often vanishes at inference. We identify a double penalty that structurally disadvantages MoE architectures during decoding: first, expert routing fragments microbatches and reduces weight reuse; second, massive resident expert pools reduce high-bandwidth memory (HBM) headroom for the KV cache. This phenomenon, formalized as reuse fragmentation, pushes feed-forward networks (FFNs) into a bandwidth-bound regime, especially at long context lengths.\n  We introduce the $qs$ inequality, a predictive criterion that identifies when MoE is structurally disadvantaged relative to a quality-matched dense model. This criterion unifies sparsity ($s$), the fraction of parameters activated per token, and the quality-equivalence factor ($q$), the size multiplier required for a dense model to match MoE performance. Our evaluation across frontier models including DeepSeek-V3, Qwen3-235B, Grok-1, and Switch-C demonstrates that this fragmentation is a general architectural phenomenon. For DeepSeek-V3 at 128k context, this results in a 4.5x throughput advantage for a quality-matched dense baseline. Crucially, massive architectures like Switch-C can become infeasible on cluster sizes where a quality-matched dense model remains viable.\n  Our results suggest that training-time FLOP efficiency is an incomplete proxy for inference-time performance in long-context serving. They also indicate that MoE may be best viewed as a training-time optimization, with distillation into dense models as a possible path toward inference-efficient deployment.",
-      "authors": [
-        "Vignesh Adhinarayanan",
-        "Nuwan Jayasena"
-      ],
-      "author_details": [
-        {
-          "name": "Vignesh Adhinarayanan"
-        },
-        {
-          "name": "Nuwan Jayasena"
-        }
-      ],
-      "published": "2026-03-09T21:48:04Z",
-      "published_date": "2026-03-09 21:48:04+00:00",
-      "updated": "2026-03-09T21:48:04Z",
-      "comments": "10 pages, 6 tables",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AR",
-        "cs.DC",
-        "cs.PF"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.08960v1",
-      "url": "http://arxiv.org/abs/2603.08960v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 9.63
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "serving",
-        "kv cache",
-        "throughput",
-        "cs.LG",
-        "cs.DC",
-        "cs.AR",
-        "memory",
-        "bandwidth",
-        "baseline",
-        "evaluation"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.LG",
-          "cs.DC",
-          "cs.AR"
-        ],
-        "required_signal_matches": [
-          "kv cache"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "throughput",
-          "memory",
-          "bandwidth"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "baseline",
-          "evaluation",
-          "throughput",
-          "memory",
-          "bandwidth"
-        ],
-        "analysis_keyword_match_count": 5,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper argues that MoE models pay a structural inference penalty from routing-induced weight-reuse fragmentation and HBM pressure on the KV cache, and packages that tradeoff into a simple `qs` criterion against quality-matched dense models.",
-        "summary_zh": "The paper targets a systems question that training-centric MoE discussions often miss: whether sparse activation still helps once long-context decoding becomes dominated by memory behavior rather than nominal FLOPs. It claims a double penalty at inference, where expert routing fragments microbatches and reduces FFN weight reuse, while large resident expert pools consume HBM capacity that would otherwise support the KV cache. The proposed `qs` inequality combines sparsity and a quality-equivalent dense size factor to predict when an MoE model is structurally worse than a dense alternative for serving. The abstract reports evaluations on DeepSeek-V3, Qwen3-235B, Grok-1, and Switch-C, including a claimed 4.5x throughput advantage for a quality-matched dense baseline over DeepSeek-V3 at 128k context, plus cases where very large MoE models become deployment-infeasible on clusters where dense models remain viable. The main missing detail is that the abstract does not make the hardware setup, batching regime, baseline matching procedure, or implementation fairness clear, so the operational scope of the claim still needs a full read.",
-        "background_zh": "MoE architectures are attractive because they improve training-time quality efficiency, but long-context LLM serving is often constrained by bandwidth, cache residency, and decode-time memory behavior rather than training FLOPs.",
-        "problem_zh": "The paper asks when MoE sparsity stops being an inference advantage and instead becomes a structural liability relative to a dense model with matched output quality.",
-        "approach_zh": "It formalizes a double inference penalty through reuse fragmentation and KV-cache headroom loss, then introduces the `qs` inequality to predict when a quality-matched dense model should outperform an MoE model in serving.",
-        "evidence_zh": "The abstract claims cross-model evaluation on DeepSeek-V3, Qwen3-235B, Grok-1, and Switch-C, with one concrete result of a 4.5x throughput advantage for a quality-matched dense baseline at 128k context on DeepSeek-V3, but it does not make the evaluation setup or fairness details clear.",
-        "value_zh": "If the criterion holds under careful evaluation, it gives LLM serving teams a compact way to decide when MoE should be treated as a training-time optimization and when dense distillation may be the more deployment-efficient path.",
-        "open_questions": [
-          "How is the quality-equivalence factor `q` estimated in practice, and how sensitive are the conclusions to that matching procedure?",
-          "What hardware, parallelism strategy, batch shapes, and context-length sweep were used, and are the dense and MoE baselines equally optimized?",
-          "Does the claimed fragmentation effect persist across different routing schemes, expert counts, quantization settings, and KV-cache management strategies?"
-        ],
-        "core_contributions": [
-          "Frames MoE inference cost as a double penalty from microbatch fragmentation and reduced KV-cache headroom, not just sparse FLOP accounting.",
-          "Introduces the `qs` inequality as a predictive rule for comparing MoE models with quality-matched dense alternatives.",
-          "Argues with multi-model evidence that long-context decoding can flip MoE from compute-efficient in training to bandwidth-limited and even deployment-infeasible in serving."
-        ],
-        "why_read": [
-          "It directly addresses an important systems blind spot: training FLOP efficiency is not the same as decode-time serving efficiency.",
-          "The mechanism is concrete and operational, tying throughput loss to weight reuse, HBM residency, and KV-cache pressure rather than generic anti-MoE claims.",
-          "It may provide a useful decision framework for when dense distillation is more practical than serving the original MoE model."
-        ],
-        "risks": [
-          "The abstract does not specify hardware assumptions, kernel quality, or scheduling details, so baseline fairness is still unverified.",
-          "The `q` quality-matching factor could be difficult to estimate consistently, which may limit how portable the inequality is across model families and tasks."
-        ],
-        "recommended_for": [
-          "Researchers studying LLM inference bottlenecks in long-context decoding.",
-          "Engineers deciding between MoE serving, dense distillation, and memory-budgeted deployment strategies.",
-          "Compiler and runtime teams interested in how routing patterns interact with bandwidth-bound FFN execution and KV-cache residency."
-        ],
-        "keywords": [
-          "MoE inference",
-          "LLM serving",
-          "throughput",
-          "KV cache",
-          "HBM bandwidth",
-          "long-context decoding"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "Strong fit with LLM inference systems and serving efficiency, with a clear systems claim about bandwidth, cache pressure, and deployment feasibility; the abstract also provides a concrete mechanism and at least one explicit throughput result, even though setup details still need verification.",
-        "fallback_summary": "Mixture-of-Experts (MoE) models deliver high quality at low training FLOPs, but this efficiency often vanishes at inference."
-      }
-    },
-    {
-      "id": "dblp:journals/ral/MengSXX25",
-      "paper_id": "dblp:journals/ral/MengSXX25",
-      "title": "Efficient Fabrication of High-Aspect-Ratio Stepped-End Microneedles via Vision-Guided Assembly for Flexible Microelectrode Implantation.",
-      "summary": "This paper presents an automated assembly method for the efficient and cost-effective fabrication of high-aspect-ratio stepped-end (HARSE) microneedles for flexible neural microelectrode implantation. The core process is a novel variable stiffness insertion (VSI) method, employing a vision-guided system to assemble commercially available tungsten wires and stainless steel tubes with microscale diameters into HARSE structures. The VSI system uses a five-axis adjustment stage, gripping module, and dual-camera feedback. A finite state machine model guides the assembly process through low-stiffness and high-stiffness feeding loops, ensuring accurate construction of the stepped-end structure. Pre-processing (wire straightening) and post-processing (tip etching) steps complement the VSI process. Fabricated microneedles demonstrated precise microelectrode grasping with less than 32 <inline-formula xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><tex-math notation=\"LaTeX\">$\\bm {\\mu }$</tex-math></inline-formula>m positional shift, approximately the size of a single neuron, and required 2.3 times less force for dura mater penetration compared to flat-ended needles. With an average manufacturing time under 4 minutes per needle and use of cost-effective equipment, this method significantly reduces fabrication costs and improves efficiency compared to techniques using expensive equipment like focused ion beam or femtosecond laser machining, addressing the growing demand for implantable flexible microelectrodes in neuroscience research and brain-machine interface development.",
-      "abstract": "This paper presents an automated assembly method for the efficient and cost-effective fabrication of high-aspect-ratio stepped-end (HARSE) microneedles for flexible neural microelectrode implantation. The core process is a novel variable stiffness insertion (VSI) method, employing a vision-guided system to assemble commercially available tungsten wires and stainless steel tubes with microscale diameters into HARSE structures. The VSI system uses a five-axis adjustment stage, gripping module, and dual-camera feedback. A finite state machine model guides the assembly process through low-stiffness and high-stiffness feeding loops, ensuring accurate construction of the stepped-end structure. Pre-processing (wire straightening) and post-processing (tip etching) steps complement the VSI process. Fabricated microneedles demonstrated precise microelectrode grasping with less than 32 <inline-formula xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><tex-math notation=\"LaTeX\">$\\bm {\\mu }$</tex-math></inline-formula>m positional shift, approximately the size of a single neuron, and required 2.3 times less force for dura mater penetration compared to flat-ended needles. With an average manufacturing time under 4 minutes per needle and use of cost-effective equipment, this method significantly reduces fabrication costs and improves efficiency compared to techniques using expensive equipment like focused ion beam or femtosecond laser machining, addressing the growing demand for implantable flexible microelectrodes in neuroscience research and brain-machine interface development.",
-      "authors": [
-        "Xianghe Meng",
-        "Xingjian Shen",
-        "Yan Xu",
-        "Hui Xie 0003"
-      ],
-      "published": "2025",
-      "published_date": "2025-07-01 00:00:00",
-      "publicationDate": "2025",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://ieeexplore.ieee.org/document/10840263/",
-      "url": "https://ieeexplore.ieee.org/document/10840263/",
-      "pdf_url": "",
-      "venue": "IEEE Robotics Autom. Lett.",
-      "venue_source_name": "MICRO",
-      "venue_source_alias": "MICRO",
-      "dblp_key": "journals/ral/MengSXX25",
-      "doi": "10.1109/LRA.2025.3529323",
-      "dblp_type": "Journal Articles",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "MICRO",
-        "venue_alias": "MICRO"
-      },
-      "venue_source_priority": 4,
-      "venue_query_year": 2025,
-      "scores": {
-        "relevance": 1.63,
-        "recency": 0.0,
-        "popularity": 0.3,
-        "quality": 0.3,
-        "recommendation": 3.84
-      },
-      "matched_domain": "Low-level Code And Assembly Generation",
-      "matched_keywords": [
-        "assembly"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "Low-level Code And Assembly Generation",
-        "text_match_count": 1,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "assembly"
-        ],
-        "required_signal_match_count": 1,
+        "required_signal_match_count": 2,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
         "analysis_keyword_matches": [],
         "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
+        "signal_bonus": 0.7,
         "bonus_keyword_bonus": 0.0
       },
-      "selection_lane": "established",
-      "citationCount": 2,
-      "institutions": [
-        "Harbin Institute of Technology",
-        "State Key Laboratory of Robotics and Systems"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://ieeexplore.ieee.org/document/10840263/",
-        "abstract_source": "openalex",
-        "pdf_source": ""
-      },
+      "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper describes a vision-guided assembly pipeline for fabricating stepped-end microneedles from commercial wire and tube components to support flexible neural microelectrode implantation.",
-        "summary_zh": "The paper targets a fabrication bottleneck for flexible neural microelectrode implantation: making high-aspect-ratio stepped-end microneedles without relying on expensive machining tools. Its main mechanism is a variable stiffness insertion workflow that combines a five-axis stage, gripping module, dual-camera feedback, and a finite state machine with low-stiffness and high-stiffness feeding loops to assemble tungsten wires and stainless steel tubes. The abstract reports three concrete outcomes: less than 32 um positional shift during microelectrode grasping, 2.3 times lower dura penetration force than flat-ended needles, and average manufacturing time under 4 minutes per needle. If these results hold under realistic process variation, the method could lower fabrication cost while improving throughput for implant tooling in neuroscience workflows. The biggest missing detail is how robust and reproducible the assembly is across samples, operators, and equipment tolerances, because the abstract does not make that evaluation setup clear.",
-        "background_zh": "Flexible neural microelectrodes need insertion aids with high aspect ratio and controlled tip geometry, but established fabrication routes can depend on expensive precision machining equipment.",
-        "problem_zh": "The paper asks how to fabricate stepped-end microneedles cheaply and efficiently while maintaining the alignment and mechanical properties needed for microelectrode implantation.",
-        "approach_zh": "It introduces a vision-guided variable stiffness insertion process that assembles off-the-shelf tungsten wires and stainless steel tubes using staged feeding control, finite-state sequencing, and complementary straightening and tip-etching steps.",
-        "evidence_zh": "The abstract supports the method with reported grasping precision below 32 um positional shift, lower penetration force than flat-ended needles by a factor of 2.3, and average fabrication time under 4 minutes per needle, but it does not make the sample size or test protocol clear.",
-        "value_zh": "If reproducible, the method offers a lower-cost and faster route to making implantation microneedles for neural interfaces without specialized beam or laser machining tools.",
+        "one_liner_zh": "This paper replaces draft-generation-based future-aware KV eviction with a learned importance predictor, aiming to keep eviction cheap while preserving long-context accuracy.",
+        "summary_zh": "KV cache eviction matters because long-context autoregressive inference makes cache memory grow linearly, and prior \"glimpse into the future\" methods improve eviction quality but add expensive draft generation during prefilling. This paper proposes LookaheadKV, which augments transformer layers with parameter-efficient modules trained to predict true KV importance scores without explicitly generating surrogate responses. The abstract claims this keeps runtime overhead near inexpensive heuristics while outperforming stronger but costlier approximation baselines on long-context understanding benchmarks across multiple models. It also reports up to 14.5x lower eviction cost and faster time-to-first-token, making the work directly relevant to serving efficiency. The main missing details are how the modules are trained and integrated, what extra per-layer overhead they introduce, and how fair the hardware and baseline comparisons are.",
+        "background_zh": "Long-context LLM serving depends on KV caching, but cache growth creates a memory and latency bottleneck, so better eviction policies have become a core inference-systems problem.",
+        "problem_zh": "The paper asks how to get the accuracy benefit of future-aware KV eviction without paying the substantial prefilling overhead of explicit draft generation.",
+        "approach_zh": "LookaheadKV adds parameter-efficient modules to transformer layers and trains them to predict true KV importance scores using future-aware signals without running a draft generator at inference time.",
+        "evidence_zh": "The abstract says experiments on long-context understanding benchmarks across multiple models outperform recent baselines and reduce eviction cost by up to 14.5x with faster time-to-first-token, but it does not make the hardware setup or comparison protocol clear.",
+        "value_zh": "If the reported tradeoff holds, this is a practical serving-side method for reducing KV-management overhead while keeping long-context quality higher than cheap heuristic eviction.",
         "open_questions": [
-          "How many needles were tested, and what were the yield, failure modes, and run-to-run variability of the assembly process?",
-          "What exact experimental setup produced the positional-shift and penetration-force results, and how fair is the comparison against flat-ended needles?",
-          "How much of the reported fabrication time and cost reduction depends on manual pre-processing, post-processing, or specific hardware calibration?"
+          "How are the added modules trained, and do they require model-specific supervision or future-response labels that are expensive to obtain?",
+          "What is the exact inference-time overhead in parameters, activations, and memory traffic for the added layer modules?",
+          "Which cache budgets, baselines, hardware settings, and TTFT measurement rules are used, and are end-to-end comparisons to draft-generation methods fair?"
         ],
         "core_contributions": [
-          "A vision-guided assembly method for building high-aspect-ratio stepped-end microneedles from commercially available microscale components.",
-          "A variable stiffness insertion control scheme implemented with finite-state transitions between low-stiffness and high-stiffness feeding loops.",
-          "An end-to-end fabrication workflow that includes wire straightening, guided assembly, and tip etching, with reported gains in precision, penetration force, and cycle time."
+          "Removes explicit draft generation from future-aware KV eviction while keeping the core idea of using future information.",
+          "Introduces a learned, parameter-efficient mechanism inside transformer layers to predict KV importance scores.",
+          "Reports better long-context benchmark performance together with much lower eviction cost and faster TTFT than recent baselines."
         ],
         "why_read": [
-          "It shows a concrete automation strategy for microscale assembly where geometry and insertion mechanics matter.",
-          "It provides specific claimed outcomes on alignment, penetration force, and fabrication time rather than only a process description.",
-          "It is useful if you want to understand whether low-cost assembly can replace more specialized microneedle fabrication methods."
+          "It targets a real deployment bottleneck: KV cache pressure in long-context inference.",
+          "The source of the claimed speedup is clear and systems-relevant: less eviction-time work than draft-based lookahead methods.",
+          "It is a useful case study in learned serving policy design rather than pure model-side modification."
         ],
         "risks": [
-          "This is weakly aligned with the stated LLM systems and code-generation focus despite the generic domain label in the input.",
-          "The abstract does not clarify yield, statistical variation, or baseline fairness, so the practical robustness is still uncertain from the provided text alone."
+          "The abstract does not specify the training cost, training data, or whether the method must be retrained for each base model.",
+          "Runtime gains may depend heavily on hidden assumptions about hardware, cache budget, batch size, or sequence-length regime."
         ],
         "recommended_for": [
-          "Researchers working on neural interface fabrication, microrobotic assembly, or implant tooling rather than LLM inference systems.",
-          "Readers evaluating low-cost alternatives to focused ion beam or femtosecond laser fabrication for stepped-end microneedles.",
-          "Researchers tracking factual reliability and verification"
+          "Researchers working on LLM inference systems and long-context serving",
+          "Engineers optimizing KV cache management and time-to-first-token",
+          "Teams comparing heuristic versus learned cache eviction policies"
         ],
         "keywords": [
-          "microneedle fabrication",
-          "vision-guided assembly",
-          "variable stiffness insertion",
-          "flexible neural microelectrodes",
-          "robotic micro-assembly",
-          "implantation tooling"
+          "KV cache eviction",
+          "long-context inference",
+          "LLM serving",
+          "time-to-first-token",
+          "parameter-efficient modules",
+          "future-aware importance prediction"
         ],
-        "reading_priority": "low",
-        "reading_priority_reason": "The abstract is reasonably specific about the fabrication pipeline and reported outcomes, but the topic is largely outside the configured focus on LLM inference acceleration, compiler/runtime systems, and low-level code generation.",
-        "fallback_summary": "This paper presents an automated assembly method for the efficient and cost-effective fabrication of high-aspect-ratio stepped-end (HARSE) microneedles for flexible neural microelectrode implantation."
+        "reading_priority": "high",
+        "reading_priority_reason": "High because it directly matches the highest-priority LLM inference systems focus and the abstract reports concrete serving-side gains in eviction cost and TTFT, with a very strong recommendation score signal.",
+        "fallback_summary": "Transformer-based large language models (LLMs) rely on key-value (KV) caching to avoid redundant computation during autoregressive inference."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2603.09216v1",
-      "arxiv_id": "2603.09216v1",
-      "title": "PIM-SHERPA: Software Method for On-device LLM Inference by Resolving PIM Memory Attribute and Layout Inconsistencies",
-      "summary": "On-device deployments of large language models (LLMs) are rapidly proliferating across mobile and edge platforms. LLM inference comprises a compute-intensive prefill phase and a memory bandwidth-intensive decode phase, and the decode phase has been widely recognized as well-suited to processing-in-memory (PIM) in both academia and industry. However, practical PIM-enabled systems face two obstacles between these phases, a memory attribute inconsistency in which prefill favors placing weights in a cacheable region for reuse whereas decode requires weights in a non-cacheable region to reliably trigger PIM, and a weight layout inconsistency between host-friendly and PIM-aware layouts. To address these problems, we introduce \\textit{PIM-SHERPA}, a software-only method for efficient on-device LLM inference by resolving PIM memory attribute and layout inconsistencies. PIM-SHERPA provides two approaches, DRAM double buffering (DDB), which keeps a single PIM-aware weights in the non-cacheable region while prefetching the swizzled weights of the next layer into small cacheable buffers, and online weight rearrangement with swizzled memory copy (OWR), which performs the on-demand swizzled memory copy immediately before GEMM. Compared to a baseline PIM emulation system, PIM-SHERPA achieves approximately 47.8 - 49.7\\% memory capacity savings while maintaining comparable performance to the theoretical maximum on the Llama 3.2 model. To the best of our knowledge, this is the first work to identify the memory attribute inconsistency and propose effective solutions on product-level PIM-enabled systems.",
+      "id": "http://arxiv.org/abs/2603.10342v1",
+      "arxiv_id": "2603.10342v1",
+      "title": "AgentServe: Algorithm-System Co-Design for Efficient Agentic AI Serving on a Consumer-Grade GPU",
+      "summary": "Large language models (LLMs) are increasingly deployed as AI agents that operate in short reasoning-action loops, interleaving model computation with external calls. Unlike traditional chat applications, these agentic workloads require inference serving systems to balance low latency, stable token emission, and throughput under multiple request arrivals from different AI agents. Recent deployments highlight a shift toward running small language models (SLMs) locally on consumer-grade GPUs, driven by privacy, compliance, and cost constraints. When heterogeneous requests overlap on a single GPU, long prefills and short decodes contend for resources, creating head-of-line blocking that destabilizes interactive performance. By analyzing agent workloads, we observe that their execution naturally separates into cold prefills, which process long system prompts, resume prefills, which append tool outputs to cached contexts, and short decodes, which are latency-critical. This mix intensifies contention compared to conventional chatbot serving. We present AgentServe, a single-GPU serving system that ensures stable multi-agent execution under such conditions by isolating prefills from decodes, applying dynamic budgeting to resume prefills, and allocating GPU resources through pre-established CUDA Green Context slots with adaptive control. Evaluation results show that AgentServe significantly improves latency stability while sustaining competitive throughput, achieving up to 2.8x TTFT improvement and 2.7x TPOT improvement over state-of-the-art baselines across different settings.",
       "authors": [
-        "Sunjung Lee",
-        "Sanghoon Cha",
-        "Hyeonsu Kim",
-        "Seungwoo Seo",
-        "Yuhwan Ro",
-        "Sukhan Lee",
-        "Byeongho Kim",
-        "Yongjun Park",
-        "Kyomin Sohn",
-        "Seungwon Lee",
-        "Jaehoon Yu"
+        "Yuning Zhang",
+        "Yan Yan",
+        "Nan Yang",
+        "Dong Yuan"
       ],
       "author_details": [
         {
-          "name": "Sunjung Lee"
+          "name": "Yuning Zhang"
         },
         {
-          "name": "Sanghoon Cha"
+          "name": "Yan Yan"
         },
         {
-          "name": "Hyeonsu Kim"
+          "name": "Nan Yang"
         },
         {
-          "name": "Seungwoo Seo"
-        },
-        {
-          "name": "Yuhwan Ro"
-        },
-        {
-          "name": "Sukhan Lee"
-        },
-        {
-          "name": "Byeongho Kim"
-        },
-        {
-          "name": "Yongjun Park"
-        },
-        {
-          "name": "Kyomin Sohn"
-        },
-        {
-          "name": "Seungwon Lee"
-        },
-        {
-          "name": "Jaehoon Yu"
+          "name": "Dong Yuan"
         }
       ],
-      "published": "2026-03-10T05:39:03Z",
-      "published_date": "2026-03-10 05:39:03+00:00",
-      "updated": "2026-03-10T05:39:03Z",
-      "comments": "13 pages, 13 figures",
+      "published": "2026-03-11T02:23:04Z",
+      "published_date": "2026-03-11 02:23:04+00:00",
+      "updated": "2026-03-11T02:23:04Z",
       "primary_category": "cs.DC",
       "categories": [
         "cs.DC"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.09216v1",
-      "url": "http://arxiv.org/abs/2603.09216v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.10342v1",
+      "url": "http://arxiv.org/abs/2603.10342v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 3.0,
+        "relevance": 2.85,
         "recency": 3.0,
-        "popularity": 1.5,
-        "quality": 1.5,
-        "recommendation": 9.55
+        "popularity": 1.1,
+        "quality": 1.1,
+        "recommendation": 8.94
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "llm inference",
-        "prefill",
-        "decode",
+        "serving",
+        "throughput",
+        "latency",
         "cs.DC",
-        "memory",
-        "bandwidth",
-        "baseline"
+        "serving system",
+        "evaluation"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -515,336 +229,236 @@
           "cs.DC"
         ],
         "required_signal_matches": [
-          "prefill",
-          "decode"
+          "serving system"
         ],
-        "required_signal_match_count": 2,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "memory",
-          "bandwidth"
+          "throughput",
+          "latency"
         ],
         "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
-          "baseline",
-          "memory",
-          "bandwidth"
+          "evaluation",
+          "throughput",
+          "latency"
         ],
         "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.7,
+        "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "The paper treats PIM-assisted on-device decoding as a weight placement and layout conversion problem between prefill and decode, and proposes two software-only paths to avoid duplicated model memory.",
-        "summary_zh": "The paper targets on-device LLM inference, where compute-heavy prefill and bandwidth-heavy decode make PIM attractive mainly for the decode phase. It argues that the practical blocker is not only GEMM offload, but two phase-transition mismatches: prefill prefers cacheable weight placement while decode needs non-cacheable placement for reliable PIM triggering, and host execution and PIM expect different weight layouts. PIM-SHERPA addresses this in software with DRAM double buffering, which keeps one PIM-aware weight copy and stages small cacheable buffers, and online weight rearrangement, which performs swizzled copies immediately before GEMM. The abstract reports Llama 3.2 results on a PIM emulation system with about 47.8-49.7% memory-capacity savings while maintaining performance comparable to a theoretical maximum. The main missing details are hardware fidelity, end-to-end overhead breakdown, and how well the method generalizes beyond the reported setup.",
-        "background_zh": "On-device LLM serving is split between a compute-bound prefill phase and a bandwidth-bound decode phase, which makes PIM a natural fit for decode but creates cross-phase systems friction.",
-        "problem_zh": "The paper asks how to run prefill and decode efficiently on the same PIM-enabled device when they require incompatible memory attributes and incompatible weight layouts.",
-        "approach_zh": "It proposes two software-only mechanisms, DRAM double buffering and online weight rearrangement with swizzled copy, to reconcile cacheability and layout mismatches without storing separate full weight replicas for each phase.",
-        "evidence_zh": "The abstract reports evaluation on a PIM emulation system for Llama 3.2, claiming 47.8-49.7% memory-capacity savings with performance near a theoretical maximum, but it does not make real-hardware behavior or overhead attribution fully clear.",
-        "value_zh": "If the method holds on real devices, it could make PIM-backed on-device LLM decoding more memory-feasible without requiring hardware changes or duplicated model storage.",
+        "one_liner_zh": "This paper presents a single-GPU serving system for agentic LLM workloads that separates long and short phases of execution to reduce latency instability under overlapping requests.",
+        "summary_zh": "The paper targets a serving problem that is becoming more important as small language models run locally as agents on consumer GPUs and interleave decoding with tool calls. It argues that agent workloads create a harder scheduling mix than standard chat because cold prefills, resume prefills, and short latency-critical decodes contend on one GPU and cause head-of-line blocking. AgentServe addresses this with prefill/decode isolation, dynamic budgeting for resume prefills, and GPU allocation through pre-established CUDA Green Context slots with adaptive control. The abstract claims improved latency stability with competitive throughput, including up to 2.8x better TTFT and 2.7x better TPOT than state-of-the-art baselines across multiple settings. The main missing detail is how these gains depend on the exact GPU, workload mix, baseline configuration, and the overheads of the proposed resource partitioning.",
+        "background_zh": "Agent-style LLM serving differs from ordinary chat serving because requests repeatedly switch between model execution and external actions, which makes single-GPU scheduling more bursty and interference-prone.",
+        "problem_zh": "The core problem is how to keep token latency stable while preserving throughput when heterogeneous prefill and decode phases from multiple agents overlap on a consumer-grade GPU.",
+        "approach_zh": "The system decomposes agent requests into cold prefills, resume prefills, and short decodes, then isolates prefills from decodes, budgets resume prefills dynamically, and assigns GPU resources with adaptive CUDA Green Context slot control.",
+        "evidence_zh": "According to the abstract, experiments across different settings show better latency stability with competitive throughput and report up to 2.8x TTFT improvement and 2.7x TPOT improvement over state-of-the-art baselines, but the abstract does not make the evaluation setup or fairness details clear.",
+        "value_zh": "If the method holds up, it offers a practical serving design for local multi-agent execution on modest hardware where interactive latency matters more than maximizing raw batch throughput.",
         "open_questions": [
-          "How faithful is the PIM emulation system to real product-level hardware, especially for cacheability behavior and reliable PIM triggering?",
-          "What are the latency, bandwidth, and synchronization costs of DRAM double buffering versus online weight rearrangement across layers and decoding lengths?",
-          "How well do the claims transfer beyond Llama 3.2 to other model sizes, quantization schemes, and deployment settings?"
+          "What GPU model, model sizes, agent traces, and request concurrency levels were used, and do the reported gains persist outside those settings?",
+          "How are the state-of-the-art baselines configured, and is the comparison fair on batching, KV-cache handling, and scheduling policy?",
+          "What overheads or utilization losses come from CUDA Green Context slot partitioning and dynamic resume-prefill budgeting under lighter or more decode-heavy workloads?"
         ],
         "core_contributions": [
-          "It identifies a memory-attribute inconsistency between cache-friendly prefill execution and non-cacheable decode execution needed to trigger PIM reliably.",
-          "It identifies a weight-layout inconsistency between host-friendly layouts and PIM-aware layouts as a distinct deployment bottleneck.",
-          "It introduces two software-only remedies, DDB and OWR, that aim to preserve PIM decode benefits while reducing extra memory footprint."
+          "It identifies agent serving on a single GPU as a distinct scheduling regime with cold prefills, resume prefills, and short decodes rather than a standard chat-style request pattern.",
+          "It proposes a serving design that explicitly separates prefills from decodes and treats resume prefills as a budgeted middle class of work.",
+          "It uses pre-established CUDA Green Context slots with adaptive control as the resource-allocation mechanism for stable multi-agent execution on consumer hardware."
         ],
         "why_read": [
-          "It surfaces a concrete systems bottleneck at the prefill/decode boundary rather than treating PIM offload as a standalone kernel problem.",
-          "It compares two different software tradeoffs: small staged buffers versus just-in-time layout conversion.",
-          "It includes an explicit memory-capacity claim, which is often the limiting factor for on-device deployment."
+          "It is directly about LLM inference serving efficiency rather than generic agent orchestration, with concrete focus on TTFT/TPOT behavior under contention.",
+          "It frames agentic workloads as a systems scheduling problem and gives a mechanism-level answer instead of only reporting end-to-end latency numbers.",
+          "It may be useful for local or edge deployments where a single consumer GPU must multiplex several agent sessions without severe interactive jitter."
         ],
         "risks": [
-          "The evaluation is reported on a PIM emulation system, so transfer to real hardware is not yet established.",
-          "The abstract compares performance to a theoretical maximum, which leaves baseline fairness and achievable end-to-end gains harder to judge from the abstract alone."
+          "The abstract does not clarify whether the gains come from a broadly applicable scheduling idea or from workload-specific tuning.",
+          "CUDA Green Context dependence may limit portability or make the design sensitive to specific driver, runtime, or GPU assumptions that are not stated here."
         ],
         "recommended_for": [
-          "Researchers studying on-device LLM inference with PIM-capable memory systems",
-          "Engineers designing memory placement and layout pipelines across prefill and decode",
-          "Systems readers interested in software/runtime co-design for bandwidth-limited LLM decode"
+          "Researchers working on LLM serving schedulers for mixed prefill/decode workloads.",
+          "Engineers building local or edge multi-agent systems on a single consumer GPU.",
+          "Readers interested in runtime and resource-allocation co-design for interactive inference."
         ],
         "keywords": [
-          "processing-in-memory",
-          "on-device LLM inference",
-          "prefill/decode split",
-          "memory attribute inconsistency",
-          "weight layout inconsistency",
-          "DRAM double buffering (DDB)"
+          "agentic AI serving",
+          "LLM inference systems",
+          "single-GPU scheduling",
+          "consumer-grade GPU",
+          "prefill/decode isolation",
+          "resume prefill budgeting"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High fit for the stated focus because it is a software/runtime paper about decode-phase memory bottlenecks in on-device LLM inference, with concrete mechanisms for placement and layout handling; the main caveat is that the evidence is emulation-based rather than clearly shown on production hardware.",
-        "fallback_summary": "On-device deployments of large language models (LLMs) are rapidly proliferating across mobile and edge platforms."
+        "reading_priority_reason": "This is a strong fit for LLM inference systems work because it focuses on single-GPU serving, latency stability, and scheduling under mixed agent workloads, and the abstract includes concrete mechanism and outcome claims rather than only motivation.",
+        "fallback_summary": "Large language models (LLMs) are increasingly deployed as AI agents that operate in short reasoning-action loops, interleaving model computation with external calls."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2602.08005v1",
-      "arxiv_id": "2602.08005v1",
-      "title": "DeltaKV: Residual-Based KV Cache Compression via Long-Range Similarity",
-      "summary": "The deployment of efficient long-context LLMs in applications like autonomous agents, long-chain reasoning, and creative writing is fundamentally bottlenecked by the linear growth of KV cache memory. Existing compression and eviction methods often struggle to balance accuracy, compression ratio, and hardware efficiency. We propose DeltaKV, a residual-based KV cache compression framework motivated by two empirical findings: long-range inter-token similarity and highly shared latent components in KV representations. Instead of discarding tokens, DeltaKV encodes semantic residuals relative to retrieved historical references, preserving fidelity while substantially reducing storage. To translate compression gains into real system speedups, we further introduce Sparse-vLLM, a high-performance inference engine with decoupled memory management and kernels optimized for sparse and irregular KV layouts. Experiments show that DeltaKV reduces KV cache memory to 29\\% of the original while maintaining near-lossless accuracy on LongBench, SCBench, and AIME. When integrated with Sparse-vLLM, it achieves up to 2$\\times$ throughput improvement over vLLM in long-context scenarios, demonstrating a practical path toward scalable long-context LLM deployment. Code, model checkpoints, and datasets are available at https://github.com/CURRENTF/Sparse-vLLM.",
+      "id": "http://arxiv.org/abs/2603.10846v1",
+      "arxiv_id": "2603.10846v1",
+      "title": "Towards Cold-Start Drafting and Continual Refining: A Value-Driven Memory Approach with Application to NPU Kernel Synthesis",
+      "summary": "Deploying Large Language Models to data-scarce programming domains poses significant challenges, particularly for kernel synthesis on emerging Domain-Specific Architectures where a \"Data Wall\" limits available training data. While models excel on data-rich platforms like CUDA, they suffer catastrophic performance drops on data-scarce ecosystems such as NPU programming. To overcome this cold-start barrier without expensive fine-tuning, we introduce EvoKernel, a self-evolving agentic framework that automates the lifecycle of kernel synthesis from initial drafting to continual refining. EvoKernel addresses this by formulating the synthesis process as a memory-based reinforcement learning task. Through a novel value-driven retrieval mechanism, it learns stage-specific Q-values that prioritize experiences based on their contribution to the current objective, whether bootstrapping a feasible draft or iteratively refining latency. Furthermore, by enabling cross-task memory sharing, the agent generalizes insights from simple to complex operators. By building an NPU variant of KernelBench and evaluating on it, EvoKernel improves frontier models' correctness from 11.0% to 83.0% and achieves a median speedup of 3.60x over initial drafts through iterative refinement. This demonstrates that value-guided experience accumulation allows general-purpose models to master the kernel synthesis task on niche hardware ecosystems. Our official page is available at https://evokernel.zhuo.li.",
       "authors": [
-        "Jitai Hao",
-        "Qiang Huang",
-        "Yaowei Wang",
-        "Min Zhang",
-        "Jun Yu"
+        "Yujie Zheng",
+        "Zhuo Li",
+        "Shengtao Zhang",
+        "Hanjing Wang",
+        "Junjie Sheng",
+        "Jiaqian Wang",
+        "Junchi Yan",
+        "Weinan Zhang",
+        "Ying Wen",
+        "Bo Tang",
+        "Muning Wen"
       ],
       "author_details": [
         {
-          "name": "Jitai Hao"
+          "name": "Yujie Zheng"
         },
         {
-          "name": "Qiang Huang"
+          "name": "Zhuo Li"
         },
         {
-          "name": "Yaowei Wang"
+          "name": "Shengtao Zhang"
         },
         {
-          "name": "Min Zhang"
+          "name": "Hanjing Wang"
         },
         {
-          "name": "Jun Yu"
+          "name": "Junjie Sheng"
+        },
+        {
+          "name": "Jiaqian Wang"
+        },
+        {
+          "name": "Junchi Yan"
+        },
+        {
+          "name": "Weinan Zhang"
+        },
+        {
+          "name": "Ying Wen"
+        },
+        {
+          "name": "Bo Tang"
+        },
+        {
+          "name": "Muning Wen"
         }
       ],
-      "published": "2026-02-08T15:14:36Z",
-      "published_date": "2026-02-08 15:14:36+00:00",
-      "updated": "2026-02-08T15:14:36Z",
-      "comments": "preprint",
-      "primary_category": "cs.CL",
+      "published": "2026-03-11T14:57:06Z",
+      "published_date": "2026-03-11 14:57:06+00:00",
+      "updated": "2026-03-11T14:57:06Z",
+      "primary_category": "cs.LG",
       "categories": [
-        "cs.CL",
-        "cs.AI"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2602.08005v1",
-      "url": "http://arxiv.org/abs/2602.08005v1",
-      "source": "arxiv_hot_fallback",
-      "hot_score": 0,
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 1.6,
-        "recommendation": 9.27
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "kv cache",
-        "vllm",
-        "throughput",
-        "cs.CL",
-        "memory"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": true,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.CL"
-        ],
-        "required_signal_matches": [
-          "kv cache",
-          "vllm"
-        ],
-        "required_signal_match_count": 2,
-        "bonus_keyword_matches": [
-          "throughput",
-          "memory"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "throughput",
-          "memory"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "A KV-cache method that stores token states as residuals against retrieved long-range references and pairs it with a sparse-aware serving stack to turn memory compression into runtime gains.",
-        "summary_zh": "Long-context LLM deployment is increasingly limited by the linear growth of KV-cache memory, and prior compression or eviction schemes often trade off accuracy, compression ratio, and serving efficiency. This paper proposes DeltaKV, which uses long-range similarity and shared latent structure to encode KV states as residuals relative to retrieved historical references instead of dropping tokens, and it pairs that idea with Sparse-vLLM, a runtime designed for sparse and irregular KV layouts. The abstract claims that KV memory can be reduced to 29% of the original while maintaining near-lossless accuracy on LongBench, SCBench, and AIME. It also reports up to 2x throughput improvement over vLLM in long-context scenarios when the method is integrated into the sparse-aware engine. The main missing details are the cost of reference retrieval, the hardware and workload conditions behind the speedups, and how much of the gain comes from the compression method versus the serving-system co-design.",
-        "background_zh": "As context windows grow for agents, long-chain reasoning, and long-form generation, KV-cache memory scales linearly with sequence length and becomes a primary bottleneck for practical LLM serving.",
-        "problem_zh": "The paper asks how to reduce KV-cache memory enough to matter at system level without paying the usual accuracy penalty of token eviction or losing performance because the compressed representation is hard to serve efficiently.",
-        "approach_zh": "It compresses KV states as semantic residuals relative to retrieved historical references and co-designs the inference stack with decoupled memory management and kernels specialized for sparse, irregular KV layouts.",
-        "evidence_zh": "The abstract reports near-lossless accuracy on LongBench, SCBench, and AIME, KV-cache reduction to 29% of the original, and up to 2x throughput over vLLM in long-context settings, but it does not make the evaluation setup or ablation breakdown clear.",
-        "value_zh": "If the claims hold under realistic serving conditions, the method could translate KV-cache savings into longer supported contexts or higher throughput under fixed memory budgets, which is directly useful for production long-context inference.",
-        "open_questions": [
-          "What retrieval mechanism is used to find historical references, and what decode-time latency or compute overhead does that lookup introduce?",
-          "What models, GPUs, sequence lengths, batch sizes, and vLLM configurations were used for the reported throughput comparison, and is the baseline tuned fairly?",
-          "How much of the end-to-end gain comes from DeltaKV itself versus Sparse-vLLM, and where does the method start to fail on extreme context lengths or harder long-context behaviors?"
-        ],
-        "core_contributions": [
-          "Uses observed long-range similarity and shared latent components in KV representations to motivate residual-style KV-cache compression.",
-          "Introduces DeltaKV, which preserves token information by encoding residuals against retrieved historical references instead of evicting tokens outright.",
-          "Builds Sparse-vLLM, a sparse-aware serving engine intended to convert compressed KV representations into actual throughput gains under irregular memory layouts."
-        ],
-        "why_read": [
-          "It links a compression idea to an inference engine, which is more relevant to deployment than cache-size-only papers.",
-          "The paper sits directly on the KV-cache, vLLM, sparse-kernel, and long-context serving path that matters for LLM systems work.",
-          "The abstract makes both accuracy and throughput claims, so it is useful for checking whether the method survives real runtime constraints."
-        ],
-        "risks": [
-          "The reference-retrieval step may add enough latency or complexity to offset part of the claimed system benefit.",
-          "Sparse and irregular KV layouts can be highly hardware-dependent, so the reported speedups may not generalize across serving setups without careful kernel support and memory management design."
-        ],
-        "recommended_for": [
-          "Researchers working on KV-cache compression and long-context LLM inference.",
-          "Engineers optimizing vLLM-like serving stacks under memory pressure.",
-          "Compiler and runtime researchers interested in sparse decode kernels and irregular memory layouts."
-        ],
-        "keywords": [
-          "KV cache compression",
-          "long-context LLM serving",
-          "residual coding",
-          "long-range similarity",
-          "Sparse-vLLM",
-          "sparse KV layouts"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "High because it squarely targets the KV-cache bottleneck in long-context LLM serving and combines an algorithmic compression idea with runtime and kernel support, which is a strong fit for inference-systems work even though the abstract leaves hardware assumptions and baseline fairness unresolved.",
-        "fallback_summary": "The deployment of efficient long-context LLMs in applications like autonomous agents, long-chain reasoning, and creative writing is fundamentally bottlenecked by the linear growth of KV cache memory."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.03310v1",
-      "arxiv_id": "2603.03310v1",
-      "title": "Entropic-Time Inference: Self-Organizing Large Language Model Decoding Beyond Attention",
-      "summary": "Modern large language model (LLM) inference engines optimize throughput and latency under fixed decoding rules, treating generation as a linear progression in token time. We propose a fundamentally different paradigm: entropic\\-time inference, where decoding is governed by the flow of uncertainty rather than token index. We introduce a self\\-organizing inference architecture that jointly couples scheduling, attention sparsification, and sampling temperature under a unified entropy control objective. Our method extends vLLM with entropy-aware scheduling, entropic pruning of paged attention blocks, and adaptive temperature control that stabilizes generation near a target entropy regime. This transforms inference into a resource\\-intelligent thermodynamic process that allocates computation where uncertainty reduction is maximized. We present a concrete systems design, pseudocode, and integration plan, demonstrating how entropy can serve as a first\\-class control signal for scalable LLM inference.",
-      "authors": [
-        "Andrew Kiruluta"
-      ],
-      "author_details": [
-        {
-          "name": "Andrew Kiruluta"
-        }
-      ],
-      "published": "2026-02-08T19:13:26Z",
-      "published_date": "2026-02-08 19:13:26+00:00",
-      "updated": "2026-02-08T19:13:26Z",
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL",
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.03310v1",
-      "url": "http://arxiv.org/abs/2603.03310v1",
-      "source": "arxiv_hot_fallback",
-      "hot_score": 0,
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.2,
-        "recommendation": 8.73
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "llm inference",
-        "paged attention",
-        "vllm",
-        "throughput",
-        "latency",
         "cs.LG",
+        "cs.AI",
         "cs.CL"
       ],
+      "pdf_url": "https://arxiv.org/pdf/2603.10846v1",
+      "url": "http://arxiv.org/abs/2603.10846v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.75,
+        "recency": 3.0,
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 7.34
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "cuda",
+        "cs.LG",
+        "speedup",
+        "latency"
+      ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
-      "is_hot_paper": true,
+      "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 5,
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
         "matched_categories": [
-          "cs.LG",
-          "cs.CL"
+          "cs.LG"
         ],
         "required_signal_matches": [
-          "paged attention",
-          "vllm"
+          "cuda"
         ],
-        "required_signal_match_count": 2,
-        "bonus_keyword_matches": [
-          "throughput",
-          "latency"
-        ],
-        "bonus_keyword_match_count": 2,
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
         "analysis_keyword_matches": [
-          "throughput",
+          "speedup",
           "latency"
         ],
         "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.36
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper proposes treating decoding entropy, rather than token position alone, as the main control signal for LLM inference, tying scheduler decisions, paged-attention pruning, and sampling temperature into one serving policy.",
-        "summary_zh": "The paper argues that current LLM inference stacks optimize latency and throughput under largely fixed token-time decoding rules, while leaving uncertainty only indirectly used. It proposes an \"entropic-time\" inference scheme where online entropy becomes the shared control variable for scheduling, attention sparsification, and temperature adjustment, with a concrete integration path built on vLLM and paged attention. The claimed systems value is a more resource-aware decoder that spends compute where uncertainty reduction is highest and keeps generation near a target entropy regime. The abstract supports the existence of a design, pseudocode, and integration plan, but it does not make clear whether the system was implemented or quantitatively evaluated. The main missing detail is whether entropy can be estimated and acted on cheaply enough to deliver real latency, throughput, or quality gains over standard baselines.",
-        "background_zh": "LLM serving systems are under constant pressure to improve latency and throughput, but most decode-time optimizations still assume a linear token-order process with fixed control rules.",
-        "problem_zh": "The paper asks whether inference-time uncertainty can be promoted to a first-class systems signal that decides where computation should go during decoding instead of relying mainly on token index and static heuristics.",
-        "approach_zh": "It extends a vLLM-style stack with entropy-aware request scheduling, entropy-based pruning of paged attention blocks, and adaptive temperature control that steers decoding toward a target entropy regime.",
-        "evidence_zh": "The abstract states that the paper provides a systems design, pseudocode, and an integration plan; it does not make clear any implementation status, experiments, or quantitative comparisons.",
-        "value_zh": "If the control signal is practical, this could offer a unified way to manage latency-throughput-quality tradeoffs in LLM serving rather than tuning scheduling, sparsification, and sampling separately.",
+        "one_liner_zh": "The paper presents EvoKernel, an agentic memory-based reinforcement learning framework that bootstraps and iteratively refines NPU kernels by retrieving prior experiences with stage-specific value estimates.",
+        "summary_zh": "Kernel synthesis for emerging NPUs faces a data wall: general-purpose LLMs perform well in CUDA-rich settings but degrade sharply when domain data is scarce. This paper proposes EvoKernel, which treats drafting and refinement as a memory-based reinforcement learning problem and uses stage-specific Q-values to retrieve prior experiences that are most useful for either finding a feasible kernel or reducing latency. It also shares memory across tasks so knowledge from simpler operators can transfer to more complex ones. The abstract reports evaluation on an NPU variant of KernelBench, with correctness improving from 11.0% to 83.0% and a median 3.60x speedup over initial drafts after iterative refinement. The main missing detail is evaluation fidelity: the abstract does not explain the NPU stack, benchmark composition, baseline strength, or how the value estimates are learned and validated.",
+        "background_zh": "As kernel generation expands beyond CUDA into emerging accelerators, data scarcity becomes a core bottleneck because these ecosystems lack the code volume and training signals that current LLM code models depend on.",
+        "problem_zh": "The paper asks how to overcome cold-start failure in NPU kernel synthesis without expensive domain fine-tuning, while still improving performance after an initial working draft.",
+        "approach_zh": "EvoKernel models synthesis as a staged memory-based RL loop, learns stage-specific Q-values to rank prior experiences for drafting versus refinement, and shares memory across related kernel tasks.",
+        "evidence_zh": "The abstract reports results on an NPU variant of KernelBench, claiming correctness improves from 11.0% to 83.0% and median performance improves by 3.60x over initial drafts, but it does not make the hardware setup, task mix, or baseline protocol clear.",
+        "value_zh": "If the method is robust, it offers a practical way to adapt general-purpose LLMs to niche accelerator programming by turning prior synthesis attempts into reusable optimization knowledge.",
         "open_questions": [
-          "How is entropy estimated online during decoding, and what extra runtime cost does that estimation add to the serving path?",
-          "What latency, throughput, and output-quality results does the method achieve against standard vLLM decoding and other fair baselines?",
-          "How does entropy-guided paged-attention pruning affect long-context correctness, KV-cache behavior, and generation stability?"
+          "How are the stage-specific Q-values defined, trained, and updated during cold-start drafting versus latency refinement?",
+          "What exactly is included in the NPU KernelBench variant, and how comparable is its evaluation protocol to existing kernel synthesis benchmarks?",
+          "Are the reported gains measured against single-shot drafts only, or against stronger baselines such as repeated sampling, search-based refinement, or other agentic systems on the same hardware?"
         ],
         "core_contributions": [
-          "Reframes LLM decoding as an entropy-driven control process rather than a purely token-time progression.",
-          "Proposes a unified control objective that couples scheduler policy, attention sparsification, and sampling temperature.",
-          "Maps the idea onto concrete serving components, specifically vLLM, paged attention, and decode-time control logic."
+          "Frames cold-start kernel synthesis on data-scarce NPUs as a memory-based reinforcement learning problem spanning initial drafting and continual refinement.",
+          "Introduces value-driven retrieval with stage-specific Q-values to prioritize past experiences by their usefulness to the current synthesis objective.",
+          "Adds cross-task memory sharing and evaluates the approach on an NPU-oriented KernelBench variant with reported correctness and speedup gains."
         ],
         "why_read": [
-          "It targets a real systems question: whether uncertainty can drive inference-time resource allocation in an LLM serving stack.",
-          "It is directly relevant to vLLM-style serving because it connects scheduler behavior with paged-attention decisions instead of treating them as isolated optimizations.",
-          "It is useful to inspect if you care about decode-time control policies beyond standard attention and batching heuristics."
+          "It targets a real systems bottleneck: getting LLM-based kernel synthesis to work on emerging accelerators without domain-specific fine-tuning.",
+          "The method ties agentic code generation to explicit memory valuation and reuse, which is more interesting than plain prompt-loop refinement.",
+          "It may be relevant for teams exploring compiler or runtime co-design for low-data kernel generation on non-CUDA hardware."
         ],
         "risks": [
-          "The abstract reads more like a systems proposal than a validated implementation, so the practical gains are unproven from the provided evidence.",
-          "Online entropy estimation and target-entropy control may introduce overhead or instability that offsets any scheduling benefit, but the abstract does not clarify this point."
+          "The abstract does not specify the NPU hardware, compiler stack, or runtime conditions, so external validity is unclear.",
+          "The main comparison is against initial drafts, so baseline fairness versus stronger search or agentic alternatives is not established in the abstract alone."
         ],
         "recommended_for": [
-          "Researchers working on LLM inference runtimes and vLLM internals.",
-          "Engineers exploring decode-time control policies for latency and throughput optimization.",
-          "Readers interested in coupling probabilistic decoding signals with systems scheduling and attention management."
+          "Researchers working on LLM-driven kernel synthesis for NPUs or other niche accelerators.",
+          "Engineers studying agentic refinement loops for low-data code generation workflows.",
+          "Compiler and runtime teams interested in memory-guided optimization for generated low-level code."
         ],
         "keywords": [
-          "LLM inference",
-          "vLLM",
-          "paged attention",
-          "entropy-aware scheduling",
-          "attention sparsification",
-          "adaptive temperature control"
+          "NPU kernel synthesis",
+          "agentic code generation",
+          "memory-based reinforcement learning",
+          "value-driven retrieval",
+          "cross-task memory sharing",
+          "iterative refinement"
         ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "The fit with current LLM inference systems interests is high, especially around vLLM and paged attention, but the abstract provides no clear empirical evidence, so the paper is more compelling as a design idea than as a validated systems result.",
-        "fallback_summary": "Modern large language model (LLM) inference engines optimize throughput and latency under fixed decoding rules, treating generation as a linear progression in token time."
+        "reading_priority": "high",
+        "reading_priority_reason": "This is a strong fit for LLM code generation and low-level kernel synthesis, and the abstract includes concrete correctness and speedup claims on NPU codegen, even though evaluation fairness and reproducibility still need checking.",
+        "fallback_summary": "Deploying Large Language Models to data-scarce programming domains poses significant challenges, particularly for kernel synthesis on emerging Domain-Specific Architectures where a \"Data Wall\" limits available training data."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are factual reliability and verification, training and inference efficiency. The set is anchored by FlexServe: A Fast and Secure LLM… and The $qs$ Inequality: Quantifying…. Efficient Fabrication of… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency. The set is anchored by LookaheadKV: Fast and Accurate KV… and AgentServe: Algorithm-System…. Towards Cold-Start Drafting and… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
-      "factual reliability and verification",
       "training and inference efficiency"
     ],
     "reading_strategy": [
-      "Start with FlexServe: A Fast and Secure LLM… and verify whether it defines the factual reliability and verification problem clearly and exposes a real mechanism.",
-      "Then read The $qs$ Inequality: Quantifying… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use Efficient Fabrication of… as a final cross-check on experimental boundaries and practical value."
+      "Start with LookaheadKV: Fast and Accurate KV… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
+      "Then read AgentServe: Algorithm-System… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use Towards Cold-Start Drafting and… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-03-11T11:10:01Z",
+    "generated_at": "2026-03-12T11:05:37Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 6,
+    "paper_results": 3,
     "paper_failures": 0
   }
 }

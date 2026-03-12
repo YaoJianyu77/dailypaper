@@ -300,6 +300,27 @@
       "domain": "LLM Inference Systems",
       "quality_score": 8.73,
       "updated": "2026-03-11"
+    },
+    {
+      "id": "2603.10899v1",
+      "title": "LookaheadKV: Fast and Accurate KV Cache Eviction by Glimpsing into the Future without Generation",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.96,
+      "updated": "2026-03-12"
+    },
+    {
+      "id": "2603.10342v1",
+      "title": "AgentServe: Algorithm-System Co-Design for Efficient Agentic AI Serving on a Consumer-Grade GPU",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.94,
+      "updated": "2026-03-12"
+    },
+    {
+      "id": "2603.10846v1",
+      "title": "Towards Cold-Start Drafting and Continual Refining: A Value-Driven Memory Approach with Application to NPU Kernel Synthesis",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 7.34,
+      "updated": "2026-03-12"
     }
   ],
   "edges": [
@@ -1070,7 +1091,19 @@
       "target": "2603.09216v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2603.10899v1",
+      "target": "2603.10342v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.10342v1",
+      "target": "2603.10899v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-11"
+  "last_updated": "2026-03-12"
 }
