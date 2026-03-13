@@ -321,6 +321,48 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 7.34,
       "updated": "2026-03-12"
+    },
+    {
+      "id": "2603.12201v1",
+      "title": "IndexCache: Accelerating Sparse Attention via Cross-Layer Index Reuse",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.63,
+      "updated": "2026-03-13"
+    },
+    {
+      "id": "2603.11564v1",
+      "title": "Where Matters More Than What: Decoding-aligned KV Cache Compression via Position-aware Pseudo Queries",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.63,
+      "updated": "2026-03-13"
+    },
+    {
+      "id": "2207.00032",
+      "title": "DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale",
+      "domain": "LLM Inference Systems",
+      "quality_score": 5.92,
+      "updated": "2026-03-13"
+    },
+    {
+      "id": "2603.11504v1",
+      "title": "LongFlow: Efficient KV Cache Compression for Reasoning M",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.22,
+      "updated": "2026-03-13"
+    },
+    {
+      "id": "2603.11935v1",
+      "title": "MobileKernelBench: Can LLMs Write Efficient Kernels for Mobile Devices?",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 8.37,
+      "updated": "2026-03-13"
+    },
+    {
+      "id": "2603.11438v1",
+      "title": "NCCLbpf: Verified, Composable Policy Execution for GPU Collective Communication",
+      "domain": "LLM Inference Systems",
+      "quality_score": 7.85,
+      "updated": "2026-03-13"
     }
   ],
   "edges": [
@@ -1103,7 +1145,97 @@
       "target": "2603.10899v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2603.12201v1",
+      "target": "2603.11564v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.12201v1",
+      "target": "2603.11504v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.12201v1",
+      "target": "2603.11438v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.11564v1",
+      "target": "2603.11504v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.11564v1",
+      "target": "2603.12201v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.11564v1",
+      "target": "2603.11438v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2207.00032",
+      "target": "2603.12201v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2207.00032",
+      "target": "2603.11564v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2207.00032",
+      "target": "2603.11504v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.11504v1",
+      "target": "2603.11564v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.11504v1",
+      "target": "2603.12201v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.11504v1",
+      "target": "2603.11438v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.11438v1",
+      "target": "2603.12201v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.11438v1",
+      "target": "2603.11564v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.11438v1",
+      "target": "2603.11504v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-12"
+  "last_updated": "2026-03-13"
 }

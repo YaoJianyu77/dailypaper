@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-12",
+  "last_updated": "2026-03-13",
   "papers": [
     {
       "paper_id": "2603.10342v1",
@@ -98,6 +98,33 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2207.00032",
+      "title": "DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale",
+      "domain": "LLM Inference Systems",
+      "published": "2022-06-30",
+      "source_lane": "classic",
+      "topics": [
+        "transformer inference",
+        "serving",
+        "multi-GPU execution",
+        "kernel optimization",
+        "CPU/GPU/NVMe offload"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-13",
+      "last_seen_date": "2026-03-13",
+      "last_recommended_date": "2026-03-13",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-13",
+          "recommendation": 5.92,
+          "lane": "classic"
+        }
+      ],
+      "cooldown_until": "2026-04-03"
     },
     {
       "paper_id": "2602.08005v1",
@@ -475,6 +502,34 @@
       "cooldown_until": "2026-03-28"
     },
     {
+      "paper_id": "2603.12201v1",
+      "title": "IndexCache: Accelerating Sparse Attention via Cross-Layer Index Reuse",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-12T17:27:21Z",
+      "source_lane": "fresh",
+      "topics": [
+        "sparse attention",
+        "LLM inference systems",
+        "long-context serving",
+        "prefill",
+        "decode",
+        "index reuse across layers"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-13",
+      "last_seen_date": "2026-03-13",
+      "last_recommended_date": "2026-03-13",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-13",
+          "recommendation": 9.63,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-12"
+    },
+    {
       "paper_id": "dblp:conf/osdi/GuanF0RRY0A25",
       "title": "KPerfIR: Towards a Open and Compiler-centric Ecosystem for GPU Kernel Performance Tooling on Modern AI Workloads.",
       "domain": "LLM Code Generation For CUDA Kernels",
@@ -501,6 +556,34 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2603.11504v1",
+      "title": "LongFlow: Efficient KV Cache Compression for Reasoning M",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-12T03:46:35Z",
+      "source_lane": "fresh",
+      "topics": [
+        "KV cache compression",
+        "reasoning model serving",
+        "FlashAttention fusion",
+        "decode-time bandwidth",
+        "token eviction",
+        "throughput"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-13",
+      "last_seen_date": "2026-03-13",
+      "last_recommended_date": "2026-03-13",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-13",
+          "recommendation": 9.22,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-12"
     },
     {
       "paper_id": "2603.10899v1",
@@ -587,6 +670,34 @@
       "cooldown_until": "2026-05-09"
     },
     {
+      "paper_id": "2603.11935v1",
+      "title": "MobileKernelBench: Can LLMs Write Efficient Kernels for Mobile Devices?",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-03-12T13:48:11Z",
+      "source_lane": "fresh",
+      "topics": [
+        "mobile kernel generation",
+        "MobileKernelBench",
+        "MNN CPU backend",
+        "on-device verification",
+        "repository-aware reasoning",
+        "multi-agent plan-and-execute"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-13",
+      "last_seen_date": "2026-03-13",
+      "last_recommended_date": "2026-03-13",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-13",
+          "recommendation": 8.37,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-12"
+    },
+    {
       "paper_id": "2602.06019v1",
       "title": "Multi-Token Prediction via Self-Distillation",
       "domain": "LLM Inference Systems",
@@ -668,6 +779,34 @@
         }
       ],
       "cooldown_until": "2026-05-07"
+    },
+    {
+      "paper_id": "2603.11438v1",
+      "title": "NCCLbpf: Verified, Composable Policy Execution for GPU Collective Communication",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-12T02:03:55Z",
+      "source_lane": "fresh",
+      "topics": [
+        "NCCL",
+        "eBPF",
+        "GPU collective communication",
+        "AllReduce",
+        "plugin verification",
+        "hot reload"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-13",
+      "last_seen_date": "2026-03-13",
+      "last_recommended_date": "2026-03-13",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-13",
+          "recommendation": 7.85,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-12"
     },
     {
       "paper_id": "dblp:conf/isca/0004HKCL00P25",
@@ -1292,6 +1431,34 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2603.11564v1",
+      "title": "Where Matters More Than What: Decoding-aligned KV Cache Compression via Position-aware Pseudo Queries",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-12T05:36:32Z",
+      "source_lane": "fresh",
+      "topics": [
+        "KV cache compression",
+        "long-context inference",
+        "token eviction",
+        "position-aware pseudo queries",
+        "prefill",
+        "memory efficiency"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-13",
+      "last_seen_date": "2026-03-13",
+      "last_recommended_date": "2026-03-13",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-13",
+          "recommendation": 9.63,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-12"
     },
     {
       "paper_id": "2602.07265v1",

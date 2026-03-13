@@ -1,178 +1,327 @@
 {
-  "target_date": "2026-03-12",
+  "target_date": "2026-03-13",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-10",
-      "end": "2026-03-12"
+      "start": "2026-02-11",
+      "end": "2026-03-13"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-12",
-      "end": "2026-02-09"
+      "start": "2025-03-13",
+      "end": "2026-02-10"
     }
   },
-  "total_found": 204,
-  "total_venue": 4,
-  "total_filtered": 7,
+  "total_found": 219,
+  "total_venue": 13,
+  "total_filtered": 19,
   "total_recent": 200,
-  "total_hot": 0,
-  "total_unique": 7,
+  "total_hot": 6,
+  "total_unique": 19,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 3,
+    "selected_count": 6,
     "lane_counts": {
-      "fresh": 3,
+      "fresh": 5,
       "established": 0,
-      "classic": 0,
-      "history_filtered": 4,
+      "classic": 1,
+      "history_filtered": 10,
       "history_relaxed": 0,
-      "classic_slot_active": 0
+      "classic_slot_active": 1
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": false
+      "slot_active_today": true
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.10899v1",
-      "arxiv_id": "2603.10899v1",
-      "title": "LookaheadKV: Fast and Accurate KV Cache Eviction by Glimpsing into the Future without Generation",
-      "summary": "Transformer-based large language models (LLMs) rely on key-value (KV) caching to avoid redundant computation during autoregressive inference. While this mechanism greatly improves efficiency, the cache size grows linearly with the input sequence length, quickly becoming a bottleneck for long-context tasks. Existing solutions mitigate this problem by evicting prompt KV that are deemed unimportant, guided by estimated importance scores. Notably, a recent line of work proposes to improve eviction quality by \"glimpsing into the future\", in which a draft generator produces a surrogate future response approximating the target model's true response, and this surrogate is subsequently used to estimate the importance of cached KV more accurately. However, these approaches rely on computationally expensive draft generation, which introduces substantial prefilling overhead and limits their practicality in real-world deployment. To address this challenge, we propose LookaheadKV, a lightweight eviction framework that leverages the strength of surrogate future response without requiring explicit draft generation. LookaheadKV augments transformer layers with parameter-efficient modules trained to predict true importance scores with high accuracy. Our design ensures negligible runtime overhead comparable to existing inexpensive heuristics, while achieving accuracy superior to more costly approximation methods. Extensive experiments on long-context understanding benchmarks, across a wide range of models, demonstrate that our method not only outperforms recent competitive baselines in various long-context understanding tasks, but also reduces the eviction cost by up to 14.5x, leading to significantly faster time-to-first-token. Our code is available at https://github.com/SamsungLabs/LookaheadKV.",
+      "id": "http://arxiv.org/abs/2603.12201v1",
+      "arxiv_id": "2603.12201v1",
+      "title": "IndexCache: Accelerating Sparse Attention via Cross-Layer Index Reuse",
+      "summary": "Long-context agentic workflows have emerged as a defining use case for large language models, making attention efficiency critical for both inference speed and serving cost. Sparse attention addresses this challenge effectively, and DeepSeek Sparse Attention (DSA) is a representative production-grade solution: a lightweight lightning indexer selects the top-k most relevant tokens per query, reducing core attention from $O(L^2)$ to $O(Lk)$. However, the indexer itself retains $O(L^2)$ complexity and must run independently at every layer, despite the fact that the resulting top-k selections are highly similar across consecutive layers. We present IndexCache, which exploits this cross-layer redundancy by partitioning layers into a small set of Full layers that run their own indexers and a majority of Shared layers that simply reuse the nearest Full layer's top-k indices. We propose two complementary approaches to determine and optimize this configuration. Training-free IndexCache applies a greedy search algorithm that selects which layers to retain indexers by directly minimizing language modeling loss on a calibration set, requiring no weight updates. Training-aware IndexCache introduces a multi-layer distillation loss that trains each retained indexer against the averaged attention distributions of all layers it serves, enabling even simple interleaved patterns to match full-indexer accuracy. Experimental results on a 30B DSA model show that IndexCache can remove 75% of indexer computations with negligible quality degradation, achieving up to 1.82$\\times$ prefill speedup and 1.48$\\times$ decode speedup compared to standard DSA. These positive results are further confirmed by our preliminary experiments on the production-scale GLM-5 model (Figure 1).",
       "authors": [
-        "Jinwoo Ahn",
-        "Ingyu Seong",
-        "Akhil Kedia",
-        "Junhan Kim",
-        "Hyemi Jang",
-        "Kangwook Lee",
-        "Yongkweon Jeon"
+        "Yushi Bai",
+        "Qian Dong",
+        "Ting Jiang",
+        "Xin Lv",
+        "Zhengxiao Du",
+        "Aohan Zeng",
+        "Jie Tang",
+        "Juanzi Li"
       ],
       "author_details": [
         {
-          "name": "Jinwoo Ahn"
+          "name": "Yushi Bai"
         },
         {
-          "name": "Ingyu Seong"
+          "name": "Qian Dong"
         },
         {
-          "name": "Akhil Kedia"
+          "name": "Ting Jiang"
         },
         {
-          "name": "Junhan Kim"
+          "name": "Xin Lv"
         },
         {
-          "name": "Hyemi Jang"
+          "name": "Zhengxiao Du"
         },
         {
-          "name": "Kangwook Lee"
+          "name": "Aohan Zeng"
         },
         {
-          "name": "Yongkweon Jeon"
+          "name": "Jie Tang"
+        },
+        {
+          "name": "Juanzi Li"
         }
       ],
-      "published": "2026-03-11T15:44:32Z",
-      "published_date": "2026-03-11 15:44:32+00:00",
-      "updated": "2026-03-11T15:44:32Z",
-      "comments": "ICLR 2026",
-      "primary_category": "cs.LG",
+      "published": "2026-03-12T17:27:21Z",
+      "published_date": "2026-03-12 17:27:21+00:00",
+      "updated": "2026-03-12T17:27:21Z",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.LG",
-        "cs.AI"
+        "cs.CL",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.10899v1",
-      "url": "http://arxiv.org/abs/2603.10899v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.12201v1",
+      "url": "http://arxiv.org/abs/2603.12201v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.86,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 9.96
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 9.63
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "kv cache",
+        "serving",
+        "prefill",
+        "decode",
         "cs.LG",
-        "runtime"
+        "cs.CL",
+        "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 1,
+        "text_match_count": 3,
         "matched_categories": [
-          "cs.LG"
+          "cs.LG",
+          "cs.CL"
         ],
         "required_signal_matches": [
-          "kv cache",
-          "runtime"
+          "prefill",
+          "decode"
         ],
         "required_signal_match_count": 2,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
+        "bonus_keyword_matches": [
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 1,
         "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2603.10342v1",
-      "arxiv_id": "2603.10342v1",
-      "title": "AgentServe: Algorithm-System Co-Design for Efficient Agentic AI Serving on a Consumer-Grade GPU",
-      "summary": "Large language models (LLMs) are increasingly deployed as AI agents that operate in short reasoning-action loops, interleaving model computation with external calls. Unlike traditional chat applications, these agentic workloads require inference serving systems to balance low latency, stable token emission, and throughput under multiple request arrivals from different AI agents. Recent deployments highlight a shift toward running small language models (SLMs) locally on consumer-grade GPUs, driven by privacy, compliance, and cost constraints. When heterogeneous requests overlap on a single GPU, long prefills and short decodes contend for resources, creating head-of-line blocking that destabilizes interactive performance. By analyzing agent workloads, we observe that their execution naturally separates into cold prefills, which process long system prompts, resume prefills, which append tool outputs to cached contexts, and short decodes, which are latency-critical. This mix intensifies contention compared to conventional chatbot serving. We present AgentServe, a single-GPU serving system that ensures stable multi-agent execution under such conditions by isolating prefills from decodes, applying dynamic budgeting to resume prefills, and allocating GPU resources through pre-established CUDA Green Context slots with adaptive control. Evaluation results show that AgentServe significantly improves latency stability while sustaining competitive throughput, achieving up to 2.8x TTFT improvement and 2.7x TPOT improvement over state-of-the-art baselines across different settings.",
+      "id": "http://arxiv.org/abs/2603.11564v1",
+      "arxiv_id": "2603.11564v1",
+      "title": "Where Matters More Than What: Decoding-aligned KV Cache Compression via Position-aware Pseudo Queries",
+      "summary": "The Key-Value (KV) cache is crucial for efficient Large Language Models (LLMs) inference, but excessively long contexts drastically increase KV cache memory footprint. Existing KV cache compression methods typically rely on input-side attention patterns within a prompt observation window to estimate token importance during the prefill stage. They fail to preserve critical tokens for future generation since these assessments are not derived from the decoding process. Intuitively, an effective observation window should mirror the decoding-stage queries to accurately reflect which tokens the generation process will attend to. However, ground-truth decoding queries are inherently unavailable during inference. For constructing pseudo queries to approximate them, we find that positional information plays a more critical role than semantic content. Motivated by this insight, we propose decoding-aligned KV cache compression via position-aware pseudo queries (DapQ), a novel and lightweight eviction framework that leverages position-aware pseudo queries to simulate the output tokens, thereby establishing an effective observation window for importance assessment. It aligns closely with the actual generation context and enables precise token eviction. Extensive evaluations across multiple benchmarks and LLMs demonstrate that DapQ achieves superior performance, particularly under strict memory constraints (e.g., up to nearly lossless performance 99.5% on NIAH with 3% KV cache budgets).",
       "authors": [
-        "Yuning Zhang",
-        "Yan Yan",
-        "Nan Yang",
-        "Dong Yuan"
+        "Zhenxu Tian",
+        "Yi Su",
+        "Juntao Li",
+        "Min Zhang"
       ],
       "author_details": [
         {
-          "name": "Yuning Zhang"
+          "name": "Zhenxu Tian"
         },
         {
-          "name": "Yan Yan"
+          "name": "Yi Su"
         },
         {
-          "name": "Nan Yang"
+          "name": "Juntao Li"
         },
         {
-          "name": "Dong Yuan"
+          "name": "Min Zhang"
         }
       ],
-      "published": "2026-03-11T02:23:04Z",
-      "published_date": "2026-03-11 02:23:04+00:00",
-      "updated": "2026-03-11T02:23:04Z",
-      "primary_category": "cs.DC",
+      "published": "2026-03-12T05:36:32Z",
+      "published_date": "2026-03-12 05:36:32+00:00",
+      "updated": "2026-03-12T05:36:32Z",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.DC"
+        "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.10342v1",
-      "url": "http://arxiv.org/abs/2603.10342v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.11564v1",
+      "url": "http://arxiv.org/abs/2603.11564v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.85,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 8.94
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 9.63
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "serving",
-        "throughput",
-        "latency",
+        "prefill",
+        "kv cache",
+        "cs.CL",
+        "memory"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 2,
+        "matched_categories": [
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "prefill"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "memory"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "memory"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "paper_id": "2207.00032",
+      "arxiv_id": "2207.00032",
+      "title": "DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale",
+      "summary": "Presents a transformer inference system that combines multi-GPU execution, kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support to scale model serving under latency and throughput constraints.",
+      "authors": [
+        "Reza Yazdani Aminabadi",
+        "Samyam Rajbhandari",
+        "Minjia Zhang",
+        "Ammar Ahmad Awan",
+        "Cheng Li",
+        "Du Li",
+        "Elton Zheng",
+        "Jeff Rasley",
+        "Shaden Smith",
+        "Olatunji Ruwase",
+        "Yuxiong He"
+      ],
+      "published": "2022-06-30",
+      "published_date": "2022-06-30 00:00:00",
+      "categories": [
         "cs.DC",
-        "serving system",
+        "cs.LG"
+      ],
+      "source": "classic_backlog",
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "inference-system",
+        "serving",
+        "multi-gpu",
+        "offload"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "selection_lane": "classic",
+      "is_hot_paper": false,
+      "source_url": "https://arxiv.org/abs/2207.00032",
+      "pdf_url": "https://arxiv.org/pdf/2207.00032.pdf",
+      "scores": {
+        "relevance": 2.9,
+        "recency": 0.0,
+        "popularity": 0.0,
+        "quality": 0.0,
+        "recommendation": 5.92
+      },
+      "classic_rotation_score": 10.5683,
+      "citationCount": 540,
+      "influentialCitationCount": 63,
+      "venue": "International Conference for High Performance Computing, Networking, Storage and Analysis",
+      "journal_ref": "SC22: International Conference for High Performance Computing, Networking, Storage and Analysis"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11504v1",
+      "arxiv_id": "2603.11504v1",
+      "title": "LongFlow: Efficient KV Cache Compression for Reasoning M",
+      "summary": "Recent reasoning models such as OpenAI-o1 and DeepSeek-R1 have shown strong performance on complex tasks including mathematical reasoning and code generation. However, this performance gain comes with substantially longer output sequences, leading to significantly increased deployment costs. In particular, long outputs require large KV caches, resulting in high memory consumption and severe bandwidth pressure during attention computation. Most existing KV cache optimization methods are designed for long-input, short-output scenarios and are ineffective for the long-output setting of reasoning models. Moreover, importance estimation in prior work is computationally expensive and becomes prohibitive when continuous re-evaluation is required during long generation. To address these challenges, we propose LongFlow, a KV cache compression method with an efficient importance estimation metric derived from an intermediate result of attention computation using only the current query. This design introduces negligible computational overhead and requires no auxiliary storage. We further develop a custom kernel that fuses FlashAttention, importance estimation, and token eviction into a single optimized operator, improving system-level efficiency. Experiments show that LongFlow achieves up to an 11.8 times throughput improvement with 80% KV cache compression with minimal impact on model accuracy.",
+      "authors": [
+        "Yi Su",
+        "Zhenxu Tian",
+        "Dan Qiao",
+        "Yuechi Zhou",
+        "Juntao Li",
+        "Min Zhang"
+      ],
+      "author_details": [
+        {
+          "name": "Yi Su"
+        },
+        {
+          "name": "Zhenxu Tian"
+        },
+        {
+          "name": "Dan Qiao"
+        },
+        {
+          "name": "Yuechi Zhou"
+        },
+        {
+          "name": "Juntao Li"
+        },
+        {
+          "name": "Min Zhang"
+        }
+      ],
+      "published": "2026-03-12T03:46:35Z",
+      "published_date": "2026-03-12 03:46:35+00:00",
+      "updated": "2026-03-12T03:46:35Z",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.11504v1",
+      "url": "http://arxiv.org/abs/2603.11504v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.1,
+        "quality": 1.1,
+        "recommendation": 9.22
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "kv cache",
+        "flashattention",
+        "throughput",
+        "cs.LG",
+        "cs.CL",
+        "memory",
+        "bandwidth",
         "evaluation"
       ],
       "matched_domain_priority": 5,
@@ -182,10 +331,183 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 3,
         "matched_categories": [
+          "cs.LG",
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "flashattention"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "throughput",
+          "memory",
+          "bandwidth"
+        ],
+        "bonus_keyword_match_count": 3,
+        "analysis_keyword_matches": [
+          "evaluation",
+          "throughput",
+          "memory",
+          "bandwidth"
+        ],
+        "analysis_keyword_match_count": 4,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.5
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11935v1",
+      "arxiv_id": "2603.11935v1",
+      "title": "MobileKernelBench: Can LLMs Write Efficient Kernels for Mobile Devices?",
+      "summary": "Large language models (LLMs) have demonstrated remarkable capabilities in code generation, yet their potential for generating kernels specifically for mobile de- vices remains largely unexplored. In this work, we extend the scope of automated kernel generation to the mobile domain to investigate the central question: Can LLMs write efficient kernels for mobile devices? To enable systematic investigation, we introduce MobileKernelBench, a comprehensive evaluation framework comprising a benchmark prioritizing operator diversity and cross-framework interoperability, coupled with an automated pipeline that bridges the host-device gap for on-device verification. Leveraging this framework, we conduct extensive evaluation on the CPU backend of Mobile Neural Network (MNN), revealing that current LLMs struggle with the engineering complexity and data scarcity inher-ent to mobile frameworks; standard models and even fine-tuned variants exhibit high compilation failure rates (over 54%) and negligible performance gains due to hallucinations and a lack of domain-specific grounding. To overcome these limitations, we propose the Mobile K ernel A gent (MoKA), a multi-agent system equipped with repository-aware reasoning and a plan-and-execute paradigm.Validated on MobileKernelBench, MoKA achieves state-of-the-art performance, boosting compilation success to 93.7% and enabling 27.4% of generated kernelsto deliver measurable speedups over native libraries.",
+      "authors": [
+        "Xingze Zou",
+        "Jing Wang",
+        "Yuhua Zheng",
+        "Xueyi Chen",
+        "Haolei Bai",
+        "Lingcheng Kong",
+        "Syed A. R. Abu-Bakar",
+        "Zhaode Wang",
+        "Chengfei Lv",
+        "Haoji Hu",
+        "Huan Wang"
+      ],
+      "author_details": [
+        {
+          "name": "Xingze Zou"
+        },
+        {
+          "name": "Jing Wang"
+        },
+        {
+          "name": "Yuhua Zheng"
+        },
+        {
+          "name": "Xueyi Chen"
+        },
+        {
+          "name": "Haolei Bai"
+        },
+        {
+          "name": "Lingcheng Kong"
+        },
+        {
+          "name": "Syed A. R. Abu-Bakar"
+        },
+        {
+          "name": "Zhaode Wang"
+        },
+        {
+          "name": "Chengfei Lv"
+        },
+        {
+          "name": "Haoji Hu"
+        },
+        {
+          "name": "Huan Wang"
+        }
+      ],
+      "published": "2026-03-12T13:48:11Z",
+      "published_date": "2026-03-12 13:48:11+00:00",
+      "updated": "2026-03-12T13:48:11Z",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.11935v1",
+      "url": "http://arxiv.org/abs/2603.11935v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.13,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 8.37
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "kernel generation",
+        "code generation",
+        "cs.LG",
+        "benchmark"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 2,
+        "matched_categories": [
+          "cs.LG"
+        ],
+        "required_signal_matches": [
+          "kernel generation"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "benchmark"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11438v1",
+      "arxiv_id": "2603.11438v1",
+      "title": "NCCLbpf: Verified, Composable Policy Execution for GPU Collective Communication",
+      "summary": "NCCL is the de facto standard for collective GPU communication in large-scale distributed training, relying heavily on plugins to customize runtime behavior. However, these plugins execute as unverified native code within NCCL's address space, risking job crashes, silent state corruption, and downtime from restarts during policy updates. Inspired by kernel extensibility models, we introduce NCCLbpf, a verified, high-performance extension framework embedding a userspace eBPF runtime directly into NCCL's existing plugin interfaces, without modifying NCCL itself. NCCLbpf offers load-time static verification to prevent unsafe plugin execution, structured cross-plugin maps enabling composable policies and closed-loop adaptation, and atomic policy hot-reloads eliminating downtime previously required for policy updates. Evaluations on 8x NVIDIA B300 GPUs connected via NVLink demonstrate that NCCLbpf imposes just 80-130 ns overhead per tuner decision (less than 0.03% of collective latency), prevents all tested unsafe plugin behaviors at load-time, and enables a message-size-aware eBPF policy that improves AllReduce throughput by up to 27% over NCCL's default in the 4-128 MiB range.",
+      "authors": [
+        "Yusheng Zheng"
+      ],
+      "author_details": [
+        {
+          "name": "Yusheng Zheng"
+        }
+      ],
+      "published": "2026-03-12T02:03:55Z",
+      "published_date": "2026-03-12 02:03:55+00:00",
+      "updated": "2026-03-12T02:03:55Z",
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC",
+        "cs.OS"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.11438v1",
+      "url": "http://arxiv.org/abs/2603.11438v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.21,
+        "recency": 3.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 7.85
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "throughput",
+        "latency",
+        "cs.DC",
+        "runtime"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 2,
+        "matched_categories": [
           "cs.DC"
         ],
         "required_signal_matches": [
-          "serving system"
+          "runtime"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
@@ -194,117 +516,12 @@
         ],
         "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
-          "evaluation",
           "throughput",
-          "latency"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.10846v1",
-      "arxiv_id": "2603.10846v1",
-      "title": "Towards Cold-Start Drafting and Continual Refining: A Value-Driven Memory Approach with Application to NPU Kernel Synthesis",
-      "summary": "Deploying Large Language Models to data-scarce programming domains poses significant challenges, particularly for kernel synthesis on emerging Domain-Specific Architectures where a \"Data Wall\" limits available training data. While models excel on data-rich platforms like CUDA, they suffer catastrophic performance drops on data-scarce ecosystems such as NPU programming. To overcome this cold-start barrier without expensive fine-tuning, we introduce EvoKernel, a self-evolving agentic framework that automates the lifecycle of kernel synthesis from initial drafting to continual refining. EvoKernel addresses this by formulating the synthesis process as a memory-based reinforcement learning task. Through a novel value-driven retrieval mechanism, it learns stage-specific Q-values that prioritize experiences based on their contribution to the current objective, whether bootstrapping a feasible draft or iteratively refining latency. Furthermore, by enabling cross-task memory sharing, the agent generalizes insights from simple to complex operators. By building an NPU variant of KernelBench and evaluating on it, EvoKernel improves frontier models' correctness from 11.0% to 83.0% and achieves a median speedup of 3.60x over initial drafts through iterative refinement. This demonstrates that value-guided experience accumulation allows general-purpose models to master the kernel synthesis task on niche hardware ecosystems. Our official page is available at https://evokernel.zhuo.li.",
-      "authors": [
-        "Yujie Zheng",
-        "Zhuo Li",
-        "Shengtao Zhang",
-        "Hanjing Wang",
-        "Junjie Sheng",
-        "Jiaqian Wang",
-        "Junchi Yan",
-        "Weinan Zhang",
-        "Ying Wen",
-        "Bo Tang",
-        "Muning Wen"
-      ],
-      "author_details": [
-        {
-          "name": "Yujie Zheng"
-        },
-        {
-          "name": "Zhuo Li"
-        },
-        {
-          "name": "Shengtao Zhang"
-        },
-        {
-          "name": "Hanjing Wang"
-        },
-        {
-          "name": "Junjie Sheng"
-        },
-        {
-          "name": "Jiaqian Wang"
-        },
-        {
-          "name": "Junchi Yan"
-        },
-        {
-          "name": "Weinan Zhang"
-        },
-        {
-          "name": "Ying Wen"
-        },
-        {
-          "name": "Bo Tang"
-        },
-        {
-          "name": "Muning Wen"
-        }
-      ],
-      "published": "2026-03-11T14:57:06Z",
-      "published_date": "2026-03-11 14:57:06+00:00",
-      "updated": "2026-03-11T14:57:06Z",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.10846v1",
-      "url": "http://arxiv.org/abs/2603.10846v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.75,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 7.34
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "cuda",
-        "cs.LG",
-        "speedup",
-        "latency"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
-        "matched_categories": [
-          "cs.LG"
-        ],
-        "required_signal_matches": [
-          "cuda"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "speedup",
           "latency"
         ],
         "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh"
     }
