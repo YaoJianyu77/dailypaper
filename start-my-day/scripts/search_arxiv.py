@@ -21,6 +21,7 @@ import urllib.request
 import urllib.parse
 
 logger = logging.getLogger(__name__)
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 try:
     import requests
@@ -28,6 +29,29 @@ try:
 except ImportError:
     HAS_REQUESTS = False
     logger.warning("requests library not found, using urllib for Semantic Scholar API")
+
+
+def load_local_env(repo_root: Path) -> None:
+    for env_name in ('.env.local', '.env'):
+        env_path = repo_root / env_name
+        if not env_path.exists():
+            continue
+        for raw_line in env_path.read_text(encoding='utf-8').splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith('#'):
+                continue
+            if line.startswith('export '):
+                line = line[len('export '):].strip()
+            if '=' not in line:
+                continue
+            key, value = line.split('=', 1)
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            if key and value and key not in os.environ:
+                os.environ[key] = value
+
+
+load_local_env(REPO_ROOT)
 
 # ---------------------------------------------------------------------------
 # API 配置

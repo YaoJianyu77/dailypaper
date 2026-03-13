@@ -35,6 +35,12 @@ Optional repository secret:
 
 - `SEMANTIC_SCHOLAR_API_KEY`
 
+For the local-first workflow, put it in `.env.local` at the repo root:
+
+```bash
+echo 'SEMANTIC_SCHOLAR_API_KEY=your_key_here' >> .env.local
+```
+
 If this secret is absent and Semantic Scholar rate-limits the run, the hot-paper pass degrades gracefully and continues with arXiv results.
 
 ## 4. Run the local pipeline once
@@ -48,7 +54,7 @@ uv run --with-requirements requirements.txt python scripts/run_local_daily.py
 This will:
 
 1. search and rank papers
-2. call local Codex CLI for structured Chinese editorial output
+2. call local Codex CLI for structured English editorial output
 3. publish content into `content/`
 4. commit and push updated content back to `main`
 5. trigger `.github/workflows/pages.yml`

@@ -5,5 +5,6 @@ __pycache__/
 .pytest_cache/
 dist/
 .env
+.env.local
 .DS_Store
 state/logs/

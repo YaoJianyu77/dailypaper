@@ -90,6 +90,14 @@ Prerequisites on the machine that will run at 7am:
 - `git push` must already work non-interactively, preferably with SSH keys or a credential helper
 - the machine must be powered on at the scheduled time
 
+Optional local secrets can live in `.env.local` at the repo root. For example:
+
+```bash
+echo 'SEMANTIC_SCHOLAR_API_KEY=your_key_here' >> .env.local
+```
+
+`scripts/run_local_daily.py` and `start-my-day/scripts/search_arxiv.py` load `.env.local` automatically, so the local cron job can use the key without committing it to git.
+
 Install the local cron job:
 
 ```bash
@@ -330,7 +338,7 @@ uv run --with-requirements requirements.txt python scripts/run_local_daily.py --
 ## Main Files
 
 - `scripts/content_store.py`: shared repo path and markdown helpers
-- `scripts/ai_enrich.py`: AI-generated Chinese summaries and daily overview
+- `scripts/ai_enrich.py`: AI-generated English mini analyses and daily overview
 - `scripts/publish_daily.py`: generate `content/daily/` and shared `content/assets/`
 - `scripts/build_site.py`: static site compiler
 - `start-my-day/scripts/search_arxiv.py`: search and ranking
