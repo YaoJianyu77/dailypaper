@@ -363,6 +363,48 @@
       "domain": "LLM Inference Systems",
       "quality_score": 7.85,
       "updated": "2026-03-13"
+    },
+    {
+      "id": "2603.15530v1",
+      "title": "DUET: Disaggregated Hybrid Mamba-Transformer LLMs with Prefill and Decode-Specific Packages",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.97,
+      "updated": "2026-03-17"
+    },
+    {
+      "id": "2603.15569v1",
+      "title": "Mamba-3: Improved Sequence Modeling using State Space Principles",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.78,
+      "updated": "2026-03-17"
+    },
+    {
+      "id": "2603.15202v1",
+      "title": "LMetric: Simple is Better - Multiplication May Be All You Need for LLM Request Scheduling",
+      "domain": "LLM Inference Systems",
+      "quality_score": 7.86,
+      "updated": "2026-03-17"
+    },
+    {
+      "id": "2603.14903v1",
+      "title": "ExPosST: Explicit Positioning with Adaptive Masking for LLM-Based Simultaneous Machine Translation",
+      "domain": "LLM Inference Systems",
+      "quality_score": 7.71,
+      "updated": "2026-03-17"
+    },
+    {
+      "id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
+      "title": "From Threads to Tiles: T2T, a Compiler for CUDA-to-NPU Translation via 2D Vectorization.",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 7.52,
+      "updated": "2026-03-17"
+    },
+    {
+      "id": "dblp:conf/cgo/FangKRAM26",
+      "title": "LLM-VeriOpt: Verification-Guided Reinforcement Learning for LLM-Based Compiler Optimization.",
+      "domain": "Low-level Code And Assembly Generation",
+      "quality_score": 5.83,
+      "updated": "2026-03-17"
     }
   ],
   "edges": [
@@ -1235,7 +1277,79 @@
       "target": "2603.11504v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2603.15530v1",
+      "target": "2603.15569v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.15530v1",
+      "target": "2603.15202v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.15530v1",
+      "target": "2603.14903v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.15569v1",
+      "target": "2603.15530v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.15569v1",
+      "target": "2603.15202v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.15569v1",
+      "target": "2603.14903v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.15202v1",
+      "target": "2603.15530v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.15202v1",
+      "target": "2603.15569v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.15202v1",
+      "target": "2603.14903v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.14903v1",
+      "target": "2603.15530v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.14903v1",
+      "target": "2603.15569v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.14903v1",
+      "target": "2603.15202v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-13"
+  "last_updated": "2026-03-17"
 }

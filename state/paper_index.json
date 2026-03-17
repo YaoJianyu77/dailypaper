@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-13",
+  "last_updated": "2026-03-17",
   "papers": [
     {
       "paper_id": "2603.10342v1",
@@ -265,6 +265,34 @@
       "cooldown_until": "2026-05-07"
     },
     {
+      "paper_id": "2603.15530v1",
+      "title": "DUET: Disaggregated Hybrid Mamba-Transformer LLMs with Prefill and Decode-Specific Packages",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-16T16:56:01Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference systems",
+        "hybrid Mamba-Transformer",
+        "prefill/decode disaggregation",
+        "accelerator co-design",
+        "state space models",
+        "time to first token (TTFT) throughput"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-17",
+      "last_seen_date": "2026-03-17",
+      "last_recommended_date": "2026-03-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-17",
+          "recommendation": 9.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-16"
+    },
+    {
       "paper_id": "dblp:journals/ral/MengSXX25",
       "title": "Efficient Fabrication of High-Aspect-Ratio Stepped-End Microneedles via Vision-Guided Assembly for Flexible Microelectrode Implantation.",
       "domain": "Low-level Code And Assembly Generation",
@@ -319,6 +347,34 @@
         }
       ],
       "cooldown_until": "2026-05-10"
+    },
+    {
+      "paper_id": "2603.14903v1",
+      "title": "ExPosST: Explicit Positioning with Adaptive Masking for LLM-Based Simultaneous Machine Translation",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-16T07:04:55Z",
+      "source_lane": "fresh",
+      "topics": [
+        "simultaneous machine translation",
+        "decoder-only LLMs",
+        "explicit position allocation",
+        "adaptive masking",
+        "KV cache",
+        "positional consistency"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-17",
+      "last_seen_date": "2026-03-17",
+      "last_recommended_date": "2026-03-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-17",
+          "recommendation": 7.71,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-16"
     },
     {
       "paper_id": "2603.05451v1",
@@ -440,6 +496,34 @@
       "cooldown_until": "2026-05-10"
     },
     {
+      "paper_id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
+      "title": "From Threads to Tiles: T2T, a Compiler for CUDA-to-NPU Translation via 2D Vectorization.",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026",
+      "source_lane": "fresh",
+      "topics": [
+        "CUDA",
+        "NPU",
+        "2-D vectorization",
+        "compiler",
+        "SIMT",
+        "tiling instructions"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-17",
+      "last_seen_date": "2026-03-17",
+      "last_recommended_date": "2026-03-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-17",
+          "recommendation": 7.52,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-16"
+    },
+    {
       "paper_id": "2210.17323",
       "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
       "domain": "LLM Inference Systems",
@@ -558,6 +642,62 @@
       "cooldown_until": "2026-05-08"
     },
     {
+      "paper_id": "dblp:conf/cgo/FangKRAM26",
+      "title": "LLM-VeriOpt: Verification-Guided Reinforcement Learning for LLM-Based Compiler Optimization.",
+      "domain": "Low-level Code And Assembly Generation",
+      "published": "2026",
+      "source_lane": "fresh",
+      "topics": [
+        "LLVM IR optimization",
+        "formal verification",
+        "Alive2",
+        "reinforcement learning",
+        "GRPO",
+        "peephole optimization"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-17",
+      "last_seen_date": "2026-03-17",
+      "last_recommended_date": "2026-03-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-17",
+          "recommendation": 5.83,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-16"
+    },
+    {
+      "paper_id": "2603.15202v1",
+      "title": "LMetric: Simple is Better - Multiplication May Be All You Need for LLM Request Scheduling",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-16T12:43:32Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "request scheduling",
+        "KV-aware routing",
+        "load balancing",
+        "prefill",
+        "serving latency"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-17",
+      "last_seen_date": "2026-03-17",
+      "last_recommended_date": "2026-03-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-17",
+          "recommendation": 7.86,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-16"
+    },
+    {
       "paper_id": "2603.11504v1",
       "title": "LongFlow: Efficient KV Cache Compression for Reasoning M",
       "domain": "LLM Inference Systems",
@@ -640,6 +780,34 @@
         }
       ],
       "cooldown_until": "2026-05-09"
+    },
+    {
+      "paper_id": "2603.15569v1",
+      "title": "Mamba-3: Improved Sequence Modeling using State Space Principles",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-16T17:30:08Z",
+      "source_lane": "fresh",
+      "topics": [
+        "state space models",
+        "linear sequence models",
+        "LLM inference systems",
+        "decode latency",
+        "memory efficiency",
+        "state tracking"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-17",
+      "last_seen_date": "2026-03-17",
+      "last_recommended_date": "2026-03-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-17",
+          "recommendation": 8.78,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-16"
     },
     {
       "paper_id": "dblp:journals/pacmpl/CaoZLSL25",
