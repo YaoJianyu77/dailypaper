@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-17",
+  "last_updated": "2026-03-18",
   "papers": [
     {
       "paper_id": "2603.10342v1",
@@ -28,6 +28,34 @@
         }
       ],
       "cooldown_until": "2026-05-11"
+    },
+    {
+      "paper_id": "2603.16428v1",
+      "title": "An Efficient Heterogeneous Co-Design for Fine-Tuning on a Single GPU",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-03-17T12:05:17Z",
+      "source_lane": "fresh",
+      "topics": [
+        "single-GPU fine-tuning",
+        "heterogeneous memory management",
+        "asynchronous overlap",
+        "Triton kernels",
+        "CPU-GPU offloading",
+        "multi-tier I/O"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-18",
+      "last_seen_date": "2026-03-18",
+      "last_recommended_date": "2026-03-18",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-18",
+          "recommendation": 6.78,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-17"
     },
     {
       "paper_id": "2603.05210v1",
@@ -71,6 +99,34 @@
         }
       ],
       "cooldown_until": "2026-05-06"
+    },
+    {
+      "paper_id": "2603.16335v1",
+      "title": "Behavioral Steering in a 35B MoE Language Model via SAE-Decoded Probe Vectors: One Agency Axis, Not Five Traits",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-17T10:05:41Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM steering",
+        "sparse autoencoder",
+        "probe vectors",
+        "Mixture-of-Experts",
+        "prefill",
+        "GatedDeltaNet"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-18",
+      "last_seen_date": "2026-03-18",
+      "last_recommended_date": "2026-03-18",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-18",
+          "recommendation": 8.36,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-17"
     },
     {
       "paper_id": "dblp:conf/cgo/HeY25",
@@ -263,6 +319,34 @@
         }
       ],
       "cooldown_until": "2026-05-07"
+    },
+    {
+      "paper_id": "2603.16437v1",
+      "title": "Dimensional Type Systems and Deterministic Memory Management: Design-Time Semantic Preservation in Native Compilation",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-03-17T12:19:07Z",
+      "source_lane": "fresh",
+      "topics": [
+        "MLIR",
+        "dimensional type system",
+        "deterministic memory management",
+        "coeffects",
+        "escape analysis",
+        "representation selection"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-18",
+      "last_seen_date": "2026-03-18",
+      "last_recommended_date": "2026-03-18",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-18",
+          "recommendation": 6.81,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-17"
     },
     {
       "paper_id": "2603.15530v1",
@@ -466,6 +550,34 @@
         }
       ],
       "cooldown_until": "2026-03-31"
+    },
+    {
+      "paper_id": "2603.16514v1",
+      "title": "FleetOpt: Analytical Fleet Provisioning for LLM Inference with Compress-and-Route as Implementation Mechanism",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-17T13:41:21Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference systems",
+        "fleet provisioning",
+        "KV cache",
+        "queueing model",
+        "prompt compression",
+        "request routing"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-18",
+      "last_seen_date": "2026-03-18",
+      "last_recommended_date": "2026-03-18",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-18",
+          "recommendation": 9.3,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-17"
     },
     {
       "paper_id": "2603.09046v1",
@@ -1244,6 +1356,34 @@
       "cooldown_until": "2026-05-06"
     },
     {
+      "paper_id": "2603.16039v1",
+      "title": "Residual Stream Duality in Modern Transformer Architectures",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-17T00:56:29Z",
+      "source_lane": "fresh",
+      "topics": [
+        "residual stream",
+        "depth-wise attention",
+        "short sliding-window attention",
+        "ShortSWA",
+        "Deep Delta Learning",
+        "KV cache"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-18",
+      "last_seen_date": "2026-03-18",
+      "last_recommended_date": "2026-03-18",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-18",
+          "recommendation": 8.06,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-17"
+    },
+    {
       "paper_id": "dblp:conf/cgo/ArmengolEstapeWCO24",
       "title": "SLaDe: A Portable Small Language Model Decompiler for Optimized Assembly.",
       "domain": "Low-level Code And Assembly Generation",
@@ -1571,6 +1711,34 @@
         }
       ],
       "cooldown_until": "2026-05-11"
+    },
+    {
+      "paper_id": "2603.16435v1",
+      "title": "VQKV: High-Fidelity and High-Ratio Cache Compression via Vector-Quantization",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-17T12:16:06Z",
+      "source_lane": "fresh",
+      "topics": [
+        "KV cache",
+        "vector quantization",
+        "LLM inference",
+        "memory compression",
+        "LongBench",
+        "LLaMA3.1-8B"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-18",
+      "last_seen_date": "2026-03-18",
+      "last_recommended_date": "2026-03-18",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-18",
+          "recommendation": 8.43,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-17"
     },
     {
       "paper_id": "2602.06932v1",

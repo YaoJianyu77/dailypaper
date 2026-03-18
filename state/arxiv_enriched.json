@@ -1,24 +1,24 @@
 {
-  "target_date": "2026-03-17",
+  "target_date": "2026-03-18",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-15",
-      "end": "2026-03-17"
+      "start": "2026-02-16",
+      "end": "2026-03-18"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-17",
-      "end": "2026-02-14"
+      "start": "2025-03-18",
+      "end": "2026-02-15"
     }
   },
-  "total_found": 221,
-  "total_venue": 14,
-  "total_filtered": 18,
+  "total_found": 210,
+  "total_venue": 3,
+  "total_filtered": 10,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 18,
+  "total_unique": 10,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
@@ -27,7 +27,7 @@
       "fresh": 6,
       "established": 0,
       "classic": 0,
-      "history_filtered": 9,
+      "history_filtered": 3,
       "history_relaxed": 0,
       "classic_slot_active": 0
     },
@@ -40,353 +40,60 @@
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.15530v1",
-      "arxiv_id": "2603.15530v1",
-      "title": "DUET: Disaggregated Hybrid Mamba-Transformer LLMs with Prefill and Decode-Specific Packages",
-      "summary": "Large language models operate in distinct compute-bound prefill followed by memory bandwidth-bound decode phases. Hybrid Mamba-Transformer models inherit this asymmetry while adding state space model (SSM) recurrences and element-wise operations that map poorly to matmul-centric accelerators. This mismatch causes performance bottlenecks, showing that a homogeneous architecture cannot satisfy all requirements. We introduce DUET, a disaggregated accelerator that assigns prefill and decode phases to specialized packages. The Prefill package utilizes systolic array chiplets with off-package memory for efficient large matrix multiplications and long-sequence SSMs. The Decode package utilizes vector-unit arrays with high-bandwidth in-package memory to accelerate token-by-token SSM and vector-matrix multiplications. Both architectures are runtime-configurable to support hybrid models with mixed Mamba and attention layers. Evaluations on Nemotron-H-56B, Zamba2-7B, and Llama3-8B across four workloads show that DUET achieves 4x faster time to first token, 1.4x higher throughput, and 1.5x lower time between tokens over the B200 GPU.",
+      "id": "http://arxiv.org/abs/2603.16514v1",
+      "arxiv_id": "2603.16514v1",
+      "title": "FleetOpt: Analytical Fleet Provisioning for LLM Inference with Compress-and-Route as Implementation Mechanism",
+      "summary": "Modern LLM GPU fleets are provisioned for worst-case context lengths that the vast majority of requests never approach, wasting GPU capacity on idle KV-cache slots. We present FleetOpt, a framework that starts from first principles: given a workload's prompt-length CDF and a P99 TTFT target, derive the minimum-cost fleet analytically, then deploy it in practice.\n  The analytical core models each pool as an M/G/c queue and derives that the minimum-cost fleet is a two-pool architecture -- a short-context pool and a long-context pool -- with an optimal boundary B* satisfying an equal marginal GPU cost condition across both pools. The fundamental barrier to achieving B* is the cost cliff: a hard routing step where requests just above B* consume 8x--42x more GPU capacity than requests just below it (depending on the context window ratio), creating a structural disincentive to lower the boundary.\n  Compress-and-Route (C&R) is the implementation mechanism that resolves this barrier. Gateway-layer extractive compression trims borderline requests below B* before the engine ever sees them, converting the hard hardware boundary into a software parameter read from the workload CDF. The two components are unified in the FleetOpt offline planner: given a CDF and SLO, it returns the optimal (n_s*, n_l*, B*, gamma*) in under 1 ms.\n  On three production traces, the combined framework reduces total GPU cost by 6--82% versus a homogeneous fleet, with C&R contributing 1--44 percentage points beyond plain pool routing depending on workload archetype. The analytical model is validated against a discrete-event simulator (inference-fleet-sim) with <= 3% error on predicted GPU utilization across all pools and workloads.",
       "authors": [
-        "Alish Kanani",
-        "Sangwan Lee",
-        "Han Lyu",
-        "Jiahao Lin",
-        "Jaehyun Park",
-        "Umit Y. Ogras"
+        "Huamin Chen",
+        "Xunzhuo Liu",
+        "Yuhan Liu",
+        "Junchen Jiang",
+        "Bowei He",
+        "Xue Liu"
       ],
       "author_details": [
         {
-          "name": "Alish Kanani"
+          "name": "Huamin Chen"
         },
         {
-          "name": "Sangwan Lee"
+          "name": "Xunzhuo Liu"
         },
         {
-          "name": "Han Lyu"
+          "name": "Yuhan Liu"
         },
         {
-          "name": "Jiahao Lin"
+          "name": "Junchen Jiang"
         },
         {
-          "name": "Jaehyun Park"
+          "name": "Bowei He"
         },
         {
-          "name": "Umit Y. Ogras"
+          "name": "Xue Liu"
         }
       ],
-      "published": "2026-03-16T16:56:01Z",
-      "published_date": "2026-03-16 16:56:01+00:00",
-      "updated": "2026-03-16T16:56:01Z",
-      "comments": "Paper accepted for publication at the Design Automation Conference (DAC) 2026 conference",
-      "primary_category": "cs.AR",
+      "published": "2026-03-17T13:41:21Z",
+      "published_date": "2026-03-17 13:41:21+00:00",
+      "updated": "2026-03-17T13:41:21Z",
+      "comments": "Work in progress",
+      "primary_category": "cs.DC",
       "categories": [
-        "cs.AR",
         "cs.DC"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.15530v1",
-      "url": "http://arxiv.org/abs/2603.15530v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.16514v1",
+      "url": "http://arxiv.org/abs/2603.16514v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 9.97
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 9.3
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "prefill",
-        "decode",
-        "throughput",
-        "cs.DC",
-        "cs.AR",
-        "runtime",
-        "b200",
-        "memory",
-        "bandwidth"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.DC",
-          "cs.AR"
-        ],
-        "required_signal_matches": [
-          "prefill",
-          "decode",
-          "runtime",
-          "b200"
-        ],
-        "required_signal_match_count": 4,
-        "bonus_keyword_matches": [
-          "throughput",
-          "memory",
-          "bandwidth"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "throughput",
-          "memory",
-          "bandwidth"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper proposes a phase-disaggregated accelerator for hybrid Mamba-Transformer inference, mapping matrix-heavy prefill and bandwidth-heavy decode to different hardware packages and reporting better TTFT, throughput, and inter-token latency than a B200 GPU.",
-        "summary_zh": "The paper argues that hybrid Mamba-Transformer LLMs expose a sharper hardware mismatch than standard transformer serving because prefill is compute-heavy while decode is dominated by memory bandwidth, recurrences, and element-wise work. DUET addresses this by splitting inference across two specialized packages: a systolic-array-based prefill package with off-package memory for large matrix multiplications and long-sequence SSMs, and a vector-unit-based decode package with high-bandwidth in-package memory for token-by-token SSM and vector-matrix operations. The design is described as runtime-configurable so mixed Mamba and attention layers can be supported without committing to a single operator profile. The abstract claims evaluation on Nemotron-H-56B, Zamba2-7B, and Llama3-8B across four workloads, with 4x faster time to first token, 1.4x higher throughput, and 1.5x lower time between tokens than a B200 GPU. The main missing details are the hardware cost and power assumptions, the fairness of the B200 comparison, and the runtime overhead of moving work across disaggregated packages.",
-        "background_zh": "Hybrid Mamba-Transformer inference combines attention with SSM-style recurrent computation, so the prefill and decode phases stress very different compute and memory paths.",
-        "problem_zh": "The paper asks whether a single homogeneous accelerator is fundamentally mismatched to hybrid Mamba-Transformer serving, especially when prefill and decode have opposite bottlenecks.",
-        "approach_zh": "DUET disaggregates inference into a systolic-array prefill package with off-package memory and a vector-array decode package with high-bandwidth in-package memory, while keeping the mapping runtime-configurable for mixed layer types.",
-        "evidence_zh": "From the abstract alone, the evidence is a hardware evaluation on three named models and four workloads, with claimed gains over a B200 GPU in time to first token, throughput, and time between tokens; the abstract does not make the setup or fairness details clear.",
-        "value_zh": "If the assumptions hold, this gives a concrete accelerator co-design template for reducing both first-token latency and steady-state decode cost in hybrid Mamba-Transformer serving.",
-        "open_questions": [
-          "What area, power, memory-capacity, and packaging assumptions are required for the two-package design, and how do they compare to the B200 baseline?",
-          "How is work partitioned between the prefill and decode packages for mixed Mamba and attention layers, and what communication or synchronization overhead does that add?",
-          "What software stack, batching regime, sequence lengths, and baseline tuning were used in the B200 comparison, and are the comparisons end-to-end fair?"
-        ],
-        "core_contributions": [
-          "Identifies phase asymmetry in hybrid Mamba-Transformer inference as a hardware-design problem rather than only a kernel-optimization issue.",
-          "Proposes a disaggregated accelerator with distinct prefill and decode packages matched to different operator and memory behaviors.",
-          "Reports end-to-end serving gains on Nemotron-H-56B, Zamba2-7B, and Llama3-8B across four workloads relative to a B200 GPU."
-        ],
-        "why_read": [
-          "It gives a specific systems argument for where TTFT and decode-phase gains are supposed to come from at the package level.",
-          "It targets hybrid Mamba-Transformer serving directly, which is more relevant than transformer-only accelerator work if SSM layers matter.",
-          "It surfaces a hardware/runtime co-design direction that may matter for future mixed-architecture LLM serving stacks."
-        ],
-        "risks": [
-          "The abstract does not disclose area, power, cost, or packaging tradeoffs, so overall efficiency is hard to judge.",
-          "Baseline fairness is unclear because the abstract does not specify B200 software tuning, batching conditions, or memory configuration details for the comparison setups, so the reported gains may reflect benchmark choices as much as architecture gains. It also leaves open whether the claimed speedups hold under different workload mixes or deployment constraints beyond the four evaluated cases, which affects how broadly the results can be trusted."
-        ],
-        "recommended_for": [
-          "Researchers working on LLM inference accelerator co-design.",
-          "Engineers comparing prefill-specialized and decode-specialized serving hardware.",
-          "Readers tracking hardware support for hybrid Mamba-Transformer or other SSM-augmented LLMs."
-        ],
-        "keywords": [
-          "LLM inference systems",
-          "hybrid Mamba-Transformer",
-          "prefill/decode disaggregation",
-          "accelerator co-design",
-          "state space models",
-          "time to first token (TTFT) throughput"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "High fit with the stated focus on LLM inference systems and hardware/runtime co-design: it targets prefill/decode specialization directly and reports concrete serving gains, while still leaving important fairness and efficiency checks for a full read.",
-        "fallback_summary": "Large language models operate in distinct compute-bound prefill followed by memory bandwidth-bound decode phases."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.15569v1",
-      "arxiv_id": "2603.15569v1",
-      "title": "Mamba-3: Improved Sequence Modeling using State Space Principles",
-      "summary": "Scaling inference-time compute has emerged as an important driver of LLM performance, making inference efficiency a central focus of model design alongside model quality. While the current Transformer-based models deliver strong model quality, their quadratic compute and linear memory make inference expensive. This has spurred the development of sub-quadratic models with reduced linear compute and constant memory requirements. However, many recent linear models trade off model quality and capability for algorithmic efficiency, failing on tasks such as state tracking. Moreover, their theoretically linear inference remains hardware-inefficient in practice. Guided by an inference-first perspective, we introduce three core methodological improvements inspired by the state space model (SSM) viewpoint of linear models. We combine: (1) a more expressive recurrence derived from SSM discretization, (2) a complex-valued state update rule that enables richer state tracking, and (3) a multi-input, multi-output (MIMO) formulation for better model performance without increasing decode latency. Together with architectural refinements, our Mamba-3 model achieves significant gains across retrieval, state-tracking, and downstream language modeling tasks. At the 1.5B scale, Mamba-3 improves average downstream accuracy by 0.6 percentage points compared to the next best model (Gated DeltaNet), with Mamba-3's MIMO variant further improving accuracy by another 1.2 points for a total 1.8 point gain. Across state-size experiments, Mamba-3 achieves comparable perplexity to Mamba-2 despite using half of its predecessor's state size. Our evaluations demonstrate Mamba-3's ability to advance the performance-efficiency Pareto frontier.",
-      "authors": [
-        "Aakash Lahoti",
-        "Kevin Y. Li",
-        "Berlin Chen",
-        "Caitlin Wang",
-        "Aviv Bick",
-        "J. Zico Kolter",
-        "Tri Dao",
-        "Albert Gu"
-      ],
-      "author_details": [
-        {
-          "name": "Aakash Lahoti"
-        },
-        {
-          "name": "Kevin Y. Li"
-        },
-        {
-          "name": "Berlin Chen"
-        },
-        {
-          "name": "Caitlin Wang"
-        },
-        {
-          "name": "Aviv Bick"
-        },
-        {
-          "name": "J. Zico Kolter"
-        },
-        {
-          "name": "Tri Dao"
-        },
-        {
-          "name": "Albert Gu"
-        }
-      ],
-      "published": "2026-03-16T17:30:08Z",
-      "published_date": "2026-03-16 17:30:08+00:00",
-      "updated": "2026-03-16T17:30:08Z",
-      "comments": "ICLR 2026",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.15569v1",
-      "url": "http://arxiv.org/abs/2603.15569v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.35,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 8.78
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "decode",
-        "latency",
-        "cs.LG",
-        "memory"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.LG"
-        ],
-        "required_signal_matches": [
-          "decode"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency",
-          "memory"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "latency",
-          "memory"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh",
-      "citationCount": 4,
-      "ai": {
-        "one_liner_zh": "Mamba-3 combines a more expressive SSM-derived recurrence, complex-valued state updates, and a MIMO design to improve state tracking and downstream accuracy while keeping decode latency flat in the paper's stated formulation.",
-        "summary_zh": "The paper starts from an inference-first view: Transformers remain strong, but their quadratic compute and linear memory make decode cost a growing bottleneck, while many linear alternatives lose capability or fail to map well to hardware. Mamba-3 addresses this with three changes rooted in the SSM perspective: a more expressive discretization-derived recurrence, a complex-valued state update for stronger state tracking, and a MIMO formulation meant to improve quality without adding decode latency. The abstract claims gains on retrieval, state-tracking, and downstream language modeling tasks. At 1.5B scale, it reports a 0.6-point average downstream accuracy gain over the cited next-best model, another 1.2 points from the MIMO variant, and comparable perplexity to Mamba-2 with half the state size. The main unresolved issue is whether these architectural gains translate into clearly measured hardware efficiency in practice, since the abstract does not specify the serving setup, kernels, or fairness details behind the latency claim.",
-        "background_zh": "As inference-time scaling becomes more important, sequence models are increasingly judged on decode compute and memory, which exposes both the quadratic cost of Transformers and the practical weaknesses of many linear alternatives.",
-        "problem_zh": "The paper asks whether a linear or state-space model can keep the inference advantages of sub-quadratic decoding while recovering the state tracking and model quality that prior efficient architectures often lose.",
-        "approach_zh": "It introduces an inference-first SSM-based design that combines a discretization-derived expressive recurrence, complex-valued state updates, a MIMO formulation, and architectural refinements intended to improve capability without increasing decode latency.",
-        "evidence_zh": "The abstract reports improvements on retrieval, state tracking, and downstream language modeling, including a total 1.8-point average downstream accuracy gain at 1.5B over the cited next-best model and comparable perplexity to Mamba-2 with half the state size, but it does not make the hardware evaluation or latency evidence clear.",
-        "value_zh": "If the claimed tradeoff holds under real serving conditions, this points to a more practical route to lower-memory, decode-efficient language models that do not give up state tracking or general downstream quality.",
-        "open_questions": [
-          "What exact hardware setup, decoding regime, and implementation details are used to support the claim that the model is hardware-efficient in practice?",
-          "How fair are the comparisons against Transformers, Mamba-2, and Gated DeltaNet in parameter count, training budget, context length, and inference configuration?",
-          "Do the complex-valued state update and MIMO design introduce hidden costs in memory bandwidth, numerical stability, or serving complexity that are not visible in the abstract?"
-        ],
-        "core_contributions": [
-          "A more expressive recurrence derived from state space model discretization.",
-          "A complex-valued state update rule aimed at improving state tracking.",
-          "A MIMO formulation that is claimed to improve model performance without increasing decode latency."
-        ],
-        "why_read": [
-          "It directly targets the systems-relevant gap between theoretical linear-time decoding and practical capability loss in prior linear models.",
-          "The method is explicit about which architectural changes are meant to improve state tracking versus preserve latency.",
-          "The abstract includes concrete quality-efficiency claims at 1.5B scale that matter for inference-oriented model design."
-        ],
-        "risks": [
-          "The abstract asserts practical inference efficiency but does not specify hardware, kernels, or end-to-end latency measurements.",
-          "Reported quality gains are hard to interpret without baseline fairness and training-budget details from the full paper."
-        ],
-        "recommended_for": [
-          "Researchers studying state-space or linear alternatives to Transformer inference.",
-          "Engineers evaluating architecture-level decode latency and memory tradeoffs for LLM serving.",
-          "Readers interested in whether model-design changes can improve efficiency before compiler or kernel optimization."
-        ],
-        "keywords": [
-          "state space models",
-          "linear sequence models",
-          "LLM inference systems",
-          "decode latency",
-          "memory efficiency",
-          "state tracking"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "This is a strong fit for an inference-systems reading list because it directly addresses decode cost, memory, and state tracking in a non-Transformer architecture, but the full paper needs checking for real hardware efficiency and baseline fairness.",
-        "fallback_summary": "Scaling inference-time compute has emerged as an important driver of LLM performance, making inference efficiency a central focus of model design alongside model quality."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.15202v1",
-      "arxiv_id": "2603.15202v1",
-      "title": "LMetric: Simple is Better - Multiplication May Be All You Need for LLM Request Scheduling",
-      "summary": "High-quality LLM request scheduling requires achieving two key objectives: whether the routed instance has KV$ to accelerate the request execution and whether the workload is balanced across instances. Achieving both objectives is challenging because pursuing one objective may compromise the other. Current approaches adopt various combinators (e.g., linear combinations) to compute a scheduling score combining indicators for the two objectives, which are complex in that they either require significant workload-specific hyperparameter tuning or model-hardware-aware simulator development, and could still lead to suboptimal performance. In this paper, we show that using a simple multiplication of two carefully chosen indicators-one for KV$-aware (new prefill tokens if routed to an instance) and one for load balancing-aware (current batch size of the instance)-as the scheduling score can simultaneously achieve both objectives well without any hyperparameter tuning. The key idea is that the multiplied score considers both objectives in a manner similar to a linear combination, with a nice property that the original hyperparameters are canceled out during comparison so we don't need tuning to find the best parameters. The two indicators are chosen based on our analysis of LLM characteristics, and our extensive experiments show that this simple approach can reduce TTFT by 92% and 52%, and TPOT by 21% and 20%, compared to vLLM-v1 and a production scheduler on real-world workloads covering chatbots, API calls, and coding agents. We also mathematically derive the conditions under which multiplication may fail, and find that such conditions are extremely rare in practice and can be detected (and mitigated) beforehand.",
-      "authors": [
-        "Dingyan Zhang",
-        "Jinbo Han",
-        "Kaixi Zhang",
-        "Xingda Wei",
-        "Sijie Shen",
-        "Chenguang Fang",
-        "Wenyuan Yu",
-        "Jingren Zhou",
-        "Rong Chen"
-      ],
-      "author_details": [
-        {
-          "name": "Dingyan Zhang"
-        },
-        {
-          "name": "Jinbo Han"
-        },
-        {
-          "name": "Kaixi Zhang"
-        },
-        {
-          "name": "Xingda Wei"
-        },
-        {
-          "name": "Sijie Shen"
-        },
-        {
-          "name": "Chenguang Fang"
-        },
-        {
-          "name": "Wenyuan Yu"
-        },
-        {
-          "name": "Jingren Zhou"
-        },
-        {
-          "name": "Rong Chen"
-        }
-      ],
-      "published": "2026-03-16T12:43:32Z",
-      "published_date": "2026-03-16 12:43:32+00:00",
-      "updated": "2026-03-16T12:43:32Z",
-      "primary_category": "cs.DC",
-      "categories": [
-        "cs.DC",
-        "cs.OS"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.15202v1",
-      "url": "http://arxiv.org/abs/2603.15202v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.58,
-        "recency": 3.0,
-        "popularity": 0.4,
-        "quality": 0.4,
-        "recommendation": 7.86
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "prefill",
-        "vllm",
+        "llm inference",
+        "kv cache",
         "cs.DC"
       ],
       "matched_domain_priority": 5,
@@ -399,122 +106,119 @@
           "cs.DC"
         ],
         "required_signal_matches": [
-          "prefill",
-          "vllm"
+          "kv cache"
         ],
-        "required_signal_match_count": 2,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
         "analysis_keyword_matches": [],
         "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.7,
+        "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "The paper argues that LLM request scheduling can be reduced to a multiplicative score over a KV-related prefill indicator and current batch size, avoiding the tuning burden of more complex combinators.",
-        "summary_zh": "Multi-instance LLM serving has to trade off routing a request to an instance with useful existing KV state against keeping load balanced, and prior schedulers often rely on tuned linear combinations or simulator-heavy design. This paper proposes a much simpler rule: multiply two indicators, one derived from how many new prefill tokens the request would need on an instance and one derived from that instance's current batch size. The authors claim this preserves the joint optimization effect while canceling the hyperparameters that usually need tuning, and they report TTFT reductions of 92% and 52% plus TPOT reductions of 21% and 20% against vLLM-v1 and a production scheduler on chatbot, API, and coding-agent workloads. If that holds broadly, the result is a very low-complexity scheduling policy for KV-aware LLM serving. The main missing details are the evaluation setup, baseline tuning fairness, hardware assumptions, and how often the derived failure cases matter in real deployments.",
-        "background_zh": "As LLM serving spreads across multiple instances, schedulers need to exploit existing KV state for latency while avoiding overloaded replicas, making routing policy a first-order systems issue.",
-        "problem_zh": "The paper asks whether one can jointly optimize KV-aware routing and load balancing without workload-specific tuning or model-hardware-aware simulators.",
-        "approach_zh": "It uses the product of a KV-aware indicator based on new prefill tokens and a load indicator based on current batch size, with the claim that multiplication retains the comparison behavior of linear combinations while removing the need to tune their weights.",
-        "evidence_zh": "The abstract reports experiments on chatbot, API, and coding-agent workloads with large TTFT gains and moderate TPOT gains over vLLM-v1 and one production scheduler, plus a mathematical derivation of failure conditions, but it does not make the evaluation setup clear.",
-        "value_zh": "If the claims survive a full read, the main payoff is a simpler LLM scheduling rule that may deliver meaningful latency gains without per-workload parameter search.",
+        "one_liner_zh": "This paper treats LLM fleet sizing as an analytical queueing problem and pairs two-pool routing with gateway prompt compression to reduce KV-cache overprovisioning.",
+        "summary_zh": "LLM serving fleets are often sized for rare long prompts, which strands GPU capacity in KV-cache slots that most requests never need. The paper formulates minimum-cost provisioning under a P99 TTFT target with an M/G/c queueing model and argues that the optimum is a two-pool design split by a context boundary B*. It then adds Compress-and-Route, where gateway-side extractive compression pushes borderline requests below that boundary and avoids the large cost jump of sending them to the long-context pool. The abstract reports 6-82% GPU cost reduction versus a homogeneous fleet on three production traces, plus simulator validation within 3% error on predicted utilization, with extra gains from compression beyond routing alone. The main missing details are whether compression preserves output quality, how realistic the serving-model assumptions are, and how sensitive the optimum is to workload drift and engine behavior.",
+        "background_zh": "KV-cache-heavy LLM serving tends to overprovision for worst-case context windows even though real prompt lengths are highly skewed.",
+        "problem_zh": "The paper asks how to derive the cheapest fleet that still meets a P99 TTFT SLO when long-context support creates a sharp GPU-capacity penalty for a small fraction of requests.",
+        "approach_zh": "FleetOpt uses a prompt-length CDF and an M/G/c analytical model to solve for short-pool size, long-pool size, routing boundary, and compression setting, then uses gateway extractive compression to move borderline requests into the cheaper pool.",
+        "evidence_zh": "The abstract claims results on three production traces and agreement with a discrete-event simulator within 3% utilization error, but it does not make the serving assumptions or compression quality impact clear.",
+        "value_zh": "If the analysis and compression tradeoff hold in practice, the method offers a fast planner for translating workload statistics and latency targets into lower-cost LLM fleet designs.",
         "open_questions": [
-          "How exactly are the two indicators computed and compared in the scheduler, especially across different models or heterogeneous hardware?",
-          "What hardware, model sizes, workload mix, and baseline tuning procedure were used for the vLLM-v1 and production-scheduler comparisons?",
-          "How often do the derived failure conditions appear in practice, and what detection or mitigation mechanism is needed at runtime?"
+          "How is extractive compression implemented, and what quality or task-performance loss does it introduce near the routing boundary?",
+          "What batching, admission, and KV-cache allocation assumptions are baked into the M/G/c model, and how well do they match real inference engines?",
+          "How stable are the optimal boundary and pool sizes under workload drift, bursty arrivals, or heterogeneous multi-model GPU fleets?"
         ],
         "core_contributions": [
-          "Proposes a multiplicative scheduling score that targets both KV-aware routing and load balancing without hyperparameter tuning.",
-          "Defines the scoring inputs around new prefill tokens for the candidate instance and the instance's current batch size.",
-          "Combines empirical serving results with an explicit analysis of when the multiplicative rule can break down."
+          "An analytical formulation of minimum-cost LLM fleet provisioning from a prompt-length distribution and a P99 TTFT target.",
+          "A claim that the optimal architecture is a two-pool short-context/long-context fleet with an equal-marginal-cost boundary.",
+          "Compress-and-Route as a practical mechanism for smoothing the long-context cost cliff by compressing borderline prompts before routing."
         ],
         "why_read": [
-          "It targets a core LLM inference systems problem where small routing-policy changes can dominate user-visible latency.",
-          "The mechanism is unusually simple relative to the claimed gains, so it is easy to assess for adoption or adaptation.",
-          "The paper appears to include both empirical results and failure-mode analysis rather than only a heuristic proposal."
+          "It targets a concrete inference-systems inefficiency: idle KV-cache capacity caused by provisioning around worst-case context length.",
+          "It links a queueing-theoretic planner to an actual serving mechanism instead of presenting only an offline optimization result.",
+          "The abstract gives both trace-based cost claims and simulator validation, making the systems argument more checkable than a purely conceptual proposal."
         ],
         "risks": [
-          "The reported gains may depend heavily on workload characteristics, especially how much reusable KV state exists.",
-          "The abstract does not specify hardware, model scale, or baseline-tuning details, so fairness is still unverified from the summary alone."
+          "The reported savings may depend strongly on prompt-length skew and may shrink on workloads with flatter or shifting context distributions.",
+          "The abstract does not establish whether gateway compression preserves output quality, safety, or end-to-end latency under production constraints. The analytical optimum may be brittle if real serving behavior is dominated by batching policy, backpressure, or heterogeneous hardware effects rather than the modeled queueing regime."
         ],
         "recommended_for": [
-          "Researchers studying LLM serving schedulers and KV-aware routing.",
-          "Engineers operating latency-sensitive multi-instance inference clusters.",
-          "Readers interested in simple control policies that replace tuned serving heuristics."
+          "Researchers working on LLM inference serving, queueing-aware schedulers, and KV-cache efficiency.",
+          "Engineers responsible for fleet sizing, admission control, or context-length routing in production LLM systems.",
+          "Readers interested in system-level cost optimization that combines analytical planning with lightweight request transformation."
         ],
         "keywords": [
-          "LLM inference",
-          "request scheduling",
-          "KV-aware routing",
-          "load balancing",
-          "prefill",
-          "serving latency"
+          "LLM inference systems",
+          "fleet provisioning",
+          "KV cache",
+          "queueing model",
+          "prompt compression",
+          "request routing"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "This is a direct fit for LLM inference systems work and claims unusually large latency improvements from a very small scheduling change, but the evaluation details still need verification.",
-        "fallback_summary": "High-quality LLM request scheduling requires achieving two key objectives: whether the routed instance has KV$ to accelerate the request execution and whether the workload is balanced across instances."
+        "reading_priority_reason": "This is a direct fit for LLM inference systems work: it focuses on fleet cost, TTFT-constrained provisioning, and a concrete mechanism for handling long-context requests, while still leaving important quality and modeling assumptions to verify in a full read.",
+        "fallback_summary": "Modern LLM GPU fleets are provisioned for worst-case context lengths that the vast majority of requests never approach, wasting GPU capacity on idle KV-cache slots."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2603.14903v1",
-      "arxiv_id": "2603.14903v1",
-      "title": "ExPosST: Explicit Positioning with Adaptive Masking for LLM-Based Simultaneous Machine Translation",
-      "summary": "Large language models (LLMs) have recently demonstrated promising performance in simultaneous machine translation (SimulMT). However, applying decoder-only LLMs to SimulMT introduces a positional mismatch, which leads to a dilemma between decoding efficiency and positional consistency. Existing approaches often rely on specific positional encodings or carefully designed prompting schemes, and thus fail to simultaneously achieve inference efficiency, positional consistency, and broad model compatibility. In this work, we propose ExPosST, a general framework that resolves this dilemma through explicit position allocation. ExPosST reserves fixed positional slots for incoming source tokens, enabling efficient decoding with KV cache across different positional encoding methods. To further bridge the gap between fine-tuning and inference, we introduce a policy-consistent fine-tuning strategy that aligns training with inference-time decoding behavior. Experiments across multiple language pairs demonstrate that ExPosST effectively supports simultaneous translation under diverse policies.",
+      "id": "http://arxiv.org/abs/2603.16435v1",
+      "arxiv_id": "2603.16435v1",
+      "title": "VQKV: High-Fidelity and High-Ratio Cache Compression via Vector-Quantization",
+      "summary": "The growing context length of Large Language Models (LLMs) enlarges the Key-Value (KV) cache, limiting deployment in resource-limited environments. Prior training-free approaches for KV cache compression typically rely on low-rank approximation or scalar quantization, which fail to simultaneously achieve high compression ratios and high reconstruction fidelity. We propose VQKV, a novel, training-free method introducing vector quantization (VQ) to obtain highly compressed KV representations while preserving high model fidelity, allowing for the representation of thousands of floating-point values with just a few integer indices. As a result, VQKV achieves an 82.8\\% compression ratio on LLaMA3.1-8B while retaining 98.6\\% of the baseline performance on LongBench and enabling 4.3x longer generation length on the same memory footprint.",
       "authors": [
-        "Yuzhe Shang",
-        "Pengzhi Gao",
-        "Yazheng Yang",
-        "Jiayao Ma",
-        "Wei Liu",
-        "Jian Luan",
-        "Jingsong Su"
+        "Yixuan Wang",
+        "Qingyu Shi",
+        "Jiayu Zhou",
+        "Dianbo Liu",
+        "Ziwei He",
+        "Zhouhan Lin"
       ],
       "author_details": [
         {
-          "name": "Yuzhe Shang"
+          "name": "Yixuan Wang"
         },
         {
-          "name": "Pengzhi Gao"
+          "name": "Qingyu Shi"
         },
         {
-          "name": "Yazheng Yang"
+          "name": "Jiayu Zhou"
         },
         {
-          "name": "Jiayao Ma"
+          "name": "Dianbo Liu"
         },
         {
-          "name": "Wei Liu"
+          "name": "Ziwei He"
         },
         {
-          "name": "Jian Luan"
-        },
-        {
-          "name": "Jingsong Su"
+          "name": "Zhouhan Lin"
         }
       ],
-      "published": "2026-03-16T07:04:55Z",
-      "published_date": "2026-03-16 07:04:55+00:00",
-      "updated": "2026-03-16T07:04:55Z",
+      "published": "2026-03-17T12:16:06Z",
+      "published_date": "2026-03-17 12:16:06+00:00",
+      "updated": "2026-03-17T12:16:06Z",
       "primary_category": "cs.CL",
       "categories": [
         "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.14903v1",
-      "url": "http://arxiv.org/abs/2603.14903v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.16435v1",
+      "url": "http://arxiv.org/abs/2603.16435v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.13,
+        "relevance": 2.57,
         "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 7.71
+        "popularity": 1.1,
+        "quality": 1.1,
+        "recommendation": 8.43
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "decoder-only",
         "kv cache",
-        "cs.CL"
+        "quantization",
+        "cs.CL",
+        "memory",
+        "baseline"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -523,6 +227,222 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 2,
         "matched_categories": [
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "kv cache"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "memory"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "baseline",
+          "memory"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "A training-free vector-quantized KV-cache compression method that claims high compression with limited quality loss for long-context LLM inference.",
+        "summary_zh": "This paper targets KV-cache growth as a deployment bottleneck for long-context LLM inference, especially when memory rather than compute limits usable context length. It proposes VQKV, a training-free compression method that replaces raw KV values with vector-quantized representations encoded by a small number of integer indices, aiming to improve the usual compression-versus-fidelity tradeoff. The abstract reports 82.8% KV-cache compression on LLaMA3.1-8B, 98.6% of baseline performance on LongBench, and 4.3x longer generation under the same memory footprint. If those numbers hold in realistic serving settings, the method could make long-context deployment materially more practical on constrained hardware. The biggest missing detail is the systems story: the abstract does not say how codebooks are built, what encode/decode overhead is added, or how fair the baselines and hardware settings are.",
+        "background_zh": "As context windows grow, KV-cache memory becomes a primary serving bottleneck, and existing training-free compression methods often lose too much fidelity at aggressive compression ratios.",
+        "problem_zh": "The paper asks whether KV caches can be compressed much more aggressively without retraining and without the quality drop seen in low-rank or scalar-quantized approaches.",
+        "approach_zh": "VQKV applies vector quantization to KV representations so large groups of floating-point cache values are represented by a small set of integer indices while remaining training-free.",
+        "evidence_zh": "The abstract reports 82.8% compression on LLaMA3.1-8B, 98.6% of baseline LongBench performance, and 4.3x longer generation at the same memory footprint, but it does not make latency, hardware setup, or evaluation breadth clear.",
+        "value_zh": "If runtime overhead is controlled, this could improve long-context serving capacity on memory-limited deployments by trading large KV buffers for compact index-based representations.",
+        "open_questions": [
+          "How are the vector-quantization codebooks constructed and applied across layers, heads, and decoding steps, and what extra compute does encoding/decoding introduce?",
+          "Do the reported compression-quality gains hold across other models, context lengths, and workloads beyond LLaMA3.1-8B on LongBench?",
+          "Are the comparisons against low-rank and scalar-quantization baselines matched for memory budget, runtime budget, and hardware conditions?"
+        ],
+        "core_contributions": [
+          "Introduces a training-free KV-cache compression scheme based on vector quantization rather than low-rank approximation or scalar quantization.",
+          "Claims a strong compression/fidelity operating point on LLaMA3.1-8B, with 82.8% KV-cache reduction while retaining 98.6% of baseline LongBench performance.",
+          "Frames memory savings as directly increasing usable generation length, reporting 4.3x longer generation under the same memory budget."
+        ],
+        "why_read": [
+          "KV-cache memory is a central bottleneck in long-context inference, and this paper targets it directly.",
+          "The mechanism is specific and system-relevant: compact integer indices replace large floating-point cache content.",
+          "The abstract provides concrete memory and quality claims, making it straightforward to verify the real tradeoff in a full read."
+        ],
+        "risks": [
+          "The abstract does not state encoding/decoding latency, bandwidth effects, or end-to-end throughput impact.",
+          "Evaluation scope is unclear beyond LLaMA3.1-8B and LongBench, so generality is not established from the abstract alone."
+        ],
+        "recommended_for": [
+          "Researchers studying KV-cache compression and long-context LLM serving.",
+          "Serving engineers constrained by accelerator memory footprint.",
+          "Teams comparing quantization-style memory reduction against other cache approximation methods."
+        ],
+        "keywords": [
+          "KV cache",
+          "vector quantization",
+          "LLM inference",
+          "memory compression",
+          "LongBench",
+          "LLaMA3.1-8B"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High fit with the current LLM inference systems focus and supported by concrete memory/quality claims on a core serving bottleneck, although a full read is needed to verify runtime overhead and baseline fairness.",
+        "fallback_summary": "The growing context length of Large Language Models (LLMs) enlarges the Key-Value (KV) cache, limiting deployment in resource-limited environments."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.16335v1",
+      "arxiv_id": "2603.16335v1",
+      "title": "Behavioral Steering in a 35B MoE Language Model via SAE-Decoded Probe Vectors: One Agency Axis, Not Five Traits",
+      "summary": "We train nine sparse autoencoders (SAEs) on the residual stream of Qwen 3.5-35B-A3B, a 35-billion-parameter Mixture-of-Experts model with a hybrid GatedDeltaNet/attention architecture, and use them to identify and steer five agentic behavioral traits. Our method trains linear probes on SAE latent activations, then projects the probe weights back through the SAE decoder to obtain continuous steering vectors in the model's native activation space. This bypasses the SAE's top-k discretization, enabling fine-grained behavioral intervention at inference time with no retraining. Across 1,800 agent rollouts (50 scenarios times 36 conditions), we find that autonomy steering at multiplier 2 achieves Cohen's d = 1.01 (p < 0.0001), shifting the model from asking the user for help 78% of the time to proactively executing code and searching the web. Cross-trait analysis, however, reveals that all five steering vectors primarily modulate a single dominant agency axis (the disposition to act independently versus defer to the user), with trait specific effects appearing only as secondary modulations in tool-type composition and dose-response shape. The tool-use vector steers behavior (d = 0.39); the risk-calibration vector produces only suppression. We additionally show that steering only during autoregressive decoding has zero effect (p > 0.35), providing causal evidence that behavioral commitments are computed during prefill in GatedDeltaNet architectures.",
+      "authors": [
+        "Jia Qing Yap"
+      ],
+      "author_details": [
+        {
+          "name": "Jia Qing Yap"
+        }
+      ],
+      "published": "2026-03-17T10:05:41Z",
+      "published_date": "2026-03-17 10:05:41+00:00",
+      "updated": "2026-03-17T10:05:41Z",
+      "comments": "14 pages, 3 figures",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.16335v1",
+      "url": "http://arxiv.org/abs/2603.16335v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.44,
+        "recency": 3.0,
+        "popularity": 1.3,
+        "quality": 1.3,
+        "recommendation": 8.36
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "prefill",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 1,
+        "matched_categories": [
+          "cs.LG",
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "prefill"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper uses SAE-decoded probe directions to steer a 35B MoE model at inference time and argues that five intended behavioral traits mostly collapse into one dominant agency axis computed during prefill.",
+        "summary_zh": "This paper studies inference-time behavioral steering in a 35B MoE language model by training sparse autoencoders on residual activations, fitting linear probes for five agentic traits, and decoding those probe weights back into continuous steering vectors. The core question is whether these behaviors can be independently controlled without retraining and where in the model's execution the relevant commitments are formed. The abstract claims that autonomy steering produces a large behavioral shift, tool-use steering has a smaller effect, and most of the apparent trait controls mostly reduce to a single agency axis rather than five cleanly separable dimensions. It also reports that steering during autoregressive decoding has no effect, which points to prefill as the stage where behavioral decisions are set in this GatedDeltaNet-based architecture. The practical systems value is therefore more about locating control points in inference than about efficient serving, and the abstract leaves key checks unclear, including intervention placement, baseline fairness, and robustness across prompts and rollout settings.",
+        "background_zh": "Inference-time control of LLM behavior is attractive because it could change model actions without retraining, but it is unclear whether high-level traits correspond to separable internal directions or to a smaller shared control factor.",
+        "problem_zh": "The paper asks whether five agentic behaviors in a large MoE model can be independently steered through residual-stream interventions and whether those behaviors are determined during prefill or decoding.",
+        "approach_zh": "It trains SAEs on residual activations, learns linear probes over SAE latents for each trait, and projects probe weights back through the SAE decoder to obtain continuous activation-space steering vectors applied at inference time.",
+        "evidence_zh": "The abstract reports results over 1,800 agent rollouts, including a strong autonomy effect, a smaller tool-use effect, suppression-only behavior for risk calibration, cross-trait collapse onto one agency axis, and a null result for decode-only steering, but it does not make the evaluation design or baseline comparisons fully clear.",
+        "value_zh": "If the claims hold, the main value is a mechanistic handle on when behavioral control enters the forward pass of hybrid recurrent-attention LMs and a practical way to test inference-time steering hypotheses without model retraining.",
+        "open_questions": [
+          "How exactly are the steering vectors injected at inference time: which layers, tokens, and residual streams are modified, and how sensitive are the results to that placement?",
+          "What are the real baselines for the claimed trait disentanglement result, such as direct probe steering without SAE decoding or alternative latent bases, and are the comparisons fair?",
+          "How robust is the prefill-versus-decoding claim across prompt families, rollout tasks, steering magnitudes, and other architectures beyond this specific Qwen 3.5-35B-A3B setup?"
+        ],
+        "core_contributions": [
+          "Introduces a probe-to-decoder method that turns SAE latent probes into continuous residual-space steering vectors for inference-time intervention.",
+          "Shows that five intended agentic trait controls mostly behave like one dominant agency axis with only limited secondary differences.",
+          "Claims causal evidence that behavioral steering matters during prefill but not during autoregressive decoding in this hybrid GatedDeltaNet architecture."
+        ],
+        "why_read": [
+          "It gives a concrete mechanistic claim about where behavioral commitments are formed in a nonstandard large-model architecture.",
+          "It is relevant if you care about activation-space control methods that avoid retraining and operate directly in the inference loop.",
+          "The collapse from five traits to one axis is a useful negative result for anyone treating behavioral dimensions as cleanly disentangled controls."
+        ],
+        "risks": [
+          "This is only loosely aligned with inference acceleration or kernel/runtime co-design, so the systems payoff is indirect.",
+          "The abstract does not specify enough about intervention sites, prompt distribution, or baseline fairness to judge reproducibility or causal strength fully."
+        ],
+        "recommended_for": [
+          "Researchers studying inference-time steering, mechanistic interpretability, and control in large language models.",
+          "Engineers interested in how prefill-stage computation in hybrid recurrent-attention LMs shapes downstream agent behavior.",
+          "Readers evaluating whether SAE-based latent probes yield genuinely disentangled control directions or mostly expose shared behavioral factors."
+        ],
+        "keywords": [
+          "LLM steering",
+          "sparse autoencoder",
+          "probe vectors",
+          "Mixture-of-Experts",
+          "prefill",
+          "GatedDeltaNet"
+        ],
+        "reading_priority": "medium",
+        "reading_priority_reason": "The paper is adjacent rather than central to serving or acceleration, but the prefill-only steering claim and the collapse to a single agency axis make it technically interesting for readers focused on inference-time control and model execution mechanics.",
+        "fallback_summary": "We train nine sparse autoencoders (SAEs) on the residual stream of Qwen 3.5-35B-A3B, a 35-billion-parameter Mixture-of-Experts model with a hybrid GatedDeltaNet/attention architecture, and use them to identify and steer five agentic behavioral traits."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.16039v1",
+      "arxiv_id": "2603.16039v1",
+      "title": "Residual Stream Duality in Modern Transformer Architectures",
+      "summary": "Recent work has made clear that the residual pathway is not mere optimization plumbing; it is part of the model's representational machinery. We agree, but argue that the cleanest way to organize this design space is through a two-axis view of the Transformer. A decoder evolves information along two ordered dimensions: sequence position and layer depth. Self-attention already provides adaptive mixing along the sequence axis, whereas the residual stream usually performs fixed addition along the depth axis. If we fix a token position and treat layer index as the ordered variable, then a causal depth-wise residual attention read is exactly the same local operator as causal short sliding-window attention (ShortSWA), except written over depth rather than over sequence. This is the core residual stream duality behind Transformer$^2$. This perspective also clarifies the recent literature. ELC-BERT and DenseFormer already show that learned aggregation over depth can outperform uniform residual accumulation, while Vertical Attention, DeepCrossAttention (DCA), MUDDFormer, and Attention Residuals move further toward explicit attention-based routing over earlier layers. The key point, however, is that operator-level duality does not imply systems-level symmetry. For large-scale autoregressive models, sequence-axis ShortSWA is usually the more hardware-friendly placement because it reuses token-side sliding-window kernels, KV-cache layouts, and chunked execution. If the goal is instead to change the shortcut itself, Deep Delta Learning (DDL) is the cleaner intervention because it modifies the residual operator directly rather than adding a separate cross-layer retrieval path. Our recommendation is therefore simple: use DDL when the shortcut is the object of interest, and use sequence-axis ShortSWA when the goal is local adaptive mixing.",
+      "authors": [
+        "Yifan Zhang"
+      ],
+      "author_details": [
+        {
+          "name": "Yifan Zhang"
+        }
+      ],
+      "published": "2026-03-17T00:56:29Z",
+      "published_date": "2026-03-17 00:56:29+00:00",
+      "updated": "2026-03-17T00:56:29Z",
+      "comments": "Project Page: https://github.com/yifanzhang-pro/residual-stream-duality",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.16039v1",
+      "url": "http://arxiv.org/abs/2603.16039v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.55,
+        "recency": 3.0,
+        "popularity": 0.7,
+        "quality": 0.7,
+        "recommendation": 8.06
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "kv cache",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 1,
+        "matched_categories": [
+          "cs.LG",
           "cs.CL"
         ],
         "required_signal_matches": [
@@ -538,105 +458,196 @@
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "A SimulMT framework for decoder-only LLMs that avoids positional mismatch by reserving source-token slots and aligning fine-tuning with inference-time decoding.",
-        "summary_zh": "This paper studies simultaneous machine translation with decoder-only LLMs, where source tokens arrive incrementally and standard positional handling creates a tension between fast KV-cache decoding and positional consistency. It proposes ExPosST, which explicitly reserves fixed positional slots for incoming source tokens so decoding can stay cache-friendly without relying on one specific positional encoding design. The paper also adds a policy-consistent fine-tuning strategy to better match training with inference-time behavior under simultaneous translation policies. The abstract says experiments across multiple language pairs show the method works under diverse policies, but it does not specify the magnitude of the gains, the latency-quality tradeoff, or baseline fairness. The practical value is a cleaner path to streaming translation with decoder-only LLMs, though the systems benefit remains only loosely evidenced at the abstract level.",
-        "background_zh": "Decoder-only LLMs are attractive for simultaneous translation because they reuse standard generation stacks, but incremental source arrival breaks the positional assumptions used by cached decoding.",
-        "problem_zh": "The paper asks how to preserve positional consistency in SimulMT without giving up KV-cache efficiency or tying the method to a specific positional encoding scheme.",
-        "approach_zh": "ExPosST explicitly allocates fixed position slots for future source tokens and pairs this with policy-consistent fine-tuning so training better reflects inference-time decoding behavior.",
-        "evidence_zh": "The abstract claims experiments across multiple language pairs and translation policies show the method is effective, but it does not make the gains, baselines, or latency measurements clear.",
-        "value_zh": "If the claims hold, the method offers a more generally compatible way to run decoder-only LLMs for streaming translation while retaining efficient cached decoding.",
+        "one_liner_zh": "This paper reframes the residual stream as a depth-axis analogue of local causal attention and argues that operator duality does not imply equal systems behavior.",
+        "summary_zh": "This paper argues that Transformer design is easier to reason about if sequence position and layer depth are treated as two ordered axes, with the residual stream viewed as a representational pathway rather than simple additive plumbing. Its central claim is that, for a fixed token, causal depth-wise residual attention is the same local operator as causal short sliding-window attention, but written over depth instead of sequence. Using that lens, the paper positions prior depth-aggregation and vertical-attention work, then argues that the apparent symmetry breaks at the systems level because sequence-axis ShortSWA can better reuse sliding-window kernels, KV-cache layouts, and chunked execution in large autoregressive models. The practical recommendation is to use sequence-axis ShortSWA for local adaptive mixing and Deep Delta Learning (DDL) when the goal is to modify the shortcut itself. The main missing detail is that the abstract does not make clear whether the paper adds new experiments or mainly offers a conceptual synthesis, so the empirical strength of the claims is unclear.",
+        "background_zh": "Recent Transformer work increasingly treats the residual pathway as part of the model's representation mechanism, creating interest in learned aggregation and routing across layer depth instead of fixed residual addition.",
+        "problem_zh": "The paper asks how to organize depth-wise residual design choices and when a depth-axis intervention is preferable to sequence-axis local attention, which matters for both model behavior and deployment efficiency.",
+        "approach_zh": "It introduces a two-axis view of decoders, identifies a local-operator duality between causal depth-wise residual attention and causal ShortSWA, and uses that framing to compare prior methods and recommend either DDL or sequence-axis ShortSWA depending on the design goal.",
+        "evidence_zh": "The abstract provides a conceptual equivalence argument and references prior literature, but it does not clearly state what new empirical evidence this paper itself contributes.",
+        "value_zh": "If the framing is sound, it helps practitioners separate shortcut-modification ideas from local-mixing ideas and prefer placements that align with existing kernels, KV-cache layouts, and chunked autoregressive execution.",
         "open_questions": [
-          "How are the reserved positional slots and masking rules constructed under different simultaneous translation policies, and what context or memory overhead do they add?",
-          "What are the actual latency, throughput, and translation-quality results versus prior SimulMT methods that use prompting or specialized positional encodings?",
-          "How robust is the approach across positional encoding families, model sizes, and longer-input settings where fixed slot allocation may become restrictive?"
+          "Does the full paper provide a formal derivation showing exactly when depth-axis residual attention is equivalent to sequence-axis ShortSWA and when that equivalence breaks?",
+          "What new experiments, if any, compare DDL, sequence-axis ShortSWA, and cross-layer attention under matched model size, context length, and hardware settings?",
+          "How large is the claimed systems advantage of the sequence-axis placement in latency, memory, and kernel reuse on real autoregressive serving workloads?"
         ],
         "core_contributions": [
-          "Identifies the positional mismatch in decoder-only LLM SimulMT as a conflict between decoding efficiency and positional consistency.",
-          "Introduces explicit position allocation so incoming source tokens can be accommodated while keeping KV-cache-based decoding efficient.",
-          "Adds a policy-consistent fine-tuning strategy to reduce the mismatch between training and inference under simultaneous translation policies."
+          "Presents a two-axis view of Transformer computation across sequence position and layer depth.",
+          "Argues that causal depth-wise residual attention and causal short sliding-window attention are the same local operator under a fixed-token perspective.",
+          "Separates operator-level duality from systems-level asymmetry and uses that distinction to recommend DDL versus sequence-axis ShortSWA."
         ],
         "why_read": [
-          "It isolates a concrete inference-time failure mode for decoder-only LLMs under incremental input rather than treating SimulMT as only a prompting problem.",
-          "It claims compatibility across different positional encoding methods, which matters if you want a method that is not architecture-specific.",
-          "It may transfer to other streaming generation settings where token positions change during cached decoding."
+          "It gives a compact conceptual frame for comparing residual-stream modification methods against sequence-axis local attention.",
+          "It explicitly connects the architectural choice to serving concerns such as KV-cache layout, chunked execution, and reuse of sliding-window kernels.",
+          "It may save time when screening the literature around learned depth aggregation, vertical attention, and cross-layer routing."
         ],
         "risks": [
-          "The abstract does not quantify latency, quality, or memory tradeoffs, so the systems benefit is still unclear.",
-          "The contribution appears specific to simultaneous translation, and the paper may not generalize to broader LLM serving workloads without further evidence."
+          "The abstract reads partly as a conceptual synthesis, so the amount of new method or empirical contribution is unclear.",
+          "The systems argument is high level and does not include concrete latency, throughput, memory, or baseline details in the abstract."
         ],
         "recommended_for": [
-          "Researchers working on simultaneous machine translation with decoder-only LLMs.",
-          "Engineers studying KV-cache-friendly decoding under streaming or incremental input.",
-          "Readers comparing position-handling strategies for autoregressive models in online generation settings."
+          "Researchers studying residual-stream design, depth-wise aggregation, or cross-layer attention in Transformers.",
+          "Inference engineers deciding whether local mixing should live on the sequence axis or inside the residual shortcut for autoregressive serving.",
+          "Readers who care about architectural choices that interact with KV-cache layout and reusable attention kernels."
         ],
         "keywords": [
-          "simultaneous machine translation",
-          "decoder-only LLMs",
-          "explicit position allocation",
-          "adaptive masking",
-          "KV cache",
-          "positional consistency"
+          "residual stream",
+          "depth-wise attention",
+          "short sliding-window attention",
+          "ShortSWA",
+          "Deep Delta Learning",
+          "KV cache"
         ],
-        "reading_priority": "low",
-        "reading_priority_reason": "The paper touches KV-cache-aware decoding, but it is primarily a SimulMT-specific method and the abstract does not provide the latency, throughput, or evaluation-detail evidence that matters most for the current systems-focused reading agenda.",
-        "fallback_summary": "Large language models (LLMs) have recently demonstrated promising performance in simultaneous machine translation (SimulMT)."
+        "reading_priority": "medium",
+        "reading_priority_reason": "The paper is relevant to LLM inference-system readers because it discusses residual design through kernel reuse and KV-cache constraints, but the abstract suggests a mainly conceptual contribution with unclear new evidence and only an indirect connection to low-level code generation.",
+        "fallback_summary": "Recent work has made clear that the residual pathway is not mere optimization plumbing; it is part of the model's representational machinery."
       }
     },
     {
-      "id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
-      "paper_id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
-      "title": "From Threads to Tiles: T2T, a Compiler for CUDA-to-NPU Translation via 2D Vectorization.",
-      "summary": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
-      "abstract": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
+      "id": "http://arxiv.org/abs/2603.16437v1",
+      "arxiv_id": "2603.16437v1",
+      "title": "Dimensional Type Systems and Deterministic Memory Management: Design-Time Semantic Preservation in Native Compilation",
+      "summary": "We present a compilation framework in which dimensional type annotations persist through multi-stage MLIR lowering, enabling the compiler to jointly resolve numeric representation selection and deterministic memory management as coeffect properties of a single program semantic graph (PSG). Dimensional inference determines value ranges; value ranges determine representation selection; representation selection determines word width and memory footprint; and memory footprint, combined with escape classification, determines allocation strategy and cross-target transfer fidelity. The Dimensional Type System (DTS) extends Hindley-Milner unification with constraints drawn from finitely generated abelian groups, yielding inference that is decidable in polynomial time, complete, and principal. Where conventional systems erase dimensional annotations before code generation, DTS carries them as compilation metadata through each lowering stage, making them available where representation and memory placement decisions occur. Deterministic Memory Management (DMM), formalized as a coeffect discipline within the same graph, unifies escape analysis and memory placement with the dimensional framework. Escape analysis classifies value lifetimes into four categories (stack-scoped, closure-captured, return-escaping, byref-escaping), each mapping to a verified allocation strategy. We identify implications for auto-differentiation: the dimensional algebra is closed under the chain rule, and forward-mode gradient computation exhibits a coeffect signature that the framework can verify. The practical consequence is a development environment where escape diagnostics, allocation strategy, representation fidelity, and cache locality estimation are design-time views over the compilation graph.",
       "authors": [
-        "Shuaijiang Li",
-        "Jiacheng Zhao",
-        "Ying Liu 0055",
-        "Shuoming Zhang",
-        "Lei Chen",
-        "Yijin Li",
-        "Yangyu Zhang",
-        "Zhicheng Li",
-        "Runyu Zhou",
-        "Xiyu Shi",
-        "Chunwei Xia",
-        "Yuan Wen",
-        "Xiaobing Feng 0002",
-        "Huimin Cui"
+        "Houston Haynes"
       ],
-      "published": "2026",
-      "published_date": "2026-03-17 07:00:02.154127",
-      "publicationDate": "2026",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://ieeexplore.ieee.org/document/11395190/",
-      "url": "https://ieeexplore.ieee.org/document/11395190/",
-      "pdf_url": "",
-      "venue": "CGO",
-      "venue_source_name": "CGO",
-      "venue_source_alias": "CGO",
-      "dblp_key": "conf/cgo/LiZLZCLZLZSXWFC26",
-      "doi": "10.1109/CGO68049.2026.11395190",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "CGO",
-        "venue_alias": "CGO"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2026,
+      "author_details": [
+        {
+          "name": "Houston Haynes"
+        }
+      ],
+      "published": "2026-03-17T12:19:07Z",
+      "published_date": "2026-03-17 12:19:07+00:00",
+      "updated": "2026-03-17T12:19:07Z",
+      "comments": "29 pages, 1 table, 3 appendices with extended examples",
+      "primary_category": "cs.PL",
+      "categories": [
+        "cs.PL",
+        "math.CT",
+        "math.LO"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.16437v1",
+      "url": "http://arxiv.org/abs/2603.16437v1",
+      "source": "arxiv",
       "scores": {
-        "relevance": 1.71,
+        "relevance": 1.96,
         "recency": 3.0,
-        "popularity": 1.9,
-        "quality": 1.9,
-        "recommendation": 7.52
+        "popularity": 0.5,
+        "quality": 0.5,
+        "recommendation": 6.81
       },
       "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "cuda"
+        "code generation",
+        "mlir",
+        "cs.PL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 2,
+        "matched_categories": [
+          "cs.PL"
+        ],
+        "required_signal_matches": [
+          "mlir"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "A semantics-heavy compiler framework that keeps dimensional type information alive through MLIR lowering so numeric representation and deterministic allocation can be chosen from one shared graph.",
+        "summary_zh": "This paper argues that native compilation usually erases semantic information too early, which makes representation sizing and memory placement less principled. It proposes a Dimensional Type System that persists through multi-stage MLIR lowering and feeds a program semantic graph where range inference, word width, memory footprint, and allocation strategy are resolved together. The abstract claims polynomial-time, complete, principal inference and a deterministic memory discipline based on four escape classes, and it also sketches compatibility with forward-mode autodiff. If this works in practice, it could make low-level representation and memory decisions inspectable at design time instead of pushing them into later ad hoc passes. The main missing detail is practical evidence: the abstract does not make implementation maturity, backend coverage, or any runtime or code-quality gains clear.",
+        "background_zh": "As compilers lower toward machine-oriented IR, rich semantic annotations are often dropped before representation and memory decisions are finalized.",
+        "problem_zh": "The paper targets the loss of dimensional semantics before code generation, which makes numeric width selection, escape handling, and memory placement harder to derive from a single coherent model.",
+        "approach_zh": "It extends Hindley-Milner with dimensional constraints over finitely generated abelian groups and models deterministic memory management as a coeffect discipline in the same program semantic graph, with escape classes mapped to allocation strategies.",
+        "evidence_zh": "The abstract supports formal claims about decidable, complete, principal inference and describes four escape classes plus design-time analyses, but it does not provide empirical results or enough implementation detail to establish real compiler or runtime benefits.",
+        "value_zh": "If the framework holds up, it offers compiler builders a unified semantic basis for representation-width and allocation decisions, with more immediate value for compiler correctness and inspectability than for direct inference-serving speedups.",
+        "open_questions": [
+          "Which MLIR stages actually preserve the dimensional metadata, and how is that metadata represented through lowering?",
+          "What proofs or mechanized checks support the claims of polynomial-time principal inference and the 'verified' allocation strategies?",
+          "Are there end-to-end compiler results showing effects on generated code, memory footprint, transfer fidelity, or cache locality on real workloads?"
+        ],
+        "core_contributions": [
+          "A dimensional type system that preserves dimensional annotations across multi-stage MLIR lowering instead of erasing them early.",
+          "A program semantic graph that ties dimensional inference to value-range estimation, representation width, and memory footprint decisions.",
+          "A deterministic memory management formulation that unifies escape analysis and allocation strategy via four explicit lifetime classes."
+        ],
+        "why_read": [
+          "It is a concrete attempt to connect semantic typing to downstream representation and memory decisions rather than treating them as separate late compiler passes.",
+          "It may be useful for MLIR-based compiler work where semantic metadata needs to survive lowering without being reduced to ordinary annotations.",
+          "The autodiff note is unusual and may matter if you care about semantics-aware verification of derivative-related behavior."
+        ],
+        "risks": [
+          "The abstract reads primarily as a PL and compiler-semantics paper, so its relevance to LLM inference systems or CUDA kernel generation is indirect.",
+          "No evaluation setup, target hardware, or baseline comparison is stated, so practical impact on performance or code quality is unproven from the abstract alone."
+        ],
+        "recommended_for": [
+          "Researchers in type systems, MLIR, and semantics-preserving native compilation.",
+          "Compiler engineers interested in coupling representation-width selection with escape-driven memory placement.",
+          "Readers who want formal compiler design ideas and are willing to verify the systems payoff in the full paper."
+        ],
+        "keywords": [
+          "MLIR",
+          "dimensional type system",
+          "deterministic memory management",
+          "coeffects",
+          "escape analysis",
+          "representation selection"
+        ],
+        "reading_priority": "low",
+        "reading_priority_reason": "Despite the search-domain label, the abstract is mainly a PL and MLIR semantics paper with no concrete evidence yet for LLM inference acceleration, CUDA kernel generation, or low-level codegen gains.",
+        "fallback_summary": "We present a compilation framework in which dimensional type annotations persist through multi-stage MLIR lowering, enabling the compiler to jointly resolve numeric representation selection and deterministic memory management as coeffect properties of a single program semantic graph (PSG)."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.16428v1",
+      "arxiv_id": "2603.16428v1",
+      "title": "An Efficient Heterogeneous Co-Design for Fine-Tuning on a Single GPU",
+      "summary": "Fine-tuning Large Language Models (LLMs) has become essential for domain adaptation, but its memory-intensive property exceeds the capabilities of most GPUs. To address this challenge and democratize LLM fine-tuning, we present SlideFormer, a novel system designed for single-GPU environments. Our innovations are: (1) A lightweight asynchronous engine that treats the GPU as a sliding window and overlaps GPU computation with CPU updates and multi-tier I/O. (2) A highly efficient heterogeneous memory management scheme significantly reduces peak memory usage. (3) Optimized Triton kernels to solve key bottlenecks and integrated advanced I/O. This collaborative design enables fine-tuning of the latest 123B+ models on a single RTX 4090, supporting up to 8x larger batch sizes and 6x larger models. In evaluations, SlideFormer achieves 1.40x to 6.27x higher throughput while roughly halving CPU/GPU memory usage compared to baselines, sustaining >95% peak performance on both NVIDIA and AMD GPUs.",
+      "authors": [
+        "Ruijia Yang",
+        "Zeyi Wen"
+      ],
+      "author_details": [
+        {
+          "name": "Ruijia Yang"
+        },
+        {
+          "name": "Zeyi Wen"
+        }
+      ],
+      "published": "2026-03-17T12:05:17Z",
+      "published_date": "2026-03-17 12:05:17+00:00",
+      "updated": "2026-03-17T12:05:17Z",
+      "comments": "7 pages",
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.16428v1",
+      "url": "http://arxiv.org/abs/2603.16428v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.67,
+        "recency": 3.0,
+        "popularity": 1.1,
+        "quality": 1.1,
+        "recommendation": 6.78
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "triton",
+        "cs.DC",
+        "throughput"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -644,217 +655,86 @@
       "match_details": {
         "domain": "LLM Code Generation For CUDA Kernels",
         "text_match_count": 1,
-        "matched_categories": [],
+        "matched_categories": [
+          "cs.DC"
+        ],
         "required_signal_matches": [
-          "cuda"
+          "triton"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "throughput"
+        ],
+        "analysis_keyword_match_count": 1,
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
-      "citationCount": 0,
-      "institutions": [
-        "University College of Applied Science",
-        "University of Leeds",
-        "University of Aberdeen",
-        "International Centre for Theoretical Physics Asia-Pacific"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://ieeexplore.ieee.org/document/11395190/",
-        "abstract_source": "openalex",
-        "pdf_source": ""
-      },
       "ai": {
-        "one_liner_zh": "This paper presents a compiler that rewrites CUDA's thread-level SIMT parallelism into explicit 2-D tile operations for NPUs through structured vectorization.",
-        "summary_zh": "The paper targets the growing mismatch between CUDA's fine-grained thread model and NPUs that execute coarse-grained 2-D tile instructions. Its main idea is to first lift implicit SIMT parallelism into an analyzable loop representation called Unified Parallelism Abstraction, then choose loop pairs for 2-D vectorization onto NPU tile instructions. The compiler also adds semantics-preserving handling for difficult CUDA features such as control flow and warp-level intrinsics. The abstract reports an implementation on top of Polygeist, results on representative NPU architectures, up to 73% of native CUDA performance on an A100-based comparison, and up to 6.9x over baseline translation methods. The practical value is clear for accelerator portability, but the abstract leaves key details unclear about hardware assumptions, baseline fairness, and which CUDA kernels fail or degrade under this lifting strategy.",
-        "background_zh": "CUDA exposes parallelism as many scalar threads, while emerging NPUs often require explicit tile-shaped vector operations, making direct portability increasingly difficult.",
-        "problem_zh": "The paper asks how to systematically lift CUDA's implicit thread-level parallelism into an explicit 2-D vector form that matches NPU execution while preserving CUDA semantics and useful performance.",
-        "approach_zh": "T2T converts CUDA kernels into a structured loop nest via Unified Parallelism Abstraction, then applies a vectorization engine that maps selected loop pairs onto 2-D tile instructions and follows with correctness-preserving optimizations for control flow and warp intrinsics.",
-        "evidence_zh": "The abstract states that T2T is implemented on Polygeist and evaluated on diverse benchmarks and representative NPU architectures, reporting up to 73% of native CUDA performance on an A100-based comparison and up to 6.9x over baseline translation approaches, but it does not make the evaluation setup and baseline details clear.",
-        "value_zh": "If the method generalizes, it offers a compiler path to reuse CUDA kernels on tile-based accelerators without manual rewrites, which is relevant for accelerator portability and low-level code generation workflows.",
+        "one_liner_zh": "SlideFormer is a single-GPU LLM fine-tuning system that combines asynchronous GPU/CPU/I/O overlap, heterogeneous memory management, and Triton kernel tuning to push much larger models onto commodity hardware.",
+        "summary_zh": "This paper targets the memory and data-movement bottlenecks that make LLM fine-tuning hard to run on a single consumer GPU. SlideFormer treats the GPU as a sliding compute window, overlaps GPU work with CPU updates and multi-tier I/O, and adds a heterogeneous memory scheme plus optimized Triton kernels for bottleneck paths. The abstract claims fine-tuning of 123B+ models on one RTX 4090, support for up to 8x larger batch sizes and 6x larger models than baselines, 1.40x to 6.27x higher throughput, roughly half the CPU/GPU memory usage, and more than 95% peak performance on both NVIDIA and AMD GPUs. If those claims hold under fair comparisons, the practical value is in end-to-end runtime and memory-system co-design rather than a single isolated trick. The biggest missing detail is how much of the gain comes from kernels versus scheduling and offloading, and the abstract does not make the baseline setup or fairness checks clear.",
+        "background_zh": "As LLM fine-tuning scales, optimizer state, activation storage, and host-device data movement make memory capacity and bandwidth the main blockers for single-GPU training setups.",
+        "problem_zh": "The paper asks how to make very large-model fine-tuning feasible and efficient on one commodity GPU without losing too much throughput to offloading and I/O overhead.",
+        "approach_zh": "It combines a sliding-window execution engine, overlapped GPU computation with CPU updates and multi-tier I/O, heterogeneous memory management, and optimized Triton kernels to reduce peak memory and hide transfer costs.",
+        "evidence_zh": "The abstract reports fine-tuning 123B+ models on a single RTX 4090, larger supported model and batch sizes, 1.40x to 6.27x throughput gains, roughly halved CPU/GPU memory usage, and more than 95% peak performance on NVIDIA and AMD GPUs, but it does not make the evaluation setup or baseline fairness clear.",
+        "value_zh": "If reproducible, this could lower the hardware barrier for practical LLM adaptation and provide a useful design pattern for memory-aware runtime and kernel co-design on constrained systems.",
         "open_questions": [
-          "What exact NPU ISA and hardware assumptions are required for the 2-D vectorization mapping, and how portable is the approach across different NPU designs?",
-          "How does T2T handle CUDA features beyond the abstract's examples, especially memory hierarchy behavior, synchronization patterns, atomics, and irregular control flow?",
-          "What do the baselines include, and where does the remaining gap to native CUDA performance come from: vectorization limits, memory layout issues, runtime overhead, or missing kernel-specific optimizations?"
+          "What exact fine-tuning method, model families, and baselines are used in the reported comparisons?",
+          "How are parameters, gradients, optimizer states, and activations partitioned across GPU, CPU, and storage during execution?",
+          "How much of the reported speedup comes from Triton kernels versus asynchronous scheduling, memory management, and I/O overlap?"
         ],
         "core_contributions": [
-          "It formalizes CUDA-to-NPU lowering as a lifting problem from implicit SIMT threads to explicit 2-D tile vector spaces.",
-          "It introduces Unified Parallelism Abstraction to expose CUDA parallel structure as analyzable loop nests for downstream translation.",
-          "It combines loop-pair selection for 2-D vectorization with semantics-preserving handling of control flow and warp-level intrinsics in a working compiler implementation."
+          "A single-GPU fine-tuning runtime that treats the GPU as a sliding execution window and overlaps compute with host-side updates and multi-tier I/O.",
+          "A heterogeneous memory-management design aimed at significantly lowering peak memory use during large-model fine-tuning.",
+          "Kernel and I/O co-optimization, including Triton bottleneck kernels, with claims spanning both NVIDIA and AMD GPUs."
         ],
         "why_read": [
-          "It addresses a real compiler problem at the CUDA-to-accelerator boundary rather than presenting generic code generation.",
-          "It gives a concrete mechanism for turning thread-centric kernels into tile-centric code, which is relevant to low-level kernel portability.",
-          "It reports nontrivial comparative evidence against translation baselines, making it useful for judging whether this compiler direction is practically viable."
+          "It addresses a concrete systems problem: fitting and sustaining large-model fine-tuning on commodity hardware.",
+          "The claimed gains appear to come from full-stack runtime, memory, and kernel co-design rather than only from aggressive offloading.",
+          "The cross-vendor result is notable if the implementation details and evaluation methodology hold up."
         ],
         "risks": [
-          "The abstract does not clarify how broad the supported CUDA subset is, so the effective applicability may be narrower than the framing suggests.",
-          "Performance is still below native CUDA, and the sources of the remaining gap are not explained in the abstract, which matters for deployment value."
+          "The abstract does not identify the baselines or isolate which subsystem contributes most of the reported improvement.",
+          "Single-GPU feasibility may depend heavily on host memory, storage bandwidth, and the exact fine-tuning recipe, none of which are specified here clearly enough for replication judgment from the abstract alone."
         ],
         "recommended_for": [
-          "Researchers working on compiler/runtime co-design for accelerator portability",
-          "Engineers interested in CUDA kernel lowering, vectorization, and tile-oriented execution models",
-          "Readers tracking low-level translation techniques between SIMT GPUs and emerging NPUs"
+          "Researchers working on LLM training and fine-tuning systems under tight memory budgets.",
+          "Engineers building heterogeneous offloading and runtime stacks for workstation-class GPUs.",
+          "Readers interested in Triton-kernel and runtime co-design, even though the target is fine-tuning rather than inference."
         ],
         "keywords": [
-          "CUDA",
-          "NPU",
-          "2-D vectorization",
-          "compiler",
-          "SIMT",
-          "tiling instructions"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "This is a strong fit for the current focus on CUDA kernel generation and low-level accelerator translation, and the abstract provides a concrete compiler mechanism plus comparative results, even though the evaluation details still need checking.",
-        "fallback_summary": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing."
-      }
-    },
-    {
-      "id": "dblp:conf/cgo/FangKRAM26",
-      "paper_id": "dblp:conf/cgo/FangKRAM26",
-      "title": "LLM-VeriOpt: Verification-Guided Reinforcement Learning for LLM-Based Compiler Optimization.",
-      "summary": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations. While various techniques have been proposed to enhance LLMs’ ability to optimize LLVM IR or assembly code, ensuring the semantic equivalence of transformed instructions remains a fundamental prerequisite for safe and effective performance improvement. At the same time, code generated by LLMs is often so far away from being correct that it is very difficult to work out how to improve them to proceed in generating optimizations using the output.In this work, we present LLM-VeriOpt, a novel reinforcement-learning methodology that incorporates feedback from a formal verifier, Alive2, to guide the training of a small-scale model, Qwen-3B. This facilitates the use of Guided Reinforcement via Group Relative Policy Optimization (GRPO), using semantic-equivalence signals from the Alive2 formal verification tool as part of the reward function. This allows the model to self-correct based on observing and subsequently learning to give correctness feedback during training, giving high code coverage by successfully transforming large amounts of code, while also optimizing it significantly.We demonstrate our technique by designing an LLM-based peephole optimizer over LLVM-IR. Our method significantly improves the correctness of IR optimizations versus the base LLM Qwen-3B applied with just a prompt and no fine-tuning — achieving a 5.4× improvement in code successfully modified. The resulting model produces verifiably correct output 90% of the time, comfortably outperforming larger state-of-the-art LLMs, including Meta’s LLM Compiler. This yields speedups of 2.3× over O0-optimized code, comparable to the handwritten LLVM-instcombine pass, and producing emergent optimizations that outperform it in 20% of cases.",
-      "abstract": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations. While various techniques have been proposed to enhance LLMs’ ability to optimize LLVM IR or assembly code, ensuring the semantic equivalence of transformed instructions remains a fundamental prerequisite for safe and effective performance improvement. At the same time, code generated by LLMs is often so far away from being correct that it is very difficult to work out how to improve them to proceed in generating optimizations using the output.In this work, we present LLM-VeriOpt, a novel reinforcement-learning methodology that incorporates feedback from a formal verifier, Alive2, to guide the training of a small-scale model, Qwen-3B. This facilitates the use of Guided Reinforcement via Group Relative Policy Optimization (GRPO), using semantic-equivalence signals from the Alive2 formal verification tool as part of the reward function. This allows the model to self-correct based on observing and subsequently learning to give correctness feedback during training, giving high code coverage by successfully transforming large amounts of code, while also optimizing it significantly.We demonstrate our technique by designing an LLM-based peephole optimizer over LLVM-IR. Our method significantly improves the correctness of IR optimizations versus the base LLM Qwen-3B applied with just a prompt and no fine-tuning — achieving a 5.4× improvement in code successfully modified. The resulting model produces verifiably correct output 90% of the time, comfortably outperforming larger state-of-the-art LLMs, including Meta’s LLM Compiler. This yields speedups of 2.3× over O0-optimized code, comparable to the handwritten LLVM-instcombine pass, and producing emergent optimizations that outperform it in 20% of cases.",
-      "authors": [
-        "Xiangxin Fang",
-        "Jiaqin Kang",
-        "Rodrigo Rocha",
-        "Sam Ainsworth 0001",
-        "Lev Mukhanov"
-      ],
-      "published": "2026",
-      "published_date": "2026-03-17 07:00:02.154127",
-      "publicationDate": "2026",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://ieeexplore.ieee.org/document/11395239/",
-      "url": "https://ieeexplore.ieee.org/document/11395239/",
-      "pdf_url": "",
-      "venue": "CGO",
-      "venue_source_name": "CGO",
-      "venue_source_alias": "CGO",
-      "dblp_key": "conf/cgo/FangKRAM26",
-      "doi": "10.1109/CGO68049.2026.11395239",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "CGO",
-        "venue_alias": "CGO"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2026,
-      "scores": {
-        "relevance": 1.31,
-        "recency": 3.0,
-        "popularity": 1.0,
-        "quality": 1.0,
-        "recommendation": 5.83
-      },
-      "matched_domain": "Low-level Code And Assembly Generation",
-      "matched_keywords": [
-        "compiler optimization"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "Low-level Code And Assembly Generation",
-        "text_match_count": 1,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "compiler optimization"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh",
-      "citationCount": 0,
-      "institutions": [
-        "Queen Mary University of London",
-        "University of Edinburgh"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://ieeexplore.ieee.org/document/11395239/",
-        "abstract_source": "openalex",
-        "pdf_source": ""
-      },
-      "ai": {
-        "one_liner_zh": "This paper trains a 3B model to generate LLVM IR peephole optimizations with reinforcement learning shaped by Alive2 semantic-equivalence feedback, aiming to make LLM-driven compiler rewrites correct often enough to be usable.",
-        "summary_zh": "LLM-based compiler optimization is attractive because language models can propose low-level rewrites, but incorrect transformations make the approach unsafe and hard to improve. This paper introduces LLM-VeriOpt, which uses Alive2 semantic-equivalence checks as part of a GRPO reward to train Qwen-3B on LLVM IR peephole optimization. The abstract claims large gains in usable transformations and correctness versus prompt-only Qwen-3B and says the trained model outperforms larger LLM baselines while reaching speedups comparable to LLVM's handwritten instcombine pass, with some emergent cases exceeding it. If those claims hold, the main systems value is a tighter compiler loop where formal verification does not just filter outputs but actively shapes policy learning. The biggest missing detail is evaluation depth: the abstract does not make clear the benchmark mix, verifier failure modes, training data, or how broadly the reported speedups and correctness rates generalize.",
-        "background_zh": "Recent work uses LLMs for LLVM IR and assembly optimization, but semantic preservation remains the core blocker because low-level rewrites are only useful if they stay correct.",
-        "problem_zh": "The paper asks how to train an LLM optimizer so that it produces semantically valid compiler rewrites often enough to be practically useful rather than mostly invalid suggestions.",
-        "approach_zh": "It integrates Alive2 verification signals into a GRPO reinforcement-learning setup so a small Qwen-3B model learns LLVM IR peephole optimizations with correctness-aware reward shaping.",
-        "evidence_zh": "The abstract reports a 5.4x improvement in successfully modified code over prompt-only Qwen-3B, says the trained model produces verifiably correct output 90% of the time, and claims speedups versus O0 that are comparable to instcombine, but it does not make the evaluation setup or baseline details clear.",
-        "value_zh": "If the method is robust, it shows a concrete path for combining formal verification with RL to make small models more viable for low-level compiler transformation tasks.",
-        "open_questions": [
-          "What benchmark suite, program distribution, and optimization task mix were used to measure correctness and speedup claims?",
-          "How much of the gain comes from verifier-shaped RL versus data selection, prompting, or other training details not stated in the abstract?",
-          "What are the limits of Alive2-based reward coverage, especially for transformations that the verifier cannot prove or that depend on undefined-behavior assumptions?"
-        ],
-        "core_contributions": [
-          "Uses Alive2 semantic-equivalence feedback directly inside RL training instead of only as a post hoc filter.",
-          "Targets LLVM IR peephole optimization with a small 3B model rather than relying on larger general-purpose LLMs.",
-          "Claims emergent optimizations that sometimes exceed LLVM instcombine on the evaluated cases."
-        ],
-        "why_read": [
-          "Concrete example of formal verification being used as a training signal for low-level code generation.",
-          "Potentially relevant to anyone studying how to make small models reliable on compiler or assembly-style transformation tasks.",
-          "Useful for comparing learned optimizer behavior against handwritten compiler passes rather than only against other LLM prompts."
-        ],
-        "risks": [
-          "The abstract does not specify benchmark composition or baseline fairness, so the reported gains are hard to calibrate.",
-          "Correctness is framed through Alive2 verification, but the abstract does not clarify coverage gaps or unverifiable cases that may matter in practice."
-        ],
-        "recommended_for": [
-          "Researchers working on LLM-guided compiler optimization and verifier-in-the-loop training.",
-          "Engineers interested in LLVM IR transformation, peephole optimization, and correctness-constrained code generation.",
-          "Readers tracking whether small models can be competitive on low-level program rewriting tasks."
-        ],
-        "keywords": [
-          "LLVM IR optimization",
-          "formal verification",
-          "Alive2",
-          "reinforcement learning",
-          "GRPO",
-          "peephole optimization"
+          "single-GPU fine-tuning",
+          "heterogeneous memory management",
+          "asynchronous overlap",
+          "Triton kernels",
+          "CPU-GPU offloading",
+          "multi-tier I/O"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "The paper is relevant because it targets low-level code generation and compiler optimization with a verifier-guided training loop, but it is less directly aligned with LLM inference serving and CUDA kernel generation than the top-priority focus areas.",
-        "fallback_summary": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations."
+        "reading_priority_reason": "Medium because the runtime and kernel co-design are relevant to LLM systems work, but the paper is centered on fine-tuning rather than inference and the abstract leaves key baseline and evaluation details unresolved.",
+        "fallback_summary": "Fine-tuning Large Language Models (LLMs) has become essential for domain adaptation, but its memory-intensive property exceeds the capabilities of most GPUs."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by DUET: Disaggregated Hybrid… and Mamba-3: Improved Sequence…. LMetric: Simple is Better -… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, LLM Inference Systems. The set is anchored by FleetOpt: Analytical Fleet… and VQKV: High-Fidelity and High-Ratio…. Behavioral Steering in a 35B MoE… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
       "training and inference efficiency",
-      "factual reliability and verification",
-      "agents and active exploration"
+      "LLM Inference Systems",
+      "factual reliability and verification"
     ],
     "reading_strategy": [
-      "Start with DUET: Disaggregated Hybrid… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
-      "Then read Mamba-3: Improved Sequence… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use LMetric: Simple is Better -… as a final cross-check on experimental boundaries and practical value."
+      "Start with FleetOpt: Analytical Fleet… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
+      "Then read VQKV: High-Fidelity and High-Ratio… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use Behavioral Steering in a 35B MoE… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-03-17T11:09:30Z",
+    "generated_at": "2026-03-18T11:10:18Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
     "paper_results": 6,

@@ -405,6 +405,48 @@
       "domain": "Low-level Code And Assembly Generation",
       "quality_score": 5.83,
       "updated": "2026-03-17"
+    },
+    {
+      "id": "2603.16514v1",
+      "title": "FleetOpt: Analytical Fleet Provisioning for LLM Inference with Compress-and-Route as Implementation Mechanism",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.3,
+      "updated": "2026-03-18"
+    },
+    {
+      "id": "2603.16435v1",
+      "title": "VQKV: High-Fidelity and High-Ratio Cache Compression via Vector-Quantization",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.43,
+      "updated": "2026-03-18"
+    },
+    {
+      "id": "2603.16335v1",
+      "title": "Behavioral Steering in a 35B MoE Language Model via SAE-Decoded Probe Vectors: One Agency Axis, Not Five Traits",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.36,
+      "updated": "2026-03-18"
+    },
+    {
+      "id": "2603.16039v1",
+      "title": "Residual Stream Duality in Modern Transformer Architectures",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.06,
+      "updated": "2026-03-18"
+    },
+    {
+      "id": "2603.16437v1",
+      "title": "Dimensional Type Systems and Deterministic Memory Management: Design-Time Semantic Preservation in Native Compilation",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 6.81,
+      "updated": "2026-03-18"
+    },
+    {
+      "id": "2603.16428v1",
+      "title": "An Efficient Heterogeneous Co-Design for Fine-Tuning on a Single GPU",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 6.78,
+      "updated": "2026-03-18"
     }
   ],
   "edges": [
@@ -1349,7 +1391,91 @@
       "target": "2603.15202v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2603.16514v1",
+      "target": "2603.16435v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16514v1",
+      "target": "2603.16039v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16514v1",
+      "target": "2603.16335v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16435v1",
+      "target": "2603.16514v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16435v1",
+      "target": "2603.16039v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16435v1",
+      "target": "2603.16335v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16335v1",
+      "target": "2603.16514v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16335v1",
+      "target": "2603.16435v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16335v1",
+      "target": "2603.16039v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16039v1",
+      "target": "2603.16514v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16039v1",
+      "target": "2603.16435v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16039v1",
+      "target": "2603.16335v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16437v1",
+      "target": "2603.16428v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.16428v1",
+      "target": "2603.16437v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-17"
+  "last_updated": "2026-03-18"
 }
