@@ -447,6 +447,48 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 6.78,
       "updated": "2026-03-18"
+    },
+    {
+      "id": "2603.17456v1",
+      "title": "Multi-stage Flow Scheduling for LLM Serving",
+      "domain": "LLM Inference Systems",
+      "quality_score": 10.0,
+      "updated": "2026-03-19"
+    },
+    {
+      "id": "2603.17435v1",
+      "title": "ZipServ: Fast and Memory-Efficient LLM Inference with Hardware-Aware Lossless Compression",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.97,
+      "updated": "2026-03-19"
+    },
+    {
+      "id": "2211.10438",
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "domain": "LLM Inference Systems",
+      "quality_score": 6.17,
+      "updated": "2026-03-19"
+    },
+    {
+      "id": "2603.17800v1",
+      "title": "Enabling RISC-V Vector Code Generation in MLIR through Custom xDSL Lowerings",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 9.95,
+      "updated": "2026-03-19"
+    },
+    {
+      "id": "2603.17280v1",
+      "title": "The 1/W Law: An Analytical Study of Context-Length Routing Topology and GPU Generation Gains for LLM Inference Energy Efficiency",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.05,
+      "updated": "2026-03-19"
+    },
+    {
+      "id": "2603.17168v1",
+      "title": "HierarchicalKV: A GPU Hash Table with Cache Semantics for Continuous Online Embedding Storage",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.13,
+      "updated": "2026-03-19"
     }
   ],
   "edges": [
@@ -1475,7 +1517,97 @@
       "target": "2603.16437v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2603.17456v1",
+      "target": "2603.17435v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.17456v1",
+      "target": "2603.17280v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.17456v1",
+      "target": "2603.17168v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.17435v1",
+      "target": "2211.10438",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.17435v1",
+      "target": "2603.17456v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.17435v1",
+      "target": "2603.17280v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2211.10438",
+      "target": "2603.17435v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2211.10438",
+      "target": "2603.17456v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2211.10438",
+      "target": "2603.17280v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.17280v1",
+      "target": "2603.17456v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.17280v1",
+      "target": "2603.17435v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.17280v1",
+      "target": "2603.17168v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.17168v1",
+      "target": "2603.17456v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.17168v1",
+      "target": "2603.17435v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.17168v1",
+      "target": "2603.17280v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-18"
+  "last_updated": "2026-03-19"
 }

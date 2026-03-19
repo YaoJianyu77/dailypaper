@@ -1,49 +1,378 @@
 {
-  "target_date": "2026-03-18",
+  "target_date": "2026-03-19",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-16",
-      "end": "2026-03-18"
+      "start": "2026-02-17",
+      "end": "2026-03-19"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-18",
-      "end": "2026-02-15"
+      "start": "2025-03-19",
+      "end": "2026-02-16"
     }
   },
-  "total_found": 210,
-  "total_venue": 3,
-  "total_filtered": 10,
+  "total_found": 221,
+  "total_venue": 14,
+  "total_filtered": 22,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 10,
+  "total_unique": 22,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
     "selected_count": 6,
     "lane_counts": {
-      "fresh": 6,
+      "fresh": 5,
       "established": 0,
-      "classic": 0,
-      "history_filtered": 3,
+      "classic": 1,
+      "history_filtered": 14,
       "history_relaxed": 0,
-      "classic_slot_active": 0
+      "classic_slot_active": 1
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": false
+      "slot_active_today": true
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.16514v1",
-      "arxiv_id": "2603.16514v1",
-      "title": "FleetOpt: Analytical Fleet Provisioning for LLM Inference with Compress-and-Route as Implementation Mechanism",
-      "summary": "Modern LLM GPU fleets are provisioned for worst-case context lengths that the vast majority of requests never approach, wasting GPU capacity on idle KV-cache slots. We present FleetOpt, a framework that starts from first principles: given a workload's prompt-length CDF and a P99 TTFT target, derive the minimum-cost fleet analytically, then deploy it in practice.\n  The analytical core models each pool as an M/G/c queue and derives that the minimum-cost fleet is a two-pool architecture -- a short-context pool and a long-context pool -- with an optimal boundary B* satisfying an equal marginal GPU cost condition across both pools. The fundamental barrier to achieving B* is the cost cliff: a hard routing step where requests just above B* consume 8x--42x more GPU capacity than requests just below it (depending on the context window ratio), creating a structural disincentive to lower the boundary.\n  Compress-and-Route (C&R) is the implementation mechanism that resolves this barrier. Gateway-layer extractive compression trims borderline requests below B* before the engine ever sees them, converting the hard hardware boundary into a software parameter read from the workload CDF. The two components are unified in the FleetOpt offline planner: given a CDF and SLO, it returns the optimal (n_s*, n_l*, B*, gamma*) in under 1 ms.\n  On three production traces, the combined framework reduces total GPU cost by 6--82% versus a homogeneous fleet, with C&R contributing 1--44 percentage points beyond plain pool routing depending on workload archetype. The analytical model is validated against a discrete-event simulator (inference-fleet-sim) with <= 3% error on predicted GPU utilization across all pools and workloads.",
+      "id": "http://arxiv.org/abs/2603.17456v1",
+      "arxiv_id": "2603.17456v1",
+      "title": "Multi-stage Flow Scheduling for LLM Serving",
+      "summary": "Meeting stringent Time-To-First-Token (TTFT) requirements is crucial for LLM applications. To improve efficiency, modern LLM serving systems adopt disaggregated architectures with diverse parallelisms, introducing complex multi-stage workflows involving reusable KV-block retrieval, collective communication, and P2D transfer. Flows from dependent stages overlap within and across requests on shared bottleneck links, making TTFT highly susceptible to network contention and necessitating stage-aware scheduling. Unfortunately, most existing works schedule flows in a stage-agnostic manner, leading to uncoordinated contention that constitutes a primary cause of SLO violations.\n  In this paper, we present MFS, a holistic multi-stage flow scheduling mechanism designed to maximize TTFT SLO attainment. At its core, MFS approximates the Least-Laxity-First (LLF) scheduling policy without requiring precise knowledge of a request's remaining slack. It achieves this through a Defer-and-Promote principle implemented through a Reverse Multi-Level Queue (RMLQ) structure. By dynamically promoting task precedence as effective laxity diminishes, MFS prioritizes flows with less laxity while preventing requests with loose SLOs from prematurely consuming network bandwidth. We implement MFS as a pluggable module integrated into vLLM, and evaluate it on a 8-server, 32-GPU testbed as well as through large-scale simulations. Our results demonstrate that MFS effectively outperforms state-of-the-art baselines, improving the TTFT SLO attainment by 1.2x--2.4x.",
+      "authors": [
+        "Yijun Sun",
+        "Xudong Liao",
+        "Songrun Xie",
+        "Hao Chen",
+        "Han Tian",
+        "Wenxue Li",
+        "Yiming Zhang",
+        "Kai Chen"
+      ],
+      "author_details": [
+        {
+          "name": "Yijun Sun",
+          "affiliation": "Hong Kong University of Science and Technology"
+        },
+        {
+          "name": "Xudong Liao",
+          "affiliation": "Hong Kong University of Science and Technology"
+        },
+        {
+          "name": "Songrun Xie",
+          "affiliation": "Hong Kong University of Science and Technology"
+        },
+        {
+          "name": "Hao Chen",
+          "affiliation": "Shanghai Jiao Tong University"
+        },
+        {
+          "name": "Han Tian",
+          "affiliation": "University of Science and Technology of China"
+        },
+        {
+          "name": "Wenxue Li",
+          "affiliation": "Hong Kong University of Science and Technology"
+        },
+        {
+          "name": "Yiming Zhang",
+          "affiliation": "Shanghai Jiao Tong University"
+        },
+        {
+          "name": "Kai Chen",
+          "affiliation": "Hong Kong University of Science and Technology"
+        }
+      ],
+      "institutions": [
+        "Hong Kong University of Science and Technology",
+        "Shanghai Jiao Tong University",
+        "University of Science and Technology of China"
+      ],
+      "published": "2026-03-18T07:53:28Z",
+      "published_date": "2026-03-18 07:53:28+00:00",
+      "updated": "2026-03-18T07:53:28Z",
+      "comments": "18 pages, 14 figures",
+      "primary_category": "cs.NI",
+      "categories": [
+        "cs.NI",
+        "cs.DC"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.17456v1",
+      "url": "http://arxiv.org/abs/2603.17456v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 10.0
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm serving",
+        "serving",
+        "vllm",
+        "cs.DC",
+        "bandwidth"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.DC"
+        ],
+        "required_signal_matches": [
+          "vllm"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "bandwidth"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "bandwidth"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.17435v1",
+      "arxiv_id": "2603.17435v1",
+      "title": "ZipServ: Fast and Memory-Efficient LLM Inference with Hardware-Aware Lossless Compression",
+      "summary": "Lossless model compression holds tremendous promise for alleviating the memory and bandwidth bottlenecks in bit-exact Large Language Model (LLM) serving. However, existing approaches often result in substantial inference slowdowns due to fundamental design mismatches with GPU architectures: at the kernel level, variable-length bitstreams produced by traditional entropy codecs break SIMT parallelism; at the system level, decoupled pipelines lead to redundant memory traffic. We present ZipServ, a lossless compression framework co-designed for efficient LLM inference. ZipServ introduces Tensor-Core-Aware Triple Bitmap Encoding (TCA-TBE), a novel fixed-length format that enables constant-time, parallel decoding, together with a fused decompression-GEMM (ZipGEMM) kernel that decompresses weights on-the-fly directly into Tensor Core registers. This \"load-compressed, compute-decompressed\" design eliminates intermediate buffers and maximizes compute intensity. Experiments show that ZipServ reduces the model size by up to 30%, achieves up to 2.21x kernel-level speedup over NVIDIA's cuBLAS, and expedites end-to-end inference by an average of 1.22x over vLLM. ZipServ is the first lossless compression system that provides both storage savings and substantial acceleration for LLM inference on GPUs.",
+      "authors": [
+        "Ruibo Fan",
+        "Xiangrui Yu",
+        "Xinglin Pan",
+        "Zeyu Li",
+        "Weile Luo",
+        "Qiang Wang",
+        "Wei Wang",
+        "Xiaowen Chu"
+      ],
+      "author_details": [
+        {
+          "name": "Ruibo Fan"
+        },
+        {
+          "name": "Xiangrui Yu"
+        },
+        {
+          "name": "Xinglin Pan"
+        },
+        {
+          "name": "Zeyu Li"
+        },
+        {
+          "name": "Weile Luo"
+        },
+        {
+          "name": "Qiang Wang"
+        },
+        {
+          "name": "Wei Wang"
+        },
+        {
+          "name": "Xiaowen Chu"
+        }
+      ],
+      "published": "2026-03-18T07:21:21Z",
+      "published_date": "2026-03-18 07:21:21+00:00",
+      "updated": "2026-03-18T07:21:21Z",
+      "comments": "ASPLOS'26 Accepted Paper",
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC",
+        "cs.AR",
+        "cs.LG",
+        "cs.PF"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.17435v1",
+      "url": "http://arxiv.org/abs/2603.17435v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.97
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm inference",
+        "serving",
+        "vllm",
+        "cs.LG",
+        "cs.DC",
+        "cs.AR",
+        "memory",
+        "bandwidth",
+        "speedup"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.LG",
+          "cs.DC",
+          "cs.AR"
+        ],
+        "required_signal_matches": [
+          "vllm"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "memory",
+          "bandwidth",
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 3,
+        "analysis_keyword_matches": [
+          "memory",
+          "bandwidth",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 3,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.5
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "paper_id": "2211.10438",
+      "arxiv_id": "2211.10438",
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "summary": "Proposes a training-free post-training quantization scheme that migrates activation outliers into weights, enabling efficient W8A8 inference with minimal quality loss on large language models.",
+      "authors": [
+        "Guangxuan Xiao",
+        "Ji Lin",
+        "Mickael Seznec",
+        "Hao Wu",
+        "Julien Demouth",
+        "Song Han"
+      ],
+      "published": "2022-11-18",
+      "published_date": "2022-11-18 00:00:00",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "source": "classic_backlog",
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "quantization",
+        "int8",
+        "serving",
+        "activation-outliers"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "selection_lane": "classic",
+      "is_hot_paper": false,
+      "source_url": "https://arxiv.org/abs/2211.10438",
+      "pdf_url": "https://arxiv.org/pdf/2211.10438.pdf",
+      "scores": {
+        "relevance": 2.9,
+        "recency": 0.0,
+        "popularity": 0.3,
+        "quality": 0.3,
+        "recommendation": 6.17
+      },
+      "classic_rotation_score": 10.7906,
+      "citationCount": 1380,
+      "influentialCitationCount": 189,
+      "venue": "International Conference on Machine Learning",
+      "journal_ref": "ArXiv"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.17800v1",
+      "arxiv_id": "2603.17800v1",
+      "title": "Enabling RISC-V Vector Code Generation in MLIR through Custom xDSL Lowerings",
+      "summary": "The growing adoption of RISC-V in high-performance and scientific computing has increased the need for performance-portable code targeting the RISC-V Vector (RVV) extension. However, current compiler infrastructures provide limited end-to-end support for generating optimized RVV code from high-level representations to low-level implementations. In particular, existing MLIR distributions lack practical lowering paths that map high-level abstractions to RVV intrinsics, limiting their applicability for production-ready RISC-V kernels. This paper presents a compilation approach that combines MLIR with xDSL to bridge the missing lowering stages required for RVV code generation. Using custom intermediate representations and transformation passes implemented in xDSL, we systematically translate high-level operations into specialized, hardware-aware C code invoking RVV intrinsics. The resulting kernels are emitted as portable C functions that can be directly integrated into existing applications, enabling incremental adoption without modifying surrounding software stacks. We demonstrate the approach on the General Matrix Multiplication (GEMM) kernel and evaluate the generated micro-kernels on two real RISC-V platforms, the K230 and the BananaPi F3, comparing against OpenBLAS for both square-matrix benchmarks and transformer-based workloads derived from the BERT-Large model. When integrated into a matrix multiplication kernel, the proposed approach consistently outperforms OpenBLAS, reaching up to 12.2 GFLOPS compared to the baseline's 5.1 GFLOPS and providing performance improvements between 10--35\\% across the evaluated workloads. These results demonstrate that combining MLIR with xDSL provides a practical pathway to portable, optimized code generation for RISC-V platforms.",
+      "authors": [
+        "Jie Lei",
+        "Héctor Martínez",
+        "Adrián Castelló"
+      ],
+      "author_details": [
+        {
+          "name": "Jie Lei"
+        },
+        {
+          "name": "Héctor Martínez"
+        },
+        {
+          "name": "Adrián Castelló"
+        }
+      ],
+      "published": "2026-03-18T14:55:52Z",
+      "published_date": "2026-03-18 14:55:52+00:00",
+      "updated": "2026-03-18T14:55:52Z",
+      "comments": "12 pages, 11 Figures, 1 table",
+      "primary_category": "cs.AR",
+      "categories": [
+        "cs.AR"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.17800v1",
+      "url": "http://arxiv.org/abs/2603.17800v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.99,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.95
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "code generation",
+        "mlir",
+        "cs.AR",
+        "baseline"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 2,
+        "matched_categories": [
+          "cs.AR"
+        ],
+        "required_signal_matches": [
+          "mlir"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "baseline"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.17280v1",
+      "arxiv_id": "2603.17280v1",
+      "title": "The 1/W Law: An Analytical Study of Context-Length Routing Topology and GPU Generation Gains for LLM Inference Energy Efficiency",
+      "summary": "How many tokens can a GPU inference cluster deliver per watt? Across deployments of identical hardware, the answer varies by 40x -- not because of software inefficiency, but because of the serving context window. We derive the 1/W law: tokens per watt halves every time the context window doubles. A larger context window shrinks the KV-cache concurrency limit while leaving GPU power draw roughly unchanged. At 64K context, an H100 holds 16 sequences in flight (tok/W = 1.5); at 4K context, the same H100 holds 256 sequences (tok/W = 17.6).\n  Routing topology -- which determines the effective context window each GPU services -- is a more powerful energy lever than buying newer hardware. Working from published H100 power measurements, a calibrated logistic power model, and a roofline throughput model, we derive these results analytically using the inference-fleet-sim framework; no new hardware experiments were conducted. Two-pool context-length routing (FleetOpt) delivers roughly 2.5x better tok/W over a homogeneous fleet, while upgrading from H100 to B200 delivers roughly 1.7x. The gains are independent: combining FleetOpt with B200 yields 4.25x over the H100 homogeneous baseline. B200/H200 numbers are analytical projections (+-20% uncertainty); H100 results are calibrated to published measurements.\n  For MoE models, active-parameter weight streaming adds a third lever. Qwen3-235B-A22B (22B active) reaches roughly 37.8 tok/W at 8K context on H100 -- 5.1x better than Llama-3.1-70B -- because decode time scales with activated weights, not total parameters. MoE dispatch overhead is excluded, so this is an upper bound.",
       "authors": [
         "Huamin Chen",
         "Xunzhuo Liu",
@@ -72,108 +401,34 @@
           "name": "Xue Liu"
         }
       ],
-      "published": "2026-03-17T13:41:21Z",
-      "published_date": "2026-03-17 13:41:21+00:00",
-      "updated": "2026-03-17T13:41:21Z",
+      "published": "2026-03-18T02:15:40Z",
+      "published_date": "2026-03-18 02:15:40+00:00",
+      "updated": "2026-03-18T02:15:40Z",
       "comments": "Work in progress",
       "primary_category": "cs.DC",
       "categories": [
         "cs.DC"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.16514v1",
-      "url": "http://arxiv.org/abs/2603.16514v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.17280v1",
+      "url": "http://arxiv.org/abs/2603.17280v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 9.3
+        "popularity": 0.9,
+        "quality": 0.9,
+        "recommendation": 9.05
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "llm inference",
+        "serving",
+        "decode",
         "kv cache",
-        "cs.DC"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "kv cache"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.16435v1",
-      "arxiv_id": "2603.16435v1",
-      "title": "VQKV: High-Fidelity and High-Ratio Cache Compression via Vector-Quantization",
-      "summary": "The growing context length of Large Language Models (LLMs) enlarges the Key-Value (KV) cache, limiting deployment in resource-limited environments. Prior training-free approaches for KV cache compression typically rely on low-rank approximation or scalar quantization, which fail to simultaneously achieve high compression ratios and high reconstruction fidelity. We propose VQKV, a novel, training-free method introducing vector quantization (VQ) to obtain highly compressed KV representations while preserving high model fidelity, allowing for the representation of thousands of floating-point values with just a few integer indices. As a result, VQKV achieves an 82.8\\% compression ratio on LLaMA3.1-8B while retaining 98.6\\% of the baseline performance on LongBench and enabling 4.3x longer generation length on the same memory footprint.",
-      "authors": [
-        "Yixuan Wang",
-        "Qingyu Shi",
-        "Jiayu Zhou",
-        "Dianbo Liu",
-        "Ziwei He",
-        "Zhouhan Lin"
-      ],
-      "author_details": [
-        {
-          "name": "Yixuan Wang"
-        },
-        {
-          "name": "Qingyu Shi"
-        },
-        {
-          "name": "Jiayu Zhou"
-        },
-        {
-          "name": "Dianbo Liu"
-        },
-        {
-          "name": "Ziwei He"
-        },
-        {
-          "name": "Zhouhan Lin"
-        }
-      ],
-      "published": "2026-03-17T12:16:06Z",
-      "published_date": "2026-03-17 12:16:06+00:00",
-      "updated": "2026-03-17T12:16:06Z",
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.16435v1",
-      "url": "http://arxiv.org/abs/2603.16435v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.57,
-        "recency": 3.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 8.43
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "kv cache",
-        "quantization",
-        "cs.CL",
-        "memory",
+        "throughput",
+        "cs.DC",
+        "h100",
+        "b200",
         "baseline"
       ],
       "matched_domain_priority": 5,
@@ -181,275 +436,157 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 2,
+        "text_match_count": 5,
         "matched_categories": [
-          "cs.CL"
+          "cs.DC"
         ],
         "required_signal_matches": [
-          "kv cache"
+          "kv cache",
+          "decode",
+          "h100",
+          "b200"
         ],
-        "required_signal_match_count": 1,
+        "required_signal_match_count": 4,
         "bonus_keyword_matches": [
-          "memory"
+          "throughput"
         ],
         "bonus_keyword_match_count": 1,
         "analysis_keyword_matches": [
           "baseline",
-          "memory"
+          "throughput"
         ],
         "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
+        "signal_bonus": 0.9,
         "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2603.16335v1",
-      "arxiv_id": "2603.16335v1",
-      "title": "Behavioral Steering in a 35B MoE Language Model via SAE-Decoded Probe Vectors: One Agency Axis, Not Five Traits",
-      "summary": "We train nine sparse autoencoders (SAEs) on the residual stream of Qwen 3.5-35B-A3B, a 35-billion-parameter Mixture-of-Experts model with a hybrid GatedDeltaNet/attention architecture, and use them to identify and steer five agentic behavioral traits. Our method trains linear probes on SAE latent activations, then projects the probe weights back through the SAE decoder to obtain continuous steering vectors in the model's native activation space. This bypasses the SAE's top-k discretization, enabling fine-grained behavioral intervention at inference time with no retraining. Across 1,800 agent rollouts (50 scenarios times 36 conditions), we find that autonomy steering at multiplier 2 achieves Cohen's d = 1.01 (p < 0.0001), shifting the model from asking the user for help 78% of the time to proactively executing code and searching the web. Cross-trait analysis, however, reveals that all five steering vectors primarily modulate a single dominant agency axis (the disposition to act independently versus defer to the user), with trait specific effects appearing only as secondary modulations in tool-type composition and dose-response shape. The tool-use vector steers behavior (d = 0.39); the risk-calibration vector produces only suppression. We additionally show that steering only during autoregressive decoding has zero effect (p > 0.35), providing causal evidence that behavioral commitments are computed during prefill in GatedDeltaNet architectures.",
+      "id": "http://arxiv.org/abs/2603.17168v1",
+      "arxiv_id": "2603.17168v1",
+      "title": "HierarchicalKV: A GPU Hash Table with Cache Semantics for Continuous Online Embedding Storage",
+      "summary": "Traditional GPU hash tables preserve every inserted key -- a dictionary assumption that wastes scarce High Bandwidth Memory (HBM) when embedding tables routinely exceed single-GPU capacity. We challenge this assumption with cache semantics, where policy-driven eviction is a first-class operation. We introduce HierarchicalKV (HKV), the first general-purpose GPU hash table library whose normal full-capacity operating contract is cache-semantic: each full-bucket upsert (update-or-insert) is resolved in place by eviction or admission rejection rather than by rehashing or capacity-induced failure. HKV co-designs four core mechanisms -- cache-line-aligned buckets, in-line score-driven upsert, score-based dynamic dual-bucket selection, and triple-group concurrency -- and uses tiered key-value separation as a scaling enabler beyond HBM. On an NVIDIA H100 NVL GPU, HKV achieves up to 3.9 billion key-value pairs per second (B-KV/s) find throughput, stable across load factors 0.50-1.00 (<5% variation), and delivers 1.4x higher find throughput than WarpCore (the strongest dictionary-semantic GPU baseline at lambda=0.50) and up to 2.6-9.4x over indirection-based GPU baselines. Since its open-source release in October 2022, HKV has been integrated into multiple open-source recommendation frameworks.",
       "authors": [
-        "Jia Qing Yap"
+        "Haidong Rong",
+        "Jiashu Yao",
+        "Matthias Langer",
+        "Shijie Liu",
+        "Li Fan",
+        "Dongxin Wang",
+        "Jia He",
+        "Jinglin Chen",
+        "Jiaheng Rang",
+        "Julian Qian",
+        "Mengyao Xu",
+        "Fan Yu",
+        "Minseok Lee",
+        "Zehuan Wang",
+        "Even Oldridge"
       ],
       "author_details": [
         {
-          "name": "Jia Qing Yap"
-        }
-      ],
-      "published": "2026-03-17T10:05:41Z",
-      "published_date": "2026-03-17 10:05:41+00:00",
-      "updated": "2026-03-17T10:05:41Z",
-      "comments": "14 pages, 3 figures",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.16335v1",
-      "url": "http://arxiv.org/abs/2603.16335v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.44,
-        "recency": 3.0,
-        "popularity": 1.3,
-        "quality": 1.3,
-        "recommendation": 8.36
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "prefill",
-        "cs.LG",
-        "cs.CL"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 1,
-        "matched_categories": [
-          "cs.LG",
-          "cs.CL"
-        ],
-        "required_signal_matches": [
-          "prefill"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.16039v1",
-      "arxiv_id": "2603.16039v1",
-      "title": "Residual Stream Duality in Modern Transformer Architectures",
-      "summary": "Recent work has made clear that the residual pathway is not mere optimization plumbing; it is part of the model's representational machinery. We agree, but argue that the cleanest way to organize this design space is through a two-axis view of the Transformer. A decoder evolves information along two ordered dimensions: sequence position and layer depth. Self-attention already provides adaptive mixing along the sequence axis, whereas the residual stream usually performs fixed addition along the depth axis. If we fix a token position and treat layer index as the ordered variable, then a causal depth-wise residual attention read is exactly the same local operator as causal short sliding-window attention (ShortSWA), except written over depth rather than over sequence. This is the core residual stream duality behind Transformer$^2$. This perspective also clarifies the recent literature. ELC-BERT and DenseFormer already show that learned aggregation over depth can outperform uniform residual accumulation, while Vertical Attention, DeepCrossAttention (DCA), MUDDFormer, and Attention Residuals move further toward explicit attention-based routing over earlier layers. The key point, however, is that operator-level duality does not imply systems-level symmetry. For large-scale autoregressive models, sequence-axis ShortSWA is usually the more hardware-friendly placement because it reuses token-side sliding-window kernels, KV-cache layouts, and chunked execution. If the goal is instead to change the shortcut itself, Deep Delta Learning (DDL) is the cleaner intervention because it modifies the residual operator directly rather than adding a separate cross-layer retrieval path. Our recommendation is therefore simple: use DDL when the shortcut is the object of interest, and use sequence-axis ShortSWA when the goal is local adaptive mixing.",
-      "authors": [
-        "Yifan Zhang"
-      ],
-      "author_details": [
-        {
-          "name": "Yifan Zhang"
-        }
-      ],
-      "published": "2026-03-17T00:56:29Z",
-      "published_date": "2026-03-17 00:56:29+00:00",
-      "updated": "2026-03-17T00:56:29Z",
-      "comments": "Project Page: https://github.com/yifanzhang-pro/residual-stream-duality",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.16039v1",
-      "url": "http://arxiv.org/abs/2603.16039v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.55,
-        "recency": 3.0,
-        "popularity": 0.7,
-        "quality": 0.7,
-        "recommendation": 8.06
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "kv cache",
-        "cs.LG",
-        "cs.CL"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 1,
-        "matched_categories": [
-          "cs.LG",
-          "cs.CL"
-        ],
-        "required_signal_matches": [
-          "kv cache"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.16437v1",
-      "arxiv_id": "2603.16437v1",
-      "title": "Dimensional Type Systems and Deterministic Memory Management: Design-Time Semantic Preservation in Native Compilation",
-      "summary": "We present a compilation framework in which dimensional type annotations persist through multi-stage MLIR lowering, enabling the compiler to jointly resolve numeric representation selection and deterministic memory management as coeffect properties of a single program semantic graph (PSG). Dimensional inference determines value ranges; value ranges determine representation selection; representation selection determines word width and memory footprint; and memory footprint, combined with escape classification, determines allocation strategy and cross-target transfer fidelity. The Dimensional Type System (DTS) extends Hindley-Milner unification with constraints drawn from finitely generated abelian groups, yielding inference that is decidable in polynomial time, complete, and principal. Where conventional systems erase dimensional annotations before code generation, DTS carries them as compilation metadata through each lowering stage, making them available where representation and memory placement decisions occur. Deterministic Memory Management (DMM), formalized as a coeffect discipline within the same graph, unifies escape analysis and memory placement with the dimensional framework. Escape analysis classifies value lifetimes into four categories (stack-scoped, closure-captured, return-escaping, byref-escaping), each mapping to a verified allocation strategy. We identify implications for auto-differentiation: the dimensional algebra is closed under the chain rule, and forward-mode gradient computation exhibits a coeffect signature that the framework can verify. The practical consequence is a development environment where escape diagnostics, allocation strategy, representation fidelity, and cache locality estimation are design-time views over the compilation graph.",
-      "authors": [
-        "Houston Haynes"
-      ],
-      "author_details": [
-        {
-          "name": "Houston Haynes"
-        }
-      ],
-      "published": "2026-03-17T12:19:07Z",
-      "published_date": "2026-03-17 12:19:07+00:00",
-      "updated": "2026-03-17T12:19:07Z",
-      "comments": "29 pages, 1 table, 3 appendices with extended examples",
-      "primary_category": "cs.PL",
-      "categories": [
-        "cs.PL",
-        "math.CT",
-        "math.LO"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.16437v1",
-      "url": "http://arxiv.org/abs/2603.16437v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.96,
-        "recency": 3.0,
-        "popularity": 0.5,
-        "quality": 0.5,
-        "recommendation": 6.81
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "code generation",
-        "mlir",
-        "cs.PL"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.PL"
-        ],
-        "required_signal_matches": [
-          "mlir"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.16428v1",
-      "arxiv_id": "2603.16428v1",
-      "title": "An Efficient Heterogeneous Co-Design for Fine-Tuning on a Single GPU",
-      "summary": "Fine-tuning Large Language Models (LLMs) has become essential for domain adaptation, but its memory-intensive property exceeds the capabilities of most GPUs. To address this challenge and democratize LLM fine-tuning, we present SlideFormer, a novel system designed for single-GPU environments. Our innovations are: (1) A lightweight asynchronous engine that treats the GPU as a sliding window and overlaps GPU computation with CPU updates and multi-tier I/O. (2) A highly efficient heterogeneous memory management scheme significantly reduces peak memory usage. (3) Optimized Triton kernels to solve key bottlenecks and integrated advanced I/O. This collaborative design enables fine-tuning of the latest 123B+ models on a single RTX 4090, supporting up to 8x larger batch sizes and 6x larger models. In evaluations, SlideFormer achieves 1.40x to 6.27x higher throughput while roughly halving CPU/GPU memory usage compared to baselines, sustaining >95% peak performance on both NVIDIA and AMD GPUs.",
-      "authors": [
-        "Ruijia Yang",
-        "Zeyi Wen"
-      ],
-      "author_details": [
-        {
-          "name": "Ruijia Yang"
+          "name": "Haidong Rong"
         },
         {
-          "name": "Zeyi Wen"
+          "name": "Jiashu Yao"
+        },
+        {
+          "name": "Matthias Langer"
+        },
+        {
+          "name": "Shijie Liu"
+        },
+        {
+          "name": "Li Fan"
+        },
+        {
+          "name": "Dongxin Wang"
+        },
+        {
+          "name": "Jia He"
+        },
+        {
+          "name": "Jinglin Chen"
+        },
+        {
+          "name": "Jiaheng Rang"
+        },
+        {
+          "name": "Julian Qian"
+        },
+        {
+          "name": "Mengyao Xu"
+        },
+        {
+          "name": "Fan Yu"
+        },
+        {
+          "name": "Minseok Lee"
+        },
+        {
+          "name": "Zehuan Wang"
+        },
+        {
+          "name": "Even Oldridge"
         }
       ],
-      "published": "2026-03-17T12:05:17Z",
-      "published_date": "2026-03-17 12:05:17+00:00",
-      "updated": "2026-03-17T12:05:17Z",
-      "comments": "7 pages",
-      "primary_category": "cs.DC",
+      "published": "2026-03-17T21:59:59Z",
+      "published_date": "2026-03-17 21:59:59+00:00",
+      "updated": "2026-03-17T21:59:59Z",
+      "comments": "15 pages, 12 figures",
+      "primary_category": "cs.DB",
       "categories": [
+        "cs.DB",
         "cs.DC",
-        "cs.AI"
+        "cs.IR"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.16428v1",
-      "url": "http://arxiv.org/abs/2603.16428v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.17168v1",
+      "url": "http://arxiv.org/abs/2603.17168v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 1.67,
+        "relevance": 2.0,
         "recency": 3.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 6.78
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 8.13
       },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "triton",
+        "throughput",
         "cs.DC",
-        "throughput"
+        "h100",
+        "memory",
+        "bandwidth",
+        "baseline"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
+        "domain": "LLM Inference Systems",
         "text_match_count": 1,
         "matched_categories": [
           "cs.DC"
         ],
         "required_signal_matches": [
-          "triton"
+          "h100"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "throughput"
+        "bonus_keyword_matches": [
+          "throughput",
+          "memory",
+          "bandwidth"
         ],
-        "analysis_keyword_match_count": 1,
+        "bonus_keyword_match_count": 3,
+        "analysis_keyword_matches": [
+          "baseline",
+          "throughput",
+          "memory",
+          "bandwidth"
+        ],
+        "analysis_keyword_match_count": 4,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.5
       },
       "selection_lane": "fresh"
     }
