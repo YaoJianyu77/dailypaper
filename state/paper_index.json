@@ -1,6 +1,34 @@
 {
-  "last_updated": "2026-03-19",
+  "last_updated": "2026-03-20",
   "papers": [
+    {
+      "paper_id": "2603.19133v1",
+      "title": "A Pipelined Collaborative Speculative Decoding Framework for Efficient Edge-Cloud LLM Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-19T16:51:32Z",
+      "source_lane": "fresh",
+      "topics": [
+        "edge-cloud inference",
+        "LLM serving",
+        "speculative decoding",
+        "asynchronous pipeline",
+        "rejection sampling",
+        "sparse compression"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-20",
+      "last_seen_date": "2026-03-20",
+      "last_recommended_date": "2026-03-20",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-20",
+          "recommendation": 9.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-19"
+    },
     {
       "paper_id": "2603.10342v1",
       "title": "AgentServe: Algorithm-System Co-Design for Efficient Agentic AI Serving on a Consumer-Grade GPU",
@@ -154,6 +182,33 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2603.19163v1",
+      "title": "cuGenOpt: A GPU-Accelerated General-Purpose Metaheuristic Framework for Combinatorial Optimization",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-03-19T17:19:21Z",
+      "source_lane": "fresh",
+      "topics": [
+        "GPU combinatorial optimization",
+        "CUDA metaheuristics",
+        "adaptive operator selection",
+        "JIT solver generation",
+        "LLM-assisted modeling"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-20",
+      "last_seen_date": "2026-03-20",
+      "last_recommended_date": "2026-03-20",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-20",
+          "recommendation": 7.67,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-19"
     },
     {
       "paper_id": "2207.00032",
@@ -375,6 +430,34 @@
         }
       ],
       "cooldown_until": "2026-05-16"
+    },
+    {
+      "paper_id": "2603.19172v1",
+      "title": "DyMoE: Dynamic Expert Orchestration with Mixed-Precision Quantization for Efficient MoE Inference on Edge",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-19T17:30:01Z",
+      "source_lane": "fresh",
+      "topics": [
+        "MoE inference",
+        "edge serving",
+        "mixed-precision quantization",
+        "runtime scheduling",
+        "expert prioritization",
+        "prefetching"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-20",
+      "last_seen_date": "2026-03-20",
+      "last_recommended_date": "2026-03-20",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-20",
+          "recommendation": 9.56,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-19"
     },
     {
       "paper_id": "dblp:journals/ral/MengSXX25",
@@ -634,6 +717,34 @@
         }
       ],
       "cooldown_until": "2026-05-10"
+    },
+    {
+      "paper_id": "2603.18383v1",
+      "title": "From Servers to Sites: Compositional Power Trace Generation of LLM Inference for Infrastructure Planning",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-19T01:01:41Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "power trace generation",
+        "datacenter power modeling",
+        "prefill and decode dynamics",
+        "facility load profiling",
+        "infrastructure planning"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-20",
+      "last_seen_date": "2026-03-20",
+      "last_recommended_date": "2026-03-20",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-20",
+          "recommendation": 9.38,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-19"
     },
     {
       "paper_id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
@@ -1629,6 +1740,34 @@
       "cooldown_until": "2026-04-09"
     },
     {
+      "paper_id": "2603.19173v1",
+      "title": "SOL-ExecBench: Speed-of-Light Benchmarking for Real-World GPU Kernels Against Hardware Limits",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-03-19T17:30:02Z",
+      "source_lane": "fresh",
+      "topics": [
+        "CUDA kernels",
+        "GPU benchmarking",
+        "Speed-of-Light bounds",
+        "Blackwell GPUs",
+        "kernel optimization",
+        "agentic optimizers"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-20",
+      "last_seen_date": "2026-03-20",
+      "last_recommended_date": "2026-03-20",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-20",
+          "recommendation": 9.38,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-19"
+    },
+    {
       "paper_id": "2602.07223v1",
       "title": "SpecAttn: Co-Designing Sparse Attention with Self-Speculative Decoding",
       "domain": "LLM Inference Systems",
@@ -1655,6 +1794,34 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2603.18567v1",
+      "title": "SpecForge: A Flexible and Efficient Open-Source Training Framework for Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-19T07:28:56Z",
+      "source_lane": "fresh",
+      "topics": [
+        "speculative decoding",
+        "EAGLE-3",
+        "draft model training",
+        "LLM serving",
+        "training kernels",
+        "hybrid parallelism"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-20",
+      "last_seen_date": "2026-03-20",
+      "last_recommended_date": "2026-03-20",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-20",
+          "recommendation": 8.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-19"
     },
     {
       "paper_id": "2602.06161v1",
