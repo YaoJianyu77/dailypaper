@@ -531,6 +531,13 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 7.67,
       "updated": "2026-03-20"
+    },
+    {
+      "id": "2603.18477v1",
+      "title": "Leveraging Large Language Models for Generalizing Peephole Optimizations",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 6.74,
+      "updated": "2026-03-21"
     }
   ],
   "edges": [
@@ -1735,5 +1742,5 @@
       "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-20"
+  "last_updated": "2026-03-21"
 }

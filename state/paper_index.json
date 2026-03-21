@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-20",
+  "last_updated": "2026-03-21",
   "papers": [
     {
       "paper_id": "2603.19133v1",
@@ -919,6 +919,33 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2603.18477v1",
+      "title": "Leveraging Large Language Models for Generalizing Peephole Optimizations",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-03-19T04:19:51Z",
+      "source_lane": "fresh",
+      "topics": [
+        "peephole optimization",
+        "LLVM",
+        "LLM-assisted compilers",
+        "program synthesis",
+        "formal verification"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-21",
+      "last_seen_date": "2026-03-21",
+      "last_recommended_date": "2026-03-21",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-21",
+          "recommendation": 6.74,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-20"
     },
     {
       "paper_id": "dblp:conf/cgo/FangKRAM26",

@@ -1,33 +1,33 @@
 {
-  "target_date": "2026-03-20",
+  "target_date": "2026-03-21",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-18",
-      "end": "2026-03-20"
+      "start": "2026-02-19",
+      "end": "2026-03-21"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-20",
-      "end": "2026-02-17"
+      "start": "2025-03-21",
+      "end": "2026-02-18"
     }
   },
-  "total_found": 210,
-  "total_venue": 3,
-  "total_filtered": 10,
+  "total_found": 221,
+  "total_venue": 14,
+  "total_filtered": 21,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 10,
+  "total_unique": 21,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 6,
+    "selected_count": 1,
     "lane_counts": {
-      "fresh": 6,
+      "fresh": 1,
       "established": 0,
       "classic": 0,
-      "history_filtered": 3,
+      "history_filtered": 17,
       "history_relaxed": 0,
       "classic_slot_active": 0
     },
@@ -40,640 +40,74 @@
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.19133v1",
-      "arxiv_id": "2603.19133v1",
-      "title": "A Pipelined Collaborative Speculative Decoding Framework for Efficient Edge-Cloud LLM Inference",
-      "summary": "Recent advancements and widespread adoption of Large Language Models (LLMs) in both industry and academia have catalyzed significant demand for LLM serving. However, traditional cloud services incur high costs, while on-device inference alone faces challenges due to limited resources. Edge-cloud collaboration emerges as a key research direction to combine the strengths of both paradigms, yet efficiently utilizing limited network bandwidth while fully leveraging and balancing the computational capabilities of edge devices and the cloud remains an open problem. To address these challenges, we propose Pipelined Collaborative Speculative Decoding Framework (PicoSpec), a novel, general-purpose, and training-free speculative decoding framework for LLM edge-cloud collaborative inference. We design an asynchronous pipeline that resolves the mutual waiting problem inherent in vanilla speculative decoding within edge collaboration scenarios, which concurrently executes a Small Language Model (SLM) on the edge device and a LLM in the cloud. Meanwhile, to mitigate the significant communication latency caused by transmitting vocabulary distributions, we introduce separate rejection sampling with sparse compression, which completes the rejection sampling with only a one-time cost of transmitting the compressed vocabulary. Experimental results demonstrate that our solution outperforms baseline and existing methods, achieving up to 2.9 speedup.",
+      "id": "http://arxiv.org/abs/2603.18477v1",
+      "arxiv_id": "2603.18477v1",
+      "title": "Leveraging Large Language Models for Generalizing Peephole Optimizations",
+      "summary": "Peephole optimizations are a core component of modern optimizing compilers. It rewrites specific instruction into semantically equivalent but more efficient forms. In practice, creating a new peephole optimization often starts from a concrete optimization instance and requires lifting it into a more general rewrite rule that matches a wider range of instruction patterns. This generalization step is critical to optimization effectiveness, but it is also difficult: producing rules that are both correct and sufficiently general typically demands substantial manual effort and domain expertise. Existing approaches such as Hydra attempt to automate this task with program synthesis, but their generalization capability is often limited by search-space explosion, under-generalization, and restricted support for diverse instruction domains.\n  We present LPG, large language model aided peephole optimization generalization, a framework that uses large language models (LLMs) to generalize peephole optimizations. The design of LPG is motivated by the observation that LLMs are effective at semantic abstraction and exploratory reasoning, while formal analyses are necessary to ensure that generated rules are sound and profitable. Based on this observation, LPG adopts a closed-loop workflow that integrates LLM-driven symbolic constant generalization, structural generalization, constraint relaxation, and bitwidth/precision generalization with feedback from syntactic validation, semantic verification, and profitability checking.\n  We evaluate LPG on real-world peephole optimization issues drawn from the LLVM ecosystem. Overall, LPG successfully generalizes 90 out of 102 optimizations. On the integer-focused subset that is directly comparable to Hydra, LPG generalizes 74 out of 81 optimizations, whereas Hydra generalizes 35.",
       "authors": [
-        "Yida Zhang",
-        "Zhiyong Gao",
-        "Shuaibing Yue",
-        "Jie Li",
-        "Rui Wang"
+        "Chunhao Liao",
+        "Hongxu Xu",
+        "Xintong Zhou",
+        "Zhenyang Xu",
+        "Chengnian Sun"
       ],
       "author_details": [
         {
-          "name": "Yida Zhang"
+          "name": "Chunhao Liao"
         },
         {
-          "name": "Zhiyong Gao"
+          "name": "Hongxu Xu"
         },
         {
-          "name": "Shuaibing Yue"
+          "name": "Xintong Zhou"
         },
         {
-          "name": "Jie Li"
+          "name": "Zhenyang Xu"
         },
         {
-          "name": "Rui Wang"
+          "name": "Chengnian Sun"
         }
       ],
-      "published": "2026-03-19T16:51:32Z",
-      "published_date": "2026-03-19 16:51:32+00:00",
-      "updated": "2026-03-19T16:51:32Z",
-      "comments": "8 pages, 6 figures",
-      "primary_category": "cs.DC",
+      "published": "2026-03-19T04:19:51Z",
+      "published_date": "2026-03-19 04:19:51+00:00",
+      "updated": "2026-03-19T04:19:51Z",
+      "primary_category": "cs.PL",
       "categories": [
-        "cs.DC"
+        "cs.PL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.19133v1",
-      "url": "http://arxiv.org/abs/2603.19133v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.18477v1",
+      "url": "http://arxiv.org/abs/2603.18477v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 3.0,
+        "relevance": 1.92,
         "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 9.97
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "llm inference",
-        "llm serving",
-        "serving",
-        "speculative decoding",
-        "latency",
-        "cs.DC",
-        "bandwidth",
-        "speedup",
-        "baseline"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 5,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "speculative decoding"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency",
-          "bandwidth",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "baseline",
-          "latency",
-          "bandwidth",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 4,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.19172v1",
-      "arxiv_id": "2603.19172v1",
-      "title": "DyMoE: Dynamic Expert Orchestration with Mixed-Precision Quantization for Efficient MoE Inference on Edge",
-      "summary": "Despite the computational efficiency of MoE models, the excessive memory footprint and I/O overhead inherent in multi-expert architectures pose formidable challenges for real-time inference on resource-constrained edge platforms. While existing static methods struggle with a rigid latency-accuracy trade-off, we observe that expert importance is highly skewed and depth-dependent. Motivated by these insights, we propose DyMoE, a dynamic mixed-precision quantization framework designed for high-performance edge inference. Leveraging insights into expert importance skewness and depth-dependent sensitivity, DyMoE introduces: (1) importance-aware prioritization to dynamically quantize experts at runtime; (2) depth-adaptive scheduling to preserve semantic integrity in critical layers; and (3) look-ahead prefetching to overlap I/O stalls. Experimental results on commercial edge hardware show that DyMoE reduces Time-to-First-Token (TTFT) by 3.44x-22.7x and up to a 14.58x speedup in Time-Per-Output-Token (TPOT) compared to state-of-the-art offloading baselines, enabling real-time, accuracy-preserving MoE inference on resource-constrained edge devices.",
-      "authors": [
-        "Yuegui Huang",
-        "Zhiyuan Fang",
-        "Weiqi Luo",
-        "Ruoyu Wu",
-        "Wuhui Chen",
-        "Zibin Zheng"
-      ],
-      "author_details": [
-        {
-          "name": "Yuegui Huang"
-        },
-        {
-          "name": "Zhiyuan Fang"
-        },
-        {
-          "name": "Weiqi Luo"
-        },
-        {
-          "name": "Ruoyu Wu"
-        },
-        {
-          "name": "Wuhui Chen"
-        },
-        {
-          "name": "Zibin Zheng"
-        }
-      ],
-      "published": "2026-03-19T17:30:01Z",
-      "published_date": "2026-03-19 17:30:01+00:00",
-      "updated": "2026-03-19T17:30:01Z",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.19172v1",
-      "url": "http://arxiv.org/abs/2603.19172v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.64,
-        "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 9.56
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "latency",
-        "quantization",
-        "cs.LG",
-        "runtime",
-        "memory",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.LG"
-        ],
-        "required_signal_matches": [
-          "runtime"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency",
-          "memory",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "latency",
-          "memory",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.19173v1",
-      "arxiv_id": "2603.19173v1",
-      "title": "SOL-ExecBench: Speed-of-Light Benchmarking for Real-World GPU Kernels Against Hardware Limits",
-      "summary": "As agentic AI systems become increasingly capable of generating and optimizing GPU kernels, progress is constrained by benchmarks that reward speedup over software baselines rather than proximity to hardware-efficient execution. We present SOL-ExecBench, a benchmark of 235 CUDA kernel optimization problems extracted from 124 production and emerging AI models spanning language, diffusion, vision, audio, video, and hybrid architectures, targeting NVIDIA Blackwell GPUs. The benchmark covers forward and backward workloads across BF16, FP8, and NVFP4, including kernels whose best performance is expected to rely on Blackwell-specific capabilities. Unlike prior benchmarks that evaluate kernels primarily relative to software implementations, SOL-ExecBench measures performance against analytically derived Speed-of-Light (SOL) bounds computed by SOLAR, our pipeline for deriving hardware-grounded SOL bounds, yielding a fixed target for hardware-efficient optimization. We report a SOL Score that quantifies how much of the gap between a release-defined scoring baseline and the hardware SOL bound a candidate kernel closes. To support robust evaluation of agentic optimizers, we additionally provide a sandboxed harness with GPU clock locking, L2 cache clearing, isolated subprocess execution, and static analysis based checks against common reward-hacking strategies. SOL-ExecBench reframes GPU kernel benchmarking from beating a mutable software baseline to closing the remaining gap to hardware Speed-of-Light.",
-      "authors": [
-        "Edward Lin",
-        "Sahil Modi",
-        "Siva Kumar Sastry Hari",
-        "Qijing Huang",
-        "Zhifan Ye",
-        "Nestor Qin",
-        "Fengzhe Zhou",
-        "Yuan Zhang",
-        "Jingquan Wang",
-        "Sana Damani",
-        "Dheeraj Peri",
-        "Ouye Xie",
-        "Aditya Kane",
-        "Moshe Maor",
-        "Michael Behar",
-        "Triston Cao",
-        "Rishabh Mehta",
-        "Vartika Singh",
-        "Vikram Sharma Mailthody",
-        "Terry Chen",
-        "Zihao Ye",
-        "Hanfeng Chen",
-        "Tianqi Chen",
-        "Vinod Grover",
-        "Wei Chen",
-        "Wei Liu",
-        "Eric Chung",
-        "Luis Ceze",
-        "Roger Bringmann",
-        "Cyril Zeller",
-        "Michael Lightstone",
-        "Christos Kozyrakis",
-        "Humphrey Shi"
-      ],
-      "author_details": [
-        {
-          "name": "Edward Lin"
-        },
-        {
-          "name": "Sahil Modi"
-        },
-        {
-          "name": "Siva Kumar Sastry Hari"
-        },
-        {
-          "name": "Qijing Huang"
-        },
-        {
-          "name": "Zhifan Ye"
-        },
-        {
-          "name": "Nestor Qin"
-        },
-        {
-          "name": "Fengzhe Zhou"
-        },
-        {
-          "name": "Yuan Zhang"
-        },
-        {
-          "name": "Jingquan Wang"
-        },
-        {
-          "name": "Sana Damani"
-        },
-        {
-          "name": "Dheeraj Peri"
-        },
-        {
-          "name": "Ouye Xie"
-        },
-        {
-          "name": "Aditya Kane"
-        },
-        {
-          "name": "Moshe Maor"
-        },
-        {
-          "name": "Michael Behar"
-        },
-        {
-          "name": "Triston Cao"
-        },
-        {
-          "name": "Rishabh Mehta"
-        },
-        {
-          "name": "Vartika Singh"
-        },
-        {
-          "name": "Vikram Sharma Mailthody"
-        },
-        {
-          "name": "Terry Chen"
-        },
-        {
-          "name": "Zihao Ye"
-        },
-        {
-          "name": "Hanfeng Chen"
-        },
-        {
-          "name": "Tianqi Chen"
-        },
-        {
-          "name": "Vinod Grover"
-        },
-        {
-          "name": "Wei Chen"
-        },
-        {
-          "name": "Wei Liu"
-        },
-        {
-          "name": "Eric Chung"
-        },
-        {
-          "name": "Luis Ceze"
-        },
-        {
-          "name": "Roger Bringmann"
-        },
-        {
-          "name": "Cyril Zeller"
-        },
-        {
-          "name": "Michael Lightstone"
-        },
-        {
-          "name": "Christos Kozyrakis"
-        },
-        {
-          "name": "Humphrey Shi"
-        }
-      ],
-      "published": "2026-03-19T17:30:02Z",
-      "published_date": "2026-03-19 17:30:02+00:00",
-      "updated": "2026-03-19T17:30:02Z",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AI"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.19173v1",
-      "url": "http://arxiv.org/abs/2603.19173v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.3,
-        "quality": 1.3,
-        "recommendation": 9.38
+        "popularity": 0.5,
+        "quality": 0.5,
+        "recommendation": 6.74
       },
       "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "cuda",
-        "cuda kernel",
-        "gpu kernel",
-        "cs.LG",
-        "benchmark",
-        "baseline",
-        "speedup"
+        "program synthesis",
+        "llvm",
+        "cs.PL"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 3,
+        "text_match_count": 2,
         "matched_categories": [
-          "cs.LG"
+          "cs.PL"
         ],
         "required_signal_matches": [
-          "cuda",
-          "cuda kernel",
-          "gpu kernel"
+          "llvm"
         ],
-        "required_signal_match_count": 3,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "benchmark",
-          "baseline",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.18383v1",
-      "arxiv_id": "2603.18383v1",
-      "title": "From Servers to Sites: Compositional Power Trace Generation of LLM Inference for Infrastructure Planning",
-      "summary": "Datacenter operators and electrical utilities rely on power traces at different spatiotemporal scales. Operators use fine-grained traces for provisioning, facility management, and scheduling, while utilities use site-level load profiles for capacity and interconnection planning. Existing datacenter power models do not capture LLM inference workloads, in which GPUs shift rapidly among compute-intensive prefill, lower-power decode, and idle states, and facility demand depends on how these states evolve and synchronize across many devices. We show that LLM inference power can be represented compositionally through two components: workload-driven transitions among operating states and configuration-specific power distributions within those states. Building on this observation, we develop a trace-generation framework that learns from measured traces and synthesizes power profiles for new traffic conditions and serving configurations. These traces aggregate from GPU servers to rack-, row-, and facility-scale load profiles at the temporal granularity required by the study.\n  Across multiple LLMs, tensor-parallel settings, and GPU generations, our framework achieves median absolute energy error below 5% for most configurations while preserving temporal autocorrelation structure. The resulting traces support downstream analyses including oversubscription, power modulation, and utility-facing load characterization, enabling infrastructure evaluations that flat nameplate assumptions and static trace replay cannot support.",
-      "authors": [
-        "Grant Wilkins",
-        "Fiodar Kazhamiaka",
-        "Ram Rajagopal"
-      ],
-      "author_details": [
-        {
-          "name": "Grant Wilkins"
-        },
-        {
-          "name": "Fiodar Kazhamiaka"
-        },
-        {
-          "name": "Ram Rajagopal"
-        }
-      ],
-      "published": "2026-03-19T01:01:41Z",
-      "published_date": "2026-03-19 01:01:41+00:00",
-      "updated": "2026-03-19T01:01:41Z",
-      "primary_category": "cs.DC",
-      "categories": [
-        "cs.DC"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.18383v1",
-      "url": "http://arxiv.org/abs/2603.18383v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.3,
-        "quality": 1.3,
-        "recommendation": 9.38
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "llm inference",
-        "serving",
-        "prefill",
-        "decode",
-        "cs.DC"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 4,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "prefill",
-          "decode"
-        ],
-        "required_signal_match_count": 2,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
         "analysis_keyword_matches": [],
         "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.18567v1",
-      "arxiv_id": "2603.18567v1",
-      "title": "SpecForge: A Flexible and Efficient Open-Source Training Framework for Speculative Decoding",
-      "summary": "Large language models incur high inference latency due to sequential autoregressive decoding. Speculative decoding alleviates this bottleneck by using a lightweight draft model to propose multiple tokens for batched verification. However, its adoption has been limited by the lack of high-quality draft models and scalable training infrastructure. We introduce SpecForge, an open-source, production-oriented framework for training speculative decoding models with full support for EAGLE-3. SpecForge incorporates target-draft decoupling, hybrid parallelism, optimized training kernels, and integration with production-grade inference engines, enabling up to 9.9x faster EAGLE-3 training for Qwen3-235B-A22B. In addition, we release SpecBundle, a suite of production-grade EAGLE-3 draft models trained with SpecForge for mainstream open-source LLMs. Through a systematic study of speculative decoding training recipes, SpecBundle addresses the scarcity of high-quality drafts in the community, and our draft models achieve up to 4.48x end-to-end inference speedup on SGLang, establishing SpecForge as a practical foundation for real-world speculative decoding deployment.",
-      "authors": [
-        "Shenggui Li",
-        "Chao Wang",
-        "Yikai Zhu",
-        "Yubo Wang",
-        "Fan Yin",
-        "Shuai Shi",
-        "Yefei Chen",
-        "Xiaomin Dong",
-        "Qiaoling Chen",
-        "Jin Pan",
-        "Ji Li",
-        "Laixin Xie",
-        "Yineng Zhang",
-        "Lei Yu",
-        "Yonggang Wen",
-        "Ivor Tsang",
-        "Tianwei Zhang"
-      ],
-      "author_details": [
-        {
-          "name": "Shenggui Li"
-        },
-        {
-          "name": "Chao Wang"
-        },
-        {
-          "name": "Yikai Zhu"
-        },
-        {
-          "name": "Yubo Wang"
-        },
-        {
-          "name": "Fan Yin"
-        },
-        {
-          "name": "Shuai Shi"
-        },
-        {
-          "name": "Yefei Chen"
-        },
-        {
-          "name": "Xiaomin Dong"
-        },
-        {
-          "name": "Qiaoling Chen"
-        },
-        {
-          "name": "Jin Pan"
-        },
-        {
-          "name": "Ji Li"
-        },
-        {
-          "name": "Laixin Xie"
-        },
-        {
-          "name": "Yineng Zhang"
-        },
-        {
-          "name": "Lei Yu"
-        },
-        {
-          "name": "Yonggang Wen"
-        },
-        {
-          "name": "Ivor Tsang"
-        },
-        {
-          "name": "Tianwei Zhang"
-        }
-      ],
-      "published": "2026-03-19T07:28:56Z",
-      "published_date": "2026-03-19 07:28:56+00:00",
-      "updated": "2026-03-19T07:28:56Z",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.18567v1",
-      "url": "http://arxiv.org/abs/2603.18567v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 0.8,
-        "quality": 0.8,
-        "recommendation": 8.97
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "speculative decoding",
-        "latency",
-        "cs.LG",
-        "cs.CL",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.LG",
-          "cs.CL"
-        ],
-        "required_signal_matches": [
-          "speculative decoding"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "latency",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.19163v1",
-      "arxiv_id": "2603.19163v1",
-      "title": "cuGenOpt: A GPU-Accelerated General-Purpose Metaheuristic Framework for Combinatorial Optimization",
-      "summary": "Combinatorial optimization problems arise in logistics, scheduling, and resource allocation, yet existing approaches face a fundamental trade-off among generality, performance, and usability. We present cuGenOpt, a GPU-accelerated general-purpose metaheuristic framework that addresses all three dimensions simultaneously.\n  At the engine level, cuGenOpt adopts a \"one block evolves one solution\" CUDA architecture with a unified encoding abstraction (permutation, binary, integer), a two-level adaptive operator selection mechanism, and hardware-aware resource management. At the extensibility level, a user-defined operator registration interface allows domain experts to inject problem-specific CUDA search operators. At the usability level, a JIT compilation pipeline exposes the framework as a pure-Python API, and an LLM-based modeling assistant converts natural-language problem descriptions into executable solver code.\n  Experiments across five thematic suites on three GPU architectures (T4, V100, A800) show that cuGenOpt outperforms general MIP solvers by orders of magnitude, achieves competitive quality against specialized solvers on instances up to n=150, and attains 4.73% gap on TSP-442 within 30s. Twelve problem types spanning five encoding variants are solved to optimality. Framework-level optimizations cumulatively reduce pcb442 gap from 36% to 4.73% and boost VRPTW throughput by 75-81%.\n  Code: https://github.com/L-yang-yang/cugenopt",
-      "authors": [
-        "Yuyang Liu"
-      ],
-      "author_details": [
-        {
-          "name": "Yuyang Liu"
-        }
-      ],
-      "published": "2026-03-19T17:19:21Z",
-      "published_date": "2026-03-19 17:19:21+00:00",
-      "updated": "2026-03-19T17:19:21Z",
-      "comments": "28 pages, 9 figures. Code available at https://github.com/L-yang-yang/cugenopt",
-      "primary_category": "cs.AI",
-      "categories": [
-        "cs.AI",
-        "cs.DC"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.19163v1",
-      "url": "http://arxiv.org/abs/2603.19163v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.75,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 7.67
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "cuda",
-        "cs.DC",
-        "throughput"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "cuda"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "throughput"
-        ],
-        "analysis_keyword_match_count": 1,
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
