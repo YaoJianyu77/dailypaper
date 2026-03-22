@@ -495,35 +495,35 @@
       "title": "A Pipelined Collaborative Speculative Decoding Framework for Efficient Edge-Cloud LLM Inference",
       "domain": "LLM Inference Systems",
       "quality_score": 9.97,
-      "updated": "2026-03-20"
+      "updated": "2026-03-22"
     },
     {
       "id": "2603.19172v1",
       "title": "DyMoE: Dynamic Expert Orchestration with Mixed-Precision Quantization for Efficient MoE Inference on Edge",
       "domain": "LLM Inference Systems",
       "quality_score": 9.56,
-      "updated": "2026-03-20"
+      "updated": "2026-03-22"
     },
     {
       "id": "2603.19173v1",
       "title": "SOL-ExecBench: Speed-of-Light Benchmarking for Real-World GPU Kernels Against Hardware Limits",
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 9.38,
-      "updated": "2026-03-20"
+      "updated": "2026-03-22"
     },
     {
       "id": "2603.18383v1",
       "title": "From Servers to Sites: Compositional Power Trace Generation of LLM Inference for Infrastructure Planning",
       "domain": "LLM Inference Systems",
       "quality_score": 9.38,
-      "updated": "2026-03-20"
+      "updated": "2026-03-22"
     },
     {
       "id": "2603.18567v1",
       "title": "SpecForge: A Flexible and Efficient Open-Source Training Framework for Speculative Decoding",
       "domain": "LLM Inference Systems",
       "quality_score": 8.97,
-      "updated": "2026-03-20"
+      "updated": "2026-03-22"
     },
     {
       "id": "2603.19163v1",
@@ -538,6 +538,13 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 6.74,
       "updated": "2026-03-21"
+    },
+    {
+      "id": "2211.17192",
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "quality_score": 5.92,
+      "updated": "2026-03-22"
     }
   ],
   "edges": [
@@ -1740,7 +1747,37 @@
       "target": "2603.19173v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2211.17192",
+      "target": "2603.18567v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2211.17192",
+      "target": "2603.19133v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2211.17192",
+      "target": "2603.19172v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.19133v1",
+      "target": "2211.17192",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.18567v1",
+      "target": "2211.17192",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-21"
+  "last_updated": "2026-03-22"
 }
