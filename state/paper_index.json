@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-22",
+  "last_updated": "2026-03-23",
   "papers": [
     {
       "paper_id": "2603.19133v1",
@@ -950,17 +950,22 @@
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-09",
-      "last_seen_date": "2026-03-09",
-      "last_recommended_date": "2026-03-09",
-      "recommended_count": 1,
+      "last_seen_date": "2026-03-23",
+      "last_recommended_date": "2026-03-23",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-03-09",
           "recommendation": 4.79,
           "lane": "established"
+        },
+        {
+          "date": "2026-03-23",
+          "recommendation": 4.79,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-08"
+      "cooldown_until": "2026-05-22"
     },
     {
       "paper_id": "2603.18477v1",
