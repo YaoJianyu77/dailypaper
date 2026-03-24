@@ -545,6 +545,48 @@
       "domain": "LLM Inference Systems",
       "quality_score": 5.92,
       "updated": "2026-03-22"
+    },
+    {
+      "id": "2603.21465v1",
+      "title": "DRTriton: Large-Scale Synthetic Data Reinforcement Learning for Triton Kernel Generation",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 9.97,
+      "updated": "2026-03-24"
+    },
+    {
+      "id": "2603.21331v1",
+      "title": "AutoKernel: Autonomous GPU Kernel Optimization via Iterative Agent-Driven Search",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 9.88,
+      "updated": "2026-03-24"
+    },
+    {
+      "id": "2603.21576v1",
+      "title": "PRISM: Breaking the O(n) Memory Wall in Long-Context LLM Inference via O(1) Photonic Block Selection",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.55,
+      "updated": "2026-03-24"
+    },
+    {
+      "id": "2603.21365v1",
+      "title": "TIDE: Token-Informed Depth Execution for Per-Token Early Exit in LLM Inference",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.38,
+      "updated": "2026-03-24"
+    },
+    {
+      "id": "2603.22206v1",
+      "title": "Chimera: Latency- and Performance-Aware Multi-agent Serving for Heterogeneous LLMs",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.3,
+      "updated": "2026-03-24"
+    },
+    {
+      "id": "2603.21321v1",
+      "title": "Improving Coherence and Persistence in Agentic AI for System Optimization",
+      "domain": "LLM Inference Systems",
+      "quality_score": 7.91,
+      "updated": "2026-03-24"
     }
   ],
   "edges": [
@@ -1777,7 +1819,91 @@
       "target": "2211.17192",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2603.21465v1",
+      "target": "2603.21331v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.21331v1",
+      "target": "2603.21465v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.21576v1",
+      "target": "2603.21365v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.21576v1",
+      "target": "2603.22206v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.21576v1",
+      "target": "2603.21321v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.21365v1",
+      "target": "2603.21576v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.21365v1",
+      "target": "2603.22206v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.21365v1",
+      "target": "2603.21321v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.22206v1",
+      "target": "2603.21576v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.22206v1",
+      "target": "2603.21365v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.22206v1",
+      "target": "2603.21321v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.21321v1",
+      "target": "2603.21576v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.21321v1",
+      "target": "2603.21365v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.21321v1",
+      "target": "2603.22206v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-23"
+  "last_updated": "2026-03-24"
 }

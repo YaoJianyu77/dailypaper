@@ -1,34 +1,34 @@
 {
-  "target_date": "2026-03-23",
+  "target_date": "2026-03-24",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-21",
-      "end": "2026-03-23"
+      "start": "2026-02-22",
+      "end": "2026-03-24"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-23",
-      "end": "2026-02-20"
+      "start": "2025-03-24",
+      "end": "2026-02-21"
     }
   },
-  "total_found": 8,
-  "total_venue": 1,
-  "total_filtered": 1,
-  "total_recent": 0,
+  "total_found": 220,
+  "total_venue": 13,
+  "total_filtered": 19,
+  "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 1,
+  "total_unique": 19,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 1,
+    "selected_count": 6,
     "lane_counts": {
-      "fresh": 0,
-      "established": 1,
+      "fresh": 6,
+      "established": 0,
       "classic": 0,
-      "history_filtered": 1,
-      "history_relaxed": 1,
+      "history_filtered": 10,
+      "history_relaxed": 0,
       "classic_slot_active": 0
     },
     "classic_policy": {
@@ -40,82 +40,472 @@
   },
   "top_papers": [
     {
-      "id": "dblp:conf/osdi/GuanF0RRY0A25",
-      "paper_id": "dblp:conf/osdi/GuanF0RRY0A25",
-      "title": "KPerfIR: Towards a Open and Compiler-centric Ecosystem for GPU Kernel Performance Tooling on Modern AI Workloads.",
-      "summary": "In this work, we propose KPerfIR, a novel multilevel compiler-centric infrastructure to enable the development of customizable, extendable, and portable profiling tools tailored for modern artificial intelligence (AI) workloads on modern GPUs. Our approach integrates profiling capabilities directly into the compiler workflow, allowing profiling functionalities to be implemented as compiler passes, offering a programmable and reusable framework for performance analysis. This design bridges the gap between compilers and profilers, enabling fine-grained insights into complex optimization challenges such as overlapping the execution of fine-grained function units on GPUs. KPerfIR is integrated into the Triton infrastructure to highlight the power of a compiler-centric approach to advance performance analysis and optimization in the ever-evolving landscape of AI compilers. Our evaluation shows that our tool incurs low overhead (8.2%), provides accurate measurements (2% relative error), and delivers actionable insights into complicated GPU intra-kernel optimizations.",
-      "abstract": "In this work, we propose KPerfIR, a novel multilevel compiler-centric infrastructure to enable the development of customizable, extendable, and portable profiling tools tailored for modern artificial intelligence (AI) workloads on modern GPUs. Our approach integrates profiling capabilities directly into the compiler workflow, allowing profiling functionalities to be implemented as compiler passes, offering a programmable and reusable framework for performance analysis. This design bridges the gap between compilers and profilers, enabling fine-grained insights into complex optimization challenges such as overlapping the execution of fine-grained function units on GPUs. KPerfIR is integrated into the Triton infrastructure to highlight the power of a compiler-centric approach to advance performance analysis and optimization in the ever-evolving landscape of AI compilers. Our evaluation shows that our tool incurs low overhead (8.2%), provides accurate measurements (2% relative error), and delivers actionable insights into complicated GPU intra-kernel optimizations.",
+      "id": "http://arxiv.org/abs/2603.21465v1",
+      "arxiv_id": "2603.21465v1",
+      "title": "DRTriton: Large-Scale Synthetic Data Reinforcement Learning for Triton Kernel Generation",
+      "summary": "Developing efficient CUDA kernels is a fundamental yet challenging task in the generative AI industry. Recent researches leverage Large Language Models (LLMs) to automatically convert PyTorch reference implementations to CUDA kernels, significantly reducing the engineering efforts. State-of-the-art LLMs, such as GPT-5.2 and Claude-Sonnet-4.5, still struggle in this specific task. To address this challenge, we propose DRTriton, a scalable learning framework for training LLMs to convert PyTorch codes into highly optimized Triton kernels, which are then compiled to CUDA kernels at runtime. DRTriton consists of three key components: (i) a data synthetic algorithm CSP-DAG that guarantees full coverage and unbiased uniform sampling over the operator space with controlled difficulty; (ii) a curriculum reinforcement learning with decoupled reward efficiently optimizes conversion success rate and inference speed simultaneously; and (iii) a test-time search algorithm that further improves the inference speed of the generated Triton kernels. Notably, despite being trained exclusively on synthetic data, DRTriton generalizes effectively to real-world CUDA kernels that are challenging even for human experts. Experimental results show that DRTriton-7B achieves speedup on 92% of the KernelBench Level 2, compared to 23% for GPT-5.2 and 19% for Claude-Sonnet-4.5.",
       "authors": [
-        "Yue Guan 0003",
-        "Yuanwei Fang",
-        "Keren Zhou 0001",
-        "Corbin Robeck",
-        "Manman Ren",
-        "Zhongkai Yu",
-        "Yufei Ding 0001",
-        "Adnan Aziz"
+        "Siqi Guo",
+        "Ming Lin",
+        "Tianbao Yang"
       ],
-      "published": "2025",
-      "published_date": "2025-07-01 00:00:00",
-      "publicationDate": "2025",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://www.usenix.org/conference/osdi25/presentation/guan",
-      "url": "https://www.usenix.org/conference/osdi25/presentation/guan",
-      "pdf_url": "https://www.usenix.org/system/files/osdi25-guan.pdf",
-      "venue": "OSDI",
-      "venue_source_name": "OSDI",
-      "venue_source_alias": "OSDI",
-      "dblp_key": "conf/osdi/GuanF0RRY0A25",
-      "doi": "",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "open",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "OSDI",
-        "venue_alias": "OSDI"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2025,
+      "author_details": [
+        {
+          "name": "Siqi Guo"
+        },
+        {
+          "name": "Ming Lin"
+        },
+        {
+          "name": "Tianbao Yang"
+        }
+      ],
+      "published": "2026-03-23T00:59:35Z",
+      "published_date": "2026-03-23 00:59:35+00:00",
+      "updated": "2026-03-23T00:59:35Z",
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.21465v1",
+      "url": "http://arxiv.org/abs/2603.21465v1",
+      "source": "arxiv",
       "scores": {
-        "relevance": 1.63,
-        "recency": 0.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 4.79
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.97
       },
       "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "gpu kernel"
+        "cuda",
+        "kernel generation",
+        "triton",
+        "cs.LG",
+        "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
-        "matched_categories": [],
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.LG"
+        ],
         "required_signal_matches": [
-          "gpu kernel"
+          "cuda",
+          "kernel generation",
+          "triton"
+        ],
+        "required_signal_match_count": 3,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.9,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.21331v1",
+      "arxiv_id": "2603.21331v1",
+      "title": "AutoKernel: Autonomous GPU Kernel Optimization via Iterative Agent-Driven Search",
+      "summary": "Writing high-performance GPU kernels is among the most labor-intensive tasks in machine learning systems engineering. We present AutoKernel, an open-source framework that applies an autonomous agent loop to GPU kernel optimization for arbitrary PyTorch models. Given a model, AutoKernel profiles it to identify computational bottlenecks, ranks them by Amdahl's law impact, and iteratively refines Triton or CUDA C++ kernel implementations through hundreds of experiments without human intervention. A five-stage correctness harness covering smoke tests, shape sweeps, numerical stability, determinism verification, and edge-case coverage ensures every candidate kernel is validated before any speedup is recorded. The system comprises over 9,000 lines of Python, 18 starter kernel implementations across two backends, a six-tier optimization playbook, and integration with the KernelBench benchmark suite. AutoKernel covers nine kernel types spanning the dominant operations in modern transformer architectures. On an NVIDIA H100, our Triton kernels outperform both PyTorch eager and torch.compile (max-autotune) on the majority of tested configurations: 5.29x over eager on RMSNorm, 2.82x on softmax, and 2.21x on cross-entropy, while beating torch.compile by 2.83x, 3.44x, and 2.94x respectively. In community deployment, an AutoKernel-optimized kernel achieved first place on the vectorsum_v2 B200 leaderboard. The full system is available at https://github.com/RightNow-AI/autokernel.",
+      "authors": [
+        "Jaber Jaber",
+        "Osama Jaber"
+      ],
+      "author_details": [
+        {
+          "name": "Jaber Jaber"
+        },
+        {
+          "name": "Osama Jaber"
+        }
+      ],
+      "published": "2026-03-22T17:15:28Z",
+      "published_date": "2026-03-22 17:15:28+00:00",
+      "updated": "2026-03-22T17:15:28Z",
+      "comments": "11 pages, 5 tables, 2 figures. Code: https://github.com/RightNow-AI/autokernel",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.PF"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.21331v1",
+      "url": "http://arxiv.org/abs/2603.21331v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.9,
+        "quality": 1.9,
+        "recommendation": 9.88
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "cuda",
+        "gpu kernel",
+        "triton",
+        "cs.LG",
+        "benchmark",
+        "speedup"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.LG"
+        ],
+        "required_signal_matches": [
+          "cuda",
+          "gpu kernel",
+          "triton"
+        ],
+        "required_signal_match_count": 3,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "benchmark",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.9,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.21576v1",
+      "arxiv_id": "2603.21576v1",
+      "title": "PRISM: Breaking the O(n) Memory Wall in Long-Context LLM Inference via O(1) Photonic Block Selection",
+      "summary": "Long-context LLM inference is bottlenecked not by compute but by the O(n) memory bandwidth cost of scanning the KV cache at every decode step -- a wall that no amount of arithmetic scaling can break. Recent photonic accelerators have demonstrated impressive throughput for dense attention computation; however, these approaches inherit the same O(n) memory scaling as electronic attention when applied to long contexts. We observe that the real leverage point is the coarse block-selection step: a memory-bound similarity search that determines which KV blocks to fetch. We identify, for the first time, that this task is structurally matched to the photonic broadcast-and-weight paradigm -- the query fans out to all candidates via passive splitting, signatures are quasi-static (matching electro-optic MRR programming), and only rank order matters (relaxing precision to 4-6 bits). Crucially, the photonic advantage grows with context length: as N increases, the electronic scan cost rises linearly while the photonic evaluation remains O(1). We instantiate this insight in PRISM (Photonic Ranking via Inner-product Similarity with Microring weights), a thin-film lithium niobate (TFLN) similarity engine. Hardware-impaired needle-in-a-haystack evaluation on Qwen2.5-7B confirms 100% accuracy from 4K through 64K tokens at k=32, with 16x traffic reduction at 64K context. PRISM achieves a four-order-of-magnitude energy advantage over GPU baselines at practical context lengths (n >= 4K).",
+      "authors": [
+        "Hyoseok Park",
+        "Yeonsang Park"
+      ],
+      "author_details": [
+        {
+          "name": "Hyoseok Park"
+        },
+        {
+          "name": "Yeonsang Park"
+        }
+      ],
+      "published": "2026-03-23T04:55:56Z",
+      "published_date": "2026-03-23 04:55:56+00:00",
+      "updated": "2026-03-23T04:55:56Z",
+      "comments": "28 pages, 27 figures, 15 tables, including supplementary material. Code available at https://github.com/hyoseokp/PRISM",
+      "primary_category": "physics.optics",
+      "categories": [
+        "physics.optics",
+        "cs.AI",
+        "cs.AR",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.21576v1",
+      "url": "http://arxiv.org/abs/2603.21576v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 9.55
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm inference",
+        "decode",
+        "kv cache",
+        "throughput",
+        "cs.LG",
+        "cs.CL",
+        "cs.AR",
+        "memory",
+        "bandwidth",
+        "evaluation"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 4,
+        "matched_categories": [
+          "cs.LG",
+          "cs.CL",
+          "cs.AR"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "decode"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "throughput",
+          "memory",
+          "bandwidth"
+        ],
+        "bonus_keyword_match_count": 3,
+        "analysis_keyword_matches": [
+          "evaluation",
+          "throughput",
+          "memory",
+          "bandwidth"
+        ],
+        "analysis_keyword_match_count": 4,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.5
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.21365v1",
+      "arxiv_id": "2603.21365v1",
+      "title": "TIDE: Token-Informed Depth Execution for Per-Token Early Exit in LLM Inference",
+      "summary": "Large language models run every token through every layer, regardless of difficulty. We present TIDE, a post-training system that attaches tiny learned routers at periodic checkpoint layers and, at inference time, selects the earliest layer whose hidden state has converged for each token. TIDE requires no model retraining, works with any HuggingFace causal LM, auto-detects GPU architecture, and supports float32, float16, and bfloat16 through fused CUDA kernels. On an NVIDIA A100 with DeepSeek R1 Distill 8B, TIDE achieves 100% prefill exit rate (5% of tokens exit at layer 11, the remaining at layer 31), reduces prefill latency by 7.2%, and increases single-batch throughput by 6.6%. During autoregressive decoding, 98-99% of tokens exit early while the model correctly solves a multi-step math problem with 95 unique output tokens. On Qwen3 8B (36 layers), throughput improves by 8.1% at batch size 8. Calibration on 2,000 WikiText samples takes under 3 minutes and produces a ~4 MB router checkpoint. The system comprises 1,308 lines of Python and 1,081 lines of CUDA/C++ with 74 passing tests. Code: https://github.com/RightNow-AI/TIDE",
+      "authors": [
+        "Jaber Jaber",
+        "Osama Jaber"
+      ],
+      "author_details": [
+        {
+          "name": "Jaber Jaber"
+        },
+        {
+          "name": "Osama Jaber"
+        }
+      ],
+      "published": "2026-03-22T18:58:07Z",
+      "published_date": "2026-03-22 18:58:07+00:00",
+      "updated": "2026-03-22T18:58:07Z",
+      "comments": "9 pages, 5 tables, 2 figures. Code: https://github.com/RightNow-AI/TIDE",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.21365v1",
+      "url": "http://arxiv.org/abs/2603.21365v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.3,
+        "quality": 1.3,
+        "recommendation": 9.38
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm inference",
+        "prefill",
+        "throughput",
+        "latency",
+        "cs.LG",
+        "cs.CL",
+        "a100"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 4,
+        "matched_categories": [
+          "cs.LG",
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "prefill",
+          "a100"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "throughput",
+          "latency"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "throughput",
+          "latency"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.36
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.22206v1",
+      "arxiv_id": "2603.22206v1",
+      "title": "Chimera: Latency- and Performance-Aware Multi-agent Serving for Heterogeneous LLMs",
+      "summary": "Multi-agent applications often execute complex tasks as multi-stage workflows, where each stage is an LLM call whose output becomes part of context for subsequent steps. Existing LLM serving systems largely assume homogeneous clusters with identical model replicas. This design overlooks the potential of heterogeneous deployments, where models of different sizes and capabilities enable finer trade-offs between latency and performance. However, heterogeneity introduces new challenges in scheduling across models with diverse throughput and performance. We present Chimera, a predictive scheduling system for multi-agent workflow serving on heterogeneous LLM clusters that jointly improves end-to-end latency and task performance. Chimera applies semantic routing to estimate per-model confidence scores for each request, predicts the total remaining output length of the workflow, and estimates per-model congestion using in-flight predicted token volumes for load balancing. We evaluate Chimera on representative agentic workflows for code generation and math reasoning using multiple heterogeneous LLM configurations. Across comparable settings, Chimera traces the best latency-performance frontier, reducing end-to-end latency by 1.2--2.4$\\times$ and improving task performance by 8.0-9.5 percentage points on average over competitive baselines including vLLM.",
+      "authors": [
+        "Kangqi Ni",
+        "Wenyue Hua",
+        "Xiaoxiang Shi",
+        "Jiang Guo",
+        "Shiyu Chang",
+        "Tianlong Chen"
+      ],
+      "author_details": [
+        {
+          "name": "Kangqi Ni"
+        },
+        {
+          "name": "Wenyue Hua"
+        },
+        {
+          "name": "Xiaoxiang Shi"
+        },
+        {
+          "name": "Jiang Guo"
+        },
+        {
+          "name": "Shiyu Chang"
+        },
+        {
+          "name": "Tianlong Chen"
+        }
+      ],
+      "published": "2026-03-23T17:01:42Z",
+      "published_date": "2026-03-23 17:01:42+00:00",
+      "updated": "2026-03-23T17:01:42Z",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.22206v1",
+      "url": "http://arxiv.org/abs/2603.22206v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 9.3
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm serving",
+        "serving",
+        "vllm",
+        "throughput",
+        "latency",
+        "cs.LG"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 5,
+        "matched_categories": [
+          "cs.LG"
+        ],
+        "required_signal_matches": [
+          "vllm"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "throughput",
+          "latency"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "throughput",
+          "latency"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.36
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.21321v1",
+      "arxiv_id": "2603.21321v1",
+      "title": "Improving Coherence and Persistence in Agentic AI for System Optimization",
+      "summary": "Designing high-performance system heuristics is a creative, iterative process requiring experts to form hypotheses and execute multi-step conceptual shifts. While Large Language Models (LLMs) show promise in automating this loop, they struggle with complex system problems due to two critical failure modes: evolutionary neighborhood bias and the coherence ceiling. Evolutionary methods often remain trapped in local optima by relying on scalar benchmark scores, failing when coordinated multi-step changes are required. Conversely, existing agentic frameworks suffer from context degradation over long horizons or fail to accumulate knowledge across independent runs.\n  We present Engram, an agentic researcher architecture that addresses these limitations by decoupling long-horizon exploration from the constraints of a single context window. Engram organizes exploration into a sequence of agents that iteratively design, test, and analyze mechanisms. At the conclusion of each run, an agent stores code snapshots, logs, and results in a persistent Archive and distills high-level modeling insights into a compact, persistent Research Digest. Subsequent agents then begin with a fresh context window, reading the Research Digest to build on prior discoveries.\n  We find that Engram exhibits superior performance across diverse domains including multi-cloud multicast, LLM inference request routing, and optimizing KV cache reuse in databases with natural language queries.",
+      "authors": [
+        "Pantea Karimi",
+        "Kimia Noorbakhsh",
+        "Mohammad Alizadeh",
+        "Hari Balakrishnan"
+      ],
+      "author_details": [
+        {
+          "name": "Pantea Karimi"
+        },
+        {
+          "name": "Kimia Noorbakhsh"
+        },
+        {
+          "name": "Mohammad Alizadeh"
+        },
+        {
+          "name": "Hari Balakrishnan"
+        }
+      ],
+      "published": "2026-03-22T17:04:50Z",
+      "published_date": "2026-03-22 17:04:50+00:00",
+      "updated": "2026-03-22T17:04:50Z",
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.21321v1",
+      "url": "http://arxiv.org/abs/2603.21321v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.38,
+        "recency": 3.0,
+        "popularity": 0.9,
+        "quality": 0.9,
+        "recommendation": 7.91
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm inference",
+        "kv cache",
+        "cs.CL",
+        "benchmark"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 2,
+        "matched_categories": [
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "kv cache"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "benchmark"
+        ],
+        "analysis_keyword_match_count": 1,
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
-      "selection_lane": "established",
-      "history_relaxed": true,
-      "citationCount": 0,
-      "venue_metadata": {
-        "official_page_blocked": false,
-        "official_page_url": "https://www.usenix.org/conference/osdi25/presentation/guan",
-        "abstract_source": "openalex",
-        "pdf_source": "official_page"
-      }
+      "selection_lane": "fresh"
     }
   ]
 }

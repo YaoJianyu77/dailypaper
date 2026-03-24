@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-23",
+  "last_updated": "2026-03-24",
   "papers": [
     {
       "paper_id": "2603.19133v1",
@@ -91,6 +91,34 @@
       "cooldown_until": "2026-05-17"
     },
     {
+      "paper_id": "2603.21331v1",
+      "title": "AutoKernel: Autonomous GPU Kernel Optimization via Iterative Agent-Driven Search",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-03-22T17:15:28Z",
+      "source_lane": "fresh",
+      "topics": [
+        "GPU kernel optimization",
+        "Triton",
+        "CUDA C++",
+        "agent-driven search",
+        "PyTorch profiling",
+        "transformer kernels"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-24",
+      "last_seen_date": "2026-03-24",
+      "last_recommended_date": "2026-03-24",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-24",
+          "recommendation": 9.88,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-23"
+    },
+    {
       "paper_id": "2603.05210v1",
       "title": "Balancing Coverage and Draft Latency in Vocabulary Trimming for Faster Speculative Decoding",
       "domain": "LLM Inference Systems",
@@ -160,6 +188,34 @@
         }
       ],
       "cooldown_until": "2026-05-17"
+    },
+    {
+      "paper_id": "2603.22206v1",
+      "title": "Chimera: Latency- and Performance-Aware Multi-agent Serving for Heterogeneous LLMs",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-23T17:01:42Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM serving",
+        "heterogeneous clusters",
+        "multi-agent workflows",
+        "predictive scheduling",
+        "semantic routing",
+        "latency-performance tradeoff"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-24",
+      "last_seen_date": "2026-03-24",
+      "last_recommended_date": "2026-03-24",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-24",
+          "recommendation": 9.3,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-23"
     },
     {
       "paper_id": "dblp:conf/cgo/HeY25",
@@ -407,6 +463,34 @@
         }
       ],
       "cooldown_until": "2026-05-17"
+    },
+    {
+      "paper_id": "2603.21465v1",
+      "title": "DRTriton: Large-Scale Synthetic Data Reinforcement Learning for Triton Kernel Generation",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-03-23T00:59:35Z",
+      "source_lane": "fresh",
+      "topics": [
+        "Triton kernel generation",
+        "CUDA",
+        "LLM code generation",
+        "synthetic data",
+        "reinforcement learning",
+        "test-time search"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-24",
+      "last_seen_date": "2026-03-24",
+      "last_recommended_date": "2026-03-24",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-24",
+          "recommendation": 9.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-23"
     },
     {
       "paper_id": "2603.15530v1",
@@ -905,6 +989,34 @@
         }
       ],
       "cooldown_until": "2026-05-18"
+    },
+    {
+      "paper_id": "2603.21321v1",
+      "title": "Improving Coherence and Persistence in Agentic AI for System Optimization",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-22T17:04:50Z",
+      "source_lane": "fresh",
+      "topics": [
+        "agentic AI",
+        "system optimization",
+        "LLM inference request routing",
+        "KV cache reuse",
+        "persistent memory",
+        "multi-step search"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-24",
+      "last_seen_date": "2026-03-24",
+      "last_recommended_date": "2026-03-24",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-24",
+          "recommendation": 7.91,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-23"
     },
     {
       "paper_id": "2603.12201v1",
@@ -1455,6 +1567,34 @@
         }
       ],
       "cooldown_until": "2026-05-10"
+    },
+    {
+      "paper_id": "2603.21576v1",
+      "title": "PRISM: Breaking the O(n) Memory Wall in Long-Context LLM Inference via O(1) Photonic Block Selection",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-23T04:55:56Z",
+      "source_lane": "fresh",
+      "topics": [
+        "long-context LLM inference",
+        "KV cache",
+        "decode-time block selection",
+        "photonic accelerator",
+        "similarity search",
+        "memory bandwidth"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-24",
+      "last_seen_date": "2026-03-24",
+      "last_recommended_date": "2026-03-24",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-24",
+          "recommendation": 9.55,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-23"
     },
     {
       "paper_id": "2602.06142v2",
@@ -2071,6 +2211,34 @@
         }
       ],
       "cooldown_until": "2026-05-18"
+    },
+    {
+      "paper_id": "2603.21365v1",
+      "title": "TIDE: Token-Informed Depth Execution for Per-Token Early Exit in LLM Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-22T18:58:07Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "early exit",
+        "adaptive depth",
+        "token-level routing",
+        "prefill",
+        "autoregressive decoding"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-24",
+      "last_seen_date": "2026-03-24",
+      "last_recommended_date": "2026-03-24",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-24",
+          "recommendation": 9.38,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-23"
     },
     {
       "paper_id": "2603.10846v1",
