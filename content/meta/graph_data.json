@@ -587,6 +587,41 @@
       "domain": "LLM Inference Systems",
       "quality_score": 7.91,
       "updated": "2026-03-24"
+    },
+    {
+      "id": "2603.23049v1",
+      "title": "PCR: A Prefetch-Enhanced Cache Reuse System for Low-Latency RAG Serving",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.97,
+      "updated": "2026-03-25"
+    },
+    {
+      "id": "2603.22910v1",
+      "title": "EchoKV: Efficient KV Cache Compression via Similarity-Based Reconstruction",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.55,
+      "updated": "2026-03-25"
+    },
+    {
+      "id": "2301.00774",
+      "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+      "domain": "LLM Inference Systems",
+      "quality_score": 5.88,
+      "updated": "2026-03-25"
+    },
+    {
+      "id": "2603.22774v1",
+      "title": "Characterizing CPU-Induced Slowdowns in Multi-GPU LLM Inference",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 8.39,
+      "updated": "2026-03-25"
+    },
+    {
+      "id": "2603.23198v1",
+      "title": "Sparser, Faster, Lighter Transformer Language Models",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 6.68,
+      "updated": "2026-03-25"
     }
   ],
   "edges": [
@@ -1903,7 +1938,67 @@
       "target": "2603.22206v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2603.23049v1",
+      "target": "2603.22910v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.23049v1",
+      "target": "2301.00774",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.22910v1",
+      "target": "2603.23049v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.22910v1",
+      "target": "2301.00774",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2301.00774",
+      "target": "2603.23049v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2301.00774",
+      "target": "2603.22910v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2301.00774",
+      "target": "2603.23198v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.22774v1",
+      "target": "2603.23198v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.23198v1",
+      "target": "2603.22774v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.23198v1",
+      "target": "2301.00774",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-24"
+  "last_updated": "2026-03-25"
 }
