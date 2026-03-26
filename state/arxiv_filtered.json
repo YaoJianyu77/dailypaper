@@ -1,195 +1,89 @@
 {
-  "target_date": "2026-03-25",
+  "target_date": "2026-03-26",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-23",
-      "end": "2026-03-25"
+      "start": "2026-02-24",
+      "end": "2026-03-26"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-25",
-      "end": "2026-02-22"
+      "start": "2025-03-26",
+      "end": "2026-02-23"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 18,
+  "total_filtered": 17,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 18,
+  "total_unique": 17,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 5,
+    "selected_count": 3,
     "lane_counts": {
-      "fresh": 4,
+      "fresh": 3,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 16,
+      "classic": 0,
+      "history_filtered": 11,
       "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.23049v1",
-      "arxiv_id": "2603.23049v1",
-      "title": "PCR: A Prefetch-Enhanced Cache Reuse System for Low-Latency RAG Serving",
-      "summary": "Retrieval-Augmented Generation (RAG) systems enhance the performance of large language models (LLMs) by incorporating supplementary retrieved documents, enabling more accurate and context-aware responses. However, integrating these external documents often results in very long input sequences, which significantly increases computation costs during the prefill stage, where key-value (KV) representations for all input tokens are generated. This latency bottleneck becomes especially pronounced under high-throughput serving scenarios. KV-cache reuse offers a promising solution by storing previously computed KV states for shared input prefixes, thereby avoiding redundant computation across requests that contain overlapping context. Yet, the effectiveness of cache reuse is often limited by three practical challenges: low cache hit rates due to naive eviction policies, high CPU-GPU data transfer overhead, and slow SSD I/O when caches spill to storage. To address these issues, we propose PCR, a system designed to maximize KV-cache reuse efficiency through intelligent prefetching and pipelined data movement. Specifically, PCR introduces three key techniques: (1) a prefix-tree caching structure with a look-ahead LRU replacement policy that uses pending requests in the scheduler queue to improve cache hit ratios; (2) layer-wise overlapping that pipelines KV-cache loading and GPU computation across CUDA streams to hide communication latency; and (3) queue-based prefetching that proactively loads relevant KV caches from SSD into DRAM before they are needed. Extensive experiments show that PCR outperforms existing KV-cache reuse methods, achieving up to a 2.47x speedup in terms of average TTFT.",
+      "id": "http://arxiv.org/abs/2603.23668v1",
+      "arxiv_id": "2603.23668v1",
+      "title": "Energy Efficient Software Hardware CoDesign for Machine Learning: From TinyML to Large Language Models",
+      "summary": "The rapid deployment of machine learning across platforms from milliwatt-class TinyML devices to large language models has made energy efficiency a primary constraint for sustainable AI. Across these scales, performance and energy are increasingly limited by data movement and memory-system behavior rather than by arithmetic throughput alone. This work reviews energy efficient software hardware codesign methods spanning edge inference and training to datacenter-scale LLM serving, covering accelerator architectures (e.g., ASIC/FPGA dataflows, processing-/compute-in-memory designs) and system-level techniques (e.g., partitioning, quantization, scheduling, and runtime adaptation). We distill common design levers and trade-offs, and highlight recurring gaps including limited cross-platform generalization, large and costly co-design search spaces, and inconsistent benchmarking across workloads and deployment settings. Finally, we outline a hierarchical decomposition perspective that maps optimization strategies to computational roles and supports incremental adaptation, offering practical guidance for building energy and carbon aware ML systems.",
       "authors": [
-        "Wenfeng Wang",
-        "Xiaofeng Hou",
-        "Peng Tang",
-        "Hengyi Zhou",
-        "Jing Wang",
-        "Xinkai Wang",
-        "Chao Li",
-        "Minyi Guo"
+        "Mohammad Saleh Vahdatpour",
+        "Yanqing Zhang"
       ],
       "author_details": [
         {
-          "name": "Wenfeng Wang"
+          "name": "Mohammad Saleh Vahdatpour"
         },
         {
-          "name": "Xiaofeng Hou"
-        },
-        {
-          "name": "Peng Tang"
-        },
-        {
-          "name": "Hengyi Zhou"
-        },
-        {
-          "name": "Jing Wang"
-        },
-        {
-          "name": "Xinkai Wang"
-        },
-        {
-          "name": "Chao Li"
-        },
-        {
-          "name": "Minyi Guo"
+          "name": "Yanqing Zhang"
         }
       ],
-      "published": "2026-03-24T10:40:58Z",
-      "published_date": "2026-03-24 10:40:58+00:00",
-      "updated": "2026-03-24T10:40:58Z",
-      "primary_category": "cs.DC",
+      "published": "2026-03-24T19:10:42Z",
+      "published_date": "2026-03-24 19:10:42+00:00",
+      "updated": "2026-03-24T19:10:42Z",
+      "comments": "Accepted as a poster presentation at the EMC2 Workshop, ASPLOS 2026",
+      "primary_category": "cs.AR",
       "categories": [
-        "cs.DC"
+        "cs.AR",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.23049v1",
-      "url": "http://arxiv.org/abs/2603.23049v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.23668v1",
+      "url": "http://arxiv.org/abs/2603.23668v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 9.97
+        "popularity": 0.9,
+        "quality": 0.9,
+        "recommendation": 9.05
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
+        "llm serving",
         "serving",
-        "prefill",
-        "kv cache",
         "throughput",
-        "latency",
-        "cs.DC",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 5,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "kv cache",
-          "prefill"
-        ],
-        "required_signal_match_count": 2,
-        "bonus_keyword_matches": [
-          "throughput",
-          "latency",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "throughput",
-          "latency",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.22910v1",
-      "arxiv_id": "2603.22910v1",
-      "title": "EchoKV: Efficient KV Cache Compression via Similarity-Based Reconstruction",
-      "summary": "The increasing memory demand of the Key-Value (KV) cache poses a significant bottleneck for Large Language Models (LLMs) in long-context applications. Existing low-rank compression methods often rely on irreversible parameter transformations, sacrificing the flexibility to switch back to full-precision inference when memory is abundant. In this paper, we propose EchoKV, a flexible KV cache compression scheme that enables on-demand transitions between standard and compressed inference. Unlike traditional compression-decompression paradigms, EchoKV utilizes a lightweight network to reconstruct the residual KV components from a partial subset, leveraging intrinsic inter-layer and intra-layer similarities among attention heads. We further introduce a two-stage fine-tuning strategy that allows for rapid, low-cost training (e.g., ~1 A100 GPU-hour for a 7B model). Experimental results on LongBench and RULER demonstrate that EchoKV consistently outperforms existing methods across various compression ratios while maintaining high throughput for short-context scenarios.",
-      "authors": [
-        "Yixuan Wang",
-        "Shiyu Ji",
-        "Yijun Liu",
-        "Qingfu Zhu",
-        "Wanxiang Che"
-      ],
-      "author_details": [
-        {
-          "name": "Yixuan Wang"
-        },
-        {
-          "name": "Shiyu Ji"
-        },
-        {
-          "name": "Yijun Liu"
-        },
-        {
-          "name": "Qingfu Zhu"
-        },
-        {
-          "name": "Wanxiang Che"
-        }
-      ],
-      "published": "2026-03-24T07:58:42Z",
-      "published_date": "2026-03-24 07:58:42+00:00",
-      "updated": "2026-03-24T07:58:42Z",
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.22910v1",
-      "url": "http://arxiv.org/abs/2603.22910v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.5,
-        "quality": 1.5,
-        "recommendation": 9.55
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "kv cache",
-        "throughput",
-        "cs.CL",
-        "a100",
+        "quantization",
+        "cs.LG",
+        "cs.AR",
+        "runtime",
         "memory"
       ],
       "matched_domain_priority": 5,
@@ -197,15 +91,15 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 2,
+        "text_match_count": 4,
         "matched_categories": [
-          "cs.CL"
+          "cs.LG",
+          "cs.AR"
         ],
         "required_signal_matches": [
-          "kv cache",
-          "a100"
+          "runtime"
         ],
-        "required_signal_match_count": 2,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [
           "throughput",
           "memory"
@@ -216,102 +110,81 @@
           "memory"
         ],
         "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.7,
+        "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh"
     },
     {
-      "paper_id": "2301.00774",
-      "arxiv_id": "2301.00774",
-      "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
-      "summary": "Shows that very large GPT-style models can be pruned in one shot to high sparsity with limited accuracy loss, and that the resulting sparsity patterns remain compatible with downstream deployment optimizations.",
+      "id": "http://arxiv.org/abs/2603.24239v1",
+      "arxiv_id": "2603.24239v1",
+      "title": "DVM: Real-Time Kernel Generation for Dynamic AI Models",
+      "summary": "Dynamism is common in AI computation, e.g., the dynamic tensor shapes and the dynamic control flows in models. Due to the long compilation time, existing runtime compilation damages the model efficiency, while the offline compilers either suffer from the long compilation time and device memory footprint to cover all the possible execution instances of a dynamic model, or sacrifice optimization opportunities for usability. In this paper, we rethink the feasibility of runtime compilation for dynamic models and identify that the key for it to work is to speed up the compilation or hide the compilation overhead. To do this, we propose a real-time compiler, DVM. In DVM, we design a runtime operator compiler based on a bytecode virtual machine to perform effective and efficient compilation for each dynamic operator instance given its input. Specifically, instead of compiling programs into machine code, we encode the operator program into bytecode on the CPU and decode the bytecode into virtual instructions for direct execution on the NPU. Based on the runtime operator compiler, we further propose an operator fuser, which performs symbol-deduction-based fusion on static graphs and runtime fusion on dynamic graphs. Both pattern- and stacking-based fusion are supported to increase fusion opportunities. Evaluation on operators, subgraphs, and models shows that, compared with TorchInductor, PyTorch-eager and MindSpore-graph-O0, we are up to 11.77$\\times$ better in terms of the operator/model efficiency and up to 5 orders of magnitude faster in terms of the maximum compilation time.",
       "authors": [
-        "Elias Frantar",
-        "Dan Alistarh"
-      ],
-      "published": "2023-01-02",
-      "published_date": "2023-01-02 00:00:00",
-      "categories": [
-        "cs.LG"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "sparsity",
-        "pruning",
-        "one-shot",
-        "inference"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.45,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2301.00774",
-      "pdf_url": "https://arxiv.org/pdf/2301.00774.pdf",
-      "scores": {
-        "relevance": 2.6,
-        "recency": 0.0,
-        "popularity": 0.8,
-        "quality": 0.8,
-        "recommendation": 5.88
-      },
-      "classic_rotation_score": 10.4321,
-      "citationCount": 1171,
-      "influentialCitationCount": 213,
-      "venue": "International Conference on Machine Learning",
-      "journal_ref": "ArXiv"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.22774v1",
-      "arxiv_id": "2603.22774v1",
-      "title": "Characterizing CPU-Induced Slowdowns in Multi-GPU LLM Inference",
-      "summary": "Large-scale machine learning workloads increasingly rely on multi-GPU systems, yet their performance is often limited by an overlooked component: the CPU. Through a detailed study of modern large language model (LLM) inference and serving workloads, we find that multi-GPU performance frequently degrades not because GPUs are saturated, but because CPUs fail to keep the GPUs busy. Under limited CPU allocations, systems exhibit symptoms such as delayed kernel launch, stalled communication, and increased tokenization latency, leading to severe GPU underutilization even when ample GPU resources are available. This work presents a systematic analysis of CPU-induced slowdowns in multi-GPU LLM inference. We show that these bottlenecks persist even in serving stacks that employ process-level separation and modern GPU-side optimizations such as CUDA Graphs. Since the marginal cost of additional CPU cores is small relative to GPU instance pricing, our evaluation indicates that increasing the number of CPU cores can substantially improve performance and stability at minimal additional cost. Under moderate serving load, we observe that CPU-starved configurations frequently time out, while providing adequate CPU resources restores responsiveness and reduces time-to-first-token (TTFT) latency by 1.36-5.40x across configurations, all without requiring additional GPUs. This work shows that CPU provisioning is a crucial factor in multi-GPU LLM inference configuration, helping prevent control-side bottlenecks.",
-      "authors": [
-        "Euijun Chung",
-        "Yuxiao Jia",
-        "Aaron Jezghani",
-        "Hyesoon Kim"
+        "Jingzhi Fang",
+        "Xiong Gao",
+        "Renwei Zhang",
+        "Zichun Ye",
+        "Lei Chen",
+        "Jie Zhao",
+        "Chengnuo Huang",
+        "Hui Xu",
+        "Xuefeng Jin"
       ],
       "author_details": [
         {
-          "name": "Euijun Chung"
+          "name": "Jingzhi Fang"
         },
         {
-          "name": "Yuxiao Jia"
+          "name": "Xiong Gao"
         },
         {
-          "name": "Aaron Jezghani"
+          "name": "Renwei Zhang"
         },
         {
-          "name": "Hyesoon Kim"
+          "name": "Zichun Ye"
+        },
+        {
+          "name": "Lei Chen"
+        },
+        {
+          "name": "Jie Zhao"
+        },
+        {
+          "name": "Chengnuo Huang"
+        },
+        {
+          "name": "Hui Xu"
+        },
+        {
+          "name": "Xuefeng Jin"
         }
       ],
-      "published": "2026-03-24T04:06:27Z",
-      "published_date": "2026-03-24 04:06:27+00:00",
-      "updated": "2026-03-24T04:06:27Z",
-      "comments": "13 pages, 13 figures, 1 table",
-      "primary_category": "cs.AR",
+      "published": "2026-03-25T12:24:33Z",
+      "published_date": "2026-03-25 12:24:33+00:00",
+      "updated": "2026-03-25T12:24:33Z",
+      "primary_category": "cs.PL",
       "categories": [
-        "cs.AR",
-        "cs.DC"
+        "cs.PL",
+        "cs.AI",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.22774v1",
-      "url": "http://arxiv.org/abs/2603.22774v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.24239v1",
+      "url": "http://arxiv.org/abs/2603.24239v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.55,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 8.39
+        "popularity": 0.7,
+        "quality": 0.7,
+        "recommendation": 8.88
       },
       "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "cuda",
-        "cs.DC",
-        "cs.AR",
-        "latency"
+        "kernel generation",
+        "cs.PL",
+        "cs.LG",
+        "fusion"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -320,102 +193,167 @@
         "domain": "LLM Code Generation For CUDA Kernels",
         "text_match_count": 1,
         "matched_categories": [
-          "cs.DC",
-          "cs.AR"
+          "cs.PL",
+          "cs.LG"
         ],
         "required_signal_matches": [
-          "cuda"
+          "kernel generation"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "latency"
+        "bonus_keyword_matches": [
+          "fusion"
         ],
-        "analysis_keyword_match_count": 1,
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2603.23198v1",
-      "arxiv_id": "2603.23198v1",
-      "title": "Sparser, Faster, Lighter Transformer Language Models",
-      "summary": "Scaling autoregressive large language models (LLMs) has driven unprecedented progress but comes with vast computational costs. In this work, we tackle these costs by leveraging unstructured sparsity within an LLM's feedforward layers, the components accounting for most of the model parameters and execution FLOPs. To achieve this, we introduce a new sparse packing format and a set of CUDA kernels designed to seamlessly integrate with the optimized execution pipelines of modern GPUs, enabling efficient sparse computation during LLM inference and training. To substantiate our gains, we provide a quantitative study of LLM sparsity, demonstrating that simple L1 regularization can induce over 99% sparsity with negligible impact on downstream performance. When paired with our kernels, we show that these sparsity levels translate into substantial throughput, energy efficiency, and memory usage benefits that increase with model scale. We will release all code and kernels under an open-source license to promote adoption and accelerate research toward establishing sparsity as a practical axis for improving the efficiency and scalability of modern foundation models.",
+      "id": "http://arxiv.org/abs/2603.24517v1",
+      "arxiv_id": "2603.24517v1",
+      "title": "AVO: Agentic Variation Operators for Autonomous Evolutionary Search",
+      "summary": "Agentic Variation Operators (AVO) are a new family of evolutionary variation operators that replace the fixed mutation, crossover, and hand-designed heuristics of classical evolutionary search with autonomous coding agents. Rather than confining a language model to candidate generation within a prescribed pipeline, AVO instantiates variation as a self-directed agent loop that can consult the current lineage, a domain-specific knowledge base, and execution feedback to propose, repair, critique, and verify implementation edits. We evaluate AVO on attention, among the most aggressively optimized kernel targets in AI, on NVIDIA Blackwell (B200) GPUs. Over 7 days of continuous autonomous evolution on multi-head attention, AVO discovers kernels that outperform cuDNN by up to 3.5% and FlashAttention-4 by up to 10.5% across the evaluated configurations. The discovered optimizations transfer readily to grouped-query attention, requiring only 30 minutes of additional autonomous adaptation and yielding gains of up to 7.0% over cuDNN and 9.3% over FlashAttention-4. Together, these results show that agentic variation operators move beyond prior LLM-in-the-loop evolutionary pipelines by elevating the agent from candidate generator to variation operator, and can discover performance-critical micro-architectural optimizations that produce kernels surpassing state-of-the-art expert-engineered attention implementations on today's most advanced GPU hardware.",
       "authors": [
-        "Edoardo Cetin",
-        "Stefano Peluchetti",
-        "Emilio Castillo",
-        "Akira Naruse",
-        "Mana Murakami",
-        "Llion Jones"
+        "Terry Chen",
+        "Zhifan Ye",
+        "Bing Xu",
+        "Zihao Ye",
+        "Timmy Liu",
+        "Ali Hassani",
+        "Tianqi Chen",
+        "Andrew Kerr",
+        "Haicheng Wu",
+        "Yang Xu",
+        "Yu-Jung Chen",
+        "Hanfeng Chen",
+        "Aditya Kane",
+        "Ronny Krashinsky",
+        "Ming-Yu Liu",
+        "Vinod Grover",
+        "Luis Ceze",
+        "Roger Bringmann",
+        "John Tran",
+        "Wei Liu",
+        "Fung Xie",
+        "Michael Lightstone",
+        "Humphrey Shi"
       ],
       "author_details": [
         {
-          "name": "Edoardo Cetin"
+          "name": "Terry Chen"
         },
         {
-          "name": "Stefano Peluchetti"
+          "name": "Zhifan Ye"
         },
         {
-          "name": "Emilio Castillo"
+          "name": "Bing Xu"
         },
         {
-          "name": "Akira Naruse"
+          "name": "Zihao Ye"
         },
         {
-          "name": "Mana Murakami"
+          "name": "Timmy Liu"
         },
         {
-          "name": "Llion Jones"
+          "name": "Ali Hassani"
+        },
+        {
+          "name": "Tianqi Chen"
+        },
+        {
+          "name": "Andrew Kerr"
+        },
+        {
+          "name": "Haicheng Wu"
+        },
+        {
+          "name": "Yang Xu"
+        },
+        {
+          "name": "Yu-Jung Chen"
+        },
+        {
+          "name": "Hanfeng Chen"
+        },
+        {
+          "name": "Aditya Kane"
+        },
+        {
+          "name": "Ronny Krashinsky"
+        },
+        {
+          "name": "Ming-Yu Liu"
+        },
+        {
+          "name": "Vinod Grover"
+        },
+        {
+          "name": "Luis Ceze"
+        },
+        {
+          "name": "Roger Bringmann"
+        },
+        {
+          "name": "John Tran"
+        },
+        {
+          "name": "Wei Liu"
+        },
+        {
+          "name": "Fung Xie"
+        },
+        {
+          "name": "Michael Lightstone"
+        },
+        {
+          "name": "Humphrey Shi"
         }
       ],
-      "published": "2026-03-24T13:43:27Z",
-      "published_date": "2026-03-24 13:43:27+00:00",
-      "updated": "2026-03-24T13:43:27Z",
-      "comments": "Code and checkpoints available at: https://github.com/SakanaAI/sparser-faster-llms",
+      "published": "2026-03-25T16:55:04Z",
+      "published_date": "2026-03-25 16:55:04+00:00",
+      "updated": "2026-03-25T16:55:04Z",
       "primary_category": "cs.LG",
       "categories": [
-        "cs.LG",
-        "cs.CL"
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.23198v1",
-      "url": "http://arxiv.org/abs/2603.23198v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.24517v1",
+      "url": "http://arxiv.org/abs/2603.24517v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 1.75,
+        "relevance": 2.13,
         "recency": 3.0,
-        "popularity": 0.8,
-        "quality": 0.8,
-        "recommendation": 6.68
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 7.96
       },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "cuda",
+        "flashattention",
         "cs.LG",
-        "throughput"
+        "b200"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
+        "domain": "LLM Inference Systems",
         "text_match_count": 1,
         "matched_categories": [
           "cs.LG"
         ],
         "required_signal_matches": [
-          "cuda"
+          "flashattention",
+          "b200"
         ],
-        "required_signal_match_count": 1,
+        "required_signal_match_count": 2,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "throughput"
-        ],
-        "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.35,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.7,
         "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh"

@@ -1,239 +1,89 @@
 {
-  "target_date": "2026-03-25",
+  "target_date": "2026-03-26",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-23",
-      "end": "2026-03-25"
+      "start": "2026-02-24",
+      "end": "2026-03-26"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-25",
-      "end": "2026-02-22"
+      "start": "2025-03-26",
+      "end": "2026-02-23"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 18,
+  "total_filtered": 17,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 18,
+  "total_unique": 17,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 5,
+    "selected_count": 3,
     "lane_counts": {
-      "fresh": 4,
+      "fresh": 3,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 16,
+      "classic": 0,
+      "history_filtered": 11,
       "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.23049v1",
-      "arxiv_id": "2603.23049v1",
-      "title": "PCR: A Prefetch-Enhanced Cache Reuse System for Low-Latency RAG Serving",
-      "summary": "Retrieval-Augmented Generation (RAG) systems enhance the performance of large language models (LLMs) by incorporating supplementary retrieved documents, enabling more accurate and context-aware responses. However, integrating these external documents often results in very long input sequences, which significantly increases computation costs during the prefill stage, where key-value (KV) representations for all input tokens are generated. This latency bottleneck becomes especially pronounced under high-throughput serving scenarios. KV-cache reuse offers a promising solution by storing previously computed KV states for shared input prefixes, thereby avoiding redundant computation across requests that contain overlapping context. Yet, the effectiveness of cache reuse is often limited by three practical challenges: low cache hit rates due to naive eviction policies, high CPU-GPU data transfer overhead, and slow SSD I/O when caches spill to storage. To address these issues, we propose PCR, a system designed to maximize KV-cache reuse efficiency through intelligent prefetching and pipelined data movement. Specifically, PCR introduces three key techniques: (1) a prefix-tree caching structure with a look-ahead LRU replacement policy that uses pending requests in the scheduler queue to improve cache hit ratios; (2) layer-wise overlapping that pipelines KV-cache loading and GPU computation across CUDA streams to hide communication latency; and (3) queue-based prefetching that proactively loads relevant KV caches from SSD into DRAM before they are needed. Extensive experiments show that PCR outperforms existing KV-cache reuse methods, achieving up to a 2.47x speedup in terms of average TTFT.",
+      "id": "http://arxiv.org/abs/2603.23668v1",
+      "arxiv_id": "2603.23668v1",
+      "title": "Energy Efficient Software Hardware CoDesign for Machine Learning: From TinyML to Large Language Models",
+      "summary": "The rapid deployment of machine learning across platforms from milliwatt-class TinyML devices to large language models has made energy efficiency a primary constraint for sustainable AI. Across these scales, performance and energy are increasingly limited by data movement and memory-system behavior rather than by arithmetic throughput alone. This work reviews energy efficient software hardware codesign methods spanning edge inference and training to datacenter-scale LLM serving, covering accelerator architectures (e.g., ASIC/FPGA dataflows, processing-/compute-in-memory designs) and system-level techniques (e.g., partitioning, quantization, scheduling, and runtime adaptation). We distill common design levers and trade-offs, and highlight recurring gaps including limited cross-platform generalization, large and costly co-design search spaces, and inconsistent benchmarking across workloads and deployment settings. Finally, we outline a hierarchical decomposition perspective that maps optimization strategies to computational roles and supports incremental adaptation, offering practical guidance for building energy and carbon aware ML systems.",
       "authors": [
-        "Wenfeng Wang",
-        "Xiaofeng Hou",
-        "Peng Tang",
-        "Hengyi Zhou",
-        "Jing Wang",
-        "Xinkai Wang",
-        "Chao Li",
-        "Minyi Guo"
+        "Mohammad Saleh Vahdatpour",
+        "Yanqing Zhang"
       ],
       "author_details": [
         {
-          "name": "Wenfeng Wang"
+          "name": "Mohammad Saleh Vahdatpour"
         },
         {
-          "name": "Xiaofeng Hou"
-        },
-        {
-          "name": "Peng Tang"
-        },
-        {
-          "name": "Hengyi Zhou"
-        },
-        {
-          "name": "Jing Wang"
-        },
-        {
-          "name": "Xinkai Wang"
-        },
-        {
-          "name": "Chao Li"
-        },
-        {
-          "name": "Minyi Guo"
+          "name": "Yanqing Zhang"
         }
       ],
-      "published": "2026-03-24T10:40:58Z",
-      "published_date": "2026-03-24 10:40:58+00:00",
-      "updated": "2026-03-24T10:40:58Z",
-      "primary_category": "cs.DC",
+      "published": "2026-03-24T19:10:42Z",
+      "published_date": "2026-03-24 19:10:42+00:00",
+      "updated": "2026-03-24T19:10:42Z",
+      "comments": "Accepted as a poster presentation at the EMC2 Workshop, ASPLOS 2026",
+      "primary_category": "cs.AR",
       "categories": [
-        "cs.DC"
+        "cs.AR",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.23049v1",
-      "url": "http://arxiv.org/abs/2603.23049v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.23668v1",
+      "url": "http://arxiv.org/abs/2603.23668v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 9.97
+        "popularity": 0.9,
+        "quality": 0.9,
+        "recommendation": 9.05
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
+        "llm serving",
         "serving",
-        "prefill",
-        "kv cache",
         "throughput",
-        "latency",
-        "cs.DC",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 5,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "kv cache",
-          "prefill"
-        ],
-        "required_signal_match_count": 2,
-        "bonus_keyword_matches": [
-          "throughput",
-          "latency",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "throughput",
-          "latency",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper presents a RAG serving system that reduces prefill latency by improving KV-cache reuse and hiding cache movement overhead across SSD, DRAM, and GPU.",
-        "summary_zh": "This paper targets a familiar RAG serving bottleneck: long retrieved contexts make prefill expensive, and naive KV-cache reuse does not help enough once hit rate, transfer cost, and storage latency become the real limits. The proposed system, PCR, combines a prefix-tree cache, a look-ahead LRU policy that uses queued requests, layer-wise overlap between KV loading and GPU compute, and queue-based prefetching from SSD to DRAM. The abstract claims these mechanisms improve reuse efficiency and hide communication latency rather than changing the model itself. Reported evidence is system-level: the authors state that PCR outperforms prior KV-cache reuse methods and reaches up to 2.47x average TTFT speedup. What remains unclear from the abstract is the evaluation setup, hardware assumptions, workload mix, baseline fairness, and how often the gains depend on high prefix overlap in real RAG traffic.",
-        "background_zh": "RAG serving increases input length with retrieved documents, so prefill and KV-state construction become a major latency and throughput bottleneck in production LLM systems.",
-        "problem_zh": "The paper asks how to make KV-cache reuse actually effective for low-latency RAG serving when cache hit rate, CPU-GPU transfer overhead, and SSD spill latency all limit the practical benefit.",
-        "approach_zh": "PCR combines scheduler-aware cache management, pipelined layer-wise KV movement and compute, and proactive SSD-to-DRAM prefetching to improve reuse and hide data movement cost.",
-        "evidence_zh": "The abstract supports a system-level claim that PCR beats existing KV-cache reuse methods and achieves up to 2.47x speedup in average TTFT, but it does not make the workload details or baseline conditions clear.",
-        "value_zh": "If the method is robust, it could make long-context RAG serving more practical by cutting prefill delay without requiring model changes, especially in workloads with reusable prefixes and storage-backed caches.",
-        "open_questions": [
-          "How representative are the evaluated RAG workloads in terms of prefix overlap, retrieval diversity, and queue dynamics?",
-          "What hardware and storage setup is assumed, and how much of the reported gain comes from overlap and prefetching versus the replacement policy itself?",
-          "Are the baselines using equally optimized cache management and data-movement pipelines, or is part of the gain due to implementation asymmetry?"
-        ],
-        "core_contributions": [
-          "A scheduler-aware prefix-tree KV cache with look-ahead LRU replacement to improve reuse under queued serving workloads.",
-          "Layer-wise overlap of KV-cache loading and GPU computation across CUDA streams to hide communication latency.",
-          "Queue-based prefetching from SSD to DRAM for caches likely to be needed soon in RAG serving."
-        ],
-        "why_read": [
-          "It isolates the real systems bottlenecks in KV-cache reuse for RAG serving instead of treating reuse as a pure hit-rate problem.",
-          "The design explicitly spans cache policy, host-device transfer, and storage staging, which is useful for inference-system engineers.",
-          "The claimed TTFT gain is material enough to justify checking whether the evaluation is fair and deployment-relevant."
-        ],
-        "risks": [
-          "The benefit may depend heavily on substantial prefix sharing across requests, which may not hold for many real RAG workloads.",
-          "The abstract does not clarify whether the method adds scheduler, memory, or storage-management complexity that could offset operational simplicity gains in practice."
-        ],
-        "recommended_for": [
-          "Researchers studying LLM serving systems and KV-cache management.",
-          "Engineers working on low-latency RAG inference pipelines.",
-          "Readers interested in storage-memory-GPU pipeline co-design for prefill-heavy workloads."
-        ],
-        "keywords": [
-          "RAG serving",
-          "KV cache reuse",
-          "prefill latency",
-          "TTFT",
-          "cache replacement",
-          "prefetching"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "This is tightly aligned with LLM inference systems and serving efficiency, and the abstract makes a concrete systems claim around TTFT improvement through cache, storage, and pipeline co-design. The main reason to read further is to verify workload realism, hardware assumptions, and baseline fairness.",
-        "fallback_summary": "Retrieval-Augmented Generation (RAG) systems enhance the performance of large language models (LLMs) by incorporating supplementary retrieved documents, enabling more accurate and context-aware responses."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.22910v1",
-      "arxiv_id": "2603.22910v1",
-      "title": "EchoKV: Efficient KV Cache Compression via Similarity-Based Reconstruction",
-      "summary": "The increasing memory demand of the Key-Value (KV) cache poses a significant bottleneck for Large Language Models (LLMs) in long-context applications. Existing low-rank compression methods often rely on irreversible parameter transformations, sacrificing the flexibility to switch back to full-precision inference when memory is abundant. In this paper, we propose EchoKV, a flexible KV cache compression scheme that enables on-demand transitions between standard and compressed inference. Unlike traditional compression-decompression paradigms, EchoKV utilizes a lightweight network to reconstruct the residual KV components from a partial subset, leveraging intrinsic inter-layer and intra-layer similarities among attention heads. We further introduce a two-stage fine-tuning strategy that allows for rapid, low-cost training (e.g., ~1 A100 GPU-hour for a 7B model). Experimental results on LongBench and RULER demonstrate that EchoKV consistently outperforms existing methods across various compression ratios while maintaining high throughput for short-context scenarios.",
-      "authors": [
-        "Yixuan Wang",
-        "Shiyu Ji",
-        "Yijun Liu",
-        "Qingfu Zhu",
-        "Wanxiang Che"
-      ],
-      "author_details": [
-        {
-          "name": "Yixuan Wang"
-        },
-        {
-          "name": "Shiyu Ji"
-        },
-        {
-          "name": "Yijun Liu"
-        },
-        {
-          "name": "Qingfu Zhu"
-        },
-        {
-          "name": "Wanxiang Che"
-        }
-      ],
-      "published": "2026-03-24T07:58:42Z",
-      "published_date": "2026-03-24 07:58:42+00:00",
-      "updated": "2026-03-24T07:58:42Z",
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.22910v1",
-      "url": "http://arxiv.org/abs/2603.22910v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.5,
-        "quality": 1.5,
-        "recommendation": 9.55
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "kv cache",
-        "throughput",
-        "cs.CL",
-        "a100",
+        "quantization",
+        "cs.LG",
+        "cs.AR",
+        "runtime",
         "memory"
       ],
       "matched_domain_priority": 5,
@@ -241,15 +91,15 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 2,
+        "text_match_count": 4,
         "matched_categories": [
-          "cs.CL"
+          "cs.LG",
+          "cs.AR"
         ],
         "required_signal_matches": [
-          "kv cache",
-          "a100"
+          "runtime"
         ],
-        "required_signal_match_count": 2,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [
           "throughput",
           "memory"
@@ -260,189 +110,125 @@
           "memory"
         ],
         "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.7,
+        "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper proposes a KV-cache compression method that keeps a reversible path between compressed and standard inference by reconstructing dropped KV residuals from a retained subset.",
-        "summary_zh": "This paper targets a core long-context inference bottleneck: KV cache memory growth, which limits serving efficiency and model usability at larger context windows. It proposes EchoKV, a similarity-based compression scheme that keeps only part of the KV cache and uses a lightweight network to reconstruct residual components, with the stated goal of allowing on-demand switching between compressed and standard inference instead of locking the model into an irreversible transformed state. The abstract claims that the method exploits inter-layer and intra-layer attention-head similarity and uses a two-stage fine-tuning process that is intended to keep adaptation cost low. Reported evidence is limited to benchmark-level claims on LongBench and RULER plus a brief training-cost example, where the paper says it outperforms prior methods across compression ratios and preserves high throughput in short-context settings. What still needs checking is where the real systems gain comes from in practice, including reconstruction overhead, memory-bandwidth tradeoffs, switching behavior, and whether the baseline comparisons are fair across hardware and serving setups.",
-        "background_zh": "KV cache growth has become a first-order systems constraint for long-context LLM inference, so compression methods are attractive but often trade away flexibility or add runtime cost.",
-        "problem_zh": "The paper asks whether KV cache memory can be reduced without permanently transforming inference behavior, so a system can return to standard full-cache execution when memory pressure is low.",
-        "approach_zh": "EchoKV compresses KV states by retaining only a partial subset and training a lightweight model to reconstruct the residual components from similarity structure across and within layers and heads, combined with a two-stage fine-tuning recipe.",
-        "evidence_zh": "The abstract supports that the method was evaluated on LongBench and RULER and claims better results than existing methods across compression ratios, but it does not make the exact metrics, baselines, or runtime breakdown clear.",
-        "value_zh": "If the claims hold, this could offer a more operationally flexible KV-cache compression path for LLM serving, especially in deployments that need to trade memory savings against throughput and revert to standard inference when resources allow.",
+        "one_liner_zh": "A cross-scale review of energy-efficient ML co-design that argues data movement and memory behavior, not raw compute, are the main constraints from TinyML to LLM serving.",
+        "summary_zh": "This paper is a review of energy-efficient software-hardware co-design across a wide span of ML deployments, from edge TinyML systems to datacenter LLM serving. Its main framing is that energy and performance bottlenecks now come largely from data movement and memory-system behavior rather than arithmetic throughput, so useful optimizations must combine architecture, runtime, and model-level decisions. The survey covers accelerator styles such as ASIC/FPGA dataflows and processing-in-memory or compute-in-memory designs, alongside system techniques including partitioning, quantization, scheduling, and runtime adaptation. It also highlights recurring weaknesses in the area: poor cross-platform generalization, large co-design search spaces, and inconsistent benchmarking across workloads and deployment settings. The practical value is in the synthesis and the proposed hierarchical decomposition perspective, but the abstract does not make clear how systematic the review is or how actionable the framework is in real deployment settings.",
+        "background_zh": "Energy efficiency has become a central systems constraint across both edge ML and large-scale LLM serving because moving data through memory and interconnects often costs more than the math itself.",
+        "problem_zh": "The paper addresses how to organize software-hardware co-design methods across very different ML scales while making the main trade-offs around energy, performance, and deployment complexity comparable.",
+        "approach_zh": "It presents a review and synthesis of accelerator-level and system-level methods, then proposes a hierarchical decomposition view that maps optimizations to different computational roles for incremental adaptation.",
+        "evidence_zh": "The abstract supports that this is a survey distilling design levers, trade-offs, and common gaps, but it does not make clear the review methodology, coverage criteria, or any quantitative comparative evidence.",
+        "value_zh": "If the synthesis is rigorous, it could help systems researchers reason more cleanly about where energy savings come from and which co-design levers transfer from edge inference to LLM serving.",
         "open_questions": [
-          "How much end-to-end latency and throughput overhead does the residual reconstruction network add at different sequence lengths and batch sizes?",
-          "What exactly are the retained subset, reconstruction targets, and switching mechanics, and can the method revert to standard inference without quality or cache-management complications?",
-          "Which baselines, hardware settings, and compression ratios are used in the LongBench and RULER comparisons, and are the comparisons fair on both quality and serving cost?"
+          "What review methodology and paper-selection criteria were used, and how complete is the coverage of recent LLM serving systems?",
+          "How concrete is the hierarchical decomposition framework: does it yield a decision procedure, taxonomy, or deployable workflow?",
+          "How does the paper treat benchmarking fairness across hardware platforms, workloads, batch regimes, and memory-system assumptions?"
         ],
         "core_contributions": [
-          "A reversible-feeling KV-cache compression formulation that aims to support transitions between compressed and standard inference.",
-          "Similarity-based residual reconstruction over partial KV states instead of a pure compress-then-decompress pipeline.",
-          "A two-stage fine-tuning strategy positioned as low-cost adaptation for deploying the method on LLMs."
+          "Unifies energy-efficient ML co-design discussion across TinyML, training, and datacenter-scale LLM serving.",
+          "Frames data movement and memory behavior as the dominant cross-scale bottlenecks rather than raw arithmetic throughput.",
+          "Synthesizes both hardware mechanisms and system techniques in one review and surfaces recurring field-wide gaps."
         ],
         "why_read": [
-          "The paper is directly aligned with LLM inference systems and a live memory bottleneck in long-context serving.",
-          "It frames flexibility as a systems property, not just a compression ratio objective, which is relevant for practical deployment.",
-          "It may clarify whether similarity structure across heads and layers is enough to recover useful KV information under aggressive cache reduction."
+          "Useful if you want a broad map of the energy-efficiency design space spanning accelerators, runtimes, and model-level choices.",
+          "Potentially helpful for identifying where serving efficiency gains actually come from in memory- and bandwidth-bound regimes.",
+          "Relevant as a taxonomy paper for comparing edge and datacenter co-design assumptions under one lens."
         ],
         "risks": [
-          "The abstract does not specify the runtime cost of reconstruction, so net serving gains may be weaker than the compression story suggests.",
-          "Benchmark claims are underspecified; without metric definitions and baseline details, superiority across compression ratios is hard to judge rigorously."
+          "This appears to be a review paper, so there may be limited new empirical systems results.",
+          "The abstract is broad and may trade depth for coverage, especially for LLM-serving-specific mechanisms and baselines."
         ],
         "recommended_for": [
-          "Researchers working on KV-cache compression and long-context LLM serving.",
-          "Engineers evaluating memory-throughput tradeoffs in inference stacks.",
-          "Readers interested in runtime-flexible alternatives to irreversible cache compression methods."
+          "Researchers surveying energy-efficient LLM serving and broader ML systems co-design.",
+          "Engineers comparing architecture, quantization, scheduling, and runtime levers under energy constraints.",
+          "Readers who want a cross-scale taxonomy rather than a single new serving algorithm or kernel optimization."
         ],
         "keywords": [
-          "KV cache",
-          "LLM inference systems",
-          "cache compression",
-          "long-context inference",
-          "similarity-based reconstruction",
-          "throughput"
+          "energy-efficient ML systems",
+          "software-hardware co-design",
+          "LLM serving",
+          "data movement",
+          "memory systems",
+          "quantization"
         ],
-        "reading_priority": "high",
-        "reading_priority_reason": "Strong fit with the stated focus on LLM inference acceleration and serving efficiency, and the paper makes a concrete systems-facing claim about memory reduction with reversible operating modes; the main caveat is that the abstract leaves important runtime and evaluation details unclear.",
-        "fallback_summary": "The increasing memory demand of the Key-Value (KV) cache poses a significant bottleneck for Large Language Models (LLMs) in long-context applications."
+        "reading_priority": "medium",
+        "reading_priority_reason": "Strong fit at the theme level because it covers LLM serving efficiency and co-design trade-offs, but it is a broad review rather than a paper introducing a concrete inference, compiler, or kernel-level mechanism.",
+        "fallback_summary": "The rapid deployment of machine learning across platforms from milliwatt-class TinyML devices to large language models has made energy efficiency a primary constraint for sustainable AI."
       }
     },
     {
-      "paper_id": "2301.00774",
-      "arxiv_id": "2301.00774",
-      "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
-      "summary": "Shows that very large GPT-style models can be pruned in one shot to high sparsity with limited accuracy loss, and that the resulting sparsity patterns remain compatible with downstream deployment optimizations.",
+      "id": "http://arxiv.org/abs/2603.24239v1",
+      "arxiv_id": "2603.24239v1",
+      "title": "DVM: Real-Time Kernel Generation for Dynamic AI Models",
+      "summary": "Dynamism is common in AI computation, e.g., the dynamic tensor shapes and the dynamic control flows in models. Due to the long compilation time, existing runtime compilation damages the model efficiency, while the offline compilers either suffer from the long compilation time and device memory footprint to cover all the possible execution instances of a dynamic model, or sacrifice optimization opportunities for usability. In this paper, we rethink the feasibility of runtime compilation for dynamic models and identify that the key for it to work is to speed up the compilation or hide the compilation overhead. To do this, we propose a real-time compiler, DVM. In DVM, we design a runtime operator compiler based on a bytecode virtual machine to perform effective and efficient compilation for each dynamic operator instance given its input. Specifically, instead of compiling programs into machine code, we encode the operator program into bytecode on the CPU and decode the bytecode into virtual instructions for direct execution on the NPU. Based on the runtime operator compiler, we further propose an operator fuser, which performs symbol-deduction-based fusion on static graphs and runtime fusion on dynamic graphs. Both pattern- and stacking-based fusion are supported to increase fusion opportunities. Evaluation on operators, subgraphs, and models shows that, compared with TorchInductor, PyTorch-eager and MindSpore-graph-O0, we are up to 11.77$\\times$ better in terms of the operator/model efficiency and up to 5 orders of magnitude faster in terms of the maximum compilation time.",
       "authors": [
-        "Elias Frantar",
-        "Dan Alistarh"
-      ],
-      "published": "2023-01-02",
-      "published_date": "2023-01-02 00:00:00",
-      "categories": [
-        "cs.LG"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "sparsity",
-        "pruning",
-        "one-shot",
-        "inference"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.45,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2301.00774",
-      "pdf_url": "https://arxiv.org/pdf/2301.00774.pdf",
-      "scores": {
-        "relevance": 2.6,
-        "recency": 0.0,
-        "popularity": 0.8,
-        "quality": 0.8,
-        "recommendation": 5.88
-      },
-      "classic_rotation_score": 10.4321,
-      "citationCount": 1171,
-      "influentialCitationCount": 213,
-      "venue": "International Conference on Machine Learning",
-      "journal_ref": "ArXiv",
-      "ai": {
-        "one_liner_zh": "This paper studies one-shot pruning for very large GPT-style models, arguing that high sparsity can be introduced with limited accuracy loss while keeping the result usable for deployment-oriented sparse optimizations.",
-        "summary_zh": "This paper targets a practical inference problem: reducing the cost of very large GPT-style models through pruning without relying on expensive iterative retraining. The claimed mechanism is one-shot pruning that pushes models to high sparsity while preserving accuracy well enough to remain useful. The abstract further claims that the resulting sparsity patterns stay compatible with downstream deployment optimizations, which is the key systems relevance for inference efficiency. If that holds, the work matters because it connects compression quality to actual serving-side acceleration rather than treating sparsity as a model-only result. The main missing detail is that the abstract does not make clear how accuracy is preserved, what sparsity structure is used, or what deployment gains are demonstrated in practice.",
-        "background_zh": "Large language models are expensive to serve, so pruning is attractive only when it preserves model quality and maps cleanly onto sparse inference implementations.",
-        "problem_zh": "The paper asks whether very large GPT-style models can be pruned to high sparsity in a single pass without the usual retraining-heavy workflow and without breaking deployment usefulness.",
-        "approach_zh": "Its core idea is a one-shot pruning method for massive language models that aims to remove many weights at once while producing sparsity patterns that remain deployment-compatible.",
-        "evidence_zh": "The abstract supports two claims at a high level: limited accuracy loss after high-sparsity one-shot pruning and compatibility with downstream deployment optimizations, but it does not make the evaluation setup or evidence details clear.",
-        "value_zh": "If the method is robust, it could lower the cost of compressing and serving large models by making sparsity practical without a long iterative pruning pipeline.",
-        "open_questions": [
-          "What pruning criterion and sparsity structure are used, and are they hardware-friendly enough to yield real inference speedups rather than only smaller models?",
-          "How strong is the empirical evidence across model sizes and downstream tasks, and what baselines are used to judge fairness against iterative pruning methods?",
-          "Does deployment compatibility translate into measured latency or throughput gains on actual sparse kernels, or is the claim limited to structural suitability?"
-        ],
-        "core_contributions": [
-          "Frames one-shot pruning as a viable path for very large GPT-style models at high sparsity.",
-          "Claims that substantial sparsity can be introduced with limited accuracy degradation.",
-          "Connects pruning output to deployment-oriented sparse optimization compatibility rather than stopping at compression alone."
-        ],
-        "why_read": [
-          "It addresses the systems-relevant gap between pruning quality and deployable sparse inference.",
-          "It may provide a practical compression route when iterative pruning or retraining is too costly for large models.",
-          "It is useful for checking whether sparsity claims in LLMs are tied to actual serving constraints or only model-side metrics."
-        ],
-        "risks": [
-          "The abstract does not specify the sparsity pattern, so deployment compatibility may depend heavily on hardware and kernel support.",
-          "No latency, throughput, or memory evidence is stated in the abstract, so systems gains are not yet established from the provided text alone."
-        ],
-        "recommended_for": [
-          "Researchers working on LLM inference efficiency and sparse serving.",
-          "Engineers evaluating whether pruning methods can map to deployable sparse kernels.",
-          "Readers comparing model-compression methods that trade retraining cost against inference-side usefulness."
-        ],
-        "keywords": [
-          "one-shot pruning",
-          "sparsity",
-          "GPT-style models",
-          "LLM inference",
-          "deployment optimization"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "High fit for LLM inference systems because it directly targets compressing large GPT-style models in a way that may matter for deployment, but the abstract leaves the hardware assumptions and realized inference benefits unclear.",
-        "fallback_summary": "Shows that very large GPT-style models can be pruned in one shot to high sparsity with limited accuracy loss, and that the resulting sparsity patterns remain compatible with downstream deployment optimizations."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.22774v1",
-      "arxiv_id": "2603.22774v1",
-      "title": "Characterizing CPU-Induced Slowdowns in Multi-GPU LLM Inference",
-      "summary": "Large-scale machine learning workloads increasingly rely on multi-GPU systems, yet their performance is often limited by an overlooked component: the CPU. Through a detailed study of modern large language model (LLM) inference and serving workloads, we find that multi-GPU performance frequently degrades not because GPUs are saturated, but because CPUs fail to keep the GPUs busy. Under limited CPU allocations, systems exhibit symptoms such as delayed kernel launch, stalled communication, and increased tokenization latency, leading to severe GPU underutilization even when ample GPU resources are available. This work presents a systematic analysis of CPU-induced slowdowns in multi-GPU LLM inference. We show that these bottlenecks persist even in serving stacks that employ process-level separation and modern GPU-side optimizations such as CUDA Graphs. Since the marginal cost of additional CPU cores is small relative to GPU instance pricing, our evaluation indicates that increasing the number of CPU cores can substantially improve performance and stability at minimal additional cost. Under moderate serving load, we observe that CPU-starved configurations frequently time out, while providing adequate CPU resources restores responsiveness and reduces time-to-first-token (TTFT) latency by 1.36-5.40x across configurations, all without requiring additional GPUs. This work shows that CPU provisioning is a crucial factor in multi-GPU LLM inference configuration, helping prevent control-side bottlenecks.",
-      "authors": [
-        "Euijun Chung",
-        "Yuxiao Jia",
-        "Aaron Jezghani",
-        "Hyesoon Kim"
+        "Jingzhi Fang",
+        "Xiong Gao",
+        "Renwei Zhang",
+        "Zichun Ye",
+        "Lei Chen",
+        "Jie Zhao",
+        "Chengnuo Huang",
+        "Hui Xu",
+        "Xuefeng Jin"
       ],
       "author_details": [
         {
-          "name": "Euijun Chung"
+          "name": "Jingzhi Fang"
         },
         {
-          "name": "Yuxiao Jia"
+          "name": "Xiong Gao"
         },
         {
-          "name": "Aaron Jezghani"
+          "name": "Renwei Zhang"
         },
         {
-          "name": "Hyesoon Kim"
+          "name": "Zichun Ye"
+        },
+        {
+          "name": "Lei Chen"
+        },
+        {
+          "name": "Jie Zhao"
+        },
+        {
+          "name": "Chengnuo Huang"
+        },
+        {
+          "name": "Hui Xu"
+        },
+        {
+          "name": "Xuefeng Jin"
         }
       ],
-      "published": "2026-03-24T04:06:27Z",
-      "published_date": "2026-03-24 04:06:27+00:00",
-      "updated": "2026-03-24T04:06:27Z",
-      "comments": "13 pages, 13 figures, 1 table",
-      "primary_category": "cs.AR",
+      "published": "2026-03-25T12:24:33Z",
+      "published_date": "2026-03-25 12:24:33+00:00",
+      "updated": "2026-03-25T12:24:33Z",
+      "primary_category": "cs.PL",
       "categories": [
-        "cs.AR",
-        "cs.DC"
+        "cs.PL",
+        "cs.AI",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.22774v1",
-      "url": "http://arxiv.org/abs/2603.22774v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.24239v1",
+      "url": "http://arxiv.org/abs/2603.24239v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.55,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 8.39
+        "popularity": 0.7,
+        "quality": 0.7,
+        "recommendation": 8.88
       },
       "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "cuda",
-        "cs.DC",
-        "cs.AR",
-        "latency"
+        "kernel generation",
+        "cs.PL",
+        "cs.LG",
+        "fusion"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -451,215 +237,279 @@
         "domain": "LLM Code Generation For CUDA Kernels",
         "text_match_count": 1,
         "matched_categories": [
-          "cs.DC",
-          "cs.AR"
+          "cs.PL",
+          "cs.LG"
         ],
         "required_signal_matches": [
-          "cuda"
+          "kernel generation"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "latency"
+        "bonus_keyword_matches": [
+          "fusion"
         ],
-        "analysis_keyword_match_count": 1,
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper argues that multi-GPU LLM inference can be bottlenecked by CPU-side control work, causing GPU underutilization even when GPU capacity is available.",
-        "summary_zh": "The paper studies an often-missed systems issue in multi-GPU LLM inference: CPUs may fail to feed the GPUs fast enough, so end-to-end performance degrades despite available GPU resources. It attributes the slowdown to control-side effects such as delayed kernel launches, stalled communication, and higher tokenization latency, and claims these bottlenecks remain even with process separation and CUDA Graphs. The abstract reports that adding CPU cores, which are relatively cheap compared with GPUs, improves stability and reduces time-to-first-token latency by 1.36-5.40x under moderate serving load without adding GPUs. For practitioners, the main value is a configuration warning: GPU provisioning alone is not enough for serving performance. The biggest missing detail is how broad the study is across models, serving stacks, hardware setups, and baseline CPU allocations.",
-        "background_zh": "As multi-GPU LLM serving stacks become more optimized on the GPU side, host-side scheduling and control overhead can become the limiting factor.",
-        "problem_zh": "The paper asks when and how insufficient CPU provisioning slows multi-GPU LLM inference enough to leave GPUs underutilized and harm serving latency and stability.",
-        "approach_zh": "It performs a system-level characterization of multi-GPU inference and serving workloads, tracing CPU-induced effects such as launch delays, communication stalls, and tokenization overhead.",
-        "evidence_zh": "The abstract supports the claim with a reported TTFT reduction of 1.36-5.40x and fewer timeouts after adding CPU cores, but it does not make the exact evaluation setup or baseline fairness clear.",
-        "value_zh": "If the results hold broadly, the paper gives a practical serving lesson: modest CPU increases may unlock substantial latency and stability gains without paying for more GPUs.",
+        "one_liner_zh": "This paper proposes a runtime compiler for dynamic AI workloads that replaces conventional machine-code generation with bytecode execution on the target device to cut compilation latency and preserve optimization opportunities.",
+        "summary_zh": "This paper targets a real systems problem in dynamic AI models: shape and control-flow variation make ahead-of-time compilation brittle, while runtime compilation often costs too much latency and memory. The proposed system, DVM, shifts runtime code generation toward a bytecode virtual machine, where operators are encoded on the CPU and decoded into virtual instructions for direct execution on the NPU, aiming to reduce or hide compilation overhead. On top of that runtime operator compiler, the paper adds static and dynamic graph fusion mechanisms, including pattern-based and stacking-based fusion, to expand optimization opportunities under dynamism. The abstract claims strong gains over TorchInductor, PyTorch eager, and MindSpore graph O0 in both execution efficiency and maximum compilation time, which makes this relevant for inference/runtime co-design. The biggest missing detail is where the reported speedups actually come from in hardware and workload terms, and how comparable the baselines and evaluation setup really are.",
+        "background_zh": "Dynamic tensor shapes and control flow are increasingly common in modern AI workloads, but they strain both ahead-of-time compilers and conventional runtime compilation pipelines.",
+        "problem_zh": "The paper asks whether runtime compilation for dynamic models can be made practical enough to avoid the latency, memory, and optimization tradeoffs of existing compiler strategies.",
+        "approach_zh": "DVM uses a bytecode-based runtime operator compiler instead of full machine-code generation, then layers symbol-deduction-based and runtime graph fusion on top to improve execution efficiency under dynamic behavior.",
+        "evidence_zh": "The abstract reports evaluations on operators, subgraphs, and full models, with claimed improvements in efficiency and much lower maximum compilation time, but it does not make the hardware setting, workload mix, or baseline normalization clear.",
+        "value_zh": "If the method holds up, it could make dynamic-model execution substantially more deployable by reducing compile-time stalls while still enabling fusion-based optimization at runtime.",
         "open_questions": [
-          "What hardware platforms, model sizes, and serving frameworks were used, and how representative are they of current multi-GPU deployments?",
-          "How were CPU allocations chosen, and are the reported gains robust against fair baselines that already tune thread placement, tokenization, and communication settings?",
-          "Which CPU-side bottleneck dominates in practice: kernel launch overhead, communication orchestration, tokenization, or something else?"
+          "What exactly is the execution model on the target NPU, and how much of the gain comes from bytecode interpretation versus reduced compilation work?",
+          "How fair are the comparisons against TorchInductor, PyTorch eager, and MindSpore graph O0 across hardware, operator coverage, and optimization settings?",
+          "What are the runtime overheads, memory costs, and limitations of the virtual-instruction approach on workloads with highly diverse dynamic patterns?"
         ],
         "core_contributions": [
-          "Frames CPU provisioning as a first-order systems variable for multi-GPU LLM inference rather than a secondary deployment detail.",
-          "Identifies concrete symptoms of CPU starvation, including delayed kernel launches, stalled communication, increased tokenization latency, and GPU underutilization.",
-          "Provides empirical evidence that adding CPU cores can improve responsiveness and TTFT without increasing GPU count."
+          "A runtime compiler design for dynamic operators built around CPU-side bytecode generation and device-side virtual-instruction execution.",
+          "A fusion framework that combines symbol-deduction-based fusion for static graphs with runtime fusion for dynamic graphs.",
+          "An empirical claim that this design improves both execution efficiency and worst-case compilation latency across operators, subgraphs, and models."
         ],
         "why_read": [
-          "It targets a real deployment failure mode that is easy to miss when profiling only GPU utilization.",
-          "It may help explain poor multi-GPU serving efficiency even in stacks that already use CUDA Graphs and process-level separation.",
-          "It is directly relevant for inference engineers making cloud instance sizing and serving configuration decisions."
+          "It addresses a real compiler/runtime bottleneck for dynamic AI execution rather than only optimizing static cases.",
+          "The bytecode-VM formulation is a concrete systems idea that may matter for runtime code generation on accelerators.",
+          "The paper appears to combine operator compilation and graph fusion, so it is relevant to compiler/runtime co-design discussions."
         ],
         "risks": [
-          "The abstract does not specify whether the findings depend heavily on a particular hardware topology, runtime stack, or CPU pinning policy.",
-          "The reported improvements may partly reflect very CPU-starved baselines, which would affect how general the gains are in well-tuned systems."
+          "The abstract does not clarify whether the gains depend on a specific NPU execution model or hardware feature set.",
+          "The reported speedups may mix compilation-time and execution-time effects in a way that needs closer scrutiny for baseline fairness."
         ],
         "recommended_for": [
-          "Researchers studying LLM inference bottlenecks beyond GPU kernels alone.",
-          "Engineers sizing CPU and GPU resources for multi-GPU LLM serving deployments.",
-          "Systems readers interested in host-side scheduling, launch overhead, and control-plane effects in accelerated inference."
+          "Researchers working on LLM and dynamic-model inference runtimes.",
+          "Compiler and accelerator engineers interested in low-latency runtime code generation.",
+          "Readers evaluating alternatives to standard AOT versus JIT tradeoffs for dynamic execution."
         ],
         "keywords": [
-          "multi-GPU LLM inference",
-          "CPU bottleneck",
-          "GPU underutilization",
-          "time-to-first-token",
-          "serving systems",
-          "kernel launch overhead"
+          "dynamic models",
+          "runtime compilation",
+          "bytecode virtual machine",
+          "operator fusion",
+          "dynamic graph optimization",
+          "NPU execution"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High fit for LLM inference systems work because it focuses on latency and utilization bottlenecks in multi-GPU serving, though the abstract leaves important evaluation details to verify.",
-        "fallback_summary": "Large-scale machine learning workloads increasingly rely on multi-GPU systems, yet their performance is often limited by an overlooked component: the CPU."
+        "reading_priority_reason": "This is directly aligned with compiler/runtime co-design for dynamic AI execution and makes unusually strong claims about compilation-latency reduction, but the abstract leaves important questions about hardware assumptions and evaluation fairness that require a full read.",
+        "fallback_summary": "Dynamism is common in AI computation, e.g., the dynamic tensor shapes and the dynamic control flows in models."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2603.23198v1",
-      "arxiv_id": "2603.23198v1",
-      "title": "Sparser, Faster, Lighter Transformer Language Models",
-      "summary": "Scaling autoregressive large language models (LLMs) has driven unprecedented progress but comes with vast computational costs. In this work, we tackle these costs by leveraging unstructured sparsity within an LLM's feedforward layers, the components accounting for most of the model parameters and execution FLOPs. To achieve this, we introduce a new sparse packing format and a set of CUDA kernels designed to seamlessly integrate with the optimized execution pipelines of modern GPUs, enabling efficient sparse computation during LLM inference and training. To substantiate our gains, we provide a quantitative study of LLM sparsity, demonstrating that simple L1 regularization can induce over 99% sparsity with negligible impact on downstream performance. When paired with our kernels, we show that these sparsity levels translate into substantial throughput, energy efficiency, and memory usage benefits that increase with model scale. We will release all code and kernels under an open-source license to promote adoption and accelerate research toward establishing sparsity as a practical axis for improving the efficiency and scalability of modern foundation models.",
+      "id": "http://arxiv.org/abs/2603.24517v1",
+      "arxiv_id": "2603.24517v1",
+      "title": "AVO: Agentic Variation Operators for Autonomous Evolutionary Search",
+      "summary": "Agentic Variation Operators (AVO) are a new family of evolutionary variation operators that replace the fixed mutation, crossover, and hand-designed heuristics of classical evolutionary search with autonomous coding agents. Rather than confining a language model to candidate generation within a prescribed pipeline, AVO instantiates variation as a self-directed agent loop that can consult the current lineage, a domain-specific knowledge base, and execution feedback to propose, repair, critique, and verify implementation edits. We evaluate AVO on attention, among the most aggressively optimized kernel targets in AI, on NVIDIA Blackwell (B200) GPUs. Over 7 days of continuous autonomous evolution on multi-head attention, AVO discovers kernels that outperform cuDNN by up to 3.5% and FlashAttention-4 by up to 10.5% across the evaluated configurations. The discovered optimizations transfer readily to grouped-query attention, requiring only 30 minutes of additional autonomous adaptation and yielding gains of up to 7.0% over cuDNN and 9.3% over FlashAttention-4. Together, these results show that agentic variation operators move beyond prior LLM-in-the-loop evolutionary pipelines by elevating the agent from candidate generator to variation operator, and can discover performance-critical micro-architectural optimizations that produce kernels surpassing state-of-the-art expert-engineered attention implementations on today's most advanced GPU hardware.",
       "authors": [
-        "Edoardo Cetin",
-        "Stefano Peluchetti",
-        "Emilio Castillo",
-        "Akira Naruse",
-        "Mana Murakami",
-        "Llion Jones"
+        "Terry Chen",
+        "Zhifan Ye",
+        "Bing Xu",
+        "Zihao Ye",
+        "Timmy Liu",
+        "Ali Hassani",
+        "Tianqi Chen",
+        "Andrew Kerr",
+        "Haicheng Wu",
+        "Yang Xu",
+        "Yu-Jung Chen",
+        "Hanfeng Chen",
+        "Aditya Kane",
+        "Ronny Krashinsky",
+        "Ming-Yu Liu",
+        "Vinod Grover",
+        "Luis Ceze",
+        "Roger Bringmann",
+        "John Tran",
+        "Wei Liu",
+        "Fung Xie",
+        "Michael Lightstone",
+        "Humphrey Shi"
       ],
       "author_details": [
         {
-          "name": "Edoardo Cetin"
+          "name": "Terry Chen"
         },
         {
-          "name": "Stefano Peluchetti"
+          "name": "Zhifan Ye"
         },
         {
-          "name": "Emilio Castillo"
+          "name": "Bing Xu"
         },
         {
-          "name": "Akira Naruse"
+          "name": "Zihao Ye"
         },
         {
-          "name": "Mana Murakami"
+          "name": "Timmy Liu"
         },
         {
-          "name": "Llion Jones"
+          "name": "Ali Hassani"
+        },
+        {
+          "name": "Tianqi Chen"
+        },
+        {
+          "name": "Andrew Kerr"
+        },
+        {
+          "name": "Haicheng Wu"
+        },
+        {
+          "name": "Yang Xu"
+        },
+        {
+          "name": "Yu-Jung Chen"
+        },
+        {
+          "name": "Hanfeng Chen"
+        },
+        {
+          "name": "Aditya Kane"
+        },
+        {
+          "name": "Ronny Krashinsky"
+        },
+        {
+          "name": "Ming-Yu Liu"
+        },
+        {
+          "name": "Vinod Grover"
+        },
+        {
+          "name": "Luis Ceze"
+        },
+        {
+          "name": "Roger Bringmann"
+        },
+        {
+          "name": "John Tran"
+        },
+        {
+          "name": "Wei Liu"
+        },
+        {
+          "name": "Fung Xie"
+        },
+        {
+          "name": "Michael Lightstone"
+        },
+        {
+          "name": "Humphrey Shi"
         }
       ],
-      "published": "2026-03-24T13:43:27Z",
-      "published_date": "2026-03-24 13:43:27+00:00",
-      "updated": "2026-03-24T13:43:27Z",
-      "comments": "Code and checkpoints available at: https://github.com/SakanaAI/sparser-faster-llms",
+      "published": "2026-03-25T16:55:04Z",
+      "published_date": "2026-03-25 16:55:04+00:00",
+      "updated": "2026-03-25T16:55:04Z",
       "primary_category": "cs.LG",
       "categories": [
-        "cs.LG",
-        "cs.CL"
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.23198v1",
-      "url": "http://arxiv.org/abs/2603.23198v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.24517v1",
+      "url": "http://arxiv.org/abs/2603.24517v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 1.75,
+        "relevance": 2.13,
         "recency": 3.0,
-        "popularity": 0.8,
-        "quality": 0.8,
-        "recommendation": 6.68
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 7.96
       },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "cuda",
+        "flashattention",
         "cs.LG",
-        "throughput"
+        "b200"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
+        "domain": "LLM Inference Systems",
         "text_match_count": 1,
         "matched_categories": [
           "cs.LG"
         ],
         "required_signal_matches": [
-          "cuda"
+          "flashattention",
+          "b200"
         ],
-        "required_signal_match_count": 1,
+        "required_signal_match_count": 2,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "throughput"
-        ],
-        "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.35,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.7,
         "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper argues that extremely sparse feedforward layers can be made practical for transformer training and inference by pairing a new sparse packing format with GPU-oriented CUDA kernels.",
-        "summary_zh": "This paper targets the main cost center in transformer LLMs: dense feedforward layers that dominate parameters and FLOPs as models scale. It proposes a sparse packing format plus CUDA kernels meant to fit modern GPU execution pipelines so that unstructured sparsity is usable during both inference and training, rather than remaining only a compression result on paper. The abstract also claims a quantitative sparsity study in which simple L1 regularization pushes models past 99% sparsity with negligible downstream degradation, and that these sparsity levels yield better throughput, energy efficiency, and memory use when combined with the proposed kernels. For systems readers, the practical interest is whether the packing and kernel design really convert nominal sparsity into hardware-efficient execution at scale. The biggest missing detail is that the abstract does not make the evaluation setup, baselines, hardware assumptions, or kernel-level source of the gains clear.",
-        "background_zh": "Transformer feedforward blocks consume much of the parameter and compute budget in autoregressive LLMs, so making them sparse is an appealing route to lower inference and training cost if the hardware can execute that sparsity efficiently.",
-        "problem_zh": "The core problem is that unstructured sparsity can remove weights on paper but often fails to deliver real GPU speedups, so the paper asks how to make very high sparsity usable in practical LLM execution.",
-        "approach_zh": "The method combines L1-induced sparsification of feedforward layers with a new sparse packing format and custom CUDA kernels designed to integrate with optimized modern GPU execution pipelines.",
-        "evidence_zh": "The abstract claims a quantitative sparsity study, negligible downstream impact at over 99% sparsity, and resulting improvements in throughput, energy efficiency, and memory usage, but it does not make the benchmark conditions or fairness of comparison clear.",
-        "value_zh": "If the kernel and format design hold up, this would make extreme sparsity a more credible systems lever for scaling LLM training and especially serving under tighter compute, memory, and energy budgets.",
+        "one_liner_zh": "This paper replaces fixed evolutionary search operators with autonomous coding-agent loops and reports attention kernels on NVIDIA B200 that modestly outperform strong hand-engineered baselines.",
+        "summary_zh": "This paper targets automated discovery of high-performance attention kernels, a setting where most obvious optimization space is already heavily mined by expert implementations. Its core idea is to turn evolutionary variation itself into an autonomous coding-agent loop that can inspect lineage, use domain knowledge, and react to execution feedback to propose, repair, critique, and verify code edits. The abstract reports multi-day autonomous search on multi-head attention over NVIDIA Blackwell B200 GPUs, with kernels that beat cuDNN and FlashAttention-4 on the evaluated configurations, and it also claims relatively fast transfer to grouped-query attention. If the method is real and stable, the value is not just another kernel search pipeline but a stronger mechanism for discovering micro-architectural optimizations without hand-written variation heuristics. The biggest missing detail is evaluation clarity: the abstract does not make baseline fairness, search cost, hardware setup breadth, or reproducibility conditions clear.",
+        "background_zh": "Attention kernels are a central systems bottleneck in LLM inference, and the optimization space is already dominated by highly tuned expert implementations, making further gains hard to obtain.",
+        "problem_zh": "The paper asks whether evolutionary search can remain effective on frontier GPU kernels without relying on fixed mutation, crossover, and hand-designed search heuristics.",
+        "approach_zh": "It replaces classical variation operators with a self-directed coding agent that uses lineage, domain knowledge, and execution feedback to iteratively edit and validate kernel implementations.",
+        "evidence_zh": "The abstract claims end-to-end kernel wins over cuDNN and FlashAttention-4 on evaluated multi-head attention and grouped-query attention settings on NVIDIA B200, but it does not make the evaluation protocol or fairness details clear.",
+        "value_zh": "If the search cost is justified, this could matter as a compiler-runtime co-design direction for automatically finding kernel-level optimizations that usually require expert manual tuning.",
         "open_questions": [
-          "What hardware, sequence lengths, batch sizes, and baselines were used to show the reported throughput and energy gains?",
-          "How much of the benefit comes from the sparse packing and CUDA kernels versus the regularization-induced sparsity alone?",
-          "Does the method preserve quality across representative downstream tasks and model scales, or only in a limited evaluation setting?"
+          "How are cuDNN and FlashAttention-4 configured and tuned in the comparisons, and are the baselines matched fairly for the same hardware and problem settings?",
+          "What is the actual search budget in compute, engineering constraints, and failure rate over the 7-day autonomous run?",
+          "Which discovered optimizations are genuinely new micro-architectural insights versus rediscovery of known attention-kernel techniques?"
         ],
         "core_contributions": [
-          "Introduces a sparse packing format for highly sparse transformer feedforward layers.",
-          "Implements CUDA kernels intended to make unstructured sparsity practical on modern GPU pipelines for training and inference.",
-          "Claims that simple L1 regularization can induce extremely high sparsity with limited downstream quality loss."
+          "Reframes evolutionary variation as an autonomous coding-agent loop rather than fixed mutation or crossover operators.",
+          "Applies the method to highly optimized attention kernels on NVIDIA Blackwell B200 GPUs.",
+          "Claims transfer of the evolved search strategy from multi-head attention to grouped-query attention with limited additional adaptation."
         ],
         "why_read": [
-          "It focuses on the systems bottleneck that matters most for transformer cost: feedforward-layer compute and parameter footprint.",
-          "It is one of the more directly relevant papers here for GPU execution, CUDA kernel design, and turning sparsity into real serving gains.",
-          "It may clarify whether extreme unstructured sparsity can be operationally useful rather than just statistically interesting."
+          "It is directly relevant to automated CUDA/kernel optimization and LLM inference serving efficiency.",
+          "The paper tests agentic code evolution on a hard target where baseline implementations are already state of the art.",
+          "A full read could reveal whether the gains come from meaningful low-level kernel discoveries or from evaluation scope and search-budget asymmetry."
         ],
         "risks": [
-          "The abstract does not explain how the kernels avoid the usual irregular-memory and load-balance penalties of unstructured sparsity.",
-          "The claimed negligible performance impact at over 99% sparsity is strong and needs careful task-level validation in the full paper."
+          "The abstract gives strong performance claims but leaves baseline fairness and reproducibility underexplained.",
+          "The reported wins may depend heavily on B200-specific behavior and may not generalize across hardware or workloads clearly from the abstract alone."
         ],
         "recommended_for": [
-          "Researchers working on LLM inference acceleration and serving efficiency.",
-          "Engineers interested in CUDA kernel design for sparse transformer execution.",
-          "Readers evaluating sparsity as a practical alternative to dense scaling."
+          "Researchers working on LLM inference kernels and attention serving stacks.",
+          "Engineers interested in LLM-guided CUDA optimization or automated low-level code generation.",
+          "Compiler and systems readers evaluating agentic search as an alternative to hand-designed kernel tuning heuristics."
         ],
         "keywords": [
-          "transformer sparsity",
-          "LLM inference",
-          "feedforward layers",
-          "CUDA kernels",
-          "sparse packing",
-          "GPU execution"
+          "attention kernels",
+          "multi-head attention",
+          "grouped-query attention",
+          "autonomous evolutionary search",
+          "coding agents",
+          "CUDA optimization"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High fit for the stated focus because it directly targets LLM efficiency through GPU kernel and runtime-oriented sparse execution, but the abstract leaves important questions about hardware setup, baseline fairness, and the actual source of the claimed gains.",
-        "fallback_summary": "Scaling autoregressive large language models (LLMs) has driven unprecedented progress but comes with vast computational costs."
+        "reading_priority_reason": "High fit with the stated focus because it targets attention-kernel optimization on B200 and claims gains over cuDNN and FlashAttention-4, but the abstract still leaves key questions about search cost, fairness, and reproducibility.",
+        "fallback_summary": "Agentic Variation Operators (AVO) are a new family of evolutionary variation operators that replace the fixed mutation, crossover, and hand-designed heuristics of classical evolutionary search with autonomous coding agents."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, LLM Inference Systems. The set is anchored by PCR: A Prefetch-Enhanced Cache… and EchoKV: Efficient KV Cache…. SparseGPT: Massive Language Models… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by Energy Efficient Software Hardware… and DVM: Real-Time Kernel Generation…. AVO: Agentic Variation Operators… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
       "training and inference efficiency",
-      "LLM Inference Systems",
       "factual reliability and verification"
     ],
     "reading_strategy": [
-      "Start with PCR: A Prefetch-Enhanced Cache… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
-      "Then read EchoKV: Efficient KV Cache… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use SparseGPT: Massive Language Models… as a final cross-check on experimental boundaries and practical value."
+      "Start with Energy Efficient Software Hardware… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
+      "Then read DVM: Real-Time Kernel Generation… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use AVO: Agentic Variation Operators… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-03-25T11:05:19Z",
+    "generated_at": "2026-03-26T11:04:50Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 5,
+    "paper_results": 3,
     "paper_failures": 0
   }
 }

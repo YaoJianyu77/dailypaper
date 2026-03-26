@@ -622,6 +622,27 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 6.68,
       "updated": "2026-03-25"
+    },
+    {
+      "id": "2603.23668v1",
+      "title": "Energy Efficient Software Hardware CoDesign for Machine Learning: From TinyML to Large Language Models",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.05,
+      "updated": "2026-03-26"
+    },
+    {
+      "id": "2603.24239v1",
+      "title": "DVM: Real-Time Kernel Generation for Dynamic AI Models",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 8.88,
+      "updated": "2026-03-26"
+    },
+    {
+      "id": "2603.24517v1",
+      "title": "AVO: Agentic Variation Operators for Autonomous Evolutionary Search",
+      "domain": "LLM Inference Systems",
+      "quality_score": 7.96,
+      "updated": "2026-03-26"
     }
   ],
   "edges": [
@@ -1998,7 +2019,19 @@
       "target": "2301.00774",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2603.23668v1",
+      "target": "2603.24517v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.24517v1",
+      "target": "2603.23668v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-25"
+  "last_updated": "2026-03-26"
 }
