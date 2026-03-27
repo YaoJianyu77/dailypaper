@@ -1,30 +1,30 @@
 {
-  "target_date": "2026-03-26",
+  "target_date": "2026-03-27",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-24",
-      "end": "2026-03-26"
+      "start": "2026-02-25",
+      "end": "2026-03-27"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-26",
-      "end": "2026-02-23"
+      "start": "2025-03-27",
+      "end": "2026-02-24"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 17,
+  "total_filtered": 15,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 17,
+  "total_unique": 15,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 3,
+    "selected_count": 1,
     "lane_counts": {
-      "fresh": 3,
+      "fresh": 1,
       "established": 0,
       "classic": 0,
       "history_filtered": 11,
@@ -40,195 +40,51 @@
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.23668v1",
-      "arxiv_id": "2603.23668v1",
-      "title": "Energy Efficient Software Hardware CoDesign for Machine Learning: From TinyML to Large Language Models",
-      "summary": "The rapid deployment of machine learning across platforms from milliwatt-class TinyML devices to large language models has made energy efficiency a primary constraint for sustainable AI. Across these scales, performance and energy are increasingly limited by data movement and memory-system behavior rather than by arithmetic throughput alone. This work reviews energy efficient software hardware codesign methods spanning edge inference and training to datacenter-scale LLM serving, covering accelerator architectures (e.g., ASIC/FPGA dataflows, processing-/compute-in-memory designs) and system-level techniques (e.g., partitioning, quantization, scheduling, and runtime adaptation). We distill common design levers and trade-offs, and highlight recurring gaps including limited cross-platform generalization, large and costly co-design search spaces, and inconsistent benchmarking across workloads and deployment settings. Finally, we outline a hierarchical decomposition perspective that maps optimization strategies to computational roles and supports incremental adaptation, offering practical guidance for building energy and carbon aware ML systems.",
+      "id": "http://arxiv.org/abs/2603.24812v1",
+      "arxiv_id": "2603.24812v1",
+      "title": "Numerical Superoptimization for Library Learning",
+      "summary": "Numerical software depends on fast, accurate implementations of mathematical primitives like sin, exp, and log. Modern superoptimizers can optimize floating-point kernels against a given set of such primitives, but a more fundamental question remains open: which new primitives are worth implementing in the first place?\n  We formulate this as numerical library learning: given a workload of floating-point kernels, identify the mathematical primitives whose expert implementations would most improve speed and accuracy. Our key insight is that numerical superoptimizers already have the machinery well-suited to this problem. Their search procedures happen to enumerate candidate primitives, their equivalence procedures can generalize and deduplicate candidates, and their cost models can estimate counterfactual utility: how much the workload would improve if a given primitive were available.\n  We present GrowLibm, which repurposes the Herbie superoptimizer as a numerical library learner. GrowLibm mines candidate primitives from the superoptimizer's intermediate search results, ranks them by counterfactual utility, and prunes redundant candidates. Across three scientific applications (PROJ, CoolProp, and Basilisk), GrowLibm identifies compact, reusable primitives that can be implemented effectively using standard numerical techniques. When Herbie is extended with these expert implementations, kernel speed improves by up to 2.2x at fixed accuracy, and maximum achievable accuracy also improves, in one case from 56.0% to 93.5%. We also prototype an LLVM matcher that recognizes learned primitives in optimized IR, recovering 26 replacement sites across five PROJ projections and improving end-to-end application performance by up to 5%.",
       "authors": [
-        "Mohammad Saleh Vahdatpour",
-        "Yanqing Zhang"
+        "Jonas Regehr",
+        "Mitch Briles",
+        "Zachary Tatlock",
+        "Pavel Panchekha"
       ],
       "author_details": [
         {
-          "name": "Mohammad Saleh Vahdatpour"
+          "name": "Jonas Regehr"
         },
         {
-          "name": "Yanqing Zhang"
+          "name": "Mitch Briles"
+        },
+        {
+          "name": "Zachary Tatlock"
+        },
+        {
+          "name": "Pavel Panchekha"
         }
       ],
-      "published": "2026-03-24T19:10:42Z",
-      "published_date": "2026-03-24 19:10:42+00:00",
-      "updated": "2026-03-24T19:10:42Z",
-      "comments": "Accepted as a poster presentation at the EMC2 Workshop, ASPLOS 2026",
-      "primary_category": "cs.AR",
-      "categories": [
-        "cs.AR",
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.23668v1",
-      "url": "http://arxiv.org/abs/2603.23668v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 0.9,
-        "quality": 0.9,
-        "recommendation": 9.05
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "llm serving",
-        "serving",
-        "throughput",
-        "quantization",
-        "cs.LG",
-        "cs.AR",
-        "runtime",
-        "memory"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 4,
-        "matched_categories": [
-          "cs.LG",
-          "cs.AR"
-        ],
-        "required_signal_matches": [
-          "runtime"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "throughput",
-          "memory"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "throughput",
-          "memory"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "A cross-scale review of energy-efficient ML co-design that argues data movement and memory behavior, not raw compute, are the main constraints from TinyML to LLM serving.",
-        "summary_zh": "This paper is a review of energy-efficient software-hardware co-design across a wide span of ML deployments, from edge TinyML systems to datacenter LLM serving. Its main framing is that energy and performance bottlenecks now come largely from data movement and memory-system behavior rather than arithmetic throughput, so useful optimizations must combine architecture, runtime, and model-level decisions. The survey covers accelerator styles such as ASIC/FPGA dataflows and processing-in-memory or compute-in-memory designs, alongside system techniques including partitioning, quantization, scheduling, and runtime adaptation. It also highlights recurring weaknesses in the area: poor cross-platform generalization, large co-design search spaces, and inconsistent benchmarking across workloads and deployment settings. The practical value is in the synthesis and the proposed hierarchical decomposition perspective, but the abstract does not make clear how systematic the review is or how actionable the framework is in real deployment settings.",
-        "background_zh": "Energy efficiency has become a central systems constraint across both edge ML and large-scale LLM serving because moving data through memory and interconnects often costs more than the math itself.",
-        "problem_zh": "The paper addresses how to organize software-hardware co-design methods across very different ML scales while making the main trade-offs around energy, performance, and deployment complexity comparable.",
-        "approach_zh": "It presents a review and synthesis of accelerator-level and system-level methods, then proposes a hierarchical decomposition view that maps optimizations to different computational roles for incremental adaptation.",
-        "evidence_zh": "The abstract supports that this is a survey distilling design levers, trade-offs, and common gaps, but it does not make clear the review methodology, coverage criteria, or any quantitative comparative evidence.",
-        "value_zh": "If the synthesis is rigorous, it could help systems researchers reason more cleanly about where energy savings come from and which co-design levers transfer from edge inference to LLM serving.",
-        "open_questions": [
-          "What review methodology and paper-selection criteria were used, and how complete is the coverage of recent LLM serving systems?",
-          "How concrete is the hierarchical decomposition framework: does it yield a decision procedure, taxonomy, or deployable workflow?",
-          "How does the paper treat benchmarking fairness across hardware platforms, workloads, batch regimes, and memory-system assumptions?"
-        ],
-        "core_contributions": [
-          "Unifies energy-efficient ML co-design discussion across TinyML, training, and datacenter-scale LLM serving.",
-          "Frames data movement and memory behavior as the dominant cross-scale bottlenecks rather than raw arithmetic throughput.",
-          "Synthesizes both hardware mechanisms and system techniques in one review and surfaces recurring field-wide gaps."
-        ],
-        "why_read": [
-          "Useful if you want a broad map of the energy-efficiency design space spanning accelerators, runtimes, and model-level choices.",
-          "Potentially helpful for identifying where serving efficiency gains actually come from in memory- and bandwidth-bound regimes.",
-          "Relevant as a taxonomy paper for comparing edge and datacenter co-design assumptions under one lens."
-        ],
-        "risks": [
-          "This appears to be a review paper, so there may be limited new empirical systems results.",
-          "The abstract is broad and may trade depth for coverage, especially for LLM-serving-specific mechanisms and baselines."
-        ],
-        "recommended_for": [
-          "Researchers surveying energy-efficient LLM serving and broader ML systems co-design.",
-          "Engineers comparing architecture, quantization, scheduling, and runtime levers under energy constraints.",
-          "Readers who want a cross-scale taxonomy rather than a single new serving algorithm or kernel optimization."
-        ],
-        "keywords": [
-          "energy-efficient ML systems",
-          "software-hardware co-design",
-          "LLM serving",
-          "data movement",
-          "memory systems",
-          "quantization"
-        ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "Strong fit at the theme level because it covers LLM serving efficiency and co-design trade-offs, but it is a broad review rather than a paper introducing a concrete inference, compiler, or kernel-level mechanism.",
-        "fallback_summary": "The rapid deployment of machine learning across platforms from milliwatt-class TinyML devices to large language models has made energy efficiency a primary constraint for sustainable AI."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.24239v1",
-      "arxiv_id": "2603.24239v1",
-      "title": "DVM: Real-Time Kernel Generation for Dynamic AI Models",
-      "summary": "Dynamism is common in AI computation, e.g., the dynamic tensor shapes and the dynamic control flows in models. Due to the long compilation time, existing runtime compilation damages the model efficiency, while the offline compilers either suffer from the long compilation time and device memory footprint to cover all the possible execution instances of a dynamic model, or sacrifice optimization opportunities for usability. In this paper, we rethink the feasibility of runtime compilation for dynamic models and identify that the key for it to work is to speed up the compilation or hide the compilation overhead. To do this, we propose a real-time compiler, DVM. In DVM, we design a runtime operator compiler based on a bytecode virtual machine to perform effective and efficient compilation for each dynamic operator instance given its input. Specifically, instead of compiling programs into machine code, we encode the operator program into bytecode on the CPU and decode the bytecode into virtual instructions for direct execution on the NPU. Based on the runtime operator compiler, we further propose an operator fuser, which performs symbol-deduction-based fusion on static graphs and runtime fusion on dynamic graphs. Both pattern- and stacking-based fusion are supported to increase fusion opportunities. Evaluation on operators, subgraphs, and models shows that, compared with TorchInductor, PyTorch-eager and MindSpore-graph-O0, we are up to 11.77$\\times$ better in terms of the operator/model efficiency and up to 5 orders of magnitude faster in terms of the maximum compilation time.",
-      "authors": [
-        "Jingzhi Fang",
-        "Xiong Gao",
-        "Renwei Zhang",
-        "Zichun Ye",
-        "Lei Chen",
-        "Jie Zhao",
-        "Chengnuo Huang",
-        "Hui Xu",
-        "Xuefeng Jin"
-      ],
-      "author_details": [
-        {
-          "name": "Jingzhi Fang"
-        },
-        {
-          "name": "Xiong Gao"
-        },
-        {
-          "name": "Renwei Zhang"
-        },
-        {
-          "name": "Zichun Ye"
-        },
-        {
-          "name": "Lei Chen"
-        },
-        {
-          "name": "Jie Zhao"
-        },
-        {
-          "name": "Chengnuo Huang"
-        },
-        {
-          "name": "Hui Xu"
-        },
-        {
-          "name": "Xuefeng Jin"
-        }
-      ],
-      "published": "2026-03-25T12:24:33Z",
-      "published_date": "2026-03-25 12:24:33+00:00",
-      "updated": "2026-03-25T12:24:33Z",
+      "published": "2026-03-25T20:47:15Z",
+      "published_date": "2026-03-25 20:47:15+00:00",
+      "updated": "2026-03-25T20:47:15Z",
       "primary_category": "cs.PL",
       "categories": [
-        "cs.PL",
-        "cs.AI",
-        "cs.LG"
+        "cs.PL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.24239v1",
-      "url": "http://arxiv.org/abs/2603.24239v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.24812v1",
+      "url": "http://arxiv.org/abs/2603.24812v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 3.0,
+        "relevance": 1.54,
         "recency": 3.0,
-        "popularity": 0.7,
-        "quality": 0.7,
-        "recommendation": 8.88
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 7.29
       },
       "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "kernel generation",
-        "cs.PL",
-        "cs.LG",
-        "fusion"
+        "llvm",
+        "cs.PL"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -237,279 +93,82 @@
         "domain": "LLM Code Generation For CUDA Kernels",
         "text_match_count": 1,
         "matched_categories": [
-          "cs.PL",
-          "cs.LG"
+          "cs.PL"
         ],
         "required_signal_matches": [
-          "kernel generation"
+          "llvm"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "fusion"
-        ],
-        "bonus_keyword_match_count": 1,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.18
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper proposes a runtime compiler for dynamic AI workloads that replaces conventional machine-code generation with bytecode execution on the target device to cut compilation latency and preserve optimization opportunities.",
-        "summary_zh": "This paper targets a real systems problem in dynamic AI models: shape and control-flow variation make ahead-of-time compilation brittle, while runtime compilation often costs too much latency and memory. The proposed system, DVM, shifts runtime code generation toward a bytecode virtual machine, where operators are encoded on the CPU and decoded into virtual instructions for direct execution on the NPU, aiming to reduce or hide compilation overhead. On top of that runtime operator compiler, the paper adds static and dynamic graph fusion mechanisms, including pattern-based and stacking-based fusion, to expand optimization opportunities under dynamism. The abstract claims strong gains over TorchInductor, PyTorch eager, and MindSpore graph O0 in both execution efficiency and maximum compilation time, which makes this relevant for inference/runtime co-design. The biggest missing detail is where the reported speedups actually come from in hardware and workload terms, and how comparable the baselines and evaluation setup really are.",
-        "background_zh": "Dynamic tensor shapes and control flow are increasingly common in modern AI workloads, but they strain both ahead-of-time compilers and conventional runtime compilation pipelines.",
-        "problem_zh": "The paper asks whether runtime compilation for dynamic models can be made practical enough to avoid the latency, memory, and optimization tradeoffs of existing compiler strategies.",
-        "approach_zh": "DVM uses a bytecode-based runtime operator compiler instead of full machine-code generation, then layers symbol-deduction-based and runtime graph fusion on top to improve execution efficiency under dynamic behavior.",
-        "evidence_zh": "The abstract reports evaluations on operators, subgraphs, and full models, with claimed improvements in efficiency and much lower maximum compilation time, but it does not make the hardware setting, workload mix, or baseline normalization clear.",
-        "value_zh": "If the method holds up, it could make dynamic-model execution substantially more deployable by reducing compile-time stalls while still enabling fusion-based optimization at runtime.",
-        "open_questions": [
-          "What exactly is the execution model on the target NPU, and how much of the gain comes from bytecode interpretation versus reduced compilation work?",
-          "How fair are the comparisons against TorchInductor, PyTorch eager, and MindSpore graph O0 across hardware, operator coverage, and optimization settings?",
-          "What are the runtime overheads, memory costs, and limitations of the virtual-instruction approach on workloads with highly diverse dynamic patterns?"
-        ],
-        "core_contributions": [
-          "A runtime compiler design for dynamic operators built around CPU-side bytecode generation and device-side virtual-instruction execution.",
-          "A fusion framework that combines symbol-deduction-based fusion for static graphs with runtime fusion for dynamic graphs.",
-          "An empirical claim that this design improves both execution efficiency and worst-case compilation latency across operators, subgraphs, and models."
-        ],
-        "why_read": [
-          "It addresses a real compiler/runtime bottleneck for dynamic AI execution rather than only optimizing static cases.",
-          "The bytecode-VM formulation is a concrete systems idea that may matter for runtime code generation on accelerators.",
-          "The paper appears to combine operator compilation and graph fusion, so it is relevant to compiler/runtime co-design discussions."
-        ],
-        "risks": [
-          "The abstract does not clarify whether the gains depend on a specific NPU execution model or hardware feature set.",
-          "The reported speedups may mix compilation-time and execution-time effects in a way that needs closer scrutiny for baseline fairness."
-        ],
-        "recommended_for": [
-          "Researchers working on LLM and dynamic-model inference runtimes.",
-          "Compiler and accelerator engineers interested in low-latency runtime code generation.",
-          "Readers evaluating alternatives to standard AOT versus JIT tradeoffs for dynamic execution."
-        ],
-        "keywords": [
-          "dynamic models",
-          "runtime compilation",
-          "bytecode virtual machine",
-          "operator fusion",
-          "dynamic graph optimization",
-          "NPU execution"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "This is directly aligned with compiler/runtime co-design for dynamic AI execution and makes unusually strong claims about compilation-latency reduction, but the abstract leaves important questions about hardware assumptions and evaluation fairness that require a full read.",
-        "fallback_summary": "Dynamism is common in AI computation, e.g., the dynamic tensor shapes and the dynamic control flows in models."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.24517v1",
-      "arxiv_id": "2603.24517v1",
-      "title": "AVO: Agentic Variation Operators for Autonomous Evolutionary Search",
-      "summary": "Agentic Variation Operators (AVO) are a new family of evolutionary variation operators that replace the fixed mutation, crossover, and hand-designed heuristics of classical evolutionary search with autonomous coding agents. Rather than confining a language model to candidate generation within a prescribed pipeline, AVO instantiates variation as a self-directed agent loop that can consult the current lineage, a domain-specific knowledge base, and execution feedback to propose, repair, critique, and verify implementation edits. We evaluate AVO on attention, among the most aggressively optimized kernel targets in AI, on NVIDIA Blackwell (B200) GPUs. Over 7 days of continuous autonomous evolution on multi-head attention, AVO discovers kernels that outperform cuDNN by up to 3.5% and FlashAttention-4 by up to 10.5% across the evaluated configurations. The discovered optimizations transfer readily to grouped-query attention, requiring only 30 minutes of additional autonomous adaptation and yielding gains of up to 7.0% over cuDNN and 9.3% over FlashAttention-4. Together, these results show that agentic variation operators move beyond prior LLM-in-the-loop evolutionary pipelines by elevating the agent from candidate generator to variation operator, and can discover performance-critical micro-architectural optimizations that produce kernels surpassing state-of-the-art expert-engineered attention implementations on today's most advanced GPU hardware.",
-      "authors": [
-        "Terry Chen",
-        "Zhifan Ye",
-        "Bing Xu",
-        "Zihao Ye",
-        "Timmy Liu",
-        "Ali Hassani",
-        "Tianqi Chen",
-        "Andrew Kerr",
-        "Haicheng Wu",
-        "Yang Xu",
-        "Yu-Jung Chen",
-        "Hanfeng Chen",
-        "Aditya Kane",
-        "Ronny Krashinsky",
-        "Ming-Yu Liu",
-        "Vinod Grover",
-        "Luis Ceze",
-        "Roger Bringmann",
-        "John Tran",
-        "Wei Liu",
-        "Fung Xie",
-        "Michael Lightstone",
-        "Humphrey Shi"
-      ],
-      "author_details": [
-        {
-          "name": "Terry Chen"
-        },
-        {
-          "name": "Zhifan Ye"
-        },
-        {
-          "name": "Bing Xu"
-        },
-        {
-          "name": "Zihao Ye"
-        },
-        {
-          "name": "Timmy Liu"
-        },
-        {
-          "name": "Ali Hassani"
-        },
-        {
-          "name": "Tianqi Chen"
-        },
-        {
-          "name": "Andrew Kerr"
-        },
-        {
-          "name": "Haicheng Wu"
-        },
-        {
-          "name": "Yang Xu"
-        },
-        {
-          "name": "Yu-Jung Chen"
-        },
-        {
-          "name": "Hanfeng Chen"
-        },
-        {
-          "name": "Aditya Kane"
-        },
-        {
-          "name": "Ronny Krashinsky"
-        },
-        {
-          "name": "Ming-Yu Liu"
-        },
-        {
-          "name": "Vinod Grover"
-        },
-        {
-          "name": "Luis Ceze"
-        },
-        {
-          "name": "Roger Bringmann"
-        },
-        {
-          "name": "John Tran"
-        },
-        {
-          "name": "Wei Liu"
-        },
-        {
-          "name": "Fung Xie"
-        },
-        {
-          "name": "Michael Lightstone"
-        },
-        {
-          "name": "Humphrey Shi"
-        }
-      ],
-      "published": "2026-03-25T16:55:04Z",
-      "published_date": "2026-03-25 16:55:04+00:00",
-      "updated": "2026-03-25T16:55:04Z",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.24517v1",
-      "url": "http://arxiv.org/abs/2603.24517v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.13,
-        "recency": 3.0,
-        "popularity": 1.5,
-        "quality": 1.5,
-        "recommendation": 7.96
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "flashattention",
-        "cs.LG",
-        "b200"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 1,
-        "matched_categories": [
-          "cs.LG"
-        ],
-        "required_signal_matches": [
-          "flashattention",
-          "b200"
-        ],
-        "required_signal_match_count": 2,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
         "analysis_keyword_matches": [],
         "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.7,
+        "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper replaces fixed evolutionary search operators with autonomous coding-agent loops and reports attention kernels on NVIDIA B200 that modestly outperform strong hand-engineered baselines.",
-        "summary_zh": "This paper targets automated discovery of high-performance attention kernels, a setting where most obvious optimization space is already heavily mined by expert implementations. Its core idea is to turn evolutionary variation itself into an autonomous coding-agent loop that can inspect lineage, use domain knowledge, and react to execution feedback to propose, repair, critique, and verify code edits. The abstract reports multi-day autonomous search on multi-head attention over NVIDIA Blackwell B200 GPUs, with kernels that beat cuDNN and FlashAttention-4 on the evaluated configurations, and it also claims relatively fast transfer to grouped-query attention. If the method is real and stable, the value is not just another kernel search pipeline but a stronger mechanism for discovering micro-architectural optimizations without hand-written variation heuristics. The biggest missing detail is evaluation clarity: the abstract does not make baseline fairness, search cost, hardware setup breadth, or reproducibility conditions clear.",
-        "background_zh": "Attention kernels are a central systems bottleneck in LLM inference, and the optimization space is already dominated by highly tuned expert implementations, making further gains hard to obtain.",
-        "problem_zh": "The paper asks whether evolutionary search can remain effective on frontier GPU kernels without relying on fixed mutation, crossover, and hand-designed search heuristics.",
-        "approach_zh": "It replaces classical variation operators with a self-directed coding agent that uses lineage, domain knowledge, and execution feedback to iteratively edit and validate kernel implementations.",
-        "evidence_zh": "The abstract claims end-to-end kernel wins over cuDNN and FlashAttention-4 on evaluated multi-head attention and grouped-query attention settings on NVIDIA B200, but it does not make the evaluation protocol or fairness details clear.",
-        "value_zh": "If the search cost is justified, this could matter as a compiler-runtime co-design direction for automatically finding kernel-level optimizations that usually require expert manual tuning.",
+        "one_liner_zh": "This paper reframes numerical library design as a search problem: mine candidate math primitives from superoptimization traces, rank them by counterfactual workload utility, and add only the primitives that materially improve downstream kernels.",
+        "summary_zh": "This paper studies a more upstream question than kernel-level numerical optimization: not just how to optimize floating-point code given a math library, but which new primitives should exist in that library at all. It introduces numerical library learning and implements it in GrowLibm, which repurposes Herbie's search, equivalence handling, and cost modeling to mine, deduplicate, and rank candidate primitives against real workloads. The abstract reports that adding expert implementations of the learned primitives improves kernel speed by up to 2.2x at fixed accuracy, can raise achievable accuracy substantially in at least one case, and can also be recovered from optimized LLVM IR to deliver up to 5% end-to-end application gains. The practical value is a workflow for expanding numerical libraries in a workload-driven way instead of relying only on manual expert intuition. The main missing detail from the abstract is how robust the ranking, implementation effort, and benchmark fairness are across broader workloads and hardware/compiler settings.",
+        "background_zh": "Numerical kernels depend heavily on a small set of expertly implemented math primitives, but deciding which additional primitives deserve that expert engineering effort has largely remained ad hoc.",
+        "problem_zh": "The paper asks how to identify new reusable mathematical primitives whose addition to a numerical library would most improve the speed and accuracy of a target workload.",
+        "approach_zh": "GrowLibm reuses a numerical superoptimizer's existing search outputs, equivalence machinery, and cost model to extract candidate primitives, estimate their counterfactual utility, and prune redundant options before implementation.",
+        "evidence_zh": "The abstract claims results on three scientific applications plus an LLVM-based recovery prototype, with reported kernel-level speed and accuracy improvements and smaller end-to-end gains, but it does not fully specify evaluation methodology in the abstract.",
+        "value_zh": "If the method holds up, it offers a principled way to co-design numerical libraries and compiler recognition around workload value rather than only hand-chosen primitives.",
         "open_questions": [
-          "How are cuDNN and FlashAttention-4 configured and tuned in the comparisons, and are the baselines matched fairly for the same hardware and problem settings?",
-          "What is the actual search budget in compute, engineering constraints, and failure rate over the 7-day autonomous run?",
-          "Which discovered optimizations are genuinely new micro-architectural insights versus rediscovery of known attention-kernel techniques?"
+          "How is counterfactual utility estimated, and how sensitive is the ranking to the workload mix, cost model, and search budget?",
+          "What implementation effort is required to turn a learned primitive into a stable expert routine, and how often do the learned candidates generalize beyond the training applications?",
+          "Are the reported speed and accuracy gains measured against strong numerical and compiler baselines under comparable optimization settings, including the LLVM matcher path?"
         ],
         "core_contributions": [
-          "Reframes evolutionary variation as an autonomous coding-agent loop rather than fixed mutation or crossover operators.",
-          "Applies the method to highly optimized attention kernels on NVIDIA Blackwell B200 GPUs.",
-          "Claims transfer of the evolved search strategy from multi-head attention to grouped-query attention with limited additional adaptation."
+          "Formulates numerical library learning as the problem of selecting new math primitives for a workload rather than only optimizing kernels under a fixed library.",
+          "Builds GrowLibm by repurposing Herbie's search traces, equivalence reasoning, and cost modeling to mine and rank candidate primitives.",
+          "Shows a compiler-facing prototype that matches learned primitives in optimized LLVM IR and recovers some end-to-end application benefit."
         ],
         "why_read": [
-          "It is directly relevant to automated CUDA/kernel optimization and LLM inference serving efficiency.",
-          "The paper tests agentic code evolution on a hard target where baseline implementations are already state of the art.",
-          "A full read could reveal whether the gains come from meaningful low-level kernel discoveries or from evaluation scope and search-budget asymmetry."
+          "It shifts attention from local floating-point rewrites to the library-design layer, which is a more structural optimization target.",
+          "It provides a concrete mechanism for connecting superoptimization search artifacts to reusable primitive discovery.",
+          "The LLVM matcher angle makes the work relevant to compiler/runtime co-design rather than pure numerical analysis alone."
         ],
         "risks": [
-          "The abstract gives strong performance claims but leaves baseline fairness and reproducibility underexplained.",
-          "The reported wins may depend heavily on B200-specific behavior and may not generalize across hardware or workloads clearly from the abstract alone."
+          "The abstract gives strong headline gains, but the breadth of workloads is narrow and may not reflect general-purpose numerical software.",
+          "The usefulness of the learned primitives may depend on substantial expert implementation work that the abstract does not quantify clearly."
         ],
         "recommended_for": [
-          "Researchers working on LLM inference kernels and attention serving stacks.",
-          "Engineers interested in LLM-guided CUDA optimization or automated low-level code generation.",
-          "Compiler and systems readers evaluating agentic search as an alternative to hand-designed kernel tuning heuristics."
+          "Researchers working on numerical optimization, superoptimization, and compiler support for floating-point kernels.",
+          "Engineers interested in workload-driven math library design and IR-level recognition of higher-level numerical idioms.",
+          "Readers tracking systems-adjacent program synthesis ideas that may influence low-level code generation pipelines."
         ],
         "keywords": [
-          "attention kernels",
-          "multi-head attention",
-          "grouped-query attention",
-          "autonomous evolutionary search",
-          "coding agents",
-          "CUDA optimization"
+          "numerical superoptimization",
+          "math library learning",
+          "floating-point kernels",
+          "Herbie",
+          "LLVM IR matching",
+          "counterfactual utility"
         ],
-        "reading_priority": "high",
-        "reading_priority_reason": "High fit with the stated focus because it targets attention-kernel optimization on B200 and claims gains over cuDNN and FlashAttention-4, but the abstract still leaves key questions about search cost, fairness, and reproducibility.",
-        "fallback_summary": "Agentic Variation Operators (AVO) are a new family of evolutionary variation operators that replace the fixed mutation, crossover, and hand-designed heuristics of classical evolutionary search with autonomous coding agents."
+        "reading_priority": "medium",
+        "reading_priority_reason": "The paper is technically interesting and methodologically original, especially for compiler and low-level optimization readers, but it is only indirectly aligned with the stated LLM inference and CUDA-kernel focus and leaves important evaluation details to the full paper.",
+        "fallback_summary": "Numerical software depends on fast, accurate implementations of mathematical primitives like sin, exp, and log."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by Energy Efficient Software Hardware… and DVM: Real-Time Kernel Generation…. AVO: Agentic Variation Operators… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are factual reliability and verification. The set is anchored by Numerical Superoptimization for….",
     "top_themes": [
-      "training and inference efficiency",
       "factual reliability and verification"
     ],
     "reading_strategy": [
-      "Start with Energy Efficient Software Hardware… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
-      "Then read DVM: Real-Time Kernel Generation… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use AVO: Agentic Variation Operators… as a final cross-check on experimental boundaries and practical value."
+      "Start with Numerical Superoptimization for… and verify whether it defines the factual reliability and verification problem clearly and exposes a real mechanism."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-03-26T11:04:50Z",
+    "generated_at": "2026-03-27T11:03:51Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 3,
+    "paper_results": 1,
     "paper_failures": 0
   }
 }

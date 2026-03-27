@@ -643,6 +643,13 @@
       "domain": "LLM Inference Systems",
       "quality_score": 7.96,
       "updated": "2026-03-26"
+    },
+    {
+      "id": "2603.24812v1",
+      "title": "Numerical Superoptimization for Library Learning",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 7.29,
+      "updated": "2026-03-27"
     }
   ],
   "edges": [
@@ -2033,5 +2040,5 @@
       "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-26"
+  "last_updated": "2026-03-27"
 }

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-26",
+  "last_updated": "2026-03-27",
   "papers": [
     {
       "paper_id": "2603.19133v1",
@@ -1608,6 +1608,34 @@
         }
       ],
       "cooldown_until": "2026-05-12"
+    },
+    {
+      "paper_id": "2603.24812v1",
+      "title": "Numerical Superoptimization for Library Learning",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-03-25T20:47:15Z",
+      "source_lane": "fresh",
+      "topics": [
+        "numerical superoptimization",
+        "math library learning",
+        "floating-point kernels",
+        "Herbie",
+        "LLVM IR matching",
+        "counterfactual utility"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-27",
+      "last_seen_date": "2026-03-27",
+      "last_recommended_date": "2026-03-27",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-27",
+          "recommendation": 7.29,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-26"
     },
     {
       "paper_id": "dblp:conf/isca/0004HKCL00P25",
