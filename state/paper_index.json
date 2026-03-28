@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-27",
+  "last_updated": "2026-03-28",
   "papers": [
     {
       "paper_id": "2603.19133v1",
@@ -1021,24 +1021,29 @@
       "topics": [
         "CUDA",
         "NPU",
-        "2-D vectorization",
         "compiler",
-        "SIMT",
-        "tiling instructions"
+        "2-D vectorization",
+        "tile instructions",
+        "SIMT translation"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-03-17",
-      "last_recommended_date": "2026-03-17",
-      "recommended_count": 1,
+      "last_seen_date": "2026-03-28",
+      "last_recommended_date": "2026-03-28",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-03-17",
           "recommendation": 7.52,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-03-28",
+          "recommendation": 7.52,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-05-16"
+      "cooldown_until": "2026-05-27"
     },
     {
       "paper_id": "2210.17323",
@@ -1247,32 +1252,65 @@
       "cooldown_until": "2026-05-20"
     },
     {
+      "paper_id": "2010.13887",
+      "title": "LightSeq: A High Performance Inference Library for Sequence Processing and Generation",
+      "domain": "LLM Inference Systems",
+      "published": "2020-10-27",
+      "source_lane": "classic",
+      "topics": [
+        "LLM inference systems",
+        "transformer inference",
+        "CUDA",
+        "kernel fusion",
+        "memory reuse",
+        "autoregressive decoding"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-03-28",
+      "last_seen_date": "2026-03-28",
+      "last_recommended_date": "2026-03-28",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-03-28",
+          "recommendation": 5.22,
+          "lane": "classic"
+        }
+      ],
+      "cooldown_until": "2026-04-18"
+    },
+    {
       "paper_id": "dblp:conf/cgo/FangKRAM26",
       "title": "LLM-VeriOpt: Verification-Guided Reinforcement Learning for LLM-Based Compiler Optimization.",
       "domain": "Low-level Code And Assembly Generation",
       "published": "2026",
       "source_lane": "fresh",
       "topics": [
-        "LLVM IR optimization",
+        "LLM compiler optimization",
+        "LLVM IR",
+        "peephole optimization",
         "formal verification",
         "Alive2",
-        "reinforcement learning",
-        "GRPO",
-        "peephole optimization"
+        "reinforcement learning"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-03-17",
-      "last_recommended_date": "2026-03-17",
-      "recommended_count": 1,
+      "last_seen_date": "2026-03-28",
+      "last_recommended_date": "2026-03-28",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-03-17",
           "recommendation": 5.83,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-03-28",
+          "recommendation": 5.83,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-05-16"
+      "cooldown_until": "2026-05-27"
     },
     {
       "paper_id": "2603.15202v1",
@@ -1617,25 +1655,30 @@
       "source_lane": "fresh",
       "topics": [
         "numerical superoptimization",
-        "math library learning",
-        "floating-point kernels",
+        "library learning",
+        "mathematical primitives",
         "Herbie",
         "LLVM IR matching",
-        "counterfactual utility"
+        "floating-point optimization"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-27",
-      "last_seen_date": "2026-03-27",
-      "last_recommended_date": "2026-03-27",
-      "recommended_count": 1,
+      "last_seen_date": "2026-03-28",
+      "last_recommended_date": "2026-03-28",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-03-27",
           "recommendation": 7.29,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-03-28",
+          "recommendation": 7.29,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-05-26"
+      "cooldown_until": "2026-05-27"
     },
     {
       "paper_id": "dblp:conf/isca/0004HKCL00P25",
@@ -1646,16 +1689,16 @@
       "topics": [
         "LLM serving",
         "KV cache",
-        "量化",
-        "离群值检测",
-        "长上下文推理",
-        "显存带宽瓶颈"
+        "quantization",
+        "memory bandwidth",
+        "long-context inference",
+        "accelerator co-design"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-07",
-      "last_recommended_date": "2026-03-07",
-      "recommended_count": 4,
+      "last_seen_date": "2026-03-28",
+      "last_recommended_date": "2026-03-28",
+      "recommended_count": 5,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -1676,9 +1719,14 @@
           "date": "2026-03-07",
           "recommendation": 7.97,
           "lane": "established"
+        },
+        {
+          "date": "2026-03-28",
+          "recommendation": 7.63,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-06"
+      "cooldown_until": "2026-05-27"
     },
     {
       "paper_id": "2602.07721v2",
@@ -1924,18 +1972,18 @@
       "published": "2024",
       "source_lane": "established",
       "topics": [
-        "LLM推理",
+        "LLM inference",
         "KV cache",
-        "稀疏化",
-        "低比特量化",
-        "Heavy Hitter",
-        "长上下文"
+        "sparsification",
+        "quantization",
+        "token selection",
+        "long-context decoding"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-07",
-      "last_recommended_date": "2026-03-07",
-      "recommended_count": 4,
+      "last_seen_date": "2026-03-28",
+      "last_recommended_date": "2026-03-28",
+      "recommended_count": 5,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -1956,9 +2004,14 @@
           "date": "2026-03-07",
           "recommendation": 7.97,
           "lane": "established"
+        },
+        {
+          "date": "2026-03-28",
+          "recommendation": 7.97,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-06"
+      "cooldown_until": "2026-05-27"
     },
     {
       "paper_id": "2603.16039v1",

@@ -131,14 +131,14 @@
       "title": "Q-Hitter: A Better Token Oracle for Efficient LLM Inference via Sparse-Quantized KV Cache.",
       "domain": "LLM Inference Systems",
       "quality_score": 7.97,
-      "updated": "2026-03-08"
+      "updated": "2026-03-28"
     },
     {
       "id": "dblp:conf/isca/0004HKCL00P25",
       "title": "Oaken: Fast and Efficient LLM Serving with Online-Offline Hybrid KV Cache Quantization.",
       "domain": "LLM Inference Systems",
-      "quality_score": 7.97,
-      "updated": "2026-03-08"
+      "quality_score": 7.63,
+      "updated": "2026-03-28"
     },
     {
       "id": "dblp:conf/cgo/GeorgakoudisPB25",
@@ -397,14 +397,14 @@
       "title": "From Threads to Tiles: T2T, a Compiler for CUDA-to-NPU Translation via 2D Vectorization.",
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 7.52,
-      "updated": "2026-03-17"
+      "updated": "2026-03-28"
     },
     {
       "id": "dblp:conf/cgo/FangKRAM26",
       "title": "LLM-VeriOpt: Verification-Guided Reinforcement Learning for LLM-Based Compiler Optimization.",
       "domain": "Low-level Code And Assembly Generation",
       "quality_score": 5.83,
-      "updated": "2026-03-17"
+      "updated": "2026-03-28"
     },
     {
       "id": "2603.16514v1",
@@ -649,7 +649,14 @@
       "title": "Numerical Superoptimization for Library Learning",
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 7.29,
-      "updated": "2026-03-27"
+      "updated": "2026-03-28"
+    },
+    {
+      "id": "2010.13887",
+      "title": "LightSeq: A High Performance Inference Library for Sequence Processing and Generation",
+      "domain": "LLM Inference Systems",
+      "quality_score": 5.22,
+      "updated": "2026-03-28"
     }
   ],
   "edges": [
@@ -2038,7 +2045,55 @@
       "target": "2603.23668v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2010.13887",
+      "target": "dblp:conf/mlsys/0015LCKCW24",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2010.13887",
+      "target": "dblp:conf/isca/0004HKCL00P25",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2010.13887",
+      "target": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.24812v1",
+      "target": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
+      "target": "2603.24812v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
+      "target": "2010.13887",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "dblp:conf/mlsys/0015LCKCW24",
+      "target": "2010.13887",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "dblp:conf/isca/0004HKCL00P25",
+      "target": "2010.13887",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-27"
+  "last_updated": "2026-03-28"
 }
