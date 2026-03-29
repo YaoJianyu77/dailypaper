@@ -1,159 +1,44 @@
 {
-  "target_date": "2026-03-28",
+  "target_date": "2026-03-29",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-02-26",
-      "end": "2026-03-28"
+      "start": "2026-02-27",
+      "end": "2026-03-29"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-28",
-      "end": "2026-02-25"
+      "start": "2025-03-29",
+      "end": "2026-02-26"
     }
   },
-  "total_found": 221,
+  "total_found": 21,
   "total_venue": 14,
-  "total_filtered": 15,
-  "total_recent": 200,
+  "total_filtered": 14,
+  "total_recent": 0,
   "total_hot": 7,
-  "total_unique": 15,
+  "total_unique": 14,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
     "selected_count": 6,
     "lane_counts": {
-      "fresh": 3,
-      "established": 2,
-      "classic": 1,
-      "history_filtered": 18,
-      "history_relaxed": 5,
-      "classic_slot_active": 1
+      "fresh": 2,
+      "established": 4,
+      "classic": 0,
+      "history_filtered": 11,
+      "history_relaxed": 6,
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
-    {
-      "paper_id": "2010.13887",
-      "arxiv_id": "2010.13887",
-      "title": "LightSeq: A High Performance Inference Library for Sequence Processing and Generation",
-      "summary": "Describes a CUDA-based high-performance inference library for transformer-family models, emphasizing coarse-grained fusion, dynamic memory reuse, and efficient autoregressive decoding.",
-      "authors": [
-        "Xiaohui Wang",
-        "Ying Xiong",
-        "Yang Wei",
-        "Mingxuan Wang",
-        "Lei Li"
-      ],
-      "published": "2020-10-27",
-      "published_date": "2020-10-27 00:00:00",
-      "categories": [
-        "cs.DC",
-        "cs.CL"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "serving",
-        "inference-library",
-        "cuda",
-        "kernel-fusion"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.45,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2010.13887",
-      "pdf_url": "https://arxiv.org/pdf/2010.13887.pdf",
-      "scores": {
-        "relevance": 2.6,
-        "recency": 0.0,
-        "popularity": 0.0,
-        "quality": 0.0,
-        "recommendation": 5.22
-      },
-      "classic_rotation_score": 10.369,
-      "citationCount": 0,
-      "influentialCitationCount": 0,
-      "venue": "arXiv.org",
-      "journal_ref": "ArXiv"
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.24812v1",
-      "arxiv_id": "2603.24812v1",
-      "title": "Numerical Superoptimization for Library Learning",
-      "summary": "Numerical software depends on fast, accurate implementations of mathematical primitives like sin, exp, and log. Modern superoptimizers can optimize floating-point kernels against a given set of such primitives, but a more fundamental question remains open: which new primitives are worth implementing in the first place?\n  We formulate this as numerical library learning: given a workload of floating-point kernels, identify the mathematical primitives whose expert implementations would most improve speed and accuracy. Our key insight is that numerical superoptimizers already have the machinery well-suited to this problem. Their search procedures happen to enumerate candidate primitives, their equivalence procedures can generalize and deduplicate candidates, and their cost models can estimate counterfactual utility: how much the workload would improve if a given primitive were available.\n  We present GrowLibm, which repurposes the Herbie superoptimizer as a numerical library learner. GrowLibm mines candidate primitives from the superoptimizer's intermediate search results, ranks them by counterfactual utility, and prunes redundant candidates. Across three scientific applications (PROJ, CoolProp, and Basilisk), GrowLibm identifies compact, reusable primitives that can be implemented effectively using standard numerical techniques. When Herbie is extended with these expert implementations, kernel speed improves by up to 2.2x at fixed accuracy, and maximum achievable accuracy also improves, in one case from 56.0% to 93.5%. We also prototype an LLVM matcher that recognizes learned primitives in optimized IR, recovering 26 replacement sites across five PROJ projections and improving end-to-end application performance by up to 5%.",
-      "authors": [
-        "Jonas Regehr",
-        "Mitch Briles",
-        "Zachary Tatlock",
-        "Pavel Panchekha"
-      ],
-      "author_details": [
-        {
-          "name": "Jonas Regehr"
-        },
-        {
-          "name": "Mitch Briles"
-        },
-        {
-          "name": "Zachary Tatlock"
-        },
-        {
-          "name": "Pavel Panchekha"
-        }
-      ],
-      "published": "2026-03-25T20:47:15Z",
-      "published_date": "2026-03-25 20:47:15+00:00",
-      "updated": "2026-03-25T20:47:15Z",
-      "primary_category": "cs.PL",
-      "categories": [
-        "cs.PL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.24812v1",
-      "url": "http://arxiv.org/abs/2603.24812v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.54,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 7.29
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "llvm",
-        "cs.PL"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
-        "matched_categories": [
-          "cs.PL"
-        ],
-        "required_signal_matches": [
-          "llvm"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh",
-      "history_relaxed": true
-    },
     {
       "id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
       "paper_id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
@@ -177,7 +62,7 @@
         "Huimin Cui"
       ],
       "published": "2026",
-      "published_date": "2026-03-28 07:00:02.571156",
+      "published_date": "2026-03-29 07:00:02.443975",
       "publicationDate": "2026",
       "categories": [],
       "source": "dblp_venue",
@@ -258,7 +143,7 @@
         "Lev Mukhanov"
       ],
       "published": "2026",
-      "published_date": "2026-03-28 07:00:02.571156",
+      "published_date": "2026-03-29 07:00:02.443975",
       "publicationDate": "2026",
       "categories": [],
       "source": "dblp_venue",
@@ -482,6 +367,163 @@
         "official_page_url": "https://dl.acm.org/doi/10.1145/3695053.3731019",
         "abstract_source": "openalex",
         "pdf_source": "openalex"
+      }
+    },
+    {
+      "id": "dblp:conf/cgo/GeorgakoudisPB25",
+      "paper_id": "dblp:conf/cgo/GeorgakoudisPB25",
+      "title": "Proteus: Portable Runtime Optimization of GPU Kernel Execution with Just-in-Time Compilation.",
+      "summary": "In High-performance computing (HPC) fast application execution is the primary objective. HPC software is written in high-performance languages (C/C++, Fortran) and is statically compiled Ahead-of-Time (AOT) using optimizing compilers to generate fast code. AOT compilation optimizes source code with only limited information available at compile time, which precludes possible optimization leveraging runtime information. We propose Proteus, an easy-to-use, portable, and lightweight Just-In-Time (JIT) compilation approach to optimize GPU kernels at runtime. Proteus dynamically extracts, compiles, and optimizes language-agnostic LLVM IR to reduce compilation overhead while enhancing portability and versatility compared to language-specific solutions. Using a minimally intrusive annotation-based interface, Proteus specializes GPU kernels for input arguments and launch parameters. Evaluation on a diverse set of programs on AMD and NVIDIA GPUs shows that Proteus achieves significant end-to-end speedup, up to 2.8× for AMD and 1.78× on NVIDIA, over AOT optimization, while outperforming CUDA-specific Jitify with an average 1.23× speedp, thanks to reduced overhead and faster binary code in certain cases.",
+      "abstract": "In High-performance computing (HPC) fast application execution is the primary objective. HPC software is written in high-performance languages (C/C++, Fortran) and is statically compiled Ahead-of-Time (AOT) using optimizing compilers to generate fast code. AOT compilation optimizes source code with only limited information available at compile time, which precludes possible optimization leveraging runtime information. We propose Proteus, an easy-to-use, portable, and lightweight Just-In-Time (JIT) compilation approach to optimize GPU kernels at runtime. Proteus dynamically extracts, compiles, and optimizes language-agnostic LLVM IR to reduce compilation overhead while enhancing portability and versatility compared to language-specific solutions. Using a minimally intrusive annotation-based interface, Proteus specializes GPU kernels for input arguments and launch parameters. Evaluation on a diverse set of programs on AMD and NVIDIA GPUs shows that Proteus achieves significant end-to-end speedup, up to 2.8× for AMD and 1.78× on NVIDIA, over AOT optimization, while outperforming CUDA-specific Jitify with an average 1.23× speedp, thanks to reduced overhead and faster binary code in certain cases.",
+      "authors": [
+        "Giorgis Georgakoudis",
+        "Konstantinos Parasyris",
+        "David Beckingsale"
+      ],
+      "published": "2025",
+      "published_date": "2025-07-01 00:00:00",
+      "publicationDate": "2025",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
+      "url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/GeorgakoudisPB25",
+      "doi": "10.1145/3696443.3708939",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2025,
+      "scores": {
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 5.46
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "gpu kernel"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "gpu kernel"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "established",
+      "history_relaxed": true,
+      "citationCount": 2,
+      "institutions": [
+        "Lawrence Livermore National Laboratory"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
+        "abstract_source": "openalex",
+        "pdf_source": ""
+      }
+    },
+    {
+      "id": "dblp:conf/cgo/CastelloBDIM24",
+      "paper_id": "dblp:conf/cgo/CastelloBDIM24",
+      "title": "Tackling the Matrix Multiplication Micro-Kernel Generation with Exo.",
+      "summary": "The optimization of the matrix multiplication (or GEMM) has been a need during the last decades. This operation is considered the flagship of current linear algebra libraries such as BLIS, OpenBLAS, or Intel OneAPI because of its widespread use in a large variety of scientific applications. The GEMM is usually implemented following the GotoBLAS philosophy, which tiles the GEMM operands and uses a series of nested loops for performance improvement. These approaches extract the maximum computational power of the architectures through small pieces of hardware-oriented, high-performance code called micro-kernel. However, this approach forces developers to generate, with a nonnegligible effort, a dedicated micro-kernel for each new hardware. In this work, we present a step-by-step procedure for generating micro-kernels with the Exo compiler that perform close to (or even better than) manually developed microkernels written with intrinsic functions or assembly language. Our solution also improves the portability of the generated code, since a hardware target is fully specified by a concise library-based description of its instructions.",
+      "abstract": "The optimization of the matrix multiplication (or GEMM) has been a need during the last decades. This operation is considered the flagship of current linear algebra libraries such as BLIS, OpenBLAS, or Intel OneAPI because of its widespread use in a large variety of scientific applications. The GEMM is usually implemented following the GotoBLAS philosophy, which tiles the GEMM operands and uses a series of nested loops for performance improvement. These approaches extract the maximum computational power of the architectures through small pieces of hardware-oriented, high-performance code called micro-kernel. However, this approach forces developers to generate, with a nonnegligible effort, a dedicated micro-kernel for each new hardware. In this work, we present a step-by-step procedure for generating micro-kernels with the Exo compiler that perform close to (or even better than) manually developed microkernels written with intrinsic functions or assembly language. Our solution also improves the portability of the generated code, since a hardware target is fully specified by a concise library-based description of its instructions.",
+      "authors": [
+        "Adrián Castelló 0001",
+        "Julian Bellavita",
+        "Grace Dinh",
+        "Yuka Ikarashi",
+        "Héctor Martínez 0002"
+      ],
+      "published": "2024",
+      "published_date": "2024-07-01 00:00:00",
+      "publicationDate": "2024",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://ieeexplore.ieee.org/document/10444883/",
+      "url": "https://ieeexplore.ieee.org/document/10444883/",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/CastelloBDIM24",
+      "doi": "10.1109/CGO57630.2024.10444883",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2024,
+      "scores": {
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 0.5,
+        "quality": 0.5,
+        "recommendation": 4.21
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "kernel generation"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "kernel generation"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "established",
+      "history_relaxed": true,
+      "citationCount": 9,
+      "institutions": [
+        "Universitat Politècnica de Catalunya",
+        "Cornell University",
+        "Berkeley College",
+        "University of California, Berkeley"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://ieeexplore.ieee.org/document/10444883/",
+        "abstract_source": "openalex",
+        "pdf_source": ""
       }
     }
   ]

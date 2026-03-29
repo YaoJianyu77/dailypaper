@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-28",
+  "last_updated": "2026-03-29",
   "papers": [
     {
       "paper_id": "2603.19133v1",
@@ -1023,14 +1023,14 @@
         "NPU",
         "compiler",
         "2-D vectorization",
-        "tile instructions",
-        "SIMT translation"
+        "SIMT",
+        "loop transformation"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-03-28",
-      "last_recommended_date": "2026-03-28",
-      "recommended_count": 2,
+      "last_seen_date": "2026-03-29",
+      "last_recommended_date": "2026-03-29",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-03-17",
@@ -1041,9 +1041,14 @@
           "date": "2026-03-28",
           "recommendation": 7.52,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-03-29",
+          "recommendation": 7.52,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-05-27"
+      "cooldown_until": "2026-05-28"
     },
     {
       "paper_id": "2210.17323",
@@ -1295,9 +1300,9 @@
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-03-28",
-      "last_recommended_date": "2026-03-28",
-      "recommended_count": 2,
+      "last_seen_date": "2026-03-29",
+      "last_recommended_date": "2026-03-29",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-03-17",
@@ -1308,9 +1313,14 @@
           "date": "2026-03-28",
           "recommendation": 5.83,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-03-29",
+          "recommendation": 5.83,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-05-27"
+      "cooldown_until": "2026-05-28"
     },
     {
       "paper_id": "2603.15202v1",
@@ -1691,14 +1701,14 @@
         "KV cache",
         "quantization",
         "memory bandwidth",
-        "long-context inference",
+        "long context",
         "accelerator co-design"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-28",
-      "last_recommended_date": "2026-03-28",
-      "recommended_count": 5,
+      "last_seen_date": "2026-03-29",
+      "last_recommended_date": "2026-03-29",
+      "recommended_count": 6,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -1724,9 +1734,14 @@
           "date": "2026-03-28",
           "recommendation": 7.63,
           "lane": "established"
+        },
+        {
+          "date": "2026-03-29",
+          "recommendation": 7.63,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-27"
+      "cooldown_until": "2026-05-28"
     },
     {
       "paper_id": "2602.07721v2",
@@ -1930,17 +1945,18 @@
       "published": "2025",
       "source_lane": "established",
       "topics": [
-        "GPU kernel JIT",
+        "GPU kernel execution",
+        "just-in-time compilation",
         "LLVM IR",
-        "运行时特化",
-        "跨厂商 GPU",
-        "AOT 与 JIT 比较"
+        "runtime specialization",
+        "AMD GPUs",
+        "NVIDIA GPUs"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-07",
-      "last_recommended_date": "2026-03-07",
-      "recommended_count": 4,
+      "last_seen_date": "2026-03-29",
+      "last_recommended_date": "2026-03-29",
+      "recommended_count": 5,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -1961,9 +1977,14 @@
           "date": "2026-03-07",
           "recommendation": 5.46,
           "lane": "established"
+        },
+        {
+          "date": "2026-03-29",
+          "recommendation": 5.46,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-06"
+      "cooldown_until": "2026-05-28"
     },
     {
       "paper_id": "dblp:conf/mlsys/0015LCKCW24",
@@ -1974,16 +1995,16 @@
       "topics": [
         "LLM inference",
         "KV cache",
-        "sparsification",
-        "quantization",
-        "token selection",
-        "long-context decoding"
+        "KV-cache sparsification",
+        "low-bit quantization",
+        "heavy hitter selection",
+        "memory bandwidth"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-28",
-      "last_recommended_date": "2026-03-28",
-      "recommended_count": 5,
+      "last_seen_date": "2026-03-29",
+      "last_recommended_date": "2026-03-29",
+      "recommended_count": 6,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -2009,9 +2030,14 @@
           "date": "2026-03-28",
           "recommendation": 7.97,
           "lane": "established"
+        },
+        {
+          "date": "2026-03-29",
+          "recommendation": 7.97,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-27"
+      "cooldown_until": "2026-05-28"
     },
     {
       "paper_id": "2603.16039v1",
@@ -2442,23 +2468,28 @@
         "GEMM",
         "matrix multiplication",
         "micro-kernel generation",
-        "Exo",
-        "performance portability",
-        "instruction-set description"
+        "Exo compiler",
+        "low-level code generation",
+        "performance portability"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-09",
-      "last_seen_date": "2026-03-09",
-      "last_recommended_date": "2026-03-09",
-      "recommended_count": 1,
+      "last_seen_date": "2026-03-29",
+      "last_recommended_date": "2026-03-29",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-03-09",
           "recommendation": 4.21,
           "lane": "established"
+        },
+        {
+          "date": "2026-03-29",
+          "recommendation": 4.21,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-08"
+      "cooldown_until": "2026-05-28"
     },
     {
       "paper_id": "2603.08960v1",
