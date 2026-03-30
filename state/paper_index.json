@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-29",
+  "last_updated": "2026-03-30",
   "papers": [
     {
       "paper_id": "2603.19133v1",
@@ -1028,9 +1028,9 @@
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-03-29",
-      "last_recommended_date": "2026-03-29",
-      "recommended_count": 3,
+      "last_seen_date": "2026-03-30",
+      "last_recommended_date": "2026-03-30",
+      "recommended_count": 4,
       "scores_history": [
         {
           "date": "2026-03-17",
@@ -1046,9 +1046,14 @@
           "date": "2026-03-29",
           "recommendation": 7.52,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-03-30",
+          "recommendation": 7.52,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-05-28"
+      "cooldown_until": "2026-05-29"
     },
     {
       "paper_id": "2210.17323",
@@ -1291,7 +1296,7 @@
       "published": "2026",
       "source_lane": "fresh",
       "topics": [
-        "LLM compiler optimization",
+        "LLM-based compiler optimization",
         "LLVM IR",
         "peephole optimization",
         "formal verification",
@@ -1300,9 +1305,9 @@
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-03-29",
-      "last_recommended_date": "2026-03-29",
-      "recommended_count": 3,
+      "last_seen_date": "2026-03-30",
+      "last_recommended_date": "2026-03-30",
+      "recommended_count": 4,
       "scores_history": [
         {
           "date": "2026-03-17",
@@ -1318,9 +1323,14 @@
           "date": "2026-03-29",
           "recommendation": 5.83,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-03-30",
+          "recommendation": 5.83,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-05-28"
+      "cooldown_until": "2026-05-29"
     },
     {
       "paper_id": "2603.15202v1",
@@ -1701,14 +1711,14 @@
         "KV cache",
         "quantization",
         "memory bandwidth",
-        "long context",
+        "long-context inference",
         "accelerator co-design"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-29",
-      "last_recommended_date": "2026-03-29",
-      "recommended_count": 6,
+      "last_seen_date": "2026-03-30",
+      "last_recommended_date": "2026-03-30",
+      "recommended_count": 7,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -1739,9 +1749,14 @@
           "date": "2026-03-29",
           "recommendation": 7.63,
           "lane": "established"
+        },
+        {
+          "date": "2026-03-30",
+          "recommendation": 7.63,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-28"
+      "cooldown_until": "2026-05-29"
     },
     {
       "paper_id": "2602.07721v2",
@@ -1946,17 +1961,17 @@
       "source_lane": "established",
       "topics": [
         "GPU kernel execution",
-        "just-in-time compilation",
+        "JIT compilation",
         "LLVM IR",
         "runtime specialization",
-        "AMD GPUs",
-        "NVIDIA GPUs"
+        "portable GPU optimization",
+        "AMD GPUs"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-29",
-      "last_recommended_date": "2026-03-29",
-      "recommended_count": 5,
+      "last_seen_date": "2026-03-30",
+      "last_recommended_date": "2026-03-30",
+      "recommended_count": 6,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -1982,9 +1997,14 @@
           "date": "2026-03-29",
           "recommendation": 5.46,
           "lane": "established"
+        },
+        {
+          "date": "2026-03-30",
+          "recommendation": 5.46,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-28"
+      "cooldown_until": "2026-05-29"
     },
     {
       "paper_id": "dblp:conf/mlsys/0015LCKCW24",
@@ -1995,16 +2015,16 @@
       "topics": [
         "LLM inference",
         "KV cache",
-        "KV-cache sparsification",
-        "low-bit quantization",
-        "heavy hitter selection",
-        "memory bandwidth"
+        "sparsification",
+        "quantization",
+        "heavy hitter tokens",
+        "low-bit decoding"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-29",
-      "last_recommended_date": "2026-03-29",
-      "recommended_count": 6,
+      "last_seen_date": "2026-03-30",
+      "last_recommended_date": "2026-03-30",
+      "recommended_count": 7,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -2035,9 +2055,14 @@
           "date": "2026-03-29",
           "recommendation": 7.97,
           "lane": "established"
+        },
+        {
+          "date": "2026-03-30",
+          "recommendation": 7.97,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-28"
+      "cooldown_until": "2026-05-29"
     },
     {
       "paper_id": "2603.16039v1",
@@ -2468,15 +2493,15 @@
         "GEMM",
         "matrix multiplication",
         "micro-kernel generation",
-        "Exo compiler",
-        "low-level code generation",
-        "performance portability"
+        "Exo",
+        "compiler",
+        "intrinsics"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-09",
-      "last_seen_date": "2026-03-29",
-      "last_recommended_date": "2026-03-29",
-      "recommended_count": 2,
+      "last_seen_date": "2026-03-30",
+      "last_recommended_date": "2026-03-30",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-03-09",
@@ -2487,9 +2512,14 @@
           "date": "2026-03-29",
           "recommendation": 4.21,
           "lane": "established"
+        },
+        {
+          "date": "2026-03-30",
+          "recommendation": 4.21,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-28"
+      "cooldown_until": "2026-05-29"
     },
     {
       "paper_id": "2603.08960v1",
