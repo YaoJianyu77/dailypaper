@@ -657,6 +657,48 @@
       "domain": "LLM Inference Systems",
       "quality_score": 5.22,
       "updated": "2026-03-28"
+    },
+    {
+      "id": "2603.28430v1",
+      "title": "IsoQuant: Hardware-Aligned SO(4) Isoclinic Rotations for LLM KV Cache Compression",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.63,
+      "updated": "2026-03-31"
+    },
+    {
+      "id": "2603.28342v1",
+      "title": "Kernel-Smith: A Unified Recipe for Evolutionary Kernel Optimization",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 9.45,
+      "updated": "2026-03-31"
+    },
+    {
+      "id": "2208.07339",
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "domain": "LLM Inference Systems",
+      "quality_score": 5.22,
+      "updated": "2026-03-31"
+    },
+    {
+      "id": "2603.28708v1",
+      "title": "GPU-Accelerated Optimization of Transformer-Based Neural Networks for Real-Time Inference",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.27,
+      "updated": "2026-03-31"
+    },
+    {
+      "id": "2603.27914v1",
+      "title": "ITQ3_S: High-Fidelity 3-bit LLM Inference via Interleaved Ternary Quantization with Rotation-Domain Smoothing",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 9.14,
+      "updated": "2026-03-31"
+    },
+    {
+      "id": "2603.27830v1",
+      "title": "jaxsgp4: GPU-accelerated mega-constellation propagation with batch parallelism",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.68,
+      "updated": "2026-03-31"
     }
   ],
   "edges": [
@@ -2141,7 +2183,97 @@
       "target": "dblp:conf/cgo/GeorgakoudisPB25",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2603.28430v1",
+      "target": "2603.28708v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.28430v1",
+      "target": "2208.07339",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.28430v1",
+      "target": "2603.27830v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.28342v1",
+      "target": "2603.27914v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2208.07339",
+      "target": "2603.28430v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2208.07339",
+      "target": "2603.28708v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2208.07339",
+      "target": "2603.27830v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.28708v1",
+      "target": "2603.28430v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.28708v1",
+      "target": "2208.07339",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.28708v1",
+      "target": "2603.27830v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.27914v1",
+      "target": "2603.28342v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.27914v1",
+      "target": "2603.28430v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.27830v1",
+      "target": "2603.28430v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.27830v1",
+      "target": "2603.28708v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.27830v1",
+      "target": "2208.07339",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-30"
+  "last_updated": "2026-03-31"
 }
