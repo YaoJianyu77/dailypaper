@@ -1,270 +1,99 @@
 {
-  "target_date": "2026-03-31",
+  "target_date": "2026-04-01",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-01",
-      "end": "2026-03-31"
+      "start": "2026-03-02",
+      "end": "2026-04-01"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-03-31",
-      "end": "2026-02-28"
+      "start": "2025-04-01",
+      "end": "2026-03-01"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 20,
+  "total_filtered": 17,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 20,
+  "total_unique": 17,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 6,
+    "selected_count": 3,
     "lane_counts": {
-      "fresh": 5,
+      "fresh": 3,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 17,
+      "classic": 0,
+      "history_filtered": 11,
       "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2603.28430v1",
-      "arxiv_id": "2603.28430v1",
-      "title": "IsoQuant: Hardware-Aligned SO(4) Isoclinic Rotations for LLM KV Cache Compression",
-      "summary": "Orthogonal feature decorrelation is effective for low-bit online vector quantization, but dense random orthogonal transforms incur prohibitive $O(d^2)$ storage and compute. RotorQuant reduces this cost with blockwise $3$D Clifford rotors, yet the resulting $3$D partition is poorly aligned with modern hardware and offers limited local mixing.\n  We propose \\textbf{IsoQuant}, a blockwise rotation framework based on quaternion algebra and the isoclinic decomposition of $SO(4)$. It represents each $4$D block as a quaternion and applies a closed-form transform $T(v)=q_L v \\overline{q_R}$. This yields two main variants: \\emph{IsoQuant-Full}, which realizes the full $SO(4)$ rotation, and \\emph{IsoQuant-Fast}, which keeps only one isoclinic factor for lower cost; the framework also admits a lightweight $2$D special case. At $d=128$, IsoQuant-Full reduces forward rotation cost from about $2{,}408$ FMAs in RotorQuant to $1{,}024$, while IsoQuant-Fast further reduces it to $512$. Across $18$ fused CUDA settings with $d \\in {128,256,512}$, bit widths ${2,3,4}$, and FP16/FP32 execution, IsoQuant achieves mean kernel-level speedups of about $4.5\\times$--$4.7\\times$ over RotorQuant while maintaining comparable reconstruction MSE, with peak speedups above $6\\times$. Current validation is limited to the stage-1 quantize--dequantize path on synthetic normalized vectors; end-to-end KV-cache evaluation remains future work.",
+      "id": "http://arxiv.org/abs/2603.29010v1",
+      "arxiv_id": "2603.29010v1",
+      "title": "Improving Efficiency of GPU Kernel Optimization Agents using a Domain-Specific Language and Speed-of-Light Guidance",
+      "summary": "Optimizing GPU kernels with LLM agents is an iterative process over a large design space. Every candidate must be generated, compiled, validated, and profiled, so fewer trials will save both runtime and cost. We make two key observations. First, the abstraction level that agents operate at is important. If it is too low, the LLM wastes reasoning on low-impact details. If it is too high, it may miss important optimization choices. Second, agents cannot easily tell when they reach the point of diminishing returns, wasting resources as they continue searching.\n  These observations motivate two design principles to improve efficiency: (1) a compact domain-specific language (DSL) that can be learned in context and lets the model reason at a higher level while preserving important optimization levers, and (2) Speed-of-Light (SOL) guidance that uses first-principles performance bounds to steer and budget search. We implement these principles in $μ$CUTLASS, a DSL with a compiler for CUTLASS-backed GPU kernels that covers kernel configuration, epilogue fusion, and multi-stage pipelines. We use SOL guidance to estimate headroom and guide optimization trials, deprioritize problems that are near SOL, and flag kernels that game the benchmark.\n  On 59 KernelBench problems with the same iteration budgets, switching from generating low-level code to DSL code using GPT-5-mini turns a 0.40x geomean regression into a 1.27x speedup over PyTorch. Adding SOL-guided steering raises this to 1.56x. Across model tiers, $μ$CUTLASS + SOL-guidance lets weaker models outperform stronger baseline agents at lower token cost. SOL-guided budgeting saves 19-43% of tokens while retaining at least 95% of geomean speedup, with the best policy reaching a 1.68x efficiency gain. Lastly, SOL analysis helps detect benchmark-gaming cases, where kernels may appear fast while failing to perform the intended computation.",
       "authors": [
-        "Zhongping Ji"
+        "Siva Kumar Sastry Hari",
+        "Vignesh Balaji",
+        "Sana Damani",
+        "Qijing Huang",
+        "Christos Kozyrakis"
       ],
       "author_details": [
         {
-          "name": "Zhongping Ji"
+          "name": "Siva Kumar Sastry Hari"
+        },
+        {
+          "name": "Vignesh Balaji"
+        },
+        {
+          "name": "Sana Damani"
+        },
+        {
+          "name": "Qijing Huang"
+        },
+        {
+          "name": "Christos Kozyrakis"
         }
       ],
-      "published": "2026-03-30T13:37:45Z",
-      "published_date": "2026-03-30 13:37:45+00:00",
-      "updated": "2026-03-30T13:37:45Z",
-      "comments": "11 pages",
+      "published": "2026-03-30T21:16:39Z",
+      "published_date": "2026-03-30 21:16:39+00:00",
+      "updated": "2026-03-30T21:16:39Z",
       "primary_category": "cs.LG",
       "categories": [
         "cs.LG",
-        "cs.CL"
+        "cs.AI"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.28430v1",
-      "url": "http://arxiv.org/abs/2603.28430v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.29010v1",
+      "url": "http://arxiv.org/abs/2603.29010v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 9.63
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "kv cache",
-        "quantization",
-        "cs.LG",
-        "cs.CL",
-        "evaluation"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.LG",
-          "cs.CL"
-        ],
-        "required_signal_matches": [
-          "kv cache"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "evaluation"
-        ],
-        "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper proposes a quaternion-based 4D rotation scheme for KV-cache quantization that aims to preserve the decorrelation benefit of orthogonal transforms while making the rotation substantially cheaper and more hardware-aligned than prior 3D rotor blocks.",
-        "summary_zh": "This paper targets a systems bottleneck in online low-bit KV-cache compression: orthogonal feature mixing helps quantization, but dense rotations are too expensive and prior low-cost 3D block rotations map awkwardly to modern hardware. The proposed method, IsoQuant, reformulates blockwise rotations in 4D using quaternion algebra and SO(4) isoclinic decomposition, with a full variant and a cheaper one-factor variant that explicitly trade rotation expressiveness for lower cost. The abstract reports much lower rotation FMA counts than RotorQuant and kernel-level CUDA speedups across multiple dimensions, bit widths, and FP16/FP32 settings, while claiming comparable reconstruction MSE. The practical value is clear if these gains carry into real serving pipelines, because KV-cache quantization overhead can erase end-to-end wins. The main missing detail is that validation is only on synthetic quantize-dequantize tests, so actual KV-cache quality, sequence-level behavior, and end-to-end inference impact remain unproven.",
-        "background_zh": "KV-cache compression is increasingly important for LLM serving, but low-bit online quantization needs cheap feature mixing to reduce correlation without adding so much compute that it cancels the runtime benefit.",
-        "problem_zh": "The paper asks how to retain the quantization benefit of orthogonal decorrelation while avoiding the storage and compute cost of dense rotations and the hardware mismatch of prior 3D blockwise rotor designs.",
-        "approach_zh": "It introduces a blockwise quaternion formulation over 4D groups, applying an SO(4) isoclinic rotation as a closed-form left-right quaternion transform, with full and reduced-cost variants plus a 2D special case.",
-        "evidence_zh": "The abstract supports lower analytic rotation cost and reports kernel-level CUDA speedups with comparable reconstruction MSE on synthetic normalized vectors, but it does not provide end-to-end KV-cache or LLM inference evidence.",
-        "value_zh": "If the kernel gains survive real-model deployment, this could make online KV-cache quantization more practical by lowering the transform overhead that often limits serving-side compression wins.",
-        "open_questions": [
-          "Do the reported kernel-level gains translate into end-to-end latency, throughput, and memory tradeoffs in real LLM KV-cache serving workloads?",
-          "How sensitive are quality and speed to block size, bit width, calibration choices, and model-specific KV statistics beyond synthetic normalized vectors?",
-          "Are the comparisons against RotorQuant fair at the implementation level, including fusion strategy, memory traffic, and hardware-specific optimization choices?"
-        ],
-        "core_contributions": [
-          "A 4D quaternion-based block rotation framework for low-bit vector quantization aligned with SO(4) isoclinic structure.",
-          "Two concrete variants that trade rotation expressiveness for cost: a full SO(4) form and a one-factor faster form.",
-          "A fused CUDA evaluation showing materially lower rotation cost and faster kernels than the cited 3D rotor baseline under multiple settings."
-        ],
-        "why_read": [
-          "It is directly relevant to LLM inference systems because it focuses on reducing the overhead of KV-cache quantization rather than only improving compression quality.",
-          "The paper is specific about where the speedup comes from: replacing 3D rotor blocks with cheaper 4D quaternion operations that better fit hardware execution.",
-          "It separates kernel-level promise from end-to-end evidence, which makes it useful for assessing whether the idea is a real serving advance or still a promising component result."
-        ],
-        "risks": [
-          "The abstract explicitly limits validation to stage-1 quantize-dequantize on synthetic data, so serving relevance is still uncertain.",
-          "Comparable reconstruction MSE does not by itself establish negligible impact on downstream model accuracy or generation quality under KV-cache reuse patterns. The reported advantage may depend on fused CUDA implementation details and hardware assumptions that are not clear from the abstract alone."
-        ],
-        "recommended_for": [
-          "Researchers working on LLM KV-cache quantization and inference-serving efficiency.",
-          "Engineers evaluating whether transform overhead is the main blocker for online low-bit cache compression.",
-          "Readers interested in compiler-kernel co-design questions around hardware-friendly structured rotations."
-        ],
-        "keywords": [
-          "LLM inference systems",
-          "KV cache compression",
-          "online quantization",
-          "quaternion rotations",
-          "SO(4) isoclinic decomposition",
-          "CUDA kernels"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "This is a strong topical match for LLM inference acceleration and KV-cache efficiency, and the abstract is unusually explicit about the mechanism behind the claimed kernel gains. The main caveat is that the evidence stops at synthetic kernel-level validation rather than end-to-end serving.",
-        "fallback_summary": "Orthogonal feature decorrelation is effective for low-bit online vector quantization, but dense random orthogonal transforms incur prohibitive $O(d^2)$ storage and compute."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.28342v1",
-      "arxiv_id": "2603.28342v1",
-      "title": "Kernel-Smith: A Unified Recipe for Evolutionary Kernel Optimization",
-      "summary": "We present Kernel-Smith, a framework for high-performance GPU kernel and operator generation that combines a stable evaluation-driven evolutionary agent with an evolution-oriented post-training recipe. On the agent side, Kernel-Smith maintains a population of executable candidates and iteratively improves them using an archive of top-performing and diverse programs together with structured execution feedback on compilation, correctness, and speedup. To make this search reliable, we build backend-specific evaluation services for Triton on NVIDIA GPUs and Maca on MetaX GPUs. On the training side, we convert long-horizon evolution trajectories into step-centric supervision and reinforcement learning signals by retaining correctness-preserving, high-gain revisions, so that the model is optimized as a strong local improver inside the evolutionary loop rather than as a one-shot generator. Under a unified evolutionary protocol, Kernel-Smith-235B-RL achieves state-of-the-art overall performance on KernelBench with Nvidia Triton backend, attaining the best average speedup ratio and outperforming frontier proprietary models including Gemini-3.0-pro and Claude-4.6-opus. We further validate the framework on the MetaX MACA backend, where our Kernel-Smith-MACA-30B surpasses large-scale counterparts such as DeepSeek-V3.2-think and Qwen3-235B-2507-think, highlighting potential for seamless adaptation across heterogeneous platforms. Beyond benchmark results, the same workflow produces upstream contributions to production systems including SGLang and LMDeploy, demonstrating that LLM-driven kernel optimization can transfer from controlled evaluation to practical deployment.",
-      "authors": [
-        "He Du",
-        "Qiming Ge",
-        "Jiakai Hu",
-        "Aijun Yang",
-        "Zheng Cai",
-        "Zixian Huang",
-        "Sheng Yuan",
-        "Qinxiu Cheng",
-        "Xinchen Xie",
-        "Yicheng Chen",
-        "Yining Li",
-        "Jiaxing Xie",
-        "Huanan Dong",
-        "Yaguang Wu",
-        "Xiangjun Huang",
-        "Jian Yang",
-        "Hui Wang",
-        "Bowen Zhou",
-        "Bowen Li",
-        "Qipeng Guo",
-        "Kai Chen"
-      ],
-      "author_details": [
-        {
-          "name": "He Du"
-        },
-        {
-          "name": "Qiming Ge"
-        },
-        {
-          "name": "Jiakai Hu"
-        },
-        {
-          "name": "Aijun Yang"
-        },
-        {
-          "name": "Zheng Cai"
-        },
-        {
-          "name": "Zixian Huang"
-        },
-        {
-          "name": "Sheng Yuan"
-        },
-        {
-          "name": "Qinxiu Cheng"
-        },
-        {
-          "name": "Xinchen Xie"
-        },
-        {
-          "name": "Yicheng Chen"
-        },
-        {
-          "name": "Yining Li"
-        },
-        {
-          "name": "Jiaxing Xie"
-        },
-        {
-          "name": "Huanan Dong"
-        },
-        {
-          "name": "Yaguang Wu"
-        },
-        {
-          "name": "Xiangjun Huang"
-        },
-        {
-          "name": "Jian Yang"
-        },
-        {
-          "name": "Hui Wang"
-        },
-        {
-          "name": "Bowen Zhou"
-        },
-        {
-          "name": "Bowen Li"
-        },
-        {
-          "name": "Qipeng Guo"
-        },
-        {
-          "name": "Kai Chen"
-        }
-      ],
-      "published": "2026-03-30T12:12:49Z",
-      "published_date": "2026-03-30 12:12:49+00:00",
-      "updated": "2026-03-30T12:12:49Z",
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL",
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.28342v1",
-      "url": "http://arxiv.org/abs/2603.28342v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.58,
-        "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 9.45
+        "popularity": 1.9,
+        "quality": 1.9,
+        "recommendation": 9.88
       },
       "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
         "gpu kernel",
-        "triton",
+        "cutlass",
         "cs.LG",
+        "fusion",
         "benchmark",
+        "baseline",
         "speedup"
       ],
       "matched_domain_priority": 5,
@@ -278,199 +107,118 @@
         ],
         "required_signal_matches": [
           "gpu kernel",
-          "triton"
+          "cutlass"
         ],
         "required_signal_match_count": 2,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
+        "bonus_keyword_matches": [
+          "fusion"
+        ],
+        "bonus_keyword_match_count": 1,
         "analysis_keyword_matches": [
           "benchmark",
+          "baseline",
           "speedup"
         ],
-        "analysis_keyword_match_count": 2,
+        "analysis_keyword_match_count": 3,
         "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper presents an evolutionary framework for generating and iteratively improving GPU kernels, with backend-specific evaluation and post-training designed to make the model a stronger local optimizer rather than a one-shot code generator.",
-        "summary_zh": "This paper targets GPU kernel optimization as a search-and-improvement problem rather than pure one-shot synthesis, which fits current interest in LLM-guided systems optimization. The proposed framework keeps a population of executable candidates, uses structured feedback on compilation, correctness, and speed, and post-trains the model on evolution trajectories so it becomes better at making correctness-preserving high-gain edits inside the loop. The abstract claims state-of-the-art average speedup on KernelBench for NVIDIA Triton and reports competitive results on a MetaX MACA backend, plus some transfer into production systems such as SGLang and LMDeploy. If those claims hold, the value is a more general recipe for kernel optimization across heterogeneous backends, not just a single benchmark-tuned agent. The biggest missing detail is evaluation rigor: the abstract does not make baseline fairness, hardware setup, task coverage, or the nature of the reported production contributions clear.",
-        "background_zh": "LLM-based kernel generation is moving from direct code emission toward search, verification, and hardware-aware optimization because correctness and performance are too brittle for one-shot generation alone.",
-        "problem_zh": "The paper asks how to make LLM-driven kernel optimization reliable and performant across backends, instead of producing isolated code candidates that often fail on compilation, correctness, or speed.",
-        "approach_zh": "Its method combines an evaluation-driven evolutionary loop over executable kernel candidates with post-training on long-horizon edit trajectories, so the model is optimized to act as a local improver guided by execution feedback.",
-        "evidence_zh": "The abstract reports benchmark wins on KernelBench for NVIDIA Triton, strong results on MetaX MACA, and mentions upstream production contributions, but it does not make the experimental setup or contribution details clear.",
-        "value_zh": "If reproducible, this offers a practical recipe for compiler-runtime co-design with LLMs: use model-generated edits inside a measured search loop to improve real kernels across different hardware backends.",
+        "one_liner_zh": "This paper argues that GPU kernel optimization agents become more efficient when they search in a compact CUTLASS-oriented DSL and stop or steer search with speed-of-light performance bounds instead of iterating blindly over low-level code.",
+        "summary_zh": "The paper studies how to make LLM-based GPU kernel optimization agents spend fewer iterations on compile-profile-search loops across a large design space. Its main idea is to move the agent from low-level code generation to a compact DSL, CUTLASS, that preserves major kernel optimization choices while removing low-value detail, then add speed-of-light guidance to estimate headroom, steer trial selection, and budget search. The abstract reports results on 59 KernelBench problems showing that DSL-based search turns a regression into a speedup over PyTorch, and that adding SOL guidance improves speedup further while reducing token cost and helping weaker models beat stronger baseline agents on efficiency. Practically, this is interesting because it ties LLM agent quality to the search interface and to first-principles performance modeling rather than only to model size. The biggest detail still needing a full read is how fair and reproducible the evaluation is, especially the baseline agent setup, the SOL estimation procedure, and the criteria for detecting benchmark-gaming kernels.",
+        "background_zh": "LLM-driven kernel tuning is expensive because every candidate must be generated, compiled, checked, and benchmarked, so agent efficiency depends heavily on both the search representation and the stopping signal.",
+        "problem_zh": "The paper asks how to reduce wasted search in GPU kernel optimization agents without removing the optimization levers that matter for real performance.",
+        "approach_zh": "It introduces CUTLASS, a CUTLASS-backed DSL for kernel configuration, epilogue fusion, and multi-stage pipelines, and combines it with speed-of-light guidance to steer trials, allocate budget, and detect suspicious wins.",
+        "evidence_zh": "The abstract provides concrete benchmark-level evidence on 59 KernelBench tasks, including speedup and token-savings claims, but the abstract alone does not make the evaluation protocol and baseline fairness fully clear.",
+        "value_zh": "If the method holds up, it suggests a practical recipe for cheaper and more reliable LLM kernel-tuning agents: constrain the action space at the right abstraction level and couple search to hardware-aware performance bounds.",
         "open_questions": [
-          "How fair are the baseline comparisons in terms of model size, inference budget, search budget, and access to execution feedback?",
-          "What hardware, workloads, and operator coverage are used for the NVIDIA Triton and MetaX MACA evaluations, and how much of the gain comes from search versus post-training?",
-          "What exactly transferred into SGLang and LMDeploy: benchmark-style kernels, production operators, or maintainable upstream changes with measurable end-to-end benefit?"
+          "How exactly is the baseline agent implemented, and are prompt budget, validation, and compilation/profiling loops matched fairly across low-level and DSL settings?",
+          "How is the speed-of-light bound estimated for each problem, and how sensitive are the steering and budgeting policies to modeling error or hardware-specific assumptions?",
+          "What qualifies as a benchmark-gaming kernel in the evaluation, and how robust is the detection method against false positives or missed invalid kernels?"
         ],
         "core_contributions": [
-          "A unified evolutionary optimization framework for GPU kernels that keeps a population of executable candidates and improves them using structured runtime feedback.",
-          "A post-training recipe that turns evolution trajectories into supervision and reinforcement signals focused on correctness-preserving, high-gain edits.",
-          "Cross-backend positioning with dedicated evaluation services for Triton on NVIDIA GPUs and MACA on MetaX GPUs under a common protocol."
+          "Frames agent efficiency as a representation-and-budgeting problem rather than only a model-capability problem.",
+          "Introduces a compact DSL, CUTLASS, that exposes major GPU kernel optimization decisions while avoiding low-level search noise.",
+          "Uses speed-of-light analysis to guide trial selection, stop low-value search, and surface suspicious benchmark results."
         ],
         "why_read": [
-          "It frames kernel generation as iterative systems optimization, which is more relevant than plain code generation for real inference stacks.",
-          "It explicitly targets heterogeneous backends, making it useful for readers interested in portability beyond a single CUDA-path benchmark.",
-          "It may clarify how much improvement comes from better search structure and training signals rather than simply scaling the base model."
+          "It is directly relevant to LLM-assisted CUDA kernel generation and compiler-runtime co-design.",
+          "It offers a concrete mechanism for where efficiency gains come from: fewer wasted trials and better search-space abstraction.",
+          "It provides a systems-oriented angle on agent design by combining language-model search with first-principles performance modeling."
         ],
         "risks": [
-          "The abstract emphasizes benchmark leadership but leaves fairness, search budget, and hardware comparability unclear.",
-          "Production impact is asserted but underspecified, so practical transfer may be narrower than implied by the abstract alone."
+          "The reported gains may depend strongly on the chosen benchmark suite, hardware target, and CUTLASS-backed search space.",
+          "A DSL can improve efficiency by narrowing search, but it may also hide optimizations available in lower-level code paths for some kernels or architectures."
         ],
         "recommended_for": [
-          "Researchers working on LLM-guided kernel optimization and execution-feedback training loops.",
-          "Engineers evaluating automated Triton or accelerator-kernel optimization for inference systems.",
-          "Readers interested in compiler/runtime and model-training co-design for low-level code generation."
+          "Researchers working on LLM-guided kernel optimization agents.",
+          "Engineers interested in CUDA kernel search spaces, CUTLASS-based generation, and hardware-aware agent budgeting.",
+          "Readers evaluating whether performance-model guidance can make automated tuning pipelines cheaper and more robust."
         ],
         "keywords": [
           "GPU kernel optimization",
-          "evolutionary search",
-          "Triton",
-          "MetaX MACA",
-          "LLM code generation",
-          "KernelBench"
+          "LLM agents",
+          "CUDA kernels",
+          "CUTLASS",
+          "domain-specific language",
+          "speed-of-light guidance"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "Strong fit with LLM kernel generation and systems optimization: the paper is directly about execution-guided kernel improvement, cross-backend evaluation, and practical transfer claims. Priority stays high despite unclear experimental detail because the method and claimed results are highly relevant to inference acceleration and low-level code generation.",
-        "fallback_summary": "We present Kernel-Smith, a framework for high-performance GPU kernel and operator generation that combines a stable evaluation-driven evolutionary agent with an evolution-oriented post-training recipe."
+        "reading_priority_reason": "This is a strong fit for LLM kernel generation and systems-focused inference tooling because it studies how representation and hardware-aware guidance change agent efficiency, not just final kernel quality.",
+        "fallback_summary": "Optimizing GPU kernels with LLM agents is an iterative process over a large design space."
       }
     },
     {
-      "paper_id": "2208.07339",
-      "arxiv_id": "2208.07339",
-      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
-      "summary": "Presents an 8-bit matrix multiplication scheme for transformers that isolates outlier dimensions in higher precision, allowing large models to be loaded and run with far lower memory footprint.",
+      "id": "http://arxiv.org/abs/2603.29002v1",
+      "arxiv_id": "2603.29002v1",
+      "title": "Understand and Accelerate Memory Processing Pipeline for Disaggregated LLM Inference",
+      "summary": "Modern large language models (LLMs) increasingly depends on efficient long-context processing and generation mechanisms, including sparse attention, retrieval-augmented generation (RAG), and compressed contextual memory, to support complex reasoning. We show that these optimizations can be unified into a four-step memory processing pipeline: Prepare Memory, Compute Relevancy, Retrieval, and Apply to Inference. Through systematic profiling, we identify a 22%-97% memory processing overhead in LLM inference and strong heterogeneity in its computational characteristics. Motivated by this insight, we argue that \\textbf{heterogeneous systems} are well-suited to accelerate memory processing and thus end-to-end inference. We demonstrate this approach on a GPU-FPGA system by offloading sparse, irregular, and memory-bounded operations to FPGAs while retaining compute-intensive operations on GPUs. Evaluated on an AMD MI210 GPU and an Alveo U55C FPGA, our system is $1.04\\sim2.2\\times$ faster and requires $1.11\\sim4.7\\times$ less energy across multiple LLM inference optimizations than the GPU baseline (similar results hold on NVIDIA A100). These results establish heterogeneous systems as a practical direction for efficient LLM memory processing and inform future heterogeneous hardware design.",
       "authors": [
-        "Tim Dettmers",
-        "Mike Lewis",
-        "Younes Belkada",
-        "Luke Zettlemoyer"
-      ],
-      "published": "2022-08-15",
-      "published_date": "2022-08-15 00:00:00",
-      "categories": [
-        "cs.LG",
-        "cs.CL"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "quantization",
-        "int8",
-        "matrix-multiplication",
-        "memory"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.45,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2208.07339",
-      "pdf_url": "https://arxiv.org/pdf/2208.07339.pdf",
-      "scores": {
-        "relevance": 2.6,
-        "recency": 0.0,
-        "popularity": 0.0,
-        "quality": 0.0,
-        "recommendation": 5.22
-      },
-      "classic_rotation_score": 10.3607,
-      "citationCount": 918,
-      "influentialCitationCount": 95,
-      "venue": "Advances in Neural Information Processing Systems 35",
-      "journal_ref": "ArXiv",
-      "ai": {
-        "one_liner_zh": "This paper proposes an INT8 matrix multiplication path for transformers that keeps a small set of outlier dimensions in higher precision to reduce memory use without fully collapsing model quality.",
-        "summary_zh": "This paper targets a core inference systems problem: large transformers are often memory-bound, so lowering weight precision can make deployment much easier if accuracy survives. The main idea is an 8-bit matrix multiplication scheme that separates rare outlier dimensions and handles them in higher precision instead of forcing the entire computation into uniform INT8. From the abstract alone, the claimed result is that large models can be loaded and run with a much lower memory footprint while remaining usable at scale. If that claim holds, the work is practically important for fitting larger models onto limited hardware and improving deployment efficiency. The biggest missing detail is that the abstract does not make the evaluation setup, accuracy tradeoff, hardware assumptions, or kernel implementation path clear.",
-        "background_zh": "Transformer inference is heavily constrained by memory capacity and bandwidth, which makes low-precision computation attractive for serving large models.",
-        "problem_zh": "The paper asks how to use 8-bit matrix multiplication for large transformers without the quality failures that can appear when important activations or dimensions are naively quantized.",
-        "approach_zh": "It introduces an INT8 matmul scheme that detects outlier dimensions and preserves them in higher precision while running the rest of the transformer computation in 8-bit form.",
-        "evidence_zh": "The abstract supports a qualitative claim that the method lowers memory footprint and enables large-model loading and execution, but it does not make the empirical evidence or tradeoff measurements clear.",
-        "value_zh": "If the method is robust, it offers a practical route to cheaper large-model inference by reducing memory requirements without requiring a full high-precision deployment path.",
-        "open_questions": [
-          "How are outlier dimensions identified and how stable is that mechanism across different transformer architectures and model scales?",
-          "What accuracy or generation-quality loss appears relative to higher-precision baselines, and which tasks were used to test it?",
-          "Are the gains mainly from model storage reduction, runtime bandwidth reduction, or a specific optimized kernel implementation on particular hardware?"
-        ],
-        "core_contributions": [
-          "An 8-bit matrix multiplication method tailored to transformer workloads.",
-          "A mixed-precision treatment of outlier dimensions instead of uniform quantization across all dimensions.",
-          "A systems-oriented argument that this design can make very large models easier to load and run under memory constraints."
-        ],
-        "why_read": [
-          "It is directly relevant to LLM inference efficiency because it addresses the memory bottleneck rather than only model compression in the abstract.",
-          "It highlights a concrete mechanism, outlier isolation, that became influential in practical low-precision transformer inference.",
-          "It is useful for understanding when quantization needs selective higher-precision exceptions instead of a uniform kernel path."
-        ],
-        "risks": [
-          "The abstract does not specify the real accuracy tradeoff, so the practical quality cost is unclear.",
-          "Hardware assumptions and implementation details are missing, so deployment benefits may depend on a specific runtime or kernel stack not described here."
-        ],
-        "recommended_for": [
-          "Researchers studying transformer quantization and LLM inference efficiency.",
-          "Engineers working on memory-constrained deployment of large transformer models.",
-          "Readers interested in mixed-precision design choices at the matrix multiplication level."
-        ],
-        "keywords": [
-          "LLM inference systems",
-          "quantization",
-          "INT8",
-          "matrix multiplication",
-          "transformers",
-          "memory efficiency"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "High fit for the stated focus because it addresses transformer inference efficiency through a concrete low-precision matmul design, but a full read is needed to verify hardware assumptions, accuracy retention, and baseline fairness.",
-        "fallback_summary": "Presents an 8-bit matrix multiplication scheme for transformers that isolates outlier dimensions in higher precision, allowing large models to be loaded and run with far lower memory footprint."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.28708v1",
-      "arxiv_id": "2603.28708v1",
-      "title": "GPU-Accelerated Optimization of Transformer-Based Neural Networks for Real-Time Inference",
-      "summary": "This paper presents the design and evaluation of a GPU-accelerated inference pipeline for transformer models using NVIDIA TensorRT with mixed-precision optimization. We evaluate BERT-base (110M parameters) and GPT-2 (124M parameters) across batch sizes from 1 to 32 and sequence lengths from 32 to 512. The system achieves up to 64.4x speedup over CPU baselines, sub-10 ms latency for single-sample inference, and a 63 percent reduction in memory usage. We introduce a hybrid precision strategy that preserves FP32 for numerically sensitive operations such as softmax and layer normalization, while applying FP16 to linear layers. This approach maintains high numerical fidelity (cosine similarity >= 0.9998 relative to baseline outputs) and eliminates NaN instability. The pipeline is implemented as a modular, containerized system that enables reproducible benchmarking across more than 360 configurations. Cross-GPU validation on an NVIDIA A100 shows consistent FP16 speedup ratios between 1.84x and 2.00x, along with stable numerical behavior. Downstream evaluation on SST-2 demonstrates no accuracy degradation under hybrid precision. Validation on WikiText-2 shows that random inputs underestimate NaN instability by up to 6x for full FP16, while confirming the robustness of the hybrid approach (0.0 percent NaN, cosine similarity >= 0.9998). These results provide a detailed characterization of performance and accuracy trade-offs across GPU architectures and offer practical guidance for deploying transformer models in latency-critical environments.",
-      "authors": [
-        "Soutrik Mukherjee",
-        "Sangwhan Cha"
+        "Zifan He",
+        "Rui Ma",
+        "Yizhou Sun",
+        "Jason Cong"
       ],
       "author_details": [
         {
-          "name": "Soutrik Mukherjee"
+          "name": "Zifan He"
         },
         {
-          "name": "Sangwhan Cha"
+          "name": "Rui Ma"
+        },
+        {
+          "name": "Yizhou Sun"
+        },
+        {
+          "name": "Jason Cong"
         }
       ],
-      "published": "2026-03-30T17:27:33Z",
-      "published_date": "2026-03-30 17:27:33+00:00",
-      "updated": "2026-03-30T17:27:33Z",
-      "comments": "10 pages, 8 figures, 15 tables",
-      "primary_category": "cs.LG",
+      "published": "2026-03-30T21:03:39Z",
+      "published_date": "2026-03-30 21:03:39+00:00",
+      "updated": "2026-03-30T21:03:39Z",
+      "primary_category": "cs.DC",
       "categories": [
-        "cs.LG",
-        "cs.DC"
+        "cs.DC",
+        "cs.AI"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.28708v1",
-      "url": "http://arxiv.org/abs/2603.28708v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.29002v1",
+      "url": "http://arxiv.org/abs/2603.29002v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.8,
+        "relevance": 2.77,
         "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 9.27
+        "popularity": 0.9,
+        "quality": 0.9,
+        "recommendation": 8.63
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "latency",
-        "cs.LG",
+        "llm inference",
         "cs.DC",
         "a100",
         "memory",
-        "speedup",
-        "baseline",
-        "evaluation"
+        "baseline"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -479,7 +227,6 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 1,
         "matched_categories": [
-          "cs.LG",
           "cs.DC"
         ],
         "required_signal_matches": [
@@ -487,109 +234,146 @@
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "latency",
-          "memory",
-          "speedup"
+          "memory"
         ],
-        "bonus_keyword_match_count": 3,
+        "bonus_keyword_match_count": 1,
         "analysis_keyword_matches": [
           "baseline",
-          "evaluation",
-          "latency",
-          "memory",
-          "speedup"
+          "memory"
         ],
-        "analysis_keyword_match_count": 5,
+        "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
+        "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "A TensorRT-based transformer inference pipeline combines mixed precision with selective FP32 retention to cut latency and memory use while avoiding the numerical failures of full FP16.",
-        "summary_zh": "This paper studies how to make transformer inference fast enough for real-time deployment on GPUs without losing numerical stability. The main mechanism is a TensorRT pipeline that applies FP16 to linear layers but keeps numerically sensitive operations such as softmax and layer normalization in FP32, aiming to preserve throughput gains while avoiding NaNs. The abstract reports large CPU-to-GPU speedups, sub-10 ms single-sample latency, lower memory use, stable cross-GPU FP16 gains on A100, and no downstream accuracy drop on SST-2, with WikiText-2 used to stress-test instability. For systems readers, the value is less a new model idea than an implementation-focused characterization of precision trade-offs across batch sizes, sequence lengths, and hardware settings. The biggest missing detail is baseline fairness and deployment realism: the abstract does not make clear how much of the gain comes from GPU acceleration itself versus TensorRT-specific optimization choices, nor how representative the tested models are for modern LLM serving workloads.",
-        "background_zh": "Mixed-precision inference is a standard route to lower latency and memory cost on GPUs, but transformer workloads can become numerically fragile when precision is reduced too aggressively.",
-        "problem_zh": "The paper asks how to optimize transformer inference for real-time GPU serving while keeping output fidelity and avoiding the instability that can appear in full FP16 execution.",
-        "approach_zh": "It builds a modular TensorRT inference pipeline with a hybrid precision policy that uses FP16 for linear layers and retains FP32 for softmax and layer normalization, then benchmarks it across models, batch sizes, sequence lengths, and GPUs.",
-        "evidence_zh": "The abstract supports the claim with benchmark results on BERT-base and GPT-2, cross-GPU validation on A100, cosine-similarity checks against baseline outputs, NaN-stability analysis, and downstream task validation on SST-2 and WikiText-2; it does not make the exact experimental controls fully clear.",
-        "value_zh": "If the setup is sound, the paper offers practical guidance for deploying small transformer models in latency-critical environments and for choosing safer mixed-precision policies in GPU inference stacks.",
+        "one_liner_zh": "This paper reframes long-context and retrieval-style LLM inference as a four-stage memory processing pipeline and argues that the irregular parts are a better fit for heterogeneous GPU-FPGA execution than for GPU-only serving.",
+        "summary_zh": "The paper targets a systems bottleneck that becomes more important as LLM inference relies more on sparse attention, retrieval-augmented generation, and compressed memory for long-context reasoning. It proposes a unified four-step memory processing pipeline, then uses profiling to argue that memory-related work can consume a large share of end-to-end inference time and that its operators have heterogeneous compute behavior. Based on that view, the system offloads sparse, irregular, and memory-bound stages to FPGA while keeping compute-heavy stages on GPU in a disaggregated heterogeneous design. The abstract reports speedup and energy reductions against a GPU baseline on MI210 plus U55C, and says similar trends hold on A100, suggesting the gains come from matching operator type to hardware rather than from a single-model trick. The main missing details are how fair the baseline is, how data movement is handled, and which exact memory-processing subroutines dominate under different inference optimizations.",
+        "background_zh": "Long-context LLM serving increasingly depends on external or compressed memory mechanisms, which makes memory preparation, scoring, and retrieval a first-class systems problem rather than a side component.",
+        "problem_zh": "The paper asks how much overhead memory-processing steps add to modern LLM inference and whether those steps should be executed on different hardware than the main dense model compute.",
+        "approach_zh": "It abstracts several memory-heavy inference methods into a four-stage pipeline and maps sparse, irregular, memory-bound operations to FPGA while leaving compute-intensive work on GPU.",
+        "evidence_zh": "The abstract supports the claim with profiling of memory-processing overhead and reported end-to-end speed and energy improvements on a GPU-FPGA setup, but it does not make the evaluation methodology or per-stage attribution fully clear.",
+        "value_zh": "If the decomposition is robust, it gives a concrete systems template for accelerating retrieval- and memory-heavy LLM inference with hardware specialization instead of treating all serving work as GPU-native.",
         "open_questions": [
-          "How fair are the baselines, especially the CPU comparison and the comparison between full FP16, hybrid precision, and unoptimized GPU inference?",
-          "Which TensorRT graph transformations, kernel choices, or fusion effects account for most of the reported latency and memory gains?",
-          "How well do these results transfer from BERT-base and GPT-2 to larger decoder-only LLMs and more realistic serving patterns such as KV-cache-heavy generation?"
+          "Which operators or pipeline stages account for most of the reported gains, and how much comes from compute acceleration versus reduced contention on the GPU?",
+          "How is the GPU baseline configured, especially for overlap, memory movement, and kernel optimization, and is the comparison fair across all evaluated inference methods?",
+          "What are the communication, batching, and deployment constraints of the disaggregated GPU-FPGA design, and do the gains persist under realistic serving latency targets?"
         ],
         "core_contributions": [
-          "A TensorRT-based GPU inference pipeline for transformer models with a selective mixed-precision policy.",
-          "An empirical comparison of latency, memory, and numerical behavior across batch sizes, sequence lengths, and multiple hardware settings.",
-          "A stability-oriented evaluation showing that hybrid precision avoids the NaN behavior seen in full FP16 under more realistic input validation."
+          "A unifying four-step abstraction for memory processing across sparse attention, RAG, and compressed contextual memory.",
+          "A profiling-based argument that memory processing can occupy a large fraction of LLM inference and has strongly heterogeneous operator characteristics.",
+          "A heterogeneous execution design that splits memory-processing work between FPGA and GPU and reports end-to-end speed and energy benefits over a GPU-only baseline."
         ],
         "why_read": [
-          "It isolates where precision reduction is usable versus risky inside transformer inference.",
-          "It provides concrete systems evidence on latency-memory-stability trade-offs rather than only reporting task accuracy.",
-          "It may be useful as a reference point for engineers evaluating mixed-precision serving policies on NVIDIA GPUs."
+          "It treats retrieval and memory handling as the systems bottleneck itself, not just as auxiliary logic around the model.",
+          "It is relevant to inference engineers interested in hardware-software co-design for irregular LLM serving workloads.",
+          "It may clarify where heterogeneous accelerators help beyond standard dense GPU execution, especially for memory-bound stages."
         ],
         "risks": [
-          "The work appears centered on relatively small models, so its relevance to current LLM serving may be limited.",
-          "The headline speedups may be dominated by CPU-to-GPU comparisons rather than by a strong optimized-GPU baseline comparison alone."
+          "The abstract does not specify the fairness and strength of the GPU baseline, so the reported gains are hard to calibrate.",
+          "The deployment cost of adding FPGA and cross-device data movement may offset practical benefits in some serving settings despite positive benchmark results from the abstract alone."
         ],
         "recommended_for": [
-          "Researchers studying LLM inference efficiency and mixed-precision serving behavior.",
-          "Engineers deploying TensorRT-based transformer inference on NVIDIA GPUs.",
-          "Readers interested in numerical stability trade-offs in low-latency GPU pipelines."
+          "Researchers working on LLM inference systems with long-context, retrieval, or external-memory workloads.",
+          "Engineers exploring heterogeneous accelerator designs for sparse or memory-bound serving pipelines.",
+          "Compiler and runtime practitioners interested in operator-to-hardware mapping for non-dense inference stages."
         ],
         "keywords": [
-          "LLM inference systems",
-          "GPU inference",
-          "TensorRT",
-          "mixed precision",
-          "FP16",
-          "numerical stability"
+          "LLM inference",
+          "long-context serving",
+          "retrieval-augmented generation",
+          "sparse attention",
+          "compressed memory",
+          "heterogeneous systems design"
         ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "Strong topical fit on inference efficiency and precision trade-offs, but the paper looks more like a careful deployment study on small transformer models than a major advance in LLM serving, compiler co-design, or low-level kernel generation.",
-        "fallback_summary": "This paper presents the design and evaluation of a GPU-accelerated inference pipeline for transformer models using NVIDIA TensorRT with mixed-precision optimization."
+        "reading_priority": "high",
+        "reading_priority_reason": "High fit for the stated focus because it directly studies LLM inference acceleration, identifies a concrete memory-processing bottleneck, and proposes hardware/runtime co-design rather than generic model-side optimization; the main caveat is that baseline fairness and systems overhead need a full-paper check.",
+        "fallback_summary": "Modern large language models (LLMs) increasingly depends on efficient long-context processing and generation mechanisms, including sparse attention, retrieval-augmented generation (RAG), and compressed contextual memory, to support complex reasoning."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2603.27914v1",
-      "arxiv_id": "2603.27914v1",
-      "title": "ITQ3_S: High-Fidelity 3-bit LLM Inference via Interleaved Ternary Quantization with Rotation-Domain Smoothing",
-      "summary": "We present \\textbf{ITQ3\\_S} (Interleaved Ternary Quantization -- Specialized), a novel 3-bit weight quantization format for large language models (LLMs) that integrates \\textbf{TurboQuant (TQ)}, a rotation-domain adaptive quantization strategy based on the Fast Walsh-Hadamard Transform (FWHT). Conventional 3-bit quantization methods suffer from catastrophic precision loss caused by heavy-tailed weight distributions and inter-channel outliers. ITQ3\\_S addresses this fundamental limitation by pre-rotating the weight space via FWHT prior to quantization, effectively spreading outlier energy across the entire vector and inducing a near-Gaussian distribution amenable to uniform ternary coding.\n  Critically, we derive a mathematically rigorous dequantization procedure that inverts the FWHT exactly using a 256-point Inverse Walsh-Hadamard Transform fused into the CUDA shared-memory loading stage, ensuring zero-error round-trip fidelity between offline quantization and online inference. We prove that for any weight vector $\\mathbf{w} \\in \\mathbb{R}^{256}$ processed by our pipeline, the reconstruction satisfies $\\|\\hat{\\mathbf{w}} - \\mathbf{w}\\|_2 \\leq ε_q$, where $ε_q$ is determined solely by the ternary quantization grid and is strictly smaller than any uniform 3-bit baseline under equal bit-budget constraints.\n  Empirically, on the NVIDIA RTX 5090 (Blackwell architecture), ITQ3\\_S achieves perplexity competitive with FP16 baselines while delivering throughput exceeding 1.5$\\times$ that of 4-bit alternatives, owing to optimized DP4A and Tensor Core scheduling in the interleaved memory layout. Our results establish ITQ3\\_S as a practical, mathematically grounded solution for high-fidelity LLM deployment on consumer-grade hardware.",
+      "id": "http://arxiv.org/abs/2603.29813v1",
+      "arxiv_id": "2603.29813v1",
+      "title": "Compiling Code LLMs into Lightweight Executables",
+      "summary": "The demand for better prediction accuracy and higher execution performance in neural networks continues to grow. The emergence and success of Large Language Models (LLMs) have led to the development of many cloud-based tools for software engineering tasks such as code suggestion. While effective, cloud deployment raises concerns over privacy, latency, and reliance on connectivity. Running LLMs locally on personal devices such as laptops would address these issues by enabling offline use and reducing response time. However, local deployment is challenging: commodity devices lack high-performance accelerators like GPUs and are constrained by limited memory and compute capacity, making it difficult to execute large models efficiently.\n  We present Ditto, a novel method for optimizing both the model size of Code LLMs and their inference programs, particularly for statically-typed programming languages such as C. Our approach integrates two key components: (1) a model compression technique inspired by product quantization, which clusters model parameters into codebooks and quantizes them to lower bit widths while ensuring that outputs remain within a bounded error, as well as synthesizing the inference program for the quantized model; and (2) a compilation pass integrated into LLVM that automatically detects and replaces unoptimized General Matrix-Vector Multiplication (GEMV) operations with implementations from Basic Linear Algebra Subprograms (BLAS) libraries, which are highly optimized for runtime performance. The output of Ditto is an optimized and compiled executable for running selected Code LLMs. We evaluate Ditto on three popular Code LLMs, achieving up to 10.5$\\times$ faster inference and 6.4$\\times$ lower memory usage compared with their original inference pipeline, while maintaining accuracy close to that of the full-precision models (with an average loss of only 0.27% in pass@1).",
       "authors": [
-        "Edward J. Yoon"
+        "Jieke Shi",
+        "Junda He",
+        "Zhou Yang",
+        "Chengran Yang",
+        "Mykhailo Klymenko",
+        "Thong Hoang",
+        "Xiwei",
+        "Xu",
+        "Zhenchang Xing",
+        "David Lo"
       ],
       "author_details": [
         {
-          "name": "Edward J. Yoon"
+          "name": "Jieke Shi",
+          "affiliation": "James"
+        },
+        {
+          "name": "Junda He",
+          "affiliation": "James"
+        },
+        {
+          "name": "Zhou Yang",
+          "affiliation": "James"
+        },
+        {
+          "name": "Chengran Yang",
+          "affiliation": "James"
+        },
+        {
+          "name": "Mykhailo Klymenko",
+          "affiliation": "James"
+        },
+        {
+          "name": "Thong Hoang",
+          "affiliation": "James"
+        },
+        {
+          "name": "Xiwei",
+          "affiliation": "Sherry"
+        },
+        {
+          "name": "Xu"
+        },
+        {
+          "name": "Zhenchang Xing"
+        },
+        {
+          "name": "David Lo"
         }
       ],
-      "published": "2026-03-30T00:03:22Z",
-      "published_date": "2026-03-30 00:03:22+00:00",
-      "updated": "2026-03-30T00:03:22Z",
-      "comments": "12 pages, 4 figures, 3 tables",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.DC"
+      "institutions": [
+        "James",
+        "Sherry"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2603.27914v1",
-      "url": "http://arxiv.org/abs/2603.27914v1",
+      "published": "2026-03-31T14:40:19Z",
+      "published_date": "2026-03-31 14:40:19+00:00",
+      "updated": "2026-03-31T14:40:19Z",
+      "comments": "This is not the camera-ready version; content is subject to change. Accepted at the 34th ACM International Conference on the Foundations of Software Engineering (FSE 2026), 25 pages",
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2603.29813v1",
+      "url": "http://arxiv.org/abs/2603.29813v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.73,
+        "relevance": 1.54,
         "recency": 3.0,
         "popularity": 1.6,
         "quality": 1.6,
-        "recommendation": 9.14
+        "recommendation": 6.96
       },
       "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "cuda",
-        "cs.DC",
-        "cs.LG",
-        "tensor core",
-        "baseline",
-        "throughput"
+        "llvm",
+        "cs.SE",
+        "latency"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -598,210 +382,87 @@
         "domain": "LLM Code Generation For CUDA Kernels",
         "text_match_count": 1,
         "matched_categories": [
-          "cs.DC",
-          "cs.LG"
+          "cs.SE"
         ],
         "required_signal_matches": [
-          "cuda"
+          "llvm"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "tensor core"
-        ],
-        "bonus_keyword_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
         "analysis_keyword_matches": [
-          "baseline",
-          "throughput"
+          "latency"
         ],
-        "analysis_keyword_match_count": 2,
+        "analysis_keyword_match_count": 1,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.18
+        "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper proposes a 3-bit LLM weight format that uses FWHT-based rotation before ternary quantization and an inverse transform fused into CUDA loading to reduce outlier-driven error while keeping inference practical.",
-        "summary_zh": "The paper targets a familiar systems problem in low-bit LLM inference: plain 3-bit quantization breaks down when heavy-tailed weights and channel outliers destroy reconstruction quality. Its core idea is to rotate 256-element weight blocks with FWHT before ternary coding, so outlier energy is spread more evenly, then recover the rotated weights during inference with an inverse Walsh-Hadamard step fused into shared-memory loading. The abstract claims both a theoretical reconstruction bound better than equal-budget uniform 3-bit baselines and empirical results on an RTX 5090 with FP16-competitive perplexity and throughput above 4-bit alternatives, attributed to interleaved layout plus DP4A and Tensor Core scheduling. If those claims hold, the practical value is a more aggressive weight-only compression point for consumer-GPU serving without the usual 3-bit quality collapse. The biggest missing detail is that the abstract does not make the evaluation setup, baselines, layer coverage, or kernel implementation tradeoffs clear enough to judge fairness or reproducibility.",
-        "background_zh": "LLM serving keeps pushing toward lower-bit weights because bandwidth and memory pressure dominate inference cost, but 3-bit formats usually lose too much accuracy once weight outliers become hard to encode.",
-        "problem_zh": "The paper asks whether 3-bit weight quantization can retain near-high-precision model quality while still translating into a real inference-speed advantage on modern consumer GPUs.",
-        "approach_zh": "It applies FWHT-based rotation-domain smoothing before ternary quantization, uses an interleaved 3-bit layout, and fuses exact inverse Walsh-Hadamard dequantization into the CUDA shared-memory load path.",
-        "evidence_zh": "The abstract states a formal reconstruction bound and reports RTX 5090 results with FP16-competitive perplexity and higher throughput than 4-bit alternatives, but it does not make the experimental protocol or baseline details clear.",
-        "value_zh": "This is interesting if it truly turns 3-bit quantization into a deployable operating point, because the gain would come from lower weight traffic paired with kernels designed to recover accuracy and keep the unpack/dequant path efficient.",
+        "one_liner_zh": "Ditto packages compressed Code LLMs and their inference path into standalone executables by combining parameter quantization with LLVM-level GEMV replacement, targeting faster local code generation on CPU-class devices.",
+        "summary_zh": "This paper targets local deployment of Code LLMs on commodity machines, where memory limits and weak accelerators make standard inference pipelines expensive. It proposes Ditto, which combines product-quantization-like model compression with synthesized inference code, then adds an LLVM pass that swaps unoptimized GEMV calls for BLAS-backed implementations. The abstract claims this yields substantially faster inference and lower memory use on three Code LLMs while keeping pass@1 close to full precision. For systems readers, the practical angle is clear: it treats model compression and low-level executable generation as one deployment pipeline rather than separate steps. The main missing details are hardware assumptions, which model families and sequence settings were tested, and how fair the baseline inference pipeline really is.",
+        "background_zh": "Code LLMs are increasingly useful for software tasks, but running them locally is difficult because laptop-class devices are constrained by memory, compute throughput, and often the absence of strong GPU support.",
+        "problem_zh": "The paper asks how to make Code LLMs executable locally with acceptable speed and memory footprint without giving up much code-generation accuracy.",
+        "approach_zh": "Ditto compresses model weights through codebook-based quantization with bounded output error, synthesizes inference code for the quantized model, and uses an LLVM compilation pass to replace poor GEMV implementations with optimized BLAS kernels.",
+        "evidence_zh": "The abstract reports evaluation on three Code LLMs with large speed and memory improvements and only a small average pass@1 drop, but it does not make the evaluation setup or baseline details clear.",
+        "value_zh": "If the claims hold, this could make offline Code LLM deployment more practical by reducing both runtime cost and packaging overhead through compiler-aware executable generation.",
         "open_questions": [
-          "What exact models, datasets, and perplexity evaluation settings were used for the FP16 and 4-bit comparisons?",
-          "How much of the claimed speedup comes from the quantization format itself versus the specific Blackwell-tuned kernel schedule and hardware support?",
-          "What are the runtime costs and implementation constraints of the fused inverse FWHT path in terms of shared memory, occupancy, and portability to non-Blackwell GPUs?"
+          "What hardware, BLAS backend, prompt lengths, and batch settings were used for the reported speedups and memory reductions?",
+          "How is the baseline inference pipeline implemented, and is the comparison fair against optimized CPU inference runtimes rather than only naive execution?",
+          "How general is the method beyond statically typed languages such as C and beyond the three evaluated Code LLMs?"
         ],
         "core_contributions": [
-          "A 3-bit interleaved ternary weight format designed around rotation-domain smoothing for LLM inference.",
-          "An exact inverse-FWHT dequantization procedure fused into the CUDA loading stage instead of treated as a separate preprocessing step.",
-          "A claim that better-conditioned rotated weights make 3-bit quantization more accurate than equal-budget uniform 3-bit baselines."
+          "A joint deployment pipeline that combines Code LLM compression with generated inference executables rather than treating quantization and serving separately.",
+          "An LLVM-integrated optimization pass that rewrites unoptimized GEMV operations to BLAS-backed implementations.",
+          "An empirical claim that the combined system preserves code-generation accuracy while substantially improving local inference speed and memory footprint."
         ],
         "why_read": [
-          "It is directly about the hard regime of sub-4-bit LLM inference rather than another generic quantization variant.",
-          "The abstract ties the compression method to kernel-level execution details, which is the right place to look for real systems gains.",
-          "It may offer a concrete example of compiler/runtime co-design around transform-domain quantization and GPU memory layout."
+          "It is directly relevant to local LLM serving and compiler-runtime co-design rather than pure model-side compression.",
+          "The interesting systems question is where the gains come from: quantized weights, synthesized inference code, or BLAS substitution inside the compiled executable.",
+          "It may offer a concrete path for packaging small code-specialized models as lightweight binaries for offline use."
         ],
         "risks": [
-          "The abstract makes strong fidelity and throughput claims, but the baseline fairness and measurement protocol are not specified.",
-          "The method may depend heavily on Blackwell-specific kernel scheduling, which could limit portability or reduce gains on other GPUs."
+          "The abstract does not clarify whether the main gains come from compression, compiler rewrites, or an especially weak baseline.",
+          "Results may depend heavily on CPU, BLAS library, and model architecture, which limits transferability until the setup is spelled out clearly."
         ],
         "recommended_for": [
-          "Researchers working on LLM inference quantization below 4 bits.",
-          "Engineers building CUDA kernels for weight-only LLM serving.",
-          "Readers interested in transform-domain quantization tied to low-level GPU execution."
+          "Researchers working on local LLM inference and CPU-oriented serving stacks.",
+          "Engineers interested in compiler-assisted deployment of compressed models.",
+          "Readers tracking systems work around code-specialized LLM execution rather than generic prompting improvements."
         ],
         "keywords": [
-          "3-bit quantization",
-          "LLM inference",
-          "FWHT",
-          "ternary quantization",
-          "CUDA kernels",
-          "DP4A"
+          "Code LLM",
+          "local inference",
+          "model compression",
+          "quantization",
+          "LLVM",
+          "BLAS/GEMV optimization"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "This is tightly aligned with low-bit LLM inference and kernel-level execution, and the abstract makes specific systems claims about where quality and throughput gains come from. It is high-priority to verify because the claimed win depends on hardware assumptions, fused dequantization overhead, and baseline fairness that are not clear from the abstract alone.",
-        "fallback_summary": "We present \\textbf{ITQ3\\_S} (Interleaved Ternary Quantization -- Specialized), a novel 3-bit weight quantization format for large language models (LLMs) that integrates \\textbf{TurboQuant (TQ)}, a rotation-domain adaptive quantization strategy based on the Fast Walsh-Hadamard Transform (FWHT)."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2603.27830v1",
-      "arxiv_id": "2603.27830v1",
-      "title": "jaxsgp4: GPU-accelerated mega-constellation propagation with batch parallelism",
-      "summary": "As the population of anthropogenic space objects transitions from sparse clusters to mega-constellations exceeding 100,000 satellites, traditional orbital propagation techniques face a critical bottleneck. Standard CPU-bound implementations of the Simplified General Perturbations 4 (SGP4) algorithm are less well suited to handle the requisite scale of collision avoidance and Space Situational Awareness (SSA) tasks. This paper introduces \\texttt{jaxsgp4}, an open-source high-performance reimplementation of SGP4 utilising the \\texttt{JAX} library. \\texttt{JAX} has gained traction in the landscape of computational research, offering an easy mechanism for Just-In-Time (JIT) compilation, automatic vectorisation and automatic optimisation of code for CPU, GPU and TPU hardware modalities. By refactoring the algorithm into a pure functional paradigm, we leverage these transformations to execute massively parallel propagations on modern GPUs. We demonstrate that \\texttt{jaxsgp4} can propagate the entire Starlink constellation (9,341 satellites) each to 1,000 future time steps in under 4 ms on a single A100 GPU, representing a speedup of $1500\\times$ over traditional C++ baselines. Furthermore, we argue that the use of 32-bit precision for SGP4 propagation tasks offers a principled trade-off, sacrificing negligible precision loss for a substantial gain in throughput on hardware accelerators.",
-      "authors": [
-        "Charlotte Priestley",
-        "Will Handley"
-      ],
-      "author_details": [
-        {
-          "name": "Charlotte Priestley"
-        },
-        {
-          "name": "Will Handley"
-        }
-      ],
-      "published": "2026-03-29T19:39:05Z",
-      "published_date": "2026-03-29 19:39:05+00:00",
-      "updated": "2026-03-29T19:39:05Z",
-      "comments": "11 pages, 3 figures",
-      "primary_category": "cs.DC",
-      "categories": [
-        "cs.DC",
-        "astro-ph.EP",
-        "astro-ph.IM",
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2603.27830v1",
-      "url": "http://arxiv.org/abs/2603.27830v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.66,
-        "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 8.68
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "throughput",
-        "cs.LG",
-        "cs.DC",
-        "a100",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 1,
-        "matched_categories": [
-          "cs.LG",
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "a100"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "throughput",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "throughput",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper recasts SGP4 orbital propagation in JAX so the workload can be batch-vectorized and JIT-compiled onto accelerators, turning large satellite-constellation propagation into a throughput-oriented GPU task.",
-        "summary_zh": "This paper targets the scaling problem in orbital propagation as satellite constellations grow large enough that CPU-oriented SGP4 implementations become a bottleneck for collision avoidance and space situational awareness. The core move is to rewrite SGP4 in a pure functional style within JAX, so JIT compilation, automatic vectorization, and accelerator backends can execute many propagations in parallel on GPUs and other hardware. The abstract claims a concrete throughput result: propagating 9,341 Starlink satellites across 1,000 future time steps in under 4 ms on a single A100 GPU, with a reported 1500x speedup over traditional C++ baselines. If those comparisons are fair, the practical value is clear for high-volume propagation pipelines where batch throughput dominates. The main missing details are baseline fairness, numerical accuracy under 32-bit precision, and how well the implementation generalizes beyond the reported workload and hardware.",
-        "background_zh": "Mega-constellations push orbital propagation from a relatively modest scientific computation into a large-scale batch systems problem where CPU implementations can become operational bottlenecks.",
-        "problem_zh": "The paper asks how to make standard SGP4 propagation fast enough for very large constellations and many forecast steps without abandoning the established algorithm used in SSA workflows.",
-        "approach_zh": "It reimplements SGP4 as a pure functional JAX program so JIT compilation and batch parallel transforms can map the propagation workload efficiently onto GPU, CPU, and TPU accelerators.",
-        "evidence_zh": "The abstract provides one headline benchmark and a claimed 1500x speedup versus traditional C++ baselines, but it does not make the evaluation protocol, baseline settings, or accuracy analysis fully clear.",
-        "value_zh": "If the reported speed and precision trade-off hold in practice, this could make large-scale propagation and screening pipelines much more tractable on accelerator hardware with relatively little algorithmic change.",
-        "open_questions": [
-          "How were the C++ baselines configured, and was the comparison matched on batching strategy, precision, and hardware utilization?",
-          "What numerical error does the 32-bit implementation introduce relative to standard higher-precision SGP4 across realistic forecasting horizons?",
-          "Does performance remain strong for smaller batches, different constellations, or non-A100 hardware where compilation and launch overheads may matter more?"
-        ],
-        "core_contributions": [
-          "A JAX-based open-source reimplementation of SGP4 designed for accelerator execution.",
-          "A batch-parallel formulation of orbital propagation that exploits JIT compilation and vectorization rather than only low-level hand optimization.",
-          "An argument that 32-bit precision is an acceptable throughput/accuracy trade-off for this propagation setting, though the abstract leaves the validation details sparse."
-        ],
-        "why_read": [
-          "It is a concrete example of converting a legacy numerical algorithm into an accelerator-friendly batch program through compiler/runtime support rather than inventing a new model.",
-          "The abstract reports unusually large throughput gains on a real large-constellation workload, which makes the systems claim worth checking.",
-          "It may be useful as a case study in when functional refactoring plus compiler transforms can outperform conventional CPU-oriented scientific code."
-        ],
-        "risks": [
-          "The paper sits outside the user's main LLM inference and code-generation focus, so relevance is mostly methodological rather than domain-specific.",
-          "The headline speedup may depend heavily on batch size, A100 hardware, and comparison choices that are not specified in the abstract alone."
-        ],
-        "recommended_for": [
-          "Researchers interested in acceleratorizing legacy scientific kernels through JAX and batch parallelism.",
-          "Engineers working on high-throughput space situational awareness or constellation-scale propagation pipelines.",
-          "Systems readers who want a non-LLM example of compiler/runtime co-design driving large throughput gains."
-        ],
-        "keywords": [
-          "JAX",
-          "SGP4",
-          "GPU acceleration",
-          "batch parallelism",
-          "orbital propagation",
-          "space situational awareness"
-        ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "The systems angle is real because the gains appear to come from batch parallelization and compiler-driven accelerator execution, but the application domain is not closely aligned with LLM inference, CUDA kernel generation, or low-level code synthesis.",
-        "fallback_summary": "As the population of anthropogenic space objects transitions from sparse clusters to mega-constellations exceeding 100,000 satellites, traditional orbital propagation techniques face a critical bottleneck."
+        "reading_priority_reason": "High fit with the stated focus because it combines Code LLM deployment, compiler passes, and low-level inference optimization; the main caveat is that the abstract leaves key evaluation and baseline details underspecified.",
+        "fallback_summary": "The demand for better prediction accuracy and higher execution performance in neural networks continues to grow."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by IsoQuant: Hardware-Aligned SO(4)… and Kernel-Smith: A Unified Recipe for…. LLM.int8(): 8-bit Matrix… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, agents and active exploration. The set is anchored by Improving Efficiency of GPU Kernel… and Understand and Accelerate Memory…. Compiling Code LLMs into… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
       "training and inference efficiency",
-      "factual reliability and verification"
+      "agents and active exploration"
     ],
     "reading_strategy": [
-      "Start with IsoQuant: Hardware-Aligned SO(4)… and verify whether it defines the factual reliability and verification problem clearly and exposes a real mechanism.",
-      "Then read Kernel-Smith: A Unified Recipe for… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use LLM.int8(): 8-bit Matrix… as a final cross-check on experimental boundaries and practical value."
+      "Start with Improving Efficiency of GPU Kernel… and verify whether it defines the agents and active exploration problem clearly and exposes a real mechanism.",
+      "Then read Understand and Accelerate Memory… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use Compiling Code LLMs into… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-03-31T11:06:05Z",
+    "generated_at": "2026-04-01T11:04:38Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 6,
+    "paper_results": 3,
     "paper_failures": 0
   }
 }

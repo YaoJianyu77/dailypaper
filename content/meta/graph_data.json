@@ -699,6 +699,27 @@
       "domain": "LLM Inference Systems",
       "quality_score": 8.68,
       "updated": "2026-03-31"
+    },
+    {
+      "id": "2603.29010v1",
+      "title": "Improving Efficiency of GPU Kernel Optimization Agents using a Domain-Specific Language and Speed-of-Light Guidance",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 9.88,
+      "updated": "2026-04-01"
+    },
+    {
+      "id": "2603.29002v1",
+      "title": "Understand and Accelerate Memory Processing Pipeline for Disaggregated LLM Inference",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.63,
+      "updated": "2026-04-01"
+    },
+    {
+      "id": "2603.29813v1",
+      "title": "Compiling Code LLMs into Lightweight Executables",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 6.96,
+      "updated": "2026-04-01"
     }
   ],
   "edges": [
@@ -2273,7 +2294,19 @@
       "target": "2208.07339",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2603.29010v1",
+      "target": "2603.29813v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2603.29813v1",
+      "target": "2603.29010v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-03-31"
+  "last_updated": "2026-04-01"
 }

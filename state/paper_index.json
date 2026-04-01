@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-31",
+  "last_updated": "2026-04-01",
   "papers": [
     {
       "paper_id": "2603.19133v1",
@@ -272,6 +272,34 @@
         }
       ],
       "cooldown_until": "2026-05-23"
+    },
+    {
+      "paper_id": "2603.29813v1",
+      "title": "Compiling Code LLMs into Lightweight Executables",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-03-31T14:40:19Z",
+      "source_lane": "fresh",
+      "topics": [
+        "Code LLM",
+        "local inference",
+        "model compression",
+        "quantization",
+        "LLVM",
+        "BLAS/GEMV optimization"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-01",
+      "last_seen_date": "2026-04-01",
+      "last_recommended_date": "2026-04-01",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-01",
+          "recommendation": 6.96,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-31"
     },
     {
       "paper_id": "dblp:conf/cgo/HeY25",
@@ -1200,6 +1228,34 @@
         }
       ],
       "cooldown_until": "2026-05-23"
+    },
+    {
+      "paper_id": "2603.29010v1",
+      "title": "Improving Efficiency of GPU Kernel Optimization Agents using a Domain-Specific Language and Speed-of-Light Guidance",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-03-30T21:16:39Z",
+      "source_lane": "fresh",
+      "topics": [
+        "GPU kernel optimization",
+        "LLM agents",
+        "CUDA kernels",
+        "CUTLASS",
+        "domain-specific language",
+        "speed-of-light guidance"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-01",
+      "last_seen_date": "2026-04-01",
+      "last_recommended_date": "2026-04-01",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-01",
+          "recommendation": 9.88,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-31"
     },
     {
       "paper_id": "2603.12201v1",
@@ -2800,6 +2856,34 @@
         }
       ],
       "cooldown_until": "2026-05-11"
+    },
+    {
+      "paper_id": "2603.29002v1",
+      "title": "Understand and Accelerate Memory Processing Pipeline for Disaggregated LLM Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-03-30T21:03:39Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "long-context serving",
+        "retrieval-augmented generation",
+        "sparse attention",
+        "compressed memory",
+        "heterogeneous systems design"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-01",
+      "last_seen_date": "2026-04-01",
+      "last_recommended_date": "2026-04-01",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-01",
+          "recommendation": 8.63,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-05-31"
     },
     {
       "paper_id": "2603.16435v1",
