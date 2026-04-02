@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-01",
+  "last_updated": "2026-04-02",
   "papers": [
     {
       "paper_id": "2603.19133v1",
@@ -1056,9 +1056,9 @@
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-03-30",
-      "last_recommended_date": "2026-03-30",
-      "recommended_count": 4,
+      "last_seen_date": "2026-04-02",
+      "last_recommended_date": "2026-04-02",
+      "recommended_count": 5,
       "scores_history": [
         {
           "date": "2026-03-17",
@@ -1079,9 +1079,14 @@
           "date": "2026-03-30",
           "recommendation": 7.52,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-02",
+          "recommendation": 7.52,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-05-29"
+      "cooldown_until": "2026-06-01"
     },
     {
       "paper_id": "2210.17323",
@@ -1492,7 +1497,7 @@
       "published": "2026",
       "source_lane": "fresh",
       "topics": [
-        "LLM-based compiler optimization",
+        "LLM compiler optimization",
         "LLVM IR",
         "peephole optimization",
         "formal verification",
@@ -1501,9 +1506,9 @@
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-03-30",
-      "last_recommended_date": "2026-03-30",
-      "recommended_count": 4,
+      "last_seen_date": "2026-04-02",
+      "last_recommended_date": "2026-04-02",
+      "recommended_count": 5,
       "scores_history": [
         {
           "date": "2026-03-17",
@@ -1524,9 +1529,14 @@
           "date": "2026-03-30",
           "recommendation": 5.83,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-02",
+          "recommendation": 5.83,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-05-29"
+      "cooldown_until": "2026-06-01"
     },
     {
       "paper_id": "2208.07339",
@@ -1934,15 +1944,15 @@
         "LLM serving",
         "KV cache",
         "quantization",
-        "memory bandwidth",
-        "long-context inference",
-        "accelerator co-design"
+        "attention bandwidth",
+        "accelerator co-design",
+        "memory management"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-30",
-      "last_recommended_date": "2026-03-30",
-      "recommended_count": 7,
+      "last_seen_date": "2026-04-02",
+      "last_recommended_date": "2026-04-02",
+      "recommended_count": 8,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -1978,9 +1988,14 @@
           "date": "2026-03-30",
           "recommendation": 7.63,
           "lane": "established"
+        },
+        {
+          "date": "2026-04-02",
+          "recommendation": 7.63,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-29"
+      "cooldown_until": "2026-06-01"
     },
     {
       "paper_id": "2602.07721v2",
@@ -2185,17 +2200,17 @@
       "source_lane": "established",
       "topics": [
         "GPU kernel execution",
-        "JIT compilation",
+        "just-in-time compilation",
         "LLVM IR",
         "runtime specialization",
-        "portable GPU optimization",
+        "portable optimization",
         "AMD GPUs"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-30",
-      "last_recommended_date": "2026-03-30",
-      "recommended_count": 6,
+      "last_seen_date": "2026-04-02",
+      "last_recommended_date": "2026-04-02",
+      "recommended_count": 7,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -2226,9 +2241,14 @@
           "date": "2026-03-30",
           "recommendation": 5.46,
           "lane": "established"
+        },
+        {
+          "date": "2026-04-02",
+          "recommendation": 5.46,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-29"
+      "cooldown_until": "2026-06-01"
     },
     {
       "paper_id": "dblp:conf/mlsys/0015LCKCW24",
@@ -2242,13 +2262,13 @@
         "sparsification",
         "quantization",
         "heavy hitter tokens",
-        "low-bit decoding"
+        "memory bandwidth"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-30",
-      "last_recommended_date": "2026-03-30",
-      "recommended_count": 7,
+      "last_seen_date": "2026-04-02",
+      "last_recommended_date": "2026-04-02",
+      "recommended_count": 8,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -2284,9 +2304,14 @@
           "date": "2026-03-30",
           "recommendation": 7.97,
           "lane": "established"
+        },
+        {
+          "date": "2026-04-02",
+          "recommendation": 7.97,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-29"
+      "cooldown_until": "2026-06-01"
     },
     {
       "paper_id": "2603.16039v1",
@@ -2718,14 +2743,14 @@
         "matrix multiplication",
         "micro-kernel generation",
         "Exo",
-        "compiler",
-        "intrinsics"
+        "compiler-assisted optimization",
+        "low-level code generation"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-09",
-      "last_seen_date": "2026-03-30",
-      "last_recommended_date": "2026-03-30",
-      "recommended_count": 3,
+      "last_seen_date": "2026-04-02",
+      "last_recommended_date": "2026-04-02",
+      "recommended_count": 4,
       "scores_history": [
         {
           "date": "2026-03-09",
@@ -2741,9 +2766,14 @@
           "date": "2026-03-30",
           "recommendation": 4.21,
           "lane": "established"
+        },
+        {
+          "date": "2026-04-02",
+          "recommendation": 4.21,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-29"
+      "cooldown_until": "2026-06-01"
     },
     {
       "paper_id": "2603.08960v1",

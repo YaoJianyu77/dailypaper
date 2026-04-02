@@ -131,21 +131,21 @@
       "title": "Q-Hitter: A Better Token Oracle for Efficient LLM Inference via Sparse-Quantized KV Cache.",
       "domain": "LLM Inference Systems",
       "quality_score": 7.97,
-      "updated": "2026-03-30"
+      "updated": "2026-04-02"
     },
     {
       "id": "dblp:conf/isca/0004HKCL00P25",
       "title": "Oaken: Fast and Efficient LLM Serving with Online-Offline Hybrid KV Cache Quantization.",
       "domain": "LLM Inference Systems",
       "quality_score": 7.63,
-      "updated": "2026-03-30"
+      "updated": "2026-04-02"
     },
     {
       "id": "dblp:conf/cgo/GeorgakoudisPB25",
       "title": "Proteus: Portable Runtime Optimization of GPU Kernel Execution with Just-in-Time Compilation.",
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 5.46,
-      "updated": "2026-03-30"
+      "updated": "2026-04-02"
     },
     {
       "id": "2602.06036v1",
@@ -194,7 +194,7 @@
       "title": "Tackling the Matrix Multiplication Micro-Kernel Generation with Exo.",
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 4.21,
-      "updated": "2026-03-30"
+      "updated": "2026-04-02"
     },
     {
       "id": "dblp:conf/osdi/GuanF0RRY0A25",
@@ -397,14 +397,14 @@
       "title": "From Threads to Tiles: T2T, a Compiler for CUDA-to-NPU Translation via 2D Vectorization.",
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 7.52,
-      "updated": "2026-03-30"
+      "updated": "2026-04-02"
     },
     {
       "id": "dblp:conf/cgo/FangKRAM26",
       "title": "LLM-VeriOpt: Verification-Guided Reinforcement Learning for LLM-Based Compiler Optimization.",
       "domain": "Low-level Code And Assembly Generation",
       "quality_score": 5.83,
-      "updated": "2026-03-30"
+      "updated": "2026-04-02"
     },
     {
       "id": "2603.16514v1",
@@ -2308,5 +2308,5 @@
       "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-01"
+  "last_updated": "2026-04-02"
 }
