@@ -250,7 +250,7 @@
       "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
       "domain": "LLM Inference Systems",
       "quality_score": 6.92,
-      "updated": "2026-03-10"
+      "updated": "2026-04-03"
     },
     {
       "id": "2603.08065v1",
@@ -720,6 +720,34 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 6.96,
       "updated": "2026-04-01"
+    },
+    {
+      "id": "2604.02047v1",
+      "title": "Goose: Anisotropic Speculation Trees for Training-Free Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.97,
+      "updated": "2026-04-03"
+    },
+    {
+      "id": "2604.02110v1",
+      "title": "FlatAttention: Dataflow and Fabric Collectives Co-Optimization for Large Attention-Based Model Inference on Tile-Based Accelerators",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.26,
+      "updated": "2026-04-03"
+    },
+    {
+      "id": "2604.01811v1",
+      "title": "GPU-RMQ: Accelerating Range Minimum Queries on Modern GPUs",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 7.51,
+      "updated": "2026-04-03"
+    },
+    {
+      "id": "2604.02106v1",
+      "title": "A Case For Host Code Guided GPU Data Race Detector",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 6.77,
+      "updated": "2026-04-03"
     }
   ],
   "edges": [
@@ -2306,7 +2334,67 @@
       "target": "2603.29010v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.02047v1",
+      "target": "2604.02110v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02047v1",
+      "target": "2205.14135",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02110v1",
+      "target": "2205.14135",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02110v1",
+      "target": "2604.02047v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2205.14135",
+      "target": "2604.02110v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2205.14135",
+      "target": "2604.02047v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2205.14135",
+      "target": "2604.01811v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.01811v1",
+      "target": "2604.02106v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.01811v1",
+      "target": "2205.14135",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02106v1",
+      "target": "2604.01811v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-02"
+  "last_updated": "2026-04-03"
 }
