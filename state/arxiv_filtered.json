@@ -1,16 +1,16 @@
 {
-  "target_date": "2026-04-03",
+  "target_date": "2026-04-04",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-04",
-      "end": "2026-04-03"
+      "start": "2026-03-05",
+      "end": "2026-04-04"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-03",
-      "end": "2026-03-03"
+      "start": "2025-04-04",
+      "end": "2026-03-04"
     }
   },
   "total_found": 221,
@@ -22,20 +22,20 @@
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 5,
+    "selected_count": 6,
     "lane_counts": {
-      "fresh": 4,
+      "fresh": 6,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 17,
-      "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic": 0,
+      "history_filtered": 15,
+      "history_relaxed": 6,
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
@@ -109,7 +109,8 @@
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.18
       },
-      "selection_lane": "fresh"
+      "selection_lane": "fresh",
+      "history_relaxed": true
     },
     {
       "id": "http://arxiv.org/abs/2604.02110v1",
@@ -196,52 +197,8 @@
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.5
       },
-      "selection_lane": "fresh"
-    },
-    {
-      "paper_id": "2205.14135",
-      "arxiv_id": "2205.14135",
-      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
-      "summary": "Introduces an IO-aware exact attention algorithm that reduces HBM traffic with tiling and kernel fusion, setting the baseline for later FlashAttention variants and many modern attention kernels.",
-      "authors": [
-        "Tri Dao",
-        "Daniel Y. Fu",
-        "Stefano Ermon",
-        "Atri Rudra",
-        "Christopher Re"
-      ],
-      "published": "2022-05-30",
-      "published_date": "2022-05-30 00:00:00",
-      "categories": [
-        "cs.LG",
-        "cs.AR"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "attention",
-        "kernel",
-        "memory-io",
-        "cuda"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2205.14135",
-      "pdf_url": "https://arxiv.org/pdf/2205.14135.pdf",
-      "scores": {
-        "relevance": 2.9,
-        "recency": 0.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 6.92
-      },
-      "classic_rotation_score": 10.4818,
-      "citationCount": 3914,
-      "influentialCitationCount": 364,
-      "venue": "Neural Information Processing Systems",
-      "journal_ref": "ArXiv"
+      "selection_lane": "fresh",
+      "history_relaxed": true
     },
     {
       "id": "http://arxiv.org/abs/2604.01811v1",
@@ -319,7 +276,8 @@
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
-      "selection_lane": "fresh"
+      "selection_lane": "fresh",
+      "history_relaxed": true
     },
     {
       "id": "http://arxiv.org/abs/2604.02106v1",
@@ -384,7 +342,177 @@
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
-      "selection_lane": "fresh"
+      "selection_lane": "fresh",
+      "history_relaxed": true
+    },
+    {
+      "id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
+      "paper_id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
+      "title": "From Threads to Tiles: T2T, a Compiler for CUDA-to-NPU Translation via 2D Vectorization.",
+      "summary": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
+      "abstract": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
+      "authors": [
+        "Shuaijiang Li",
+        "Jiacheng Zhao",
+        "Ying Liu 0055",
+        "Shuoming Zhang",
+        "Lei Chen",
+        "Yijin Li",
+        "Yangyu Zhang",
+        "Zhicheng Li",
+        "Runyu Zhou",
+        "Xiyu Shi",
+        "Chunwei Xia",
+        "Yuan Wen",
+        "Xiaobing Feng 0002",
+        "Huimin Cui"
+      ],
+      "published": "2026",
+      "published_date": "2026-04-04 07:00:02.667063",
+      "publicationDate": "2026",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://ieeexplore.ieee.org/document/11395190/",
+      "url": "https://ieeexplore.ieee.org/document/11395190/",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/LiZLZCLZLZSXWFC26",
+      "doi": "10.1109/CGO68049.2026.11395190",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2026,
+      "scores": {
+        "relevance": 1.71,
+        "recency": 3.0,
+        "popularity": 1.9,
+        "quality": 1.9,
+        "recommendation": 7.52
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "cuda"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "cuda"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh",
+      "history_relaxed": true,
+      "citationCount": 0,
+      "institutions": [
+        "University College of Applied Science",
+        "University of Leeds",
+        "University of Aberdeen",
+        "International Centre for Theoretical Physics Asia-Pacific"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://ieeexplore.ieee.org/document/11395190/",
+        "abstract_source": "openalex",
+        "pdf_source": ""
+      }
+    },
+    {
+      "id": "dblp:conf/cgo/FangKRAM26",
+      "paper_id": "dblp:conf/cgo/FangKRAM26",
+      "title": "LLM-VeriOpt: Verification-Guided Reinforcement Learning for LLM-Based Compiler Optimization.",
+      "summary": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations. While various techniques have been proposed to enhance LLMs’ ability to optimize LLVM IR or assembly code, ensuring the semantic equivalence of transformed instructions remains a fundamental prerequisite for safe and effective performance improvement. At the same time, code generated by LLMs is often so far away from being correct that it is very difficult to work out how to improve them to proceed in generating optimizations using the output.In this work, we present LLM-VeriOpt, a novel reinforcement-learning methodology that incorporates feedback from a formal verifier, Alive2, to guide the training of a small-scale model, Qwen-3B. This facilitates the use of Guided Reinforcement via Group Relative Policy Optimization (GRPO), using semantic-equivalence signals from the Alive2 formal verification tool as part of the reward function. This allows the model to self-correct based on observing and subsequently learning to give correctness feedback during training, giving high code coverage by successfully transforming large amounts of code, while also optimizing it significantly.We demonstrate our technique by designing an LLM-based peephole optimizer over LLVM-IR. Our method significantly improves the correctness of IR optimizations versus the base LLM Qwen-3B applied with just a prompt and no fine-tuning — achieving a 5.4× improvement in code successfully modified. The resulting model produces verifiably correct output 90% of the time, comfortably outperforming larger state-of-the-art LLMs, including Meta’s LLM Compiler. This yields speedups of 2.3× over O0-optimized code, comparable to the handwritten LLVM-instcombine pass, and producing emergent optimizations that outperform it in 20% of cases.",
+      "abstract": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations. While various techniques have been proposed to enhance LLMs’ ability to optimize LLVM IR or assembly code, ensuring the semantic equivalence of transformed instructions remains a fundamental prerequisite for safe and effective performance improvement. At the same time, code generated by LLMs is often so far away from being correct that it is very difficult to work out how to improve them to proceed in generating optimizations using the output.In this work, we present LLM-VeriOpt, a novel reinforcement-learning methodology that incorporates feedback from a formal verifier, Alive2, to guide the training of a small-scale model, Qwen-3B. This facilitates the use of Guided Reinforcement via Group Relative Policy Optimization (GRPO), using semantic-equivalence signals from the Alive2 formal verification tool as part of the reward function. This allows the model to self-correct based on observing and subsequently learning to give correctness feedback during training, giving high code coverage by successfully transforming large amounts of code, while also optimizing it significantly.We demonstrate our technique by designing an LLM-based peephole optimizer over LLVM-IR. Our method significantly improves the correctness of IR optimizations versus the base LLM Qwen-3B applied with just a prompt and no fine-tuning — achieving a 5.4× improvement in code successfully modified. The resulting model produces verifiably correct output 90% of the time, comfortably outperforming larger state-of-the-art LLMs, including Meta’s LLM Compiler. This yields speedups of 2.3× over O0-optimized code, comparable to the handwritten LLVM-instcombine pass, and producing emergent optimizations that outperform it in 20% of cases.",
+      "authors": [
+        "Xiangxin Fang",
+        "Jiaqin Kang",
+        "Rodrigo Rocha",
+        "Sam Ainsworth 0001",
+        "Lev Mukhanov"
+      ],
+      "published": "2026",
+      "published_date": "2026-04-04 07:00:02.667063",
+      "publicationDate": "2026",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://ieeexplore.ieee.org/document/11395239/",
+      "url": "https://ieeexplore.ieee.org/document/11395239/",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/FangKRAM26",
+      "doi": "10.1109/CGO68049.2026.11395239",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2026,
+      "scores": {
+        "relevance": 1.31,
+        "recency": 3.0,
+        "popularity": 1.0,
+        "quality": 1.0,
+        "recommendation": 5.83
+      },
+      "matched_domain": "Low-level Code And Assembly Generation",
+      "matched_keywords": [
+        "compiler optimization"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "Low-level Code And Assembly Generation",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "compiler optimization"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh",
+      "history_relaxed": true,
+      "citationCount": 0,
+      "institutions": [
+        "Queen Mary University of London",
+        "University of Edinburgh"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://ieeexplore.ieee.org/document/11395239/",
+        "abstract_source": "openalex",
+        "pdf_source": ""
+      }
     }
   ]
 }
