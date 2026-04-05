@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-04",
+  "last_updated": "2026-04-05",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -10,16 +10,16 @@
       "topics": [
         "GPU data race detection",
         "static analysis",
-        "host code analysis",
-        "CUDA kernels",
-        "CPU-GPU co-analysis",
+        "host-device co-analysis",
+        "GPU kernels",
+        "CUDA tooling",
         "program verification"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-03",
-      "last_seen_date": "2026-04-04",
-      "last_recommended_date": "2026-04-04",
-      "recommended_count": 2,
+      "last_seen_date": "2026-04-05",
+      "last_recommended_date": "2026-04-05",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-04-03",
@@ -30,9 +30,14 @@
           "date": "2026-04-04",
           "recommendation": 6.77,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-05",
+          "recommendation": 6.77,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-03"
+      "cooldown_until": "2026-06-04"
     },
     {
       "paper_id": "2603.19133v1",
@@ -997,8 +1002,8 @@
       "published": "2026-04-02T14:45:19Z",
       "source_lane": "fresh",
       "topics": [
-        "LLM inference systems",
-        "attention acceleration",
+        "LLM inference",
+        "attention",
         "tile-based accelerators",
         "wafer-scale systems",
         "dataflow optimization",
@@ -1006,9 +1011,9 @@
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-03",
-      "last_seen_date": "2026-04-04",
-      "last_recommended_date": "2026-04-04",
-      "recommended_count": 2,
+      "last_seen_date": "2026-04-05",
+      "last_recommended_date": "2026-04-05",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-04-03",
@@ -1019,9 +1024,14 @@
           "date": "2026-04-04",
           "recommendation": 9.26,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-05",
+          "recommendation": 9.26,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-03"
+      "cooldown_until": "2026-06-04"
     },
     {
       "paper_id": "2603.16514v1",
@@ -1127,9 +1137,9 @@
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-04-04",
-      "last_recommended_date": "2026-04-04",
-      "recommended_count": 6,
+      "last_seen_date": "2026-04-05",
+      "last_recommended_date": "2026-04-05",
+      "recommended_count": 7,
       "scores_history": [
         {
           "date": "2026-03-17",
@@ -1160,9 +1170,14 @@
           "date": "2026-04-04",
           "recommendation": 7.52,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-05",
+          "recommendation": 7.52,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-03"
+      "cooldown_until": "2026-06-04"
     },
     {
       "paper_id": "2604.02047v1",
@@ -1173,16 +1188,16 @@
       "topics": [
         "LLM inference systems",
         "speculative decoding",
-        "training-free acceleration",
-        "anisotropic speculation tree",
-        "adaptive spine tree",
-        "verification budget allocation"
+        "training-free decoding",
+        "adaptive tree search",
+        "serving efficiency",
+        "token acceptance rate"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-03",
-      "last_seen_date": "2026-04-04",
-      "last_recommended_date": "2026-04-04",
-      "recommended_count": 2,
+      "last_seen_date": "2026-04-05",
+      "last_recommended_date": "2026-04-05",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-04-03",
@@ -1193,9 +1208,14 @@
           "date": "2026-04-04",
           "recommendation": 9.97,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-05",
+          "recommendation": 9.97,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-03"
+      "cooldown_until": "2026-06-04"
     },
     {
       "paper_id": "2210.17323",
@@ -1298,14 +1318,14 @@
         "GPU",
         "CUDA",
         "ray tracing cores",
-        "hierarchical summaries",
-        "query throughput"
+        "hierarchical index",
+        "throughput"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-03",
-      "last_seen_date": "2026-04-04",
-      "last_recommended_date": "2026-04-04",
-      "recommended_count": 2,
+      "last_seen_date": "2026-04-05",
+      "last_recommended_date": "2026-04-05",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-04-03",
@@ -1316,9 +1336,14 @@
           "date": "2026-04-04",
           "recommendation": 7.51,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-05",
+          "recommendation": 7.51,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-03"
+      "cooldown_until": "2026-06-04"
     },
     {
       "paper_id": "2603.17168v1",
@@ -1648,9 +1673,9 @@
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-04-04",
-      "last_recommended_date": "2026-04-04",
-      "recommended_count": 6,
+      "last_seen_date": "2026-04-05",
+      "last_recommended_date": "2026-04-05",
+      "recommended_count": 7,
       "scores_history": [
         {
           "date": "2026-03-17",
@@ -1681,9 +1706,14 @@
           "date": "2026-04-04",
           "recommendation": 5.83,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-05",
+          "recommendation": 5.83,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-03"
+      "cooldown_until": "2026-06-04"
     },
     {
       "paper_id": "2208.07339",

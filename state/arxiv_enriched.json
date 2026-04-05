@@ -1,16 +1,16 @@
 {
-  "target_date": "2026-04-04",
+  "target_date": "2026-04-05",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-05",
-      "end": "2026-04-04"
+      "start": "2026-03-06",
+      "end": "2026-04-05"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-04",
-      "end": "2026-03-04"
+      "start": "2025-04-05",
+      "end": "2026-03-05"
     }
   },
   "total_found": 221,
@@ -112,47 +112,47 @@
       "selection_lane": "fresh",
       "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "This paper argues that training-free speculative decoding should use an asymmetric tree when draft-token sources have very different acceptance rates, and proposes an adaptive spine-plus-branches design to exploit that gap.",
-        "summary_zh": "The paper studies training-free speculative decoding under a fixed verification budget, where tree depth and branch width trade off against each other. Its core claim is that common draft sources are not equally reliable: context-matched n-gram copies and statistical predictions from prior passes have sharply different acceptance rates, so balanced trees waste budget by treating them too similarly. Based on that observation, the method builds an anisotropic speculation tree with a deep spine of high-acceptance tokens and wide side branches of lower-confidence alternatives, aiming to increase accepted tokens per verification step without extra training. The abstract reports both a proof that this mixed tree is at least as good as using either source alone and empirical lossless speedups of 1.9-4.3x, with 12-33% gains over balanced-tree baselines under the same budget. The main missing detail from the abstract is how the adaptive policy is implemented in practice across workloads, including its overheads, robustness, and baseline fairness.",
-        "background_zh": "Speculative decoding speeds up LLM inference by proposing multiple tokens before verification, but practical gains depend heavily on how limited verification compute is allocated across candidate depth and fallback breadth.",
-        "problem_zh": "The paper asks how to organize a training-free speculation tree when available draft-token sources have very different acceptance quality, because balanced trees may underuse reliable drafts and dilute the verification budget.",
-        "approach_zh": "It introduces GOOSE, which constructs an adaptive anisotropic tree with a deep chain of high-acceptance context-matched tokens and wide branches of lower-acceptance alternatives at each node.",
-        "evidence_zh": "The abstract supports the method with an observed acceptance-rate gap between two draft sources, a proof that the combined tree matches or exceeds either source alone in accepted tokens per step, and experiments on five models and five benchmarks showing reported lossless speedups and improvements over balanced baselines.",
-        "value_zh": "If the method is robust, it offers a deployment-friendly way to improve speculative decoding throughput without retraining models, mainly by spending verification budget where token acceptance is most likely.",
+        "one_liner_zh": "This paper argues that training-free speculative decoding should use an asymmetric token tree when draft sources have very different acceptance rates, and implements that idea as an adaptive spine-plus-branches structure.",
+        "summary_zh": "The paper studies a systems bottleneck in speculative decoding: under a fixed verification budget, tree depth and tree breadth trade off against each other, and balanced trees waste budget when draft sources have very different acceptance quality. Its key observation is that context-matched n-gram tokens and prior-pass statistical predictions have a large acceptance-rate gap, so they should not be placed symmetrically in the same draft tree. Goose addresses this with an anisotropic speculation tree: high-confidence context-matched tokens form a deep spine, while lower-confidence alternatives branch out more widely from each spine node. The abstract provides both a theoretical claim, namely that this structure accepts at least as many tokens per step as either source alone, and empirical results across five models and five benchmarks with lossless speedups and gains over balanced-tree baselines under the same budget. The main missing detail for a full read is how adaptive tree construction, verification cost accounting, and baseline fairness are implemented in practice.",
+        "background_zh": "Training-free speculative decoding is attractive for LLM serving because it can reduce autoregressive latency without retraining the model, but its efficiency depends heavily on how candidate tokens are organized for verification.",
+        "problem_zh": "The paper asks how to allocate a fixed verification budget across tree depth and breadth when multiple training-free draft sources have sharply different token acceptance rates.",
+        "approach_zh": "It proposes an anisotropic tree design in which reliable context-matched tokens extend a deep spine and weaker alternatives are attached as wider side branches, rather than using a balanced tree built from a single undifferentiated source.",
+        "evidence_zh": "The abstract reports a large acceptance-rate gap between two draft sources, gives a proof that the proposed structure is at least as good as using either source alone in accepted tokens per step, and claims 1.9-4.3x lossless speedup with 12-33% gains over balanced baselines, but it does not make the exact experimental setup fully clear.",
+        "value_zh": "If the method is robust, it offers a practical serving-side improvement for speculative decoding by turning heterogeneous draft quality into better latency-throughput tradeoffs without extra training.",
         "open_questions": [
-          "How is the adaptive spine tree built online, and what runtime overhead does that policy add relative to the reported speedups?",
-          "Are the balanced-tree baselines matched fairly on verification budget, draft-source access, and implementation quality?",
-          "How sensitive are the gains to workload properties such as prompt repetition, benchmark mix, and the availability of strong context-matched n-gram tokens?"
+          "How is the adaptive spine tree constructed online, and what bookkeeping or runtime overhead does that introduce during serving?",
+          "Are the reported gains consistent across prompt regimes where context n-gram matches are weak, sparse, or absent?",
+          "What exact verification-budget definition and baseline implementations are used, and are the comparisons fair across tree shapes and draft-source mixtures?"
         ],
         "core_contributions": [
-          "Identifies a large acceptance-rate asymmetry between two common training-free draft-token sources for speculative decoding.",
-          "Shows theoretically that when such quality gaps exist, an anisotropic tree is preferable to a balanced tree under a fixed verification budget.",
-          "Proposes GOOSE, an adaptive spine-tree framework that combines deep high-confidence drafting with wide low-confidence fallbacks, and reports lossless inference speedups across multiple LLMs and benchmarks."
+          "A formulation of speculative tree design that explicitly accounts for heterogeneous acceptance quality across training-free draft sources.",
+          "A theoretical argument that quality gaps imply an asymmetric optimal tree shape instead of a balanced one.",
+          "A training-free decoding framework, Goose, that combines a deep high-confidence spine with wide low-confidence side branches and reports better speedups than balanced-tree baselines."
         ],
         "why_read": [
-          "It gives a concrete systems argument for why speculation-tree shape, not just draft quality, matters for inference acceleration.",
-          "The method is training-free, so the idea is directly relevant to serving stacks that cannot afford extra draft-model training.",
-          "The abstract provides both a theoretical framing and multi-model empirical results, which makes it useful for evaluating speculative decoding design space."
+          "It targets LLM inference efficiency directly rather than model quality, with a concrete mechanism for improving speculative decoding under fixed verification budget.",
+          "It separates where the gain comes from: better use of acceptance-rate asymmetry between context copying and statistical prediction.",
+          "It includes both structural reasoning and serving-oriented empirical claims, which makes it relevant for inference-system design."
         ],
         "risks": [
-          "The reported gains may depend strongly on workloads where context-matched tokens are unusually reliable, limiting generality.",
-          "The abstract does not clarify the runtime cost of adaptively constructing and managing the anisotropic tree, so net serving benefit needs verification in implementation details, hardware setup, and sequence-length regimes."
+          "The method may depend strongly on having reliable context-matched tokens, which could limit gains on low-overlap or highly novel generations.",
+          "The abstract does not specify runtime overheads, hardware assumptions, or implementation complexity, so net serving benefit still needs checking beyond token acceptance theory."
         ],
         "recommended_for": [
           "Researchers working on LLM inference acceleration and speculative decoding.",
-          "Engineers evaluating training-free serving optimizations under fixed verification budgets.",
-          "Readers interested in runtime policies that mix heterogeneous draft sources rather than relying on a single speculation strategy."
+          "Engineers evaluating serving-side optimizations that do not require retraining.",
+          "Readers interested in runtime policies that exploit heterogeneous draft-token quality."
         ],
         "keywords": [
           "LLM inference systems",
           "speculative decoding",
-          "training-free acceleration",
-          "anisotropic speculation tree",
-          "adaptive spine tree",
-          "verification budget allocation"
+          "training-free decoding",
+          "adaptive tree search",
+          "serving efficiency",
+          "token acceptance rate"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "This is tightly aligned with LLM inference acceleration, reports concrete throughput gains from a serving-time algorithmic change, and appears to offer a nontrivial design insight about budget allocation across speculative tree structure rather than a minor variant.",
+        "reading_priority_reason": "This is tightly aligned with LLM inference acceleration and makes a concrete systems claim about where speculative decoding speedup comes from, with both theory and reported serving gains; the main caveat is that the abstract leaves some evaluation and implementation details underspecified.",
         "fallback_summary": "Speculative decoding accelerates large language model inference by drafting multiple candidate tokens and verifying them in a single forward pass."
       }
     },
@@ -244,47 +244,47 @@
       "selection_lane": "fresh",
       "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "This paper proposes an attention dataflow for tile-based accelerators that reduces HBM traffic by pushing more communication into on-chip fabric collectives and reports substantial inference gains for modern attention workloads.",
-        "summary_zh": "This paper targets a systems bottleneck that is becoming more important in MoE inference: attention now consumes a large share of runtime, while tile-based accelerators create new data-movement constraints across on-chip fabric and HBM. The core idea is FlatAttention, a dataflow that co-optimizes attention execution with fabric-level collective primitives so more communication stays on chip and expensive HBM accesses are reduced. The abstract reports high utilization, lower HBM traffic, speedups over FlashAttention-3 and GH200-based attention implementations, and end-to-end decoding gains for DeepSeek-v3 FP8 on a wafer-scale multi-die system. The practical value is clear for accelerator and runtime designers working on large-model inference, especially where memory traffic and inter-tile coordination dominate efficiency. The biggest missing detail is baseline fairness and implementation scope: the abstract does not make clear which attention variants, sequence regimes, mapping constraints, and hardware assumptions are most responsible for the reported gains.",
-        "background_zh": "As large-model inference shifts toward tile-based chip-scale and wafer-scale accelerators, performance depends increasingly on how attention data movement is scheduled across on-chip fabric versus HBM.",
-        "problem_zh": "The paper asks how to run modern attention variants efficiently on tile-based accelerators when naive mappings waste bandwidth and underuse compute because too much traffic falls back to HBM.",
-        "approach_zh": "It introduces FlatAttention, a dataflow that uses collective communication primitives in the on-chip network fabric to reorganize attention execution and minimize off-chip memory accesses.",
-        "evidence_zh": "The abstract provides concrete utilization, HBM traffic, speedup, throughput, and latency claims across multiple attention variants and an end-to-end DeepSeek-v3 FP8 decoding setup, but it does not make the experimental setup fully clear.",
-        "value_zh": "If the claims hold under fair baselines, the work is useful for co-designing accelerator fabrics, runtimes, and attention kernels that convert on-chip communication support into real inference throughput and latency gains.",
+        "one_liner_zh": "This paper presents an attention dataflow for tile-based accelerators that trades HBM traffic for on-chip fabric collectives to raise utilization and improve large-model inference throughput.",
+        "summary_zh": "The paper targets a systems shift where attention is becoming a larger inference bottleneck, especially for MoE decoding on chip-scale and wafer-scale tile-based accelerators. It proposes FlatAttention, a dataflow that restructures attention execution around collective primitives in the on-chip fabric so more data movement stays on chip and expensive HBM accesses are reduced. The abstract reports strong kernel- and system-level gains, including higher utilization, lower HBM traffic, speedups over FlashAttention-3 and GH200-based implementations, and end-to-end decoding improvements for DeepSeek-v3 FP8. For this audience, the main interest is the co-design angle between attention scheduling and the accelerator interconnect rather than a generic attention kernel optimization. The biggest missing detail is how fair the hardware comparison, baseline implementation quality, and generalization claims are across attention variants and deployment settings.",
+        "background_zh": "As large-model inference moves toward tile-based accelerators, attention increasingly stresses both dataflow design and memory bandwidth rather than just raw compute.",
+        "problem_zh": "The paper asks how to map modern attention variants onto tile-based accelerator fabrics so inference avoids HBM bottlenecks and sustains high utilization at system scale.",
+        "approach_zh": "FlatAttention co-optimizes attention dataflow with fabric-level collective communication, keeping more intermediate movement on the on-chip network instead of pushing traffic through HBM.",
+        "evidence_zh": "The abstract provides concrete utilization, HBM-traffic, speedup, throughput, and latency claims across kernel-level, cross-variant, and end-to-end decoding evaluations, but it does not make the evaluation methodology or baseline fairness fully clear.",
+        "value_zh": "If the claims hold, this gives a useful template for compiler-runtime-hardware co-design on tile-based LLM inference systems where communication primitives are first-class optimization levers.",
         "open_questions": [
-          "How comparable are the reported baselines in precision, problem size, sequence length, batch regime, and implementation maturity, especially versus FlashAttention-3 and GH200?",
-          "Which specific attention variants are compute-bound versus memory-bound under FlatAttention, and what mapping or workload assumptions determine the gains?",
-          "What hardware features are required from the tile fabric and collective primitives, and how portable is the method to accelerators without the same on-chip communication support?"
+          "What exact hardware and software assumptions make the GH200 and state-of-the-art comparisons fair, including peak compute, memory capacity, and kernel maturity?",
+          "How are the fabric collectives exposed and scheduled in practice, and what compiler or runtime support is required to realize the claimed dataflow?",
+          "Which attention variants benefit most or least, and where do the remaining bottlenecks shift once HBM traffic is reduced?"
         ],
         "core_contributions": [
-          "A fabric-aware attention dataflow for tile-based accelerators that explicitly trades HBM traffic for on-chip collective communication.",
-          "A cross-variant evaluation framing that separates compute-bound and memory-bound attention behavior using utilization-based evidence.",
-          "An end-to-end inference study showing that the dataflow can translate from kernel-level efficiency to system-level decoding throughput and latency gains on a wafer-scale setup."
+          "Introduces a fabric-aware attention dataflow for tile-based accelerators.",
+          "Uses on-chip collective primitives to reduce HBM traffic during attention execution.",
+          "Evaluates the method from kernel-level behavior up to end-to-end MoE decoding on a wafer-scale multi-die system."
         ],
         "why_read": [
-          "It is directly about LLM inference efficiency and makes a concrete claim that dataflow plus fabric collectives can outperform strong GPU-side attention baselines.",
-          "It ties kernel-level memory traffic reduction to end-to-end decoding metrics, which is more useful than a kernel-only optimization paper.",
-          "It is relevant for anyone studying accelerator/runtime co-design for attention-heavy inference rather than generic model serving."
+          "It is directly about inference acceleration for attention, with explicit latency, throughput, bandwidth, and utilization claims.",
+          "It highlights a nontrivial co-design point: network collectives and dataflow policy may matter as much as kernel math on tile-based hardware.",
+          "It includes an end-to-end decoding result instead of stopping at isolated microbenchmarks."
         ],
         "risks": [
-          "The reported gains may depend heavily on specialized tile-fabric collectives that are not available on mainstream accelerators.",
-          "The abstract does not clarify baseline fairness or how much engineering optimization the comparison implementations received, which could materially affect the headline speedups."
+          "The strongest gains may depend on a specific tile fabric and may not transfer to more conventional GPU systems.",
+          "The abstract does not clarify how optimized the comparison baselines are, especially against FlashAttention-3 and GH200 implementations."
         ],
         "recommended_for": [
-          "Researchers working on LLM inference accelerators and runtime scheduling.",
-          "Engineers evaluating attention kernel mappings on tile-based, chip-scale, or wafer-scale systems.",
-          "Readers interested in memory-traffic reduction and on-chip communication co-design for large-model inference."
+          "Researchers working on LLM inference systems for non-GPU accelerators.",
+          "Engineers studying attention scheduling, memory traffic reduction, and on-chip communication primitives.",
+          "Compiler and runtime designers interested in hardware-software co-design for tile-based model serving."
         ],
         "keywords": [
-          "LLM inference systems",
-          "attention acceleration",
+          "LLM inference",
+          "attention",
           "tile-based accelerators",
           "wafer-scale systems",
           "dataflow optimization",
           "on-chip collectives"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "Strong fit for the stated focus on LLM inference acceleration and hardware-software co-design, with concrete claims about throughput, latency, bandwidth, and attention execution mechanics; priority stays high even though baseline fairness and portability still need verification.",
+        "reading_priority_reason": "This is tightly aligned with LLM inference acceleration and hardware-software co-design, and the abstract reports concrete throughput, latency, bandwidth, and utilization gains rather than vague efficiency claims.",
         "fallback_summary": "Attention accounts for an increasingly dominant fraction of total computation during inference for mixture-of-experts (MoE) models, making efficient acceleration critical."
       }
     },
@@ -367,47 +367,47 @@
       "selection_lane": "fresh",
       "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "This paper presents a hybrid GPU range-minimum-query design that combines hierarchical summaries with both ray-tracing and CUDA execution paths to reduce memory overhead and improve throughput on large arrays.",
-        "summary_zh": "This paper studies range minimum queries on modern GPUs, where prior GPU and ray-tracing-based methods appear to run into a poor tradeoff between memory use, build cost, and query throughput at larger scales. The proposed system, GPU-RMQ, builds a hierarchy of range-minimum summaries in parallel and answers queries by scanning only the relevant hierarchy regions, while using ray-tracing cores and CUDA cores at different levels. The abstract claims this hybrid design improves the main systems bottlenecks by lowering memory footprint, greatly reducing index construction time, and increasing throughput, especially on larger arrays. Reported evidence includes comparisons against prior GPU approaches and an optimized CPU baseline, with substantial claimed gains in throughput and build speed. The main missing detail is how the hierarchy is laid out and scheduled in practice, including hardware assumptions, workload characteristics, and whether the comparisons remain fair across query distributions and memory budgets.",
-        "background_zh": "Range minimum query data structures matter in data-intensive workloads such as string processing, retrieval, and sequence analysis, but GPU implementations have struggled to scale cleanly on modern hardware.",
-        "problem_zh": "The paper targets the systems problem that existing GPU RMQ methods become impractical on large arrays because they pay too much in memory, preprocessing cost, or throughput.",
-        "approach_zh": "The method builds a hierarchical summary structure over the input and answers queries with an optimized parallel scan over only relevant hierarchy regions, using a hybrid mix of ray-tracing cores and CUDA cores across levels.",
-        "evidence_zh": "The abstract provides concrete experimental claims that the method improves throughput, lowers memory footprint, and speeds index construction relative to prior GPU and CPU baselines, but it does not make the evaluation setup fully clear.",
-        "value_zh": "If the claims hold under realistic workloads, the paper offers a more scalable GPU RMQ design that could make large-array query processing more practical on current NVIDIA hardware.",
+        "one_liner_zh": "GPU-RMQ proposes a hierarchical GPU range-minimum-query index that mixes CUDA cores and ray-tracing cores to cut memory and build cost while improving query throughput on large arrays.",
+        "summary_zh": "This paper targets GPU range minimum queries, a primitive used in string processing and database workloads, where prior GPU methods appear to trade off badly between memory footprint, index build cost, and throughput on large inputs. The proposed system builds a hierarchy of range-minimum summaries in parallel, then answers queries by scanning only the relevant hierarchy regions with an optimized massively parallel operation. A hybrid execution design uses both ray-tracing cores and CUDA cores at different hierarchy levels, which is the main systems mechanism behind the claimed efficiency gains. The abstract reports higher throughput than prior GPU approaches, much lower memory use, and dramatically faster index construction, especially on larger arrays. The main missing detail is how much of the gain comes from the hierarchy itself versus the hybrid hardware mapping, and whether the comparison setup and workload mix are fair across methods.",
+        "background_zh": "GPU-accelerated RMQ matters because it sits inside string and database pipelines, but modern GPU implementations appear constrained by memory capacity, preprocessing cost, and scalable throughput.",
+        "problem_zh": "The paper asks how to make RMQ practical on modern GPUs for large arrays when prior GPU and RTX-based methods become too memory-hungry, too slow to build, or too limited in throughput.",
+        "approach_zh": "It builds a hierarchical summary structure over the input array and answers each query by processing only the needed hierarchy segments, with a hybrid assignment of work across CUDA cores and ray-tracing cores.",
+        "evidence_zh": "The abstract claims experimental improvements in throughput, memory footprint, and index construction time over LCA, RTXRMQ, and an optimized CPU baseline, but it does not make the workload details, fairness conditions, or hardware sensitivity fully clear.",
+        "value_zh": "If the claims hold, this looks like a useful GPU data-structure design pattern for large-query workloads where preprocessing cost and memory capacity matter as much as raw query speed.",
         "open_questions": [
-          "How is work partitioned between ray-tracing cores and CUDA cores, and what query or hierarchy characteristics determine that split?",
-          "What are the memory-layout, preprocessing, and query-distribution assumptions behind the reported throughput gains and large-array scaling claims?",
-          "Are the baseline comparisons matched on hardware limits, batch size, and memory budget, especially for the largest input arrays?"
+          "What are the exact query distributions, array sizes, and batching assumptions used in the comparison, and are all baselines equally optimized for the same hardware?",
+          "How is work split between CUDA cores and ray-tracing cores across hierarchy levels, and how much does each component contribute to the reported gains?",
+          "What are the construction, memory, and throughput tradeoffs under different hierarchy parameters and on GPUs other than an RTX 4090-class device?"
         ],
         "core_contributions": [
-          "A hierarchical GPU RMQ design aimed at reducing the memory and preprocessing costs seen in prior approaches.",
-          "A hybrid execution strategy that uses both ray-tracing hardware and CUDA cores rather than relying on a single GPU execution path.",
-          "An empirical claim that this design improves large-array throughput while also cutting index construction time and memory footprint."
+          "A hierarchical RMQ design for GPUs that summarizes ranges and restricts query work to relevant hierarchy regions.",
+          "A hybrid execution strategy that combines CUDA cores and ray-tracing cores instead of committing to one hardware path.",
+          "An empirical claim that this design improves large-array practicality by reducing memory footprint and index build time while increasing throughput."
         ],
         "why_read": [
-          "It is a concrete example of GPU algorithm design that combines specialized hardware paths with conventional CUDA execution.",
-          "The paper focuses on throughput, build cost, and memory footprint together rather than optimizing only query speed.",
-          "The abstract gives enough signal to assess a real systems tradeoff, but the full paper is needed to verify hardware scheduling and evaluation fairness."
+          "It is a concrete example of GPU algorithm and hardware-feature co-design rather than a generic parallelization story.",
+          "The paper appears to explain where throughput gains come from at the data-structure and execution-mapping level, which is relevant to systems readers.",
+          "Its build-time and memory claims matter if preprocessing-heavy GPU indexes are the real deployment bottleneck."
         ],
         "risks": [
-          "This is not an LLM inference paper, so the relevance to the stated research focus is indirect and mainly at the GPU systems level.",
-          "The abstract reports strong speedups, but the exact workload mix, batching strategy, and fairness of baselines are not clear from the summary alone."
+          "This is not directly an LLM inference paper, so relevance to the core reading focus is indirect.",
+          "The abstract does not separate the benefit of the hierarchy from the benefit of specialized RTX hardware usage, which may limit portability conclusions."
         ],
         "recommended_for": [
-          "Researchers interested in GPU data structures and hybrid use of ray-tracing and CUDA hardware.",
-          "Engineers studying how hierarchy design affects throughput, memory footprint, and preprocessing cost on modern GPUs.",
-          "Readers looking for transferable ideas in low-level GPU scheduling rather than direct LLM serving techniques."
+          "Researchers working on GPU data structures and massively parallel query processing.",
+          "Engineers interested in CUDA and fixed-function hardware co-design for throughput-oriented workloads.",
+          "Readers looking for transferable ideas about hierarchy construction, selective scanning, and memory-efficient GPU indexing."
         ],
         "keywords": [
           "range minimum query",
           "GPU",
           "CUDA",
           "ray tracing cores",
-          "hierarchical summaries",
-          "query throughput"
+          "hierarchical index",
+          "throughput"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "The paper looks technically solid as a GPU systems design note with clear claims about throughput, memory, and build-time tradeoffs, but it is only indirectly aligned with the main LLM inference and low-level code-generation focus.",
+        "reading_priority_reason": "The systems angle is real and the hybrid CUDA/RTX design is technically relevant to low-level acceleration work, but the workload is a database/string primitive rather than LLM inference or kernel code generation directly.",
         "fallback_summary": "Range minimum queries are frequently used in string processing and database applications including biological sequence analysis, document retrieval, and web search."
       }
     },
@@ -477,47 +477,47 @@
       "selection_lane": "fresh",
       "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "This paper argues that GPU race detection improves materially when static analysis uses host-side kernel launch semantics to constrain what kernel parameters can actually be at runtime.",
-        "summary_zh": "This paper targets a familiar static-analysis problem in GPU software: dynamic race detectors miss bugs that do not manifest in tests, while static tools over-report because they reason over infeasible parameter values. The core idea is to analyze host launch code together with GPU kernels so the detector can infer which kernel arguments are actually possible during execution. The abstract claims this holistic CPU+GPU analysis, implemented as HGRD, finds a broad set of true races, misses none that prior dynamic tools miss, and eliminates the false alarms produced by prior static methods. If that holds, the value is better bug-finding precision for GPU kernel development and generated CUDA code, where false positives can make static tooling unusable. The biggest missing detail is evaluation scope: the abstract does not make clear the benchmark set, supported language features, analysis cost, or how robust the result is outside the tested programs.",
-        "background_zh": "GPU race detection remains hard because runtime detectors depend on test coverage, while static analyzers usually over-approximate thread behavior and kernel inputs.",
-        "problem_zh": "The paper asks whether static GPU race detection can reduce false alarms without missing real races by using information that already exists in host code that launches kernels.",
-        "approach_zh": "It proposes HGRD, a holistic static analysis that jointly reasons about CPU launch code and GPU kernels so kernel-parameter ranges reflect feasible executions rather than conservative worst-case assumptions.",
-        "evidence_zh": "The abstract claims HGRD misses no true races missed by prior dynamic tools and raises no false alarms where prior static tools raise many, but it does not make the evaluation setup or evidence granularity clear.",
-        "value_zh": "If the claims generalize, this could make static race detection practical for CUDA-style development workflows by improving precision enough that developers can trust the warnings.",
+        "one_liner_zh": "This paper argues that GPU race detection improves materially when static analysis uses host-side launch code to constrain which kernel parameter values can actually occur.",
+        "summary_zh": "This paper targets a familiar GPU tooling gap: dynamic race detectors miss bugs that do not trigger in tests, while static analyzers often over-report because they reason over impossible parameter values. The core idea is to analyze host launch code together with GPU kernel code so the detector can use CPU-side semantic constraints on kernel arguments. The abstract claims this produces a static detector, HGRD, that covers a broad set of real races while eliminating the false alarms seen in prior static tools, and that it also avoids the misses of prior dynamic tools. For systems readers, the value is less about LLM inference directly and more about making generated or hand-written GPU kernels safer without relying on test coverage alone. The biggest missing detail is evaluation context: the abstract does not make clear the benchmark suite, supported GPU programming model details, analysis cost, or how broadly the zero-false-alarm claim holds.",
+        "background_zh": "GPU software stacks are increasingly complex, and existing race detection splits between incomplete dynamic testing and overly conservative static analysis.",
+        "problem_zh": "The paper asks how to detect true GPU data races without depending on runtime manifestation and without flooding developers with false positives from impossible execution states.",
+        "approach_zh": "It introduces HGRD, a static analysis that jointly reasons about CPU host code and GPU kernel code, using host-side launch semantics to narrow feasible kernel parameter values.",
+        "evidence_zh": "According to the abstract, HGRD misses no true races found in its evaluation and avoids the tens of false alarms reported by prior static tools, but the abstract does not make the evaluation setup or scope clear.",
+        "value_zh": "If the claims hold, this could make GPU kernel development and generated CUDA-style code more debuggable by improving pre-deployment race detection precision without relying on test-triggered failures.",
         "open_questions": [
-          "What host-language and GPU-programming patterns does HGRD actually support, and where does the cross-CPU/GPU analysis break down?",
-          "What benchmarks and baselines were used to justify the claims of zero misses and zero false alarms, and how fair are those comparisons?",
-          "What is the analysis cost and developer workflow impact relative to existing static and dynamic GPU race detectors?"
+          "What exact GPU languages, synchronization primitives, and memory models does HGRD support, and are there kernel patterns it cannot analyze?",
+          "How large and realistic is the evaluation corpus behind the claims of no misses and no false alarms, and how fair are the baselines against iGUARD, GPUVerify, and FaialAA?",
+          "What is the analysis cost in practice, especially for large host-device codebases or code generated by modern compiler and LLM-assisted workflows?"
         ],
         "core_contributions": [
-          "Identifies host-side kernel launch code as a key source of semantic constraints for GPU race detection.",
-          "Introduces a static analysis that jointly reasons over CPU and GPU code instead of analyzing kernels in isolation.",
-          "Claims a better precision-recall tradeoff than prior GPU race detectors by reducing false alarms without missing real races."
+          "A host-code-guided formulation of GPU race detection that treats CPU launch code as a source of semantic constraints on kernel arguments.",
+          "A holistic static analysis, HGRD, that jointly analyzes host and device code rather than reasoning about kernels in isolation.",
+          "An empirical claim that this joint analysis improves both recall versus dynamic detectors and precision versus prior static analyzers."
         ],
         "why_read": [
-          "The host-guided analysis angle is a concrete compiler/runtime co-analysis idea rather than another kernel-only checker.",
-          "It is relevant to anyone generating or validating CUDA kernels, where infeasible-argument assumptions can dominate static-analysis noise.",
-          "The paper makes strong precision claims that are easy to stress-test in a full read."
+          "The paper proposes a concrete way to reduce false positives in GPU static analysis by exploiting information that prior tools appear to ignore.",
+          "It is relevant to anyone working on CUDA kernel generation or low-level GPU tooling, where race-checking quality affects trust in generated code.",
+          "It may clarify a broader systems lesson: some GPU analysis problems are only tractable when host-runtime context is modeled explicitly."
         ],
         "risks": [
-          "The abstract makes unusually strong correctness claims without enough detail on dataset size, ground truth construction, or threat model.",
-          "Results may depend on restricted host-code patterns or kernel interfaces that are easier to analyze than real production stacks use today."
+          "The abstract makes unusually strong accuracy claims, but does not expose the dataset, corner cases, or failure modes needed to judge robustness.",
+          "The contribution is a program analysis result rather than an inference or compiler-speedup result, so its relevance to LLM systems is indirect unless you care about GPU kernel correctness tooling."
         ],
         "recommended_for": [
-          "Researchers working on GPU program analysis, compiler verification, or CUDA tooling.",
-          "Engineers building static validation pipelines for generated GPU kernels or accelerator software stacks.",
-          "Readers interested in CPU-GPU co-analysis rather than pure kernel-local checking."
+          "Researchers working on GPU program analysis, CUDA verification, and correctness tooling.",
+          "Engineers building or validating generated GPU kernels where host launch context materially constrains device behavior.",
+          "Systems readers interested in host-device co-analysis rather than kernel-only reasoning."
         ],
         "keywords": [
           "GPU data race detection",
           "static analysis",
-          "host code analysis",
-          "CUDA kernels",
-          "CPU-GPU co-analysis",
+          "host-device co-analysis",
+          "GPU kernels",
+          "CUDA tooling",
           "program verification"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "The host-guided static-analysis idea is technically relevant to kernel-generation and GPU tooling workflows, but the abstract is more about software verification than inference acceleration, and the strong claims need validation from the full paper.",
+        "reading_priority_reason": "The paper is technically relevant because it targets GPU kernel correctness with a host-device analysis angle that could matter for generated kernels, but it is adjacent to the main focus on inference acceleration and low-level code generation rather than directly advancing serving or compiler performance.",
         "fallback_summary": "Data races in GPU programs pose a threat to the reliability of GPU-accelerated software stacks."
       }
     },
@@ -544,7 +544,7 @@
         "Huimin Cui"
       ],
       "published": "2026",
-      "published_date": "2026-04-04 07:00:02.667063",
+      "published_date": "2026-04-05 07:00:02.032710",
       "publicationDate": "2026",
       "categories": [],
       "source": "dblp_venue",
@@ -611,36 +611,36 @@
         "pdf_source": ""
       },
       "ai": {
-        "one_liner_zh": "This paper presents a compiler that rewrites CUDA kernels into an explicit loop form and then maps selected loop pairs onto 2-D NPU tile instructions to bridge the SIMT-to-tile semantic gap.",
-        "summary_zh": "This paper targets the growing mismatch between CUDA s fine-grained thread model and NPUs that execute coarse-grained 2-D tile operations. It proposes T2T, a compiler framework that first converts implicit SIMT parallelism into an analyzable loop-nest representation through a Unified Parallelism Abstraction, then applies 2-D vectorization to map chosen loop pairs onto NPU tile instructions. The abstract claims semantics-preserving handling of difficult CUDA features such as control flow and warp-level intrinsics, and reports both strong gains over baseline translation methods and partial recovery of native CUDA performance. If the method is robust, it could matter for retargeting existing CUDA kernels onto emerging NPU architectures without manual rewrites. The biggest missing detail is how broad the supported CUDA subset is and how fair and representative the evaluation setup is across kernels and target NPUs.",
-        "background_zh": "CUDA remains the dominant programming model for accelerator kernels, while newer NPUs expose a very different execution model based on explicit 2-D tiled operations rather than scalar SIMT threads.",
-        "problem_zh": "The paper addresses how to systematically lift CUDA s implicit thread-level parallelism into the explicit multidimensional vector structure required by NPUs without losing correctness or too much performance.",
-        "approach_zh": "T2T translates CUDA into a structured loop representation with UPA, then uses a vectorization engine to choose loop pairs for mapping onto 2-D tile instructions, followed by semantics-preserving optimizations for control flow and warp-level operations.",
-        "evidence_zh": "The abstract states that T2T is implemented on Polygeist, evaluated on representative NPU architectures, reaches up to 73% of native CUDA performance on an A100-based reference point, and outperforms baseline translation approaches by up to 6.9x, but the abstract does not make the benchmark mix or baseline setup fully clear.",
-        "value_zh": "If the compilation strategy generalizes, it offers a plausible path to reuse CUDA kernel ecosystems on NPU-like accelerators while making the performance tradeoffs of thread-to-tile lowering more systematic.",
+        "one_liner_zh": "This paper presents a compiler that lifts CUDA's thread-level SIMT structure into analyzable loop nests and then maps selected loop pairs onto NPU-style 2-D tile instructions.",
+        "summary_zh": "This paper targets the mismatch between CUDA's fine-grained thread model and emerging NPUs that execute coarse-grained 2-D tile operations. It proposes T2T, a compiler pipeline that first rewrites implicit SIMT parallelism into an explicit loop representation through a Unified Parallelism Abstraction, then applies 2-D vectorization to map loop pairs onto NPU tile instructions. The abstract claims this translation is combined with semantics-preserving handling of control flow and warp-level intrinsics, which matters because those features often block direct retargeting of CUDA kernels. Reported evidence is meaningful but limited to the abstract: the implementation is built on Polygeist, reaches up to 73% of native CUDA performance on an A100-based comparison point, and beats baseline translation methods by up to 6.9x on representative NPUs. The main missing detail is evaluation transparency, especially which kernels transfer well, what the NPU hardware assumptions are, and how fair the baselines are.",
+        "background_zh": "CUDA exposes parallelism through many scalar threads, while newer NPUs instead expect explicit tile-shaped vector operations, creating a real compiler gap for porting existing kernels.",
+        "problem_zh": "The paper asks how to systematically translate CUDA kernels into NPU programs when the source expresses implicit SIMT parallelism but the target requires explicit 2-D tile-level execution.",
+        "approach_zh": "T2T converts CUDA kernels into an explicit loop-nest form with UPA, then chooses loop pairs for 2-D vectorization onto tile instructions and adds correctness-preserving optimizations for control flow and warp intrinsics.",
+        "evidence_zh": "The abstract supports that T2T is implemented on Polygeist and reports benchmark results showing up to 73% of native CUDA performance and up to 6.9x improvement over translation baselines, but it does not make the setup or workload coverage fully clear.",
+        "value_zh": "If the method generalizes, it offers a concrete compiler path for reusing CUDA kernel code on tile-based NPUs without fully rewriting kernels by hand.",
         "open_questions": [
-          "What CUDA language features and kernel patterns are actually supported, and where does the lifting approach break down?",
-          "How are the baselines constructed, and are the reported gains driven by stronger vectorization, better handling of control flow, or benchmark selection effects?",
-          "What target-specific assumptions about NPU tile shapes, memory hierarchy, and execution model are required for T2T to work well?"
+          "Which benchmark classes account for the reported gains, and where does the CUDA-to-NPU mapping break down or require heavy fallback handling?",
+          "What exact NPU architectural assumptions are built into the 2-D vectorization strategy, including tile sizes, memory hierarchy, and control-flow support?",
+          "How fair are the baseline comparisons, and how much of the speedup comes from vectorization itself versus later optimizations such as control-flow handling and warp-intrinsic lowering?"
         ],
         "core_contributions": [
-          "Formulates CUDA-to-NPU translation as a lifting problem from implicit SIMT threads to explicit 2-D tile parallelism.",
-          "Introduces a Unified Parallelism Abstraction that rewrites CUDA kernel parallelism into an analyzable loop-nest form.",
-          "Applies a compiler-driven 2-D vectorization strategy to map loop pairs onto NPU tile instructions while preserving CUDA semantics for hard features like warp intrinsics."
+          "Formulates CUDA-to-NPU translation as a lifting problem from scalar-thread SIMT execution to explicit 2-D tiled execution.",
+          "Introduces UPA to expose CUDA parallelism as structured loop nests that can be analyzed and transformed.",
+          "Builds a compiler vectorization engine that maps selected loop pairs onto NPU 2-D tile instructions and extends the pipeline to handle control flow and warp-level intrinsics."
         ],
         "why_read": [
-          "It is directly relevant to compiler and runtime co-design for retargeting CUDA kernels onto non-GPU accelerators.",
-          "It makes a concrete claim about where translation performance comes from: explicit loop restructuring plus 2-D vectorization, not just syntax-level lowering.",
-          "It may be a useful reference for anyone thinking about LLM-generated CUDA kernels, portability layers, or tile-oriented backends."
+          "The paper is directly relevant to compiler and runtime co-design for retargeting CUDA-style kernels onto non-GPU accelerators.",
+          "It is more systems-relevant than generic code translation work because the claimed gains come from an explicit execution-model transformation tied to tile hardware.",
+          "The abstract gives enough signal to judge whether 2-D vectorization is a serious path for CUDA portability, but a full read is needed to validate hardware scope and baseline fairness."
         ],
         "risks": [
-          "The abstract does not clarify how much of CUDA is covered beyond the showcased optimizations, so portability claims may depend on a restricted kernel subset.",
-          "The reported comparison mixes native CUDA and translation baselines, which needs careful reading to judge fairness and practical significance on real NPU hardware targets or models of them ."
+          "The reported 73% of native CUDA performance uses A100 as the reference point, which may not translate into a clear practical portability story without more apples-to-apples detail.",
+          "The abstract does not clarify whether the method depends on a narrow class of affine or regular kernels, which could limit usefulness for real CUDA workloads with irregular control or memory access patterns."
         ],
         "recommended_for": [
-          "Researchers working on accelerator compilers and translation from GPU programming models to tile-based hardware.",
-          "Engineers interested in CUDA portability to NPUs or other non-SIMT backends.",
-          "Systems readers tracking low-level code generation and compiler strategies for emerging inference hardware."
+          "Researchers working on LLM inference compilers and accelerator retargeting.",
+          "Engineers interested in CUDA portability onto tile-based NPUs.",
+          "Readers evaluating loop/vectorization-based alternatives to hand-written low-level kernel ports."
         ],
         "keywords": [
           "CUDA",
@@ -651,7 +651,7 @@
           "loop transformation"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "Strong fit for the stated focus on CUDA kernel generation, low-level code translation, and compiler/runtime co-design; the paper appears technically substantive, though the abstract leaves important evaluation and coverage details to verify.",
+        "reading_priority_reason": "This is a strong fit for the stated focus on CUDA-kernel translation and compiler/runtime techniques for accelerator execution, and the abstract makes concrete systems claims rather than generic code generation claims.",
         "fallback_summary": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing."
       }
     },
@@ -669,7 +669,7 @@
         "Lev Mukhanov"
       ],
       "published": "2026",
-      "published_date": "2026-04-04 07:00:02.667063",
+      "published_date": "2026-04-05 07:00:02.032710",
       "publicationDate": "2026",
       "categories": [],
       "source": "dblp_venue",
@@ -734,36 +734,36 @@
         "pdf_source": ""
       },
       "ai": {
-        "one_liner_zh": "This paper trains a small LLM for LLVM IR peephole optimization using reinforcement learning with Alive2 verification feedback, aiming to improve optimization correctness rather than relying on prompting alone.",
-        "summary_zh": "This paper targets a core bottleneck in LLM-based compiler optimization: generated low-level rewrites are often incorrect, which makes iterative improvement hard and limits practical use. The authors propose LLM-VeriOpt, a verification-guided reinforcement learning setup that uses Alive2 semantic-equivalence signals inside a GRPO reward to train Qwen-3B as an LLVM IR peephole optimizer. The abstract claims substantially better correctness than prompt-only use of the base model, strong verified output rates, and runtime gains comparable to LLVM's handwritten instcombine pass, with some cases exceeding it. For systems readers, the main interest is the compiler-and-verifier co-design loop rather than generic code generation. The biggest missing details are how broad the evaluation is, how fair the baselines are, and which optimization classes and hardware or benchmark settings drive the reported gains.",
-        "background_zh": "LLMs are increasingly being applied to low-level compiler transformations, but semantic correctness remains the gating requirement before any performance gain can matter.",
-        "problem_zh": "The paper asks how to train an LLM to produce useful compiler optimizations when naive LLM outputs are often incorrect and too unreliable to support a productive optimization loop.",
-        "approach_zh": "It uses Alive2 as a formal verifier inside a reinforcement-learning pipeline, giving semantic-equivalence feedback as part of a GRPO reward to train Qwen-3B for LLVM IR peephole rewrites.",
-        "evidence_zh": "The abstract reports higher rates of successful code modification, 90% verifiably correct output, speedups over O0 code, and competitiveness with LLVM instcombine, but the abstract does not make the evaluation scope or baseline setup fully clear.",
-        "value_zh": "If the claims hold, this suggests a practical path to making small LLMs useful for verified low-level optimization by coupling model training tightly to compiler correctness tooling.",
+        "one_liner_zh": "This paper trains a small LLM for LLVM IR peephole optimization with verifier-driven reinforcement learning so correctness signals from Alive2 become part of the optimization loop.",
+        "summary_zh": "This paper targets a central blocker in LLM-based compiler optimization: generated low-level rewrites are often invalid, so raw model capability is not enough for safe optimization. The authors propose LLM-VeriOpt, which trains Qwen-3B with GRPO using Alive2 semantic-equivalence feedback in the reward, aiming to make the model learn to self-correct toward verifiable LLVM IR transformations. The abstract claims substantially higher modification success, 90% verifiably correct outputs, and speedups over O0 code that are comparable to LLVM instcombine, with some emergent cases exceeding the handwritten pass. For systems readers, the interesting point is not just code generation but compiler-runtime co-design between an LLM policy and a formal verifier. The biggest missing detail from the abstract is the evaluation setup: it does not make clear the benchmark mix, verifier cost, training data construction, or how fair the baselines are.",
+        "background_zh": "LLM-based compiler optimization is attractive because it may automate low-level rewrites, but correctness is a hard constraint and current models often generate transformations that are too wrong to optimize safely.",
+        "problem_zh": "The paper asks how to make an LLM produce useful compiler optimizations when semantic correctness is mandatory and naive outputs are too unreliable to serve as an optimization pipeline.",
+        "approach_zh": "It uses reinforcement learning on Qwen-3B with GRPO, adding Alive2 formal-verification signals to the reward so the model is trained against semantic-equivalence feedback while learning LLVM IR peephole rewrites.",
+        "evidence_zh": "The abstract reports a 5.4x improvement in successfully modified code over prompt-only Qwen-3B, 90% verifiably correct outputs, speedups of 2.3x over O0 code, and comparable results to LLVM instcombine, but it does not make the experimental setup or verifier overhead clear.",
+        "value_zh": "If the claims hold, this suggests a practical path for pairing small LLMs with formal verification to produce safer low-level optimizers without relying only on larger general-purpose models.",
         "open_questions": [
-          "What benchmark suite, code distribution, and optimization classes were used to measure correctness and speedup?",
-          "How were the baselines configured, especially larger LLMs and Meta's LLM Compiler, and were they given comparable search or verification support?",
-          "What kinds of emergent optimizations beat instcombine, and how often do they generalize beyond the reported cases?"
+          "What benchmarks, IR distributions, and hardware/runtime conditions were used to measure both optimization quality and end-to-end cost?",
+          "How expensive is the Alive2-in-the-loop training and inference workflow, and does verifier overhead limit practical deployment?",
+          "How strong and fair are the baselines, especially against LLVM instcombine and larger LLM compiler systems under matched prompting or tuning settings?"
         ],
         "core_contributions": [
-          "A verification-guided RL framework for LLM-based compiler optimization using Alive2 feedback.",
-          "An LLVM IR peephole optimizer built from a small Qwen-3B model rather than a large prompted model.",
-          "Empirical claims that verified correctness and optimization quality improve substantially over prompt-only and some larger-model baselines."
+          "Frames compiler optimization as verifier-guided reinforcement learning rather than prompt-only code generation.",
+          "Uses Alive2 semantic-equivalence feedback directly in the reward for training a small LLVM IR optimizer.",
+          "Claims that the resulting model can reach high correctness while remaining competitive with a handwritten compiler pass on optimization outcomes."
         ],
         "why_read": [
-          "It is a concrete example of formal verification being used as a training signal rather than only as a post hoc filter.",
-          "It tests whether a small model plus compiler-aware reward shaping can compete with larger LLMs for low-level transformation tasks.",
-          "It may clarify how far verification-guided training can push LLMs toward trustworthy assembly or IR-level optimization."
+          "It is directly relevant to low-level code generation because the main mechanism is formal-verification-guided learning over LLVM IR rewrites.",
+          "It offers a concrete systems angle on how to convert correctness checking into a training signal instead of using verification only as a post hoc filter.",
+          "It gives a useful case study for whether small specialized models can beat larger generic LLMs in compiler tasks."
         ],
         "risks": [
-          "The abstract emphasizes correctness improvements, but the generality across workloads and rewrite families is not clear.",
-          "Speedup claims may depend heavily on benchmark choice and comparison against O0, which is a weak runtime baseline by itself when judging optimizer quality fully through the abstract alone."
+          "The abstract is strong on headline results but weak on benchmark detail, so baseline fairness is still unverified.",
+          "Reported optimization gains may depend heavily on the chosen peephole tasks and may not generalize to broader compiler phases or architectures."
         ],
         "recommended_for": [
-          "Researchers working on LLM-guided compiler optimization and verified code transformation.",
-          "Engineers interested in compiler/runtime co-design with formal methods in the training loop.",
-          "Readers tracking low-level code generation beyond prompt-only LLM baselines."
+          "Researchers working on LLM-guided compiler optimization and verifier-integrated training loops.",
+          "Engineers interested in LLVM IR transformation safety, formal equivalence checking, and low-level code generation pipelines.",
+          "Readers evaluating whether small domain-tuned models can be competitive for structured systems tasks."
         ],
         "keywords": [
           "LLM compiler optimization",
@@ -774,7 +774,7 @@
           "reinforcement learning"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "This is directly aligned with low-level code and compiler co-design, and it makes a specific systems-relevant claim: verification feedback can turn a small model into a substantially more reliable optimizer. The abstract is unusually concrete about correctness and optimization outcomes, though a full read is still needed to verify evaluation breadth and baseline fairness.",
+        "reading_priority_reason": "High fit for the configured focus because it sits at the intersection of low-level code generation, compiler optimization, and training-time correctness control, with concrete claims about verifier-guided improvement rather than generic code generation.",
         "fallback_summary": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations."
       }
     }
@@ -794,7 +794,7 @@
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-04-04T11:05:53Z",
+    "generated_at": "2026-04-05T11:06:10Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
     "paper_results": 6,
