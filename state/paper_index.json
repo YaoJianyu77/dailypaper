@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-05",
+  "last_updated": "2026-04-06",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -183,6 +183,34 @@
         }
       ],
       "cooldown_until": "2026-05-25"
+    },
+    {
+      "paper_id": "2604.02638v1",
+      "title": "AXELRAM: Quantize Once, Never Dequantize",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-03T02:03:38Z",
+      "source_lane": "fresh",
+      "topics": [
+        "KV cache",
+        "attention",
+        "quantization",
+        "SRAM macro",
+        "LLM inference",
+        "codebook lookup"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-06",
+      "last_seen_date": "2026-04-06",
+      "last_recommended_date": "2026-04-06",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-06",
+          "recommendation": 8.99,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-05"
     },
     {
       "paper_id": "2603.05210v1",
@@ -900,6 +928,34 @@
       "cooldown_until": "2026-04-12"
     },
     {
+      "paper_id": "2604.02556v1",
+      "title": "Fast NF4 Dequantization Kernels for Large Language Model Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-02T22:15:57Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "NF4 quantization",
+        "dequantization kernel",
+        "shared memory",
+        "A100",
+        "BitsAndBytes"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-06",
+      "last_seen_date": "2026-04-06",
+      "last_recommended_date": "2026-04-06",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-06",
+          "recommendation": 8.72,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-05"
+    },
+    {
       "paper_id": "2603.05451v1",
       "title": "FlashAttention-4: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling",
       "domain": "LLM Inference Systems",
@@ -1088,6 +1144,34 @@
         }
       ],
       "cooldown_until": "2026-05-10"
+    },
+    {
+      "paper_id": "2604.02715v1",
+      "title": "FluxMoE: Decoupling Expert Residency for High-Performance MoE Serving",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-03T04:16:01Z",
+      "source_lane": "fresh",
+      "topics": [
+        "MoE serving",
+        "LLM inference systems",
+        "expert paging",
+        "GPU memory management",
+        "KV cache",
+        "vLLM"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-06",
+      "last_seen_date": "2026-04-06",
+      "last_recommended_date": "2026-04-06",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-06",
+          "recommendation": 9.22,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-05"
     },
     {
       "paper_id": "2603.18383v1",
@@ -2519,6 +2603,34 @@
       "cooldown_until": "2026-05-17"
     },
     {
+      "paper_id": "2604.03088v1",
+      "title": "SkillRT: Compiling Skills for Efficient Execution Everywhere",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-03T15:11:45Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM agents",
+        "skill compilation",
+        "runtime optimization",
+        "portability",
+        "capability profiling",
+        "latency reduction"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-06",
+      "last_seen_date": "2026-04-06",
+      "last_recommended_date": "2026-04-06",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-06",
+          "recommendation": 7.77,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-05"
+    },
+    {
       "paper_id": "dblp:conf/cgo/ArmengolEstapeWCO24",
       "title": "SLaDe: A Portable Small Language Model Decompiler for Optimized Assembly.",
       "domain": "Low-level Code And Assembly Generation",
@@ -3037,6 +3149,34 @@
       "cooldown_until": "2026-05-23"
     },
     {
+      "paper_id": "2604.03143v1",
+      "title": "TokenDance: Scaling Multi-Agent LLM Serving via Collective KV Cache Sharing",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-03T16:04:40Z",
+      "source_lane": "fresh",
+      "topics": [
+        "multi-agent llm serving",
+        "kv cache sharing",
+        "prefill optimization",
+        "memory compression",
+        "vllm",
+        "collective communication"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-06",
+      "last_seen_date": "2026-04-06",
+      "last_recommended_date": "2026-04-06",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-06",
+          "recommendation": 8.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-05"
+    },
+    {
       "paper_id": "2603.10846v1",
       "title": "Towards Cold-Start Drafting and Continual Refining: A Value-Driven Memory Approach with Application to NPU Kernel Synthesis",
       "domain": "LLM Code Generation For CUDA Kernels",
@@ -3063,6 +3203,34 @@
         }
       ],
       "cooldown_until": "2026-05-11"
+    },
+    {
+      "paper_id": "2010.05680",
+      "title": "TurboTransformers: An Efficient GPU Serving System For Transformer Models",
+      "domain": "LLM Inference Systems",
+      "published": "2020-10-12",
+      "source_lane": "classic",
+      "topics": [
+        "GPU serving",
+        "transformer inference",
+        "runtime",
+        "online latency",
+        "throughput",
+        "variable-length requests"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-06",
+      "last_seen_date": "2026-04-06",
+      "last_recommended_date": "2026-04-06",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-06",
+          "recommendation": 5.22,
+          "lane": "classic"
+        }
+      ],
+      "cooldown_until": "2026-04-27"
     },
     {
       "paper_id": "2603.29002v1",

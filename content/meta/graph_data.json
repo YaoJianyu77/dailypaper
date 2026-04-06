@@ -748,6 +748,48 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 6.77,
       "updated": "2026-04-05"
+    },
+    {
+      "id": "2604.02715v1",
+      "title": "FluxMoE: Decoupling Expert Residency for High-Performance MoE Serving",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.22,
+      "updated": "2026-04-06"
+    },
+    {
+      "id": "2604.02638v1",
+      "title": "AXELRAM: Quantize Once, Never Dequantize",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.99,
+      "updated": "2026-04-06"
+    },
+    {
+      "id": "2010.05680",
+      "title": "TurboTransformers: An Efficient GPU Serving System For Transformer Models",
+      "domain": "LLM Inference Systems",
+      "quality_score": 5.22,
+      "updated": "2026-04-06"
+    },
+    {
+      "id": "2604.03143v1",
+      "title": "TokenDance: Scaling Multi-Agent LLM Serving via Collective KV Cache Sharing",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.97,
+      "updated": "2026-04-06"
+    },
+    {
+      "id": "2604.02556v1",
+      "title": "Fast NF4 Dequantization Kernels for Large Language Model Inference",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.72,
+      "updated": "2026-04-06"
+    },
+    {
+      "id": "2604.03088v1",
+      "title": "SkillRT: Compiling Skills for Efficient Execution Everywhere",
+      "domain": "LLM Inference Systems",
+      "quality_score": 7.77,
+      "updated": "2026-04-06"
     }
   ],
   "edges": [
@@ -2418,7 +2460,115 @@
       "target": "2604.02106v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.02715v1",
+      "target": "2604.02638v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02715v1",
+      "target": "2604.03143v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02715v1",
+      "target": "2604.02556v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02638v1",
+      "target": "2604.02715v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02638v1",
+      "target": "2604.02556v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02638v1",
+      "target": "2604.03143v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2010.05680",
+      "target": "2604.02715v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2010.05680",
+      "target": "2604.02638v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2010.05680",
+      "target": "2604.03143v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.03143v1",
+      "target": "2604.02715v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.03143v1",
+      "target": "2604.02638v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.03143v1",
+      "target": "2604.02556v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02556v1",
+      "target": "2604.02638v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02556v1",
+      "target": "2604.02715v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.02556v1",
+      "target": "2604.03143v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.03088v1",
+      "target": "2604.02715v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.03088v1",
+      "target": "2604.02638v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.03088v1",
+      "target": "2604.03143v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-05"
+  "last_updated": "2026-04-06"
 }

@@ -1,89 +1,173 @@
 {
-  "target_date": "2026-04-05",
+  "target_date": "2026-04-06",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-06",
-      "end": "2026-04-05"
+      "start": "2026-03-07",
+      "end": "2026-04-06"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-05",
-      "end": "2026-03-05"
+      "start": "2025-04-06",
+      "end": "2026-03-06"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 18,
+  "total_filtered": 20,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 18,
+  "total_unique": 20,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
     "selected_count": 6,
     "lane_counts": {
-      "fresh": 6,
+      "fresh": 5,
       "established": 0,
-      "classic": 0,
-      "history_filtered": 15,
-      "history_relaxed": 6,
-      "classic_slot_active": 0
+      "classic": 1,
+      "history_filtered": 17,
+      "history_relaxed": 0,
+      "classic_slot_active": 1
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": false
+      "slot_active_today": true
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.02047v1",
-      "arxiv_id": "2604.02047v1",
-      "title": "Goose: Anisotropic Speculation Trees for Training-Free Speculative Decoding",
-      "summary": "Speculative decoding accelerates large language model inference by drafting multiple candidate tokens and verifying them in a single forward pass. Candidates are organized as a tree: deeper trees accept more tokens per step, but adding depth requires sacrificing breadth (fallback options) under a fixed verification budget. Existing training-free methods draft from a single token source and shape their trees without distinguishing candidate quality across origins. We observe that two common training-free token sources - n-gram matches copied from the input context, and statistical predictions from prior forward passes - differ dramatically in acceptance rate (~6x median gap, range 2-18x across five models and five benchmarks). We prove that when such a quality gap exists, the optimal tree is anisotropic (asymmetric): reliable tokens should form a deep chain while unreliable tokens spread as wide branches, breaking through the depth limit of balanced trees. We realize this structure in GOOSE, a training-free framework that builds an adaptive spine tree - a deep chain of high-acceptance context-matched tokens with wide branches of low-acceptance alternatives at each node. We prove that the number of tokens accepted per step is at least as large as that of either source used alone. On five LLMs (7B-33B) and five benchmarks, GOOSE achieves 1.9-4.3x lossless speedup, outperforming balanced-tree baselines by 12-33% under the same budget.",
+      "id": "http://arxiv.org/abs/2604.02715v1",
+      "arxiv_id": "2604.02715v1",
+      "title": "FluxMoE: Decoupling Expert Residency for High-Performance MoE Serving",
+      "summary": "Mixture-of-Experts (MoE) models have become a dominant paradigm for scaling large language models, but their rapidly growing parameter sizes introduce a fundamental inefficiency during inference: most expert weights remain idle in GPU memory while competing with performance-critical runtime state such as the key-value (KV) cache. Since KV cache capacity directly determines serving throughput, this mismatch leads to underutilized memory and degraded performance. In this paper, we present FluxMoE, a new MoE inference system that decouples expert parameters from persistent GPU residency. FluxMoE introduces an expert paging abstraction that treats expert weights as streamed, transient resources, materializing them on demand and evicting them immediately after use, allowing GPU memory to be preferentially allocated to throughput-critical runtime state. We implement FluxMoE atop vLLM to enable efficient MoE inference under severe memory constraints. Experimental results demonstrate that FluxMoE achieves up to 3.0$\\times$ throughput gains over vLLM in memory-intensive regimes, without compromising model fidelity.",
       "authors": [
-        "Tao Jin",
-        "Phuong Minh Nguyen",
-        "Naoya Inoue"
+        "Qingxiu Liu",
+        "Cyril Y. He",
+        "Hanser Jiang",
+        "Zion Wang",
+        "Alan Zhao",
+        "Patrick P. C. Lee"
       ],
       "author_details": [
         {
-          "name": "Tao Jin"
+          "name": "Qingxiu Liu"
         },
         {
-          "name": "Phuong Minh Nguyen"
+          "name": "Cyril Y. He"
         },
         {
-          "name": "Naoya Inoue"
+          "name": "Hanser Jiang"
+        },
+        {
+          "name": "Zion Wang"
+        },
+        {
+          "name": "Alan Zhao"
+        },
+        {
+          "name": "Patrick P. C. Lee"
         }
       ],
-      "published": "2026-04-02T13:48:42Z",
-      "published_date": "2026-04-02 13:48:42+00:00",
-      "updated": "2026-04-02T13:48:42Z",
-      "primary_category": "cs.CL",
+      "published": "2026-04-03T04:16:01Z",
+      "published_date": "2026-04-03 04:16:01+00:00",
+      "updated": "2026-04-03T04:16:01Z",
+      "primary_category": "cs.LG",
       "categories": [
-        "cs.CL",
-        "cs.AI"
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.02047v1",
-      "url": "http://arxiv.org/abs/2604.02047v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.02715v1",
+      "url": "http://arxiv.org/abs/2604.02715v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 9.97
+        "popularity": 1.1,
+        "quality": 1.1,
+        "recommendation": 9.22
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "language model inference",
-        "speculative decoding",
-        "cs.CL",
-        "speedup"
+        "serving",
+        "kv cache",
+        "vllm",
+        "throughput",
+        "cs.LG",
+        "runtime",
+        "memory"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 4,
+        "matched_categories": [
+          "cs.LG"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "vllm",
+          "runtime"
+        ],
+        "required_signal_match_count": 3,
+        "bonus_keyword_matches": [
+          "throughput",
+          "memory"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "throughput",
+          "memory"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.9,
+        "bonus_keyword_bonus": 0.36
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.02638v1",
+      "arxiv_id": "2604.02638v1",
+      "title": "AXELRAM: Quantize Once, Never Dequantize",
+      "summary": "We propose AXELRAM, a smart SRAM macro architecture that computes attention scores directly from quantized KV cache indices without dequantization. The key enabler is a design-time fixed codebook: orthogonal-transform-based quantization concentrates each coordinate's distribution to N(0,1/d), so the optimal quantizer depends only on dimension d and bit-width b, not on input data. The asymmetric path design -- transform on write, table-lookup on read with no inverse transform -- reduces per-query multiplications by 102.4x (a mathematical identity).\n  Through multi-seed evaluation (10 seeds x 3 models), we discover that sign pattern sensitivity causes catastrophic PPL spikes (Delta > 50) on certain models (Qwen2.5-3B), while others (LLaMA-3.1-8B) are fully stable. This phenomenon extends SpinQuant's observation of rotation variance in weight quantization to the KV cache domain, where the effect is qualitatively more severe. We trace the root cause to layer-wise norm heterogeneity and propose a gradient-free sign pattern selection (200 candidates, 8 calibration samples, one-time) that eliminates catastrophic spikes with zero additional hardware cost. All source code is available at https://github.com/Axelidea/AXELRAM.",
+      "authors": [
+        "Yasushi Nishida"
+      ],
+      "author_details": [
+        {
+          "name": "Yasushi Nishida"
+        }
+      ],
+      "published": "2026-04-03T02:03:38Z",
+      "published_date": "2026-04-03 02:03:38+00:00",
+      "updated": "2026-04-03T02:03:38Z",
+      "comments": "6 pages, 3 figures, 3 tables. Code: https://github.com/Axelidea/AXELRAM",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AR"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.02638v1",
+      "url": "http://arxiv.org/abs/2604.02638v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.83,
+        "recency": 3.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 8.99
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "kv cache",
+        "quantization",
+        "cs.LG",
+        "cs.AR",
+        "evaluation"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -92,77 +176,212 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 2,
         "matched_categories": [
-          "cs.CL"
+          "cs.LG",
+          "cs.AR"
         ],
         "required_signal_matches": [
-          "speculative decoding"
+          "kv cache"
         ],
         "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "evaluation"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "paper_id": "2010.05680",
+      "arxiv_id": "2010.05680",
+      "title": "TurboTransformers: An Efficient GPU Serving System For Transformer Models",
+      "summary": "Presents a GPU serving runtime for transformer models that targets online latency and throughput constraints while coping with variable input lengths and memory-management overheads.",
+      "authors": [
+        "Ziheng Jiang",
+        "Ying Liu",
+        "Yu Gu",
+        "Bingyang Zhang",
+        "Jiawei Liu",
+        "Yadong Mu",
+        "Mingyu Guo"
+      ],
+      "published": "2020-10-12",
+      "published_date": "2020-10-12 00:00:00",
+      "categories": [
+        "cs.DC",
+        "cs.LG"
+      ],
+      "source": "classic_backlog",
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "serving",
+        "runtime",
+        "gpu-system",
+        "variable-length"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.45,
+      "selection_lane": "classic",
+      "is_hot_paper": false,
+      "source_url": "https://arxiv.org/abs/2010.05680",
+      "pdf_url": "https://arxiv.org/pdf/2010.05680.pdf",
+      "scores": {
+        "relevance": 2.6,
+        "recency": 0.0,
+        "popularity": 0.0,
+        "quality": 0.0,
+        "recommendation": 5.22
+      },
+      "classic_rotation_score": 10.3464,
+      "citationCount": 170,
+      "influentialCitationCount": 16,
+      "venue": "ACM SIGPLAN Symposium on Principles & Practice of Parallel Programming",
+      "journal_ref": "Proceedings of the 26th ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming"
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.03143v1",
+      "arxiv_id": "2604.03143v1",
+      "title": "TokenDance: Scaling Multi-Agent LLM Serving via Collective KV Cache Sharing",
+      "summary": "Multi-agent LLM applications organize execution in synchronized rounds where a central scheduler gathers outputs from all agents and redistributes the combined context. This All-Gather communication pattern creates massive KV Cache redundancy, because every agent's prompt contains the same shared output blocks, yet existing reuse methods fail to exploit it efficiently. We present TokenDance, a system that scales the number of concurrent agents by exploiting the All-Gather pattern for collective KV Cache sharing. TokenDance's KV Collector performs KV Cache reuse over the full round in one collective step, so the cost of reusing a shared block is paid once regardless of agent count. Its Diff-Aware Storage encodes sibling caches as block-sparse diffs against a single master copy, achieving 11-17x compression on representative workloads. Evaluation on GenerativeAgents and AgentSociety shows that TokenDance supports up to 2.7x more concurrent agents than vLLM with prefix caching under SLO requirement, reduces per-agent KV Cache storage by up to 17.5x, and achieves up to 1.9x prefill speedup over per-request position-independent caching.",
+      "authors": [
+        "Zhuohang Bian",
+        "Feiyang Wu",
+        "Chengrui Zhang",
+        "Hangcheng Dong",
+        "Yun Liang",
+        "Youwei Zhuo"
+      ],
+      "author_details": [
+        {
+          "name": "Zhuohang Bian"
+        },
+        {
+          "name": "Feiyang Wu"
+        },
+        {
+          "name": "Chengrui Zhang"
+        },
+        {
+          "name": "Hangcheng Dong"
+        },
+        {
+          "name": "Yun Liang"
+        },
+        {
+          "name": "Youwei Zhuo"
+        }
+      ],
+      "published": "2026-04-03T16:04:40Z",
+      "published_date": "2026-04-03 16:04:40+00:00",
+      "updated": "2026-04-03T16:04:40Z",
+      "comments": "14 pages, 14 figures, arXiv:submit/7438760 [cs.DC], preprint under review",
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.03143v1",
+      "url": "http://arxiv.org/abs/2604.03143v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 0.8,
+        "quality": 0.8,
+        "recommendation": 8.97
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm serving",
+        "serving",
+        "prefill",
+        "kv cache",
+        "vllm",
+        "cs.DC",
+        "speedup",
+        "evaluation"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 5,
+        "matched_categories": [
+          "cs.DC"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "prefill",
+          "vllm"
+        ],
+        "required_signal_match_count": 3,
         "bonus_keyword_matches": [
           "speedup"
         ],
         "bonus_keyword_match_count": 1,
         "analysis_keyword_matches": [
+          "evaluation",
           "speedup"
         ],
-        "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.35,
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.9,
         "bonus_keyword_bonus": 0.18
       },
-      "selection_lane": "fresh",
-      "history_relaxed": true
+      "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2604.02110v1",
-      "arxiv_id": "2604.02110v1",
-      "title": "FlatAttention: Dataflow and Fabric Collectives Co-Optimization for Large Attention-Based Model Inference on Tile-Based Accelerators",
-      "summary": "Attention accounts for an increasingly dominant fraction of total computation during inference for mixture-of-experts (MoE) models, making efficient acceleration critical. Emerging domain-specific accelerators for large model inference are shifting toward chip-scale and wafer-scale tile-based architectures. Tiles contain large matrix and vector engines and are connected through on-chip interconnects, which support tile-to-tile traffic to reduce the tile-to-main-memory traffic bottleneck. Hence, dataflow management is crucial to achieve high utilization. We propose FlatAttention, a dataflow for modern attention variants on tile-based accelerators. FlatAttention minimizes expensive high-bandwidth memory (HBM) accesses by exploiting collective primitives integrated into the on-chip network fabric, achieving up to 92.3% utilization, 4.1x speedup over FlashAttention-3, and 16x lower HBM traffic. On a 32x32 tile configuration with peak performance comparable to NVIDIA GH200, FlatAttention generalizes across multiple attention variants, achieving an average of 86% utilization for compute-bound attentions and 78% HBM bandwidth utilization for memory-bound ones, resulting in an average 1.9x speedup over attention implementations on GH200. Finally, we evaluate end-to-end DeepSeek-v3 FP8 decoding with FlatAttention on a wafer-scale multi-die system, achieving a 1.9x improvement in system throughput and a 1.4x reduction in per-user token output latency, despite operating with 1.5x lower peak system performance compared to the state-of-the-art solution.",
+      "id": "http://arxiv.org/abs/2604.02556v1",
+      "arxiv_id": "2604.02556v1",
+      "title": "Fast NF4 Dequantization Kernels for Large Language Model Inference",
+      "summary": "Large language models (LLMs) have grown beyond the memory capacity of single GPU devices, necessitating quantization techniques for practical deployment. While NF4 (4-bit NormalFloat) quantization enables 4$\\times$ memory reduction, inference on current NVIDIA GPUs (e.g., Ampere A100) requires expensive dequantization back to FP16 format, creating a critical performance bottleneck. This paper presents a lightweight shared memory optimization that addresses this gap through principled memory hierarchy exploitation while maintaining full ecosystem compatibility. We compare our technique against the open-source BitsAndBytes implementation, achieving 2.0--2.2$\\times$ kernel speedup across three models (Gemma 27B, Qwen3 32B, and Llama3.3 70B) and up to 1.54$\\times$ end-to-end improvement by leveraging the 12--15$\\times$ latency advantage of shared memory over global memory access. Our optimization reduces instruction counts through simplified indexing logic while using only 64 bytes of shared memory per thread block, demonstrating that lightweight optimizations can deliver substantial performance gains with minimal engineering effort. This work provides a plug-and-play solution for the HuggingFace ecosystem that democratizes access to advanced models on existing GPU infrastructure.",
       "authors": [
-        "Chi Zhang",
-        "Luca Colagrande",
-        "Renzo Andri",
-        "Luca Benini"
+        "Xiangbo Qi",
+        "Chaoyi Jiang",
+        "Murali Annavaram"
       ],
       "author_details": [
         {
-          "name": "Chi Zhang"
+          "name": "Xiangbo Qi"
         },
         {
-          "name": "Luca Colagrande"
+          "name": "Chaoyi Jiang"
         },
         {
-          "name": "Renzo Andri"
-        },
-        {
-          "name": "Luca Benini"
+          "name": "Murali Annavaram"
         }
       ],
-      "published": "2026-04-02T14:45:19Z",
-      "published_date": "2026-04-02 14:45:19+00:00",
-      "updated": "2026-04-02T14:45:19Z",
-      "comments": "Submitted to IEEE Transactions on Computers. 14 pages",
-      "primary_category": "cs.AR",
+      "published": "2026-04-02T22:15:57Z",
+      "published_date": "2026-04-02 22:15:57+00:00",
+      "updated": "2026-04-02T22:15:57Z",
+      "comments": "7 pages, 4 figures, EMC2 Workshop at ASPLOS 2026",
+      "primary_category": "cs.LG",
       "categories": [
-        "cs.AR"
+        "cs.LG",
+        "cs.AR",
+        "cs.PF"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.02110v1",
-      "url": "http://arxiv.org/abs/2604.02110v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.02556v1",
+      "url": "http://arxiv.org/abs/2604.02556v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.98,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 9.26
+        "popularity": 0.5,
+        "quality": 0.5,
+        "recommendation": 8.72
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "flashattention",
-        "throughput",
+        "language model inference",
         "latency",
+        "quantization",
+        "cs.LG",
         "cs.AR",
+        "a100",
         "memory",
-        "bandwidth",
         "speedup"
       ],
       "matched_domain_priority": 5,
@@ -172,347 +391,109 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 3,
         "matched_categories": [
+          "cs.LG",
           "cs.AR"
         ],
         "required_signal_matches": [
-          "flashattention"
+          "a100"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput",
           "latency",
           "memory",
-          "bandwidth",
           "speedup"
         ],
-        "bonus_keyword_match_count": 5,
+        "bonus_keyword_match_count": 3,
         "analysis_keyword_matches": [
-          "throughput",
           "latency",
           "memory",
-          "bandwidth",
           "speedup"
         ],
-        "analysis_keyword_match_count": 5,
+        "analysis_keyword_match_count": 3,
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.5
       },
-      "selection_lane": "fresh",
-      "history_relaxed": true
+      "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2604.01811v1",
-      "arxiv_id": "2604.01811v1",
-      "title": "GPU-RMQ: Accelerating Range Minimum Queries on Modern GPUs",
-      "summary": "Range minimum queries are frequently used in string processing and database applications including biological sequence analysis, document retrieval, and web search. Hence, various data structures have been proposed for improving their efficiency on both CPUs and GPUs.Recent work has also shown that hardware-accelerated ray tracing on modern NVIDIA RTX graphic cards can be exploited to answer range minimum queries by expressing queries as rays, which are fired into a scene of triangles representing minima of ranges at different granularities. While these approaches are promising, they suffer from at least one of three issues: severe memory overhead, high index construction time, and low query throughput. This renders these methods practically unusable on larger arrays: For example, the state-of-art GPU-based approaches LCA and RTXRMQ exceed the memory capacity of an NVIDIA RTX 4090 GPU for input arrays of size >= 2^29. To tackle these problems, in this work, we present a new approach called GPU-RMQ which is based on a hierarchical approach. GPU-RMQ first constructs a hierarchy of range minimum summaries on top of the original array in a highly parallel fashion. For query answering, only the relevant portions of the hierarchy are then processed in an optimized massively-parallel scan operation. Additionally, GPU-RMQ is hybrid in design enabling the use of both ray tracing cores and CUDA cores across different levels of the hierarchy to handle queries. Our experimental evaluation shows that GPU-RMQ outperforms the state-of-the-art approaches in terms of query throughput especially for larger arrays while offering a significantly lower memory footprint and up to two orders-of-magnitude faster index construction. In particular, it achieves up to ~8x higher throughput than LCA, ~17x higher throughput than RTXRMQ, and up to ~4800x higher throughput compared to an optimized CPU-based approach.",
+      "id": "http://arxiv.org/abs/2604.03088v1",
+      "arxiv_id": "2604.03088v1",
+      "title": "SkillRT: Compiling Skills for Efficient Execution Everywhere",
+      "summary": "LLM agents increasingly adopt skills as a reusable unit of composition. While skills are shared across diverse agent platforms, current systems treat them as raw context, causing the same skill to behave inconsistently for different agents. This fragility undermines skill portability and execution efficiency.\n  To address this challenge, we analyze 118,000 skills and draw inspiration from traditional compiler design. We treat skills as code and LLMs as heterogeneous processors. To make portability actionable, we decompose a skill's requirements into a set of primitive capabilities, and measure how well each model-harness pair supports them. Based on these capability profiles, we propose SkillRT, a compilation and runtime system designed for portable and efficient skill execution. At compile time, SkillRT performs capability-based compilation, environment binding, and concurrency extraction. At runtime, SkillRT applies JIT code solidification and adaptive recompilation for performance optimization.\n  We evaluate SkillRT across eight LLMs of varying scales and three agent harnesses, covering SkillsBench and representative skill tasks. Results demonstrate that SkillRT significantly improves task completion rates across different models and environments while reducing token consumption by up to 40%. In terms of performance, SkillRT achieves up to 3.2x speedup with enhanced parallelism, and 19-50x latency reduction through code solidification.",
       "authors": [
-        "Lara Kreis",
-        "Justus Henneberg",
-        "Valentin Henkys",
-        "Felix Schuhknecht",
-        "Bertil Schmidt"
+        "Le Chen",
+        "Erhu Feng",
+        "Yubin Xia",
+        "Haibo Chen"
       ],
       "author_details": [
         {
-          "name": "Lara Kreis"
+          "name": "Le Chen"
         },
         {
-          "name": "Justus Henneberg"
+          "name": "Erhu Feng"
         },
         {
-          "name": "Valentin Henkys"
+          "name": "Yubin Xia"
         },
         {
-          "name": "Felix Schuhknecht"
-        },
-        {
-          "name": "Bertil Schmidt"
+          "name": "Haibo Chen"
         }
       ],
-      "published": "2026-04-02T09:23:08Z",
-      "published_date": "2026-04-02 09:23:08+00:00",
-      "updated": "2026-04-02T09:23:08Z",
-      "primary_category": "cs.DB",
-      "categories": [
-        "cs.DB",
-        "cs.DC",
-        "cs.DS"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.01811v1",
-      "url": "http://arxiv.org/abs/2604.01811v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.75,
-        "recency": 3.0,
-        "popularity": 1.8,
-        "quality": 1.8,
-        "recommendation": 7.51
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "cuda",
-        "cs.DC",
-        "throughput"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "cuda"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "throughput"
-        ],
-        "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh",
-      "history_relaxed": true
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.02106v1",
-      "arxiv_id": "2604.02106v1",
-      "title": "A Case For Host Code Guided GPU Data Race Detector",
-      "summary": "Data races in GPU programs pose a threat to the reliability of GPU-accelerated software stacks. Prior works proposed various dynamic (runtime) and static (compile-time) techniques to detect races in GPU programs. However, dynamic techniques often miss critical races, as they require the races to manifest during testing. While static ones can catch such races, they often generate numerous false alarms by conservatively assuming values of variables/parameters that cannot ever occur during any execution of the program.\n  We make a key observation that the host (CPU) code that launches GPU kernels contains crucial semantic information about the values that the GPU kernel's parameters can take during execution. Harnessing this hitherto overlooked information helps accurately detect data races in GPU kernel code. We create HGRD, a new state-of-the-art static analysis technique that performs a holistic analysis of both CPU and GPU code to accurately detect a broad set of true races while minimizing false alarms. While SOTA dynamic techniques, such as iGUARD, miss many true races, HGRD misses none. On the other hand, static techniques such as GPUVerify and FaialAA raise tens of false alarms, where HGRD raises none.",
-      "authors": [
-        "Ajay Nayak",
-        "Anubhab Ghosh",
-        "Arkaprava Basu"
-      ],
-      "author_details": [
-        {
-          "name": "Ajay Nayak"
-        },
-        {
-          "name": "Anubhab Ghosh"
-        },
-        {
-          "name": "Arkaprava Basu"
-        }
-      ],
-      "published": "2026-04-02T14:35:49Z",
-      "published_date": "2026-04-02 14:35:49+00:00",
-      "updated": "2026-04-02T14:35:49Z",
+      "published": "2026-04-03T15:11:45Z",
+      "published_date": "2026-04-03 15:11:45+00:00",
+      "updated": "2026-04-03T15:11:45Z",
       "primary_category": "cs.SE",
       "categories": [
-        "cs.SE"
+        "cs.SE",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.02106v1",
-      "url": "http://arxiv.org/abs/2604.02106v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.03088v1",
+      "url": "http://arxiv.org/abs/2604.03088v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 1.71,
+        "relevance": 2.21,
         "recency": 3.0,
-        "popularity": 1.0,
-        "quality": 1.0,
-        "recommendation": 6.77
+        "popularity": 1.1,
+        "quality": 1.1,
+        "recommendation": 7.77
       },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "gpu kernel",
-        "cs.SE"
+        "latency",
+        "cs.LG",
+        "runtime",
+        "compiler",
+        "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
+        "domain": "LLM Inference Systems",
         "text_match_count": 1,
         "matched_categories": [
-          "cs.SE"
+          "cs.LG"
         ],
         "required_signal_matches": [
-          "gpu kernel"
+          "runtime",
+          "compiler"
         ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh",
-      "history_relaxed": true
-    },
-    {
-      "id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
-      "paper_id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
-      "title": "From Threads to Tiles: T2T, a Compiler for CUDA-to-NPU Translation via 2D Vectorization.",
-      "summary": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
-      "abstract": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
-      "authors": [
-        "Shuaijiang Li",
-        "Jiacheng Zhao",
-        "Ying Liu 0055",
-        "Shuoming Zhang",
-        "Lei Chen",
-        "Yijin Li",
-        "Yangyu Zhang",
-        "Zhicheng Li",
-        "Runyu Zhou",
-        "Xiyu Shi",
-        "Chunwei Xia",
-        "Yuan Wen",
-        "Xiaobing Feng 0002",
-        "Huimin Cui"
-      ],
-      "published": "2026",
-      "published_date": "2026-04-05 07:00:02.032710",
-      "publicationDate": "2026",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://ieeexplore.ieee.org/document/11395190/",
-      "url": "https://ieeexplore.ieee.org/document/11395190/",
-      "pdf_url": "",
-      "venue": "CGO",
-      "venue_source_name": "CGO",
-      "venue_source_alias": "CGO",
-      "dblp_key": "conf/cgo/LiZLZCLZLZSXWFC26",
-      "doi": "10.1109/CGO68049.2026.11395190",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "CGO",
-        "venue_alias": "CGO"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2026,
-      "scores": {
-        "relevance": 1.71,
-        "recency": 3.0,
-        "popularity": 1.9,
-        "quality": 1.9,
-        "recommendation": 7.52
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "cuda"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "cuda"
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "latency",
+          "speedup"
         ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh",
-      "history_relaxed": true,
-      "citationCount": 0,
-      "institutions": [
-        "University College of Applied Science",
-        "University of Leeds",
-        "University of Aberdeen",
-        "International Centre for Theoretical Physics Asia-Pacific"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://ieeexplore.ieee.org/document/11395190/",
-        "abstract_source": "openalex",
-        "pdf_source": ""
-      }
-    },
-    {
-      "id": "dblp:conf/cgo/FangKRAM26",
-      "paper_id": "dblp:conf/cgo/FangKRAM26",
-      "title": "LLM-VeriOpt: Verification-Guided Reinforcement Learning for LLM-Based Compiler Optimization.",
-      "summary": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations. While various techniques have been proposed to enhance LLMs’ ability to optimize LLVM IR or assembly code, ensuring the semantic equivalence of transformed instructions remains a fundamental prerequisite for safe and effective performance improvement. At the same time, code generated by LLMs is often so far away from being correct that it is very difficult to work out how to improve them to proceed in generating optimizations using the output.In this work, we present LLM-VeriOpt, a novel reinforcement-learning methodology that incorporates feedback from a formal verifier, Alive2, to guide the training of a small-scale model, Qwen-3B. This facilitates the use of Guided Reinforcement via Group Relative Policy Optimization (GRPO), using semantic-equivalence signals from the Alive2 formal verification tool as part of the reward function. This allows the model to self-correct based on observing and subsequently learning to give correctness feedback during training, giving high code coverage by successfully transforming large amounts of code, while also optimizing it significantly.We demonstrate our technique by designing an LLM-based peephole optimizer over LLVM-IR. Our method significantly improves the correctness of IR optimizations versus the base LLM Qwen-3B applied with just a prompt and no fine-tuning — achieving a 5.4× improvement in code successfully modified. The resulting model produces verifiably correct output 90% of the time, comfortably outperforming larger state-of-the-art LLMs, including Meta’s LLM Compiler. This yields speedups of 2.3× over O0-optimized code, comparable to the handwritten LLVM-instcombine pass, and producing emergent optimizations that outperform it in 20% of cases.",
-      "abstract": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations. While various techniques have been proposed to enhance LLMs’ ability to optimize LLVM IR or assembly code, ensuring the semantic equivalence of transformed instructions remains a fundamental prerequisite for safe and effective performance improvement. At the same time, code generated by LLMs is often so far away from being correct that it is very difficult to work out how to improve them to proceed in generating optimizations using the output.In this work, we present LLM-VeriOpt, a novel reinforcement-learning methodology that incorporates feedback from a formal verifier, Alive2, to guide the training of a small-scale model, Qwen-3B. This facilitates the use of Guided Reinforcement via Group Relative Policy Optimization (GRPO), using semantic-equivalence signals from the Alive2 formal verification tool as part of the reward function. This allows the model to self-correct based on observing and subsequently learning to give correctness feedback during training, giving high code coverage by successfully transforming large amounts of code, while also optimizing it significantly.We demonstrate our technique by designing an LLM-based peephole optimizer over LLVM-IR. Our method significantly improves the correctness of IR optimizations versus the base LLM Qwen-3B applied with just a prompt and no fine-tuning — achieving a 5.4× improvement in code successfully modified. The resulting model produces verifiably correct output 90% of the time, comfortably outperforming larger state-of-the-art LLMs, including Meta’s LLM Compiler. This yields speedups of 2.3× over O0-optimized code, comparable to the handwritten LLVM-instcombine pass, and producing emergent optimizations that outperform it in 20% of cases.",
-      "authors": [
-        "Xiangxin Fang",
-        "Jiaqin Kang",
-        "Rodrigo Rocha",
-        "Sam Ainsworth 0001",
-        "Lev Mukhanov"
-      ],
-      "published": "2026",
-      "published_date": "2026-04-05 07:00:02.032710",
-      "publicationDate": "2026",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://ieeexplore.ieee.org/document/11395239/",
-      "url": "https://ieeexplore.ieee.org/document/11395239/",
-      "pdf_url": "",
-      "venue": "CGO",
-      "venue_source_name": "CGO",
-      "venue_source_alias": "CGO",
-      "dblp_key": "conf/cgo/FangKRAM26",
-      "doi": "10.1109/CGO68049.2026.11395239",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "CGO",
-        "venue_alias": "CGO"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2026,
-      "scores": {
-        "relevance": 1.31,
-        "recency": 3.0,
-        "popularity": 1.0,
-        "quality": 1.0,
-        "recommendation": 5.83
-      },
-      "matched_domain": "Low-level Code And Assembly Generation",
-      "matched_keywords": [
-        "compiler optimization"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "Low-level Code And Assembly Generation",
-        "text_match_count": 1,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "compiler optimization"
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "latency",
+          "speedup"
         ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.36
       },
-      "selection_lane": "fresh",
-      "history_relaxed": true,
-      "citationCount": 0,
-      "institutions": [
-        "Queen Mary University of London",
-        "University of Edinburgh"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://ieeexplore.ieee.org/document/11395239/",
-        "abstract_source": "openalex",
-        "pdf_source": ""
-      }
+      "selection_lane": "fresh"
     }
   ]
 }
