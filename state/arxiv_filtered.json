@@ -1,173 +1,110 @@
 {
-  "target_date": "2026-04-06",
+  "target_date": "2026-04-07",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-07",
-      "end": "2026-04-06"
+      "start": "2026-03-08",
+      "end": "2026-04-07"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-06",
-      "end": "2026-03-06"
+      "start": "2025-04-07",
+      "end": "2026-03-07"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 20,
+  "total_filtered": 17,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 20,
+  "total_unique": 17,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 6,
+    "selected_count": 3,
     "lane_counts": {
-      "fresh": 5,
+      "fresh": 3,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 17,
+      "classic": 0,
+      "history_filtered": 11,
       "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.02715v1",
-      "arxiv_id": "2604.02715v1",
-      "title": "FluxMoE: Decoupling Expert Residency for High-Performance MoE Serving",
-      "summary": "Mixture-of-Experts (MoE) models have become a dominant paradigm for scaling large language models, but their rapidly growing parameter sizes introduce a fundamental inefficiency during inference: most expert weights remain idle in GPU memory while competing with performance-critical runtime state such as the key-value (KV) cache. Since KV cache capacity directly determines serving throughput, this mismatch leads to underutilized memory and degraded performance. In this paper, we present FluxMoE, a new MoE inference system that decouples expert parameters from persistent GPU residency. FluxMoE introduces an expert paging abstraction that treats expert weights as streamed, transient resources, materializing them on demand and evicting them immediately after use, allowing GPU memory to be preferentially allocated to throughput-critical runtime state. We implement FluxMoE atop vLLM to enable efficient MoE inference under severe memory constraints. Experimental results demonstrate that FluxMoE achieves up to 3.0$\\times$ throughput gains over vLLM in memory-intensive regimes, without compromising model fidelity.",
+      "id": "http://arxiv.org/abs/2604.04921v1",
+      "arxiv_id": "2604.04921v1",
+      "title": "TriAttention: Efficient Long Reasoning with Trigonometric KV Compression",
+      "summary": "Extended reasoning in large language models (LLMs) creates severe KV cache memory bottlenecks. Leading KV cache compression methods estimate KV importance using attention scores from recent post-RoPE queries. However, queries rotate with position during RoPE, making representative queries very few, leading to poor top-key selection and unstable reasoning. To avoid this issue, we turn to the pre-RoPE space, where we observe that Q and K vectors are highly concentrated around fixed non-zero centers and remain stable across positions -- Q/K concentration. We show that this concentration causes queries to preferentially attend to keys at specific distances (e.g., nearest keys), with the centers determining which distances are preferred via a trigonometric series. Based on this, we propose TriAttention to estimate key importance by leveraging these centers. Via the trigonometric series, we use the distance preference characterized by these centers to score keys according to their positions, and also leverage Q/K norms as an additional signal for importance estimation. On AIME25 with 32K-token generation, TriAttention matches Full Attention reasoning accuracy while achieving 2.5x higher throughput or 10.7x KV memory reduction, whereas leading baselines achieve only about half the accuracy at the same efficiency. TriAttention enables OpenClaw deployment on a single consumer GPU, where long context would otherwise cause out-of-memory with Full Attention.",
       "authors": [
-        "Qingxiu Liu",
-        "Cyril Y. He",
-        "Hanser Jiang",
-        "Zion Wang",
-        "Alan Zhao",
-        "Patrick P. C. Lee"
+        "Weian Mao",
+        "Xi Lin",
+        "Wei Huang",
+        "Yuxin Xie",
+        "Tianfu Fu",
+        "Bohan Zhuang",
+        "Song Han",
+        "Yukang Chen"
       ],
       "author_details": [
         {
-          "name": "Qingxiu Liu"
+          "name": "Weian Mao"
         },
         {
-          "name": "Cyril Y. He"
+          "name": "Xi Lin"
         },
         {
-          "name": "Hanser Jiang"
+          "name": "Wei Huang"
         },
         {
-          "name": "Zion Wang"
+          "name": "Yuxin Xie"
         },
         {
-          "name": "Alan Zhao"
+          "name": "Tianfu Fu"
         },
         {
-          "name": "Patrick P. C. Lee"
+          "name": "Bohan Zhuang"
+        },
+        {
+          "name": "Song Han"
+        },
+        {
+          "name": "Yukang Chen"
         }
       ],
-      "published": "2026-04-03T04:16:01Z",
-      "published_date": "2026-04-03 04:16:01+00:00",
-      "updated": "2026-04-03T04:16:01Z",
-      "primary_category": "cs.LG",
+      "published": "2026-04-06T17:58:42Z",
+      "published_date": "2026-04-06 17:58:42+00:00",
+      "updated": "2026-04-06T17:58:42Z",
+      "comments": "Code is available at https://github.com/WeianMao/triattention",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.LG"
+        "cs.CL",
+        "cs.CV"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.02715v1",
-      "url": "http://arxiv.org/abs/2604.02715v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.04921v1",
+      "url": "http://arxiv.org/abs/2604.04921v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 3.0,
+        "relevance": 2.46,
         "recency": 3.0,
         "popularity": 1.1,
         "quality": 1.1,
-        "recommendation": 9.22
+        "recommendation": 8.23
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "serving",
         "kv cache",
-        "vllm",
         "throughput",
-        "cs.LG",
-        "runtime",
+        "cs.CL",
         "memory"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 4,
-        "matched_categories": [
-          "cs.LG"
-        ],
-        "required_signal_matches": [
-          "kv cache",
-          "vllm",
-          "runtime"
-        ],
-        "required_signal_match_count": 3,
-        "bonus_keyword_matches": [
-          "throughput",
-          "memory"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "throughput",
-          "memory"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.02638v1",
-      "arxiv_id": "2604.02638v1",
-      "title": "AXELRAM: Quantize Once, Never Dequantize",
-      "summary": "We propose AXELRAM, a smart SRAM macro architecture that computes attention scores directly from quantized KV cache indices without dequantization. The key enabler is a design-time fixed codebook: orthogonal-transform-based quantization concentrates each coordinate's distribution to N(0,1/d), so the optimal quantizer depends only on dimension d and bit-width b, not on input data. The asymmetric path design -- transform on write, table-lookup on read with no inverse transform -- reduces per-query multiplications by 102.4x (a mathematical identity).\n  Through multi-seed evaluation (10 seeds x 3 models), we discover that sign pattern sensitivity causes catastrophic PPL spikes (Delta > 50) on certain models (Qwen2.5-3B), while others (LLaMA-3.1-8B) are fully stable. This phenomenon extends SpinQuant's observation of rotation variance in weight quantization to the KV cache domain, where the effect is qualitatively more severe. We trace the root cause to layer-wise norm heterogeneity and propose a gradient-free sign pattern selection (200 candidates, 8 calibration samples, one-time) that eliminates catastrophic spikes with zero additional hardware cost. All source code is available at https://github.com/Axelidea/AXELRAM.",
-      "authors": [
-        "Yasushi Nishida"
-      ],
-      "author_details": [
-        {
-          "name": "Yasushi Nishida"
-        }
-      ],
-      "published": "2026-04-03T02:03:38Z",
-      "published_date": "2026-04-03 02:03:38+00:00",
-      "updated": "2026-04-03T02:03:38Z",
-      "comments": "6 pages, 3 figures, 3 tables. Code: https://github.com/Axelidea/AXELRAM",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AR"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.02638v1",
-      "url": "http://arxiv.org/abs/2604.02638v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.83,
-        "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 8.99
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "kv cache",
-        "quantization",
-        "cs.LG",
-        "cs.AR",
-        "evaluation"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -176,322 +113,206 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 2,
         "matched_categories": [
-          "cs.LG",
-          "cs.AR"
+          "cs.CL"
         ],
         "required_signal_matches": [
           "kv cache"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "evaluation"
+        "bonus_keyword_matches": [
+          "throughput",
+          "memory"
         ],
-        "analysis_keyword_match_count": 1,
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "throughput",
+          "memory"
+        ],
+        "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh"
     },
     {
-      "paper_id": "2010.05680",
-      "arxiv_id": "2010.05680",
-      "title": "TurboTransformers: An Efficient GPU Serving System For Transformer Models",
-      "summary": "Presents a GPU serving runtime for transformer models that targets online latency and throughput constraints while coping with variable input lengths and memory-management overheads.",
+      "id": "http://arxiv.org/abs/2604.04335v1",
+      "arxiv_id": "2604.04335v1",
+      "title": "GENSERVE: Efficient Co-Serving of Heterogeneous Diffusion Model Workloads",
+      "summary": "Diffusion models have emerged as the prevailing approach for text-to-image (T2I) and text-to-video (T2V) generation, yet production platforms must increasingly serve both modalities on shared GPU clusters while meeting stringent latency SLOs. Co-serving such heterogeneous workloads is challenging: T2I and T2V requests exhibit vastly different compute demands, parallelism characteristics, and latency requirements, leading to significant SLO violations in existing serving systems. We present GENSERVE, a co-serving system that leverages the inherent predictability of the diffusion process to optimize serving efficiency. A central insight is that diffusion inference proceeds in discrete, predictable steps and is naturally preemptible at step boundaries, opening a new design space for heterogeneity-aware resource management. GENSERVE introduces step-level resource adaptation through three coordinated mechanisms: intelligent video preemption, elastic sequence parallelism with dynamic batching, and an SLO-aware scheduler that jointly optimizes resource allocation across all concurrent requests. Experimental results show that GENSERVE improves the SLO attainment rate by up to 44% over the strongest baseline across diverse configurations.",
       "authors": [
-        "Ziheng Jiang",
-        "Ying Liu",
-        "Yu Gu",
-        "Bingyang Zhang",
-        "Jiawei Liu",
-        "Yadong Mu",
-        "Mingyu Guo"
-      ],
-      "published": "2020-10-12",
-      "published_date": "2020-10-12 00:00:00",
-      "categories": [
-        "cs.DC",
-        "cs.LG"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "serving",
-        "runtime",
-        "gpu-system",
-        "variable-length"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.45,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2010.05680",
-      "pdf_url": "https://arxiv.org/pdf/2010.05680.pdf",
-      "scores": {
-        "relevance": 2.6,
-        "recency": 0.0,
-        "popularity": 0.0,
-        "quality": 0.0,
-        "recommendation": 5.22
-      },
-      "classic_rotation_score": 10.3464,
-      "citationCount": 170,
-      "influentialCitationCount": 16,
-      "venue": "ACM SIGPLAN Symposium on Principles & Practice of Parallel Programming",
-      "journal_ref": "Proceedings of the 26th ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.03143v1",
-      "arxiv_id": "2604.03143v1",
-      "title": "TokenDance: Scaling Multi-Agent LLM Serving via Collective KV Cache Sharing",
-      "summary": "Multi-agent LLM applications organize execution in synchronized rounds where a central scheduler gathers outputs from all agents and redistributes the combined context. This All-Gather communication pattern creates massive KV Cache redundancy, because every agent's prompt contains the same shared output blocks, yet existing reuse methods fail to exploit it efficiently. We present TokenDance, a system that scales the number of concurrent agents by exploiting the All-Gather pattern for collective KV Cache sharing. TokenDance's KV Collector performs KV Cache reuse over the full round in one collective step, so the cost of reusing a shared block is paid once regardless of agent count. Its Diff-Aware Storage encodes sibling caches as block-sparse diffs against a single master copy, achieving 11-17x compression on representative workloads. Evaluation on GenerativeAgents and AgentSociety shows that TokenDance supports up to 2.7x more concurrent agents than vLLM with prefix caching under SLO requirement, reduces per-agent KV Cache storage by up to 17.5x, and achieves up to 1.9x prefill speedup over per-request position-independent caching.",
-      "authors": [
-        "Zhuohang Bian",
-        "Feiyang Wu",
-        "Chengrui Zhang",
-        "Hangcheng Dong",
-        "Yun Liang",
-        "Youwei Zhuo"
+        "Fanjiang Ye",
+        "Zhangke Li",
+        "Xinrui Zhong",
+        "Ethan Ma",
+        "Russell Chen",
+        "Kaijian Wang",
+        "Jingwei Zuo",
+        "Desen Sun",
+        "Ye Cao",
+        "Triston Cao",
+        "Myungjin Lee",
+        "Arvind Krishnamurthy",
+        "Yuke Wang"
       ],
       "author_details": [
         {
-          "name": "Zhuohang Bian"
+          "name": "Fanjiang Ye"
         },
         {
-          "name": "Feiyang Wu"
+          "name": "Zhangke Li"
         },
         {
-          "name": "Chengrui Zhang"
+          "name": "Xinrui Zhong"
         },
         {
-          "name": "Hangcheng Dong"
+          "name": "Ethan Ma"
         },
         {
-          "name": "Yun Liang"
+          "name": "Russell Chen"
         },
         {
-          "name": "Youwei Zhuo"
+          "name": "Kaijian Wang"
+        },
+        {
+          "name": "Jingwei Zuo"
+        },
+        {
+          "name": "Desen Sun"
+        },
+        {
+          "name": "Ye Cao"
+        },
+        {
+          "name": "Triston Cao"
+        },
+        {
+          "name": "Myungjin Lee"
+        },
+        {
+          "name": "Arvind Krishnamurthy"
+        },
+        {
+          "name": "Yuke Wang"
         }
       ],
-      "published": "2026-04-03T16:04:40Z",
-      "published_date": "2026-04-03 16:04:40+00:00",
-      "updated": "2026-04-03T16:04:40Z",
-      "comments": "14 pages, 14 figures, arXiv:submit/7438760 [cs.DC], preprint under review",
+      "published": "2026-04-06T01:02:02Z",
+      "published_date": "2026-04-06 01:02:02+00:00",
+      "updated": "2026-04-06T01:02:02Z",
       "primary_category": "cs.DC",
       "categories": [
         "cs.DC"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.03143v1",
-      "url": "http://arxiv.org/abs/2604.03143v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.04335v1",
+      "url": "http://arxiv.org/abs/2604.04335v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 3.0,
+        "relevance": 2.32,
         "recency": 3.0,
-        "popularity": 0.8,
-        "quality": 0.8,
-        "recommendation": 8.97
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 8.05
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "llm serving",
         "serving",
-        "prefill",
-        "kv cache",
-        "vllm",
+        "latency",
         "cs.DC",
-        "speedup",
-        "evaluation"
+        "serving system",
+        "baseline"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 5,
+        "text_match_count": 2,
         "matched_categories": [
           "cs.DC"
         ],
         "required_signal_matches": [
-          "kv cache",
-          "prefill",
-          "vllm"
+          "serving system"
         ],
-        "required_signal_match_count": 3,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "speedup"
+          "latency"
         ],
         "bonus_keyword_match_count": 1,
         "analysis_keyword_matches": [
-          "evaluation",
-          "speedup"
+          "baseline",
+          "latency"
         ],
         "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.9,
+        "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2604.02556v1",
-      "arxiv_id": "2604.02556v1",
-      "title": "Fast NF4 Dequantization Kernels for Large Language Model Inference",
-      "summary": "Large language models (LLMs) have grown beyond the memory capacity of single GPU devices, necessitating quantization techniques for practical deployment. While NF4 (4-bit NormalFloat) quantization enables 4$\\times$ memory reduction, inference on current NVIDIA GPUs (e.g., Ampere A100) requires expensive dequantization back to FP16 format, creating a critical performance bottleneck. This paper presents a lightweight shared memory optimization that addresses this gap through principled memory hierarchy exploitation while maintaining full ecosystem compatibility. We compare our technique against the open-source BitsAndBytes implementation, achieving 2.0--2.2$\\times$ kernel speedup across three models (Gemma 27B, Qwen3 32B, and Llama3.3 70B) and up to 1.54$\\times$ end-to-end improvement by leveraging the 12--15$\\times$ latency advantage of shared memory over global memory access. Our optimization reduces instruction counts through simplified indexing logic while using only 64 bytes of shared memory per thread block, demonstrating that lightweight optimizations can deliver substantial performance gains with minimal engineering effort. This work provides a plug-and-play solution for the HuggingFace ecosystem that democratizes access to advanced models on existing GPU infrastructure.",
+      "id": "http://arxiv.org/abs/2604.04238v1",
+      "arxiv_id": "2604.04238v1",
+      "title": "Agentic Code Optimization via Compiler-LLM Cooperation",
+      "summary": "Generating performant executables from high level languages is critical to software performance across a wide range of domains. Modern compilers perform this task by passing code through a series of well-studied optimizations at progressively lower levels of abstraction, but may miss optimization opportunities that require high-level reasoning about a program's purpose. Recent work has proposed using LLMs to fill this gap. While LLMs can achieve large speedups on some programs, they frequently generate code that is incorrect. In this work, we propose a method to balance the correctness of conventional compiler optimizations with the ``creativity'' of LLM-based code generation: compiler-LLM cooperation. Our approach integrates existing compiler optimization passes with LLM-based code generation at multiple levels of abstraction, retaining the best features of both types of code optimization. We realize our approach with a multi-agent system that includes (1) LLM-based optimization agents for each level of abstraction, (2) individual compiler constituents as tools, (3) an LLM-based test generation agent that probes the correctness and performance of generated code, and (4) a guiding LLM that orchestrates the other components. The strategy enables LLM-based optimization of input programs at multiple levels of abstraction and introduces a method for distributing computational budget between levels. Our extensive evaluation shows that compiler-LLM cooperation outperforms both existing compiler optimizations and level-specific LLM-based baselines, producing speedups up to 1.25x.",
       "authors": [
-        "Xiangbo Qi",
-        "Chaoyi Jiang",
-        "Murali Annavaram"
+        "Benjamin Mikek",
+        "Danylo Vashchilenko",
+        "Bryan Lu",
+        "Panpan Xu"
       ],
       "author_details": [
         {
-          "name": "Xiangbo Qi"
+          "name": "Benjamin Mikek"
         },
         {
-          "name": "Chaoyi Jiang"
+          "name": "Danylo Vashchilenko"
         },
         {
-          "name": "Murali Annavaram"
+          "name": "Bryan Lu"
+        },
+        {
+          "name": "Panpan Xu"
         }
       ],
-      "published": "2026-04-02T22:15:57Z",
-      "published_date": "2026-04-02 22:15:57+00:00",
-      "updated": "2026-04-02T22:15:57Z",
-      "comments": "7 pages, 4 figures, EMC2 Workshop at ASPLOS 2026",
-      "primary_category": "cs.LG",
+      "published": "2026-04-05T19:44:02Z",
+      "published_date": "2026-04-05 19:44:02+00:00",
+      "updated": "2026-04-05T19:44:02Z",
+      "primary_category": "cs.PL",
       "categories": [
-        "cs.LG",
-        "cs.AR",
-        "cs.PF"
+        "cs.PL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.02556v1",
-      "url": "http://arxiv.org/abs/2604.02556v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.04238v1",
+      "url": "http://arxiv.org/abs/2604.04238v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 3.0,
+        "relevance": 1.57,
         "recency": 3.0,
-        "popularity": 0.5,
-        "quality": 0.5,
-        "recommendation": 8.72
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 6.73
       },
-      "matched_domain": "LLM Inference Systems",
+      "matched_domain": "Low-level Code And Assembly Generation",
       "matched_keywords": [
-        "language model inference",
-        "latency",
-        "quantization",
-        "cs.LG",
-        "cs.AR",
-        "a100",
-        "memory",
-        "speedup"
+        "compiler optimization",
+        "cs.PL"
       ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.6,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.LG",
-          "cs.AR"
-        ],
-        "required_signal_matches": [
-          "a100"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency",
-          "memory",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "latency",
-          "memory",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.03088v1",
-      "arxiv_id": "2604.03088v1",
-      "title": "SkillRT: Compiling Skills for Efficient Execution Everywhere",
-      "summary": "LLM agents increasingly adopt skills as a reusable unit of composition. While skills are shared across diverse agent platforms, current systems treat them as raw context, causing the same skill to behave inconsistently for different agents. This fragility undermines skill portability and execution efficiency.\n  To address this challenge, we analyze 118,000 skills and draw inspiration from traditional compiler design. We treat skills as code and LLMs as heterogeneous processors. To make portability actionable, we decompose a skill's requirements into a set of primitive capabilities, and measure how well each model-harness pair supports them. Based on these capability profiles, we propose SkillRT, a compilation and runtime system designed for portable and efficient skill execution. At compile time, SkillRT performs capability-based compilation, environment binding, and concurrency extraction. At runtime, SkillRT applies JIT code solidification and adaptive recompilation for performance optimization.\n  We evaluate SkillRT across eight LLMs of varying scales and three agent harnesses, covering SkillsBench and representative skill tasks. Results demonstrate that SkillRT significantly improves task completion rates across different models and environments while reducing token consumption by up to 40%. In terms of performance, SkillRT achieves up to 3.2x speedup with enhanced parallelism, and 19-50x latency reduction through code solidification.",
-      "authors": [
-        "Le Chen",
-        "Erhu Feng",
-        "Yubin Xia",
-        "Haibo Chen"
-      ],
-      "author_details": [
-        {
-          "name": "Le Chen"
-        },
-        {
-          "name": "Erhu Feng"
-        },
-        {
-          "name": "Yubin Xia"
-        },
-        {
-          "name": "Haibo Chen"
-        }
-      ],
-      "published": "2026-04-03T15:11:45Z",
-      "published_date": "2026-04-03 15:11:45+00:00",
-      "updated": "2026-04-03T15:11:45Z",
-      "primary_category": "cs.SE",
-      "categories": [
-        "cs.SE",
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.03088v1",
-      "url": "http://arxiv.org/abs/2604.03088v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.21,
-        "recency": 3.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 7.77
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "latency",
-        "cs.LG",
-        "runtime",
-        "compiler",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
+        "domain": "Low-level Code And Assembly Generation",
         "text_match_count": 1,
         "matched_categories": [
-          "cs.LG"
+          "cs.PL"
         ],
         "required_signal_matches": [
-          "runtime",
-          "compiler"
+          "compiler optimization"
         ],
-        "required_signal_match_count": 2,
-        "bonus_keyword_matches": [
-          "latency",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "latency",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.36
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh"
     }

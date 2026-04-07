@@ -1,217 +1,110 @@
 {
-  "target_date": "2026-04-06",
+  "target_date": "2026-04-07",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-07",
-      "end": "2026-04-06"
+      "start": "2026-03-08",
+      "end": "2026-04-07"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-06",
-      "end": "2026-03-06"
+      "start": "2025-04-07",
+      "end": "2026-03-07"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 20,
+  "total_filtered": 17,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 20,
+  "total_unique": 17,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 6,
+    "selected_count": 3,
     "lane_counts": {
-      "fresh": 5,
+      "fresh": 3,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 17,
+      "classic": 0,
+      "history_filtered": 11,
       "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.02715v1",
-      "arxiv_id": "2604.02715v1",
-      "title": "FluxMoE: Decoupling Expert Residency for High-Performance MoE Serving",
-      "summary": "Mixture-of-Experts (MoE) models have become a dominant paradigm for scaling large language models, but their rapidly growing parameter sizes introduce a fundamental inefficiency during inference: most expert weights remain idle in GPU memory while competing with performance-critical runtime state such as the key-value (KV) cache. Since KV cache capacity directly determines serving throughput, this mismatch leads to underutilized memory and degraded performance. In this paper, we present FluxMoE, a new MoE inference system that decouples expert parameters from persistent GPU residency. FluxMoE introduces an expert paging abstraction that treats expert weights as streamed, transient resources, materializing them on demand and evicting them immediately after use, allowing GPU memory to be preferentially allocated to throughput-critical runtime state. We implement FluxMoE atop vLLM to enable efficient MoE inference under severe memory constraints. Experimental results demonstrate that FluxMoE achieves up to 3.0$\\times$ throughput gains over vLLM in memory-intensive regimes, without compromising model fidelity.",
+      "id": "http://arxiv.org/abs/2604.04921v1",
+      "arxiv_id": "2604.04921v1",
+      "title": "TriAttention: Efficient Long Reasoning with Trigonometric KV Compression",
+      "summary": "Extended reasoning in large language models (LLMs) creates severe KV cache memory bottlenecks. Leading KV cache compression methods estimate KV importance using attention scores from recent post-RoPE queries. However, queries rotate with position during RoPE, making representative queries very few, leading to poor top-key selection and unstable reasoning. To avoid this issue, we turn to the pre-RoPE space, where we observe that Q and K vectors are highly concentrated around fixed non-zero centers and remain stable across positions -- Q/K concentration. We show that this concentration causes queries to preferentially attend to keys at specific distances (e.g., nearest keys), with the centers determining which distances are preferred via a trigonometric series. Based on this, we propose TriAttention to estimate key importance by leveraging these centers. Via the trigonometric series, we use the distance preference characterized by these centers to score keys according to their positions, and also leverage Q/K norms as an additional signal for importance estimation. On AIME25 with 32K-token generation, TriAttention matches Full Attention reasoning accuracy while achieving 2.5x higher throughput or 10.7x KV memory reduction, whereas leading baselines achieve only about half the accuracy at the same efficiency. TriAttention enables OpenClaw deployment on a single consumer GPU, where long context would otherwise cause out-of-memory with Full Attention.",
       "authors": [
-        "Qingxiu Liu",
-        "Cyril Y. He",
-        "Hanser Jiang",
-        "Zion Wang",
-        "Alan Zhao",
-        "Patrick P. C. Lee"
+        "Weian Mao",
+        "Xi Lin",
+        "Wei Huang",
+        "Yuxin Xie",
+        "Tianfu Fu",
+        "Bohan Zhuang",
+        "Song Han",
+        "Yukang Chen"
       ],
       "author_details": [
         {
-          "name": "Qingxiu Liu"
+          "name": "Weian Mao"
         },
         {
-          "name": "Cyril Y. He"
+          "name": "Xi Lin"
         },
         {
-          "name": "Hanser Jiang"
+          "name": "Wei Huang"
         },
         {
-          "name": "Zion Wang"
+          "name": "Yuxin Xie"
         },
         {
-          "name": "Alan Zhao"
+          "name": "Tianfu Fu"
         },
         {
-          "name": "Patrick P. C. Lee"
+          "name": "Bohan Zhuang"
+        },
+        {
+          "name": "Song Han"
+        },
+        {
+          "name": "Yukang Chen"
         }
       ],
-      "published": "2026-04-03T04:16:01Z",
-      "published_date": "2026-04-03 04:16:01+00:00",
-      "updated": "2026-04-03T04:16:01Z",
-      "primary_category": "cs.LG",
+      "published": "2026-04-06T17:58:42Z",
+      "published_date": "2026-04-06 17:58:42+00:00",
+      "updated": "2026-04-06T17:58:42Z",
+      "comments": "Code is available at https://github.com/WeianMao/triattention",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.LG"
+        "cs.CL",
+        "cs.CV"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.02715v1",
-      "url": "http://arxiv.org/abs/2604.02715v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.04921v1",
+      "url": "http://arxiv.org/abs/2604.04921v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 3.0,
+        "relevance": 2.46,
         "recency": 3.0,
         "popularity": 1.1,
         "quality": 1.1,
-        "recommendation": 9.22
+        "recommendation": 8.23
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "serving",
         "kv cache",
-        "vllm",
         "throughput",
-        "cs.LG",
-        "runtime",
+        "cs.CL",
         "memory"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 4,
-        "matched_categories": [
-          "cs.LG"
-        ],
-        "required_signal_matches": [
-          "kv cache",
-          "vllm",
-          "runtime"
-        ],
-        "required_signal_match_count": 3,
-        "bonus_keyword_matches": [
-          "throughput",
-          "memory"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "throughput",
-          "memory"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper presents an MoE serving design that stops keeping expert weights permanently resident on GPU and instead pages experts in on demand to free memory for KV cache and other throughput-critical state.",
-        "summary_zh": "The paper targets a core MoE serving bottleneck: expert weights occupy GPU memory even though only a small subset is active per token, while KV cache capacity is the resource that more directly drives throughput. FluxMoE addresses this by decoupling expert residency from persistent GPU memory, treating experts as transient paged resources that are materialized when needed and evicted immediately after use. Implemented on top of vLLM, the system is positioned as a serving runtime change rather than a model-side modification. The abstract claims up to 3.0x throughput improvement over vLLM in memory-intensive settings without hurting model fidelity, which makes the method relevant for constrained-memory MoE deployment. The biggest missing detail is the actual cost model and operating envelope: the abstract does not make clear the paging overheads, hardware assumptions, routing locality, or when streaming experts stops paying off.",
-        "background_zh": "Modern MoE models scale parameter count by activating only a few experts per token, but serving still suffers because many expert weights occupy scarce GPU memory that could otherwise expand KV cache capacity and raise throughput.",
-        "problem_zh": "The paper asks how to serve large MoE models more efficiently when persistent GPU residency of mostly idle expert weights conflicts with the memory needed for throughput-critical runtime state.",
-        "approach_zh": "FluxMoE introduces an expert paging abstraction that streams expert weights into GPU memory on demand and evicts them after use, reallocating persistent memory budget toward KV cache and related serving state.",
-        "evidence_zh": "According to the abstract, the system is implemented on top of vLLM and shows up to 3.0x throughput gains in memory-intensive regimes without compromising model fidelity, but the abstract does not make the evaluation setup or evidence scope clear.",
-        "value_zh": "If the tradeoff holds in practice, this could improve MoE serving efficiency under tight GPU memory budgets by converting unused expert residency into higher effective KV cache capacity and better throughput.",
-        "open_questions": [
-          "What are the paging overheads in bandwidth, latency, and scheduling, and under what batch sizes or sequence lengths do they outweigh the throughput gains?",
-          "What hardware and memory hierarchy assumptions does FluxMoE rely on, and where are expert weights stored and streamed from during inference?",
-          "How fair is the comparison to baseline vLLM, including KV-cache settings, expert placement policy, and fidelity validation across workloads?"
-        ],
-        "core_contributions": [
-          "Frames persistent expert residency as a serving inefficiency that directly competes with KV cache capacity in MoE inference.",
-          "Introduces a runtime abstraction that pages expert weights on demand instead of pinning them in GPU memory.",
-          "Implements the design on top of vLLM and reports improved throughput in memory-constrained serving regimes."
-        ],
-        "why_read": [
-          "It is directly about MoE serving throughput and memory allocation, not generic model scaling.",
-          "The main claimed gain comes from a concrete systems mechanism: trading resident expert memory for more throughput-critical runtime state.",
-          "It may be useful for readers tracking vLLM-based serving designs and memory-management strategies for sparse LLMs."
-        ],
-        "risks": [
-          "The abstract does not specify the paging source, bandwidth bottlenecks, or overlap strategy, so the gains may depend heavily on hardware and workload locality.",
-          "Memory-intensive regimes' is broad; the reported improvement may not generalize to less constrained deployments or different routing patterns."
-        ],
-        "recommended_for": [
-          "Researchers working on LLM serving runtimes and KV-cache-aware memory management.",
-          "Engineers deploying large MoE models under tight GPU memory constraints.",
-          "Readers interested in compiler/runtime-style resource decoupling for sparse inference systems."
-        ],
-        "keywords": [
-          "MoE serving",
-          "LLM inference systems",
-          "expert paging",
-          "GPU memory management",
-          "KV cache",
-          "vLLM"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "Strong fit with the stated focus on LLM inference acceleration and serving efficiency; the paper proposes a concrete runtime mechanism for improving MoE throughput, though the abstract leaves important evaluation and hardware details unresolved.",
-        "fallback_summary": "Mixture-of-Experts (MoE) models have become a dominant paradigm for scaling large language models, but their rapidly growing parameter sizes introduce a fundamental inefficiency during inference: most expert weights remain idle in GPU memory while competing with performance-critical runtime state such as the key-value (KV) cache."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.02638v1",
-      "arxiv_id": "2604.02638v1",
-      "title": "AXELRAM: Quantize Once, Never Dequantize",
-      "summary": "We propose AXELRAM, a smart SRAM macro architecture that computes attention scores directly from quantized KV cache indices without dequantization. The key enabler is a design-time fixed codebook: orthogonal-transform-based quantization concentrates each coordinate's distribution to N(0,1/d), so the optimal quantizer depends only on dimension d and bit-width b, not on input data. The asymmetric path design -- transform on write, table-lookup on read with no inverse transform -- reduces per-query multiplications by 102.4x (a mathematical identity).\n  Through multi-seed evaluation (10 seeds x 3 models), we discover that sign pattern sensitivity causes catastrophic PPL spikes (Delta > 50) on certain models (Qwen2.5-3B), while others (LLaMA-3.1-8B) are fully stable. This phenomenon extends SpinQuant's observation of rotation variance in weight quantization to the KV cache domain, where the effect is qualitatively more severe. We trace the root cause to layer-wise norm heterogeneity and propose a gradient-free sign pattern selection (200 candidates, 8 calibration samples, one-time) that eliminates catastrophic spikes with zero additional hardware cost. All source code is available at https://github.com/Axelidea/AXELRAM.",
-      "authors": [
-        "Yasushi Nishida"
-      ],
-      "author_details": [
-        {
-          "name": "Yasushi Nishida"
-        }
-      ],
-      "published": "2026-04-03T02:03:38Z",
-      "published_date": "2026-04-03 02:03:38+00:00",
-      "updated": "2026-04-03T02:03:38Z",
-      "comments": "6 pages, 3 figures, 3 tables. Code: https://github.com/Axelidea/AXELRAM",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AR"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.02638v1",
-      "url": "http://arxiv.org/abs/2604.02638v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.83,
-        "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 8.99
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "kv cache",
-        "quantization",
-        "cs.LG",
-        "cs.AR",
-        "evaluation"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -220,565 +113,360 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 2,
         "matched_categories": [
-          "cs.LG",
-          "cs.AR"
+          "cs.CL"
         ],
         "required_signal_matches": [
           "kv cache"
         ],
         "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "throughput",
+          "memory"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "throughput",
+          "memory"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.36
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper proposes a RoPE-aware KV cache compression method that scores key importance from pre-RoPE Q/K structure instead of recent post-RoPE attention, targeting long-reasoning memory bottlenecks.",
+        "summary_zh": "This paper studies KV cache compression for long-reasoning LLM workloads, where memory growth and cache bandwidth become the main deployment bottlenecks. The key claim is that post-RoPE queries are a poor basis for importance estimation, so the method moves to pre-RoPE space and uses stable Q/K centers plus a trigonometric distance-preference model, along with Q/K norms, to rank keys for retention. The abstract reports that on AIME25 with 32K-token generation, the method matches full-attention reasoning accuracy while delivering either higher throughput or much lower KV memory use, and that it makes single-consumer-GPU deployment feasible for a long-context OpenClaw setup. The practical value is clear if the scoring rule is cheap and robust, because it would turn KV compression from a heuristic cache pruning trick into a more structure-aware long-context serving mechanism. The main missing details are baseline fairness, runtime overhead of the scoring logic, hardware setup, and how well the claimed Q/K concentration behavior generalizes beyond the reported setting.",
+        "background_zh": "Long-context reasoning pushes KV cache memory and bandwidth to the forefront, so inference systems need compression schemes that preserve accuracy under aggressive cache reduction.",
+        "problem_zh": "The paper asks how to estimate KV importance more reliably under RoPE, given that recent post-RoPE attention can mis-rank keys and destabilize long reasoning.",
+        "approach_zh": "It models stable pre-RoPE Q/K concentration around non-zero centers, derives position-based distance preferences through a trigonometric series, and combines that signal with Q/K norms to score which keys to keep.",
+        "evidence_zh": "The abstract claims matching full-attention accuracy on AIME25 at 32K tokens while improving throughput or reducing KV memory substantially, but it does not make the evaluation protocol, hardware assumptions, or per-baseline cost tradeoffs fully clear.",
+        "value_zh": "If the method holds up, it could materially improve long-context LLM serving by reducing KV footprint enough to unlock cheaper hardware targets without giving up reasoning quality.",
+        "open_questions": [
+          "What is the exact runtime overhead of TriAttention's scoring pipeline relative to the saved KV memory and bandwidth?",
+          "How fair are the baseline comparisons in token budget, retained-cache ratio, decoding setup, and hardware configuration?",
+          "Does the pre-RoPE concentration assumption remain stable across model families, layers, tasks, and much longer contexts than the reported AIME25 setting?"
+        ],
+        "core_contributions": [
+          "Identifies post-RoPE query instability as a weakness in existing KV importance estimation for long reasoning.",
+          "Introduces a pre-RoPE key scoring method based on Q/K concentration centers, trigonometric distance preference, and Q/K norms.",
+          "Reports a deployment-oriented result where long-context reasoning fits on a single consumer GPU instead of running out of memory under full attention."
+        ],
+        "why_read": [
+          "It is directly about KV-cache compression for long-reasoning inference, which is a core systems bottleneck.",
+          "The mechanism is more structural than standard attention-score heuristics and may matter for robust cache pruning under RoPE.",
+          "The abstract includes both accuracy and deployment claims, so it is useful for judging whether this is a real serving method or just a benchmark-specific compression trick."
+        ],
+        "risks": [
+          "The claimed gains may depend heavily on the specific benchmark, context length, or model rather than general long-context serving workloads.",
+          "The abstract does not clarify the computational overhead of the scoring method, so throughput gains may be sensitive to implementation details and hardware balance between compute and memory bandwidth."
+        ],
+        "recommended_for": [
+          "Researchers working on KV-cache compression and long-context LLM inference.",
+          "Engineers evaluating whether structured cache scoring can reduce memory enough for consumer-GPU deployment.",
+          "Readers interested in how RoPE geometry can inform inference-time systems decisions."
+        ],
+        "keywords": [
+          "KV cache compression",
+          "long-context inference",
+          "LLM reasoning",
+          "RoPE",
+          "throughput",
+          "memory reduction"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High fit with LLM inference systems: it targets KV-cache memory directly, claims substantial throughput and memory gains, and proposes a concrete mechanism tied to RoPE behavior rather than a generic pruning heuristic.",
+        "fallback_summary": "Extended reasoning in large language models (LLMs) creates severe KV cache memory bottlenecks."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.04335v1",
+      "arxiv_id": "2604.04335v1",
+      "title": "GENSERVE: Efficient Co-Serving of Heterogeneous Diffusion Model Workloads",
+      "summary": "Diffusion models have emerged as the prevailing approach for text-to-image (T2I) and text-to-video (T2V) generation, yet production platforms must increasingly serve both modalities on shared GPU clusters while meeting stringent latency SLOs. Co-serving such heterogeneous workloads is challenging: T2I and T2V requests exhibit vastly different compute demands, parallelism characteristics, and latency requirements, leading to significant SLO violations in existing serving systems. We present GENSERVE, a co-serving system that leverages the inherent predictability of the diffusion process to optimize serving efficiency. A central insight is that diffusion inference proceeds in discrete, predictable steps and is naturally preemptible at step boundaries, opening a new design space for heterogeneity-aware resource management. GENSERVE introduces step-level resource adaptation through three coordinated mechanisms: intelligent video preemption, elastic sequence parallelism with dynamic batching, and an SLO-aware scheduler that jointly optimizes resource allocation across all concurrent requests. Experimental results show that GENSERVE improves the SLO attainment rate by up to 44% over the strongest baseline across diverse configurations.",
+      "authors": [
+        "Fanjiang Ye",
+        "Zhangke Li",
+        "Xinrui Zhong",
+        "Ethan Ma",
+        "Russell Chen",
+        "Kaijian Wang",
+        "Jingwei Zuo",
+        "Desen Sun",
+        "Ye Cao",
+        "Triston Cao",
+        "Myungjin Lee",
+        "Arvind Krishnamurthy",
+        "Yuke Wang"
+      ],
+      "author_details": [
+        {
+          "name": "Fanjiang Ye"
+        },
+        {
+          "name": "Zhangke Li"
+        },
+        {
+          "name": "Xinrui Zhong"
+        },
+        {
+          "name": "Ethan Ma"
+        },
+        {
+          "name": "Russell Chen"
+        },
+        {
+          "name": "Kaijian Wang"
+        },
+        {
+          "name": "Jingwei Zuo"
+        },
+        {
+          "name": "Desen Sun"
+        },
+        {
+          "name": "Ye Cao"
+        },
+        {
+          "name": "Triston Cao"
+        },
+        {
+          "name": "Myungjin Lee"
+        },
+        {
+          "name": "Arvind Krishnamurthy"
+        },
+        {
+          "name": "Yuke Wang"
+        }
+      ],
+      "published": "2026-04-06T01:02:02Z",
+      "published_date": "2026-04-06 01:02:02+00:00",
+      "updated": "2026-04-06T01:02:02Z",
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.04335v1",
+      "url": "http://arxiv.org/abs/2604.04335v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.32,
+        "recency": 3.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 8.05
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "serving",
+        "latency",
+        "cs.DC",
+        "serving system",
+        "baseline"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 2,
+        "matched_categories": [
+          "cs.DC"
+        ],
+        "required_signal_matches": [
+          "serving system"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "latency"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "baseline",
+          "latency"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper proposes a diffusion serving system that co-schedules text-to-image and text-to-video requests by exploiting step-level predictability and preemptibility in diffusion inference.",
+        "summary_zh": "This paper targets a practical serving problem: text-to-image and text-to-video diffusion workloads increasingly share GPU clusters, but their compute profiles and latency needs differ enough that existing systems miss SLOs. The core idea is to treat diffusion inference as a sequence of predictable, discrete steps, then use that structure for finer-grained resource control during co-serving. GENSERVE combines video preemption at step boundaries, elastic sequence parallelism with dynamic batching, and an SLO-aware scheduler that jointly allocates resources across concurrent requests. The abstract claims up to a 44% improvement in SLO attainment rate over a strongest baseline across diverse settings, which suggests the gains come from better scheduling and adaptation rather than a new model architecture. The main missing details are hardware assumptions, workload mix, baseline fairness, and the overheads of preemption and dynamic reconfiguration.",
+        "background_zh": "Shared GPU serving for diffusion models is becoming more common as platforms support both image and video generation, but these workloads stress the cluster in different ways.",
+        "problem_zh": "The paper asks how to co-serve heterogeneous diffusion requests without causing excessive latency or SLO violations when T2I and T2V jobs have very different runtime and parallelism behavior.",
+        "approach_zh": "It uses the stepwise structure of diffusion inference to enable step-boundary preemption and pairs that with adaptive parallelism, dynamic batching, and an SLO-aware global scheduler.",
+        "evidence_zh": "The abstract reports experimental gains of up to 44% in SLO attainment rate versus a strongest baseline across diverse configurations, but it does not make the evaluation setup or tradeoffs clear.",
+        "value_zh": "If the method is robust, it could improve utilization and tail-latency control for mixed diffusion serving clusters without changing the underlying generation models.",
+        "open_questions": [
+          "What hardware setup, workload mix, and SLO definitions were used to produce the reported SLO attainment gains?",
+          "How much overhead do step-level preemption, elastic sequence parallelism, and dynamic batching introduce in practice?",
+          "How fair are the baselines, especially regarding batching, parallelism configuration, and scheduling knowledge about diffusion step structure?"
+        ],
+        "core_contributions": [
+          "Frames diffusion co-serving around step-level predictability and preemptibility rather than treating requests as monolithic jobs.",
+          "Combines three coordinated mechanisms: intelligent video preemption, elastic sequence parallelism with dynamic batching, and an SLO-aware scheduler.",
+          "Targets heterogeneous T2I and T2V co-serving as a systems problem and reports improved SLO attainment over prior serving baselines."
+        ],
+        "why_read": [
+          "Useful if you care about scheduler and runtime design for mixed generative workloads on shared GPU clusters.",
+          "The step-boundary preemption idea is a concrete systems lever that may generalize to other iterative inference pipelines.",
+          "The paper appears focused on latency/SLO behavior rather than model changes, which is relevant for serving-stack readers."
+        ],
+        "risks": [
+          "The abstract emphasizes SLO attainment but does not clarify throughput, utilization, or cost tradeoffs.",
+          "It is unclear whether the reported gains depend on specific workload predictability or carefully tuned cluster settings that may limit generality after a full read."
+        ],
+        "recommended_for": [
+          "Researchers working on inference scheduling and multi-tenant GPU serving.",
+          "Engineers operating shared clusters for diffusion image and video generation.",
+          "Readers interested in runtime mechanisms for preemption and adaptive parallelism in iterative inference."
+        ],
+        "keywords": [
+          "diffusion serving",
+          "co-serving",
+          "text-to-image",
+          "text-to-video",
+          "SLO-aware scheduling",
+          "preemption"
+        ],
+        "reading_priority": "medium",
+        "reading_priority_reason": "This is relevant to serving efficiency and scheduler design, but it is adjacent to the user's core LLM and low-level code generation focus, and the abstract leaves important systems details unspecified.",
+        "fallback_summary": "Diffusion models have emerged as the prevailing approach for text-to-image (T2I) and text-to-video (T2V) generation, yet production platforms must increasingly serve both modalities on shared GPU clusters while meeting stringent latency SLOs."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.04238v1",
+      "arxiv_id": "2604.04238v1",
+      "title": "Agentic Code Optimization via Compiler-LLM Cooperation",
+      "summary": "Generating performant executables from high level languages is critical to software performance across a wide range of domains. Modern compilers perform this task by passing code through a series of well-studied optimizations at progressively lower levels of abstraction, but may miss optimization opportunities that require high-level reasoning about a program's purpose. Recent work has proposed using LLMs to fill this gap. While LLMs can achieve large speedups on some programs, they frequently generate code that is incorrect. In this work, we propose a method to balance the correctness of conventional compiler optimizations with the ``creativity'' of LLM-based code generation: compiler-LLM cooperation. Our approach integrates existing compiler optimization passes with LLM-based code generation at multiple levels of abstraction, retaining the best features of both types of code optimization. We realize our approach with a multi-agent system that includes (1) LLM-based optimization agents for each level of abstraction, (2) individual compiler constituents as tools, (3) an LLM-based test generation agent that probes the correctness and performance of generated code, and (4) a guiding LLM that orchestrates the other components. The strategy enables LLM-based optimization of input programs at multiple levels of abstraction and introduces a method for distributing computational budget between levels. Our extensive evaluation shows that compiler-LLM cooperation outperforms both existing compiler optimizations and level-specific LLM-based baselines, producing speedups up to 1.25x.",
+      "authors": [
+        "Benjamin Mikek",
+        "Danylo Vashchilenko",
+        "Bryan Lu",
+        "Panpan Xu"
+      ],
+      "author_details": [
+        {
+          "name": "Benjamin Mikek"
+        },
+        {
+          "name": "Danylo Vashchilenko"
+        },
+        {
+          "name": "Bryan Lu"
+        },
+        {
+          "name": "Panpan Xu"
+        }
+      ],
+      "published": "2026-04-05T19:44:02Z",
+      "published_date": "2026-04-05 19:44:02+00:00",
+      "updated": "2026-04-05T19:44:02Z",
+      "primary_category": "cs.PL",
+      "categories": [
+        "cs.PL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.04238v1",
+      "url": "http://arxiv.org/abs/2604.04238v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.57,
+        "recency": 3.0,
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 6.73
+      },
+      "matched_domain": "Low-level Code And Assembly Generation",
+      "matched_keywords": [
+        "compiler optimization",
+        "cs.PL"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "Low-level Code And Assembly Generation",
+        "text_match_count": 1,
+        "matched_categories": [
+          "cs.PL"
+        ],
+        "required_signal_matches": [
+          "compiler optimization"
+        ],
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "evaluation"
-        ],
-        "analysis_keyword_match_count": 1,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper proposes an SRAM-oriented attention design that operates on quantized KV-cache indices directly, aiming to remove dequantization and most query-side multiply cost.",
-        "summary_zh": "This paper targets KV-cache handling in LLM inference and argues that attention scores can be computed directly from quantized cache indices instead of reconstructing full-precision values. The core idea is a fixed codebook enabled by an orthogonal-transform-based quantization scheme, plus an asymmetric hardware path that applies the transform on write and uses table lookup on read without inverse transform. The abstract claims a mathematical 102.4x reduction in per-query multiplications and reports multi-seed evaluation showing an important failure mode: some models exhibit catastrophic perplexity spikes from sign-pattern sensitivity, while others remain stable. The paper then proposes a gradient-free sign-pattern selection procedure to remove those spikes at no added hardware cost. What still needs a full read is whether end-to-end latency, SRAM area and energy tradeoffs, and baseline fairness actually support the claimed systems benefit beyond the arithmetic-count reduction.",
-        "background_zh": "KV-cache growth and memory movement are major bottlenecks in LLM inference, so quantization is attractive, but dequantization and reconstruction overhead can erase part of the benefit.",
-        "problem_zh": "The paper asks whether attention can consume quantized KV-cache representations directly, while avoiding severe accuracy failures that arise from quantization-induced sensitivity.",
-        "approach_zh": "It combines orthogonal-transform-based quantization with a design-time fixed codebook and an asymmetric read/write path so SRAM can score attention from quantized indices via lookup rather than inverse-transform reconstruction.",
-        "evidence_zh": "The abstract supports two claims: a mathematical reduction in per-query multiplications and multi-seed model evaluations showing both catastrophic instability from sign patterns and mitigation from a one-time gradient-free sign-pattern search; it does not make hardware-level end-to-end gains fully clear.",
-        "value_zh": "If the hardware and accuracy tradeoffs hold, the method could reduce KV-cache read-side compute and simplify attention-serving datapaths for memory-constrained LLM inference.",
+        "one_liner_zh": "This paper proposes a compiler-LLM optimization pipeline that inserts LLM agents at multiple abstraction levels and uses testing plus orchestration to trade off aggressive rewrites against correctness.",
+        "summary_zh": "This paper targets a real gap in program optimization: standard compiler passes are reliable but can miss opportunities that require higher-level semantic reasoning, while LLM rewrites can sometimes find better code but often break correctness. The proposed system combines both by placing LLM optimization agents alongside compiler tools at multiple abstraction levels, with a guiding LLM coordinating the process and a separate LLM agent generating tests to check correctness and performance. The abstract claims that this cooperative setup beats conventional compiler optimization and single-level LLM baselines, with reported speedups up to 1.25x. The practical value is the attempt to make LLM-driven optimization less brittle by constraining it inside a compiler-oriented workflow rather than treating code rewriting as a free-form generation problem. The biggest missing detail is evaluation quality: the abstract does not make clear what programs were used, how correctness was validated beyond generated tests, or how much compute budget the multi-agent search requires.",
+        "background_zh": "Compiler pipelines are strong at systematic low-level optimization, but they are less suited to transformations that depend on higher-level intent, which is why LLM-based optimization has recently been explored despite correctness risks.",
+        "problem_zh": "The core problem is how to use LLMs for program optimization without giving up the reliability of compiler-driven code generation.",
+        "approach_zh": "The method interleaves compiler passes and LLM optimization agents across multiple abstraction levels, adds an LLM test-generation component for validation, and uses a guiding LLM to allocate search effort across levels.",
+        "evidence_zh": "The abstract supports the claim that the system was evaluated against compiler-only and level-specific LLM baselines and reports speedups up to 1.25x, but it does not make the evaluation setup or validation strength clear.",
+        "value_zh": "If the method is robust, it could provide a more disciplined way to use LLMs for performance optimization by embedding them inside a compiler-and-testing loop rather than relying on unconstrained code rewrites.",
         "open_questions": [
-          "What exact SRAM macro design, lookup tables, and area/energy costs are required to realize the claimed no-dequantization attention path?",
-          "How do end-to-end latency, throughput, and perplexity compare against strong KV-cache quantization baselines under the same models, sequence lengths, and hardware assumptions?",
-          "How robust is the sign-pattern selection across models, layers, and deployment settings, and what calibration burden is required in practice?"
+          "What benchmarks and program classes were used, and do the gains come from a few outliers or hold broadly across workloads?",
+          "How is semantic correctness established in cases where LLM-generated tests may miss corner cases or undefined-behavior changes?",
+          "What is the runtime and token-cost overhead of the multi-agent orchestration, and does the optimization payoff justify that budget?"
         ],
         "core_contributions": [
-          "A hardware-oriented attention formulation that uses quantized KV-cache indices directly instead of dequantizing cached values.",
-          "A fixed-codebook argument based on orthogonal-transform quantization, making the quantizer depend on dimension and bit-width rather than input data.",
-          "An empirical analysis of sign-pattern sensitivity in KV-cache quantization, plus a gradient-free one-time selection method to remove catastrophic failures."
+          "A compiler-LLM cooperation framework that mixes standard compiler passes with LLM-driven optimization instead of replacing the compiler outright.",
+          "A multi-agent design with separate optimization agents at different abstraction levels plus a guiding controller.",
+          "An LLM-based test-generation component used to probe correctness and performance of generated variants."
         ],
         "why_read": [
-          "It is directly about KV-cache efficiency, which is central to LLM inference-system bottlenecks.",
-          "It separates an attractive systems idea from a non-obvious stability failure mode, which is useful for anyone considering aggressive cache-side quantization.",
-          "It may offer a concrete example of algorithm and memory-macro co-design rather than a purely software quantization tweak."
+          "It is one of the more systems-oriented attempts to make LLM code optimization compatible with compiler structure and validation.",
+          "It frames optimization as budgeted search across abstraction levels, which is more concrete than single-shot rewrite generation.",
+          "It may be relevant to readers interested in whether LLMs can contribute to low-level optimization without fully trusting generated code."
         ],
         "risks": [
-          "The main systems gain stated in the abstract is an arithmetic-count reduction, not a clearly demonstrated end-to-end serving improvement.",
-          "The method appears sensitive to model-dependent sign patterns, which raises portability and reproducibility concerns across architectures and scales."
+          "The reported gain ceiling in the abstract is modest, so orchestration overhead may matter.",
+          "Correctness assurance may be weak if it depends heavily on generated tests rather than stronger validation methods."
         ],
         "recommended_for": [
-          "Researchers working on KV-cache compression and LLM serving hardware",
-          "Engineers evaluating memory-macro or accelerator co-design for attention inference",
-          "Readers interested in quantization failure modes that appear only under multi-seed or cross-model evaluation"
+          "Researchers studying compiler-LLM hybrid optimization",
+          "Engineers evaluating LLMs for performance-sensitive code transformation",
+          "Readers interested in low-level code generation with correctness constraints"
         ],
         "keywords": [
-          "KV cache",
-          "attention",
-          "quantization",
-          "SRAM macro",
-          "LLM inference",
-          "codebook lookup"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "This is tightly aligned with LLM inference systems and cache-side acceleration, and the paper appears to contain both a concrete hardware-path idea and a nontrivial stability caveat that needs careful validation.",
-        "fallback_summary": "We propose AXELRAM, a smart SRAM macro architecture that computes attention scores directly from quantized KV cache indices without dequantization."
-      }
-    },
-    {
-      "paper_id": "2010.05680",
-      "arxiv_id": "2010.05680",
-      "title": "TurboTransformers: An Efficient GPU Serving System For Transformer Models",
-      "summary": "Presents a GPU serving runtime for transformer models that targets online latency and throughput constraints while coping with variable input lengths and memory-management overheads.",
-      "authors": [
-        "Ziheng Jiang",
-        "Ying Liu",
-        "Yu Gu",
-        "Bingyang Zhang",
-        "Jiawei Liu",
-        "Yadong Mu",
-        "Mingyu Guo"
-      ],
-      "published": "2020-10-12",
-      "published_date": "2020-10-12 00:00:00",
-      "categories": [
-        "cs.DC",
-        "cs.LG"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "serving",
-        "runtime",
-        "gpu-system",
-        "variable-length"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.45,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2010.05680",
-      "pdf_url": "https://arxiv.org/pdf/2010.05680.pdf",
-      "scores": {
-        "relevance": 2.6,
-        "recency": 0.0,
-        "popularity": 0.0,
-        "quality": 0.0,
-        "recommendation": 5.22
-      },
-      "classic_rotation_score": 10.3464,
-      "citationCount": 170,
-      "influentialCitationCount": 16,
-      "venue": "ACM SIGPLAN Symposium on Principles & Practice of Parallel Programming",
-      "journal_ref": "Proceedings of the 26th ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming",
-      "ai": {
-        "one_liner_zh": "This paper presents a GPU serving runtime for transformer models aimed at improving online latency and throughput under variable-length requests and memory-management overheads.",
-        "summary_zh": "The paper targets a practical systems problem in transformer serving: keeping latency and throughput acceptable in online GPU inference when request lengths vary and runtime memory costs become significant. From the abstract, the main contribution is a serving runtime specialized for transformer workloads rather than a new model architecture. The claimed mechanism is to handle variable-length inputs and reduce overheads associated with GPU-side memory management, which are common bottlenecks in real serving pipelines. The likely value is for engineers studying how transformer inference systems translate model compute into stable serving performance under production-style request variability. The abstract is very underspecified on the actual runtime design, hardware assumptions, baselines, and measured gains, so a full read is needed to judge system novelty and fairness.",
-        "background_zh": "As transformer deployment moved into online services, serving systems had to deal with request-length variability and runtime overheads that can waste GPU efficiency even when model kernels are fast.",
-        "problem_zh": "The paper asks how to build a GPU serving system for transformer inference that maintains low latency and good throughput despite variable input lengths and memory-management costs.",
-        "approach_zh": "It proposes a transformer-focused GPU serving runtime that explicitly targets scheduling or execution issues caused by variable-length requests and memory overheads, though the abstract does not specify the concrete mechanisms.",
-        "evidence_zh": "The abstract claims the system targets online latency and throughput constraints while addressing variable input lengths and memory-management overheads, but it does not make the evaluation setup or empirical evidence clear.",
-        "value_zh": "If the runtime improvements are real and general, the work could be useful as an early systems reference for transformer serving bottlenecks beyond raw kernel compute, especially around batching efficiency and runtime overhead control.",
-        "open_questions": [
-          "What concrete runtime techniques are used to handle variable-length requests on GPU, and where do the gains actually come from?",
-          "What hardware, model types, batch regimes, and baselines are used in evaluation, and are the comparisons fair to existing serving stacks?",
-          "How much of the reported benefit comes from memory-management changes versus scheduling, batching, or kernel-level optimization?"
-        ],
-        "core_contributions": [
-          "Frames transformer serving as a GPU systems problem shaped by latency, throughput, variable-length inputs, and memory overheads.",
-          "Introduces a dedicated GPU serving runtime for transformer inference rather than focusing only on model architecture.",
-          "Highlights memory-management overhead as a first-class systems bottleneck in online transformer serving."
-        ],
-        "why_read": [
-          "Useful for readers tracing the evolution of transformer inference serving before later LLM-serving stacks became standard.",
-          "Potentially relevant if you care about how request variability interacts with batching and GPU efficiency.",
-          "May provide a systems decomposition of serving bottlenecks beyond pure model FLOPs, though the abstract alone does not confirm the depth."
-        ],
-        "risks": [
-          "The abstract is too high level to tell whether the system introduces genuinely new runtime techniques or mostly repackages standard serving optimizations.",
-          "No concrete evidence, baselines, or quantitative claims are stated in the provided abstract, so impact is hard to assess from this alone."
-        ],
-        "recommended_for": [
-          "Researchers studying LLM or transformer inference serving systems.",
-          "Engineers interested in GPU runtime bottlenecks caused by variable-length requests.",
-          "Readers looking for earlier systems work on transformer serving efficiency rather than model design."
-        ],
-        "keywords": [
-          "GPU serving",
-          "transformer inference",
-          "runtime",
-          "online latency",
-          "throughput",
-          "variable-length requests"
+          "compiler optimization",
+          "LLM-guided optimization",
+          "multi-agent systems",
+          "program correctness",
+          "low-level code generation"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "Strong topic fit for inference systems, but the provided abstract is too underspecified to establish mechanism quality, evaluation rigor, or direct relevance to kernel-level acceleration.",
-        "fallback_summary": "Presents a GPU serving runtime for transformer models that targets online latency and throughput constraints while coping with variable input lengths and memory-management overheads."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.03143v1",
-      "arxiv_id": "2604.03143v1",
-      "title": "TokenDance: Scaling Multi-Agent LLM Serving via Collective KV Cache Sharing",
-      "summary": "Multi-agent LLM applications organize execution in synchronized rounds where a central scheduler gathers outputs from all agents and redistributes the combined context. This All-Gather communication pattern creates massive KV Cache redundancy, because every agent's prompt contains the same shared output blocks, yet existing reuse methods fail to exploit it efficiently. We present TokenDance, a system that scales the number of concurrent agents by exploiting the All-Gather pattern for collective KV Cache sharing. TokenDance's KV Collector performs KV Cache reuse over the full round in one collective step, so the cost of reusing a shared block is paid once regardless of agent count. Its Diff-Aware Storage encodes sibling caches as block-sparse diffs against a single master copy, achieving 11-17x compression on representative workloads. Evaluation on GenerativeAgents and AgentSociety shows that TokenDance supports up to 2.7x more concurrent agents than vLLM with prefix caching under SLO requirement, reduces per-agent KV Cache storage by up to 17.5x, and achieves up to 1.9x prefill speedup over per-request position-independent caching.",
-      "authors": [
-        "Zhuohang Bian",
-        "Feiyang Wu",
-        "Chengrui Zhang",
-        "Hangcheng Dong",
-        "Yun Liang",
-        "Youwei Zhuo"
-      ],
-      "author_details": [
-        {
-          "name": "Zhuohang Bian"
-        },
-        {
-          "name": "Feiyang Wu"
-        },
-        {
-          "name": "Chengrui Zhang"
-        },
-        {
-          "name": "Hangcheng Dong"
-        },
-        {
-          "name": "Yun Liang"
-        },
-        {
-          "name": "Youwei Zhuo"
-        }
-      ],
-      "published": "2026-04-03T16:04:40Z",
-      "published_date": "2026-04-03 16:04:40+00:00",
-      "updated": "2026-04-03T16:04:40Z",
-      "comments": "14 pages, 14 figures, arXiv:submit/7438760 [cs.DC], preprint under review",
-      "primary_category": "cs.DC",
-      "categories": [
-        "cs.DC"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.03143v1",
-      "url": "http://arxiv.org/abs/2604.03143v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 0.8,
-        "quality": 0.8,
-        "recommendation": 8.97
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "llm serving",
-        "serving",
-        "prefill",
-        "kv cache",
-        "vllm",
-        "cs.DC",
-        "speedup",
-        "evaluation"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 5,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "kv cache",
-          "prefill",
-          "vllm"
-        ],
-        "required_signal_match_count": 3,
-        "bonus_keyword_matches": [
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 1,
-        "analysis_keyword_matches": [
-          "evaluation",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.18
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper proposes a multi-agent LLM serving system that exploits round-level all-gather structure to share KV cache collectively instead of duplicating shared prompt blocks across agents.",
-        "summary_zh": "This paper targets a specific inefficiency in synchronized multi-agent LLM serving: agents repeatedly receive the same shared context, but their KV caches are still stored and reused largely per request. The proposed system, TokenDance, introduces a collective KV reuse step across a full round and stores related agent caches as block-sparse diffs against a master copy, so both reuse cost and storage growth scale better with agent count. The abstract claims this reduces KV redundancy substantially, improves prefill performance, and increases the number of concurrent agents that can be served under an SLO compared with vLLM prefix caching and position-independent caching. For systems readers, the main value is the explicit co-design between multi-agent communication structure and KV-cache management rather than another generic cache heuristic. The biggest missing detail is how robust the method is under less synchronized workloads, what the exact hardware and SLO setup are, and whether the reported baselines are fully comparable.",
-        "background_zh": "Multi-agent LLM applications often run in synchronized rounds with shared context exchange, which makes KV-cache duplication a growing systems bottleneck as agent count rises.",
-        "problem_zh": "The paper asks how to scale concurrent multi-agent serving when all-gather style prompt sharing creates large redundant KV caches that existing reuse methods do not amortize well across many agents.",
-        "approach_zh": "TokenDance performs KV reuse collectively at the round level through a KV Collector and compresses related agent caches with diff-aware block-sparse storage against one master cache copy.",
-        "evidence_zh": "According to the abstract, experiments on GenerativeAgents and AgentSociety show higher supported concurrency under an SLO, lower per-agent KV storage, and faster prefill than the named caching baselines, but the abstract does not make the hardware setup or baseline fairness details clear.",
-        "value_zh": "If the method generalizes, it offers a practical way to push multi-agent LLM serving capacity by converting communication-level redundancy into lower memory footprint and lower prefill overhead.",
-        "open_questions": [
-          "How exactly does the collective KV reuse step interact with scheduling, synchronization, and communication overhead at larger cluster scales?",
-          "What hardware configuration, sequence lengths, agent counts, and SLO definitions were used, and are the vLLM and position-independent caching baselines matched fairly?",
-          "How well does the diff-aware scheme hold up when agents diverge more strongly or when workloads are less round-synchronous than the benchmark settings?"
-        ],
-        "core_contributions": [
-          "Identifies all-gather-induced KV redundancy as a first-order systems issue in synchronized multi-agent LLM serving.",
-          "Introduces round-level collective KV cache sharing so reuse cost for shared blocks is paid once rather than per agent.",
-          "Uses diff-aware block-sparse storage for sibling caches to reduce KV memory duplication."
-        ],
-        "why_read": [
-          "It reframes KV-cache optimization around multi-agent communication structure, which is more specific and potentially more useful than generic prefix reuse.",
-          "It reports gains on both memory efficiency and prefill speed, the two main bottlenecks that limit concurrent agent serving.",
-          "It is directly relevant to LLM serving system design, especially for frameworks that coordinate many agents with shared context."
-        ],
-        "risks": [
-          "The gains may depend heavily on synchronized round structure and may weaken for asynchronous or highly divergent agent workloads.",
-          "The abstract does not clarify implementation overheads, communication costs, or failure modes of the collective reuse mechanism at scale."
-        ],
-        "recommended_for": [
-          "Researchers working on LLM inference systems and KV-cache management for multi-agent workloads.",
-          "Engineers building serving stacks for agent frameworks with synchronized shared-context rounds.",
-          "Readers interested in memory-compression and cache-sharing mechanisms tied to serving-runtime structure."
-        ],
-        "keywords": [
-          "multi-agent llm serving",
-          "kv cache sharing",
-          "prefill optimization",
-          "memory compression",
-          "vllm",
-          "collective communication"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "This is a strong fit for LLM inference systems work because it targets KV-cache redundancy, prefill cost, and serving concurrency with a concrete systems mechanism, though the full paper is needed to verify workload assumptions and baseline fairness.",
-        "fallback_summary": "Multi-agent LLM applications organize execution in synchronized rounds where a central scheduler gathers outputs from all agents and redistributes the combined context."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.02556v1",
-      "arxiv_id": "2604.02556v1",
-      "title": "Fast NF4 Dequantization Kernels for Large Language Model Inference",
-      "summary": "Large language models (LLMs) have grown beyond the memory capacity of single GPU devices, necessitating quantization techniques for practical deployment. While NF4 (4-bit NormalFloat) quantization enables 4$\\times$ memory reduction, inference on current NVIDIA GPUs (e.g., Ampere A100) requires expensive dequantization back to FP16 format, creating a critical performance bottleneck. This paper presents a lightweight shared memory optimization that addresses this gap through principled memory hierarchy exploitation while maintaining full ecosystem compatibility. We compare our technique against the open-source BitsAndBytes implementation, achieving 2.0--2.2$\\times$ kernel speedup across three models (Gemma 27B, Qwen3 32B, and Llama3.3 70B) and up to 1.54$\\times$ end-to-end improvement by leveraging the 12--15$\\times$ latency advantage of shared memory over global memory access. Our optimization reduces instruction counts through simplified indexing logic while using only 64 bytes of shared memory per thread block, demonstrating that lightweight optimizations can deliver substantial performance gains with minimal engineering effort. This work provides a plug-and-play solution for the HuggingFace ecosystem that democratizes access to advanced models on existing GPU infrastructure.",
-      "authors": [
-        "Xiangbo Qi",
-        "Chaoyi Jiang",
-        "Murali Annavaram"
-      ],
-      "author_details": [
-        {
-          "name": "Xiangbo Qi"
-        },
-        {
-          "name": "Chaoyi Jiang"
-        },
-        {
-          "name": "Murali Annavaram"
-        }
-      ],
-      "published": "2026-04-02T22:15:57Z",
-      "published_date": "2026-04-02 22:15:57+00:00",
-      "updated": "2026-04-02T22:15:57Z",
-      "comments": "7 pages, 4 figures, EMC2 Workshop at ASPLOS 2026",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AR",
-        "cs.PF"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.02556v1",
-      "url": "http://arxiv.org/abs/2604.02556v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 0.5,
-        "quality": 0.5,
-        "recommendation": 8.72
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "language model inference",
-        "latency",
-        "quantization",
-        "cs.LG",
-        "cs.AR",
-        "a100",
-        "memory",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.LG",
-          "cs.AR"
-        ],
-        "required_signal_matches": [
-          "a100"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency",
-          "memory",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "latency",
-          "memory",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper targets NF4 dequantization as an LLM inference bottleneck on NVIDIA GPUs and proposes a small shared-memory optimization that speeds the kernel up while preserving compatibility with existing HuggingFace-style workflows.",
-        "summary_zh": "This paper studies a practical systems bottleneck in NF4-quantized LLM inference: weights save memory, but runtime dequantization back to FP16 can dominate execution on current NVIDIA GPUs. The authors propose a lightweight kernel optimization that exploits shared memory and simpler indexing logic, with the stated goal of reducing memory access cost and instruction count without breaking existing software stacks. The abstract claims 2.0-2.2x kernel speedup against BitsAndBytes across Gemma 27B, Qwen3 32B, and Llama3.3 70B, plus up to 1.54x end-to-end improvement on A100-class hardware. If those results hold, the value is immediate for quantized serving on installed GPU fleets, but the abstract leaves important details unclear around exact evaluation setup, baseline fairness, and how broadly the method transfers beyond the reported kernels and hardware.",
-        "background_zh": "NF4 quantization helps fit larger LLMs onto limited GPU memory, but its practical benefit depends on whether dequantization overhead erases the serving gains.",
-        "problem_zh": "The paper asks how to reduce the runtime cost of NF4-to-FP16 dequantization on NVIDIA GPUs, where current implementations can turn quantized inference into a memory-system bottleneck.",
-        "approach_zh": "The method uses a small shared-memory staging strategy and simplified indexing logic to better exploit the GPU memory hierarchy while keeping the implementation plug-and-play with the existing ecosystem.",
-        "evidence_zh": "The abstract reports comparisons against the open-source BitsAndBytes implementation, claiming 2.0-2.2x kernel speedup on three models and up to 1.54x end-to-end inference improvement, but it does not make the full evaluation protocol clear.",
-        "value_zh": "If robust, this is a low-complexity serving optimization for NF4-based LLM deployment that could improve throughput or latency on existing A100-class systems without changing model formats.",
-        "open_questions": [
-          "What are the exact kernel shapes, batch/token regimes, and decode versus prefill settings used in the end-to-end evaluation?",
-          "How fair is the BitsAndBytes baseline comparison, including compiler flags, fusion choices, and any surrounding runtime differences?",
-          "Does the shared-memory strategy generalize across newer GPUs, different NF4 layouts, and other quantized inference kernels without introducing occupancy tradeoffs?"
-        ],
-        "core_contributions": [
-          "Identifies NF4 dequantization as a concrete inference bottleneck for large quantized LLMs on NVIDIA GPUs.",
-          "Introduces a lightweight shared-memory optimization with reduced indexing overhead and very small stated shared-memory usage per thread block.",
-          "Reports both kernel-level and end-to-end speedups while keeping compatibility with common HuggingFace-style deployment flows."
-        ],
-        "why_read": [
-          "It focuses on a real inference-path bottleneck rather than proposing a new quantization format.",
-          "The claimed gains come from kernel and memory-hierarchy changes, which is directly relevant to LLM serving and low-level optimization work.",
-          "It may offer a practical template for improving other dequantization or lightweight transform kernels in quantized inference stacks."
-        ],
-        "risks": [
-          "The abstract centers on A100-era hardware, so portability to other architectures is not yet clear.",
-          "The reported end-to-end gains depend heavily on workload mix and system configuration, which the abstract does not fully specify."
-        ],
-        "recommended_for": [
-          "Researchers working on LLM inference kernels and quantized serving runtimes.",
-          "Engineers maintaining NF4 or BitsAndBytes-style inference stacks on NVIDIA GPUs.",
-          "Readers interested in memory-hierarchy-aware kernel optimization rather than new model algorithms."
-        ],
-        "keywords": [
-          "LLM inference",
-          "NF4 quantization",
-          "dequantization kernel",
-          "shared memory",
-          "A100",
-          "BitsAndBytes"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "This is tightly aligned with LLM inference acceleration and kernel-level optimization, and the abstract makes a concrete systems claim with immediate serving relevance, even though baseline fairness and evaluation details still need verification.",
-        "fallback_summary": "Large language models (LLMs) have grown beyond the memory capacity of single GPU devices, necessitating quantization techniques for practical deployment."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.03088v1",
-      "arxiv_id": "2604.03088v1",
-      "title": "SkillRT: Compiling Skills for Efficient Execution Everywhere",
-      "summary": "LLM agents increasingly adopt skills as a reusable unit of composition. While skills are shared across diverse agent platforms, current systems treat them as raw context, causing the same skill to behave inconsistently for different agents. This fragility undermines skill portability and execution efficiency.\n  To address this challenge, we analyze 118,000 skills and draw inspiration from traditional compiler design. We treat skills as code and LLMs as heterogeneous processors. To make portability actionable, we decompose a skill's requirements into a set of primitive capabilities, and measure how well each model-harness pair supports them. Based on these capability profiles, we propose SkillRT, a compilation and runtime system designed for portable and efficient skill execution. At compile time, SkillRT performs capability-based compilation, environment binding, and concurrency extraction. At runtime, SkillRT applies JIT code solidification and adaptive recompilation for performance optimization.\n  We evaluate SkillRT across eight LLMs of varying scales and three agent harnesses, covering SkillsBench and representative skill tasks. Results demonstrate that SkillRT significantly improves task completion rates across different models and environments while reducing token consumption by up to 40%. In terms of performance, SkillRT achieves up to 3.2x speedup with enhanced parallelism, and 19-50x latency reduction through code solidification.",
-      "authors": [
-        "Le Chen",
-        "Erhu Feng",
-        "Yubin Xia",
-        "Haibo Chen"
-      ],
-      "author_details": [
-        {
-          "name": "Le Chen"
-        },
-        {
-          "name": "Erhu Feng"
-        },
-        {
-          "name": "Yubin Xia"
-        },
-        {
-          "name": "Haibo Chen"
-        }
-      ],
-      "published": "2026-04-03T15:11:45Z",
-      "published_date": "2026-04-03 15:11:45+00:00",
-      "updated": "2026-04-03T15:11:45Z",
-      "primary_category": "cs.SE",
-      "categories": [
-        "cs.SE",
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.03088v1",
-      "url": "http://arxiv.org/abs/2604.03088v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.21,
-        "recency": 3.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 7.77
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "latency",
-        "cs.LG",
-        "runtime",
-        "compiler",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 1,
-        "matched_categories": [
-          "cs.LG"
-        ],
-        "required_signal_matches": [
-          "runtime",
-          "compiler"
-        ],
-        "required_signal_match_count": 2,
-        "bonus_keyword_matches": [
-          "latency",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "latency",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper frames reusable agent skills as compilable programs and proposes a compiler-runtime stack that adapts them to different model and harness capabilities for better portability and lower execution cost.",
-        "summary_zh": "The paper argues that agent skills are currently passed around as raw prompt context, which makes them fragile across different LLMs and agent harnesses and wastes execution budget. It proposes SkillRT, a compiler and runtime that treats skills like code, profiles primitive capabilities of each model-harness pair, and then performs capability-based compilation, environment binding, concurrency extraction, JIT code solidification, and adaptive recompilation. The abstract claims improved task completion across eight LLMs and three harnesses, along with lower token use, higher parallelism, and large latency reductions from code solidification. For systems readers, the interesting angle is the compiler/runtime co-design for cross-model agent execution rather than standard prompting. The biggest missing detail is what the capability model actually looks like, how fair the baselines are, and how much of the gain comes from execution caching or task-specific restructuring versus genuinely better portability.",
-        "background_zh": "As LLM agents adopt reusable skills, portability becomes a systems problem because the same skill can execute differently across models and orchestration harnesses.",
-        "problem_zh": "The paper asks how to make shared agent skills both portable and efficient across heterogeneous model-harness environments instead of treating them as brittle raw context.",
-        "approach_zh": "SkillRT decomposes skill requirements into primitive capabilities, matches them to capability profiles of model-harness pairs, compiles skills accordingly, and applies runtime solidification and adaptive recompilation to optimize execution.",
-        "evidence_zh": "The abstract reports evaluation on 118,000 analyzed skills, eight LLMs, three agent harnesses, SkillsBench, and representative tasks, and claims better completion, lower token use, and lower latency, but it does not make the exact evaluation protocol or baseline fairness fully clear.",
-        "value_zh": "If the method holds up, it suggests a practical path to serving reusable agent skills with lower latency and token cost while reducing environment-specific breakage.",
-        "open_questions": [
-          "What are the primitive capabilities, and how are capability profiles measured for each model-harness pair?",
-          "How are the baselines constructed, and are the reported gains mainly from compilation decisions, concurrency extraction, or runtime code solidification?",
-          "What assumptions does code solidification make about task determinism, environment state, and safety when reusing or specializing skill executions?"
-        ],
-        "core_contributions": [
-          "Reframes agent skills as compilable artifacts rather than raw prompt snippets.",
-          "Introduces a capability-based compilation pipeline for mapping skills onto heterogeneous model and harness environments.",
-          "Combines compile-time restructuring with runtime JIT solidification and adaptive recompilation for lower-cost skill execution."
-        ],
-        "why_read": [
-          "It connects agent skill portability to a compiler/runtime formulation instead of another prompting recipe.",
-          "It reports systems-relevant gains in token cost, parallelism, and latency across multiple models and harnesses.",
-          "It may be useful for readers interested in execution-layer optimization for LLM agents rather than model training."
-        ],
-        "risks": [
-          "The abstract leaves unclear how general the capability abstraction is beyond the evaluated benchmarks and harnesses.",
-          "Large latency improvements may depend heavily on solidification assumptions that do not transfer to stateful or open-ended agent tasks."
-        ],
-        "recommended_for": [
-          "Researchers working on LLM agent runtimes and serving systems.",
-          "Engineers interested in compiler-style optimization for reusable agent workflows.",
-          "Readers evaluating portability mechanisms across heterogeneous LLM backends and orchestration harnesses."
-        ],
-        "keywords": [
-          "LLM agents",
-          "skill compilation",
-          "runtime optimization",
-          "portability",
-          "capability profiling",
-          "latency reduction"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "Strong fit with LLM inference systems and compiler-runtime co-design: the paper targets execution efficiency, latency, and portability across heterogeneous LLM environments, though a full read is needed to verify baseline fairness and the real source of the reported gains.",
-        "fallback_summary": "LLM agents increasingly adopt skills as a reusable unit of composition."
+        "reading_priority_reason": "The paper is aligned with compiler and low-level code generation themes, but it is less directly tied to LLM inference acceleration or CUDA kernel generation, and the abstract leaves important evaluation and reproducibility details unclear.",
+        "fallback_summary": "Generating performant executables from high level languages is critical to software performance across a wide range of domains."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, LLM Inference Systems. The set is anchored by FluxMoE: Decoupling Expert… and AXELRAM: Quantize Once, Never…. TurboTransformers: An Efficient… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, agents and active exploration. The set is anchored by TriAttention: Efficient Long… and GENSERVE: Efficient Co-Serving of…. Agentic Code Optimization via… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
       "training and inference efficiency",
-      "LLM Inference Systems"
+      "agents and active exploration"
     ],
     "reading_strategy": [
-      "Start with FluxMoE: Decoupling Expert… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
-      "Then read AXELRAM: Quantize Once, Never… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use TurboTransformers: An Efficient… as a final cross-check on experimental boundaries and practical value."
+      "Start with TriAttention: Efficient Long… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
+      "Then read GENSERVE: Efficient Co-Serving of… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use Agentic Code Optimization via… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-04-06T11:05:46Z",
+    "generated_at": "2026-04-07T11:05:06Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 6,
+    "paper_results": 3,
     "paper_failures": 0
   }
 }

@@ -790,6 +790,27 @@
       "domain": "LLM Inference Systems",
       "quality_score": 7.77,
       "updated": "2026-04-06"
+    },
+    {
+      "id": "2604.04921v1",
+      "title": "TriAttention: Efficient Long Reasoning with Trigonometric KV Compression",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.23,
+      "updated": "2026-04-07"
+    },
+    {
+      "id": "2604.04335v1",
+      "title": "GENSERVE: Efficient Co-Serving of Heterogeneous Diffusion Model Workloads",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.05,
+      "updated": "2026-04-07"
+    },
+    {
+      "id": "2604.04238v1",
+      "title": "Agentic Code Optimization via Compiler-LLM Cooperation",
+      "domain": "Low-level Code And Assembly Generation",
+      "quality_score": 6.73,
+      "updated": "2026-04-07"
     }
   ],
   "edges": [
@@ -2568,7 +2589,19 @@
       "target": "2604.03143v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.04921v1",
+      "target": "2604.04335v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.04335v1",
+      "target": "2604.04921v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-06"
+  "last_updated": "2026-04-07"
 }

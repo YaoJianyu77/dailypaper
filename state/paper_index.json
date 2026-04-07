@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-06",
+  "last_updated": "2026-04-07",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -71,6 +71,33 @@
         }
       ],
       "cooldown_until": "2026-05-21"
+    },
+    {
+      "paper_id": "2604.04238v1",
+      "title": "Agentic Code Optimization via Compiler-LLM Cooperation",
+      "domain": "Low-level Code And Assembly Generation",
+      "published": "2026-04-05T19:44:02Z",
+      "source_lane": "fresh",
+      "topics": [
+        "compiler optimization",
+        "LLM-guided optimization",
+        "multi-agent systems",
+        "program correctness",
+        "low-level code generation"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-07",
+      "last_seen_date": "2026-04-07",
+      "last_recommended_date": "2026-04-07",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-07",
+          "recommendation": 6.73,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-06"
     },
     {
       "paper_id": "2603.10342v1",
@@ -1262,6 +1289,34 @@
         }
       ],
       "cooldown_until": "2026-06-04"
+    },
+    {
+      "paper_id": "2604.04335v1",
+      "title": "GENSERVE: Efficient Co-Serving of Heterogeneous Diffusion Model Workloads",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-06T01:02:02Z",
+      "source_lane": "fresh",
+      "topics": [
+        "diffusion serving",
+        "co-serving",
+        "text-to-image",
+        "text-to-video",
+        "SLO-aware scheduling",
+        "preemption"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-07",
+      "last_seen_date": "2026-04-07",
+      "last_recommended_date": "2026-04-07",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-07",
+          "recommendation": 8.05,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-06"
     },
     {
       "paper_id": "2604.02047v1",
@@ -3203,6 +3258,34 @@
         }
       ],
       "cooldown_until": "2026-05-11"
+    },
+    {
+      "paper_id": "2604.04921v1",
+      "title": "TriAttention: Efficient Long Reasoning with Trigonometric KV Compression",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-06T17:58:42Z",
+      "source_lane": "fresh",
+      "topics": [
+        "KV cache compression",
+        "long-context inference",
+        "LLM reasoning",
+        "RoPE",
+        "throughput",
+        "memory reduction"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-07",
+      "last_seen_date": "2026-04-07",
+      "last_recommended_date": "2026-04-07",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-07",
+          "recommendation": 8.23,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-06"
     },
     {
       "paper_id": "2010.05680",
