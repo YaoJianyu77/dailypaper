@@ -811,6 +811,48 @@
       "domain": "Low-level Code And Assembly Generation",
       "quality_score": 6.73,
       "updated": "2026-04-07"
+    },
+    {
+      "id": "2604.05650v1",
+      "title": "See the Forest for the Trees: Loosely Speculative Decoding via Visual-Semantic Guidance for Efficient Inference of Video LLMs",
+      "domain": "LLM Inference Systems",
+      "quality_score": 10.0,
+      "updated": "2026-04-08"
+    },
+    {
+      "id": "2604.05250v1",
+      "title": "DualDiffusion: A Speculative Decoding Strategy for Masked Diffusion Models",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.63,
+      "updated": "2026-04-08"
+    },
+    {
+      "id": "2604.05417v1",
+      "title": "Multi-Drafter Speculative Decoding with Alignment Feedback",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.21,
+      "updated": "2026-04-08"
+    },
+    {
+      "id": "2604.05438v1",
+      "title": "Top-K Retrieval with Fixed-Size Linear-Attention Completion: Backbone- and KV-Format-Preserving Attention for KV-Cache Read Reduction",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.88,
+      "updated": "2026-04-08"
+    },
+    {
+      "id": "2604.05404v1",
+      "title": "Beyond Accuracy: Unveiling Inefficiency Patterns in Tool-Integrated Reasoning",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.88,
+      "updated": "2026-04-08"
+    },
+    {
+      "id": "2604.05496v1",
+      "title": "Optimizing OpenFaaS on Kubernetes: Comparative Analysis of Language Runtimes and Cluster Distributions",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.1,
+      "updated": "2026-04-08"
     }
   ],
   "edges": [
@@ -2601,7 +2643,115 @@
       "target": "2604.04921v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.05650v1",
+      "target": "2604.05250v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05650v1",
+      "target": "2604.05417v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05650v1",
+      "target": "2604.05438v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05250v1",
+      "target": "2604.05650v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05250v1",
+      "target": "2604.05417v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05250v1",
+      "target": "2604.05438v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05417v1",
+      "target": "2604.05650v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05417v1",
+      "target": "2604.05250v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05417v1",
+      "target": "2604.05438v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05438v1",
+      "target": "2604.05404v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05438v1",
+      "target": "2604.05250v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05438v1",
+      "target": "2604.05650v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05404v1",
+      "target": "2604.05438v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05404v1",
+      "target": "2604.05250v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05404v1",
+      "target": "2604.05650v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05496v1",
+      "target": "2604.05650v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05496v1",
+      "target": "2604.05250v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.05496v1",
+      "target": "2604.05417v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-07"
+  "last_updated": "2026-04-08"
 }

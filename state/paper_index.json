@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-07",
+  "last_updated": "2026-04-08",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -309,6 +309,34 @@
         }
       ],
       "cooldown_until": "2026-05-17"
+    },
+    {
+      "paper_id": "2604.05404v1",
+      "title": "Beyond Accuracy: Unveiling Inefficiency Patterns in Tool-Integrated Reasoning",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-07T03:55:29Z",
+      "source_lane": "fresh",
+      "topics": [
+        "tool-integrated reasoning",
+        "LLM inference systems",
+        "KV cache",
+        "prefill",
+        "decode latency",
+        "latency modeling"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-08",
+      "last_seen_date": "2026-04-08",
+      "last_recommended_date": "2026-04-08",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-08",
+          "recommendation": 8.88,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-07"
     },
     {
       "paper_id": "2603.22774v1",
@@ -668,6 +696,34 @@
         }
       ],
       "cooldown_until": "2026-05-23"
+    },
+    {
+      "paper_id": "2604.05250v1",
+      "title": "DualDiffusion: A Speculative Decoding Strategy for Masked Diffusion Models",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-06T23:23:57Z",
+      "source_lane": "fresh",
+      "topics": [
+        "masked diffusion models",
+        "speculative decoding",
+        "LLM inference systems",
+        "bidirectional attention",
+        "quality-efficiency trade-off",
+        "MMLU"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-08",
+      "last_seen_date": "2026-04-08",
+      "last_recommended_date": "2026-04-08",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-08",
+          "recommendation": 9.63,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-07"
     },
     {
       "paper_id": "2603.15530v1",
@@ -2079,6 +2135,34 @@
       "cooldown_until": "2026-05-12"
     },
     {
+      "paper_id": "2604.05417v1",
+      "title": "Multi-Drafter Speculative Decoding with Alignment Feedback",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-07T04:25:26Z",
+      "source_lane": "fresh",
+      "topics": [
+        "speculative decoding",
+        "LLM inference",
+        "multi-drafter",
+        "alignment feedback",
+        "multi-armed bandit",
+        "serving adaptation"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-08",
+      "last_seen_date": "2026-04-08",
+      "last_recommended_date": "2026-04-08",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-08",
+          "recommendation": 9.21,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-07"
+    },
+    {
       "paper_id": "2603.17456v1",
       "title": "Multi-stage Flow Scheduling for LLM Serving",
       "domain": "LLM Inference Systems",
@@ -2312,6 +2396,34 @@
         }
       ],
       "cooldown_until": "2026-06-01"
+    },
+    {
+      "paper_id": "2604.05496v1",
+      "title": "Optimizing OpenFaaS on Kubernetes: Comparative Analysis of Language Runtimes and Cluster Distributions",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-07T06:38:29Z",
+      "source_lane": "fresh",
+      "topics": [
+        "OpenFaaS",
+        "Kubernetes",
+        "serverless",
+        "Function-as-a-Service",
+        "runtime comparison",
+        "Go runtime performance"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-08",
+      "last_seen_date": "2026-04-08",
+      "last_recommended_date": "2026-04-08",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-08",
+          "recommendation": 8.1,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-07"
     },
     {
       "paper_id": "2602.07721v2",
@@ -2656,6 +2768,34 @@
         }
       ],
       "cooldown_until": "2026-05-17"
+    },
+    {
+      "paper_id": "2604.05650v1",
+      "title": "See the Forest for the Trees: Loosely Speculative Decoding via Visual-Semantic Guidance for Efficient Inference of Video LLMs",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-07T09:54:33Z",
+      "source_lane": "fresh",
+      "topics": [
+        "Video-LLM",
+        "speculative decoding",
+        "inference latency",
+        "multimodal serving",
+        "training-free acceleration",
+        "verification design"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-08",
+      "last_seen_date": "2026-04-08",
+      "last_recommended_date": "2026-04-08",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-08",
+          "recommendation": 10.0,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-07"
     },
     {
       "paper_id": "2604.03088v1",
@@ -3230,6 +3370,34 @@
         }
       ],
       "cooldown_until": "2026-06-05"
+    },
+    {
+      "paper_id": "2604.05438v1",
+      "title": "Top-K Retrieval with Fixed-Size Linear-Attention Completion: Backbone- and KV-Format-Preserving Attention for KV-Cache Read Reduction",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-07T05:19:54Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference systems",
+        "KV cache",
+        "long-context decoding",
+        "Top-K retrieval",
+        "attention approximation",
+        "KV offload"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-08",
+      "last_seen_date": "2026-04-08",
+      "last_recommended_date": "2026-04-08",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-08",
+          "recommendation": 8.88,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-07"
     },
     {
       "paper_id": "2603.10846v1",

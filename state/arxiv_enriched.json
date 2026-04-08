@@ -1,30 +1,30 @@
 {
-  "target_date": "2026-04-07",
+  "target_date": "2026-04-08",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-08",
-      "end": "2026-04-07"
+      "start": "2026-03-09",
+      "end": "2026-04-08"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-07",
-      "end": "2026-03-07"
+      "start": "2025-04-08",
+      "end": "2026-03-08"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 17,
+  "total_filtered": 21,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 17,
+  "total_unique": 21,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 3,
+    "selected_count": 6,
     "lane_counts": {
-      "fresh": 3,
+      "fresh": 6,
       "established": 0,
       "classic": 0,
       "history_filtered": 11,
@@ -40,71 +40,66 @@
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.04921v1",
-      "arxiv_id": "2604.04921v1",
-      "title": "TriAttention: Efficient Long Reasoning with Trigonometric KV Compression",
-      "summary": "Extended reasoning in large language models (LLMs) creates severe KV cache memory bottlenecks. Leading KV cache compression methods estimate KV importance using attention scores from recent post-RoPE queries. However, queries rotate with position during RoPE, making representative queries very few, leading to poor top-key selection and unstable reasoning. To avoid this issue, we turn to the pre-RoPE space, where we observe that Q and K vectors are highly concentrated around fixed non-zero centers and remain stable across positions -- Q/K concentration. We show that this concentration causes queries to preferentially attend to keys at specific distances (e.g., nearest keys), with the centers determining which distances are preferred via a trigonometric series. Based on this, we propose TriAttention to estimate key importance by leveraging these centers. Via the trigonometric series, we use the distance preference characterized by these centers to score keys according to their positions, and also leverage Q/K norms as an additional signal for importance estimation. On AIME25 with 32K-token generation, TriAttention matches Full Attention reasoning accuracy while achieving 2.5x higher throughput or 10.7x KV memory reduction, whereas leading baselines achieve only about half the accuracy at the same efficiency. TriAttention enables OpenClaw deployment on a single consumer GPU, where long context would otherwise cause out-of-memory with Full Attention.",
+      "id": "http://arxiv.org/abs/2604.05650v1",
+      "arxiv_id": "2604.05650v1",
+      "title": "See the Forest for the Trees: Loosely Speculative Decoding via Visual-Semantic Guidance for Efficient Inference of Video LLMs",
+      "summary": "Video Large Language Models (Video-LLMs) excel in video understanding but suffer from high inference latency during autoregressive generation. Speculative Decoding (SD) mitigates this by applying a draft-and-verify paradigm, yet existing methods are constrained by rigid exact-match rules, severely limiting the acceleration potential. To bridge this gap, we propose LVSpec, the first training-free loosely SD framework tailored for Video-LLMs. Grounded in the insight that generation is governed by sparse visual-relevant anchors (mandating strictness) amidst abundant visual-irrelevant fillers (permitting loose verification), LVSpec employs a lightweight visual-relevant token identification scheme to accurately pinpoint the former. To further maximize acceptance, we augment this with a position-shift tolerant mechanism that effectively salvages positionally mismatched but semantically equivalent tokens. Experiments demonstrate that LVSpec achieves high fidelity and speed: it preserves >99.8 of target performance while accelerating Qwen2.5-VL-32B by 2.70x and LLaVA-OneVision-72B by 2.94x. Notably, it boosts the mean accepted length and speedup ratio by 136% and 35% compared to SOTA training-free SD methods for Video-LLMs.",
       "authors": [
-        "Weian Mao",
-        "Xi Lin",
-        "Wei Huang",
-        "Yuxin Xie",
-        "Tianfu Fu",
-        "Bohan Zhuang",
-        "Song Han",
-        "Yukang Chen"
+        "Yicheng Ji",
+        "Jun Zhang",
+        "Jinpeng Chen",
+        "Cong Wang",
+        "Lidan Shou",
+        "Gang Chen",
+        "Huan Li"
       ],
       "author_details": [
         {
-          "name": "Weian Mao"
+          "name": "Yicheng Ji"
         },
         {
-          "name": "Xi Lin"
+          "name": "Jun Zhang"
         },
         {
-          "name": "Wei Huang"
+          "name": "Jinpeng Chen"
         },
         {
-          "name": "Yuxin Xie"
+          "name": "Cong Wang"
         },
         {
-          "name": "Tianfu Fu"
+          "name": "Lidan Shou"
         },
         {
-          "name": "Bohan Zhuang"
+          "name": "Gang Chen"
         },
         {
-          "name": "Song Han"
-        },
-        {
-          "name": "Yukang Chen"
+          "name": "Huan Li"
         }
       ],
-      "published": "2026-04-06T17:58:42Z",
-      "published_date": "2026-04-06 17:58:42+00:00",
-      "updated": "2026-04-06T17:58:42Z",
-      "comments": "Code is available at https://github.com/WeianMao/triattention",
+      "published": "2026-04-07T09:54:33Z",
+      "published_date": "2026-04-07 09:54:33+00:00",
+      "updated": "2026-04-07T09:54:33Z",
+      "comments": "ACL'2026 MainConference",
       "primary_category": "cs.CL",
       "categories": [
-        "cs.CL",
-        "cs.CV"
+        "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.04921v1",
-      "url": "http://arxiv.org/abs/2604.04921v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.05650v1",
+      "url": "http://arxiv.org/abs/2604.05650v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.46,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 8.23
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 10.0
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "kv cache",
-        "throughput",
+        "speculative decoding",
+        "latency",
         "cs.CL",
-        "memory"
+        "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -116,17 +111,17 @@
           "cs.CL"
         ],
         "required_signal_matches": [
-          "kv cache"
+          "speculative decoding"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput",
-          "memory"
+          "latency",
+          "speedup"
         ],
         "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
-          "throughput",
-          "memory"
+          "latency",
+          "speedup"
         ],
         "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
@@ -134,265 +129,111 @@
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper proposes a RoPE-aware KV cache compression method that scores key importance from pre-RoPE Q/K structure instead of recent post-RoPE attention, targeting long-reasoning memory bottlenecks.",
-        "summary_zh": "This paper studies KV cache compression for long-reasoning LLM workloads, where memory growth and cache bandwidth become the main deployment bottlenecks. The key claim is that post-RoPE queries are a poor basis for importance estimation, so the method moves to pre-RoPE space and uses stable Q/K centers plus a trigonometric distance-preference model, along with Q/K norms, to rank keys for retention. The abstract reports that on AIME25 with 32K-token generation, the method matches full-attention reasoning accuracy while delivering either higher throughput or much lower KV memory use, and that it makes single-consumer-GPU deployment feasible for a long-context OpenClaw setup. The practical value is clear if the scoring rule is cheap and robust, because it would turn KV compression from a heuristic cache pruning trick into a more structure-aware long-context serving mechanism. The main missing details are baseline fairness, runtime overhead of the scoring logic, hardware setup, and how well the claimed Q/K concentration behavior generalizes beyond the reported setting.",
-        "background_zh": "Long-context reasoning pushes KV cache memory and bandwidth to the forefront, so inference systems need compression schemes that preserve accuracy under aggressive cache reduction.",
-        "problem_zh": "The paper asks how to estimate KV importance more reliably under RoPE, given that recent post-RoPE attention can mis-rank keys and destabilize long reasoning.",
-        "approach_zh": "It models stable pre-RoPE Q/K concentration around non-zero centers, derives position-based distance preferences through a trigonometric series, and combines that signal with Q/K norms to score which keys to keep.",
-        "evidence_zh": "The abstract claims matching full-attention accuracy on AIME25 at 32K tokens while improving throughput or reducing KV memory substantially, but it does not make the evaluation protocol, hardware assumptions, or per-baseline cost tradeoffs fully clear.",
-        "value_zh": "If the method holds up, it could materially improve long-context LLM serving by reducing KV footprint enough to unlock cheaper hardware targets without giving up reasoning quality.",
+        "one_liner_zh": "This paper proposes a training-free speculative decoding method for Video-LLMs that relaxes exact token matching by separating visually critical tokens from filler text and tolerating position shifts for semantically equivalent outputs.",
+        "summary_zh": "This paper targets the high autoregressive decoding latency of Video-LLMs, where standard speculative decoding leaves speed on the table because verification is forced to use exact token matches. The proposed LVSpec framework loosens verification by identifying visually relevant anchor tokens that still require strict matching, while allowing more flexible acceptance for visually irrelevant filler tokens and recovering semantically equivalent outputs with a position-shift tolerant check. The abstract claims this is training-free and reports both high output fidelity and materially better speedups on Qwen2.5-VL-32B and LLaVA-OneVision-72B, including gains over prior training-free Video-LLM speculative decoding methods. If the method is robust, the value is a cleaner latency reduction path for multimodal serving without retraining the model. The main missing detail is whether the visual-token identification and loose verification remain fair, stable, and cheap across tasks, prompts, and verification baselines.",
+        "background_zh": "Video-LLMs are expensive at inference time because multimodal autoregressive generation compounds large-model decoding cost, making speculative decoding an appealing systems lever if verification can be made less brittle.",
+        "problem_zh": "The paper asks how to increase speculative decoding acceptance for Video-LLMs without breaking output fidelity, given that exact-match verification rejects many harmless wording or position differences.",
+        "approach_zh": "LVSpec introduces training-free loose verification that treats visually grounded anchor tokens strictly, treats visually irrelevant filler tokens more flexibly, and adds position-shift tolerance to accept semantically equivalent but misaligned tokens.",
+        "evidence_zh": "The abstract reports near-target quality preservation and substantial speedups on two large Video-LLMs, plus improvements in accepted length and speedup over prior training-free baselines, but it does not make the evaluation protocol or fairness details clear.",
+        "value_zh": "If the claims hold, the work offers a practical way to reduce Video-LLM serving latency through verifier design rather than retraining, with obvious relevance to multimodal inference systems.",
         "open_questions": [
-          "What is the exact runtime overhead of TriAttention's scoring pipeline relative to the saved KV memory and bandwidth?",
-          "How fair are the baseline comparisons in token budget, retained-cache ratio, decoding setup, and hardware configuration?",
-          "Does the pre-RoPE concentration assumption remain stable across model families, layers, tasks, and much longer contexts than the reported AIME25 setting?"
+          "How is visual-relevant token identification implemented, and what is its runtime overhead relative to the saved decoding cost?",
+          "What tasks, prompts, and evaluation metrics were used to support the >99.8 target-performance preservation claim, and how sensitive is it to generation style differences?",
+          "Are the baseline comparisons fair in draft model choice, verifier budget, and hardware setup, especially against other training-free Video-LLM speculative decoding methods?"
         ],
         "core_contributions": [
-          "Identifies post-RoPE query instability as a weakness in existing KV importance estimation for long reasoning.",
-          "Introduces a pre-RoPE key scoring method based on Q/K concentration centers, trigonometric distance preference, and Q/K norms.",
-          "Reports a deployment-oriented result where long-context reasoning fits on a single consumer GPU instead of running out of memory under full attention."
+          "A training-free loosely speculative decoding framework tailored to Video-LLMs.",
+          "A verification scheme that distinguishes visually grounded anchor tokens from visually irrelevant filler tokens.",
+          "A position-shift tolerant mechanism to recover semantically equivalent tokens that exact-match verification would reject."
         ],
         "why_read": [
-          "It is directly about KV-cache compression for long-reasoning inference, which is a core systems bottleneck.",
-          "The mechanism is more structural than standard attention-score heuristics and may matter for robust cache pruning under RoPE.",
-          "The abstract includes both accuracy and deployment claims, so it is useful for judging whether this is a real serving method or just a benchmark-specific compression trick."
+          "It directly targets multimodal inference latency with a verifier-side change rather than model retraining.",
+          "It makes a concrete systems claim about where speculative decoding fails for Video-LLMs: rigid verification, not just weak drafting.",
+          "It includes reported results on very large Video-LLMs, which makes the idea relevant to practical serving settings."
         ],
         "risks": [
-          "The claimed gains may depend heavily on the specific benchmark, context length, or model rather than general long-context serving workloads.",
-          "The abstract does not clarify the computational overhead of the scoring method, so throughput gains may be sensitive to implementation details and hardware balance between compute and memory bandwidth."
+          "The abstract does not clarify the computational cost and failure modes of the visual-relevant token identification step.",
+          "Loose verification may be sensitive to task type or evaluation metric and could hide output deviations that exact match would expose differently in downstream use cases."
         ],
         "recommended_for": [
-          "Researchers working on KV-cache compression and long-context LLM inference.",
-          "Engineers evaluating whether structured cache scoring can reduce memory enough for consumer-GPU deployment.",
-          "Readers interested in how RoPE geometry can inform inference-time systems decisions."
+          "Researchers working on speculative decoding and verifier design for multimodal LLM inference.",
+          "Engineers evaluating latency-reduction methods for large Video-LLM serving stacks.",
+          "Readers interested in training-free inference acceleration rather than model-side retraining."
         ],
         "keywords": [
-          "KV cache compression",
-          "long-context inference",
-          "LLM reasoning",
-          "RoPE",
-          "throughput",
-          "memory reduction"
+          "Video-LLM",
+          "speculative decoding",
+          "inference latency",
+          "multimodal serving",
+          "training-free acceleration",
+          "verification design"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High fit with LLM inference systems: it targets KV-cache memory directly, claims substantial throughput and memory gains, and proposes a concrete mechanism tied to RoPE behavior rather than a generic pruning heuristic.",
-        "fallback_summary": "Extended reasoning in large language models (LLMs) creates severe KV cache memory bottlenecks."
+        "reading_priority_reason": "This is a strong fit for LLM inference systems because it proposes a concrete decoding-time acceleration mechanism, reports large speedups on frontier-scale Video-LLMs, and focuses on verifier design rather than generic multimodal modeling, though the full paper is needed to judge fairness and overhead.",
+        "fallback_summary": "Video Large Language Models (Video-LLMs) excel in video understanding but suffer from high inference latency during autoregressive generation."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.04335v1",
-      "arxiv_id": "2604.04335v1",
-      "title": "GENSERVE: Efficient Co-Serving of Heterogeneous Diffusion Model Workloads",
-      "summary": "Diffusion models have emerged as the prevailing approach for text-to-image (T2I) and text-to-video (T2V) generation, yet production platforms must increasingly serve both modalities on shared GPU clusters while meeting stringent latency SLOs. Co-serving such heterogeneous workloads is challenging: T2I and T2V requests exhibit vastly different compute demands, parallelism characteristics, and latency requirements, leading to significant SLO violations in existing serving systems. We present GENSERVE, a co-serving system that leverages the inherent predictability of the diffusion process to optimize serving efficiency. A central insight is that diffusion inference proceeds in discrete, predictable steps and is naturally preemptible at step boundaries, opening a new design space for heterogeneity-aware resource management. GENSERVE introduces step-level resource adaptation through three coordinated mechanisms: intelligent video preemption, elastic sequence parallelism with dynamic batching, and an SLO-aware scheduler that jointly optimizes resource allocation across all concurrent requests. Experimental results show that GENSERVE improves the SLO attainment rate by up to 44% over the strongest baseline across diverse configurations.",
+      "id": "http://arxiv.org/abs/2604.05250v1",
+      "arxiv_id": "2604.05250v1",
+      "title": "DualDiffusion: A Speculative Decoding Strategy for Masked Diffusion Models",
+      "summary": "Masked Diffusion Models (MDMs) offer a promising alternative to autoregressive language models by enabling parallel token generation and bidirectional context modeling. However, their inference speed is significantly limited by the inability to cache key-value pairs due to bidirectional attention, requiring $O(N^2)$ computations at each generation step. While recent methods like FastDLLM and DkvCache improve inference speed through attention approximations and caching strategies, they achieve speedups at the cost of generation quality. We propose DualDiffusion, a speculative decoding framework for MDMs that combines fast drafter models (using efficient approximations) with slower, more accurate verifier models. By running multiple steps of a lightweight drafter followed by a single verification step, DualDiffusion achieves a superior Pareto frontier between generation steps and accuracy compared to existing approaches. We evaluate our method on MMLU and GSM8K, demonstrating that DualDiffusion maintains high accuracy while reducing the number of generation steps required, effectively pushing the quality-efficiency trade-off curve for masked diffusion language models.",
       "authors": [
-        "Fanjiang Ye",
-        "Zhangke Li",
-        "Xinrui Zhong",
-        "Ethan Ma",
-        "Russell Chen",
-        "Kaijian Wang",
-        "Jingwei Zuo",
-        "Desen Sun",
-        "Ye Cao",
-        "Triston Cao",
-        "Myungjin Lee",
-        "Arvind Krishnamurthy",
-        "Yuke Wang"
+        "Satyam Goyal",
+        "Kushal Patel",
+        "Tanush Mittal",
+        "Arjun Laxman"
       ],
       "author_details": [
         {
-          "name": "Fanjiang Ye"
+          "name": "Satyam Goyal"
         },
         {
-          "name": "Zhangke Li"
+          "name": "Kushal Patel"
         },
         {
-          "name": "Xinrui Zhong"
+          "name": "Tanush Mittal"
         },
         {
-          "name": "Ethan Ma"
-        },
-        {
-          "name": "Russell Chen"
-        },
-        {
-          "name": "Kaijian Wang"
-        },
-        {
-          "name": "Jingwei Zuo"
-        },
-        {
-          "name": "Desen Sun"
-        },
-        {
-          "name": "Ye Cao"
-        },
-        {
-          "name": "Triston Cao"
-        },
-        {
-          "name": "Myungjin Lee"
-        },
-        {
-          "name": "Arvind Krishnamurthy"
-        },
-        {
-          "name": "Yuke Wang"
+          "name": "Arjun Laxman"
         }
       ],
-      "published": "2026-04-06T01:02:02Z",
-      "published_date": "2026-04-06 01:02:02+00:00",
-      "updated": "2026-04-06T01:02:02Z",
-      "primary_category": "cs.DC",
+      "published": "2026-04-06T23:23:57Z",
+      "published_date": "2026-04-06 23:23:57+00:00",
+      "updated": "2026-04-06T23:23:57Z",
+      "primary_category": "cs.LG",
       "categories": [
-        "cs.DC"
+        "cs.LG",
+        "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.04335v1",
-      "url": "http://arxiv.org/abs/2604.04335v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.05250v1",
+      "url": "http://arxiv.org/abs/2604.05250v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.32,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 8.05
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 9.63
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "serving",
-        "latency",
-        "cs.DC",
-        "serving system",
-        "baseline"
+        "speculative decoding",
+        "cs.LG",
+        "cs.CL"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "serving system"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency"
-        ],
-        "bonus_keyword_match_count": 1,
-        "analysis_keyword_matches": [
-          "baseline",
-          "latency"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.18
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper proposes a diffusion serving system that co-schedules text-to-image and text-to-video requests by exploiting step-level predictability and preemptibility in diffusion inference.",
-        "summary_zh": "This paper targets a practical serving problem: text-to-image and text-to-video diffusion workloads increasingly share GPU clusters, but their compute profiles and latency needs differ enough that existing systems miss SLOs. The core idea is to treat diffusion inference as a sequence of predictable, discrete steps, then use that structure for finer-grained resource control during co-serving. GENSERVE combines video preemption at step boundaries, elastic sequence parallelism with dynamic batching, and an SLO-aware scheduler that jointly allocates resources across concurrent requests. The abstract claims up to a 44% improvement in SLO attainment rate over a strongest baseline across diverse settings, which suggests the gains come from better scheduling and adaptation rather than a new model architecture. The main missing details are hardware assumptions, workload mix, baseline fairness, and the overheads of preemption and dynamic reconfiguration.",
-        "background_zh": "Shared GPU serving for diffusion models is becoming more common as platforms support both image and video generation, but these workloads stress the cluster in different ways.",
-        "problem_zh": "The paper asks how to co-serve heterogeneous diffusion requests without causing excessive latency or SLO violations when T2I and T2V jobs have very different runtime and parallelism behavior.",
-        "approach_zh": "It uses the stepwise structure of diffusion inference to enable step-boundary preemption and pairs that with adaptive parallelism, dynamic batching, and an SLO-aware global scheduler.",
-        "evidence_zh": "The abstract reports experimental gains of up to 44% in SLO attainment rate versus a strongest baseline across diverse configurations, but it does not make the evaluation setup or tradeoffs clear.",
-        "value_zh": "If the method is robust, it could improve utilization and tail-latency control for mixed diffusion serving clusters without changing the underlying generation models.",
-        "open_questions": [
-          "What hardware setup, workload mix, and SLO definitions were used to produce the reported SLO attainment gains?",
-          "How much overhead do step-level preemption, elastic sequence parallelism, and dynamic batching introduce in practice?",
-          "How fair are the baselines, especially regarding batching, parallelism configuration, and scheduling knowledge about diffusion step structure?"
-        ],
-        "core_contributions": [
-          "Frames diffusion co-serving around step-level predictability and preemptibility rather than treating requests as monolithic jobs.",
-          "Combines three coordinated mechanisms: intelligent video preemption, elastic sequence parallelism with dynamic batching, and an SLO-aware scheduler.",
-          "Targets heterogeneous T2I and T2V co-serving as a systems problem and reports improved SLO attainment over prior serving baselines."
-        ],
-        "why_read": [
-          "Useful if you care about scheduler and runtime design for mixed generative workloads on shared GPU clusters.",
-          "The step-boundary preemption idea is a concrete systems lever that may generalize to other iterative inference pipelines.",
-          "The paper appears focused on latency/SLO behavior rather than model changes, which is relevant for serving-stack readers."
-        ],
-        "risks": [
-          "The abstract emphasizes SLO attainment but does not clarify throughput, utilization, or cost tradeoffs.",
-          "It is unclear whether the reported gains depend on specific workload predictability or carefully tuned cluster settings that may limit generality after a full read."
-        ],
-        "recommended_for": [
-          "Researchers working on inference scheduling and multi-tenant GPU serving.",
-          "Engineers operating shared clusters for diffusion image and video generation.",
-          "Readers interested in runtime mechanisms for preemption and adaptive parallelism in iterative inference."
-        ],
-        "keywords": [
-          "diffusion serving",
-          "co-serving",
-          "text-to-image",
-          "text-to-video",
-          "SLO-aware scheduling",
-          "preemption"
-        ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "This is relevant to serving efficiency and scheduler design, but it is adjacent to the user's core LLM and low-level code generation focus, and the abstract leaves important systems details unspecified.",
-        "fallback_summary": "Diffusion models have emerged as the prevailing approach for text-to-image (T2I) and text-to-video (T2V) generation, yet production platforms must increasingly serve both modalities on shared GPU clusters while meeting stringent latency SLOs."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.04238v1",
-      "arxiv_id": "2604.04238v1",
-      "title": "Agentic Code Optimization via Compiler-LLM Cooperation",
-      "summary": "Generating performant executables from high level languages is critical to software performance across a wide range of domains. Modern compilers perform this task by passing code through a series of well-studied optimizations at progressively lower levels of abstraction, but may miss optimization opportunities that require high-level reasoning about a program's purpose. Recent work has proposed using LLMs to fill this gap. While LLMs can achieve large speedups on some programs, they frequently generate code that is incorrect. In this work, we propose a method to balance the correctness of conventional compiler optimizations with the ``creativity'' of LLM-based code generation: compiler-LLM cooperation. Our approach integrates existing compiler optimization passes with LLM-based code generation at multiple levels of abstraction, retaining the best features of both types of code optimization. We realize our approach with a multi-agent system that includes (1) LLM-based optimization agents for each level of abstraction, (2) individual compiler constituents as tools, (3) an LLM-based test generation agent that probes the correctness and performance of generated code, and (4) a guiding LLM that orchestrates the other components. The strategy enables LLM-based optimization of input programs at multiple levels of abstraction and introduces a method for distributing computational budget between levels. Our extensive evaluation shows that compiler-LLM cooperation outperforms both existing compiler optimizations and level-specific LLM-based baselines, producing speedups up to 1.25x.",
-      "authors": [
-        "Benjamin Mikek",
-        "Danylo Vashchilenko",
-        "Bryan Lu",
-        "Panpan Xu"
-      ],
-      "author_details": [
-        {
-          "name": "Benjamin Mikek"
-        },
-        {
-          "name": "Danylo Vashchilenko"
-        },
-        {
-          "name": "Bryan Lu"
-        },
-        {
-          "name": "Panpan Xu"
-        }
-      ],
-      "published": "2026-04-05T19:44:02Z",
-      "published_date": "2026-04-05 19:44:02+00:00",
-      "updated": "2026-04-05T19:44:02Z",
-      "primary_category": "cs.PL",
-      "categories": [
-        "cs.PL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.04238v1",
-      "url": "http://arxiv.org/abs/2604.04238v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.57,
-        "recency": 3.0,
-        "popularity": 1.5,
-        "quality": 1.5,
-        "recommendation": 6.73
-      },
-      "matched_domain": "Low-level Code And Assembly Generation",
-      "matched_keywords": [
-        "compiler optimization",
-        "cs.PL"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "Low-level Code And Assembly Generation",
         "text_match_count": 1,
         "matched_categories": [
-          "cs.PL"
+          "cs.LG",
+          "cs.CL"
         ],
         "required_signal_matches": [
-          "compiler optimization"
+          "speculative decoding"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [],
@@ -404,69 +245,548 @@
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper proposes a compiler-LLM optimization pipeline that inserts LLM agents at multiple abstraction levels and uses testing plus orchestration to trade off aggressive rewrites against correctness.",
-        "summary_zh": "This paper targets a real gap in program optimization: standard compiler passes are reliable but can miss opportunities that require higher-level semantic reasoning, while LLM rewrites can sometimes find better code but often break correctness. The proposed system combines both by placing LLM optimization agents alongside compiler tools at multiple abstraction levels, with a guiding LLM coordinating the process and a separate LLM agent generating tests to check correctness and performance. The abstract claims that this cooperative setup beats conventional compiler optimization and single-level LLM baselines, with reported speedups up to 1.25x. The practical value is the attempt to make LLM-driven optimization less brittle by constraining it inside a compiler-oriented workflow rather than treating code rewriting as a free-form generation problem. The biggest missing detail is evaluation quality: the abstract does not make clear what programs were used, how correctness was validated beyond generated tests, or how much compute budget the multi-agent search requires.",
-        "background_zh": "Compiler pipelines are strong at systematic low-level optimization, but they are less suited to transformations that depend on higher-level intent, which is why LLM-based optimization has recently been explored despite correctness risks.",
-        "problem_zh": "The core problem is how to use LLMs for program optimization without giving up the reliability of compiler-driven code generation.",
-        "approach_zh": "The method interleaves compiler passes and LLM optimization agents across multiple abstraction levels, adds an LLM test-generation component for validation, and uses a guiding LLM to allocate search effort across levels.",
-        "evidence_zh": "The abstract supports the claim that the system was evaluated against compiler-only and level-specific LLM baselines and reports speedups up to 1.25x, but it does not make the evaluation setup or validation strength clear.",
-        "value_zh": "If the method is robust, it could provide a more disciplined way to use LLMs for performance optimization by embedding them inside a compiler-and-testing loop rather than relying on unconstrained code rewrites.",
+        "one_liner_zh": "This paper applies speculative decoding to masked diffusion language models by pairing a fast approximate drafter with a slower verifier to improve the quality-efficiency trade-off.",
+        "summary_zh": "Masked diffusion language models are attractive because they can generate tokens in parallel, but inference remains expensive because bidirectional attention prevents standard KV caching and leaves each step with quadratic-cost attention. This paper proposes DualDiffusion, a speculative decoding scheme that lets a lightweight drafter run several approximate generation steps before a more accurate verifier checks and corrects the result. The abstract claims this moves the Pareto frontier against prior MDM acceleration methods such as FastDLLM and DkvCache, which reportedly gain speed by sacrificing generation quality. Reported evidence is limited to MMLU and GSM8K, where the method is said to preserve high accuracy while reducing required generation steps. The main missing detail is how the drafter approximations, verifier acceptance behavior, and actual wall-clock or hardware-level gains compare under a fair serving setup.",
+        "background_zh": "Masked diffusion models promise parallel generation and bidirectional context, but their inference path is still bottlenecked by repeated full-attention computation because standard autoregressive caching does not transfer cleanly.",
+        "problem_zh": "The paper targets the core systems problem of accelerating masked diffusion inference without taking the quality loss seen in prior approximation- or cache-based speedup methods.",
+        "approach_zh": "It introduces a speculative decoding framework with two roles: a cheap drafter that advances multiple approximate steps and a slower verifier that checks those drafts with a more accurate model.",
+        "evidence_zh": "The abstract says evaluations on MMLU and GSM8K show fewer generation steps with high accuracy, but it does not make the exact acceptance behavior, runtime setup, or wall-clock speedup clear.",
+        "value_zh": "If the verification overhead is controlled, this could make masked diffusion models more practical by reducing effective decoding work while preserving quality better than existing fast approximations.",
         "open_questions": [
-          "What benchmarks and program classes were used, and do the gains come from a few outliers or hold broadly across workloads?",
-          "How is semantic correctness established in cases where LLM-generated tests may miss corner cases or undefined-behavior changes?",
-          "What is the runtime and token-cost overhead of the multi-agent orchestration, and does the optimization payoff justify that budget?"
+          "What exact drafter approximations are used, and how often does the verifier accept versus reject proposed steps?",
+          "Do the reported gains translate to real latency or throughput improvements on specific hardware, or only to fewer generation steps?",
+          "How fair are the baselines against FastDLLM and DkvCache in terms of model size, quality target, and serving configuration?"
         ],
         "core_contributions": [
-          "A compiler-LLM cooperation framework that mixes standard compiler passes with LLM-driven optimization instead of replacing the compiler outright.",
-          "A multi-agent design with separate optimization agents at different abstraction levels plus a guiding controller.",
-          "An LLM-based test-generation component used to probe correctness and performance of generated variants."
+          "Applies speculative decoding to masked diffusion language models rather than standard autoregressive decoding.",
+          "Uses a drafter-verifier split to trade cheap approximate steps against periodic accurate correction.",
+          "Frames the result as a better quality-efficiency frontier than prior masked diffusion acceleration methods."
         ],
         "why_read": [
-          "It is one of the more systems-oriented attempts to make LLM code optimization compatible with compiler structure and validation.",
-          "It frames optimization as budgeted search across abstraction levels, which is more concrete than single-shot rewrite generation.",
-          "It may be relevant to readers interested in whether LLMs can contribute to low-level optimization without fully trusting generated code."
+          "Relevant if you care about whether speculative execution can help non-autoregressive or bidirectional LLM inference.",
+          "Useful for comparing step-count reduction claims against true serving efficiency in masked diffusion systems.",
+          "Potentially interesting as a runtime design pattern for acceleration without fully committing to lossy attention approximations."
         ],
         "risks": [
-          "The reported gain ceiling in the abstract is modest, so orchestration overhead may matter.",
-          "Correctness assurance may be weak if it depends heavily on generated tests rather than stronger validation methods."
+          "The abstract reports reduced generation steps, but does not establish actual end-to-end latency or throughput gains.",
+          "Quality claims are benchmark-level and underspecified, so robustness outside MMLU and GSM8K is unclear."
         ],
         "recommended_for": [
-          "Researchers studying compiler-LLM hybrid optimization",
-          "Engineers evaluating LLMs for performance-sensitive code transformation",
-          "Readers interested in low-level code generation with correctness constraints"
+          "Researchers working on LLM inference acceleration beyond autoregressive decoding.",
+          "Engineers tracking speculative decoding variants and verifier-based serving designs.",
+          "Readers interested in masked diffusion language models as a systems alternative to standard LLM decoding."
         ],
         "keywords": [
-          "compiler optimization",
-          "LLM-guided optimization",
-          "multi-agent systems",
-          "program correctness",
-          "low-level code generation"
+          "masked diffusion models",
+          "speculative decoding",
+          "LLM inference systems",
+          "bidirectional attention",
+          "quality-efficiency trade-off",
+          "MMLU"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "The paper is aligned with compiler and low-level code generation themes, but it is less directly tied to LLM inference acceleration or CUDA kernel generation, and the abstract leaves important evaluation and reproducibility details unclear.",
-        "fallback_summary": "Generating performant executables from high level languages is critical to software performance across a wide range of domains."
+        "reading_priority_reason": "Strong topical fit because it targets inference efficiency through speculative execution, but the abstract is still high level and does not clarify real system gains, hardware assumptions, or baseline fairness.",
+        "fallback_summary": "Masked Diffusion Models (MDMs) offer a promising alternative to autoregressive language models by enabling parallel token generation and bidirectional context modeling."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.05417v1",
+      "arxiv_id": "2604.05417v1",
+      "title": "Multi-Drafter Speculative Decoding with Alignment Feedback",
+      "summary": "Speculative decoding (SD) accelerates large language model (LLM) inference by using a smaller model to draft future tokens, which are then verified by the target LLM. This preserves generation quality by accepting only aligned tokens. However, individual drafters, often trained for specific tasks or domains, exhibit limited effectiveness across diverse applications. To address this, we introduce \\textsc{MetaSD}, a unified framework that integrates multiple drafters into the SD process. MetaSD dynamically allocates computational resources to heterogeneous drafters by leveraging alignment feedback and framing drafter selection as a multi-armed bandit problem. Extensive experiments show MetaSD consistently outperforms single-drafter approaches.",
+      "authors": [
+        "Taehyeon Kim",
+        "Hojung Jung",
+        "Se-Young Yun"
+      ],
+      "author_details": [
+        {
+          "name": "Taehyeon Kim"
+        },
+        {
+          "name": "Hojung Jung"
+        },
+        {
+          "name": "Se-Young Yun"
+        }
+      ],
+      "published": "2026-04-07T04:25:26Z",
+      "published_date": "2026-04-07 04:25:26+00:00",
+      "updated": "2026-04-07T04:25:26Z",
+      "comments": "ACL 2026 Findings",
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.05417v1",
+      "url": "http://arxiv.org/abs/2604.05417v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.59,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.21
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "speculative decoding",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 1,
+        "matched_categories": [
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "speculative decoding"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper extends speculative decoding from one auxiliary drafter to a pool of heterogeneous drafters selected online using alignment feedback.",
+        "summary_zh": "The paper targets a practical weakness in speculative decoding: a single small drafter often works well only for certain tasks or domains, so acceleration can degrade when prompts shift. It proposes MetaSD, a framework that combines multiple drafters and uses alignment feedback from verification to decide how to allocate drafting effort among them, casting the choice as a multi-armed bandit problem. The abstract supports the claim that this is meant to preserve the usual speculative decoding quality constraint while improving cross-application effectiveness over single-drafter setups. If the mechanism works as described, the value is a more robust inference-time acceleration layer that can adapt to workload diversity instead of depending on one universally good drafter. The biggest missing detail is how much overhead the controller and extra drafters add, and under what serving setup the reported gains remain net-positive.",
+        "background_zh": "Speculative decoding is a current LLM inference acceleration path, but its benefits depend heavily on how well the drafter matches the target model and workload.",
+        "problem_zh": "The paper asks how to make speculative decoding remain effective across diverse tasks when any single drafter is likely to be domain-specialized and uneven in quality.",
+        "approach_zh": "MetaSD integrates multiple heterogeneous drafters and uses verification-derived alignment feedback to adaptively choose among them via a multi-armed bandit formulation.",
+        "evidence_zh": "The abstract claims extensive experiments and says MetaSD consistently outperforms single-drafter methods, but it does not make the evaluation setup, baselines, or overhead tradeoffs clear.",
+        "value_zh": "If the added control logic is cheap enough, this could make speculative decoding more robust for mixed workloads in real serving systems where prompt distributions are not stable.",
+        "open_questions": [
+          "What is the actual runtime overhead of maintaining multiple drafters and bandit-based selection, and when does it erase the decoding speedup?",
+          "How are drafters constructed or chosen, and how sensitive are results to drafter diversity, task mix, and target-model pairing?",
+          "Are the comparisons fair against strong single-drafter and other adaptive speculative decoding baselines under the same latency and quality constraints?"
+        ],
+        "core_contributions": [
+          "Reframes speculative decoding drafter selection as an online allocation problem over multiple heterogeneous drafters.",
+          "Introduces alignment-feedback-driven selection to adapt drafting behavior during inference.",
+          "Targets cross-domain robustness rather than optimizing a single specialized drafter."
+        ],
+        "why_read": [
+          "Useful if you care about speculative decoding under non-stationary or mixed workloads rather than narrow benchmark settings.",
+          "The key systems question is whether adaptive multi-drafter control can convert workload diversity into better acceptance and net throughput.",
+          "It may clarify how far inference-time adaptation can go before controller and model-management overhead dominate."
+        ],
+        "risks": [
+          "The abstract does not say where the speedup comes from in latency terms versus simply improving acceptance quality.",
+          "Multiple drafters may increase memory footprint, scheduler complexity, and deployment cost in ways not visible from the abstract alone."
+        ],
+        "recommended_for": [
+          "Researchers working on LLM inference acceleration and speculative decoding.",
+          "Engineers evaluating adaptive serving policies for heterogeneous prompt distributions.",
+          "Readers interested in runtime-controller ideas more than new model architecture."
+        ],
+        "keywords": [
+          "speculative decoding",
+          "LLM inference",
+          "multi-drafter",
+          "alignment feedback",
+          "multi-armed bandit",
+          "serving adaptation"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "Strong topical fit with LLM inference systems and speculative decoding. The paper appears to address a real serving-side weakness of single-drafter methods, though the abstract leaves important overhead and evaluation details unresolved.",
+        "fallback_summary": "Speculative decoding (SD) accelerates large language model (LLM) inference by using a smaller model to draft future tokens, which are then verified by the target LLM."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.05438v1",
+      "arxiv_id": "2604.05438v1",
+      "title": "Top-K Retrieval with Fixed-Size Linear-Attention Completion: Backbone- and KV-Format-Preserving Attention for KV-Cache Read Reduction",
+      "summary": "Long-context generation is increasingly limited by decode-time key-value (KV) cache traffic, particularly when KV is offloaded beyond GPU memory. Query-aware retrieval (e.g., Top-K selection) reduces this traffic by loading only a subset of KV pairs, but renormalizing the softmax over the subset introduces bias when attention mass is spread over unretrieved tokens. We propose a retrieval-completion attention module that keeps backbone weights and the KV-cache format unchanged. For each query, we compute exact attention over sink/tail anchors and the query-dependent retrieved Top-K tokens, and estimate the remaining mid-region numerator and denominator using a fixed-size feature-map summary computed at prefill time. We add the exact and estimated contributions in the unnormalized domain and apply a single normalization, recovering the missing softmax mass without additional attention-side KV reads. Across long-context benchmarks, the proposed method improves over selection-only Top-K at matched token-equivalent read budgets, with the largest gains in high-entropy heads.",
+      "authors": [
+        "Yasuto Hoshi",
+        "Daisuke Miyashita",
+        "Jun Deguchi"
+      ],
+      "author_details": [
+        {
+          "name": "Yasuto Hoshi"
+        },
+        {
+          "name": "Daisuke Miyashita"
+        },
+        {
+          "name": "Jun Deguchi"
+        }
+      ],
+      "published": "2026-04-07T05:19:54Z",
+      "published_date": "2026-04-07 05:19:54+00:00",
+      "updated": "2026-04-07T05:19:54Z",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.05438v1",
+      "url": "http://arxiv.org/abs/2604.05438v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 0.7,
+        "quality": 0.7,
+        "recommendation": 8.88
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "prefill",
+        "decode",
+        "kv cache",
+        "cs.LG",
+        "cs.CL",
+        "memory"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.LG",
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "prefill",
+          "decode"
+        ],
+        "required_signal_match_count": 3,
+        "bonus_keyword_matches": [
+          "memory"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "memory"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.9,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper proposes a KV-cache read reduction method that preserves the original backbone and KV format by combining exact Top-K attention with a fixed-size summary that restores missing softmax mass.",
+        "summary_zh": "This paper targets a real systems bottleneck in long-context decoding: KV-cache traffic, especially when KV must be offloaded beyond GPU memory. The core issue is that Top-K retrieval cuts reads but biases attention because softmax is renormalized over an incomplete token set when attention is diffuse. The proposed module keeps the backbone weights and KV-cache layout unchanged, computes exact attention on anchors plus retrieved Top-K tokens, and uses a prefill-time fixed-size feature-map summary to estimate the remaining region before applying one final normalization. The abstract claims better results than selection-only Top-K at matched token-equivalent read budgets, with the largest gains in high-entropy heads. What remains unclear from the abstract is the actual approximation cost, hardware setting, and how robust the method is across offload regimes and retrieval budgets.",
+        "background_zh": "Long-context LLM decoding is increasingly constrained by KV-cache bandwidth rather than pure compute, especially once KV data no longer fits cleanly in GPU memory.",
+        "problem_zh": "The paper addresses how to reduce decode-time KV reads with query-aware retrieval without introducing the softmax bias that appears when unretrieved tokens still carry meaningful attention mass.",
+        "approach_zh": "It combines exact attention over sink and tail anchors plus query-dependent Top-K tokens with a fixed-size prefill-time summary that estimates the unretrieved mid-region contribution in the unnormalized attention domain.",
+        "evidence_zh": "The abstract says the method outperforms selection-only Top-K on long-context benchmarks at matched token-equivalent read budgets, especially for high-entropy heads, but it does not make the evaluation setup or magnitude of improvement clear.",
+        "value_zh": "If the approximation is cheap and stable, this offers a practical way to lower KV-cache traffic while preserving existing model weights and cache formats, which is attractive for serving systems with KV offload.",
+        "open_questions": [
+          "What exact feature map and summary statistics are stored at prefill time, and what memory or compute overhead do they add?",
+          "How fair are the baselines and read-budget comparisons across different context lengths, retrieval budgets, and KV offload settings?",
+          "Does the method remain accurate and latency-efficient when attention is highly diffuse or when the Top-K retriever misses semantically important tokens?"
+        ],
+        "core_contributions": [
+          "A retrieval-completion attention formulation that preserves both pretrained backbone weights and the existing KV-cache format.",
+          "A fixed-size prefill-time summary used to estimate unretrieved attention mass without extra attention-side KV reads at decode time.",
+          "An unnormalized-domain combination of exact and estimated contributions followed by a single normalization to correct selection-only Top-K bias."
+        ],
+        "why_read": [
+          "It is directly about decode-time KV-cache traffic reduction, which is a central systems issue for long-context inference.",
+          "The design constraint is practical: no backbone change and no KV-format change, so deployment friction may be lower than architecture-altering alternatives.",
+          "It focuses on when Top-K retrieval fails most clearly, namely high-entropy heads where missing softmax mass matters."
+        ],
+        "risks": [
+          "The abstract does not say how expensive the prefill-time summary is in memory, bandwidth, or implementation complexity.",
+          "Reported gains are only described relative to selection-only Top-K, so competitiveness against other cache-reduction or approximation schemes is unclear from the abstract alone."
+        ],
+        "recommended_for": [
+          "Researchers working on LLM serving and KV-cache offload.",
+          "Engineers evaluating decode-time bandwidth reduction methods that preserve existing model and cache formats.",
+          "Readers interested in approximation schemes for long-context attention under tight memory-read budgets."
+        ],
+        "keywords": [
+          "LLM inference systems",
+          "KV cache",
+          "long-context decoding",
+          "Top-K retrieval",
+          "attention approximation",
+          "KV offload"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "This is tightly aligned with LLM inference efficiency and KV-cache bandwidth reduction, and the paper's main claim is a practical systems-friendly correction to Top-K retrieval bias without changing model weights or cache layout.",
+        "fallback_summary": "Long-context generation is increasingly limited by decode-time key-value (KV) cache traffic, particularly when KV is offloaded beyond GPU memory."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.05404v1",
+      "arxiv_id": "2604.05404v1",
+      "title": "Beyond Accuracy: Unveiling Inefficiency Patterns in Tool-Integrated Reasoning",
+      "summary": "In real-world Tool-Integrated Reasoning (TIR) scenarios, where LLMs interleave reasoning with external tool calls, a major source of inefficiency is that the toolcalls create pauses between LLM requests and cause KV-Cache eviction, forcing recomputation. Also, the long, unfiltered response returned by external tools inflates the KV-Cache, so each decode step spends more time loading the growing cache and thus becomes steadily slower as context length increases. However, existing efficiency metrics like token counts and toolcall counts fail to capture the real model inference latency. To address this, we introduce PTE (Prefill Token Equivalents), a hardware-aware TIR-efficiency metric that unifies internal reasoning and external tool-use costs while explicitly accounting for non-reusable KV-Cache and long-tool-response scenarios. Validation in a high-concurrency industrial setting indicates that PTE aligns significantly better with wall-clock latency than standard token counts, while maintaining consistent efficiency rankings across diverse hardware profiles. We conduct extensive experiments across five TIR benchmarks, quantify their PTE costs, and identify four inefficiency patterns that appear in TIR. We also discover that trajectories with higher PTE costs tend to have lower reasoning correctness, indicating that simply using more tools does not improve the quality of the answer.",
+      "authors": [
+        "Qisheng Su",
+        "Shiting Huang",
+        "Zhen Fang",
+        "Ziyan Chen",
+        "Zehui Chen",
+        "Feng Zhao"
+      ],
+      "author_details": [
+        {
+          "name": "Qisheng Su"
+        },
+        {
+          "name": "Shiting Huang"
+        },
+        {
+          "name": "Zhen Fang"
+        },
+        {
+          "name": "Ziyan Chen"
+        },
+        {
+          "name": "Zehui Chen"
+        },
+        {
+          "name": "Feng Zhao"
+        }
+      ],
+      "published": "2026-04-07T03:55:29Z",
+      "published_date": "2026-04-07 03:55:29+00:00",
+      "updated": "2026-04-07T03:55:29Z",
+      "comments": "Accepted at ACL 2026. Code: https://github.com/sqs-ustc/tool-reasoning-framework-PTE",
+      "primary_category": "cs.PF",
+      "categories": [
+        "cs.PF",
+        "cs.SE"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.05404v1",
+      "url": "http://arxiv.org/abs/2604.05404v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 0.7,
+        "quality": 0.7,
+        "recommendation": 8.88
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "prefill",
+        "decode",
+        "kv cache",
+        "latency"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 4,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "kv cache",
+          "prefill",
+          "decode"
+        ],
+        "required_signal_match_count": 3,
+        "bonus_keyword_matches": [
+          "latency"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "latency"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.9,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper argues that tool-integrated reasoning has a distinct latency pathology: tool pauses can break KV-cache reuse, and long tool outputs bloat decode-time cache loading, so token counts alone miss the real inference cost.",
+        "summary_zh": "This paper studies efficiency in tool-integrated reasoning, where LLM inference is repeatedly interrupted by external tool calls and long tool outputs. It argues that the main latency cost is not captured by raw token or tool-call counts, because cache eviction can force recomputation and verbose tool responses enlarge the KV cache, slowing later decode steps. The proposed metric, PTE (Prefill Token Equivalents), is presented as a hardware-aware way to combine reasoning and tool-use costs while accounting for non-reusable cache and long-response effects. The abstract claims that PTE matches wall-clock latency better than standard token counts in a high-concurrency industrial setting and across five benchmarks, and that it reveals four recurring inefficiency patterns in TIR. The main missing detail is how PTE is computed in practice, what the identified patterns concretely are, and how fair and reproducible the hardware and workload comparisons are.",
+        "background_zh": "As LLM systems increasingly interleave generation with external tools, inference efficiency depends on cache behavior and system-level pauses rather than just the number of generated tokens.",
+        "problem_zh": "The paper asks how to measure real inference cost in tool-integrated reasoning when tool interruptions and long tool outputs distort latency in ways that standard token-based metrics do not capture.",
+        "approach_zh": "It introduces PTE, a hardware-aware metric intended to normalize reasoning and tool-use cost into a single efficiency measure that explicitly models cache non-reuse and context growth from tool responses.",
+        "evidence_zh": "The abstract says PTE aligns better with wall-clock latency than token counts in a high-concurrency industrial setting, remains consistent across hardware profiles, and is analyzed on five TIR benchmarks, but the exact setup and quantitative strength are not made clear in the abstract.",
+        "value_zh": "If the metric is robust, it could give LLM serving and agent-system builders a more faithful way to diagnose latency bottlenecks and avoid tool-use patterns that hurt both throughput and answer quality.",
+        "open_questions": [
+          "How is PTE calculated from actual serving traces, and which hardware-specific factors are required to instantiate it?",
+          "What are the four inefficiency patterns, and do they point to actionable fixes in prompting, tool design, or cache management?",
+          "How strong is the claimed correlation between higher PTE and lower correctness, and does it hold across model sizes, serving stacks, and benchmark types?"
+        ],
+        "core_contributions": [
+          "Defines a hardware-aware efficiency metric for tool-integrated reasoning that targets latency effects missed by token counts.",
+          "Frames KV-cache eviction and long tool responses as first-order system costs in TIR workloads.",
+          "Reports a benchmark-based analysis of inefficiency patterns and a claimed link between higher cost trajectories and worse reasoning outcomes."
+        ],
+        "why_read": [
+          "Useful if you care about measuring agentic inference cost beyond naive token accounting.",
+          "Relevant to serving work where cache reuse, context growth, and concurrency dominate latency.",
+          "Potentially helpful for evaluating whether tool-use trajectories are system-efficient rather than merely verbose."
+        ],
+        "risks": [
+          "The abstract does not specify the PTE formula, so it is hard to judge portability and implementation burden.",
+          "The industrial validation claim is underspecified, which makes baseline fairness and reproducibility unclear from the abstract alone. The abstract also does not make clear whether the observed correctness relationship is causal or just a correlation with harder trajectories."
+        ],
+        "recommended_for": [
+          "Researchers studying LLM serving cost models for agentic or tool-using workloads.",
+          "Engineers optimizing KV-cache behavior, long-context decoding, or concurrency in tool-augmented systems.",
+          "Readers interested in evaluation metrics that better reflect end-to-end latency than token counts."
+        ],
+        "keywords": [
+          "tool-integrated reasoning",
+          "LLM inference systems",
+          "KV cache",
+          "prefill",
+          "decode latency",
+          "latency modeling"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "Strong fit for LLM inference systems work because it focuses on cache reuse, decode slowdown, and latency measurement in tool-augmented workloads; the main limitation is that the abstract leaves the metric definition and evaluation details underspecified.",
+        "fallback_summary": "In real-world Tool-Integrated Reasoning (TIR) scenarios, where LLMs interleave reasoning with external tool calls, a major source of inefficiency is that the toolcalls create pauses between LLM requests and cause KV-Cache eviction, forcing recomputation."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.05496v1",
+      "arxiv_id": "2604.05496v1",
+      "title": "Optimizing OpenFaaS on Kubernetes: Comparative Analysis of Language Runtimes and Cluster Distributions",
+      "summary": "Serverless computing, particularly Function-as-a-Service (FaaS), has revolutionized cloud computing by abstracting infrastructure management and enabling dynamic resource allocation. This paper examines the performance and compatibility of OpenFaaS, an open-source serverless platform, when deployed on various Kubernetes distributions, including Kubeadm, K3s, MicroK8s, and K0s. Moreover, leveraging the CloudLab infrastructure, this study examines the impact of Python, Go, and Node.js programming languages on the performance of Kubernetes-enabled OpenFaaS, specifically when these languages are used to develop functions deployed on the platform. The performance is evaluated and analyzed under various levels of concurrent invocations using several usage-level metrics, such as throughput and CPU usage, as well as responsiveness metrics, such as delay. According to our findings, Go consistently outperforms Python and Node.js in terms of throughput and CPU usage, making it the ideal runtime for serverless applications. Among the Kubernetes distributions, K3s and Kubeadm exhibit superior performance, with Kubeadm maintaining low latency and efficient CPU usage, and K3s demonstrating high throughput. This study provides valuable insights into optimizing the Kubernetes-enabled OpenFaaS platform, highlighting the strengths and trade-offs of different Kubernetes distributions and language runtimes.",
+      "authors": [
+        "Ehsan Ataie",
+        "Mohammadreza Pooshani",
+        "Hossein Aqasizade"
+      ],
+      "author_details": [
+        {
+          "name": "Ehsan Ataie"
+        },
+        {
+          "name": "Mohammadreza Pooshani"
+        },
+        {
+          "name": "Hossein Aqasizade"
+        }
+      ],
+      "published": "2026-04-07T06:38:29Z",
+      "published_date": "2026-04-07 06:38:29+00:00",
+      "updated": "2026-04-07T06:38:29Z",
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC",
+        "cs.PF"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.05496v1",
+      "url": "http://arxiv.org/abs/2604.05496v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.21,
+        "recency": 3.0,
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 8.1
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "throughput",
+        "latency",
+        "cs.DC",
+        "runtime"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 2,
+        "matched_categories": [
+          "cs.DC"
+        ],
+        "required_signal_matches": [
+          "runtime"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "throughput",
+          "latency"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "throughput",
+          "latency"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.36
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper benchmarks OpenFaaS on several Kubernetes distributions and language runtimes, arguing that runtime and cluster choice materially change serverless throughput, latency, and CPU efficiency.",
+        "summary_zh": "This paper studies a practical serverless systems question: how much OpenFaaS performance changes with both Kubernetes distribution and function runtime choice. Using CloudLab, the authors compare Kubeadm, K3s, MicroK8s, and K0s, and evaluate Python, Go, and Node.js functions under different concurrency levels with throughput, CPU usage, and delay metrics. The main claim is that Go is the strongest runtime overall, while Kubeadm and K3s are the best cluster options, with Kubeadm favoring latency and CPU efficiency and K3s favoring throughput. For systems readers, the value is a deployment-level comparison of where efficiency differences may come from in the runtime and orchestration stack rather than from application logic. The biggest missing detail is that the abstract does not make the workload design, baseline fairness, hardware setup, or statistical robustness clear.",
+        "background_zh": "As serverless platforms are increasingly deployed on Kubernetes, performance now depends not just on application code but also on runtime overheads and cluster distribution design choices.",
+        "problem_zh": "The paper asks which language runtime and Kubernetes distribution give the best OpenFaaS behavior under concurrent load, and whether those choices meaningfully affect throughput, latency, and CPU cost.",
+        "approach_zh": "The authors run OpenFaaS on multiple Kubernetes distributions in CloudLab and compare Python, Go, and Node.js functions across concurrency levels using throughput, delay, and CPU usage metrics.",
+        "evidence_zh": "The abstract supports comparative benchmark claims across runtimes and cluster distributions, but it does not make the exact workloads, controls, variance, or experimental rigor clear.",
+        "value_zh": "If the comparisons are fair, the paper could help operators choose a lower-overhead runtime and a better-suited Kubernetes distribution for OpenFaaS deployments.",
+        "open_questions": [
+          "Are the functions across Python, Go, and Node.js equivalent in behavior, implementation effort, and optimization level, or does runtime fairness confound the results?",
+          "What are the hardware configuration, network conditions, autoscaling settings, and request patterns used in CloudLab, and how sensitive are the conclusions to those choices?",
+          "Do the reported differences come from cold start behavior, steady-state execution, Kubernetes control-plane overhead, or OpenFaaS-specific implementation details?"
+        ],
+        "core_contributions": [
+          "A cross-distribution OpenFaaS comparison covering Kubeadm, K3s, MicroK8s, and K0s.",
+          "A runtime comparison of Python, Go, and Node.js for OpenFaaS functions under concurrent invocation.",
+          "An empirical claim that Go is strongest overall and that Kubeadm and K3s offer the best performance trade-offs among the tested clusters."
+        ],
+        "why_read": [
+          "It isolates deployment-stack choices that can materially change serverless efficiency without changing the application itself.",
+          "It may provide useful operational guidance if you run OpenFaaS on Kubernetes and need to trade off throughput, latency, and CPU usage.",
+          "It is a concrete systems benchmark paper rather than a purely conceptual discussion of serverless platforms."
+        ],
+        "risks": [
+          "The abstract is underspecified on workload realism, experimental controls, and baseline fairness.",
+          "The paper is only loosely aligned with LLM inference, compiler, or low-level code generation priorities despite matching generic systems keywords like throughput and latency."
+        ],
+        "recommended_for": [
+          "Researchers studying serverless and cloud performance on Kubernetes.",
+          "Engineers operating OpenFaaS who need evidence on runtime and cluster trade-offs.",
+          "Readers interested in empirical FaaS benchmarking rather than LLM-specific inference systems."
+        ],
+        "keywords": [
+          "OpenFaaS",
+          "Kubernetes",
+          "serverless",
+          "Function-as-a-Service",
+          "runtime comparison",
+          "Go runtime performance"
+        ],
+        "reading_priority": "low",
+        "reading_priority_reason": "The paper is a reasonable serverless systems benchmark, but it is weakly matched to the main focus on LLM inference acceleration, compiler/runtime co-design, and low-level code generation.",
+        "fallback_summary": "Serverless computing, particularly Function-as-a-Service (FaaS), has revolutionized cloud computing by abstracting infrastructure management and enabling dynamic resource allocation."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, agents and active exploration. The set is anchored by TriAttention: Efficient Long… and GENSERVE: Efficient Co-Serving of…. Agentic Code Optimization via… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by See the Forest for the Trees:… and DualDiffusion: A Speculative…. Multi-Drafter Speculative Decoding… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
       "training and inference efficiency",
-      "agents and active exploration"
+      "factual reliability and verification"
     ],
     "reading_strategy": [
-      "Start with TriAttention: Efficient Long… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
-      "Then read GENSERVE: Efficient Co-Serving of… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use Agentic Code Optimization via… as a final cross-check on experimental boundaries and practical value."
+      "Start with See the Forest for the Trees:… and verify whether it defines the factual reliability and verification problem clearly and exposes a real mechanism.",
+      "Then read DualDiffusion: A Speculative… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use Multi-Drafter Speculative Decoding… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-04-07T11:05:06Z",
+    "generated_at": "2026-04-08T11:06:08Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 3,
+    "paper_results": 6,
     "paper_failures": 0
   }
 }
