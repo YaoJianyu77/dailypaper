@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-08",
+  "last_updated": "2026-04-09",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -182,6 +182,34 @@
         }
       ],
       "cooldown_until": "2026-05-23"
+    },
+    {
+      "paper_id": "2604.07144v1",
+      "title": "Autopoiesis: A Self-Evolving System Paradigm for LLM Serving Under Runtime Dynamics",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-08T14:37:17Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM serving",
+        "online policy evolution",
+        "runtime adaptation",
+        "scheduling",
+        "rescheduling",
+        "program synthesis"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-09",
+      "last_seen_date": "2026-04-09",
+      "last_recommended_date": "2026-04-09",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-09",
+          "recommendation": 9.55,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-08"
     },
     {
       "paper_id": "2603.24517v1",
@@ -484,24 +512,30 @@
       "source_lane": "classic",
       "topics": [
         "transformer inference",
-        "serving",
-        "multi-GPU execution",
+        "LLM serving",
+        "multi-GPU",
         "kernel optimization",
+        "heterogeneous memory",
         "CPU/GPU/NVMe offload"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-13",
-      "last_seen_date": "2026-03-13",
-      "last_recommended_date": "2026-03-13",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-09",
+      "last_recommended_date": "2026-04-09",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-03-13",
           "recommendation": 5.92,
           "lane": "classic"
+        },
+        {
+          "date": "2026-04-09",
+          "recommendation": 5.92,
+          "lane": "classic"
         }
       ],
-      "cooldown_until": "2026-04-03"
+      "cooldown_until": "2026-04-30"
     },
     {
       "paper_id": "2602.08005v1",
@@ -1653,6 +1687,34 @@
       "cooldown_until": "2026-05-12"
     },
     {
+      "paper_id": "2604.07173v1",
+      "title": "InfiniLoRA: Disaggregated Multi-LoRA Serving for Large Language Models",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-08T15:01:04Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference systems",
+        "multi-LoRA serving",
+        "disaggregated serving",
+        "latency SLO",
+        "tail latency",
+        "adapter memory"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-09",
+      "last_seen_date": "2026-04-09",
+      "last_recommended_date": "2026-04-09",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-09",
+          "recommendation": 8.38,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-08"
+    },
+    {
       "paper_id": "2603.28430v1",
       "title": "IsoQuant: Hardware-Aligned SO(4) Isoclinic Rotations for LLM KV Cache Compression",
       "domain": "LLM Inference Systems",
@@ -2105,6 +2167,62 @@
         }
       ],
       "cooldown_until": "2026-05-09"
+    },
+    {
+      "paper_id": "2604.07023v1",
+      "title": "MARS: Enabling Autoregressive Models Multi-Token Generation",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-08T12:41:37Z",
+      "source_lane": "fresh",
+      "topics": [
+        "autoregressive decoding",
+        "multi-token generation",
+        "LLM inference",
+        "throughput",
+        "KV cache",
+        "serving systems"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-09",
+      "last_seen_date": "2026-04-09",
+      "last_recommended_date": "2026-04-09",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-09",
+          "recommendation": 9.22,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-08"
+    },
+    {
+      "paper_id": "2604.07345v1",
+      "title": "Measurement of Generative AI Workload Power Profiles for Whole-Facility Data Center Infrastructure Planning",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-08T17:56:41Z",
+      "source_lane": "fresh",
+      "topics": [
+        "generative AI workloads",
+        "data center power profiling",
+        "facility energy modeling",
+        "H100",
+        "vLLM",
+        "MLCommons"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-09",
+      "last_seen_date": "2026-04-09",
+      "last_recommended_date": "2026-04-09",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-09",
+          "recommendation": 8.7,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-08"
     },
     {
       "paper_id": "2603.11935v1",
@@ -3215,6 +3333,34 @@
         }
       ],
       "cooldown_until": "2026-05-07"
+    },
+    {
+      "paper_id": "2604.06746v1",
+      "title": "StructKV: Preserving the Structural Skeleton for Scalable Long-Context Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-08T07:10:35Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference systems",
+        "KV cache compression",
+        "long-context inference",
+        "memory bandwidth",
+        "prefill-decoding decoupling",
+        "attention centrality"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-09",
+      "last_seen_date": "2026-04-09",
+      "last_recommended_date": "2026-04-09",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-09",
+          "recommendation": 9.52,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-08"
     },
     {
       "paper_id": "dblp:conf/cgo/CastelloBDIM24",

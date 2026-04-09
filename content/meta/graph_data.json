@@ -341,7 +341,7 @@
       "title": "DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale",
       "domain": "LLM Inference Systems",
       "quality_score": 5.92,
-      "updated": "2026-03-13"
+      "updated": "2026-04-09"
     },
     {
       "id": "2603.11504v1",
@@ -853,6 +853,41 @@
       "domain": "LLM Inference Systems",
       "quality_score": 8.1,
       "updated": "2026-04-08"
+    },
+    {
+      "id": "2604.07144v1",
+      "title": "Autopoiesis: A Self-Evolving System Paradigm for LLM Serving Under Runtime Dynamics",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.55,
+      "updated": "2026-04-09"
+    },
+    {
+      "id": "2604.06746v1",
+      "title": "StructKV: Preserving the Structural Skeleton for Scalable Long-Context Inference",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.52,
+      "updated": "2026-04-09"
+    },
+    {
+      "id": "2604.07023v1",
+      "title": "MARS: Enabling Autoregressive Models Multi-Token Generation",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.22,
+      "updated": "2026-04-09"
+    },
+    {
+      "id": "2604.07345v1",
+      "title": "Measurement of Generative AI Workload Power Profiles for Whole-Facility Data Center Infrastructure Planning",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.7,
+      "updated": "2026-04-09"
+    },
+    {
+      "id": "2604.07173v1",
+      "title": "InfiniLoRA: Disaggregated Multi-LoRA Serving for Large Language Models",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.38,
+      "updated": "2026-04-09"
     }
   ],
   "edges": [
@@ -2751,7 +2786,115 @@
       "target": "2604.05417v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.07144v1",
+      "target": "2207.00032",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.07144v1",
+      "target": "2604.06746v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.07144v1",
+      "target": "2604.07023v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.06746v1",
+      "target": "2604.07173v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.06746v1",
+      "target": "2604.07144v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.06746v1",
+      "target": "2604.07023v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2207.00032",
+      "target": "2604.07144v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2207.00032",
+      "target": "2604.06746v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2207.00032",
+      "target": "2604.07023v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.07023v1",
+      "target": "2604.07144v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.07023v1",
+      "target": "2604.06746v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.07023v1",
+      "target": "2604.07345v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.07345v1",
+      "target": "2604.07144v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.07345v1",
+      "target": "2604.06746v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.07345v1",
+      "target": "2604.07023v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.07173v1",
+      "target": "2604.06746v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.07173v1",
+      "target": "2604.07144v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.07173v1",
+      "target": "2604.07023v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-08"
+  "last_updated": "2026-04-09"
 }
