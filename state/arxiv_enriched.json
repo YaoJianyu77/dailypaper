@@ -1,90 +1,302 @@
 {
-  "target_date": "2026-04-09",
+  "target_date": "2026-04-14",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-10",
-      "end": "2026-04-09"
+      "start": "2026-03-15",
+      "end": "2026-04-14"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-09",
-      "end": "2026-03-09"
+      "start": "2025-04-14",
+      "end": "2026-03-14"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 20,
+  "total_filtered": 19,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 20,
+  "total_unique": 19,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 6,
+    "selected_count": 5,
     "lane_counts": {
       "fresh": 5,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 18,
+      "classic": 0,
+      "history_filtered": 11,
       "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.07144v1",
-      "arxiv_id": "2604.07144v1",
-      "title": "Autopoiesis: A Self-Evolving System Paradigm for LLM Serving Under Runtime Dynamics",
-      "summary": "Modern Large Language Model (LLM) serving operates in highly volatile environments characterized by severe runtime dynamics, such as workload fluctuations and elastic cluster autoscaling. Traditional serving systems rely on static, human-engineered serving policies (e.g., scheduling algorithms and rescheduling strategies) to manage these dynamics. However, these policies must navigate deeply intertwined runtime trade-offs (e.g., scheduling overhead vs. execution efficiency, rescheduling frequency vs. reconfiguration overhead), whose optimal balance is workload-specific and shifts continuously as runtime conditions evolve, rendering any fixed policy fundamentally unable to adapt. We propose Autopoiesis, a novel online self-evolving system that shifts LLM serving from static policy deployment to continuous online policy evolution. First, Autopoiesis introduces an LLM-driven program synthesis workflow to evolve serving policies with respect to real-time observed dynamics, where the evolved policies reflect the optimal decision in navigating the complex, multi-dimensional trade-off space. Second, Autopoiesis enables this synthesis process to operate continuously during serving, observing real-world system behavior, and rewriting the policy code as runtime trade-offs shift, thereby transforming policy design from a one-time offline endeavor into an ongoing system component, enabling autonomous adaptation to evolving runtime conditions. Together, we establish a new paradigm: Serving policies are no longer static artifacts designed by humans before deployment, but living code that LLMs continuously evolve throughout deployment to navigate runtime trade-offs beyond human design. We evaluate Autopoiesis across diverse runtime dynamics and show up to 53% and on average 34% improvements over state-of-the-art LLM serving systems.",
+      "id": "http://arxiv.org/abs/2604.11288v1",
+      "arxiv_id": "2604.11288v1",
+      "title": "Transactional Attention: Semantic Sponsorship for KV-Cache Retention",
+      "summary": "At K=16 tokens (0.4% of a 4K context), every existing KV-cache compression method achieves 0% on credential retrieval. The failure mode is dormant tokens: credentials, API keys, and configuration values that receive near-zero attention but become essential at generation time. Because these tokens lack the statistical signals that eviction policies rely on, no method based on attention scores, reconstruction loss, or learned retention gates retains them. We introduce Transactional Attention (TA), a sponsorship mechanism in which structural anchor patterns (e.g., \"key:\", \"password:\") protect adjacent value-bearing tokens from eviction. TA achieves 100% credential retrieval at K=16 where six baselines (H2O, TOVA, SnapKV, StreamingLLM, PyramidKV, DynamicKV) achieve 0%, and sustains 100% accuracy across 200 function-calling trials. TA-Fast, an attention-free variant, reduces memory overhead by 52% and is compatible with SDPA and FlashAttention. TA is orthogonal to existing compression methods and adds less than 1% latency overhead.",
       "authors": [
-        "Youhe Jiang",
-        "Ran Yan",
-        "You Peng",
-        "Wenshuang Li",
-        "Taiyi Wang",
-        "Fangcheng Fu",
-        "Binhang Yuan"
+        "Abhinaba Basu"
       ],
       "author_details": [
         {
-          "name": "Youhe Jiang"
-        },
-        {
-          "name": "Ran Yan"
-        },
-        {
-          "name": "You Peng"
-        },
-        {
-          "name": "Wenshuang Li"
-        },
-        {
-          "name": "Taiyi Wang"
-        },
-        {
-          "name": "Fangcheng Fu"
-        },
-        {
-          "name": "Binhang Yuan"
+          "name": "Abhinaba Basu"
         }
       ],
-      "published": "2026-04-08T14:37:17Z",
-      "published_date": "2026-04-08 14:37:17+00:00",
-      "updated": "2026-04-08T14:37:17Z",
-      "primary_category": "cs.DC",
+      "published": "2026-04-13T10:51:46Z",
+      "published_date": "2026-04-13 10:51:46+00:00",
+      "updated": "2026-04-13T10:51:46Z",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.DC"
+        "cs.CL",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.07144v1",
-      "url": "http://arxiv.org/abs/2604.07144v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11288v1",
+      "url": "http://arxiv.org/abs/2604.11288v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 9.63
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "kv cache",
+        "flashattention",
+        "latency",
+        "cs.LG",
+        "cs.CL",
+        "memory"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.LG",
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "flashattention"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "latency",
+          "memory"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "latency",
+          "memory"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.36
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper proposes an anchor-based KV-cache retention rule for dormant value tokens and claims it fixes an extreme-budget failure mode that standard compression methods miss.",
+        "summary_zh": "This paper targets a specific weakness in KV-cache compression: semantically critical tokens such as credentials or configuration values can receive near-zero attention until they are suddenly needed, so standard eviction signals discard them. The proposed Transactional Attention mechanism uses structural anchor patterns like \"key:\" or \"password:\" to sponsor adjacent value tokens, and a TA-Fast variant removes attention dependence while remaining compatible with SDPA and FlashAttention. In the abstract, the method is evaluated at a very small cache budget of K=16 tokens and is reported to reach 100% credential retrieval where six named baselines get 0%, while also maintaining 100% accuracy across 200 function-calling trials. If those results hold beyond the described settings, the main value is a cheap, composable fix for a concrete reliability gap in compressed LLM inference. The biggest missing detail is scope: the abstract does not make clear how broad the workloads, prompt formats, hardware setup, and baseline tuning are, so the generality and fairness still need checking.",
+        "background_zh": "KV-cache compression is increasingly necessary for long-context inference, but common retention signals track observed salience rather than future usefulness, which creates failure cases for dormant tokens.",
+        "problem_zh": "The paper asks how to preserve low-attention but semantically essential tokens under aggressive cache compression without giving up the latency and memory benefits of eviction.",
+        "approach_zh": "It introduces a sponsorship mechanism in which structural anchors protect nearby value-bearing tokens from eviction, plus an attention-free TA-Fast variant designed to compose with standard attention backends.",
+        "evidence_zh": "The abstract reports 100% credential retrieval at K=16 versus 0% for six baselines, 100% accuracy on 200 function-calling trials, 52% lower memory overhead for TA-Fast, and less than 1% latency overhead, but it does not make the broader evaluation setup clear.",
+        "value_zh": "If the retention rule generalizes, it could provide a low-overhead way to close an important correctness and safety gap in KV-cache compression while remaining compatible with existing serving kernels and stacks.",
+        "open_questions": [
+          "How diverse are the prompts and anchor formats beyond explicit patterns like \"key:\" and \"password:\", and how brittle is the method to formatting variation?",
+          "What hardware, model sizes, context lengths, and cache-budget ranges were used, and were the six baselines tuned fairly for the same operating point?",
+          "Does the sponsorship rule help on broader long-context retrieval and tool-use workloads, or is the gain concentrated on credential-style key-value patterns?"
+        ],
+        "core_contributions": [
+          "Identifies dormant value tokens as a concrete failure mode for KV-cache compression under extreme retention budgets.",
+          "Introduces structural-anchor sponsorship to retain adjacent semantically important tokens that attention-based policies miss.",
+          "Presents an attention-free TA-Fast variant positioned as lower-overhead and compatible with SDPA and FlashAttention."
+        ],
+        "why_read": [
+          "It addresses an inference-system correctness issue rather than only average compression quality, which is highly relevant for production serving.",
+          "The mechanism is simple and orthogonal to existing KV-cache policies, so it may be easy to reason about and integrate.",
+          "The abstract gives unusually sharp failure-mode numbers at an extreme budget, making it worth checking whether the result survives broader evaluation."
+        ],
+        "risks": [
+          "The method may depend heavily on explicit textual anchor patterns and fail when important values are not locally marked.",
+          "The reported wins may be narrow to credential retrieval and similar function-calling templates rather than general long-context reasoning workloads."
+        ],
+        "recommended_for": [
+          "Researchers studying KV-cache eviction and long-context inference reliability.",
+          "Engineers building LLM serving systems with aggressive cache compression.",
+          "Readers interested in lightweight runtime heuristics that compose with existing attention kernels."
+        ],
+        "keywords": [
+          "KV-cache compression",
+          "long-context inference",
+          "dormant tokens",
+          "credential retrieval",
+          "function calling",
+          "FlashAttention compatibility"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "The paper is tightly aligned with LLM inference systems and cache-efficiency work, and it claims a concrete fix for a sharp failure mode with low latency cost; the main reason to read is to verify generality and baseline fairness.",
+        "fallback_summary": "At K=16 tokens (0.4% of a 4K context), every existing KV-cache compression method achieves 0% on credential retrieval."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.11001v1",
+      "arxiv_id": "2604.11001v1",
+      "title": "Flow-Controlled Scheduling for LLM Inference with Provable Stability Guarantees",
+      "summary": "Large language models (LLMs) have been widely adopted due to their great performance across a wide range of applications. ChatGPT and Gemini now serve hundreds of millions of active users and handle billions of user requests per day, which puts optimizing LLM inference into the spotlight. A key challenge in LLM inference is that decode lengths are unknown. The memory usage for each request grows with generated tokens, which may lead to overflow and cause system instability. To address this concern, we propose a simple flow-control framework that controls the rate at which prompts join the active set. We derive a necessary condition that any stable system must satisfy and establish sufficient conditions under which our algorithm provably achieves stability. Experiments show that, compared to commonly used strategies in practice, our approach achieves higher token and request throughput, lower average and tail latency, and more stable KV cache utilization.",
+      "authors": [
+        "Zhuolun Dong",
+        "Junyu Cao"
+      ],
+      "author_details": [
+        {
+          "name": "Zhuolun Dong"
+        },
+        {
+          "name": "Junyu Cao"
+        }
+      ],
+      "published": "2026-04-13T05:03:16Z",
+      "published_date": "2026-04-13 05:03:16+00:00",
+      "updated": "2026-04-13T05:03:16Z",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.11001v1",
+      "url": "http://arxiv.org/abs/2604.11001v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 9.63
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm inference",
+        "decode",
+        "kv cache",
+        "throughput",
+        "latency",
+        "cs.LG",
+        "memory"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 5,
+        "matched_categories": [
+          "cs.LG"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "decode"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "throughput",
+          "latency",
+          "memory"
+        ],
+        "bonus_keyword_match_count": 3,
+        "analysis_keyword_matches": [
+          "throughput",
+          "latency",
+          "memory"
+        ],
+        "analysis_keyword_match_count": 3,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.5
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper studies admission control for LLM inference and proposes a flow-control scheduler that limits how prompts enter the active set so systems with unknown decode lengths can remain stable under KV-cache growth.",
+        "summary_zh": "This paper targets a core serving problem in LLM inference: decode lengths are unknown, so per-request KV-cache demand grows during generation and can push the system into overflow or unstable behavior. The proposed method is a simple flow-control framework that regulates the rate at which new prompts join the active set, framing scheduling as a stability problem rather than only a throughput optimization problem. The abstract claims both theory and practice: it derives a necessary condition for any stable system, gives sufficient conditions under which the proposed algorithm is provably stable, and reports experiments against common practical strategies. Those experiments are said to show better token throughput, request throughput, average and tail latency, and more stable KV-cache utilization. The main missing detail is how the controller is instantiated and evaluated in real serving setups, including workload assumptions, baselines, and the tradeoff between aggressiveness and admission delay.",
+        "background_zh": "LLM serving is now constrained not just by compute but by dynamic memory pressure, because generated sequence lengths are unknown and KV-cache usage grows online during decoding.",
+        "problem_zh": "The paper asks how to schedule LLM inference requests so the system remains stable despite unpredictable decode lengths and growing memory demand that can otherwise cause overflow.",
+        "approach_zh": "It introduces a flow-control scheduler that controls the rate at which prompts enter the active set and analyzes this controller with necessary and sufficient stability conditions.",
+        "evidence_zh": "The abstract supports the claim that the method has both a formal stability analysis and experimental comparisons, but it does not make the evaluation setup, baseline details, or quantitative margins clear.",
+        "value_zh": "If the guarantees and experiments hold under realistic workloads, the method could give serving systems a cleaner way to trade admission rate against KV-cache safety, tail latency, and sustained throughput.",
+        "open_questions": [
+          "What exact queueing or workload model underlies the stability proof, and how well does it match real LLM serving traffic with bursty arrivals and heterogeneous prompts?",
+          "What are the practical baselines and controller knobs in the experiments, and are throughput and latency gains preserved under fair memory and batching constraints?",
+          "How does the method interact with common serving mechanisms such as continuous batching, prefill/decode disaggregation, and KV-cache eviction or reservation policies?"
+        ],
+        "core_contributions": [
+          "Frames LLM inference scheduling with unknown decode lengths as a flow-control problem tied directly to system stability.",
+          "Derives a necessary condition for stability and sufficient conditions under which the proposed scheduler is provably stable.",
+          "Reports experimental gains in throughput, latency, and KV-cache utilization stability relative to commonly used practical strategies."
+        ],
+        "why_read": [
+          "It is directly about LLM inference serving under KV-cache pressure, which is a central systems bottleneck.",
+          "It combines control logic with provable stability conditions instead of treating scheduling as a purely heuristic tuning problem.",
+          "It may clarify when admission control improves tail behavior and utilization in decode-heavy workloads."
+        ],
+        "risks": [
+          "The abstract does not specify the serving stack, hardware, or workload distribution, so external validity is unclear.",
+          "The theoretical model may simplify real systems enough that the guarantees do not transfer cleanly to production schedulers with multiple interacting policies."
+        ],
+        "recommended_for": [
+          "Researchers working on LLM inference scheduling and queueing control.",
+          "Engineers building serving systems where KV-cache pressure and tail latency dominate operating limits.",
+          "Readers interested in theory-backed admission control rather than purely heuristic batching policies."
+        ],
+        "keywords": [
+          "LLM inference",
+          "scheduling",
+          "flow control",
+          "stability",
+          "KV cache",
+          "throughput vs latency"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "This is a strong topical match for LLM inference systems and focuses on scheduling, KV-cache stability, throughput, and latency. The paper appears to offer both formal guarantees and systems-facing evidence, which makes it more relevant than a purely empirical serving tweak, although the abstract leaves important evaluation details unspecified.",
+        "fallback_summary": "Large language models (LLMs) have been widely adopted due to their great performance across a wide range of applications."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.11501v1",
+      "arxiv_id": "2604.11501v1",
+      "title": "Quantization Dominates Rank Reduction for KV-Cache Compression",
+      "summary": "We compare two strategies for compressing the KV cache in transformer inference: rank reduction (discard dimensions) and quantization (keep all dimensions, reduce precision). At matched storage budgets across five models (124M-14B, MHA and GQA), we find that quantization consistently outperforms rank reduction by 4-364 PPL depending on model and compression level. The gap persists even when rank reduction is combined with quantization in hybrid baselines, and it grows with GQA aggressiveness. On LAMBADA, INT4 matches FP16 accuracy (+0.23 PPL on Mistral 7B, +0.58 on GPT-2) while rank-32 at identical storage collapses to 0.4%.\n  We trace this gap to a structural asymmetry: under softmax attention routing, removing a dimension can flip which token is attended (a discrete failure), while quantization noise is bounded and typically preserves score ordering. We formalize this via a perturbation result showing projection damage exceeds quantization damage by 3 x 2^(2b) per direction under the softmax Fisher metric. A basis ablation confirms the finding is basis-independent (spread <0.4 PPL), establishing that the advantage comes from preserving dimensions, not from a better coordinate system. Joint K+V INT4 quantization achieves 75% total KV reduction at only +0.18 PPL on Mistral 7B.",
+      "authors": [
+        "Samuel Salfati"
+      ],
+      "author_details": [
+        {
+          "name": "Samuel Salfati"
+        }
+      ],
+      "published": "2026-04-13T14:06:18Z",
+      "published_date": "2026-04-13 14:06:18+00:00",
+      "updated": "2026-04-13T14:06:18Z",
+      "comments": "16 pages, 3 figures",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.11501v1",
+      "url": "http://arxiv.org/abs/2604.11501v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
@@ -95,10 +307,11 @@
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "llm serving",
-        "serving",
-        "cs.DC",
-        "runtime"
+        "kv cache",
+        "quantization",
+        "cs.LG",
+        "cs.CL",
+        "ablation"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -107,716 +320,349 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 2,
         "matched_categories": [
-          "cs.DC"
+          "cs.LG",
+          "cs.CL"
         ],
         "required_signal_matches": [
-          "runtime"
+          "kv cache"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "ablation"
+        ],
+        "analysis_keyword_match_count": 1,
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "The paper proposes an online LLM serving system that continuously rewrites its own scheduling and rescheduling policies to adapt to changing runtime conditions.",
-        "summary_zh": "This paper targets a real systems problem in LLM serving: fixed hand-designed policies degrade when workload mix, cluster size, and runtime trade-offs keep shifting. It proposes Autopoiesis, a self-evolving serving framework in which an LLM synthesizes and rewrites policy code online based on observed system behavior, rather than relying on a static scheduling design chosen before deployment. The abstract claims results across diverse runtime dynamics, with up to 53% and average 34% improvement over state-of-the-art LLM serving systems, which suggests the gains come from adapting policy choices as operating conditions change. For systems readers, the main interest is the shift from offline policy tuning to runtime policy evolution as a control mechanism for serving efficiency. The biggest missing detail is that the abstract does not make clear what policies are editable in practice, how safety and rollback are enforced, or how fair and stable the comparisons are under real serving overheads.",
-        "background_zh": "LLM serving now runs in environments with fluctuating workloads and elastic infrastructure, so policy choices that were reasonable offline can become suboptimal during deployment.",
-        "problem_zh": "The paper asks how to manage intertwined runtime trade-offs in LLM serving when the best scheduling or rescheduling policy depends on conditions that keep changing over time.",
-        "approach_zh": "Autopoiesis uses an LLM-driven program synthesis loop that observes live system behavior and continuously rewrites serving policy code to adapt decisions to current runtime dynamics.",
-        "evidence_zh": "The abstract reports evaluation under diverse runtime dynamics and claims up to 53% and average 34% improvement over state-of-the-art LLM serving systems, but it does not make the experimental setup, baselines, or overhead accounting clear.",
-        "value_zh": "If the method is robust, it could reduce the need for brittle hand-tuned serving heuristics and make LLM serving stacks adapt automatically to changing cluster and workload conditions.",
+        "one_liner_zh": "This paper argues that, at fixed KV-cache storage budgets, low-bit quantization preserves transformer quality much better than rank reduction because it keeps the full attention geometry intact.",
+        "summary_zh": "KV-cache growth is a central inference bottleneck, so this paper asks whether cache compression should discard dimensions or instead keep all dimensions and lower precision. It compares rank reduction, quantization, and hybrid baselines at matched storage budgets across five transformer models spanning 124M to 14B parameters, including both MHA and GQA settings. The claimed result is that quantization consistently beats rank reduction on perplexity, with especially sharp failures for matched-budget rank reduction on LAMBADA, while joint K+V INT4 quantization still gives large cache savings with only a small reported perplexity increase on Mistral 7B. The proposed reason is structural: removing dimensions can flip which token attention selects, whereas quantization noise is bounded and usually preserves score ordering, and the basis ablation is presented as evidence that this is not just a coordinate-choice artifact. The main missing detail is systems-side evidence: the abstract does not say how these methods compare in latency, bandwidth, kernel complexity, or deployment overhead on real hardware.",
+        "background_zh": "KV-cache memory grows with sequence length and batch size, so compressing keys and values without breaking attention quality is a core problem in long-context LLM inference.",
+        "problem_zh": "The paper studies whether KV-cache compression should spend its budget on fewer dimensions or on lower precision, and why rank reduction may fail more catastrophically than quantization.",
+        "approach_zh": "It performs matched-budget comparisons between rank reduction, quantization, and hybrid schemes, then supports the observed gap with a softmax-Fisher perturbation argument and a basis-independence ablation.",
+        "evidence_zh": "The abstract reports results on five models from 124M to 14B with both MHA and GQA, large perplexity gaps favoring quantization, severe matched-budget rank-reduction failure on LAMBADA, and a joint K+V INT4 result on Mistral 7B; it does not make runtime or hardware costs clear.",
+        "value_zh": "If the result generalizes, it strongly favors full-dimension low-bit KV storage over projection-based compression for practical LLM serving systems.",
         "open_questions": [
-          "Which policy surfaces are actually synthesized online, and what constraints keep generated code safe, valid, and low-overhead during serving?",
-          "How are the baseline systems configured, and are the reported gains still strong after including synthesis, monitoring, recompilation, and rollback costs?",
-          "What runtime signals trigger policy rewrites, and how stable is the system under noisy or rapidly oscillating workload conditions?"
+          "How were matched storage budgets defined in practice, including quantization scales, metadata, and packing overhead versus projection parameters?",
+          "What are the actual latency, bandwidth, and kernel-cost tradeoffs of INT4 K+V quantization compared with rank-reduced caches on real serving hardware?",
+          "Do the conclusions hold at longer context lengths, on more downstream tasks than perplexity and LAMBADA, and across additional model families?"
         ],
         "core_contributions": [
-          "Frames LLM serving control as continuous online policy evolution rather than static policy deployment.",
-          "Introduces an LLM-driven program synthesis workflow for adapting serving policies to observed runtime dynamics.",
-          "Claims substantial end-to-end improvements across changing serving conditions compared with state-of-the-art baselines."
+          "A matched-budget empirical comparison showing that KV-cache quantization outperforms rank reduction across multiple transformer sizes and attention variants.",
+          "A structural explanation that dimension removal can change attention routing discretely, while quantization usually perturbs scores without changing their ordering.",
+          "A basis ablation used to argue that the advantage comes from preserving dimensions rather than from a better projection basis."
         ],
         "why_read": [
-          "It treats serving policy code itself as an adaptive runtime object, which is a stronger systems claim than ordinary offline autotuning.",
-          "It is directly aligned with LLM inference systems work because the proposed gains are tied to scheduling and rescheduling under dynamic deployment conditions.",
-          "It raises concrete systems questions around synthesis overhead, control stability, and safe live policy updates."
+          "It directly addresses a practical KV-cache compression decision for inference systems under equal storage constraints.",
+          "It gives a concrete mechanism for why low-bit cache storage may be safer than dimensionality reduction in attention.",
+          "It includes GQA behavior, which matters for modern deployment-oriented transformer architectures."
         ],
         "risks": [
-          "The abstract does not specify whether policy synthesis overhead erodes net serving gains in realistic deployments.",
-          "Generated policy rewrites may introduce instability, regressions, or unsafe behavior if validation and rollback are weakly designed or too slow to react, so the control loop could harm tail latency or cluster efficiency instead of improving it under adverse conditions alone or together with noisy runtime signals and rapid oscillations that the abstract does not characterize in enough detail to judge robustness confidently."
+          "The abstract emphasizes quality outcomes but does not specify latency, throughput, memory-bandwidth, or implementation overhead.",
+          "The theoretical result may be locally persuasive, but the abstract does not show how tightly it predicts end-to-end behavior across settings beyond those reported here."
         ],
         "recommended_for": [
-          "Researchers working on LLM serving schedulers, adaptive runtimes, and inference control loops.",
-          "Engineers evaluating whether online policy generation can outperform static heuristic design in volatile clusters.",
-          "Readers interested in compiler- or program-synthesis-style techniques applied to live serving policy optimization."
+          "Researchers studying LLM inference efficiency and KV-cache compression.",
+          "Engineers choosing between low-bit cache storage and projection-based compression in serving stacks.",
+          "Compiler or kernel developers evaluating whether full-dimension INT4 KV paths are better targets than rank-reduced representations."
         ],
         "keywords": [
-          "LLM serving",
-          "online policy evolution",
-          "runtime adaptation",
-          "scheduling",
-          "rescheduling",
-          "program synthesis"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "Strong fit with LLM inference systems and runtime control. The core claim is systems-relevant and concrete, but a full read is needed to judge overheads, safety, and baseline fairness.",
-        "fallback_summary": "Modern Large Language Model (LLM) serving operates in highly volatile environments characterized by severe runtime dynamics, such as workload fluctuations and elastic cluster autoscaling."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.06746v1",
-      "arxiv_id": "2604.06746v1",
-      "title": "StructKV: Preserving the Structural Skeleton for Scalable Long-Context Inference",
-      "summary": "As Large Language Models (LLMs) scale to support context windows exceeding one million tokens, the linear growth of Key-Value (KV) cache imposes severe memory capacity and bandwidth bottlenecks, constraining the efficiency of long-context inference. Existing compression approaches typically prioritize tokens based on local saliency metrics to decouple prefill computation from decoding memory. However, these methods often rely on local saliency snapshots at a specific layer, thereby systematically discarding tokens that act as global information hubs across the network depth but appear temporarily dormant at the specific layer selected for pruning. To address this limitation, we propose StructKV, a structure-aware KV cache compression framework that introduces three core innovations: First, Global In-Degree Centrality aggregates attention patterns across the network depth to identify global information hubs. Second, Dynamic Pivot Detection utilizes information-theoretic metrics to adaptively locate the optimal layer for compression. Finally, Structural Propagation and Decoupling separates the computational budget from the memory storage budget. Experimental results on the LongBench and RULER benchmarks demonstrate that StructKV effectively preserves long-range dependencies and retrieval robustness.",
-      "authors": [
-        "Zhirui Chen",
-        "Peiyang Liu",
-        "Ling Shao"
-      ],
-      "author_details": [
-        {
-          "name": "Zhirui Chen"
-        },
-        {
-          "name": "Peiyang Liu"
-        },
-        {
-          "name": "Ling Shao"
-        }
-      ],
-      "published": "2026-04-08T07:10:35Z",
-      "published_date": "2026-04-08 07:10:35+00:00",
-      "updated": "2026-04-08T07:10:35Z",
-      "comments": "Accepted to ACL 2026 Findings, 14 pages",
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.06746v1",
-      "url": "http://arxiv.org/abs/2604.06746v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.94,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 9.52
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "prefill",
-        "kv cache",
-        "cs.CL",
-        "memory",
-        "bandwidth"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.CL"
-        ],
-        "required_signal_matches": [
-          "kv cache",
-          "prefill"
-        ],
-        "required_signal_match_count": 2,
-        "bonus_keyword_matches": [
-          "memory",
-          "bandwidth"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "memory",
-          "bandwidth"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper proposes a structure-aware KV-cache compression method for million-token inference that tries to retain globally important tokens instead of pruning from a single-layer saliency snapshot.",
-        "summary_zh": "This paper targets a central long-context inference problem: KV cache growth creates both memory-capacity and bandwidth pressure as context windows move toward the million-token regime. The authors argue that common compression methods over-trust local saliency at one layer and can drop tokens that are globally important for information flow across depth. Their method, StructKV, combines depth-aggregated attention centrality, adaptive layer selection for compression, and a decoupling of compute budget from storage budget to preserve the structural skeleton of the context. The abstract claims improved preservation of long-range dependencies and retrieval robustness on LongBench and RULER, which is directionally relevant for LLM serving efficiency. The main missing detail is where the actual efficiency gains come from in system terms, including compression ratio, latency or bandwidth impact, hardware assumptions, and how fair the baseline setup is.",
-        "background_zh": "Long-context LLM inference is increasingly limited by KV-cache memory footprint and memory traffic rather than raw model compute, especially as context windows scale toward very large token counts.",
-        "problem_zh": "The paper asks how to compress KV cache without discarding tokens that may look unimportant at one layer but serve as globally important connectors for long-range reasoning across the network.",
-        "approach_zh": "StructKV scores token importance using attention-derived global in-degree across layers, chooses the compression layer dynamically with an information-theoretic criterion, and separates computation from storage through structural propagation and decoupling.",
-        "evidence_zh": "The abstract states that experiments on LongBench and RULER show better preservation of long-range dependencies and retrieval robustness, but it does not make the efficiency evidence or comparison details clear.",
-        "value_zh": "If the method holds up, it could make long-context serving more scalable by reducing KV-cache pressure while avoiding the quality collapse that comes from overly local pruning heuristics.",
-        "open_questions": [
-          "What compression ratios, latency changes, and memory-bandwidth savings does StructKV achieve under concrete hardware and sequence-length settings?",
-          "How are the baselines configured, and is the comparison fair against strong recent KV-cache compression methods using comparable budgets?",
-          "What is the runtime overhead of computing global centrality and dynamic pivot detection during prefill and decoding?"
-        ],
-        "core_contributions": [
-          "Frames KV-cache compression as a structural retention problem rather than a purely local saliency problem.",
-          "Introduces a depth-aggregated centrality signal to identify globally important tokens across the network.",
-          "Adds adaptive compression-layer selection and a compute-storage decoupling mechanism within one KV compression pipeline."
-        ],
-        "why_read": [
-          "Relevant to long-context LLM inference because it targets both memory capacity and bandwidth bottlenecks directly.",
-          "Interesting if you care about whether attention structure can produce better pruning signals than single-layer token saliency.",
-          "Useful to inspect for system realism: the paper makes quality-preservation claims, but the serving-side cost model still needs validation."
-        ],
-        "risks": [
-          "The abstract does not specify actual throughput, latency, or memory savings, so the systems benefit is still unproven from the provided text.",
-          "The added scoring and adaptive-layer logic may introduce overhead that reduces practical gains at inference time, especially at scale."
-        ],
-        "recommended_for": [
-          "Researchers working on KV-cache compression and long-context LLM inference.",
-          "Engineers evaluating memory-bandwidth tradeoffs in long-context serving stacks.",
-          "Readers interested in structure-aware alternatives to local token saliency pruning."
-        ],
-        "keywords": [
-          "LLM inference systems",
-          "KV cache compression",
-          "long-context inference",
-          "memory bandwidth",
-          "prefill-decoding decoupling",
-          "attention centrality"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "High fit with the current focus on LLM inference acceleration and memory-efficient serving. The paper is directly about KV-cache compression under long-context scaling, but the abstract leaves key systems questions unresolved, so the priority comes from topic alignment more than validated engineering evidence.",
-        "fallback_summary": "As Large Language Models (LLMs) scale to support context windows exceeding one million tokens, the linear growth of Key-Value (KV) cache imposes severe memory capacity and bandwidth bottlenecks, constraining the efficiency of long-context inference."
-      }
-    },
-    {
-      "paper_id": "2207.00032",
-      "arxiv_id": "2207.00032",
-      "title": "DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale",
-      "summary": "Presents a transformer inference system that combines multi-GPU execution, kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support to scale model serving under latency and throughput constraints.",
-      "authors": [
-        "Reza Yazdani Aminabadi",
-        "Samyam Rajbhandari",
-        "Minjia Zhang",
-        "Ammar Ahmad Awan",
-        "Cheng Li",
-        "Du Li",
-        "Elton Zheng",
-        "Jeff Rasley",
-        "Shaden Smith",
-        "Olatunji Ruwase",
-        "Yuxiong He"
-      ],
-      "published": "2022-06-30",
-      "published_date": "2022-06-30 00:00:00",
-      "categories": [
-        "cs.DC",
-        "cs.LG"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "inference-system",
-        "serving",
-        "multi-gpu",
-        "offload"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2207.00032",
-      "pdf_url": "https://arxiv.org/pdf/2207.00032.pdf",
-      "scores": {
-        "relevance": 2.9,
-        "recency": 0.0,
-        "popularity": 0.0,
-        "quality": 0.0,
-        "recommendation": 5.92
-      },
-      "classic_rotation_score": 10.7505,
-      "citationCount": 555,
-      "influentialCitationCount": 64,
-      "venue": "International Conference for High Performance Computing, Networking, Storage and Analysis",
-      "journal_ref": "SC22: International Conference for High Performance Computing, Networking, Storage and Analysis",
-      "ai": {
-        "one_liner_zh": "This paper presents a transformer inference system that combines multi-GPU execution, kernel optimization, and heterogeneous CPU/GPU/NVMe memory use to serve very large models under latency and throughput constraints.",
-        "summary_zh": "This paper targets the systems problem of serving transformer models when model size pushes beyond straightforward single-device deployment. The core idea is a combined inference stack: multi-GPU execution for scale-out, kernel-level optimization for faster execution, and heterogeneous CPU/GPU/NVMe memory support to extend effective model capacity. From the abstract, the claim is that these pieces together enable efficient large-scale inference while respecting latency and throughput constraints, but it does not explain which optimizations matter most or under what hardware assumptions. The practical value is clear for large-model serving, especially where memory capacity is the bottleneck. The biggest missing detail is evaluation clarity: the abstract does not specify baselines, workloads, or how much of the benefit comes from kernels versus parallelism versus offload.",
-        "background_zh": "Transformer inference is constrained by both compute efficiency and memory capacity, and those limits become more severe as model size outgrows single-GPU serving.",
-        "problem_zh": "The paper asks how to serve very large transformer models efficiently when deployment must satisfy both latency and throughput targets despite device memory limits.",
-        "approach_zh": "It proposes an inference system that combines multi-GPU execution, kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support in one serving stack.",
-        "evidence_zh": "The abstract supports only a high-level system claim that this combination enables large-scale transformer inference under latency and throughput constraints; it does not make the evaluation setup or evidence strength clear.",
-        "value_zh": "If the integration works as claimed, it offers a practical path to serving larger transformer models by jointly addressing execution efficiency and memory capacity rather than treating them separately.",
-        "open_questions": [
-          "Which part of the reported gain comes from kernel optimization versus model parallel execution versus heterogeneous memory offload?",
-          "What hardware topology and interconnect assumptions are required for the system to meet latency targets in practice?",
-          "How fair are the baselines and what workloads, batch sizes, and model scales were used in evaluation?"
-        ],
-        "core_contributions": [
-          "A transformer inference system aimed at very large-scale serving.",
-          "A joint design that combines multi-GPU execution with kernel-level optimization.",
-          "Heterogeneous CPU/GPU/NVMe memory support to extend serving capacity beyond accelerator memory."
-        ],
-        "why_read": [
-          "It is directly about LLM inference systems rather than model training or generic deployment.",
-          "It frames scale-out execution and memory offload as a single serving problem.",
-          "It is useful for understanding early system designs for large-model inference under latency and throughput constraints."
-        ],
-        "risks": [
-          "The abstract is too underspecified to judge baseline quality or the real source of performance gains.",
-          "Offload-based scaling may depend heavily on specific hardware and interconnect characteristics not described here."
-        ],
-        "recommended_for": [
-          "Researchers studying LLM serving architectures and inference-system design.",
-          "Engineers evaluating multi-GPU and offload-based strategies for large-model deployment.",
-          "Readers interested in systems tradeoffs between latency, throughput, and memory capacity."
-        ],
-        "keywords": [
+          "KV-cache compression",
+          "quantization",
+          "rank reduction",
           "transformer inference",
-          "LLM serving",
-          "multi-GPU",
-          "kernel optimization",
-          "heterogeneous memory",
-          "CPU/GPU/NVMe offload"
+          "attention routing",
+          "INT4 cache storage"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "This is a strong fit for LLM inference systems and large-model serving, but the abstract leaves key implementation and evaluation details unclear, so the value is in the system design framing rather than verified evidence from the abstract alone.",
-        "fallback_summary": "Presents a transformer inference system that combines multi-GPU execution, kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support to scale model serving under latency and throughput constraints."
+        "reading_priority_reason": "This is a strong fit for LLM inference systems work because it isolates a deployment-relevant KV-cache design choice, gives concrete matched-budget evidence, and frames the gain in terms of attention behavior rather than generic compression claims.",
+        "fallback_summary": "We compare two strategies for compressing the KV cache in transformer inference: rank reduction (discard dimensions) and quantization (keep all dimensions, reduce precision)."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.07023v1",
-      "arxiv_id": "2604.07023v1",
-      "title": "MARS: Enabling Autoregressive Models Multi-Token Generation",
-      "summary": "Autoregressive (AR) language models generate text one token at a time, even when consecutive tokens are highly predictable given earlier context. We introduce MARS (Mask AutoRegreSsion), a lightweight fine-tuning method that teaches an instruction-tuned AR model to predict multiple tokens per forward pass. MARS adds no architectural modifications, no extra parameters, and produces a single model that can still be called exactly like the original AR model with no performance degradation. Unlike speculative decoding, which maintains a separate draft model alongside the target, or multi-head approaches such as Medusa, which attach additional prediction heads, MARS requires only continued training on existing instruction data. When generating one token per forward pass, MARS matches or exceeds the AR baseline on six standard benchmarks. When allowed to accept multiple tokens per step, it maintains baseline-level accuracy while achieving 1.5-1.7x throughput. We further develop a block-level KV caching strategy for batch inference, achieving up to 1.71x wall-clock speedup over AR with KV cache on Qwen2.5-7B. Finally, MARS supports real-time speed adjustment via confidence thresholding: under high request load, the serving system can increase throughput on the fly without swapping models or restarting, providing a practical latency-quality knob for deployment.",
+      "id": "http://arxiv.org/abs/2604.11512v1",
+      "arxiv_id": "2604.11512v1",
+      "title": "EdgeCIM: A Hardware-Software Co-Design for CIM-Based Acceleration of Small Language Models",
+      "summary": "The growing demand for deploying Small Language Models (SLMs) on edge devices, including laptops, smartphones, and embedded platforms, has exposed fundamental inefficiencies in existing accelerators. While GPUs handle prefill workloads efficiently, the autoregressive decoding phase is dominated by GEMV operations that are inherently memory-bound, resulting in poor utilization and prohibitive energy costs at the edge. In this work, we present EdgeCIM, a hardware-software co-design framework that rethinks accelerator design for end-to-end decoder-only inference. At its core is a CIM macro, implemented in 65nm, coupled with a tile-based mapping strategy that balances pipeline stages, maximizing parallelism while alleviating DRAM bandwidth bottlenecks. Our simulator enables design space exploration of SLMs up to 4B parameters, identifying Pareto-optimal configurations in terms of latency and energy. Compared to an NVIDIA Orin Nano, EdgeCIM achieves up to 7.3x higher throughput and 49.59x better energy efficiency on LLaMA3.2-1B, and delivers 9.95x higher throughput than Qualcomm SA8255P on LLaMA3.2-3B. Extensive benchmarks on TinyLLaMA-1.1B, LLaMA3.2 (1B, 3B), Phi-3.5-mini-3.8B, Qwen2.5 (0.5B, 1.5B, 3B), SmolLM2-1.7B, SmolLM3-3B, and Qwen3 (0.6B, 1.7B, 4B) reveal that our accelerator, under INT4 precision, achieves on average 336.42 tokens/s and 173.02 tokens/J. These results establish EdgeCIM as a compelling solution towards real-time, energy-efficient edge-scale SLM inference.",
       "authors": [
-        "Ziqi Jin",
-        "Lei Wang",
-        "Ziwei Luo",
-        "Aixin Sun"
+        "Jinane Bazzi",
+        "Mariam Rakka",
+        "Fadi Kurdahi",
+        "Mohammed E. Fouda",
+        "Ahmed Eltawil"
       ],
       "author_details": [
         {
-          "name": "Ziqi Jin"
+          "name": "Jinane Bazzi"
         },
         {
-          "name": "Lei Wang"
+          "name": "Mariam Rakka"
         },
         {
-          "name": "Ziwei Luo"
+          "name": "Fadi Kurdahi"
         },
         {
-          "name": "Aixin Sun"
+          "name": "Mohammed E. Fouda"
+        },
+        {
+          "name": "Ahmed Eltawil"
         }
       ],
-      "published": "2026-04-08T12:41:37Z",
-      "published_date": "2026-04-08 12:41:37+00:00",
-      "updated": "2026-04-08T12:41:37Z",
-      "comments": "15 pages, 4 fugures",
-      "primary_category": "cs.CL",
+      "published": "2026-04-13T14:16:20Z",
+      "published_date": "2026-04-13 14:16:20+00:00",
+      "updated": "2026-04-13T14:16:20Z",
+      "primary_category": "cs.AR",
       "categories": [
-        "cs.CL"
+        "cs.AR",
+        "cs.AI"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.07023v1",
-      "url": "http://arxiv.org/abs/2604.07023v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11512v1",
+      "url": "http://arxiv.org/abs/2604.11512v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 9.22
+        "popularity": 1.3,
+        "quality": 1.3,
+        "recommendation": 9.38
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "serving",
-        "speculative decoding",
-        "kv cache",
+        "decoder-only",
+        "prefill",
         "throughput",
         "latency",
-        "cs.CL",
-        "serving system",
-        "speedup",
-        "baseline"
+        "cs.AR",
+        "memory",
+        "bandwidth",
+        "tokens/s"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 5,
+        "text_match_count": 4,
         "matched_categories": [
-          "cs.CL"
+          "cs.AR"
         ],
         "required_signal_matches": [
-          "speculative decoding",
-          "kv cache",
-          "serving system"
+          "prefill"
         ],
-        "required_signal_match_count": 3,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [
           "throughput",
           "latency",
-          "speedup"
+          "memory",
+          "bandwidth",
+          "tokens/s"
         ],
-        "bonus_keyword_match_count": 3,
+        "bonus_keyword_match_count": 5,
         "analysis_keyword_matches": [
-          "baseline",
           "throughput",
           "latency",
-          "speedup"
+          "memory",
+          "bandwidth"
         ],
         "analysis_keyword_match_count": 4,
-        "signal_bonus": 0.9,
+        "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.5
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "MARS fine-tunes an autoregressive instruction model to emit multiple tokens per forward pass without adding heads or a draft model, aiming to turn predictable token stretches into serving-time throughput gains.",
-        "summary_zh": "This paper targets a core inefficiency in autoregressive decoding: many next-token runs are predictable, but standard inference still pays one forward pass per token. MARS proposes a lightweight continued-training method that teaches an existing instruction-tuned AR model to produce multiple tokens per step without architectural changes, extra parameters, or a separate speculative draft model. The abstract claims that the same model preserves baseline-level quality in normal one-token decoding, reaches 1.5-1.7x throughput when multi-token acceptance is enabled, and pairs with a block-level KV-cache scheme for up to 1.71x wall-clock speedup on Qwen2.5-7B. The practical systems angle is a runtime confidence threshold that trades speed against quality without model swapping or restart. The biggest missing detail is how token acceptance, threshold calibration, hardware setup, and baseline fairness are implemented and evaluated in full.",
-        "background_zh": "LLM serving remains dominated by autoregressive decoding overhead, so methods that reduce per-token forward-pass cost are attractive when they do not require extra models or invasive architecture changes.",
-        "problem_zh": "The paper asks whether an instruction-tuned autoregressive model can generate multiple tokens per step while preserving baseline behavior and deployment simplicity.",
-        "approach_zh": "MARS uses continued fine-tuning on existing instruction data so the original model can predict multi-token blocks directly, combined with confidence-based acceptance and a block-level KV-caching strategy for batch inference.",
-        "evidence_zh": "The abstract reports benchmark parity or improvement in standard single-token decoding, 1.5-1.7x throughput in multi-token generation, and up to 1.71x wall-clock speedup on Qwen2.5-7B, but it does not make the evaluation protocol or fairness details clear.",
-        "value_zh": "If the claims hold, this offers a relatively low-friction path to faster LLM serving with a built-in latency-throughput knob and without the operational cost of draft models or extra prediction heads.",
+        "one_liner_zh": "A CIM-based edge accelerator co-designed with tile mapping to target memory-bound decode workloads in small language model inference.",
+        "summary_zh": "This paper targets a real systems bottleneck in edge SLM serving: prefill can be handled reasonably well by GPUs, but autoregressive decode is dominated by memory-bound GEMV and wastes both bandwidth and energy. It proposes EdgeCIM, a hardware-software co-design built around a 65nm compute-in-memory macro plus a tile-based mapping strategy intended to balance pipeline stages and reduce DRAM pressure for end-to-end decoder-only inference. The abstract reports simulator-driven design-space exploration up to 4B-parameter models and claims substantial throughput and energy gains over NVIDIA Orin Nano and Qualcomm SA8255P, with additional averages across multiple SLM families under INT4. If these comparisons are methodologically fair, the practical value is a stronger edge inference path for real-time low-power decoding. The main missing detail is whether the reported gains come from a realistic end-to-end setup with comparable quantization, batching, memory capacity, and prefill/decode accounting rather than from favorable modeling assumptions.",
+        "background_zh": "Edge deployment of small language models is constrained less by raw compute than by memory-bound decoding, which makes conventional accelerators inefficient on latency and energy.",
+        "problem_zh": "The paper asks how to redesign the accelerator stack for decoder-only SLM inference so that decode-phase GEMV bottlenecks do not dominate edge throughput and power cost.",
+        "approach_zh": "It combines a 65nm CIM macro with a tile-based software mapping strategy that aims to balance pipeline stages, expose parallelism, and reduce DRAM bandwidth pressure across end-to-end inference.",
+        "evidence_zh": "The abstract provides concrete claimed benchmark results from a simulator and named hardware comparisons across several SLMs under INT4, but it does not make the evaluation methodology or baseline normalization clear.",
+        "value_zh": "If the setup is sound, the work could matter for edge LLM serving by showing that decode-centric hardware-software co-design can outperform general-purpose edge accelerators on tokens per second and tokens per joule.",
         "open_questions": [
-          "How are multi-token candidates accepted or rejected at inference time, and how sensitive are results to the confidence threshold?",
-          "What hardware, batch sizes, sequence lengths, and baselines were used for the reported throughput and wall-clock gains, and are comparisons compute-fair against speculative and multi-head methods?",
-          "How robust is quality retention across harder reasoning or long-generation settings where early-token errors could compound within a multi-token block?"
+          "Are the Orin Nano and SA8255P baselines matched on precision, batching, sequence lengths, and end-to-end prefill/decode accounting?",
+          "How much of the gain comes from the CIM macro itself versus the tile mapping and pipeline-balancing strategy?",
+          "What memory-capacity, model-placement, and accuracy tradeoffs are required to sustain the reported INT4 results up to 4B parameters?"
         ],
         "core_contributions": [
-          "A fine-tuning recipe that enables multi-token generation from a standard autoregressive instruction model without architecture changes or added parameters.",
-          "A serving path that uses confidence thresholding as a runtime speed-quality control rather than requiring model swaps.",
-          "A block-level KV-caching strategy intended to preserve end-to-end inference gains in batched deployment."
+          "Frames edge SLM inference around the decode-phase GEMV bottleneck rather than treating prefill-dominant behavior as representative.",
+          "Presents a CIM-based accelerator design paired with tile mapping for end-to-end decoder-only inference.",
+          "Reports multi-model design-space exploration and hardware comparisons focused on throughput and energy efficiency at the edge."
         ],
         "why_read": [
-          "It is directly relevant to LLM inference acceleration because it tries to convert predictable token runs into real serving throughput gains without extra-model complexity.",
-          "It positions itself against speculative decoding and Medusa-style heads, so it is useful for comparing deployment tradeoffs across multi-token decoding families.",
-          "It may expose a practical compiler-runtime boundary question: how much of the gain comes from model behavior versus cache-management and serving-policy changes?"
+          "Useful if you care about where edge LLM latency and energy actually come from during decode rather than prefill.",
+          "Potentially relevant for hardware-runtime co-design decisions around memory bandwidth and model tiling.",
+          "Provides a concrete case study of CIM as a decode-oriented inference accelerator for 1B-4B class SLMs."
         ],
         "risks": [
-          "The abstract does not clarify acceptance mechanics, calibration, or failure modes, so quality preservation under distribution shift is still uncertain.",
-          "Reported speedups may depend heavily on serving stack, batching regime, and hardware assumptions that are not specified here only from the abstract alone cannoted abstract changes ? We should keep direct."
+          "The main results appear to rely on simulation, so implementation realism and system overheads need scrutiny.",
+          "Baseline fairness is unclear from the abstract, especially around INT4, workload configuration, and end-to-end accounting conventions for competitor hardware.` `Hardware specificity may limit portability: a 65nm CIM design optimized for edge decode may not generalize across process nodes, models, or mixed workloads."
         ],
         "recommended_for": [
-          "Researchers studying LLM inference acceleration and decoding algorithms.",
-          "Engineers evaluating alternatives to speculative decoding for production serving.",
-          "Readers interested in runtime policies around KV cache management and adaptive latency-throughput tradeoffs."
+          "Researchers working on LLM inference acceleration and edge serving.",
+          "Engineers evaluating decode-heavy hardware-software co-design for small language models.",
+          "Readers interested in memory-bandwidth bottlenecks, quantized inference, and alternative accelerator architectures."
         ],
         "keywords": [
-          "autoregressive decoding",
-          "multi-token generation",
-          "LLM inference",
-          "throughput",
-          "KV cache",
-          "serving systems"
+          "SLM inference",
+          "edge serving",
+          "compute-in-memory",
+          "decoder-only inference",
+          "decode bottleneck",
+          "memory-bound GEMV"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "Strong fit for LLM inference systems work: the paper claims meaningful serving speedups from a low-friction training-and-runtime change, but a full read is needed to verify evaluation fairness, hardware assumptions, and how the quality-speed tradeoff is controlled.",
-        "fallback_summary": "Autoregressive (AR) language models generate text one token at a time, even when consecutive tokens are highly predictable given earlier context."
+        "reading_priority_reason": "Strong fit with LLM inference systems and accelerator co-design, with concrete throughput and energy claims on decoder-heavy edge workloads, though the full read should verify simulator assumptions and baseline fairness.",
+        "fallback_summary": "The growing demand for deploying Small Language Models (SLMs) on edge devices, including laptops, smartphones, and embedded platforms, has exposed fundamental inefficiencies in existing accelerators."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.07345v1",
-      "arxiv_id": "2604.07345v1",
-      "title": "Measurement of Generative AI Workload Power Profiles for Whole-Facility Data Center Infrastructure Planning",
-      "summary": "The rapid growth of generative artificial intelligence (AI) has introduced unprecedented computational demands, driving significant increases in the energy footprint of data centers. However, existing power consumption data is largely proprietary and reported at varying resolutions, creating challenges for estimating whole-facility energy use and planning infrastructure. In this work, we present a methodology that bridges this gap by linking high-resolution workload power measurements to whole-facility energy demand. Using NLR's high-performance computing data center equipped with NVIDIA H100 GPUs, we measure power consumption of AI workloads at 0.1-second resolution for AI training, fine-tuning and inference jobs. Workloads are characterized using MLCommons benchmarks for model training and fine-tuning, and vLLM benchmarks for inference, enabling reproducible and standardized workload profiling. The dataset of power consumption profiles is made publicly available. These power profiles are then scaled to the whole-facility-level using a bottom-up, event-driven, data center energy model. The resulting whole-facility energy profiles capture realistic temporal fluctuations driven by AI workloads and user-behavior, and can be used to inform infrastructure planning for grid connection, on-site energy generation, and distributed microgrids.",
+      "id": "http://arxiv.org/abs/2604.11109v1",
+      "arxiv_id": "2604.11109v1",
+      "title": "Record-Remix-Replay: Hierarchical GPU Kernel Optimization using Evolutionary Search",
+      "summary": "As high-performance computing and AI workloads become increasingly dependent on GPUs, maintaining high performance across rapidly evolving hardware generations has become a major challenge. Developers often spend months tuning scientific applications to fully exploit new architectures, navigating a complex optimization space that spans algorithm design, source implementation, compiler flags and pass sequences, and kernel launch parameters. Existing approaches can effectively search parts of this space in isolation, such as launch configurations or compiler settings, but optimizing across the full space still requires substantial human expertise and iterative manual effort.\n  In this paper, we present Record-Remix-Replay (R^3), a hierarchical optimization framework that combines LLM-driven evolutionary search, Bayesian optimization, and record-replay compilation techniques to efficiently explore GPU kernel optimizations from source-level implementation choices down to compiler pass ordering and runtime configuration. By making candidate evaluation fast and scalable, our approach enables practical end-to-end search over optimization dimensions that are typically treated separately. We show that Record-Remix-Replay can optimize full scientific applications better than traditional approaches over kernel parameters and compiler flags, while also being nearly an order of magnitude faster than modern evolutionary search approaches.",
       "authors": [
-        "Roberto Vercellino",
-        "Jared Willard",
-        "Gustavo Campos",
-        "Weslley da Silva Pereira",
-        "Olivia Hull",
-        "Matthew Selensky",
-        "Juliane Mueller"
+        "Daniel Nichols",
+        "Konstantinos Parasyris",
+        "Caetano Melone",
+        "Tal Ben-Nun",
+        "Giorgis Georgakoudis",
+        "Harshitha Menon"
       ],
       "author_details": [
         {
-          "name": "Roberto Vercellino",
-          "affiliation": "National Laboratory of the Rockies"
+          "name": "Daniel Nichols"
         },
         {
-          "name": "Jared Willard",
-          "affiliation": "National Laboratory of the Rockies"
+          "name": "Konstantinos Parasyris"
         },
         {
-          "name": "Gustavo Campos",
-          "affiliation": "National Laboratory of the Rockies"
+          "name": "Caetano Melone"
         },
         {
-          "name": "Weslley da Silva Pereira",
-          "affiliation": "National Laboratory of the Rockies"
+          "name": "Tal Ben-Nun"
         },
         {
-          "name": "Olivia Hull",
-          "affiliation": "National Laboratory of the Rockies"
+          "name": "Giorgis Georgakoudis"
         },
         {
-          "name": "Matthew Selensky",
-          "affiliation": "National Laboratory of the Rockies"
-        },
-        {
-          "name": "Juliane Mueller",
-          "affiliation": "National Laboratory of the Rockies"
+          "name": "Harshitha Menon"
         }
       ],
-      "institutions": [
-        "National Laboratory of the Rockies"
-      ],
-      "published": "2026-04-08T17:56:41Z",
-      "published_date": "2026-04-08 17:56:41+00:00",
-      "updated": "2026-04-08T17:56:41Z",
-      "comments": "The data associated with this publication can be found at http://doi.org/10.7799/3025227",
-      "primary_category": "eess.SY",
+      "published": "2026-04-13T07:25:12Z",
+      "published_date": "2026-04-13 07:25:12+00:00",
+      "updated": "2026-04-13T07:25:12Z",
+      "primary_category": "cs.DC",
       "categories": [
-        "eess.SY",
         "cs.DC",
-        "cs.LG"
+        "cs.AI",
+        "cs.LG",
+        "cs.PF"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.07345v1",
-      "url": "http://arxiv.org/abs/2604.07345v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11109v1",
+      "url": "http://arxiv.org/abs/2604.11109v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.9,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 0.7,
-        "quality": 0.7,
-        "recommendation": 8.7
+        "popularity": 0.9,
+        "quality": 0.9,
+        "recommendation": 9.05
       },
-      "matched_domain": "LLM Inference Systems",
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "vllm",
-        "cs.LG",
+        "gpu kernel",
         "cs.DC",
-        "h100"
+        "cs.LG"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Inference Systems",
+        "domain": "LLM Code Generation For CUDA Kernels",
         "text_match_count": 1,
         "matched_categories": [
-          "cs.LG",
-          "cs.DC"
+          "cs.DC",
+          "cs.LG"
         ],
         "required_signal_matches": [
-          "vllm",
-          "h100"
+          "gpu kernel"
         ],
-        "required_signal_match_count": 2,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
         "analysis_keyword_matches": [],
         "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.7,
+        "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper builds a public, high-time-resolution power profiling dataset for generative AI workloads and connects it to a bottom-up facility energy model for data center planning.",
-        "summary_zh": "This paper studies a practical gap in AI infrastructure planning: workload-level GPU power measurements exist unevenly, but operators need facility-level demand estimates to size power and energy systems. The authors measure training, fine-tuning, and inference workloads on NVIDIA H100 GPUs at 0.1-second resolution using MLCommons and vLLM benchmark setups, then feed those profiles into an event-driven bottom-up data center energy model. The claimed contribution is not an inference optimization method, but a measurement and modeling pipeline that turns reproducible workload traces into whole-facility power and energy profiles with realistic temporal variation. If the methodology is sound, it is useful for planning grid connection, on-site generation, and microgrid design around GenAI demand rather than relying on coarse averages. The main missing detail from the abstract is how representative the workloads, user-behavior assumptions, and scaling model are, and how well the facility model is validated against real site measurements.",
-        "background_zh": "Generative AI has made data center power planning harder because bursty GPU workloads create infrastructure stress that is not captured well by coarse or proprietary energy reports.",
-        "problem_zh": "The paper asks how to translate fine-grained AI workload power measurements into realistic whole-facility demand estimates that are usable for infrastructure planning.",
-        "approach_zh": "It combines 0.1-second power measurements for standardized training, fine-tuning, and vLLM inference workloads on H100 GPUs with a bottom-up, event-driven facility energy model.",
-        "evidence_zh": "The abstract supports that the authors collected high-resolution workload power traces, made the dataset public, and produced modeled facility-level profiles, but it does not make clear how the model was validated or how accurate the scaled results are.",
-        "value_zh": "The practical value is a reproducible way to reason from benchmarked GenAI workloads to site-level power behavior, which could help operators size power delivery and local energy resources more realistically.",
+        "one_liner_zh": "This paper presents a hierarchical GPU kernel optimization framework that combines LLM-guided evolutionary search, Bayesian optimization, and record-replay compilation to search source, compiler, and runtime choices together.",
+        "summary_zh": "The paper targets a real GPU systems problem: performance tuning now spans source-level implementation decisions, compiler pass sequences and flags, and launch-time parameters, and that cross-layer space is too large for manual tuning. It proposes Record-Remix-Replay (R^3), a hierarchical framework that combines LLM-driven evolutionary search with Bayesian optimization and record-replay compilation so candidate variants can be evaluated quickly enough for end-to-end search. The abstract claims this lets the system optimize full scientific applications better than approaches that only tune kernel parameters or compiler flags, while being nearly an order of magnitude faster than modern evolutionary search methods. For systems readers, the main interest is the co-design across program representation, compiler search, and fast evaluation infrastructure rather than any single search heuristic. The biggest missing detail is that the abstract does not make the evaluation setup, hardware targets, benchmark coverage, or baseline fairness clear.",
+        "background_zh": "GPU performance tuning increasingly depends on coordinated choices across code structure, compiler behavior, and runtime configuration, and new hardware generations make that space harder to maintain manually.",
+        "problem_zh": "The paper asks how to search the full GPU optimization stack jointly, instead of optimizing isolated knobs such as launch parameters or compiler flags, without prohibitive evaluation cost.",
+        "approach_zh": "R^3 uses a hierarchical search loop that mixes LLM-driven evolutionary proposal generation, Bayesian optimization for efficient exploration, and record-replay compilation to accelerate candidate evaluation across source, compiler, and runtime dimensions.",
+        "evidence_zh": "According to the abstract, the method improves optimization results for full scientific applications relative to traditional kernel-parameter and compiler-flag tuning approaches, and is nearly an order of magnitude faster than modern evolutionary search methods, but the abstract does not make the experimental setup clear.",
+        "value_zh": "If the claims hold, this could make cross-layer GPU tuning substantially more practical and reduce the human effort needed to retarget performance-critical workloads to new architectures.",
         "open_questions": [
-          "How is the bottom-up facility model validated against measured whole-site power data, rather than only simulated scaling?",
-          "How representative are the selected MLCommons and vLLM workloads of real production inference mixes, request patterns, and utilization levels?",
-          "What assumptions about cooling, power delivery overheads, and user-behavior drive the facility-level fluctuations, and how sensitive are the results to those assumptions?"
+          "What exactly is recorded and replayed, and how much of the reported speedup comes from cheaper evaluation versus better search decisions?",
+          "How broad and fair are the baselines across source-level search, compiler pass ordering, and runtime tuning, and are they compared under the same evaluation budget?",
+          "How well does the method generalize across GPU generations, application domains, and kernels outside the scientific workloads named in the abstract?"
         ],
         "core_contributions": [
-          "A public dataset of 0.1-second power consumption profiles for generative AI training, fine-tuning, and inference workloads on H100-based infrastructure.",
-          "A methodology for mapping workload-level power traces to whole-facility energy demand using an event-driven bottom-up model.",
-          "A planning-oriented framing that targets grid connection, on-site generation, and microgrid decisions rather than only server-level measurement."
+          "A hierarchical optimization framework that searches source implementation choices, compiler passes and flags, and runtime configuration jointly.",
+          "A combination of LLM-driven evolutionary search and Bayesian optimization for navigating a large GPU optimization space.",
+          "Use of record-replay compilation to make large-scale candidate evaluation fast enough for practical end-to-end search."
         ],
         "why_read": [
-          "It provides measurement infrastructure and public traces that may be useful for systems researchers who need realistic AI power profiles instead of vendor anecdotes.",
-          "It connects vLLM-style inference benchmarking to facility planning, which is adjacent to serving systems even though it is not an acceleration paper.",
-          "It may clarify where short-timescale workload variability matters for data center design, capacity margins, and energy provisioning."
+          "It treats GPU kernel optimization as a full-stack search problem rather than a single-layer autotuning problem.",
+          "The record-replay component may be the main systems contribution if it materially reduces search cost.",
+          "It is relevant to compiler/runtime co-design and to any work on LLM-assisted low-level code optimization."
         ],
         "risks": [
-          "The paper is only loosely aligned with inference acceleration or kernel/compiler work; it is a measurement and infrastructure planning study.",
-          "The abstract does not show whether the facility model is accurate, calibrated, or robust across different sites and workload mixes."
+          "The abstract does not say whether the gains come from stronger search, faster evaluation, or both, which affects how reusable the idea is.",
+          "The workload emphasis is scientific applications, so relevance to LLM inference kernels is indirect until kernel types and hardware are shown clearly in the full paper."
         ],
         "recommended_for": [
-          "Researchers studying LLM serving infrastructure, power-aware scheduling, or data center energy modeling.",
-          "Engineers responsible for facility planning, capacity forecasting, or energy provisioning for GPU clusters.",
-          "Readers who want public workload power traces tied to standardized AI benchmark setups."
+          "Researchers working on GPU autotuning and compiler optimization.",
+          "Engineers interested in search over compiler pass ordering and launch/runtime parameters.",
+          "Readers studying LLM-assisted low-level code generation or optimization systems."
         ],
         "keywords": [
-          "generative AI workloads",
-          "data center power profiling",
-          "facility energy modeling",
-          "H100",
-          "vLLM",
-          "MLCommons"
-        ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "Relevant as infrastructure context for LLM serving, especially around inference power characterization with vLLM, but it does not target latency, throughput, compiler, or low-level code generation directly.",
-        "fallback_summary": "The rapid growth of generative artificial intelligence (AI) has introduced unprecedented computational demands, driving significant increases in the energy footprint of data centers."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.07173v1",
-      "arxiv_id": "2604.07173v1",
-      "title": "InfiniLoRA: Disaggregated Multi-LoRA Serving for Large Language Models",
-      "summary": "LoRA enables efficient customization of LLMs and is widely used in multi-tenant and multi-task serving. However, emerging model architectures such as MoE significantly increase LoRA memory cost, making existing coupled LoRA serving designs poorly scalable and prone to tail-latency inflation. We present InfiniLoRA, a disaggregated LoRA serving system that decouples LoRA execution from base-model inference. InfiniLoRA introduces a shared LoRA Server with parallelism-aware execution, SLO-driven provisioning, and critical-path optimizations, including GPU-initiated communication and hardware-specialized LoRA kernels. Experiments show that InfiniLoRA can achieve an average $3.05\\times$ increase in serviceable request rate under strict latency SLOs, and improve the percentage of LoRA adapters satisfying the SLO requirement by 54.0\\%.",
-      "authors": [
-        "Hongyu Chen",
-        "Letian Ruan",
-        "Zilin Xu",
-        "Yuchen Li",
-        "Xinyu Chen",
-        "Jingwen Leng",
-        "Bingsheng He",
-        "Minyi Guo",
-        "Shixuan Sun"
-      ],
-      "author_details": [
-        {
-          "name": "Hongyu Chen"
-        },
-        {
-          "name": "Letian Ruan"
-        },
-        {
-          "name": "Zilin Xu"
-        },
-        {
-          "name": "Yuchen Li"
-        },
-        {
-          "name": "Xinyu Chen"
-        },
-        {
-          "name": "Jingwen Leng"
-        },
-        {
-          "name": "Bingsheng He"
-        },
-        {
-          "name": "Minyi Guo"
-        },
-        {
-          "name": "Shixuan Sun"
-        }
-      ],
-      "published": "2026-04-08T15:01:04Z",
-      "published_date": "2026-04-08 15:01:04+00:00",
-      "updated": "2026-04-08T15:01:04Z",
-      "primary_category": "cs.DC",
-      "categories": [
-        "cs.DC"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.07173v1",
-      "url": "http://arxiv.org/abs/2604.07173v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.5,
-        "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 8.38
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "serving",
-        "latency",
-        "cs.DC",
-        "serving system",
-        "memory"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "serving system"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency",
-          "memory"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "latency",
-          "memory"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper proposes a disaggregated multi-LoRA serving design that moves LoRA execution out of the base-model path to improve scalability and tail-latency control, especially when adapter memory grows in newer architectures such as MoE.",
-        "summary_zh": "The paper targets a concrete serving problem: LoRA is attractive for multi-tenant LLM deployment, but newer architectures such as MoE raise adapter memory cost enough that tightly coupled serving designs become hard to scale and more likely to violate latency SLOs. InfiniLoRA addresses this by disaggregating LoRA execution from base-model inference and introducing a shared LoRA server, parallelism-aware execution, SLO-driven provisioning, GPU-initiated communication, and hardware-specialized LoRA kernels. The abstract claims system-level gains under strict latency targets, including a 3.05x increase in serviceable request rate and a 54.0% increase in the share of adapters meeting the SLO requirement. If those gains hold under realistic workloads, the main value is higher adapter density and better latency isolation for multi-LoRA serving. The biggest missing detail from the abstract is where the improvement comes from quantitatively across communication, kernel execution, provisioning, and hardware assumptions.",
-        "background_zh": "Multi-LoRA serving matters because LLM deployments increasingly need many tenant- or task-specific adapters, and the memory footprint becomes more painful as model architectures grow more complex.",
-        "problem_zh": "The paper asks how to serve many LoRA adapters at scale without the memory growth and tail-latency inflation caused by coupling adapter execution directly to base-model inference.",
-        "approach_zh": "Its core move is to disaggregate LoRA processing into a shared LoRA server and then optimize that path with parallelism-aware execution, SLO-aware provisioning, GPU-initiated communication, and specialized kernels.",
-        "evidence_zh": "The abstract provides concrete headline results on serviceable request rate and SLO satisfaction, but it does not make the evaluation setup, baselines, workload mix, or contribution of each optimization clear.",
-        "value_zh": "For LLM serving systems, the practical payoff would be better multi-tenant scalability and stricter latency control when many adapters must coexist on limited accelerator memory.",
-        "open_questions": [
-          "What are the hardware setup, model architectures, and workload characteristics behind the reported 3.05x throughput-like gain and 54.0% SLO improvement?",
-          "How much of the benefit comes from disaggregation itself versus GPU-initiated communication, specialized kernels, and SLO-driven provisioning?",
-          "Are the baselines fair for modern multi-LoRA serving, especially under MoE-heavy memory pressure and tail-latency-sensitive traffic?"
-        ],
-        "core_contributions": [
-          "A disaggregated serving architecture that decouples LoRA execution from base-model inference.",
-          "A shared LoRA server design with parallelism-aware execution and SLO-driven provisioning.",
-          "Critical-path optimizations centered on GPU-initiated communication and hardware-specialized LoRA kernels."
-        ],
-        "why_read": [
-          "It is directly about LLM inference serving rather than generic fine-tuning, with an explicit focus on latency SLOs and multi-adapter scalability.",
-          "It frames LoRA serving as a systems disaggregation problem, which is relevant if adapter memory is becoming the main bottleneck.",
-          "It reports concrete serving-side gains, making it useful to inspect for deployment assumptions and baseline methodology."
-        ],
-        "risks": [
-          "The abstract does not separate the impact of architecture-level disaggregation from the impact of low-level kernel and communication optimizations.",
-          "The reported gains may depend strongly on specific hardware, traffic patterns, or MoE-related memory pressure that are not described here."
-        ],
-        "recommended_for": [
-          "Researchers working on LLM inference serving and SLO-aware systems design.",
-          "Engineers evaluating multi-tenant LoRA deployment under memory and tail-latency constraints.",
-          "Readers interested in system/runtime co-design for adapter-heavy LLM serving rather than model training."
-        ],
-        "keywords": [
-          "LLM inference systems",
-          "multi-LoRA serving",
-          "disaggregated serving",
-          "latency SLO",
-          "tail latency",
-          "adapter memory"
+          "GPU kernel optimization",
+          "hierarchical search",
+          "evolutionary search",
+          "Bayesian optimization",
+          "record-replay compilation",
+          "compiler pass ordering"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "This is a strong topical match for LLM inference systems and serving efficiency, and the abstract claims concrete latency-SLO and capacity gains, though the full paper is needed to verify hardware assumptions and baseline fairness.",
-        "fallback_summary": "LoRA enables efficient customization of LLMs and is widely used in multi-tenant and multi-task serving."
+        "reading_priority_reason": "This is a strong thematic match for GPU kernel optimization and compiler/runtime co-design, with clear relevance to low-level code generation workflows, even though the abstract is centered on scientific applications rather than LLM inference specifically.",
+        "fallback_summary": "As high-performance computing and AI workloads become increasingly dependent on GPUs, maintaining high performance across rapidly evolving hardware generations has become a major challenge."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by Autopoiesis: A Self-Evolving… and StructKV: Preserving the…. DeepSpeed Inference: Enabling… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, LLM Code Generation For CUDA Kernels. The set is anchored by Transactional Attention: Semantic… and Flow-Controlled Scheduling for LLM…. Quantization Dominates Rank… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
       "training and inference efficiency",
-      "factual reliability and verification"
+      "LLM Code Generation For CUDA Kernels"
     ],
     "reading_strategy": [
-      "Start with Autopoiesis: A Self-Evolving… and verify whether it defines the factual reliability and verification problem clearly and exposes a real mechanism.",
-      "Then read StructKV: Preserving the… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use DeepSpeed Inference: Enabling… as a final cross-check on experimental boundaries and practical value."
+      "Start with Transactional Attention: Semantic… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
+      "Then read Flow-Controlled Scheduling for LLM… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use Quantization Dominates Rank… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-04-09T11:05:53Z",
+    "generated_at": "2026-04-14T11:06:07Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 6,
+    "paper_results": 5,
     "paper_failures": 0
   }
 }

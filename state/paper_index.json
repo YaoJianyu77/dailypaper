@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-09",
+  "last_updated": "2026-04-14",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -877,6 +877,34 @@
       "cooldown_until": "2026-05-24"
     },
     {
+      "paper_id": "2604.11512v1",
+      "title": "EdgeCIM: A Hardware-Software Co-Design for CIM-Based Acceleration of Small Language Models",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-13T14:16:20Z",
+      "source_lane": "fresh",
+      "topics": [
+        "SLM inference",
+        "edge serving",
+        "compute-in-memory",
+        "decoder-only inference",
+        "decode bottleneck",
+        "memory-bound GEMV"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-14",
+      "last_seen_date": "2026-04-14",
+      "last_recommended_date": "2026-04-14",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-14",
+          "recommendation": 9.38,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-13"
+    },
+    {
       "paper_id": "dblp:journals/ral/MengSXX25",
       "title": "Efficient Fabrication of High-Aspect-Ratio Stepped-End Microneedles via Vision-Guided Assembly for Flexible Microelectrode Implantation.",
       "domain": "Low-level Code And Assembly Generation",
@@ -1261,6 +1289,34 @@
         }
       ],
       "cooldown_until": "2026-05-10"
+    },
+    {
+      "paper_id": "2604.11001v1",
+      "title": "Flow-Controlled Scheduling for LLM Inference with Provable Stability Guarantees",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-13T05:03:16Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "scheduling",
+        "flow control",
+        "stability",
+        "KV cache",
+        "throughput vs latency"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-14",
+      "last_seen_date": "2026-04-14",
+      "last_recommended_date": "2026-04-14",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-14",
+          "recommendation": 9.63,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-13"
     },
     {
       "paper_id": "2604.02715v1",
@@ -2860,6 +2916,62 @@
       "cooldown_until": "2026-06-01"
     },
     {
+      "paper_id": "2604.11501v1",
+      "title": "Quantization Dominates Rank Reduction for KV-Cache Compression",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-13T14:06:18Z",
+      "source_lane": "fresh",
+      "topics": [
+        "KV-cache compression",
+        "quantization",
+        "rank reduction",
+        "transformer inference",
+        "attention routing",
+        "INT4 cache storage"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-14",
+      "last_seen_date": "2026-04-14",
+      "last_recommended_date": "2026-04-14",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-14",
+          "recommendation": 9.55,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-13"
+    },
+    {
+      "paper_id": "2604.11109v1",
+      "title": "Record-Remix-Replay: Hierarchical GPU Kernel Optimization using Evolutionary Search",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-04-13T07:25:12Z",
+      "source_lane": "fresh",
+      "topics": [
+        "GPU kernel optimization",
+        "hierarchical search",
+        "evolutionary search",
+        "Bayesian optimization",
+        "record-replay compilation",
+        "compiler pass ordering"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-14",
+      "last_seen_date": "2026-04-14",
+      "last_recommended_date": "2026-04-14",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-14",
+          "recommendation": 9.05,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-13"
+    },
+    {
       "paper_id": "2603.16039v1",
       "title": "Residual Stream Duality in Modern Transformer Architectures",
       "domain": "LLM Inference Systems",
@@ -3572,6 +3684,34 @@
         }
       ],
       "cooldown_until": "2026-05-11"
+    },
+    {
+      "paper_id": "2604.11288v1",
+      "title": "Transactional Attention: Semantic Sponsorship for KV-Cache Retention",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-13T10:51:46Z",
+      "source_lane": "fresh",
+      "topics": [
+        "KV-cache compression",
+        "long-context inference",
+        "dormant tokens",
+        "credential retrieval",
+        "function calling",
+        "FlashAttention compatibility"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-14",
+      "last_seen_date": "2026-04-14",
+      "last_recommended_date": "2026-04-14",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-14",
+          "recommendation": 9.63,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-13"
     },
     {
       "paper_id": "2604.04921v1",

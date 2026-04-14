@@ -888,6 +888,41 @@
       "domain": "LLM Inference Systems",
       "quality_score": 8.38,
       "updated": "2026-04-09"
+    },
+    {
+      "id": "2604.11288v1",
+      "title": "Transactional Attention: Semantic Sponsorship for KV-Cache Retention",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.63,
+      "updated": "2026-04-14"
+    },
+    {
+      "id": "2604.11001v1",
+      "title": "Flow-Controlled Scheduling for LLM Inference with Provable Stability Guarantees",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.63,
+      "updated": "2026-04-14"
+    },
+    {
+      "id": "2604.11501v1",
+      "title": "Quantization Dominates Rank Reduction for KV-Cache Compression",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.55,
+      "updated": "2026-04-14"
+    },
+    {
+      "id": "2604.11512v1",
+      "title": "EdgeCIM: A Hardware-Software Co-Design for CIM-Based Acceleration of Small Language Models",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.38,
+      "updated": "2026-04-14"
+    },
+    {
+      "id": "2604.11109v1",
+      "title": "Record-Remix-Replay: Hierarchical GPU Kernel Optimization using Evolutionary Search",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 9.05,
+      "updated": "2026-04-14"
     }
   ],
   "edges": [
@@ -2894,7 +2929,79 @@
       "target": "2604.07023v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.11288v1",
+      "target": "2604.11501v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.11288v1",
+      "target": "2604.11001v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.11288v1",
+      "target": "2604.11512v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.11001v1",
+      "target": "2604.11288v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.11001v1",
+      "target": "2604.11501v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.11001v1",
+      "target": "2604.11512v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.11501v1",
+      "target": "2604.11288v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.11501v1",
+      "target": "2604.11001v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.11501v1",
+      "target": "2604.11512v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.11512v1",
+      "target": "2604.11288v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.11512v1",
+      "target": "2604.11001v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.11512v1",
+      "target": "2604.11501v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-09"
+  "last_updated": "2026-04-14"
 }
