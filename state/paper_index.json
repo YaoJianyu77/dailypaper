@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-14",
+  "last_updated": "2026-04-15",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -1053,24 +1053,29 @@
       "topics": [
         "speculative decoding",
         "autoregressive generation",
-        "Transformer inference",
-        "draft and verify",
-        "exact decoding",
-        "LLM inference systems"
+        "transformer inference",
+        "decoding acceleration",
+        "exact verification",
+        "parallelism"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-22",
-      "last_seen_date": "2026-03-22",
-      "last_recommended_date": "2026-03-22",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-15",
+      "last_recommended_date": "2026-04-15",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-03-22",
           "recommendation": 5.92,
           "lane": "classic"
+        },
+        {
+          "date": "2026-04-15",
+          "recommendation": 5.92,
+          "lane": "classic"
         }
       ],
-      "cooldown_until": "2026-04-12"
+      "cooldown_until": "2026-05-06"
     },
     {
       "paper_id": "2604.02556v1",
@@ -2476,6 +2481,34 @@
       "cooldown_until": "2026-05-12"
     },
     {
+      "paper_id": "2604.12374v1",
+      "title": "Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-14T07:02:32Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference systems",
+        "Mixture-of-Experts",
+        "hybrid Mamba-Transformer",
+        "speculative decoding",
+        "MTP",
+        "NVFP4 quantization"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-15",
+      "last_seen_date": "2026-04-15",
+      "last_recommended_date": "2026-04-15",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-15",
+          "recommendation": 9.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-14"
+    },
+    {
       "paper_id": "2603.24812v1",
       "title": "Numerical Superoptimization for Library Learning",
       "domain": "LLM Code Generation For CUDA Kernels",
@@ -2682,6 +2715,34 @@
         }
       ],
       "cooldown_until": "2026-05-10"
+    },
+    {
+      "paper_id": "2604.12171v1",
+      "title": "PipeLive: Efficient Live In-place Pipeline Parallelism Reconfiguration for Dynamic LLM Serving",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-14T00:56:32Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM serving",
+        "pipeline parallelism",
+        "live reconfiguration",
+        "KV cache",
+        "PageAttention",
+        "vLLM-like runtime"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-15",
+      "last_seen_date": "2026-04-15",
+      "last_recommended_date": "2026-04-15",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-15",
+          "recommendation": 9.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-14"
     },
     {
       "paper_id": "2603.21576v1",
@@ -3248,6 +3309,34 @@
       "cooldown_until": "2026-05-21"
     },
     {
+      "paper_id": "2604.12110v1",
+      "title": "SOLARIS: Speculative Offloading of Latent-bAsed Representation for Inference Scaling",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-13T22:33:28Z",
+      "source_lane": "fresh",
+      "topics": [
+        "speculative serving",
+        "asynchronous precomputation",
+        "recommendation foundation models",
+        "online inference",
+        "embedding reuse",
+        "advertising systems"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-15",
+      "last_seen_date": "2026-04-15",
+      "last_recommended_date": "2026-04-15",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-15",
+          "recommendation": 8.88,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-14"
+    },
+    {
       "paper_id": "2301.00774",
       "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
       "domain": "LLM Inference Systems",
@@ -3329,6 +3418,34 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2604.12247v1",
+      "title": "SpecBound: Adaptive Bounded Self-Speculation with Layer-wise Confidence Calibration",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-14T03:47:04Z",
+      "source_lane": "fresh",
+      "topics": [
+        "speculative decoding",
+        "self-speculation",
+        "LLM inference systems",
+        "confidence calibration",
+        "adaptive draft length",
+        "autoregressive decoding"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-15",
+      "last_seen_date": "2026-04-15",
+      "last_recommended_date": "2026-04-15",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-15",
+          "recommendation": 9.19,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-14"
     },
     {
       "paper_id": "2603.18567v1",
@@ -3796,6 +3913,34 @@
         }
       ],
       "cooldown_until": "2026-05-31"
+    },
+    {
+      "paper_id": "2604.12798v1",
+      "title": "VFA: Relieving Vector Operations in Flash Attention with Global Maximum Pre-computation",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-14T14:28:50Z",
+      "source_lane": "fresh",
+      "topics": [
+        "FlashAttention",
+        "online softmax",
+        "attention kernel optimization",
+        "LLM inference",
+        "vector bottleneck",
+        "block reordering"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-15",
+      "last_seen_date": "2026-04-15",
+      "last_recommended_date": "2026-04-15",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-15",
+          "recommendation": 9.26,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-14"
     },
     {
       "paper_id": "2603.16435v1",

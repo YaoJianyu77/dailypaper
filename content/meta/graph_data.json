@@ -544,7 +544,7 @@
       "title": "Fast Inference from Transformers via Speculative Decoding",
       "domain": "LLM Inference Systems",
       "quality_score": 5.92,
-      "updated": "2026-03-22"
+      "updated": "2026-04-15"
     },
     {
       "id": "2603.21465v1",
@@ -923,6 +923,41 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 9.05,
       "updated": "2026-04-14"
+    },
+    {
+      "id": "2604.12374v1",
+      "title": "Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.97,
+      "updated": "2026-04-15"
+    },
+    {
+      "id": "2604.12171v1",
+      "title": "PipeLive: Efficient Live In-place Pipeline Parallelism Reconfiguration for Dynamic LLM Serving",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.97,
+      "updated": "2026-04-15"
+    },
+    {
+      "id": "2604.12798v1",
+      "title": "VFA: Relieving Vector Operations in Flash Attention with Global Maximum Pre-computation",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.26,
+      "updated": "2026-04-15"
+    },
+    {
+      "id": "2604.12247v1",
+      "title": "SpecBound: Adaptive Bounded Self-Speculation with Layer-wise Confidence Calibration",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.19,
+      "updated": "2026-04-15"
+    },
+    {
+      "id": "2604.12110v1",
+      "title": "SOLARIS: Speculative Offloading of Latent-bAsed Representation for Inference Scaling",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.88,
+      "updated": "2026-04-15"
     }
   ],
   "edges": [
@@ -3001,7 +3036,115 @@
       "target": "2604.11501v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.12374v1",
+      "target": "2604.12247v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12374v1",
+      "target": "2211.17192",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12374v1",
+      "target": "2604.12171v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12171v1",
+      "target": "2604.12374v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12171v1",
+      "target": "2604.12798v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12171v1",
+      "target": "2604.12247v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2211.17192",
+      "target": "2604.12374v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2211.17192",
+      "target": "2604.12247v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2211.17192",
+      "target": "2604.12171v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12798v1",
+      "target": "2604.12374v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12798v1",
+      "target": "2604.12171v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12798v1",
+      "target": "2604.12247v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12247v1",
+      "target": "2604.12374v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12247v1",
+      "target": "2211.17192",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12247v1",
+      "target": "2604.12171v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12110v1",
+      "target": "2604.12374v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12110v1",
+      "target": "2604.12171v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.12110v1",
+      "target": "2604.12798v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-14"
+  "last_updated": "2026-04-15"
 }
