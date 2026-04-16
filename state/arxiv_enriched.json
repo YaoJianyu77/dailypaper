@@ -1,2252 +1,96 @@
 {
-  "target_date": "2026-04-15",
+  "target_date": "2026-04-16",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-16",
-      "end": "2026-04-15"
+      "start": "2026-03-17",
+      "end": "2026-04-16"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-15",
-      "end": "2026-03-15"
+      "start": "2025-04-16",
+      "end": "2026-03-16"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 26,
+  "total_filtered": 19,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 26,
+  "total_unique": 19,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 6,
+    "selected_count": 5,
     "lane_counts": {
       "fresh": 5,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 17,
+      "classic": 0,
+      "history_filtered": 11,
       "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.12374v1",
-      "arxiv_id": "2604.12374v1",
-      "title": "Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning",
-      "summary": "We describe the pre-training, post-training, and quantization of Nemotron 3 Super, a 120 billion (active 12 billion) parameter hybrid Mamba-Attention Mixture-of-Experts model. Nemotron 3 Super is the first model in the Nemotron 3 family to 1) be pre-trained in NVFP4, 2) leverage LatentMoE, a new Mixture-of-Experts architecture that optimizes for both accuracy per FLOP and accuracy per parameter, and 3) include MTP layers for inference acceleration through native speculative decoding. We pre-trained Nemotron 3 Super on 25 trillion tokens followed by post-training using supervised fine tuning (SFT) and reinforcement learning (RL). The final model supports up to 1M context length and achieves comparable accuracy on common benchmarks, while also achieving up to 2.2x and 7.5x higher inference throughput compared to GPT-OSS-120B and Qwen3.5-122B, respectively. Nemotron 3 Super datasets, along with the base, post-trained, and quantized checkpoints, are open-sourced on HuggingFace.",
+      "id": "http://arxiv.org/abs/2604.13634v1",
+      "arxiv_id": "2604.13634v1",
+      "title": "Calibrated Speculative Decoding: Frequency-Guided Candidate Selection for Efficient Inference",
+      "summary": "Speculative decoding accelerates autoregressive generation by letting draft tokens bypass full verification, but conventional frameworks suffer from frequent false rejections, particularly when draft models produce semantically correct but lexically divergent outputs. In this paper, we present Calibrated Speculative Decoding (CSD), a training-free framework that recovers valid tokens discarded by standard verification. Guided by the principle of \"Frequency-Guided Candidate Selection and Probability-Guarded Acceptance,\" CSD incorporates two lightweight modules: Online Correction Memory, which aggregates historical rejections to propose recurring divergence patterns as rescue candidates, and Semantic Consistency Gating, which verifies candidate admissibility using probability ratios instead of exact token matching. Our evaluation across diverse large language models demonstrates that CSD outperforms existing methods, achieving a peak throughput speedup of 2.33x. CSD preserves model accuracy across all tasks while further boosting performance on complex reasoning datasets. These results establish CSD as a highly effective, lightweight solution for practical LLM deployments.",
       "authors": [
-        "NVIDIA",
-        ":",
-        "Aakshita Chandiramani",
-        "Aaron Blakeman",
-        "Abdullahi Olaoye",
-        "Abhibha Gupta",
-        "Abhilash Somasamudramath",
-        "Abhinav Khattar",
-        "Adeola Adesoba",
-        "Adi Renduchintala",
-        "Adil Asif",
-        "Aditya Agrawal",
-        "Aditya Vavre",
-        "Ahmad Kiswani",
-        "Aishwarya Padmakumar",
-        "Ajay Hotchandani",
-        "Akanksha Shukla",
-        "Akhiad Bercovich",
-        "Aleksander Ficek",
-        "Aleksandr Shaposhnikov",
-        "Alex Gronskiy",
-        "Alex Kondratenko",
-        "Alex Neefus",
-        "Alex Steiner",
-        "Alex Yang",
-        "Alexander Bukharin",
-        "Alexander Young",
-        "Ali Hatamizadeh",
-        "Ali Taghibakhshi",
-        "Alina Galiautdinova",
-        "Alisa Liu",
-        "Alok Kumar",
-        "Ameya Sunil Mahabaleshwarkar",
-        "Amir Klein",
-        "Amit Zuker",
-        "Amnon Geifman",
-        "Anahita Bhiwandiwalla",
-        "Ananth Subramaniam",
-        "Andrew Tao",
-        "Anjaney Shrivastava",
-        "Anjulie Agrusa",
-        "Ankur Srivastava",
-        "Ankur Verma",
-        "Ann Guan",
-        "Anna Shors",
-        "Annamalai Chockalingam",
-        "Anubhav Mandarwal",
-        "Aparnaa Ramani",
-        "Arham Mehta",
-        "Arti Jain",
-        "Arun Venkatesan",
-        "Asha Anoosheh",
-        "Ashwath Aithal",
-        "Ashwin Poojary",
-        "Asif Ahamed",
-        "Asit Mishra",
-        "Asli Sabanci Demiroz",
-        "Asma Kuriparambil Thekkumpate",
-        "Atefeh Sohrabizadeh",
-        "Avinash Kaur",
-        "Ayush Dattagupta",
-        "Barath Subramaniam Anandan",
-        "Bardiya Sadeghi",
-        "Barnaby Simkin",
-        "Ben Lanir",
-        "Benedikt Schifferer",
-        "Benjamin Chislett",
-        "Besmira Nushi",
-        "Bilal Kartal",
-        "Bill Thiede",
-        "Bita Darvish Rouhani",
-        "Bobby Chen",
-        "Boris Ginsburg",
-        "Brandon Norick",
-        "Branislav Kisacanin",
-        "Brian Yu",
-        "Bryan Catanzaro",
-        "Buvaneswari Mani",
-        "Carlo del Mundo",
-        "Chankyu Lee",
-        "Chanran Kim",
-        "Chantal Hwang",
-        "Chao Ni",
-        "Charles Wang",
-        "Charlie Truong",
-        "Cheng-Ping Hsieh",
-        "Chenhan Yu",
-        "Chenjie Luo",
-        "Cherie Wang",
-        "Chetan Mungekar",
-        "Chintan Patel",
-        "Chris Alexiuk",
-        "Chris Holguin",
-        "Chris Wing",
-        "Christian Munley",
-        "Christopher Parisien",
-        "Chuck Desai",
-        "Chunyang Sheng",
-        "Collin Neale",
-        "Cyril Meurillon",
-        "Dakshi Kumar",
-        "Dan Gil",
-        "Dan Su",
-        "Dane Corneil",
-        "Daniel Afrimi",
-        "Daniel Burkhardt Eliuth Triana",
-        "Daniel Egert",
-        "Daniel Fatade",
-        "Daniel Lo",
-        "Daniel Rohrer",
-        "Daniel Serebrenik",
-        "Daniil Sorokin",
-        "Daria Gitman",
-        "Daria Levy",
-        "Darko Stosic",
-        "David Edelsohn",
-        "David Messina",
-        "David Mosallanezhad",
-        "David Tamok",
-        "Deena Donia",
-        "Deepak Narayanan",
-        "Devin O'Kelly",
-        "Dheeraj Peri",
-        "Dhruv Nathawani",
-        "Di Wu",
-        "Dima Rekesh",
-        "Dina Yared",
-        "Divyanshu Kakwani",
-        "Dmitry Konyagin Brandon Tuttle",
-        "Dong Ahn",
-        "Dongfu Jiang",
-        "Dorrin Poorkay",
-        "Douglas O'Flaherty",
-        "Duncan Riach",
-        "Dusan Stosic",
-        "Dustin Van Stee",
-        "Edgar Minasyan",
-        "Edward Lin",
-        "Eileen Peters Long",
-        "Elad Segal",
-        "Elena Lantz",
-        "Elena Lewis",
-        "Ellie Evans",
-        "Elliott Ning",
-        "Eric Chung",
-        "Eric Harper",
-        "Eric Pham-Hung",
-        "Eric W. Tramel",
-        "Erick Galinkin",
-        "Erik Pounds",
-        "Esti Etrog",
-        "Evan Briones",
-        "Evan Wu",
-        "Evelina Bakhturina",
-        "Evgeny Tsykunov",
-        "Ewa Dobrowolska",
-        "Farshad Saberi Movahed",
-        "Farzan Memarian",
-        "Fay Wang",
-        "Fei Jia",
-        "Felipe Soares",
-        "Felipe Vieira Frujeri",
-        "Feng Chen",
-        "Fengguang Lin",
-        "Ferenc Galko",
-        "Fortuna Zhang",
-        "Frankie Siino",
-        "Frida Hou",
-        "Gantavya Bhatt",
-        "Gargi Prasad",
-        "Geethapriya Venkataramani",
-        "Geetika Gupta",
-        "George Armstrong",
-        "Gerald Shen",
-        "Giulio Borghesi",
-        "Gordana Neskovic",
-        "Gorkem Batmaz",
-        "Grace Lam",
-        "Grace Wu",
-        "Greg Pauloski",
-        "Greyson Davis",
-        "Grigor Nalbandyan",
-        "Guoming Zhang",
-        "Guy Farber",
-        "Guyue Huang",
-        "Haifeng Qian",
-        "Haran Kumar Shiv Kumar",
-        "Harry Kim",
-        "Harsh Sharma",
-        "Hayate Iso",
-        "Hayley Ross",
-        "Herbert Hum",
-        "Herman Sahota",
-        "Hexin Wang",
-        "Himanshu Soni",
-        "Hiren Upadhyay",
-        "Huy Nguyen",
-        "Iain Cunningham",
-        "Ido Galil",
-        "Ido Shahaf",
-        "Igino Padovani",
-        "Igor Gitman",
-        "Igor Shovkun",
-        "Ikroop Dhillon",
-        "Ilya Loshchilov",
-        "Ingrid Kelly",
-        "Itamar Schen",
-        "Itay Levy",
-        "Ivan Moshkov",
-        "Izik Golan",
-        "Izzy Putterman",
-        "Jain Tu",
-        "Jan Baczek",
-        "Jan Kautz",
-        "Jane Polak Scowcroft",
-        "Janica Rosenberg",
-        "Jared Casper",
-        "Jarrod Pflum",
-        "Jason Grant",
-        "Jason Sewall",
-        "Jatin Mitra",
-        "Jeffrey Glick",
-        "Jenny Chen",
-        "Jesse Oliver",
-        "Jiacheng Xu",
-        "Jiafan Zhu",
-        "Jialin Song",
-        "Jian Zhang",
-        "Jiaqi Zeng",
-        "Jie Lou",
-        "Jill Milton",
-        "Jim Chow",
-        "Jimmy Zhang",
-        "Jinhang Choi",
-        "Jining Huang",
-        "Jocelyn Huang",
-        "Joel Caruso",
-        "Joey Conway",
-        "Joey Guman",
-        "Johan Jatko",
-        "John Kamalu",
-        "Johnny Greco",
-        "Jonathan Cohen",
-        "Jonathan Raiman",
-        "Joseph Jennings",
-        "Joyjit Daw",
-        "Juan Yu",
-        "Julio Tapia",
-        "Junkeun Yi",
-        "Jupinder Parmar",
-        "Jyothi Achar",
-        "Kari Briski",
-        "Kartik Mattoo",
-        "Katherine Cheung",
-        "Katherine Luna",
-        "Keith Wyss",
-        "Kevin Shih",
-        "Kezhi Kong",
-        "Khanh Nguyen",
-        "Khushi Bhardwaj",
-        "Kirill Buryak",
-        "Kirthi Shankar Sivamani",
-        "Konstantinos Krommydas",
-        "Kris Murphy",
-        "Krishna C. Puvvada",
-        "Krzysztof Pawelec",
-        "Kumar Anik",
-        "Laikh Tewari",
-        "Laya Sleiman",
-        "Leo Du",
-        "Leon Derczynski",
-        "Li Ding",
-        "Lilach Ilan",
-        "Lingjie Wu",
-        "Lizzie Wei",
-        "Luis Vega",
-        "Lun Su",
-        "Maarten Van Segbroeck",
-        "Maer Rodrigues de Melo",
-        "Magaret Zhang",
-        "Mahan Fathi",
-        "Makesh Narsimhan Sreedhar",
-        "Makesh Sreedhar",
-        "Makesh Tarun Chandran",
-        "Manuel Reyes Gomez",
-        "Maor Ashkenazi",
-        "Marc Cuevas",
-        "Marc Romeijn",
-        "Margaret Zhang",
-        "Mark Cai",
-        "Mark Gabel",
-        "Markus Kliegl",
-        "Martyna Patelka",
-        "Maryam Moosaei",
-        "Matthew Varacalli",
-        "Matvei Novikov",
-        "Mauricio Ferrato",
-        "Mehrzad Samadi",
-        "Melissa Corpuz",
-        "Meng Xin",
-        "Mengdi Wang",
-        "Mengru Wang",
-        "Meredith Price",
-        "Micah Schaffer",
-        "Michael Andersch",
-        "Michael Boone",
-        "Michael Evans",
-        "Michael Z Wang",
-        "Miguel Martinez",
-        "Mikail Khona",
-        "Mike Chrzanowski",
-        "Mike Hollinger",
-        "Mingyuan Ma",
-        "Minseok Lee",
-        "Mohammad Dabbah",
-        "Mohammad Shoeybi",
-        "Mostofa Patwary",
-        "Nabin Mulepati",
-        "Nader Khalil",
-        "Najeeb Nabwani",
-        "Nancy Agarwal",
-        "Nanthini Balasubramaniam",
-        "Narimane Hennouni",
-        "Narsi Kodukula",
-        "Natalie Hereth",
-        "Nathaniel Pinckney",
-        "Nave Assaf",
-        "Negar Habibi",
-        "Nestor Qin",
-        "Neta Zmora",
-        "Netanel Haber",
-        "Nick Reamaroon",
-        "Nickson Quak",
-        "Nidhi Bhatia",
-        "Nikhil Jukar",
-        "Nikki Pope",
-        "Nikolai Ludwig",
-        "Nima Tajbakhsh",
-        "Nir Ailon",
-        "Nirmal Juluru",
-        "Nirmalya De",
-        "Nowel Pitt",
-        "Oleg Rybakov",
-        "Oleksii Hrinchuk",
-        "Oleksii Kuchaiev",
-        "Olivier Delalleau",
-        "Oluwatobi Olabiyi",
-        "Omer Ullman Argov",
-        "Omri Almog",
-        "Omri Puny",
-        "Oren Tropp",
-        "Otavio Padovani",
-        "Ouye Xie",
-        "Parth Chadha",
-        "Pasha Shamis",
-        "Paul Gibbons",
-        "Pavlo Molchanov",
-        "Peter Belcak",
-        "Peter Jin",
-        "Pinky Xu",
-        "Piotr Januszewski",
-        "Pooya Jannaty",
-        "Prachi Shevate",
-        "Pradeep Thalasta",
-        "Pranav Prashant Thombre",
-        "Prasoon Varshney",
-        "Prerana Gambhir",
-        "Pritam Gundecha",
-        "Przemek Tredak",
-        "Qing Miao",
-        "Qiyu Wan",
-        "Quan Tran Minh",
-        "Rabeeh Karimi Mahabadi",
-        "Rachel Oberman",
-        "Rachit Garg",
-        "Rahul Kandu",
-        "Raina Zhong",
-        "Ran El-Yaniv",
-        "Ran Zilberstein",
-        "Rasoul Shafipour",
-        "Renee Yao",
-        "Renjie Pi",
-        "Richard Mazzarese",
-        "Richard Wang",
-        "Rick Izzo",
-        "Ridhima Singla",
-        "Rima Shahbazyan",
-        "Rishabh Garg",
-        "Ritika Borkar",
-        "Ritu Gala",
-        "Riyad Islam",
-        "Robert Clark",
-        "Robert Hesse",
-        "Roger Waleffe",
-        "Rohit Varma Kalidindi",
-        "Rohit Watve",
-        "Roi Koren",
-        "Ron Fan",
-        "Ruchika Kharwar",
-        "Ruisi Cai",
-        "Ruoxi Zhang",
-        "Russell J. Hewett",
-        "Ryan Prenger",
-        "Ryan Timbrook",
-        "Ryota Egashira",
-        "Sadegh Mahdavi",
-        "Sagar Singh Ashutosh Joshi",
-        "Sahil Modi",
-        "Samuel Kriman",
-        "Sandeep Pombra",
-        "Sanjay Kariyappa",
-        "Sanjeev Satheesh",
-        "Santiago Pombo",
-        "Saori Kaji",
-        "Satish Pasumarthi",
-        "Saurav Mishra",
-        "Saurav Muralidharan",
-        "Scott Hara",
-        "Sean Narenthiran",
-        "Sebastian Rogawski",
-        "Seonjin Na",
-        "Seonmyeong Bak",
-        "Sepehr Sameni",
-        "Seth Poulos",
-        "Shahar Mor",
-        "Shantanu Acharya",
-        "Shaona Ghosh Adam Lord",
-        "Sharath Turuvekere Sreenivas",
-        "Shaun Kotek",
-        "Shaya Gharghabi",
-        "Shelby Thomas",
-        "Sheng-Chieh Lin",
-        "Shibani Likhite",
-        "Shiqing Fan",
-        "Shiyang Chen",
-        "Shreya Gopal",
-        "Shrimai Prabhumoye",
-        "Shubham Pachori",
-        "Shubham Toshniwal",
-        "Shuo Zhang",
-        "Shuoyang Ding",
-        "Shyam Renjith",
-        "Shyamala Prayaga",
-        "Siddhartha Jain",
-        "Simeng Sun",
-        "Sirisha Rella",
-        "Sirshak Das",
-        "Smita Ithape",
-        "Sneha Harishchandra S",
-        "Somshubra Majumdar",
-        "Soumye Singhal",
-        "Sri Harsha Singudasu",
-        "Sriharsha Niverty",
-        "Stas Sergienko",
-        "Stefana Gloginic",
-        "Stefania Alborghetti",
-        "Stephen Ge",
-        "Stephen McCullough",
-        "Sugam Dipak Devare",
-        "Suguna Varshini Velury",
-        "Sukrit Rao",
-        "Sumeet Kumar Barua",
-        "Sunny Gai",
-        "Suseella Panguluri",
-        "Sushil Koundinyan",
-        "Swathi Patnam",
-        "Sweta Priyadarshi",
-        "Swetha Bhendigeri",
-        "Syeda Nahida Akter",
-        "Sylendran Arunagiri",
-        "Tailling Yuan",
-        "Talor Abramovich",
-        "Tan Bui",
-        "Tan Yu",
-        "Terry Kong",
-        "Thanh Do",
-        "Thomas Gburek",
-        "Thorgane Marques",
-        "Tiffany Moore",
-        "Tijmen Blankevoort",
-        "Tim Moon",
-        "Timothy Ma",
-        "Tiyasa Mitra",
-        "Tomasz Grzegorzek",
-        "Tomer Asida",
-        "Tomer Bar Natan",
-        "Tomer Keren",
-        "Tomer Ronen",
-        "Traian Rebedea",
-        "Trenton Starkey",
-        "Tugrul Konuk",
-        "Twinkle Vashishth",
-        "Tyler Condensa",
-        "Udi Karpas",
-        "Ushnish De",
-        "Vahid Noorozi",
-        "Vahid Noroozi",
-        "Vanshil Atul Shah",
-        "Veena Vaidyanathan",
-        "Venkat Srinivasan",
-        "Venmugil Elango",
-        "Victor Cui",
-        "Vijay Korthikanti",
-        "Vikas Mehta",
-        "Virginia Adams",
-        "Virginia Wu",
-        "Vitaly Kurin",
-        "Vitaly Lavrukhin",
-        "Vladimir Anisimov",
-        "Wan Seo",
-        "Wanli Jiang",
-        "Wasi Uddin Ahmad",
-        "Wei Du",
-        "Wei Ping",
-        "Wei-Ming Chen",
-        "Wendy Quan",
-        "Wenliang Dai",
-        "Wenwen Gao",
-        "Will Jennings",
-        "William Zhang",
-        "Xiaowei Ren",
-        "Xiaowen Xin",
-        "Xin Li",
-        "Yang Yu",
-        "Yangyi Chen",
-        "Yaniv Galron",
-        "Yashaswi Karnati",
-        "Yejin Choi",
-        "Yev Meyer",
-        "Yi-Fu Wu",
-        "Yian Zhang",
-        "Ying Lin",
-        "Yonatan Geifman",
-        "Yonggan Fu",
-        "Yoshi Suhara",
-        "Youngeun Kwon",
-        "Yuan Zhang",
-        "Yuki Huang",
-        "Zach Moshe",
-        "Zhilin Wang",
-        "Zhiyu Cheng",
-        "Zhongbo Zhu",
-        "Zhuolin Yang",
-        "Zihan Liu",
-        "Zijia Chen",
-        "Zijie Yan",
-        "Zuhair Ahmed"
+        "Xuwen Zhou",
+        "Fangxin Liu",
+        "Chao Wang",
+        "Xiao Zheng",
+        "Hao Zheng",
+        "Min He",
+        "Li Jiang",
+        "Haibing Guan"
       ],
       "author_details": [
         {
-          "name": "NVIDIA"
+          "name": "Xuwen Zhou"
         },
         {
-          "name": ":"
+          "name": "Fangxin Liu"
         },
         {
-          "name": "Aakshita Chandiramani"
+          "name": "Chao Wang"
         },
         {
-          "name": "Aaron Blakeman"
+          "name": "Xiao Zheng"
         },
         {
-          "name": "Abdullahi Olaoye"
+          "name": "Hao Zheng"
         },
         {
-          "name": "Abhibha Gupta"
+          "name": "Min He"
         },
         {
-          "name": "Abhilash Somasamudramath"
+          "name": "Li Jiang"
         },
         {
-          "name": "Abhinav Khattar"
-        },
-        {
-          "name": "Adeola Adesoba"
-        },
-        {
-          "name": "Adi Renduchintala"
-        },
-        {
-          "name": "Adil Asif"
-        },
-        {
-          "name": "Aditya Agrawal"
-        },
-        {
-          "name": "Aditya Vavre"
-        },
-        {
-          "name": "Ahmad Kiswani"
-        },
-        {
-          "name": "Aishwarya Padmakumar"
-        },
-        {
-          "name": "Ajay Hotchandani"
-        },
-        {
-          "name": "Akanksha Shukla"
-        },
-        {
-          "name": "Akhiad Bercovich"
-        },
-        {
-          "name": "Aleksander Ficek"
-        },
-        {
-          "name": "Aleksandr Shaposhnikov"
-        },
-        {
-          "name": "Alex Gronskiy"
-        },
-        {
-          "name": "Alex Kondratenko"
-        },
-        {
-          "name": "Alex Neefus"
-        },
-        {
-          "name": "Alex Steiner"
-        },
-        {
-          "name": "Alex Yang"
-        },
-        {
-          "name": "Alexander Bukharin"
-        },
-        {
-          "name": "Alexander Young"
-        },
-        {
-          "name": "Ali Hatamizadeh"
-        },
-        {
-          "name": "Ali Taghibakhshi"
-        },
-        {
-          "name": "Alina Galiautdinova"
-        },
-        {
-          "name": "Alisa Liu"
-        },
-        {
-          "name": "Alok Kumar"
-        },
-        {
-          "name": "Ameya Sunil Mahabaleshwarkar"
-        },
-        {
-          "name": "Amir Klein"
-        },
-        {
-          "name": "Amit Zuker"
-        },
-        {
-          "name": "Amnon Geifman"
-        },
-        {
-          "name": "Anahita Bhiwandiwalla"
-        },
-        {
-          "name": "Ananth Subramaniam"
-        },
-        {
-          "name": "Andrew Tao"
-        },
-        {
-          "name": "Anjaney Shrivastava"
-        },
-        {
-          "name": "Anjulie Agrusa"
-        },
-        {
-          "name": "Ankur Srivastava"
-        },
-        {
-          "name": "Ankur Verma"
-        },
-        {
-          "name": "Ann Guan"
-        },
-        {
-          "name": "Anna Shors"
-        },
-        {
-          "name": "Annamalai Chockalingam"
-        },
-        {
-          "name": "Anubhav Mandarwal"
-        },
-        {
-          "name": "Aparnaa Ramani"
-        },
-        {
-          "name": "Arham Mehta"
-        },
-        {
-          "name": "Arti Jain"
-        },
-        {
-          "name": "Arun Venkatesan"
-        },
-        {
-          "name": "Asha Anoosheh"
-        },
-        {
-          "name": "Ashwath Aithal"
-        },
-        {
-          "name": "Ashwin Poojary"
-        },
-        {
-          "name": "Asif Ahamed"
-        },
-        {
-          "name": "Asit Mishra"
-        },
-        {
-          "name": "Asli Sabanci Demiroz"
-        },
-        {
-          "name": "Asma Kuriparambil Thekkumpate"
-        },
-        {
-          "name": "Atefeh Sohrabizadeh"
-        },
-        {
-          "name": "Avinash Kaur"
-        },
-        {
-          "name": "Ayush Dattagupta"
-        },
-        {
-          "name": "Barath Subramaniam Anandan"
-        },
-        {
-          "name": "Bardiya Sadeghi"
-        },
-        {
-          "name": "Barnaby Simkin"
-        },
-        {
-          "name": "Ben Lanir"
-        },
-        {
-          "name": "Benedikt Schifferer"
-        },
-        {
-          "name": "Benjamin Chislett"
-        },
-        {
-          "name": "Besmira Nushi"
-        },
-        {
-          "name": "Bilal Kartal"
-        },
-        {
-          "name": "Bill Thiede"
-        },
-        {
-          "name": "Bita Darvish Rouhani"
-        },
-        {
-          "name": "Bobby Chen"
-        },
-        {
-          "name": "Boris Ginsburg"
-        },
-        {
-          "name": "Brandon Norick"
-        },
-        {
-          "name": "Branislav Kisacanin"
-        },
-        {
-          "name": "Brian Yu"
-        },
-        {
-          "name": "Bryan Catanzaro"
-        },
-        {
-          "name": "Buvaneswari Mani"
-        },
-        {
-          "name": "Carlo del Mundo"
-        },
-        {
-          "name": "Chankyu Lee"
-        },
-        {
-          "name": "Chanran Kim"
-        },
-        {
-          "name": "Chantal Hwang"
-        },
-        {
-          "name": "Chao Ni"
-        },
-        {
-          "name": "Charles Wang"
-        },
-        {
-          "name": "Charlie Truong"
-        },
-        {
-          "name": "Cheng-Ping Hsieh"
-        },
-        {
-          "name": "Chenhan Yu"
-        },
-        {
-          "name": "Chenjie Luo"
-        },
-        {
-          "name": "Cherie Wang"
-        },
-        {
-          "name": "Chetan Mungekar"
-        },
-        {
-          "name": "Chintan Patel"
-        },
-        {
-          "name": "Chris Alexiuk"
-        },
-        {
-          "name": "Chris Holguin"
-        },
-        {
-          "name": "Chris Wing"
-        },
-        {
-          "name": "Christian Munley"
-        },
-        {
-          "name": "Christopher Parisien"
-        },
-        {
-          "name": "Chuck Desai"
-        },
-        {
-          "name": "Chunyang Sheng"
-        },
-        {
-          "name": "Collin Neale"
-        },
-        {
-          "name": "Cyril Meurillon"
-        },
-        {
-          "name": "Dakshi Kumar"
-        },
-        {
-          "name": "Dan Gil"
-        },
-        {
-          "name": "Dan Su"
-        },
-        {
-          "name": "Dane Corneil"
-        },
-        {
-          "name": "Daniel Afrimi"
-        },
-        {
-          "name": "Daniel Burkhardt Eliuth Triana"
-        },
-        {
-          "name": "Daniel Egert"
-        },
-        {
-          "name": "Daniel Fatade"
-        },
-        {
-          "name": "Daniel Lo"
-        },
-        {
-          "name": "Daniel Rohrer"
-        },
-        {
-          "name": "Daniel Serebrenik"
-        },
-        {
-          "name": "Daniil Sorokin"
-        },
-        {
-          "name": "Daria Gitman"
-        },
-        {
-          "name": "Daria Levy"
-        },
-        {
-          "name": "Darko Stosic"
-        },
-        {
-          "name": "David Edelsohn"
-        },
-        {
-          "name": "David Messina"
-        },
-        {
-          "name": "David Mosallanezhad"
-        },
-        {
-          "name": "David Tamok"
-        },
-        {
-          "name": "Deena Donia"
-        },
-        {
-          "name": "Deepak Narayanan"
-        },
-        {
-          "name": "Devin O'Kelly"
-        },
-        {
-          "name": "Dheeraj Peri"
-        },
-        {
-          "name": "Dhruv Nathawani"
-        },
-        {
-          "name": "Di Wu"
-        },
-        {
-          "name": "Dima Rekesh"
-        },
-        {
-          "name": "Dina Yared"
-        },
-        {
-          "name": "Divyanshu Kakwani"
-        },
-        {
-          "name": "Dmitry Konyagin Brandon Tuttle"
-        },
-        {
-          "name": "Dong Ahn"
-        },
-        {
-          "name": "Dongfu Jiang"
-        },
-        {
-          "name": "Dorrin Poorkay"
-        },
-        {
-          "name": "Douglas O'Flaherty"
-        },
-        {
-          "name": "Duncan Riach"
-        },
-        {
-          "name": "Dusan Stosic"
-        },
-        {
-          "name": "Dustin Van Stee"
-        },
-        {
-          "name": "Edgar Minasyan"
-        },
-        {
-          "name": "Edward Lin"
-        },
-        {
-          "name": "Eileen Peters Long"
-        },
-        {
-          "name": "Elad Segal"
-        },
-        {
-          "name": "Elena Lantz"
-        },
-        {
-          "name": "Elena Lewis"
-        },
-        {
-          "name": "Ellie Evans"
-        },
-        {
-          "name": "Elliott Ning"
-        },
-        {
-          "name": "Eric Chung"
-        },
-        {
-          "name": "Eric Harper"
-        },
-        {
-          "name": "Eric Pham-Hung"
-        },
-        {
-          "name": "Eric W. Tramel"
-        },
-        {
-          "name": "Erick Galinkin"
-        },
-        {
-          "name": "Erik Pounds"
-        },
-        {
-          "name": "Esti Etrog"
-        },
-        {
-          "name": "Evan Briones"
-        },
-        {
-          "name": "Evan Wu"
-        },
-        {
-          "name": "Evelina Bakhturina"
-        },
-        {
-          "name": "Evgeny Tsykunov"
-        },
-        {
-          "name": "Ewa Dobrowolska"
-        },
-        {
-          "name": "Farshad Saberi Movahed"
-        },
-        {
-          "name": "Farzan Memarian"
-        },
-        {
-          "name": "Fay Wang"
-        },
-        {
-          "name": "Fei Jia"
-        },
-        {
-          "name": "Felipe Soares"
-        },
-        {
-          "name": "Felipe Vieira Frujeri"
-        },
-        {
-          "name": "Feng Chen"
-        },
-        {
-          "name": "Fengguang Lin"
-        },
-        {
-          "name": "Ferenc Galko"
-        },
-        {
-          "name": "Fortuna Zhang"
-        },
-        {
-          "name": "Frankie Siino"
-        },
-        {
-          "name": "Frida Hou"
-        },
-        {
-          "name": "Gantavya Bhatt"
-        },
-        {
-          "name": "Gargi Prasad"
-        },
-        {
-          "name": "Geethapriya Venkataramani"
-        },
-        {
-          "name": "Geetika Gupta"
-        },
-        {
-          "name": "George Armstrong"
-        },
-        {
-          "name": "Gerald Shen"
-        },
-        {
-          "name": "Giulio Borghesi"
-        },
-        {
-          "name": "Gordana Neskovic"
-        },
-        {
-          "name": "Gorkem Batmaz"
-        },
-        {
-          "name": "Grace Lam"
-        },
-        {
-          "name": "Grace Wu"
-        },
-        {
-          "name": "Greg Pauloski"
-        },
-        {
-          "name": "Greyson Davis"
-        },
-        {
-          "name": "Grigor Nalbandyan"
-        },
-        {
-          "name": "Guoming Zhang"
-        },
-        {
-          "name": "Guy Farber"
-        },
-        {
-          "name": "Guyue Huang"
-        },
-        {
-          "name": "Haifeng Qian"
-        },
-        {
-          "name": "Haran Kumar Shiv Kumar"
-        },
-        {
-          "name": "Harry Kim"
-        },
-        {
-          "name": "Harsh Sharma"
-        },
-        {
-          "name": "Hayate Iso"
-        },
-        {
-          "name": "Hayley Ross"
-        },
-        {
-          "name": "Herbert Hum"
-        },
-        {
-          "name": "Herman Sahota"
-        },
-        {
-          "name": "Hexin Wang"
-        },
-        {
-          "name": "Himanshu Soni"
-        },
-        {
-          "name": "Hiren Upadhyay"
-        },
-        {
-          "name": "Huy Nguyen"
-        },
-        {
-          "name": "Iain Cunningham"
-        },
-        {
-          "name": "Ido Galil"
-        },
-        {
-          "name": "Ido Shahaf"
-        },
-        {
-          "name": "Igino Padovani"
-        },
-        {
-          "name": "Igor Gitman"
-        },
-        {
-          "name": "Igor Shovkun"
-        },
-        {
-          "name": "Ikroop Dhillon"
-        },
-        {
-          "name": "Ilya Loshchilov"
-        },
-        {
-          "name": "Ingrid Kelly"
-        },
-        {
-          "name": "Itamar Schen"
-        },
-        {
-          "name": "Itay Levy"
-        },
-        {
-          "name": "Ivan Moshkov"
-        },
-        {
-          "name": "Izik Golan"
-        },
-        {
-          "name": "Izzy Putterman"
-        },
-        {
-          "name": "Jain Tu"
-        },
-        {
-          "name": "Jan Baczek"
-        },
-        {
-          "name": "Jan Kautz"
-        },
-        {
-          "name": "Jane Polak Scowcroft"
-        },
-        {
-          "name": "Janica Rosenberg"
-        },
-        {
-          "name": "Jared Casper"
-        },
-        {
-          "name": "Jarrod Pflum"
-        },
-        {
-          "name": "Jason Grant"
-        },
-        {
-          "name": "Jason Sewall"
-        },
-        {
-          "name": "Jatin Mitra"
-        },
-        {
-          "name": "Jeffrey Glick"
-        },
-        {
-          "name": "Jenny Chen"
-        },
-        {
-          "name": "Jesse Oliver"
-        },
-        {
-          "name": "Jiacheng Xu"
-        },
-        {
-          "name": "Jiafan Zhu"
-        },
-        {
-          "name": "Jialin Song"
-        },
-        {
-          "name": "Jian Zhang"
-        },
-        {
-          "name": "Jiaqi Zeng"
-        },
-        {
-          "name": "Jie Lou"
-        },
-        {
-          "name": "Jill Milton"
-        },
-        {
-          "name": "Jim Chow"
-        },
-        {
-          "name": "Jimmy Zhang"
-        },
-        {
-          "name": "Jinhang Choi"
-        },
-        {
-          "name": "Jining Huang"
-        },
-        {
-          "name": "Jocelyn Huang"
-        },
-        {
-          "name": "Joel Caruso"
-        },
-        {
-          "name": "Joey Conway"
-        },
-        {
-          "name": "Joey Guman"
-        },
-        {
-          "name": "Johan Jatko"
-        },
-        {
-          "name": "John Kamalu"
-        },
-        {
-          "name": "Johnny Greco"
-        },
-        {
-          "name": "Jonathan Cohen"
-        },
-        {
-          "name": "Jonathan Raiman"
-        },
-        {
-          "name": "Joseph Jennings"
-        },
-        {
-          "name": "Joyjit Daw"
-        },
-        {
-          "name": "Juan Yu"
-        },
-        {
-          "name": "Julio Tapia"
-        },
-        {
-          "name": "Junkeun Yi"
-        },
-        {
-          "name": "Jupinder Parmar"
-        },
-        {
-          "name": "Jyothi Achar"
-        },
-        {
-          "name": "Kari Briski"
-        },
-        {
-          "name": "Kartik Mattoo"
-        },
-        {
-          "name": "Katherine Cheung"
-        },
-        {
-          "name": "Katherine Luna"
-        },
-        {
-          "name": "Keith Wyss"
-        },
-        {
-          "name": "Kevin Shih"
-        },
-        {
-          "name": "Kezhi Kong"
-        },
-        {
-          "name": "Khanh Nguyen"
-        },
-        {
-          "name": "Khushi Bhardwaj"
-        },
-        {
-          "name": "Kirill Buryak"
-        },
-        {
-          "name": "Kirthi Shankar Sivamani"
-        },
-        {
-          "name": "Konstantinos Krommydas"
-        },
-        {
-          "name": "Kris Murphy"
-        },
-        {
-          "name": "Krishna C. Puvvada"
-        },
-        {
-          "name": "Krzysztof Pawelec"
-        },
-        {
-          "name": "Kumar Anik"
-        },
-        {
-          "name": "Laikh Tewari"
-        },
-        {
-          "name": "Laya Sleiman"
-        },
-        {
-          "name": "Leo Du"
-        },
-        {
-          "name": "Leon Derczynski"
-        },
-        {
-          "name": "Li Ding"
-        },
-        {
-          "name": "Lilach Ilan"
-        },
-        {
-          "name": "Lingjie Wu"
-        },
-        {
-          "name": "Lizzie Wei"
-        },
-        {
-          "name": "Luis Vega"
-        },
-        {
-          "name": "Lun Su"
-        },
-        {
-          "name": "Maarten Van Segbroeck"
-        },
-        {
-          "name": "Maer Rodrigues de Melo"
-        },
-        {
-          "name": "Magaret Zhang"
-        },
-        {
-          "name": "Mahan Fathi"
-        },
-        {
-          "name": "Makesh Narsimhan Sreedhar"
-        },
-        {
-          "name": "Makesh Sreedhar"
-        },
-        {
-          "name": "Makesh Tarun Chandran"
-        },
-        {
-          "name": "Manuel Reyes Gomez"
-        },
-        {
-          "name": "Maor Ashkenazi"
-        },
-        {
-          "name": "Marc Cuevas"
-        },
-        {
-          "name": "Marc Romeijn"
-        },
-        {
-          "name": "Margaret Zhang"
-        },
-        {
-          "name": "Mark Cai"
-        },
-        {
-          "name": "Mark Gabel"
-        },
-        {
-          "name": "Markus Kliegl"
-        },
-        {
-          "name": "Martyna Patelka"
-        },
-        {
-          "name": "Maryam Moosaei"
-        },
-        {
-          "name": "Matthew Varacalli"
-        },
-        {
-          "name": "Matvei Novikov"
-        },
-        {
-          "name": "Mauricio Ferrato"
-        },
-        {
-          "name": "Mehrzad Samadi"
-        },
-        {
-          "name": "Melissa Corpuz"
-        },
-        {
-          "name": "Meng Xin"
-        },
-        {
-          "name": "Mengdi Wang"
-        },
-        {
-          "name": "Mengru Wang"
-        },
-        {
-          "name": "Meredith Price"
-        },
-        {
-          "name": "Micah Schaffer"
-        },
-        {
-          "name": "Michael Andersch"
-        },
-        {
-          "name": "Michael Boone"
-        },
-        {
-          "name": "Michael Evans"
-        },
-        {
-          "name": "Michael Z Wang"
-        },
-        {
-          "name": "Miguel Martinez"
-        },
-        {
-          "name": "Mikail Khona"
-        },
-        {
-          "name": "Mike Chrzanowski"
-        },
-        {
-          "name": "Mike Hollinger"
-        },
-        {
-          "name": "Mingyuan Ma"
-        },
-        {
-          "name": "Minseok Lee"
-        },
-        {
-          "name": "Mohammad Dabbah"
-        },
-        {
-          "name": "Mohammad Shoeybi"
-        },
-        {
-          "name": "Mostofa Patwary"
-        },
-        {
-          "name": "Nabin Mulepati"
-        },
-        {
-          "name": "Nader Khalil"
-        },
-        {
-          "name": "Najeeb Nabwani"
-        },
-        {
-          "name": "Nancy Agarwal"
-        },
-        {
-          "name": "Nanthini Balasubramaniam"
-        },
-        {
-          "name": "Narimane Hennouni"
-        },
-        {
-          "name": "Narsi Kodukula"
-        },
-        {
-          "name": "Natalie Hereth"
-        },
-        {
-          "name": "Nathaniel Pinckney"
-        },
-        {
-          "name": "Nave Assaf"
-        },
-        {
-          "name": "Negar Habibi"
-        },
-        {
-          "name": "Nestor Qin"
-        },
-        {
-          "name": "Neta Zmora"
-        },
-        {
-          "name": "Netanel Haber"
-        },
-        {
-          "name": "Nick Reamaroon"
-        },
-        {
-          "name": "Nickson Quak"
-        },
-        {
-          "name": "Nidhi Bhatia"
-        },
-        {
-          "name": "Nikhil Jukar"
-        },
-        {
-          "name": "Nikki Pope"
-        },
-        {
-          "name": "Nikolai Ludwig"
-        },
-        {
-          "name": "Nima Tajbakhsh"
-        },
-        {
-          "name": "Nir Ailon"
-        },
-        {
-          "name": "Nirmal Juluru"
-        },
-        {
-          "name": "Nirmalya De"
-        },
-        {
-          "name": "Nowel Pitt"
-        },
-        {
-          "name": "Oleg Rybakov"
-        },
-        {
-          "name": "Oleksii Hrinchuk"
-        },
-        {
-          "name": "Oleksii Kuchaiev"
-        },
-        {
-          "name": "Olivier Delalleau"
-        },
-        {
-          "name": "Oluwatobi Olabiyi"
-        },
-        {
-          "name": "Omer Ullman Argov"
-        },
-        {
-          "name": "Omri Almog"
-        },
-        {
-          "name": "Omri Puny"
-        },
-        {
-          "name": "Oren Tropp"
-        },
-        {
-          "name": "Otavio Padovani"
-        },
-        {
-          "name": "Ouye Xie"
-        },
-        {
-          "name": "Parth Chadha"
-        },
-        {
-          "name": "Pasha Shamis"
-        },
-        {
-          "name": "Paul Gibbons"
-        },
-        {
-          "name": "Pavlo Molchanov"
-        },
-        {
-          "name": "Peter Belcak"
-        },
-        {
-          "name": "Peter Jin"
-        },
-        {
-          "name": "Pinky Xu"
-        },
-        {
-          "name": "Piotr Januszewski"
-        },
-        {
-          "name": "Pooya Jannaty"
-        },
-        {
-          "name": "Prachi Shevate"
-        },
-        {
-          "name": "Pradeep Thalasta"
-        },
-        {
-          "name": "Pranav Prashant Thombre"
-        },
-        {
-          "name": "Prasoon Varshney"
-        },
-        {
-          "name": "Prerana Gambhir"
-        },
-        {
-          "name": "Pritam Gundecha"
-        },
-        {
-          "name": "Przemek Tredak"
-        },
-        {
-          "name": "Qing Miao"
-        },
-        {
-          "name": "Qiyu Wan"
-        },
-        {
-          "name": "Quan Tran Minh"
-        },
-        {
-          "name": "Rabeeh Karimi Mahabadi"
-        },
-        {
-          "name": "Rachel Oberman"
-        },
-        {
-          "name": "Rachit Garg"
-        },
-        {
-          "name": "Rahul Kandu"
-        },
-        {
-          "name": "Raina Zhong"
-        },
-        {
-          "name": "Ran El-Yaniv"
-        },
-        {
-          "name": "Ran Zilberstein"
-        },
-        {
-          "name": "Rasoul Shafipour"
-        },
-        {
-          "name": "Renee Yao"
-        },
-        {
-          "name": "Renjie Pi"
-        },
-        {
-          "name": "Richard Mazzarese"
-        },
-        {
-          "name": "Richard Wang"
-        },
-        {
-          "name": "Rick Izzo"
-        },
-        {
-          "name": "Ridhima Singla"
-        },
-        {
-          "name": "Rima Shahbazyan"
-        },
-        {
-          "name": "Rishabh Garg"
-        },
-        {
-          "name": "Ritika Borkar"
-        },
-        {
-          "name": "Ritu Gala"
-        },
-        {
-          "name": "Riyad Islam"
-        },
-        {
-          "name": "Robert Clark"
-        },
-        {
-          "name": "Robert Hesse"
-        },
-        {
-          "name": "Roger Waleffe"
-        },
-        {
-          "name": "Rohit Varma Kalidindi"
-        },
-        {
-          "name": "Rohit Watve"
-        },
-        {
-          "name": "Roi Koren"
-        },
-        {
-          "name": "Ron Fan"
-        },
-        {
-          "name": "Ruchika Kharwar"
-        },
-        {
-          "name": "Ruisi Cai"
-        },
-        {
-          "name": "Ruoxi Zhang"
-        },
-        {
-          "name": "Russell J. Hewett"
-        },
-        {
-          "name": "Ryan Prenger"
-        },
-        {
-          "name": "Ryan Timbrook"
-        },
-        {
-          "name": "Ryota Egashira"
-        },
-        {
-          "name": "Sadegh Mahdavi"
-        },
-        {
-          "name": "Sagar Singh Ashutosh Joshi"
-        },
-        {
-          "name": "Sahil Modi"
-        },
-        {
-          "name": "Samuel Kriman"
-        },
-        {
-          "name": "Sandeep Pombra"
-        },
-        {
-          "name": "Sanjay Kariyappa"
-        },
-        {
-          "name": "Sanjeev Satheesh"
-        },
-        {
-          "name": "Santiago Pombo"
-        },
-        {
-          "name": "Saori Kaji"
-        },
-        {
-          "name": "Satish Pasumarthi"
-        },
-        {
-          "name": "Saurav Mishra"
-        },
-        {
-          "name": "Saurav Muralidharan"
-        },
-        {
-          "name": "Scott Hara"
-        },
-        {
-          "name": "Sean Narenthiran"
-        },
-        {
-          "name": "Sebastian Rogawski"
-        },
-        {
-          "name": "Seonjin Na"
-        },
-        {
-          "name": "Seonmyeong Bak"
-        },
-        {
-          "name": "Sepehr Sameni"
-        },
-        {
-          "name": "Seth Poulos"
-        },
-        {
-          "name": "Shahar Mor"
-        },
-        {
-          "name": "Shantanu Acharya"
-        },
-        {
-          "name": "Shaona Ghosh Adam Lord"
-        },
-        {
-          "name": "Sharath Turuvekere Sreenivas"
-        },
-        {
-          "name": "Shaun Kotek"
-        },
-        {
-          "name": "Shaya Gharghabi"
-        },
-        {
-          "name": "Shelby Thomas"
-        },
-        {
-          "name": "Sheng-Chieh Lin"
-        },
-        {
-          "name": "Shibani Likhite"
-        },
-        {
-          "name": "Shiqing Fan"
-        },
-        {
-          "name": "Shiyang Chen"
-        },
-        {
-          "name": "Shreya Gopal"
-        },
-        {
-          "name": "Shrimai Prabhumoye"
-        },
-        {
-          "name": "Shubham Pachori"
-        },
-        {
-          "name": "Shubham Toshniwal"
-        },
-        {
-          "name": "Shuo Zhang"
-        },
-        {
-          "name": "Shuoyang Ding"
-        },
-        {
-          "name": "Shyam Renjith"
-        },
-        {
-          "name": "Shyamala Prayaga"
-        },
-        {
-          "name": "Siddhartha Jain"
-        },
-        {
-          "name": "Simeng Sun"
-        },
-        {
-          "name": "Sirisha Rella"
-        },
-        {
-          "name": "Sirshak Das"
-        },
-        {
-          "name": "Smita Ithape"
-        },
-        {
-          "name": "Sneha Harishchandra S"
-        },
-        {
-          "name": "Somshubra Majumdar"
-        },
-        {
-          "name": "Soumye Singhal"
-        },
-        {
-          "name": "Sri Harsha Singudasu"
-        },
-        {
-          "name": "Sriharsha Niverty"
-        },
-        {
-          "name": "Stas Sergienko"
-        },
-        {
-          "name": "Stefana Gloginic"
-        },
-        {
-          "name": "Stefania Alborghetti"
-        },
-        {
-          "name": "Stephen Ge"
-        },
-        {
-          "name": "Stephen McCullough"
-        },
-        {
-          "name": "Sugam Dipak Devare"
-        },
-        {
-          "name": "Suguna Varshini Velury"
-        },
-        {
-          "name": "Sukrit Rao"
-        },
-        {
-          "name": "Sumeet Kumar Barua"
-        },
-        {
-          "name": "Sunny Gai"
-        },
-        {
-          "name": "Suseella Panguluri"
-        },
-        {
-          "name": "Sushil Koundinyan"
-        },
-        {
-          "name": "Swathi Patnam"
-        },
-        {
-          "name": "Sweta Priyadarshi"
-        },
-        {
-          "name": "Swetha Bhendigeri"
-        },
-        {
-          "name": "Syeda Nahida Akter"
-        },
-        {
-          "name": "Sylendran Arunagiri"
-        },
-        {
-          "name": "Tailling Yuan"
-        },
-        {
-          "name": "Talor Abramovich"
-        },
-        {
-          "name": "Tan Bui"
-        },
-        {
-          "name": "Tan Yu"
-        },
-        {
-          "name": "Terry Kong"
-        },
-        {
-          "name": "Thanh Do"
-        },
-        {
-          "name": "Thomas Gburek"
-        },
-        {
-          "name": "Thorgane Marques"
-        },
-        {
-          "name": "Tiffany Moore"
-        },
-        {
-          "name": "Tijmen Blankevoort"
-        },
-        {
-          "name": "Tim Moon"
-        },
-        {
-          "name": "Timothy Ma"
-        },
-        {
-          "name": "Tiyasa Mitra"
-        },
-        {
-          "name": "Tomasz Grzegorzek"
-        },
-        {
-          "name": "Tomer Asida"
-        },
-        {
-          "name": "Tomer Bar Natan"
-        },
-        {
-          "name": "Tomer Keren"
-        },
-        {
-          "name": "Tomer Ronen"
-        },
-        {
-          "name": "Traian Rebedea"
-        },
-        {
-          "name": "Trenton Starkey"
-        },
-        {
-          "name": "Tugrul Konuk"
-        },
-        {
-          "name": "Twinkle Vashishth"
-        },
-        {
-          "name": "Tyler Condensa"
-        },
-        {
-          "name": "Udi Karpas"
-        },
-        {
-          "name": "Ushnish De"
-        },
-        {
-          "name": "Vahid Noorozi"
-        },
-        {
-          "name": "Vahid Noroozi"
-        },
-        {
-          "name": "Vanshil Atul Shah"
-        },
-        {
-          "name": "Veena Vaidyanathan"
-        },
-        {
-          "name": "Venkat Srinivasan"
-        },
-        {
-          "name": "Venmugil Elango"
-        },
-        {
-          "name": "Victor Cui"
-        },
-        {
-          "name": "Vijay Korthikanti"
-        },
-        {
-          "name": "Vikas Mehta"
-        },
-        {
-          "name": "Virginia Adams"
-        },
-        {
-          "name": "Virginia Wu"
-        },
-        {
-          "name": "Vitaly Kurin"
-        },
-        {
-          "name": "Vitaly Lavrukhin"
-        },
-        {
-          "name": "Vladimir Anisimov"
-        },
-        {
-          "name": "Wan Seo"
-        },
-        {
-          "name": "Wanli Jiang"
-        },
-        {
-          "name": "Wasi Uddin Ahmad"
-        },
-        {
-          "name": "Wei Du"
-        },
-        {
-          "name": "Wei Ping"
-        },
-        {
-          "name": "Wei-Ming Chen"
-        },
-        {
-          "name": "Wendy Quan"
-        },
-        {
-          "name": "Wenliang Dai"
-        },
-        {
-          "name": "Wenwen Gao"
-        },
-        {
-          "name": "Will Jennings"
-        },
-        {
-          "name": "William Zhang"
-        },
-        {
-          "name": "Xiaowei Ren"
-        },
-        {
-          "name": "Xiaowen Xin"
-        },
-        {
-          "name": "Xin Li"
-        },
-        {
-          "name": "Yang Yu"
-        },
-        {
-          "name": "Yangyi Chen"
-        },
-        {
-          "name": "Yaniv Galron"
-        },
-        {
-          "name": "Yashaswi Karnati"
-        },
-        {
-          "name": "Yejin Choi"
-        },
-        {
-          "name": "Yev Meyer"
-        },
-        {
-          "name": "Yi-Fu Wu"
-        },
-        {
-          "name": "Yian Zhang"
-        },
-        {
-          "name": "Ying Lin"
-        },
-        {
-          "name": "Yonatan Geifman"
-        },
-        {
-          "name": "Yonggan Fu"
-        },
-        {
-          "name": "Yoshi Suhara"
-        },
-        {
-          "name": "Youngeun Kwon"
-        },
-        {
-          "name": "Yuan Zhang"
-        },
-        {
-          "name": "Yuki Huang"
-        },
-        {
-          "name": "Zach Moshe"
-        },
-        {
-          "name": "Zhilin Wang"
-        },
-        {
-          "name": "Zhiyu Cheng"
-        },
-        {
-          "name": "Zhongbo Zhu"
-        },
-        {
-          "name": "Zhuolin Yang"
-        },
-        {
-          "name": "Zihan Liu"
-        },
-        {
-          "name": "Zijia Chen"
-        },
-        {
-          "name": "Zijie Yan"
-        },
-        {
-          "name": "Zuhair Ahmed"
+          "name": "Haibing Guan"
         }
       ],
-      "published": "2026-04-14T07:02:32Z",
-      "published_date": "2026-04-14 07:02:32+00:00",
-      "updated": "2026-04-14T07:02:32Z",
-      "primary_category": "cs.LG",
+      "published": "2026-04-15T09:01:54Z",
+      "published_date": "2026-04-15 09:01:54+00:00",
+      "updated": "2026-04-15T09:01:54Z",
+      "comments": "ACL 2026 Main Conference",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL"
+        "cs.CL",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.12374v1",
-      "url": "http://arxiv.org/abs/2604.12374v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.13634v1",
+      "url": "http://arxiv.org/abs/2604.13634v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
@@ -2257,19 +101,20 @@
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "inference acceleration",
         "speculative decoding",
         "throughput",
-        "quantization",
         "cs.LG",
-        "cs.CL"
+        "cs.CL",
+        "memory",
+        "speedup",
+        "evaluation"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 4,
+        "text_match_count": 2,
         "matched_categories": [
           "cs.LG",
           "cs.CL"
@@ -2279,341 +124,327 @@
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput"
+          "throughput",
+          "memory",
+          "speedup"
         ],
-        "bonus_keyword_match_count": 1,
+        "bonus_keyword_match_count": 3,
         "analysis_keyword_matches": [
-          "throughput"
+          "evaluation",
+          "throughput",
+          "memory",
+          "speedup"
         ],
-        "analysis_keyword_match_count": 1,
+        "analysis_keyword_match_count": 4,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.18
+        "bonus_keyword_bonus": 0.5
       },
       "selection_lane": "fresh",
-      "citationCount": 7,
       "ai": {
-        "one_liner_zh": "This paper presents a 120B-parameter hybrid Mamba-attention MoE model with 12B active parameters that combines NVFP4 pretraining, a LatentMoE design, and MTP-based native speculative decoding to target efficient long-context reasoning.",
-        "summary_zh": "The paper targets the current systems problem of pushing frontier-scale reasoning models toward higher serving efficiency without giving up model quality or long-context capability. It introduces Nemotron 3 Super, a hybrid Mamba-Transformer Mixture-of-Experts model that combines NVFP4 pretraining, a new LatentMoE architecture, and MTP layers intended to accelerate inference through native speculative decoding. The abstract claims comparable accuracy on common benchmarks, support for up to 1M context, and up to 2.2x and 7.5x higher inference throughput than GPT-OSS-120B and Qwen3.5-122B, respectively. If those claims hold under fair serving conditions, the work matters because it ties architectural choices, quantization, and decoding strategy into one efficiency-oriented stack rather than treating them separately. The biggest missing detail is that the abstract does not make clear how much of the gain comes from MoE sparsity, Mamba-attention hybridization, NVFP4, MTP decoding, or the exact evaluation setup.",
-        "background_zh": "Large reasoning models are increasingly constrained by inference cost, memory pressure, and long-context serving overhead, so architecture and decoding choices now matter as much as raw parameter count.",
-        "problem_zh": "The paper asks how to build an open frontier-scale reasoning model that preserves competitive accuracy while materially improving throughput and context scalability.",
-        "approach_zh": "It combines a hybrid Mamba-attention backbone with a sparse LatentMoE design, NVFP4 pretraining and quantization, and MTP layers for native speculative decoding.",
-        "evidence_zh": "The abstract reports comparable benchmark accuracy, 1M context support, and throughput gains of up to 2.2x versus GPT-OSS-120B and 7.5x versus Qwen3.5-122B, but it does not make the hardware, baselines, or attribution of gains clear.",
-        "value_zh": "This is potentially useful as a systems case study in co-design across model architecture, quantization, and decoding for higher-throughput open LLM serving.",
+        "one_liner_zh": "A training-free speculative decoding variant that tries to recover draft tokens rejected by exact-match verification through frequency-guided candidate rescue and probability-based acceptance.",
+        "summary_zh": "This paper targets a known inefficiency in speculative decoding: standard verification can reject draft tokens that are semantically acceptable but lexically different, which limits realized speedup. The proposed Calibrated Speculative Decoding (CSD) adds two lightweight pieces, an Online Correction Memory that reuses recurring rejection patterns as rescue candidates and a Semantic Consistency Gating step that accepts candidates using probability ratios rather than exact token matching. The abstract claims gains across multiple LLMs, with peak throughput speedup up to 2.33x, while preserving accuracy and even improving performance on complex reasoning datasets. If those claims hold, the practical value is better speculative decoding efficiency without retraining, which is relevant for serving stacks that want more speed from existing model pairs. The main missing detail is that the abstract does not specify the verification cost, hardware/setup, baselines, or when semantic gating remains fair and stable versus standard exact verification.",
+        "background_zh": "Speculative decoding is a key LLM inference acceleration technique, but its realized speedup is often reduced by conservative token verification that rejects useful draft outputs.",
+        "problem_zh": "The paper asks how to reduce false rejections in speculative decoding when draft tokens are semantically valid but do not match the target model lexically, because those rejections waste potential throughput gains.",
+        "approach_zh": "CSD keeps the method training-free and adds an online memory of past rejection patterns plus a probability-ratio gate that can admit rescued candidates without relying on exact token matching.",
+        "evidence_zh": "The abstract reports evaluation across diverse LLMs, a peak throughput speedup of 2.33x, preserved accuracy across tasks, and better performance on complex reasoning datasets, but it does not make the evaluation setup or baseline details clear.",
+        "value_zh": "For inference systems, the appeal is a low-overhead way to extract more throughput from speculative decoding without retraining models, if the added rescue and gating logic is cheaper than the rejection it avoids.",
         "open_questions": [
-          "How much of the reported throughput gain comes from LatentMoE sparsity versus MTP speculative decoding versus NVFP4 quantization?",
-          "What hardware, batch sizes, sequence lengths, KV-cache policy, and serving stack were used in the throughput comparisons, and were the baselines matched fairly?",
-          "Does the 1M-context support hold with practical throughput and memory behavior, or is it mainly a capability claim without detailed serving evidence?"
+          "What are the draft/target model pairings, hardware settings, and baseline speculative decoding implementations used for the reported 2.33x peak speedup?",
+          "How much extra latency or memory overhead do Online Correction Memory and Semantic Consistency Gating add, and when do they stop paying for themselves?",
+          "Does probability-guarded acceptance preserve exact output distribution guarantees, or is the method making an accuracy-efficiency tradeoff that only looks safe on the reported tasks?"
         ],
         "core_contributions": [
-          "A 120B hybrid Mamba-attention MoE model with 12B active parameters aimed at efficient agentic reasoning.",
-          "Use of NVFP4 in pretraining and quantization as part of the model's efficiency story.",
-          "Integration of MTP layers for native speculative decoding rather than treating decoding acceleration as an external add-on."
+          "Reframes speculative decoding inefficiency as a false-rejection problem caused by strict lexical verification.",
+          "Introduces Online Correction Memory to reuse recurring rejection patterns as rescue candidates.",
+          "Introduces Semantic Consistency Gating that checks candidate admissibility with probability ratios instead of exact token matching."
         ],
         "why_read": [
-          "It is directly relevant to LLM inference systems because it claims substantial throughput gains from a combined architecture-plus-decoding design.",
-          "It provides an open model and datasets, which may make the efficiency claims more inspectable and reproducible than closed-model announcements.",
-          "It is useful for understanding whether hybrid sequence models and sparse experts are becoming practical serving choices at frontier scale."
+          "It targets a concrete bottleneck in speculative decoding rather than proposing a generic decoding tweak.",
+          "The method is explicitly training-free, which matters for deployment-oriented inference work.",
+          "The abstract makes testable systems claims around throughput, accuracy preservation, and reasoning-task behavior."
         ],
         "risks": [
-          "The abstract does not separate the contribution of each optimization, so the source of the speedup is currently hard to evaluate.",
-          "Throughput claims may depend heavily on NVIDIA-specific hardware or kernels, which the abstract does not disclose clearly enough for portability assessment."
+          "The abstract does not clarify whether the acceptance rule preserves the same decoding semantics as standard verification.",
+          "Reported speedups may depend heavily on specific model pairs, task mixes, or hardware, which are not described here."
         ],
         "recommended_for": [
-          "Researchers studying LLM inference acceleration and speculative decoding.",
-          "Engineers evaluating MoE, quantization, and long-context tradeoffs in production serving stacks.",
-          "Compiler and runtime practitioners interested in how model architecture choices interact with system-level throughput."
+          "Researchers working on LLM serving and speculative decoding.",
+          "Engineers evaluating training-free inference acceleration methods.",
+          "Readers interested in verification-policy changes rather than new model training."
         ],
         "keywords": [
-          "LLM inference systems",
-          "Mixture-of-Experts",
-          "hybrid Mamba-Transformer",
           "speculative decoding",
-          "MTP",
-          "NVFP4 quantization"
+          "LLM inference",
+          "throughput",
+          "training-free acceleration",
+          "candidate selection",
+          "probability-based acceptance"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "Strong fit with the stated focus on LLM inference acceleration and serving efficiency, with concrete throughput claims and architecture-decoding co-design, although the abstract leaves important fairness and attribution details unresolved.",
-        "fallback_summary": "We describe the pre-training, post-training, and quantization of Nemotron 3 Super, a 120 billion (active 12 billion) parameter hybrid Mamba-Attention Mixture-of-Experts model."
+        "reading_priority_reason": "Strong fit with LLM inference systems and serving efficiency, with a concrete mechanism for throughput gains and explicit performance claims, though the abstract leaves important evaluation and correctness details unclear.",
+        "fallback_summary": "Speculative decoding accelerates autoregressive generation by letting draft tokens bypass full verification, but conventional frameworks suffer from frequent false rejections, particularly when draft models produce semantically correct but lexically divergent outputs."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.12171v1",
-      "arxiv_id": "2604.12171v1",
-      "title": "PipeLive: Efficient Live In-place Pipeline Parallelism Reconfiguration for Dynamic LLM Serving",
-      "summary": "Pipeline parallelism (PP) is widely used to partition layers of large language models (LLMs) across GPUs, enabling scalable inference for large models. However, existing systems rely on static PP configurations that fail to adapt to dynamic settings, such as serverless platforms and heterogeneous GPU environments. Reconfiguring PP by stopping and redeploying service incurs prohibitive downtime, so reconfiguration must instead proceed live and in place, without interrupting inference. However, live in-place PP reconfiguration is fundamentally challenging. GPUs are already saturated with model weights and KV cache, leaving little room for new layer placements and necessitating KV cache resizing, at odds with systems like vLLM that preallocate for throughput. Moreover, maintaining KV consistency during execution is difficult: stop-and-copy introduces large pauses, while background synchronization risks inconsistency as states evolve. We present PipeLive, which enables live in-place PP reconfiguration with minimal disruption. PipeLive introduces a redesigned KV cache layout together with a co-designed extension to PageAttention, forming a unified mechanism for live KV resizing. It further adopts an incremental KV patching mechanism, inspired by live virtual machine migration, to synchronize KV states between source and target configurations and identify a safe switch point. PipeLive achieves a 2.5X reduction in time-to-first-token (TTFT) without KV cache overflow compared to disabling KV resizing. Furthermore, compared to a variant without KV patching, it reduces reconfiguration overhead from seconds to under 10ms, and improves TTFT and time-per-output-token (TPOT) by up to 54.7% and 14.7%, respectively.",
+      "id": "http://arxiv.org/abs/2604.13556v1",
+      "arxiv_id": "2604.13556v1",
+      "title": "YOCO++: Enhancing YOCO with KV Residual Connections for Efficient LLM Inference",
+      "summary": "Cross-layer key-value (KV) compression has been found to be effective in efficient inference of large language models (LLMs). Although they reduce the memory consumption of the KV cache, such methods usually introduce non-negligible performance degradation. In this work, we aim to enhance the performance of YOCO, a cross-layer KV compression method that shares the KVs of the middle layer with the top-half layers. We propose YOCO++, an enhanced YOCO that incorporates a weighted residual connection between the KVs of each bottom-half layer and the bottom layer. Compared to YOCO, YOCO++ increases model capacity while maintaining the same training and inference efficiency. Our experiments show that YOCO++ achieves state-of-the-art performance among the cross-layer KV compression methods at a 50% KV cache compression rate, outperforming the standard Transformer.",
       "authors": [
-        "Xu Bai",
-        "Muhammed Tawfiqul Islam",
-        "Chen Wang",
-        "Adel N. Toosi"
+        "You Wu",
+        "Ziheng Chen",
+        "Yizhen Zhang",
+        "Haoyi Wu",
+        "Chengting Yu",
+        "Yuchi Xu",
+        "Wenbo Su",
+        "Bo Zheng",
+        "Kewei Tu"
       ],
       "author_details": [
         {
-          "name": "Xu Bai"
+          "name": "You Wu"
         },
         {
-          "name": "Muhammed Tawfiqul Islam"
+          "name": "Ziheng Chen"
         },
         {
-          "name": "Chen Wang"
+          "name": "Yizhen Zhang"
         },
         {
-          "name": "Adel N. Toosi"
+          "name": "Haoyi Wu"
+        },
+        {
+          "name": "Chengting Yu"
+        },
+        {
+          "name": "Yuchi Xu"
+        },
+        {
+          "name": "Wenbo Su"
+        },
+        {
+          "name": "Bo Zheng"
+        },
+        {
+          "name": "Kewei Tu"
         }
       ],
-      "published": "2026-04-14T00:56:32Z",
-      "published_date": "2026-04-14 00:56:32+00:00",
-      "updated": "2026-04-14T00:56:32Z",
-      "primary_category": "cs.DC",
+      "published": "2026-04-15T07:05:14Z",
+      "published_date": "2026-04-15 07:05:14+00:00",
+      "updated": "2026-04-15T07:05:14Z",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.DC",
-        "cs.LG"
+        "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.12171v1",
-      "url": "http://arxiv.org/abs/2604.12171v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.13556v1",
+      "url": "http://arxiv.org/abs/2604.13556v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 9.97
+        "popularity": 1.8,
+        "quality": 1.8,
+        "recommendation": 9.8
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "llm serving",
-        "serving",
+        "llm inference",
         "kv cache",
-        "vllm",
-        "throughput",
-        "cs.LG",
-        "cs.DC"
+        "cs.CL",
+        "memory"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 5,
+        "text_match_count": 2,
         "matched_categories": [
-          "cs.LG",
-          "cs.DC"
+          "cs.CL"
         ],
         "required_signal_matches": [
-          "kv cache",
-          "vllm"
+          "kv cache"
         ],
-        "required_signal_match_count": 2,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput"
+          "memory"
         ],
         "bonus_keyword_match_count": 1,
         "analysis_keyword_matches": [
-          "throughput"
+          "memory"
         ],
         "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.7,
+        "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "The paper targets live pipeline-parallel reconfiguration for LLM serving by reworking KV-cache management so layer placement can change without stopping inference.",
-        "summary_zh": "This paper addresses a practical serving gap: pipeline parallelism is usually configured statically, but real deployments on heterogeneous or elastic GPU pools may need to change the partition while requests are still running. The core idea is to make reconfiguration live and in place through a redesigned KV-cache layout, a co-designed PageAttention extension for KV resizing, and an incremental KV patching mechanism that synchronizes state across old and new configurations until a safe switch point. The abstract reports better reconfiguration behavior than two ablations: 2.5x lower time-to-first-token than disabling KV resizing, and reconfiguration overhead reduced from seconds to under 10 ms versus a variant without KV patching, with up to 54.7% TTFT and 14.7% TPOT improvement. If these results hold under realistic load, the work is directly relevant to dynamic LLM serving because the gains appear to come from avoiding downtime, preventing KV overflow, and reducing state-transfer stalls during reconfiguration. The main missing detail is evaluation scope: the abstract does not make clear the hardware setup, model sizes, workload mix, memory overheads, or how broadly the mechanism generalizes beyond the reported system design.",
-        "background_zh": "Static pipeline-parallel layouts are a poor fit for LLM serving environments where GPU availability and heterogeneity change over time, but inference systems still need to keep latency and throughput stable.",
-        "problem_zh": "The paper asks how to reconfigure pipeline parallelism online, without interrupting inference, even though GPUs are already packed with weights and KV cache and KV state must remain consistent during execution.",
-        "approach_zh": "PipeLive combines a new KV-cache layout with a PageAttention extension for live KV resizing, then uses incremental KV patching to synchronize old and new placements and switch only when the KV state is safe.",
-        "evidence_zh": "The abstract provides concrete comparative claims: 2.5x lower TTFT than disabling KV resizing, reconfiguration overhead cut from seconds to under 10 ms versus a no-patching variant, and up to 54.7% TTFT and 14.7% TPOT improvement; it does not make the full evaluation setup clear.",
-        "value_zh": "If the mechanism is robust, it could let serving systems adapt PP layouts online in elastic or heterogeneous clusters instead of redeploying, improving responsiveness while preserving ongoing requests.",
+        "one_liner_zh": "This paper modifies cross-layer KV sharing with bottom-layer residual links to recover capacity at fixed 50% KV-cache compression.",
+        "summary_zh": "The paper targets a common tradeoff in LLM inference: cross-layer KV-cache compression reduces memory use but often hurts model quality. It extends YOCO, which reuses middle-layer KVs for upper layers, by adding weighted residual connections from each bottom-half layer to the bottom layer's KVs. The abstract claims this raises model capacity without changing training or inference efficiency, and reports state-of-the-art results among cross-layer KV compression methods at 50% KV-cache compression, including outperforming a standard Transformer. For systems readers, the practical value is a potentially better memory-quality point for long-context serving, but the abstract does not make the evaluation setup, hardware assumptions, or fairness of the baseline comparisons clear.",
+        "background_zh": "KV-cache memory is a major bottleneck in LLM serving, so cross-layer KV sharing is attractive when memory pressure dominates inference cost.",
+        "problem_zh": "The core problem is how to keep the memory savings of cross-layer KV compression without the quality drop that usually comes with aggressive KV sharing.",
+        "approach_zh": "YOCO++ keeps YOCO's cross-layer sharing scheme and adds weighted residual connections between each bottom-half layer's KVs and the bottom layer's KVs to restore representational capacity.",
+        "evidence_zh": "The abstract supports two concrete claims: equal training and inference efficiency relative to YOCO, and stronger reported performance at 50% KV-cache compression than prior cross-layer KV compression methods and a standard Transformer; it does not make the benchmarks, model scales, or measurement protocol clear.",
+        "value_zh": "If the claims hold, the method could improve the memory-efficiency frontier for LLM inference by making KV-cache compression less accuracy-destructive at the same cache footprint.",
         "open_questions": [
-          "What models, GPU types, and batch or concurrency settings were used, and how sensitive are the gains to hardware heterogeneity?",
-          "What extra memory, engineering complexity, or steady-state overhead does the new KV layout and PageAttention extension introduce before reconfiguration is even needed?",
-          "How fair are the baselines and how does PipeLive behave under repeated reconfigurations or heavy multi-tenant traffic rather than a single transition event?"
+          "Which benchmarks, model sizes, and context lengths support the claimed gains, and does the advantage persist outside the reported setup?",
+          "How is the weighted residual connection parameterized and trained, and what extra compute or memory overhead does it introduce in practice?",
+          "Is the comparison to the standard Transformer matched for parameter count, training recipe, and serving constraints, or is the baseline advantage partly a fairness issue?"
         ],
         "core_contributions": [
-          "Formulates live in-place pipeline-parallel reconfiguration for dynamic LLM serving as a systems problem centered on memory pressure and KV consistency.",
-          "Introduces a unified KV-resizing mechanism via a redesigned KV layout and a co-designed PageAttention extension.",
-          "Adds incremental KV patching to keep source and target configurations synchronized and determine a safe handoff point during live reconfiguration."
+          "Adds KV residual connections to the YOCO cross-layer KV-sharing design.",
+          "Targets higher effective model capacity while preserving YOCO's stated efficiency profile.",
+          "Claims best reported accuracy among cross-layer KV compression methods at 50% KV-cache compression."
         ],
         "why_read": [
-          "It is directly aligned with LLM inference systems work on KV-cache management, serving elasticity, and latency-sensitive reconfiguration.",
-          "The abstract ties the reported gains to concrete system mechanisms rather than generic scheduler changes.",
-          "It frames reconfiguration as an online state-migration problem, which is useful for anyone working on vLLM-like runtimes or heterogeneous serving stacks."
+          "Relevant to LLM serving work where KV-cache memory, not raw FLOPs, is the binding inference constraint.",
+          "Useful if you want a concrete architectural alternative to token-level or eviction-based KV-cache reduction.",
+          "Worth reading for the exact mechanism behind how residual KV paths recover quality under fixed compression."
         ],
         "risks": [
-          "The abstract leaves out hardware assumptions, model scale, and workload details, so external validity is still unclear.",
-          "The reported comparisons are against ablated variants; the abstract does not clarify broader baseline coverage or deployment fairness checks before and after reconfiguration state changes."
+          "The abstract gives no detail on hardware, latency measurements, or end-to-end serving throughput, so systems relevance is only partially established.",
+          "Baseline fairness is unclear, especially for the claim of outperforming a standard Transformer under compression-aware conditions versus unconstrained settings more broadly for comparison quality and scope in the reported setup only at 50% compression rate and not other regimes or workloads in evidence provided here alone by the abstract summary itself only today in this input."
         ],
         "recommended_for": [
-          "Researchers working on LLM serving runtimes, KV-cache management, and dynamic pipeline-parallel execution.",
-          "Engineers evaluating how to adapt serving topologies online in heterogeneous or elastic GPU environments.",
-          "Readers interested in runtime and attention-kernel co-design for inference-system reconfiguration."
+          "Researchers working on KV-cache compression and memory-efficient LLM inference.",
+          "Engineers evaluating architecture-level ways to reduce serving memory without changing runtime complexity too much.",
+          "Readers comparing cross-layer sharing schemes with other cache-reduction approaches."
         ],
         "keywords": [
-          "LLM serving",
-          "pipeline parallelism",
-          "live reconfiguration",
+          "LLM inference",
           "KV cache",
-          "PageAttention",
-          "vLLM-like runtime"
+          "cross-layer KV compression",
+          "memory efficiency",
+          "YOCO",
+          "Transformer serving"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High fit with the stated focus on LLM inference systems: the paper is about online serving reconfiguration, KV-cache mechanics, and latency/throughput impact, and the abstract includes concrete system-level evidence rather than only a high-level proposal.",
-        "fallback_summary": "Pipeline parallelism (PP) is widely used to partition layers of large language models (LLMs) across GPUs, enabling scalable inference for large models."
+        "reading_priority_reason": "This is directly aligned with LLM inference efficiency and KV-cache reduction, but the abstract leaves important systems details unresolved, so the value is high while the evidence still needs verification.",
+        "fallback_summary": "Cross-layer key-value (KV) compression has been found to be effective in efficient inference of large language models (LLMs)."
       }
     },
     {
-      "paper_id": "2211.17192",
-      "arxiv_id": "2211.17192",
-      "title": "Fast Inference from Transformers via Speculative Decoding",
-      "summary": "Formalizes speculative decoding as a way to accelerate autoregressive generation by pairing a cheaper draft process with exact verification from the target model without changing the output distribution.",
+      "id": "http://arxiv.org/abs/2604.13327v1",
+      "arxiv_id": "2604.13327v1",
+      "title": "Event Tensor: A Unified Abstraction for Compiling Dynamic Megakernel",
+      "summary": "Modern GPU workloads, especially large language model (LLM) inference, suffer from kernel launch overheads and coarse synchronization that limit inter-kernel parallelism. Recent megakernel techniques fuse multiple operators into a single persistent kernel to eliminate launch gaps and expose inter-kernel parallelism, but struggle to handle dynamic shapes and data-dependent computation in real workloads. We present Event Tensor, a unified compiler abstraction for dynamic megakernels. Event Tensor encodes dependencies between tiled tasks, and enables first-class support for both shape and data-dependent dynamism. Built atop this abstraction, our Event Tensor Compiler (ETC) applies static and dynamic scheduling transformations to generate high-performance persistent kernels. Evaluations show that ETC achieves state-of-the-art LLM serving latency while significantly reducing system warmup overhead.",
       "authors": [
-        "Yaniv Leviathan",
-        "Matan Kalman",
-        "Yossi Matias"
-      ],
-      "published": "2022-11-30",
-      "published_date": "2022-11-30 00:00:00",
-      "categories": [
-        "cs.LG",
-        "cs.CL"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "speculative-decoding",
-        "decoding",
-        "parallelism"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2211.17192",
-      "pdf_url": "https://arxiv.org/pdf/2211.17192.pdf",
-      "scores": {
-        "relevance": 2.9,
-        "recency": 0.0,
-        "popularity": 0.0,
-        "quality": 0.0,
-        "recommendation": 5.92
-      },
-      "classic_rotation_score": 10.4734,
-      "citationCount": 1385,
-      "influentialCitationCount": 242,
-      "venue": "International Conference on Machine Learning",
-      "ai": {
-        "one_liner_zh": "This paper frames speculative decoding as an exact inference acceleration method that uses a cheap draft generator plus target-model verification to speed autoregressive decoding without changing the final distribution.",
-        "summary_zh": "The paper targets a central inference bottleneck in autoregressive transformers: generation is slow because tokens are produced sequentially. It formalizes speculative decoding, where a cheaper draft process proposes tokens and the full target model verifies them so the output distribution remains unchanged. From the abstract, the main claim is conceptual and algorithmic rather than implementation-specific: acceleration comes from shifting some token proposal work to a cheaper model while preserving exactness through verification. That makes the idea highly relevant to LLM serving and inference-system design, but the abstract does not say what hardware setting, model pairings, acceptance behavior, or realized speedups support the claim. A full read is needed to judge baseline fairness, throughput gains, and when verification overhead cancels the benefit.",
-        "background_zh": "Autoregressive transformer inference is dominated by sequential decoding cost, so methods that extract parallel work without changing outputs are important for LLM serving.",
-        "problem_zh": "The paper asks how to reduce decoding latency for transformer generation while keeping the exact output distribution of the original target model.",
-        "approach_zh": "It formalizes speculative decoding as a two-stage procedure in which a cheaper draft process proposes tokens and the target model verifies or rejects them exactly.",
-        "evidence_zh": "The abstract supports the claim that the method is formalized and intended to preserve the target distribution, but it does not make the empirical evidence, evaluation setup, or performance gains clear.",
-        "value_zh": "If the method works as claimed, it offers a clean systems lever for faster exact decoding by trading some expensive target-model steps for cheaper proposal work.",
-        "open_questions": [
-          "What acceptance mechanism and proof ensure that verification preserves the exact target-model distribution?",
-          "Under what model-size ratios, workloads, and sequence lengths does speculative decoding provide net latency or throughput gains?",
-          "How much verification overhead, draft-model cost, and implementation complexity are introduced relative to standard decoding baselines?"
-        ],
-        "core_contributions": [
-          "Formalizes speculative decoding for autoregressive transformer inference.",
-          "Separates generation into cheap token drafting and exact target-model verification.",
-          "Claims exact output preservation rather than approximate acceleration."
-        ],
-        "why_read": [
-          "This is a foundational framing for a now-important inference acceleration line in LLM serving.",
-          "The paper's core idea is directly about decoding-time efficiency, not training-time approximation.",
-          "It provides the conceptual basis needed to evaluate later systems work built on speculative decoding variants."
-        ],
-        "risks": [
-          "The abstract does not reveal the empirical setup, so practical gains may depend heavily on draft-model quality and acceptance rate.",
-          "Exactness alone does not guarantee meaningful end-to-end speedup once verification overhead is included."
-        ],
-        "recommended_for": [
-          "Researchers studying LLM inference latency and serving-system design.",
-          "Engineers evaluating speculative decoding as an exact acceleration primitive.",
-          "Readers who want the original formulation behind later speculative decoding systems work."
-        ],
-        "keywords": [
-          "speculative decoding",
-          "autoregressive generation",
-          "transformer inference",
-          "decoding acceleration",
-          "exact verification",
-          "parallelism"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "The paper is directly aligned with LLM inference systems and describes a foundational exact decoding-speedup mechanism, but the abstract alone leaves the empirical value and deployment conditions unclear.",
-        "fallback_summary": "Formalizes speculative decoding as a way to accelerate autoregressive generation by pairing a cheaper draft process with exact verification from the target model without changing the output distribution."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.12798v1",
-      "arxiv_id": "2604.12798v1",
-      "title": "VFA: Relieving Vector Operations in Flash Attention with Global Maximum Pre-computation",
-      "summary": "FlashAttention-style online softmax enables exact attention computation with linear memory by streaming score tiles through on-chip memory and maintaining a running maximum and normalizer. However, as attention kernels approach peak tensor-core/cube-core throughput on modern accelerators, non-matmul components of online softmax -- especially per-tile rowmax and rowsum reductions and rescale chains -- can become vector or SIMD limited and dominate latency. This paper revisits FlashAttention and proposes Vector Relieved Flash Attention (VFA), a hardware-friendly method that reduces rowmax-driven updates of the running maximum while retaining the online-softmax structure. VFA initializes the running maximum via a cheap approximation from key-block representations, reorders key-block traversal to prioritize high-impact sink and local blocks, and freezes the maximum for remaining blocks to avoid repeated reductions and rescaling. We further integrate VFA with block-sparse skipping methods such as BLASST to form Vector Relieved Sparse Attention (VSA), which reduces both block count and per-block overhead. Notably, VFA and VSA completely avoid the conditional rescale operation in the update stage used in FA4.0. Extensive evaluations on benchmarks including MMLU and MATH500, together with attention statistics, verify our design: (i) sink and local reordering stabilizes the running maximum early; (ii) simple Q and K block summaries fail due to intra-block heterogeneity; (iii) m-initialization is required when maxima appear in middle blocks. Overall, VFA and VSA efficiently alleviate online-softmax reduction bottlenecks without performance loss. Compared to the C16V32 baseline, C8V32, C4V32 and C4V16 achieve nearly two times speedup on modern hardware while hitting the vector bottleneck. With upcoming architecture improvements, C4V16 will deliver six times speedup by enhancing exponent capacity.",
-      "authors": [
-        "Yupeng Sun",
-        "Yanzhao Li",
-        "Zhiqiang Zou",
-        "Bai Du",
-        "Zhiyuan Zhang",
-        "Hui Dong",
-        "Gaoyige Fan",
-        "Hui Wang"
+        "Hongyi Jin",
+        "Bohan Hou",
+        "Guanjie Wang",
+        "Ruihang Lai",
+        "Jinqi Chen",
+        "Zihao Ye",
+        "Yaxing Cai",
+        "Yixin Dong",
+        "Xinhao Cheng",
+        "Zhihao Zhang",
+        "Yilong Zhao",
+        "Yingyi Huang",
+        "Lijie Yang",
+        "Jinchen Jiang",
+        "Gabriele Oliaro",
+        "Jianan Ji",
+        "Xupeng Miao",
+        "Vinod Grover",
+        "Todd C. Mowry",
+        "Zhihao Jia",
+        "Tianqi Chen"
       ],
       "author_details": [
         {
-          "name": "Yupeng Sun"
+          "name": "Hongyi Jin"
         },
         {
-          "name": "Yanzhao Li"
+          "name": "Bohan Hou"
         },
         {
-          "name": "Zhiqiang Zou"
+          "name": "Guanjie Wang"
         },
         {
-          "name": "Bai Du"
+          "name": "Ruihang Lai"
         },
         {
-          "name": "Zhiyuan Zhang"
+          "name": "Jinqi Chen"
         },
         {
-          "name": "Hui Dong"
+          "name": "Zihao Ye"
         },
         {
-          "name": "Gaoyige Fan"
+          "name": "Yaxing Cai"
         },
         {
-          "name": "Hui Wang"
+          "name": "Yixin Dong"
+        },
+        {
+          "name": "Xinhao Cheng"
+        },
+        {
+          "name": "Zhihao Zhang"
+        },
+        {
+          "name": "Yilong Zhao"
+        },
+        {
+          "name": "Yingyi Huang"
+        },
+        {
+          "name": "Lijie Yang"
+        },
+        {
+          "name": "Jinchen Jiang"
+        },
+        {
+          "name": "Gabriele Oliaro"
+        },
+        {
+          "name": "Jianan Ji"
+        },
+        {
+          "name": "Xupeng Miao"
+        },
+        {
+          "name": "Vinod Grover"
+        },
+        {
+          "name": "Todd C. Mowry"
+        },
+        {
+          "name": "Zhihao Jia"
+        },
+        {
+          "name": "Tianqi Chen"
         }
       ],
-      "published": "2026-04-14T14:28:50Z",
-      "published_date": "2026-04-14 14:28:50+00:00",
-      "updated": "2026-04-14T14:28:50Z",
-      "primary_category": "cs.LG",
+      "published": "2026-04-14T22:19:51Z",
+      "published_date": "2026-04-14 22:19:51+00:00",
+      "updated": "2026-04-14T22:19:51Z",
+      "comments": "16 pages. 18 figures. accepted in MLSys 2026",
+      "primary_category": "cs.DC",
       "categories": [
+        "cs.DC",
         "cs.LG",
-        "cs.AI"
+        "cs.PL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.12798v1",
-      "url": "http://arxiv.org/abs/2604.12798v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.13327v1",
+      "url": "http://arxiv.org/abs/2604.13327v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.98,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 9.26
+        "popularity": 1.8,
+        "quality": 1.8,
+        "recommendation": 9.8
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "flashattention",
-        "throughput",
+        "llm serving",
+        "serving",
         "latency",
         "cs.LG",
-        "memory",
-        "speedup",
-        "baseline"
+        "cs.DC",
+        "compiler"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -2622,117 +453,122 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 3,
         "matched_categories": [
-          "cs.LG"
+          "cs.LG",
+          "cs.DC"
         ],
         "required_signal_matches": [
-          "flashattention"
+          "compiler"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput",
-          "latency",
-          "memory",
-          "speedup"
+          "latency"
         ],
-        "bonus_keyword_match_count": 4,
+        "bonus_keyword_match_count": 1,
         "analysis_keyword_matches": [
-          "baseline",
-          "throughput",
-          "latency",
-          "memory",
-          "speedup"
+          "latency"
         ],
-        "analysis_keyword_match_count": 5,
+        "analysis_keyword_match_count": 1,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
+        "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper modifies FlashAttention's online softmax to cut rowmax, rowsum, and rescale overhead by stabilizing the running maximum early and then freezing it for later blocks.",
-        "summary_zh": "This paper targets a regime where FlashAttention-style kernels are no longer dominated by matrix multiply, and online-softmax vector work becomes the latency bottleneck. It proposes Vector Relieved Flash Attention (VFA), which initializes the running maximum from key-block representations, reorders blocks to visit sink and local blocks first, and then freezes the maximum to avoid repeated reductions and rescaling while keeping the online-softmax structure. The paper also extends the idea to sparse attention as VSA by combining block skipping with lower per-block softmax overhead, and it claims to remove the conditional rescale step used in FA4.0. The abstract reports benchmark results on MMLU and MATH500 plus attention-statistics analyses, and it claims nearly 2x speedups over a C16V32 baseline for several configurations without performance loss. The main detail still missing from the abstract is the exact hardware setup, kernel implementation constraints, and how broadly the early-max assumption holds across sequence patterns and model settings.",
-        "background_zh": "As attention kernels get closer to peak tensor-core throughput, the remaining online-softmax bookkeeping in FlashAttention can become vector-limited and start to dominate end-to-end latency.",
-        "problem_zh": "The paper asks how to reduce exact attention latency when rowwise max/sum reductions and rescale updates, rather than matrix multiply, are the main bottleneck in FlashAttention-style kernels.",
-        "approach_zh": "VFA pre-initializes the running maximum, reorders block traversal to surface likely high-maximum blocks early, and freezes the maximum afterward so later blocks avoid repeated reduction and rescale work; VSA combines this with block-sparse skipping.",
-        "evidence_zh": "The abstract says evaluations on MMLU, MATH500, and attention statistics support the claim that early sink/local reordering stabilizes the maximum, that naive block summaries are insufficient, and that several configurations achieve nearly 2x speedup without performance loss, but it does not make the experimental setup fully clear.",
-        "value_zh": "If the method is robust, it offers a practical path to faster exact and sparse attention by attacking non-matmul softmax overhead that current accelerator generations increasingly expose.",
+        "one_liner_zh": "This paper proposes a compiler abstraction for dynamic megakernels that aims to preserve the launch-overhead and synchronization benefits of persistent kernels while handling shape and data-dependent LLM inference workloads.",
+        "summary_zh": "This paper targets a real systems bottleneck in LLM inference: kernel launch overheads and coarse synchronization can leave inter-kernel parallelism underused, while existing megakernel approaches become brittle once shapes or control flow are dynamic. It introduces Event Tensor, a compiler abstraction that represents dependencies among tiled tasks and is meant to support both shape-dependent and data-dependent dynamism inside a unified persistent-kernel compilation flow. On top of that abstraction, the Event Tensor Compiler applies static and dynamic scheduling transformations to generate high-performance persistent kernels for serving workloads. The abstract claims state-of-the-art LLM serving latency and substantially lower warmup overhead, which suggests value for deployment settings where dynamic behavior and startup cost both matter. The biggest missing detail is that the abstract does not say what workloads, hardware, baselines, or scheduling overheads were used to justify those claims.",
+        "background_zh": "Persistent megakernels are attractive for LLM serving because they can remove launch gaps and reduce synchronization overhead, but production inference workloads often include dynamic shapes and data-dependent behavior that make static fusion difficult.",
+        "problem_zh": "The paper asks how to compile megakernels that keep the performance benefits of persistent execution without breaking once real workloads introduce shape variation and data-dependent computation.",
+        "approach_zh": "Its core move is an Event Tensor abstraction that encodes tiled-task dependencies and serves as the basis for compiler scheduling transformations that mix static and dynamic decisions when generating persistent kernels.",
+        "evidence_zh": "The abstract supports only a high-level claim that ETC reaches state-of-the-art LLM serving latency and reduces warmup overhead; it does not make the evaluation setup, baselines, or quantitative evidence clear.",
+        "value_zh": "If the abstraction and scheduler work as claimed, this could make dynamic LLM serving more compiler-manageable while retaining the latency benefits that usually require more rigid fused-kernel designs.",
         "open_questions": [
-          "What exact hardware, datatype, sequence-length regime, and kernel implementation assumptions are required for the reported speedups?",
-          "How often does maximum freezing remain exact or effectively lossless across different models, long-context patterns, and non-sink/local attention distributions?",
-          "Are the baselines, including FA4.0-style kernels and sparse methods such as BLASST, matched fairly on tiling, parallelism, and memory-layout choices?"
+          "What exact hardware, serving workloads, and comparison baselines were used for the latency and warmup claims?",
+          "How much runtime overhead does Event Tensor introduce for dependency tracking and dynamic scheduling in highly irregular workloads?",
+          "Does the compiler generalize beyond the reported LLM serving cases, or is it tuned to a narrower class of persistent-kernel patterns?"
         ],
         "core_contributions": [
-          "Identifies online-softmax vector reductions and rescale chains as the dominant bottleneck once attention matmuls approach peak accelerator throughput.",
-          "Introduces a running-maximum initialization and block-reordering scheme that reduces rowmax-driven updates while preserving exact online-softmax structure.",
-          "Extends the method to sparse attention as VSA and claims removal of the conditional rescale operation used in FA4.0."
+          "Defines Event Tensor as a unified abstraction for expressing dependencies in dynamic megakernels.",
+          "Builds an Event Tensor Compiler that applies static and dynamic scheduling transformations to generate persistent kernels.",
+          "Targets both shape-dependent and data-dependent dynamism instead of assuming mostly static fused execution."
         ],
         "why_read": [
-          "It focuses on a real systems bottleneck in modern attention kernels: non-matmul softmax work rather than GEMM throughput.",
-          "It gives a concrete kernel-level idea for trading traversal order and maximum management against vector-lane pressure.",
-          "It is directly relevant to inference-serving work where FlashAttention variants are already highly optimized and marginal gains now come from reduction-side cleanup."
+          "It is directly aligned with LLM serving efficiency and compiler/runtime co-design for GPU inference.",
+          "It focuses on where latency gains should come from in practice: fewer launches, less coarse synchronization, and more exposed inter-kernel parallelism.",
+          "It may offer a more principled compiler model for dynamic persistent kernels than ad hoc megakernel implementations."
         ],
         "risks": [
-          "The abstract does not specify enough about hardware, compiler, or kernel implementation details to judge reproducibility.",
-          "The method may depend on attention patterns where sink and local blocks stabilize the maximum early, which may not generalize uniformly across workloads."
+          "The abstraction may add runtime or compiler complexity that offsets part of the claimed latency benefit on some workloads.",
+          "The abstract does not reveal baseline fairness, so the state-of-the-art claim is hard to assess from the provided evidence alone."
         ],
         "recommended_for": [
-          "Researchers working on LLM inference kernels and FlashAttention variants",
-          "Engineers optimizing exact or sparse attention on modern accelerators",
-          "Compiler and runtime researchers interested in reducing vector-side overhead in fused kernels"
+          "Researchers working on LLM inference runtimes and serving systems.",
+          "Engineers building GPU compiler stacks for persistent kernels and dynamic execution.",
+          "Readers interested in compiler abstractions for low-overhead scheduling under dynamic workload structure."
         ],
         "keywords": [
-          "FlashAttention",
-          "online softmax",
-          "attention kernel optimization",
-          "LLM inference",
-          "vector bottleneck",
-          "block reordering"
+          "LLM serving",
+          "dynamic megakernels",
+          "persistent kernels",
+          "compiler",
+          "dynamic shapes",
+          "data-dependent computation"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "This is tightly aligned with LLM inference acceleration and kernel-level attention optimization, and the abstract makes a specific systems claim about where latency is coming from and how to remove it, even though the implementation and evaluation details still need verification.",
-        "fallback_summary": "FlashAttention-style online softmax enables exact attention computation with linear memory by streaming score tiles through on-chip memory and maintaining a running maximum and normalizer."
+        "reading_priority_reason": "This is a strong topical fit for LLM inference systems and compiler/runtime co-design, and the abstract makes concrete systems claims about latency and warmup, even though the evaluation details still need verification.",
+        "fallback_summary": "Modern GPU workloads, especially large language model (LLM) inference, suffer from kernel launch overheads and coarse synchronization that limit inter-kernel parallelism."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.12247v1",
-      "arxiv_id": "2604.12247v1",
-      "title": "SpecBound: Adaptive Bounded Self-Speculation with Layer-wise Confidence Calibration",
-      "summary": "Speculative decoding has emerged as a promising approach to accelerate autoregressive inference in large language models (LLMs). Self-draft methods, which leverage the base LLM itself for speculation, avoid the overhead of auxiliary draft models but face limitations: shallow layers often produce overconfident yet incorrect token predictions, and the presence of difficult tokens in a draft sequence forces redundant computation through deeper layers, undermining both draft acceptance and overall speedup. To address these issues, we propose a novel self-draft framework that suppresses spurious confidence via layer-wise temperature annealing in early-exit decision and adaptively bounds speculation length based on token-wise decoding difficulty. By reprocessing the hidden states of draft tokens in a unified parallel pass through deep layers, our method maintains exact output equivalence with the original model while maximizing computational efficiency. It requires no modifications to the base LLM parameters and achieves up to 2.33x wall-time speedup over standard autoregressive decoding across diverse long-form generation tasks and multiple model architectures.",
+      "id": "http://arxiv.org/abs/2604.13519v1",
+      "arxiv_id": "2604.13519v1",
+      "title": "ToolSpec: Accelerating Tool Calling via Schema-Aware and Retrieval-Augmented Speculative Decoding",
+      "summary": "Tool calling has greatly expanded the practical utility of large language models (LLMs) by enabling them to interact with external applications. As LLM capabilities advance, effective tool use increasingly involves multi-step, multi-turn interactions to solve complex tasks. However, the resulting growth in tool interactions incurs substantial latency, posing a key challenge for real-time LLM serving. Through empirical analysis, we find that tool-calling traces are highly structured, conform to constrained schemas, and often exhibit recurring invocation patterns. Motivated by this, we propose ToolSpec, a schema-aware, retrieval-augmented speculative decoding method for accelerating tool calling. ToolSpec exploits predefined tool schemas to generate accurate drafts, using a finite-state machine to alternate between deterministic schema token filling and speculative generation for variable fields. In addition, ToolSpec retrieves similar historical tool invocations and reuses them as drafts to further improve efficiency. ToolSpec presents a plug-and-play solution that can be seamlessly integrated into existing LLM workflows. Experiments across multiple benchmarks demonstrate that ToolSpec achieves up to a 4.2x speedup, substantially outperforming existing training-free speculative decoding methods.",
       "authors": [
-        "Zhuofan Wen",
-        "Yang Feng"
+        "Heming Xia",
+        "Yongqi Li",
+        "Cunxiao Du",
+        "Mingbo Song",
+        "Wenjie Li"
       ],
       "author_details": [
         {
-          "name": "Zhuofan Wen"
+          "name": "Heming Xia"
         },
         {
-          "name": "Yang Feng"
+          "name": "Yongqi Li"
+        },
+        {
+          "name": "Cunxiao Du"
+        },
+        {
+          "name": "Mingbo Song"
+        },
+        {
+          "name": "Wenjie Li"
         }
       ],
-      "published": "2026-04-14T03:47:04Z",
-      "published_date": "2026-04-14 03:47:04+00:00",
-      "updated": "2026-04-14T03:47:04Z",
-      "comments": "ACL 2026 Findings",
+      "published": "2026-04-15T06:05:11Z",
+      "published_date": "2026-04-15 06:05:11+00:00",
+      "updated": "2026-04-15T06:05:11Z",
       "primary_category": "cs.CL",
       "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.LG"
+        "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.12247v1",
-      "url": "http://arxiv.org/abs/2604.12247v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.13519v1",
+      "url": "http://arxiv.org/abs/2604.13519v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.76,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 9.19
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 9.55
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
+        "llm serving",
+        "serving",
         "speculative decoding",
-        "cs.LG",
+        "latency",
         "cs.CL",
         "speedup"
       ],
@@ -2741,9 +577,8 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 1,
+        "text_match_count": 4,
         "matched_categories": [
-          "cs.LG",
           "cs.CL"
         ],
         "required_signal_matches": [
@@ -2751,318 +586,200 @@
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
+          "latency",
           "speedup"
         ],
-        "bonus_keyword_match_count": 1,
+        "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
+          "latency",
           "speedup"
         ],
-        "analysis_keyword_match_count": 1,
+        "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.18
+        "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper proposes an exact self-speculative decoding scheme that calibrates early-layer confidence and adaptively limits draft length to reduce wasted deep-layer work.",
-        "summary_zh": "This paper targets a known weakness in self-speculative decoding for LLM inference: shallow layers can be overconfident on hard tokens, which hurts draft acceptance and wastes computation when bad drafts are pushed through deeper layers. The method combines layer-wise temperature annealing for early-exit confidence calibration with an adaptive bound on speculation length based on token-level decoding difficulty. It also reprocesses draft-token hidden states in a unified parallel deep-layer pass, with the claim that final outputs remain exactly equivalent to standard autoregressive decoding and that efficiency improves without changing base model parameters. The abstract reports up to 2.33x wall-time speedup across long-form generation tasks and multiple model architectures, which makes this directly relevant to inference-serving work. The main missing details are how decoding difficulty is estimated, what the added control logic costs in practice, and how fair the baseline and hardware setup are.",
-        "background_zh": "Speculative decoding is a main line of LLM inference acceleration, and self-draft variants are attractive because they avoid maintaining a separate draft model.",
-        "problem_zh": "The paper asks how to make self-speculation faster and more reliable when early layers are miscalibrated and fixed draft lengths cause redundant deep-layer computation on difficult tokens.",
-        "approach_zh": "It calibrates shallow-layer confidence with layer-wise temperature annealing, adaptively truncates speculation by token difficulty, and then reprocesses accepted draft-token states through deep layers in a unified parallel pass.",
-        "evidence_zh": "From the abstract alone, the supported evidence is limited to a claim of exact output equivalence and up to 2.33x wall-time speedup across diverse long-form generation tasks and multiple model architectures; the abstract does not make the evaluation protocol or ablations clear.",
-        "value_zh": "If the claims hold under fair baselines, this looks like a practical path to faster exact LLM decoding without extra draft models or parameter changes, which is useful for serving stacks that want low integration overhead.",
+        "one_liner_zh": "ToolSpec speeds up LLM tool calling by drafting schema-constrained outputs and reusing similar past tool invocations during speculative decoding.",
+        "summary_zh": "This paper targets a practical serving bottleneck: multi-step tool calling adds substantial latency as LLM applications rely more heavily on structured external actions. The core claim is that tool-calling traces are structured enough to admit better speculative drafts, so ToolSpec combines schema-aware drafting with retrieval of similar historical invocations. Its mechanism alternates deterministic filling of schema-fixed tokens with speculative generation for variable fields, using a finite-state-machine style controller. The abstract reports benchmark results with up to 4.2x speedup over prior training-free speculative decoding methods, which makes the work directly relevant to inference-time serving efficiency. The main missing details are the hardware setup, benchmark mix, verification overhead, retrieval cost, and how robust the gains are when tool arguments are less repetitive or less schema-regular.",
+        "background_zh": "As LLM systems move toward multi-turn agentic workflows, tool calling becomes a larger share of end-to-end serving latency, especially when outputs must follow structured schemas.",
+        "problem_zh": "The paper asks how to reduce tool-calling latency in real-time LLM serving without model retraining, despite structured outputs that mix fixed schema tokens with variable argument content.",
+        "approach_zh": "ToolSpec uses tool schemas to draft constrained output regions deterministically, speculates only on variable fields, and augments drafts with retrieved historical tool invocations that resemble the current call.",
+        "evidence_zh": "The abstract claims experiments on multiple benchmarks and reports up to 4.2x speedup over existing training-free speculative decoding baselines, but it does not make the evaluation setup, workloads, or baseline fairness details clear.",
+        "value_zh": "If the reported gains hold under realistic serving conditions, this offers a low-friction path to faster tool-augmented inference by exploiting structure already present in production tool schemas and call histories.",
         "open_questions": [
-          "How is token-wise decoding difficulty estimated, and does that estimator introduce noticeable overhead or instability across prompts and models?",
-          "What are the exact baselines, hardware settings, sequence lengths, and acceptance-rate comparisons behind the reported wall-time speedup?",
-          "How much of the gain comes from confidence calibration versus adaptive length bounding versus the unified deep-layer reprocessing pass?"
+          "What are the exact benchmarks, models, and hardware settings behind the reported speedups, and how much of the gain survives end-to-end serving measurement rather than token-level decoding alone?",
+          "How large is the retrieval overhead and cache requirement, and when does retrieval stop helping because tool arguments are novel, sparse, or weakly repetitive?",
+          "How does the finite-state schema controller handle invalid drafts, optional fields, nested schemas, and tools whose outputs are only partially constrained?"
         ],
         "core_contributions": [
-          "A self-speculative decoding framework aimed at exact acceleration without an auxiliary draft model.",
-          "Layer-wise confidence calibration to suppress overconfident early-exit token decisions from shallow layers.",
-          "Adaptive speculation-length control tied to token-level decoding difficulty to avoid wasting deep-layer compute on hard tokens."
+          "Frames tool calling as a structured speculative decoding problem rather than generic free-form generation.",
+          "Introduces a schema-aware drafting method that separates deterministic schema token filling from speculative generation on variable fields.",
+          "Adds retrieval-augmented draft reuse from similar historical tool invocations to improve draft accuracy and efficiency."
         ],
         "why_read": [
-          "It addresses a real systems bottleneck in self-speculation: miscalibrated shallow predictions can erase speedup even when the idea is architecturally simple.",
-          "The paper is directly relevant to exact LLM inference acceleration because it claims wall-time gains without modifying model weights or adding a second model.",
-          "It may clarify whether better calibration and dynamic control, rather than larger draft machinery, are enough to improve practical speculative decoding."
+          "Directly targets inference latency in tool-augmented LLM serving, which is a concrete systems bottleneck.",
+          "The method is training-free and plug-and-play in the abstract, so the deployment path may be simpler than model-side optimization.",
+          "It is useful for readers tracking how constrained generation and speculative decoding can be adapted to structured agent workloads."
         ],
         "risks": [
-          "The abstract does not reveal the overhead of the calibration and difficulty-estimation logic, so net gains may depend heavily on implementation details.",
-          "The claim of exact equivalence needs a careful full-read check because the mechanism adds adaptive control and hidden-state reprocessing steps to standard decoding flow."
+          "The reported gains may depend heavily on repetitive tool traces and strong schema regularity, which may not generalize across production workloads.",
+          "Retrieval can add memory, indexing, and latency overhead that may offset decode-time savings in some deployments."
         ],
         "recommended_for": [
-          "Researchers working on speculative decoding and exact LLM inference acceleration.",
-          "Engineers building serving runtimes that prefer single-model acceleration paths over auxiliary draft-model deployment.",
-          "Compiler/runtime practitioners interested in how dynamic control policies interact with parallel deep-layer execution."
+          "Researchers working on LLM inference acceleration and speculative decoding.",
+          "Engineers building low-latency tool-calling or agent-serving stacks.",
+          "Readers interested in constrained decoding, structured generation, and retrieval-assisted inference."
         ],
         "keywords": [
-          "speculative decoding",
-          "self-speculation",
           "LLM inference systems",
-          "confidence calibration",
-          "adaptive draft length",
-          "autoregressive decoding"
+          "tool calling",
+          "speculative decoding",
+          "structured generation",
+          "schema-aware decoding",
+          "retrieval-augmented decoding"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "This is a strong fit for the stated focus on LLM inference acceleration, and the abstract makes a concrete systems claim about exact decoding speedup from better speculation control rather than generic modeling changes.",
-        "fallback_summary": "Speculative decoding has emerged as a promising approach to accelerate autoregressive inference in large language models (LLMs)."
+        "reading_priority_reason": "This is tightly aligned with LLM serving and inference-time acceleration, and the claimed speedup comes from a concrete decoding/runtime mechanism rather than a generic application wrapper.",
+        "fallback_summary": "Tool calling has greatly expanded the practical utility of large language models (LLMs) by enabling them to interact with external applications."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.12110v1",
-      "arxiv_id": "2604.12110v1",
-      "title": "SOLARIS: Speculative Offloading of Latent-bAsed Representation for Inference Scaling",
-      "summary": "Recent advances in recommendation scaling laws have led to foundation models of unprecedented complexity. While these models offer superior performance, their computational demands make real-time serving impractical, often forcing practitioners to rely on knowledge distillation-compromising serving quality for efficiency. To address this challenge, we present SOLARIS (Speculative Offloading of Latent-bAsed Representation for Inference Scaling), a novel framework inspired by speculative decoding. SOLARIS proactively precomputes user-item interaction embeddings by predicting which user-item pairs are likely to appear in future requests, and asynchronously generating their foundation model representations ahead of time. This approach decouples the costly foundation model inference from the latency-critical serving path, enabling real-time knowledge transfer from models previously considered too expensive for online use. Deployed across Meta's advertising system serving billions of daily requests, SOLARIS achieves 0.67% revenue-driving top-line metrics gain, demonstrating its effectiveness at scale.",
+      "id": "http://arxiv.org/abs/2604.13523v1",
+      "arxiv_id": "2604.13523v1",
+      "title": "ATLAAS: Automatic Tensor-Level Abstraction of Accelerator Semantics",
+      "summary": "Numerous tensor accelerator designs have been proposed, yet most lack well-documented ISAs and compiler backends, limiting evaluation to a handful of operators. Recent work has shown that given a tensor-level ISA specification, complete software stacks including compiler backends can be automatically generated--but writing such specifications remains a manual, expert-driven process.\n  We present ATLAAS, the first end-to-end MLIR-based pipeline that lifts RTL-extracted accelerator semantics to tensor ISA specifications. Starting from bit-level LLVM IR produced by prior architecture-level model extraction, ATLAAS applies an 8-pass semantic lifting pipeline that progressively recovers high-level tensor structure--MAC idioms, saturation semantics, multi-dimensional buffer organizations, and data layout transformations--emitting specifications that immediately enable automatic software stack generation through the ACT ecosystem.\n  We evaluate ATLAAS on the Gemmini systolic-array accelerator, where the pipeline collapses bit-level MLIR by up to 92.9% on processing elements and 24-34% on controller modules. ATLAAS discovers hardware features omitted from the hand-written reference, with correctness validated via Z3 SMT equivalence proofs. Generality is confirmed on TVM's VTA processor, where the same pipeline lifts all four datapath modules without accelerator-specific changes, enabling an automated path from RTL to a performance-competitive compiler backend.",
       "authors": [
-        "Zikun Liu",
-        "Liang Luo",
-        "Qianru Li",
-        "Zhengyu Zhang",
-        "Wei Ling",
-        "Jingyi Shen",
-        "Zeliang Chen",
-        "Yaning Huang",
-        "Jingxian Huang",
-        "Abdallah Aboelela",
-        "Chonglin Sun",
-        "Feifan Gu",
-        "Fenggang Wu",
-        "Hang Qu",
-        "Huayu Li",
-        "Jill Pan",
-        "Kaidi Pei",
-        "Laming Chen",
-        "Longhao Jin",
-        "Qin Huang",
-        "Tongyi Tang",
-        "Varna Puvvada",
-        "Wenlin Chen",
-        "Xiaohan Wei",
-        "Xu Cao",
-        "Yantao Yao",
-        "Yuan Jin",
-        "Yunchen Pu",
-        "Yuxin Chen",
-        "Zijian Shen",
-        "Zhengkai Zhang",
-        "Dong Liang",
-        "Ellie Wen"
+        "Ruijie Gao",
+        "Haoran Jin",
+        "Jirong Yang",
+        "Nathaniel Bleier"
       ],
       "author_details": [
         {
-          "name": "Zikun Liu"
+          "name": "Ruijie Gao"
         },
         {
-          "name": "Liang Luo"
+          "name": "Haoran Jin"
         },
         {
-          "name": "Qianru Li"
+          "name": "Jirong Yang"
         },
         {
-          "name": "Zhengyu Zhang"
-        },
-        {
-          "name": "Wei Ling"
-        },
-        {
-          "name": "Jingyi Shen"
-        },
-        {
-          "name": "Zeliang Chen"
-        },
-        {
-          "name": "Yaning Huang"
-        },
-        {
-          "name": "Jingxian Huang"
-        },
-        {
-          "name": "Abdallah Aboelela"
-        },
-        {
-          "name": "Chonglin Sun"
-        },
-        {
-          "name": "Feifan Gu"
-        },
-        {
-          "name": "Fenggang Wu"
-        },
-        {
-          "name": "Hang Qu"
-        },
-        {
-          "name": "Huayu Li"
-        },
-        {
-          "name": "Jill Pan"
-        },
-        {
-          "name": "Kaidi Pei"
-        },
-        {
-          "name": "Laming Chen"
-        },
-        {
-          "name": "Longhao Jin"
-        },
-        {
-          "name": "Qin Huang"
-        },
-        {
-          "name": "Tongyi Tang"
-        },
-        {
-          "name": "Varna Puvvada"
-        },
-        {
-          "name": "Wenlin Chen"
-        },
-        {
-          "name": "Xiaohan Wei"
-        },
-        {
-          "name": "Xu Cao"
-        },
-        {
-          "name": "Yantao Yao"
-        },
-        {
-          "name": "Yuan Jin"
-        },
-        {
-          "name": "Yunchen Pu"
-        },
-        {
-          "name": "Yuxin Chen"
-        },
-        {
-          "name": "Zijian Shen"
-        },
-        {
-          "name": "Zhengkai Zhang"
-        },
-        {
-          "name": "Dong Liang"
-        },
-        {
-          "name": "Ellie Wen"
+          "name": "Nathaniel Bleier"
         }
       ],
-      "published": "2026-04-13T22:33:28Z",
-      "published_date": "2026-04-13 22:33:28+00:00",
-      "updated": "2026-04-13T22:33:28Z",
-      "comments": "Accepted to SIGIR 2026 Industry Track",
-      "primary_category": "cs.LG",
+      "published": "2026-04-15T06:15:56Z",
+      "published_date": "2026-04-15 06:15:56+00:00",
+      "updated": "2026-04-15T06:15:56Z",
+      "primary_category": "cs.AR",
       "categories": [
-        "cs.LG"
+        "cs.AR"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.12110v1",
-      "url": "http://arxiv.org/abs/2604.12110v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.13523v1",
+      "url": "http://arxiv.org/abs/2604.13523v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.59,
+        "relevance": 2.27,
         "recency": 3.0,
         "popularity": 1.6,
         "quality": 1.6,
-        "recommendation": 8.88
+        "recommendation": 8.29
       },
-      "matched_domain": "LLM Inference Systems",
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "serving",
-        "speculative decoding",
-        "latency",
-        "cs.LG"
+        "mlir",
+        "llvm",
+        "cs.AR"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 2,
         "matched_categories": [
-          "cs.LG"
+          "cs.AR"
         ],
         "required_signal_matches": [
-          "speculative decoding"
+          "mlir",
+          "llvm"
         ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency"
-        ],
-        "bonus_keyword_match_count": 1,
-        "analysis_keyword_matches": [
-          "latency"
-        ],
-        "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.18
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper proposes a speculative serving framework that precomputes likely future user-item representations so large recommendation models can contribute online without sitting on the critical latency path.",
-        "summary_zh": "This paper targets a familiar serving problem in large recommendation models: the best foundation models are too expensive to run synchronously for real-time requests, so production systems often fall back to distilled surrogates. SOLARIS adapts the speculative-execution idea to recommendation serving by predicting which user-item pairs are likely to arrive and asynchronously materializing their latent representations ahead of time. The abstract claims this moves expensive foundation-model inference out of the latency-critical path while preserving access to stronger model representations at serving time. Evidence is limited but notable: the method is reportedly deployed in Meta's advertising system at billion-request scale and associated with a 0.67% top-line metric gain. What remains unclear from the abstract is the actual systems tradeoff, including hit rate, precompute overhead, staleness handling, storage cost, and how much latency reduction versus extra background compute is required for the result.",
-        "background_zh": "Large recommendation foundation models improve quality, but their inference cost makes direct online serving hard, creating pressure to trade model strength for latency through distillation or simpler serving stacks.",
-        "problem_zh": "The paper asks how to use expensive recommendation foundation models in real-time serving without paying their full inference cost on the request path.",
-        "approach_zh": "SOLARIS speculatively predicts future user-item requests, precomputes their interaction embeddings asynchronously, and serves those latent representations when the corresponding requests arrive.",
-        "evidence_zh": "The abstract supports that the method was deployed in a large advertising system and reports a 0.67% top-line gain, but it does not make the latency savings, compute overhead, baseline comparisons, or evaluation methodology clear.",
-        "value_zh": "If the prediction and caching pipeline is effective, this gives a practical serving pattern for shifting expensive model work off the online path while still exploiting stronger representations than a distilled online model alone.",
+        "one_liner_zh": "This paper presents an MLIR pipeline that lifts RTL-derived bit-level accelerator semantics into tensor-level ISA specifications so compiler backends can be generated with much less manual ISA modeling.",
+        "summary_zh": "This work targets a real bottleneck in accelerator evaluation: many tensor accelerators have RTL but lack usable ISA documentation and compiler backends, so software support remains narrow and expert-dependent. ATLAAS proposes an end-to-end MLIR lifting pipeline that starts from RTL-extracted bit-level LLVM IR and progressively reconstructs higher-level tensor semantics such as MAC patterns, saturation behavior, buffer structure, and layout transforms. The abstract reports substantial IR collapse on Gemmini, Z3-based equivalence checking, and successful reuse of the same pipeline on VTA without accelerator-specific changes. If the method is robust, the practical value is a shorter path from hardware RTL to a usable compiler stack for new accelerators. The main missing detail is how broadly this lifting works beyond the reported modules and how strong the evidence is for the claimed performance-competitive backend generation.",
+        "background_zh": "Custom tensor accelerators are proliferating faster than their software stacks, and manual ISA abstraction remains a major bottleneck for serious compiler and systems evaluation.",
+        "problem_zh": "The paper asks how to automatically recover tensor-level accelerator semantics from low-level RTL-derived representations so undocumented hardware can obtain usable ISA specifications and compiler support.",
+        "approach_zh": "ATLAAS uses an eight-pass MLIR-based semantic lifting pipeline to transform bit-level LLVM IR into tensor ISA specifications by recovering compute idioms, numeric semantics, memory organization, and layout transformations.",
+        "evidence_zh": "The abstract supports the method with IR size reduction on Gemmini, Z3 SMT equivalence validation, and unchanged-pipeline lifting of four VTA datapath modules, but it does not make the end-to-end backend competitiveness evidence fully clear.",
+        "value_zh": "If the abstraction is reliable, it could reduce the manual compiler bring-up cost for new accelerators and make hardware-software co-design evaluation much more scalable.",
         "open_questions": [
-          "How are likely future user-item pairs predicted, and what hit rate is needed for the serving gain to outweigh background compute and storage cost?",
-          "What are the actual latency, throughput, and infrastructure tradeoffs versus direct inference, distillation-only serving, or more standard caching baselines?",
-          "How does the system handle representation staleness, cold-start pairs, and misses when the precomputed embedding is unavailable or outdated?"
+          "How dependent is ATLAAS on the quality and assumptions of the prior RTL-to-LLVM extraction stage, and where do failures appear in practice?",
+          "What exact evaluation supports the claim of a performance-competitive compiler backend, and which baselines and workloads were used?",
+          "How much manual intervention is still required when lifting more irregular accelerators with control-heavy behavior or less regular tensor dataflow?"
         ],
         "core_contributions": [
-          "Introduces a speculative offloading framework that applies speculative-execution ideas to recommendation serving rather than token decoding.",
-          "Uses asynchronous precomputation of user-item latent representations to decouple expensive foundation-model inference from the online request path.",
-          "Provides an at-scale production deployment claim in an advertising system rather than only an offline simulation."
+          "An end-to-end MLIR pipeline that converts RTL-extracted low-level semantics into tensor-level ISA specifications.",
+          "An eight-pass lifting procedure that explicitly reconstructs MAC idioms, saturation semantics, multidimensional buffer structure, and data-layout transformations.",
+          "Validation on Gemmini with reported IR simplification and SMT equivalence checks, plus a generalization test on VTA without accelerator-specific pipeline changes."
         ],
         "why_read": [
-          "It is a concrete systems idea for moving expensive model work off the latency-critical path without reducing the online model to a small distilled proxy.",
-          "The paper may offer a reusable serving pattern for other workloads where future requests are partially predictable and representation reuse is possible.",
-          "The claimed production deployment makes it potentially useful for understanding what speculative inference looks like in a real high-throughput serving stack."
+          "It addresses a concrete compiler bottleneck for accelerators that exist in RTL form but lack maintainable ISA and backend descriptions.",
+          "It is relevant to systems readers interested in MLIR-based recovery of higher-level semantics from very low-level hardware representations.",
+          "It may clarify how much of compiler enablement for new accelerators can be automated rather than hand-modeled by experts."
         ],
         "risks": [
-          "The result may depend heavily on workload predictability; poor prediction quality could erase the benefit through low reuse and wasted precompute.",
-          "The abstract does not establish fairness against strong caching, distillation, or hybrid serving baselines, so the gain is hard to interpret technically from the abstract alone."
+          "The workflow depends on an upstream RTL-extraction step, so practical robustness may be limited by errors or information loss there.",
+          "The abstract shows only a small number of accelerator case studies, so generality across more complex designs remains uncertain."
         ],
         "recommended_for": [
-          "Researchers studying speculative execution, asynchronous serving, and cache-like mechanisms for large-model inference systems.",
-          "Engineers working on recommendation or ads infrastructure where future request patterns can be forecast and expensive representations can be materialized ahead of time.",
-          "Readers interested in production serving patterns more than model architecture details."
+          "Researchers working on compiler generation for custom accelerators.",
+          "Engineers interested in MLIR, LLVM, and hardware-software co-design automation.",
+          "Readers tracking automated recovery of low-level accelerator semantics into usable software interfaces."
         ],
         "keywords": [
-          "speculative serving",
-          "asynchronous precomputation",
-          "recommendation foundation models",
-          "online inference",
-          "embedding reuse",
-          "advertising systems"
+          "MLIR",
+          "LLVM IR",
+          "tensor ISA specification",
+          "accelerator semantics lifting",
+          "compiler backend generation",
+          "Gemmini"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "The serving idea is relevant to inference-systems readers because it treats expensive model computation as schedulable background work, but the paper is centered on recommendation ads rather than LLM inference or low-level kernel generation, and the abstract leaves the key systems tradeoffs underspecified.",
-        "fallback_summary": "Recent advances in recommendation scaling laws have led to foundation models of unprecedented complexity."
+        "reading_priority_reason": "The paper is technically relevant because it automates compiler-facing abstraction for accelerators, but it is less directly aligned with LLM inference serving, CUDA kernel generation, or low-level GPU code generation than the highest-priority topics.",
+        "fallback_summary": "Numerous tensor accelerator designs have been proposed, yet most lack well-documented ISAs and compiler backends, limiting evaluation to a handful of operators."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by Nemotron 3 Super: Open, Efficient… and PipeLive: Efficient Live In-place…. Fast Inference from Transformers… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, LLM Code Generation For CUDA Kernels. The set is anchored by Calibrated Speculative Decoding:… and YOCO++: Enhancing YOCO with KV…. Event Tensor: A Unified… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
       "training and inference efficiency",
+      "LLM Code Generation For CUDA Kernels",
       "factual reliability and verification"
     ],
     "reading_strategy": [
-      "Start with Nemotron 3 Super: Open, Efficient… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
-      "Then read PipeLive: Efficient Live In-place… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use Fast Inference from Transformers… as a final cross-check on experimental boundaries and practical value."
+      "Start with Calibrated Speculative Decoding:… and verify whether it defines the factual reliability and verification problem clearly and exposes a real mechanism.",
+      "Then read YOCO++: Enhancing YOCO with KV… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use Event Tensor: A Unified… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-04-15T11:06:16Z",
+    "generated_at": "2026-04-16T11:05:46Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 6,
+    "paper_results": 5,
     "paper_failures": 0
   }
 }

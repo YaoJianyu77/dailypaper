@@ -958,6 +958,41 @@
       "domain": "LLM Inference Systems",
       "quality_score": 8.88,
       "updated": "2026-04-15"
+    },
+    {
+      "id": "2604.13634v1",
+      "title": "Calibrated Speculative Decoding: Frequency-Guided Candidate Selection for Efficient Inference",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.97,
+      "updated": "2026-04-16"
+    },
+    {
+      "id": "2604.13556v1",
+      "title": "YOCO++: Enhancing YOCO with KV Residual Connections for Efficient LLM Inference",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.8,
+      "updated": "2026-04-16"
+    },
+    {
+      "id": "2604.13327v1",
+      "title": "Event Tensor: A Unified Abstraction for Compiling Dynamic Megakernel",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.8,
+      "updated": "2026-04-16"
+    },
+    {
+      "id": "2604.13519v1",
+      "title": "ToolSpec: Accelerating Tool Calling via Schema-Aware and Retrieval-Augmented Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.55,
+      "updated": "2026-04-16"
+    },
+    {
+      "id": "2604.13523v1",
+      "title": "ATLAAS: Automatic Tensor-Level Abstraction of Accelerator Semantics",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 8.29,
+      "updated": "2026-04-16"
     }
   ],
   "edges": [
@@ -3144,7 +3179,79 @@
       "target": "2604.12798v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.13634v1",
+      "target": "2604.13556v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.13634v1",
+      "target": "2604.13519v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.13634v1",
+      "target": "2604.13327v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.13556v1",
+      "target": "2604.13634v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.13556v1",
+      "target": "2604.13327v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.13556v1",
+      "target": "2604.13519v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.13327v1",
+      "target": "2604.13634v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.13327v1",
+      "target": "2604.13556v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.13327v1",
+      "target": "2604.13519v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.13519v1",
+      "target": "2604.13634v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.13519v1",
+      "target": "2604.13556v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.13519v1",
+      "target": "2604.13327v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-15"
+  "last_updated": "2026-04-16"
 }

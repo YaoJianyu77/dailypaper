@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-15",
+  "last_updated": "2026-04-16",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -154,6 +154,34 @@
         }
       ],
       "cooldown_until": "2026-05-17"
+    },
+    {
+      "paper_id": "2604.13523v1",
+      "title": "ATLAAS: Automatic Tensor-Level Abstraction of Accelerator Semantics",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-04-15T06:15:56Z",
+      "source_lane": "fresh",
+      "topics": [
+        "MLIR",
+        "LLVM IR",
+        "tensor ISA specification",
+        "accelerator semantics lifting",
+        "compiler backend generation",
+        "Gemmini"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-16",
+      "last_seen_date": "2026-04-16",
+      "last_recommended_date": "2026-04-16",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-16",
+          "recommendation": 8.29,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-15"
     },
     {
       "paper_id": "2603.21331v1",
@@ -365,6 +393,34 @@
         }
       ],
       "cooldown_until": "2026-06-07"
+    },
+    {
+      "paper_id": "2604.13634v1",
+      "title": "Calibrated Speculative Decoding: Frequency-Guided Candidate Selection for Efficient Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-15T09:01:54Z",
+      "source_lane": "fresh",
+      "topics": [
+        "speculative decoding",
+        "LLM inference",
+        "throughput",
+        "training-free acceleration",
+        "candidate selection",
+        "probability-based acceptance"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-16",
+      "last_seen_date": "2026-04-16",
+      "last_recommended_date": "2026-04-16",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-16",
+          "recommendation": 9.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-15"
     },
     {
       "paper_id": "2603.22774v1",
@@ -1015,6 +1071,34 @@
         }
       ],
       "cooldown_until": "2026-05-10"
+    },
+    {
+      "paper_id": "2604.13327v1",
+      "title": "Event Tensor: A Unified Abstraction for Compiling Dynamic Megakernel",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-14T22:19:51Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM serving",
+        "dynamic megakernels",
+        "persistent kernels",
+        "compiler",
+        "dynamic shapes",
+        "data-dependent computation"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-16",
+      "last_seen_date": "2026-04-16",
+      "last_recommended_date": "2026-04-16",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-16",
+          "recommendation": 9.8,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-15"
     },
     {
       "paper_id": "2603.14903v1",
@@ -3747,6 +3831,34 @@
       "cooldown_until": "2026-06-05"
     },
     {
+      "paper_id": "2604.13519v1",
+      "title": "ToolSpec: Accelerating Tool Calling via Schema-Aware and Retrieval-Augmented Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-15T06:05:11Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference systems",
+        "tool calling",
+        "speculative decoding",
+        "structured generation",
+        "schema-aware decoding",
+        "retrieval-augmented decoding"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-16",
+      "last_seen_date": "2026-04-16",
+      "last_recommended_date": "2026-04-16",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-16",
+          "recommendation": 9.55,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-15"
+    },
+    {
       "paper_id": "2604.05438v1",
       "title": "Top-K Retrieval with Fixed-Size Linear-Attention Completion: Backbone- and KV-Format-Preserving Attention for KV-Cache Read Reduction",
       "domain": "LLM Inference Systems",
@@ -4053,6 +4165,34 @@
         }
       ],
       "cooldown_until": "2026-05-08"
+    },
+    {
+      "paper_id": "2604.13556v1",
+      "title": "YOCO++: Enhancing YOCO with KV Residual Connections for Efficient LLM Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-15T07:05:14Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "KV cache",
+        "cross-layer KV compression",
+        "memory efficiency",
+        "YOCO",
+        "Transformer serving"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-16",
+      "last_seen_date": "2026-04-16",
+      "last_recommended_date": "2026-04-16",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-16",
+          "recommendation": 9.8,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-15"
     },
     {
       "paper_id": "2603.17435v1",

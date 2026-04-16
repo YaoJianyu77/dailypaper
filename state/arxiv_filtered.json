@@ -1,2252 +1,96 @@
 {
-  "target_date": "2026-04-15",
+  "target_date": "2026-04-16",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-16",
-      "end": "2026-04-15"
+      "start": "2026-03-17",
+      "end": "2026-04-16"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-15",
-      "end": "2026-03-15"
+      "start": "2025-04-16",
+      "end": "2026-03-16"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 26,
+  "total_filtered": 19,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 26,
+  "total_unique": 19,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 6,
+    "selected_count": 5,
     "lane_counts": {
       "fresh": 5,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 17,
+      "classic": 0,
+      "history_filtered": 11,
       "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.12374v1",
-      "arxiv_id": "2604.12374v1",
-      "title": "Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning",
-      "summary": "We describe the pre-training, post-training, and quantization of Nemotron 3 Super, a 120 billion (active 12 billion) parameter hybrid Mamba-Attention Mixture-of-Experts model. Nemotron 3 Super is the first model in the Nemotron 3 family to 1) be pre-trained in NVFP4, 2) leverage LatentMoE, a new Mixture-of-Experts architecture that optimizes for both accuracy per FLOP and accuracy per parameter, and 3) include MTP layers for inference acceleration through native speculative decoding. We pre-trained Nemotron 3 Super on 25 trillion tokens followed by post-training using supervised fine tuning (SFT) and reinforcement learning (RL). The final model supports up to 1M context length and achieves comparable accuracy on common benchmarks, while also achieving up to 2.2x and 7.5x higher inference throughput compared to GPT-OSS-120B and Qwen3.5-122B, respectively. Nemotron 3 Super datasets, along with the base, post-trained, and quantized checkpoints, are open-sourced on HuggingFace.",
+      "id": "http://arxiv.org/abs/2604.13634v1",
+      "arxiv_id": "2604.13634v1",
+      "title": "Calibrated Speculative Decoding: Frequency-Guided Candidate Selection for Efficient Inference",
+      "summary": "Speculative decoding accelerates autoregressive generation by letting draft tokens bypass full verification, but conventional frameworks suffer from frequent false rejections, particularly when draft models produce semantically correct but lexically divergent outputs. In this paper, we present Calibrated Speculative Decoding (CSD), a training-free framework that recovers valid tokens discarded by standard verification. Guided by the principle of \"Frequency-Guided Candidate Selection and Probability-Guarded Acceptance,\" CSD incorporates two lightweight modules: Online Correction Memory, which aggregates historical rejections to propose recurring divergence patterns as rescue candidates, and Semantic Consistency Gating, which verifies candidate admissibility using probability ratios instead of exact token matching. Our evaluation across diverse large language models demonstrates that CSD outperforms existing methods, achieving a peak throughput speedup of 2.33x. CSD preserves model accuracy across all tasks while further boosting performance on complex reasoning datasets. These results establish CSD as a highly effective, lightweight solution for practical LLM deployments.",
       "authors": [
-        "NVIDIA",
-        ":",
-        "Aakshita Chandiramani",
-        "Aaron Blakeman",
-        "Abdullahi Olaoye",
-        "Abhibha Gupta",
-        "Abhilash Somasamudramath",
-        "Abhinav Khattar",
-        "Adeola Adesoba",
-        "Adi Renduchintala",
-        "Adil Asif",
-        "Aditya Agrawal",
-        "Aditya Vavre",
-        "Ahmad Kiswani",
-        "Aishwarya Padmakumar",
-        "Ajay Hotchandani",
-        "Akanksha Shukla",
-        "Akhiad Bercovich",
-        "Aleksander Ficek",
-        "Aleksandr Shaposhnikov",
-        "Alex Gronskiy",
-        "Alex Kondratenko",
-        "Alex Neefus",
-        "Alex Steiner",
-        "Alex Yang",
-        "Alexander Bukharin",
-        "Alexander Young",
-        "Ali Hatamizadeh",
-        "Ali Taghibakhshi",
-        "Alina Galiautdinova",
-        "Alisa Liu",
-        "Alok Kumar",
-        "Ameya Sunil Mahabaleshwarkar",
-        "Amir Klein",
-        "Amit Zuker",
-        "Amnon Geifman",
-        "Anahita Bhiwandiwalla",
-        "Ananth Subramaniam",
-        "Andrew Tao",
-        "Anjaney Shrivastava",
-        "Anjulie Agrusa",
-        "Ankur Srivastava",
-        "Ankur Verma",
-        "Ann Guan",
-        "Anna Shors",
-        "Annamalai Chockalingam",
-        "Anubhav Mandarwal",
-        "Aparnaa Ramani",
-        "Arham Mehta",
-        "Arti Jain",
-        "Arun Venkatesan",
-        "Asha Anoosheh",
-        "Ashwath Aithal",
-        "Ashwin Poojary",
-        "Asif Ahamed",
-        "Asit Mishra",
-        "Asli Sabanci Demiroz",
-        "Asma Kuriparambil Thekkumpate",
-        "Atefeh Sohrabizadeh",
-        "Avinash Kaur",
-        "Ayush Dattagupta",
-        "Barath Subramaniam Anandan",
-        "Bardiya Sadeghi",
-        "Barnaby Simkin",
-        "Ben Lanir",
-        "Benedikt Schifferer",
-        "Benjamin Chislett",
-        "Besmira Nushi",
-        "Bilal Kartal",
-        "Bill Thiede",
-        "Bita Darvish Rouhani",
-        "Bobby Chen",
-        "Boris Ginsburg",
-        "Brandon Norick",
-        "Branislav Kisacanin",
-        "Brian Yu",
-        "Bryan Catanzaro",
-        "Buvaneswari Mani",
-        "Carlo del Mundo",
-        "Chankyu Lee",
-        "Chanran Kim",
-        "Chantal Hwang",
-        "Chao Ni",
-        "Charles Wang",
-        "Charlie Truong",
-        "Cheng-Ping Hsieh",
-        "Chenhan Yu",
-        "Chenjie Luo",
-        "Cherie Wang",
-        "Chetan Mungekar",
-        "Chintan Patel",
-        "Chris Alexiuk",
-        "Chris Holguin",
-        "Chris Wing",
-        "Christian Munley",
-        "Christopher Parisien",
-        "Chuck Desai",
-        "Chunyang Sheng",
-        "Collin Neale",
-        "Cyril Meurillon",
-        "Dakshi Kumar",
-        "Dan Gil",
-        "Dan Su",
-        "Dane Corneil",
-        "Daniel Afrimi",
-        "Daniel Burkhardt Eliuth Triana",
-        "Daniel Egert",
-        "Daniel Fatade",
-        "Daniel Lo",
-        "Daniel Rohrer",
-        "Daniel Serebrenik",
-        "Daniil Sorokin",
-        "Daria Gitman",
-        "Daria Levy",
-        "Darko Stosic",
-        "David Edelsohn",
-        "David Messina",
-        "David Mosallanezhad",
-        "David Tamok",
-        "Deena Donia",
-        "Deepak Narayanan",
-        "Devin O'Kelly",
-        "Dheeraj Peri",
-        "Dhruv Nathawani",
-        "Di Wu",
-        "Dima Rekesh",
-        "Dina Yared",
-        "Divyanshu Kakwani",
-        "Dmitry Konyagin Brandon Tuttle",
-        "Dong Ahn",
-        "Dongfu Jiang",
-        "Dorrin Poorkay",
-        "Douglas O'Flaherty",
-        "Duncan Riach",
-        "Dusan Stosic",
-        "Dustin Van Stee",
-        "Edgar Minasyan",
-        "Edward Lin",
-        "Eileen Peters Long",
-        "Elad Segal",
-        "Elena Lantz",
-        "Elena Lewis",
-        "Ellie Evans",
-        "Elliott Ning",
-        "Eric Chung",
-        "Eric Harper",
-        "Eric Pham-Hung",
-        "Eric W. Tramel",
-        "Erick Galinkin",
-        "Erik Pounds",
-        "Esti Etrog",
-        "Evan Briones",
-        "Evan Wu",
-        "Evelina Bakhturina",
-        "Evgeny Tsykunov",
-        "Ewa Dobrowolska",
-        "Farshad Saberi Movahed",
-        "Farzan Memarian",
-        "Fay Wang",
-        "Fei Jia",
-        "Felipe Soares",
-        "Felipe Vieira Frujeri",
-        "Feng Chen",
-        "Fengguang Lin",
-        "Ferenc Galko",
-        "Fortuna Zhang",
-        "Frankie Siino",
-        "Frida Hou",
-        "Gantavya Bhatt",
-        "Gargi Prasad",
-        "Geethapriya Venkataramani",
-        "Geetika Gupta",
-        "George Armstrong",
-        "Gerald Shen",
-        "Giulio Borghesi",
-        "Gordana Neskovic",
-        "Gorkem Batmaz",
-        "Grace Lam",
-        "Grace Wu",
-        "Greg Pauloski",
-        "Greyson Davis",
-        "Grigor Nalbandyan",
-        "Guoming Zhang",
-        "Guy Farber",
-        "Guyue Huang",
-        "Haifeng Qian",
-        "Haran Kumar Shiv Kumar",
-        "Harry Kim",
-        "Harsh Sharma",
-        "Hayate Iso",
-        "Hayley Ross",
-        "Herbert Hum",
-        "Herman Sahota",
-        "Hexin Wang",
-        "Himanshu Soni",
-        "Hiren Upadhyay",
-        "Huy Nguyen",
-        "Iain Cunningham",
-        "Ido Galil",
-        "Ido Shahaf",
-        "Igino Padovani",
-        "Igor Gitman",
-        "Igor Shovkun",
-        "Ikroop Dhillon",
-        "Ilya Loshchilov",
-        "Ingrid Kelly",
-        "Itamar Schen",
-        "Itay Levy",
-        "Ivan Moshkov",
-        "Izik Golan",
-        "Izzy Putterman",
-        "Jain Tu",
-        "Jan Baczek",
-        "Jan Kautz",
-        "Jane Polak Scowcroft",
-        "Janica Rosenberg",
-        "Jared Casper",
-        "Jarrod Pflum",
-        "Jason Grant",
-        "Jason Sewall",
-        "Jatin Mitra",
-        "Jeffrey Glick",
-        "Jenny Chen",
-        "Jesse Oliver",
-        "Jiacheng Xu",
-        "Jiafan Zhu",
-        "Jialin Song",
-        "Jian Zhang",
-        "Jiaqi Zeng",
-        "Jie Lou",
-        "Jill Milton",
-        "Jim Chow",
-        "Jimmy Zhang",
-        "Jinhang Choi",
-        "Jining Huang",
-        "Jocelyn Huang",
-        "Joel Caruso",
-        "Joey Conway",
-        "Joey Guman",
-        "Johan Jatko",
-        "John Kamalu",
-        "Johnny Greco",
-        "Jonathan Cohen",
-        "Jonathan Raiman",
-        "Joseph Jennings",
-        "Joyjit Daw",
-        "Juan Yu",
-        "Julio Tapia",
-        "Junkeun Yi",
-        "Jupinder Parmar",
-        "Jyothi Achar",
-        "Kari Briski",
-        "Kartik Mattoo",
-        "Katherine Cheung",
-        "Katherine Luna",
-        "Keith Wyss",
-        "Kevin Shih",
-        "Kezhi Kong",
-        "Khanh Nguyen",
-        "Khushi Bhardwaj",
-        "Kirill Buryak",
-        "Kirthi Shankar Sivamani",
-        "Konstantinos Krommydas",
-        "Kris Murphy",
-        "Krishna C. Puvvada",
-        "Krzysztof Pawelec",
-        "Kumar Anik",
-        "Laikh Tewari",
-        "Laya Sleiman",
-        "Leo Du",
-        "Leon Derczynski",
-        "Li Ding",
-        "Lilach Ilan",
-        "Lingjie Wu",
-        "Lizzie Wei",
-        "Luis Vega",
-        "Lun Su",
-        "Maarten Van Segbroeck",
-        "Maer Rodrigues de Melo",
-        "Magaret Zhang",
-        "Mahan Fathi",
-        "Makesh Narsimhan Sreedhar",
-        "Makesh Sreedhar",
-        "Makesh Tarun Chandran",
-        "Manuel Reyes Gomez",
-        "Maor Ashkenazi",
-        "Marc Cuevas",
-        "Marc Romeijn",
-        "Margaret Zhang",
-        "Mark Cai",
-        "Mark Gabel",
-        "Markus Kliegl",
-        "Martyna Patelka",
-        "Maryam Moosaei",
-        "Matthew Varacalli",
-        "Matvei Novikov",
-        "Mauricio Ferrato",
-        "Mehrzad Samadi",
-        "Melissa Corpuz",
-        "Meng Xin",
-        "Mengdi Wang",
-        "Mengru Wang",
-        "Meredith Price",
-        "Micah Schaffer",
-        "Michael Andersch",
-        "Michael Boone",
-        "Michael Evans",
-        "Michael Z Wang",
-        "Miguel Martinez",
-        "Mikail Khona",
-        "Mike Chrzanowski",
-        "Mike Hollinger",
-        "Mingyuan Ma",
-        "Minseok Lee",
-        "Mohammad Dabbah",
-        "Mohammad Shoeybi",
-        "Mostofa Patwary",
-        "Nabin Mulepati",
-        "Nader Khalil",
-        "Najeeb Nabwani",
-        "Nancy Agarwal",
-        "Nanthini Balasubramaniam",
-        "Narimane Hennouni",
-        "Narsi Kodukula",
-        "Natalie Hereth",
-        "Nathaniel Pinckney",
-        "Nave Assaf",
-        "Negar Habibi",
-        "Nestor Qin",
-        "Neta Zmora",
-        "Netanel Haber",
-        "Nick Reamaroon",
-        "Nickson Quak",
-        "Nidhi Bhatia",
-        "Nikhil Jukar",
-        "Nikki Pope",
-        "Nikolai Ludwig",
-        "Nima Tajbakhsh",
-        "Nir Ailon",
-        "Nirmal Juluru",
-        "Nirmalya De",
-        "Nowel Pitt",
-        "Oleg Rybakov",
-        "Oleksii Hrinchuk",
-        "Oleksii Kuchaiev",
-        "Olivier Delalleau",
-        "Oluwatobi Olabiyi",
-        "Omer Ullman Argov",
-        "Omri Almog",
-        "Omri Puny",
-        "Oren Tropp",
-        "Otavio Padovani",
-        "Ouye Xie",
-        "Parth Chadha",
-        "Pasha Shamis",
-        "Paul Gibbons",
-        "Pavlo Molchanov",
-        "Peter Belcak",
-        "Peter Jin",
-        "Pinky Xu",
-        "Piotr Januszewski",
-        "Pooya Jannaty",
-        "Prachi Shevate",
-        "Pradeep Thalasta",
-        "Pranav Prashant Thombre",
-        "Prasoon Varshney",
-        "Prerana Gambhir",
-        "Pritam Gundecha",
-        "Przemek Tredak",
-        "Qing Miao",
-        "Qiyu Wan",
-        "Quan Tran Minh",
-        "Rabeeh Karimi Mahabadi",
-        "Rachel Oberman",
-        "Rachit Garg",
-        "Rahul Kandu",
-        "Raina Zhong",
-        "Ran El-Yaniv",
-        "Ran Zilberstein",
-        "Rasoul Shafipour",
-        "Renee Yao",
-        "Renjie Pi",
-        "Richard Mazzarese",
-        "Richard Wang",
-        "Rick Izzo",
-        "Ridhima Singla",
-        "Rima Shahbazyan",
-        "Rishabh Garg",
-        "Ritika Borkar",
-        "Ritu Gala",
-        "Riyad Islam",
-        "Robert Clark",
-        "Robert Hesse",
-        "Roger Waleffe",
-        "Rohit Varma Kalidindi",
-        "Rohit Watve",
-        "Roi Koren",
-        "Ron Fan",
-        "Ruchika Kharwar",
-        "Ruisi Cai",
-        "Ruoxi Zhang",
-        "Russell J. Hewett",
-        "Ryan Prenger",
-        "Ryan Timbrook",
-        "Ryota Egashira",
-        "Sadegh Mahdavi",
-        "Sagar Singh Ashutosh Joshi",
-        "Sahil Modi",
-        "Samuel Kriman",
-        "Sandeep Pombra",
-        "Sanjay Kariyappa",
-        "Sanjeev Satheesh",
-        "Santiago Pombo",
-        "Saori Kaji",
-        "Satish Pasumarthi",
-        "Saurav Mishra",
-        "Saurav Muralidharan",
-        "Scott Hara",
-        "Sean Narenthiran",
-        "Sebastian Rogawski",
-        "Seonjin Na",
-        "Seonmyeong Bak",
-        "Sepehr Sameni",
-        "Seth Poulos",
-        "Shahar Mor",
-        "Shantanu Acharya",
-        "Shaona Ghosh Adam Lord",
-        "Sharath Turuvekere Sreenivas",
-        "Shaun Kotek",
-        "Shaya Gharghabi",
-        "Shelby Thomas",
-        "Sheng-Chieh Lin",
-        "Shibani Likhite",
-        "Shiqing Fan",
-        "Shiyang Chen",
-        "Shreya Gopal",
-        "Shrimai Prabhumoye",
-        "Shubham Pachori",
-        "Shubham Toshniwal",
-        "Shuo Zhang",
-        "Shuoyang Ding",
-        "Shyam Renjith",
-        "Shyamala Prayaga",
-        "Siddhartha Jain",
-        "Simeng Sun",
-        "Sirisha Rella",
-        "Sirshak Das",
-        "Smita Ithape",
-        "Sneha Harishchandra S",
-        "Somshubra Majumdar",
-        "Soumye Singhal",
-        "Sri Harsha Singudasu",
-        "Sriharsha Niverty",
-        "Stas Sergienko",
-        "Stefana Gloginic",
-        "Stefania Alborghetti",
-        "Stephen Ge",
-        "Stephen McCullough",
-        "Sugam Dipak Devare",
-        "Suguna Varshini Velury",
-        "Sukrit Rao",
-        "Sumeet Kumar Barua",
-        "Sunny Gai",
-        "Suseella Panguluri",
-        "Sushil Koundinyan",
-        "Swathi Patnam",
-        "Sweta Priyadarshi",
-        "Swetha Bhendigeri",
-        "Syeda Nahida Akter",
-        "Sylendran Arunagiri",
-        "Tailling Yuan",
-        "Talor Abramovich",
-        "Tan Bui",
-        "Tan Yu",
-        "Terry Kong",
-        "Thanh Do",
-        "Thomas Gburek",
-        "Thorgane Marques",
-        "Tiffany Moore",
-        "Tijmen Blankevoort",
-        "Tim Moon",
-        "Timothy Ma",
-        "Tiyasa Mitra",
-        "Tomasz Grzegorzek",
-        "Tomer Asida",
-        "Tomer Bar Natan",
-        "Tomer Keren",
-        "Tomer Ronen",
-        "Traian Rebedea",
-        "Trenton Starkey",
-        "Tugrul Konuk",
-        "Twinkle Vashishth",
-        "Tyler Condensa",
-        "Udi Karpas",
-        "Ushnish De",
-        "Vahid Noorozi",
-        "Vahid Noroozi",
-        "Vanshil Atul Shah",
-        "Veena Vaidyanathan",
-        "Venkat Srinivasan",
-        "Venmugil Elango",
-        "Victor Cui",
-        "Vijay Korthikanti",
-        "Vikas Mehta",
-        "Virginia Adams",
-        "Virginia Wu",
-        "Vitaly Kurin",
-        "Vitaly Lavrukhin",
-        "Vladimir Anisimov",
-        "Wan Seo",
-        "Wanli Jiang",
-        "Wasi Uddin Ahmad",
-        "Wei Du",
-        "Wei Ping",
-        "Wei-Ming Chen",
-        "Wendy Quan",
-        "Wenliang Dai",
-        "Wenwen Gao",
-        "Will Jennings",
-        "William Zhang",
-        "Xiaowei Ren",
-        "Xiaowen Xin",
-        "Xin Li",
-        "Yang Yu",
-        "Yangyi Chen",
-        "Yaniv Galron",
-        "Yashaswi Karnati",
-        "Yejin Choi",
-        "Yev Meyer",
-        "Yi-Fu Wu",
-        "Yian Zhang",
-        "Ying Lin",
-        "Yonatan Geifman",
-        "Yonggan Fu",
-        "Yoshi Suhara",
-        "Youngeun Kwon",
-        "Yuan Zhang",
-        "Yuki Huang",
-        "Zach Moshe",
-        "Zhilin Wang",
-        "Zhiyu Cheng",
-        "Zhongbo Zhu",
-        "Zhuolin Yang",
-        "Zihan Liu",
-        "Zijia Chen",
-        "Zijie Yan",
-        "Zuhair Ahmed"
+        "Xuwen Zhou",
+        "Fangxin Liu",
+        "Chao Wang",
+        "Xiao Zheng",
+        "Hao Zheng",
+        "Min He",
+        "Li Jiang",
+        "Haibing Guan"
       ],
       "author_details": [
         {
-          "name": "NVIDIA"
+          "name": "Xuwen Zhou"
         },
         {
-          "name": ":"
+          "name": "Fangxin Liu"
         },
         {
-          "name": "Aakshita Chandiramani"
+          "name": "Chao Wang"
         },
         {
-          "name": "Aaron Blakeman"
+          "name": "Xiao Zheng"
         },
         {
-          "name": "Abdullahi Olaoye"
+          "name": "Hao Zheng"
         },
         {
-          "name": "Abhibha Gupta"
+          "name": "Min He"
         },
         {
-          "name": "Abhilash Somasamudramath"
+          "name": "Li Jiang"
         },
         {
-          "name": "Abhinav Khattar"
-        },
-        {
-          "name": "Adeola Adesoba"
-        },
-        {
-          "name": "Adi Renduchintala"
-        },
-        {
-          "name": "Adil Asif"
-        },
-        {
-          "name": "Aditya Agrawal"
-        },
-        {
-          "name": "Aditya Vavre"
-        },
-        {
-          "name": "Ahmad Kiswani"
-        },
-        {
-          "name": "Aishwarya Padmakumar"
-        },
-        {
-          "name": "Ajay Hotchandani"
-        },
-        {
-          "name": "Akanksha Shukla"
-        },
-        {
-          "name": "Akhiad Bercovich"
-        },
-        {
-          "name": "Aleksander Ficek"
-        },
-        {
-          "name": "Aleksandr Shaposhnikov"
-        },
-        {
-          "name": "Alex Gronskiy"
-        },
-        {
-          "name": "Alex Kondratenko"
-        },
-        {
-          "name": "Alex Neefus"
-        },
-        {
-          "name": "Alex Steiner"
-        },
-        {
-          "name": "Alex Yang"
-        },
-        {
-          "name": "Alexander Bukharin"
-        },
-        {
-          "name": "Alexander Young"
-        },
-        {
-          "name": "Ali Hatamizadeh"
-        },
-        {
-          "name": "Ali Taghibakhshi"
-        },
-        {
-          "name": "Alina Galiautdinova"
-        },
-        {
-          "name": "Alisa Liu"
-        },
-        {
-          "name": "Alok Kumar"
-        },
-        {
-          "name": "Ameya Sunil Mahabaleshwarkar"
-        },
-        {
-          "name": "Amir Klein"
-        },
-        {
-          "name": "Amit Zuker"
-        },
-        {
-          "name": "Amnon Geifman"
-        },
-        {
-          "name": "Anahita Bhiwandiwalla"
-        },
-        {
-          "name": "Ananth Subramaniam"
-        },
-        {
-          "name": "Andrew Tao"
-        },
-        {
-          "name": "Anjaney Shrivastava"
-        },
-        {
-          "name": "Anjulie Agrusa"
-        },
-        {
-          "name": "Ankur Srivastava"
-        },
-        {
-          "name": "Ankur Verma"
-        },
-        {
-          "name": "Ann Guan"
-        },
-        {
-          "name": "Anna Shors"
-        },
-        {
-          "name": "Annamalai Chockalingam"
-        },
-        {
-          "name": "Anubhav Mandarwal"
-        },
-        {
-          "name": "Aparnaa Ramani"
-        },
-        {
-          "name": "Arham Mehta"
-        },
-        {
-          "name": "Arti Jain"
-        },
-        {
-          "name": "Arun Venkatesan"
-        },
-        {
-          "name": "Asha Anoosheh"
-        },
-        {
-          "name": "Ashwath Aithal"
-        },
-        {
-          "name": "Ashwin Poojary"
-        },
-        {
-          "name": "Asif Ahamed"
-        },
-        {
-          "name": "Asit Mishra"
-        },
-        {
-          "name": "Asli Sabanci Demiroz"
-        },
-        {
-          "name": "Asma Kuriparambil Thekkumpate"
-        },
-        {
-          "name": "Atefeh Sohrabizadeh"
-        },
-        {
-          "name": "Avinash Kaur"
-        },
-        {
-          "name": "Ayush Dattagupta"
-        },
-        {
-          "name": "Barath Subramaniam Anandan"
-        },
-        {
-          "name": "Bardiya Sadeghi"
-        },
-        {
-          "name": "Barnaby Simkin"
-        },
-        {
-          "name": "Ben Lanir"
-        },
-        {
-          "name": "Benedikt Schifferer"
-        },
-        {
-          "name": "Benjamin Chislett"
-        },
-        {
-          "name": "Besmira Nushi"
-        },
-        {
-          "name": "Bilal Kartal"
-        },
-        {
-          "name": "Bill Thiede"
-        },
-        {
-          "name": "Bita Darvish Rouhani"
-        },
-        {
-          "name": "Bobby Chen"
-        },
-        {
-          "name": "Boris Ginsburg"
-        },
-        {
-          "name": "Brandon Norick"
-        },
-        {
-          "name": "Branislav Kisacanin"
-        },
-        {
-          "name": "Brian Yu"
-        },
-        {
-          "name": "Bryan Catanzaro"
-        },
-        {
-          "name": "Buvaneswari Mani"
-        },
-        {
-          "name": "Carlo del Mundo"
-        },
-        {
-          "name": "Chankyu Lee"
-        },
-        {
-          "name": "Chanran Kim"
-        },
-        {
-          "name": "Chantal Hwang"
-        },
-        {
-          "name": "Chao Ni"
-        },
-        {
-          "name": "Charles Wang"
-        },
-        {
-          "name": "Charlie Truong"
-        },
-        {
-          "name": "Cheng-Ping Hsieh"
-        },
-        {
-          "name": "Chenhan Yu"
-        },
-        {
-          "name": "Chenjie Luo"
-        },
-        {
-          "name": "Cherie Wang"
-        },
-        {
-          "name": "Chetan Mungekar"
-        },
-        {
-          "name": "Chintan Patel"
-        },
-        {
-          "name": "Chris Alexiuk"
-        },
-        {
-          "name": "Chris Holguin"
-        },
-        {
-          "name": "Chris Wing"
-        },
-        {
-          "name": "Christian Munley"
-        },
-        {
-          "name": "Christopher Parisien"
-        },
-        {
-          "name": "Chuck Desai"
-        },
-        {
-          "name": "Chunyang Sheng"
-        },
-        {
-          "name": "Collin Neale"
-        },
-        {
-          "name": "Cyril Meurillon"
-        },
-        {
-          "name": "Dakshi Kumar"
-        },
-        {
-          "name": "Dan Gil"
-        },
-        {
-          "name": "Dan Su"
-        },
-        {
-          "name": "Dane Corneil"
-        },
-        {
-          "name": "Daniel Afrimi"
-        },
-        {
-          "name": "Daniel Burkhardt Eliuth Triana"
-        },
-        {
-          "name": "Daniel Egert"
-        },
-        {
-          "name": "Daniel Fatade"
-        },
-        {
-          "name": "Daniel Lo"
-        },
-        {
-          "name": "Daniel Rohrer"
-        },
-        {
-          "name": "Daniel Serebrenik"
-        },
-        {
-          "name": "Daniil Sorokin"
-        },
-        {
-          "name": "Daria Gitman"
-        },
-        {
-          "name": "Daria Levy"
-        },
-        {
-          "name": "Darko Stosic"
-        },
-        {
-          "name": "David Edelsohn"
-        },
-        {
-          "name": "David Messina"
-        },
-        {
-          "name": "David Mosallanezhad"
-        },
-        {
-          "name": "David Tamok"
-        },
-        {
-          "name": "Deena Donia"
-        },
-        {
-          "name": "Deepak Narayanan"
-        },
-        {
-          "name": "Devin O'Kelly"
-        },
-        {
-          "name": "Dheeraj Peri"
-        },
-        {
-          "name": "Dhruv Nathawani"
-        },
-        {
-          "name": "Di Wu"
-        },
-        {
-          "name": "Dima Rekesh"
-        },
-        {
-          "name": "Dina Yared"
-        },
-        {
-          "name": "Divyanshu Kakwani"
-        },
-        {
-          "name": "Dmitry Konyagin Brandon Tuttle"
-        },
-        {
-          "name": "Dong Ahn"
-        },
-        {
-          "name": "Dongfu Jiang"
-        },
-        {
-          "name": "Dorrin Poorkay"
-        },
-        {
-          "name": "Douglas O'Flaherty"
-        },
-        {
-          "name": "Duncan Riach"
-        },
-        {
-          "name": "Dusan Stosic"
-        },
-        {
-          "name": "Dustin Van Stee"
-        },
-        {
-          "name": "Edgar Minasyan"
-        },
-        {
-          "name": "Edward Lin"
-        },
-        {
-          "name": "Eileen Peters Long"
-        },
-        {
-          "name": "Elad Segal"
-        },
-        {
-          "name": "Elena Lantz"
-        },
-        {
-          "name": "Elena Lewis"
-        },
-        {
-          "name": "Ellie Evans"
-        },
-        {
-          "name": "Elliott Ning"
-        },
-        {
-          "name": "Eric Chung"
-        },
-        {
-          "name": "Eric Harper"
-        },
-        {
-          "name": "Eric Pham-Hung"
-        },
-        {
-          "name": "Eric W. Tramel"
-        },
-        {
-          "name": "Erick Galinkin"
-        },
-        {
-          "name": "Erik Pounds"
-        },
-        {
-          "name": "Esti Etrog"
-        },
-        {
-          "name": "Evan Briones"
-        },
-        {
-          "name": "Evan Wu"
-        },
-        {
-          "name": "Evelina Bakhturina"
-        },
-        {
-          "name": "Evgeny Tsykunov"
-        },
-        {
-          "name": "Ewa Dobrowolska"
-        },
-        {
-          "name": "Farshad Saberi Movahed"
-        },
-        {
-          "name": "Farzan Memarian"
-        },
-        {
-          "name": "Fay Wang"
-        },
-        {
-          "name": "Fei Jia"
-        },
-        {
-          "name": "Felipe Soares"
-        },
-        {
-          "name": "Felipe Vieira Frujeri"
-        },
-        {
-          "name": "Feng Chen"
-        },
-        {
-          "name": "Fengguang Lin"
-        },
-        {
-          "name": "Ferenc Galko"
-        },
-        {
-          "name": "Fortuna Zhang"
-        },
-        {
-          "name": "Frankie Siino"
-        },
-        {
-          "name": "Frida Hou"
-        },
-        {
-          "name": "Gantavya Bhatt"
-        },
-        {
-          "name": "Gargi Prasad"
-        },
-        {
-          "name": "Geethapriya Venkataramani"
-        },
-        {
-          "name": "Geetika Gupta"
-        },
-        {
-          "name": "George Armstrong"
-        },
-        {
-          "name": "Gerald Shen"
-        },
-        {
-          "name": "Giulio Borghesi"
-        },
-        {
-          "name": "Gordana Neskovic"
-        },
-        {
-          "name": "Gorkem Batmaz"
-        },
-        {
-          "name": "Grace Lam"
-        },
-        {
-          "name": "Grace Wu"
-        },
-        {
-          "name": "Greg Pauloski"
-        },
-        {
-          "name": "Greyson Davis"
-        },
-        {
-          "name": "Grigor Nalbandyan"
-        },
-        {
-          "name": "Guoming Zhang"
-        },
-        {
-          "name": "Guy Farber"
-        },
-        {
-          "name": "Guyue Huang"
-        },
-        {
-          "name": "Haifeng Qian"
-        },
-        {
-          "name": "Haran Kumar Shiv Kumar"
-        },
-        {
-          "name": "Harry Kim"
-        },
-        {
-          "name": "Harsh Sharma"
-        },
-        {
-          "name": "Hayate Iso"
-        },
-        {
-          "name": "Hayley Ross"
-        },
-        {
-          "name": "Herbert Hum"
-        },
-        {
-          "name": "Herman Sahota"
-        },
-        {
-          "name": "Hexin Wang"
-        },
-        {
-          "name": "Himanshu Soni"
-        },
-        {
-          "name": "Hiren Upadhyay"
-        },
-        {
-          "name": "Huy Nguyen"
-        },
-        {
-          "name": "Iain Cunningham"
-        },
-        {
-          "name": "Ido Galil"
-        },
-        {
-          "name": "Ido Shahaf"
-        },
-        {
-          "name": "Igino Padovani"
-        },
-        {
-          "name": "Igor Gitman"
-        },
-        {
-          "name": "Igor Shovkun"
-        },
-        {
-          "name": "Ikroop Dhillon"
-        },
-        {
-          "name": "Ilya Loshchilov"
-        },
-        {
-          "name": "Ingrid Kelly"
-        },
-        {
-          "name": "Itamar Schen"
-        },
-        {
-          "name": "Itay Levy"
-        },
-        {
-          "name": "Ivan Moshkov"
-        },
-        {
-          "name": "Izik Golan"
-        },
-        {
-          "name": "Izzy Putterman"
-        },
-        {
-          "name": "Jain Tu"
-        },
-        {
-          "name": "Jan Baczek"
-        },
-        {
-          "name": "Jan Kautz"
-        },
-        {
-          "name": "Jane Polak Scowcroft"
-        },
-        {
-          "name": "Janica Rosenberg"
-        },
-        {
-          "name": "Jared Casper"
-        },
-        {
-          "name": "Jarrod Pflum"
-        },
-        {
-          "name": "Jason Grant"
-        },
-        {
-          "name": "Jason Sewall"
-        },
-        {
-          "name": "Jatin Mitra"
-        },
-        {
-          "name": "Jeffrey Glick"
-        },
-        {
-          "name": "Jenny Chen"
-        },
-        {
-          "name": "Jesse Oliver"
-        },
-        {
-          "name": "Jiacheng Xu"
-        },
-        {
-          "name": "Jiafan Zhu"
-        },
-        {
-          "name": "Jialin Song"
-        },
-        {
-          "name": "Jian Zhang"
-        },
-        {
-          "name": "Jiaqi Zeng"
-        },
-        {
-          "name": "Jie Lou"
-        },
-        {
-          "name": "Jill Milton"
-        },
-        {
-          "name": "Jim Chow"
-        },
-        {
-          "name": "Jimmy Zhang"
-        },
-        {
-          "name": "Jinhang Choi"
-        },
-        {
-          "name": "Jining Huang"
-        },
-        {
-          "name": "Jocelyn Huang"
-        },
-        {
-          "name": "Joel Caruso"
-        },
-        {
-          "name": "Joey Conway"
-        },
-        {
-          "name": "Joey Guman"
-        },
-        {
-          "name": "Johan Jatko"
-        },
-        {
-          "name": "John Kamalu"
-        },
-        {
-          "name": "Johnny Greco"
-        },
-        {
-          "name": "Jonathan Cohen"
-        },
-        {
-          "name": "Jonathan Raiman"
-        },
-        {
-          "name": "Joseph Jennings"
-        },
-        {
-          "name": "Joyjit Daw"
-        },
-        {
-          "name": "Juan Yu"
-        },
-        {
-          "name": "Julio Tapia"
-        },
-        {
-          "name": "Junkeun Yi"
-        },
-        {
-          "name": "Jupinder Parmar"
-        },
-        {
-          "name": "Jyothi Achar"
-        },
-        {
-          "name": "Kari Briski"
-        },
-        {
-          "name": "Kartik Mattoo"
-        },
-        {
-          "name": "Katherine Cheung"
-        },
-        {
-          "name": "Katherine Luna"
-        },
-        {
-          "name": "Keith Wyss"
-        },
-        {
-          "name": "Kevin Shih"
-        },
-        {
-          "name": "Kezhi Kong"
-        },
-        {
-          "name": "Khanh Nguyen"
-        },
-        {
-          "name": "Khushi Bhardwaj"
-        },
-        {
-          "name": "Kirill Buryak"
-        },
-        {
-          "name": "Kirthi Shankar Sivamani"
-        },
-        {
-          "name": "Konstantinos Krommydas"
-        },
-        {
-          "name": "Kris Murphy"
-        },
-        {
-          "name": "Krishna C. Puvvada"
-        },
-        {
-          "name": "Krzysztof Pawelec"
-        },
-        {
-          "name": "Kumar Anik"
-        },
-        {
-          "name": "Laikh Tewari"
-        },
-        {
-          "name": "Laya Sleiman"
-        },
-        {
-          "name": "Leo Du"
-        },
-        {
-          "name": "Leon Derczynski"
-        },
-        {
-          "name": "Li Ding"
-        },
-        {
-          "name": "Lilach Ilan"
-        },
-        {
-          "name": "Lingjie Wu"
-        },
-        {
-          "name": "Lizzie Wei"
-        },
-        {
-          "name": "Luis Vega"
-        },
-        {
-          "name": "Lun Su"
-        },
-        {
-          "name": "Maarten Van Segbroeck"
-        },
-        {
-          "name": "Maer Rodrigues de Melo"
-        },
-        {
-          "name": "Magaret Zhang"
-        },
-        {
-          "name": "Mahan Fathi"
-        },
-        {
-          "name": "Makesh Narsimhan Sreedhar"
-        },
-        {
-          "name": "Makesh Sreedhar"
-        },
-        {
-          "name": "Makesh Tarun Chandran"
-        },
-        {
-          "name": "Manuel Reyes Gomez"
-        },
-        {
-          "name": "Maor Ashkenazi"
-        },
-        {
-          "name": "Marc Cuevas"
-        },
-        {
-          "name": "Marc Romeijn"
-        },
-        {
-          "name": "Margaret Zhang"
-        },
-        {
-          "name": "Mark Cai"
-        },
-        {
-          "name": "Mark Gabel"
-        },
-        {
-          "name": "Markus Kliegl"
-        },
-        {
-          "name": "Martyna Patelka"
-        },
-        {
-          "name": "Maryam Moosaei"
-        },
-        {
-          "name": "Matthew Varacalli"
-        },
-        {
-          "name": "Matvei Novikov"
-        },
-        {
-          "name": "Mauricio Ferrato"
-        },
-        {
-          "name": "Mehrzad Samadi"
-        },
-        {
-          "name": "Melissa Corpuz"
-        },
-        {
-          "name": "Meng Xin"
-        },
-        {
-          "name": "Mengdi Wang"
-        },
-        {
-          "name": "Mengru Wang"
-        },
-        {
-          "name": "Meredith Price"
-        },
-        {
-          "name": "Micah Schaffer"
-        },
-        {
-          "name": "Michael Andersch"
-        },
-        {
-          "name": "Michael Boone"
-        },
-        {
-          "name": "Michael Evans"
-        },
-        {
-          "name": "Michael Z Wang"
-        },
-        {
-          "name": "Miguel Martinez"
-        },
-        {
-          "name": "Mikail Khona"
-        },
-        {
-          "name": "Mike Chrzanowski"
-        },
-        {
-          "name": "Mike Hollinger"
-        },
-        {
-          "name": "Mingyuan Ma"
-        },
-        {
-          "name": "Minseok Lee"
-        },
-        {
-          "name": "Mohammad Dabbah"
-        },
-        {
-          "name": "Mohammad Shoeybi"
-        },
-        {
-          "name": "Mostofa Patwary"
-        },
-        {
-          "name": "Nabin Mulepati"
-        },
-        {
-          "name": "Nader Khalil"
-        },
-        {
-          "name": "Najeeb Nabwani"
-        },
-        {
-          "name": "Nancy Agarwal"
-        },
-        {
-          "name": "Nanthini Balasubramaniam"
-        },
-        {
-          "name": "Narimane Hennouni"
-        },
-        {
-          "name": "Narsi Kodukula"
-        },
-        {
-          "name": "Natalie Hereth"
-        },
-        {
-          "name": "Nathaniel Pinckney"
-        },
-        {
-          "name": "Nave Assaf"
-        },
-        {
-          "name": "Negar Habibi"
-        },
-        {
-          "name": "Nestor Qin"
-        },
-        {
-          "name": "Neta Zmora"
-        },
-        {
-          "name": "Netanel Haber"
-        },
-        {
-          "name": "Nick Reamaroon"
-        },
-        {
-          "name": "Nickson Quak"
-        },
-        {
-          "name": "Nidhi Bhatia"
-        },
-        {
-          "name": "Nikhil Jukar"
-        },
-        {
-          "name": "Nikki Pope"
-        },
-        {
-          "name": "Nikolai Ludwig"
-        },
-        {
-          "name": "Nima Tajbakhsh"
-        },
-        {
-          "name": "Nir Ailon"
-        },
-        {
-          "name": "Nirmal Juluru"
-        },
-        {
-          "name": "Nirmalya De"
-        },
-        {
-          "name": "Nowel Pitt"
-        },
-        {
-          "name": "Oleg Rybakov"
-        },
-        {
-          "name": "Oleksii Hrinchuk"
-        },
-        {
-          "name": "Oleksii Kuchaiev"
-        },
-        {
-          "name": "Olivier Delalleau"
-        },
-        {
-          "name": "Oluwatobi Olabiyi"
-        },
-        {
-          "name": "Omer Ullman Argov"
-        },
-        {
-          "name": "Omri Almog"
-        },
-        {
-          "name": "Omri Puny"
-        },
-        {
-          "name": "Oren Tropp"
-        },
-        {
-          "name": "Otavio Padovani"
-        },
-        {
-          "name": "Ouye Xie"
-        },
-        {
-          "name": "Parth Chadha"
-        },
-        {
-          "name": "Pasha Shamis"
-        },
-        {
-          "name": "Paul Gibbons"
-        },
-        {
-          "name": "Pavlo Molchanov"
-        },
-        {
-          "name": "Peter Belcak"
-        },
-        {
-          "name": "Peter Jin"
-        },
-        {
-          "name": "Pinky Xu"
-        },
-        {
-          "name": "Piotr Januszewski"
-        },
-        {
-          "name": "Pooya Jannaty"
-        },
-        {
-          "name": "Prachi Shevate"
-        },
-        {
-          "name": "Pradeep Thalasta"
-        },
-        {
-          "name": "Pranav Prashant Thombre"
-        },
-        {
-          "name": "Prasoon Varshney"
-        },
-        {
-          "name": "Prerana Gambhir"
-        },
-        {
-          "name": "Pritam Gundecha"
-        },
-        {
-          "name": "Przemek Tredak"
-        },
-        {
-          "name": "Qing Miao"
-        },
-        {
-          "name": "Qiyu Wan"
-        },
-        {
-          "name": "Quan Tran Minh"
-        },
-        {
-          "name": "Rabeeh Karimi Mahabadi"
-        },
-        {
-          "name": "Rachel Oberman"
-        },
-        {
-          "name": "Rachit Garg"
-        },
-        {
-          "name": "Rahul Kandu"
-        },
-        {
-          "name": "Raina Zhong"
-        },
-        {
-          "name": "Ran El-Yaniv"
-        },
-        {
-          "name": "Ran Zilberstein"
-        },
-        {
-          "name": "Rasoul Shafipour"
-        },
-        {
-          "name": "Renee Yao"
-        },
-        {
-          "name": "Renjie Pi"
-        },
-        {
-          "name": "Richard Mazzarese"
-        },
-        {
-          "name": "Richard Wang"
-        },
-        {
-          "name": "Rick Izzo"
-        },
-        {
-          "name": "Ridhima Singla"
-        },
-        {
-          "name": "Rima Shahbazyan"
-        },
-        {
-          "name": "Rishabh Garg"
-        },
-        {
-          "name": "Ritika Borkar"
-        },
-        {
-          "name": "Ritu Gala"
-        },
-        {
-          "name": "Riyad Islam"
-        },
-        {
-          "name": "Robert Clark"
-        },
-        {
-          "name": "Robert Hesse"
-        },
-        {
-          "name": "Roger Waleffe"
-        },
-        {
-          "name": "Rohit Varma Kalidindi"
-        },
-        {
-          "name": "Rohit Watve"
-        },
-        {
-          "name": "Roi Koren"
-        },
-        {
-          "name": "Ron Fan"
-        },
-        {
-          "name": "Ruchika Kharwar"
-        },
-        {
-          "name": "Ruisi Cai"
-        },
-        {
-          "name": "Ruoxi Zhang"
-        },
-        {
-          "name": "Russell J. Hewett"
-        },
-        {
-          "name": "Ryan Prenger"
-        },
-        {
-          "name": "Ryan Timbrook"
-        },
-        {
-          "name": "Ryota Egashira"
-        },
-        {
-          "name": "Sadegh Mahdavi"
-        },
-        {
-          "name": "Sagar Singh Ashutosh Joshi"
-        },
-        {
-          "name": "Sahil Modi"
-        },
-        {
-          "name": "Samuel Kriman"
-        },
-        {
-          "name": "Sandeep Pombra"
-        },
-        {
-          "name": "Sanjay Kariyappa"
-        },
-        {
-          "name": "Sanjeev Satheesh"
-        },
-        {
-          "name": "Santiago Pombo"
-        },
-        {
-          "name": "Saori Kaji"
-        },
-        {
-          "name": "Satish Pasumarthi"
-        },
-        {
-          "name": "Saurav Mishra"
-        },
-        {
-          "name": "Saurav Muralidharan"
-        },
-        {
-          "name": "Scott Hara"
-        },
-        {
-          "name": "Sean Narenthiran"
-        },
-        {
-          "name": "Sebastian Rogawski"
-        },
-        {
-          "name": "Seonjin Na"
-        },
-        {
-          "name": "Seonmyeong Bak"
-        },
-        {
-          "name": "Sepehr Sameni"
-        },
-        {
-          "name": "Seth Poulos"
-        },
-        {
-          "name": "Shahar Mor"
-        },
-        {
-          "name": "Shantanu Acharya"
-        },
-        {
-          "name": "Shaona Ghosh Adam Lord"
-        },
-        {
-          "name": "Sharath Turuvekere Sreenivas"
-        },
-        {
-          "name": "Shaun Kotek"
-        },
-        {
-          "name": "Shaya Gharghabi"
-        },
-        {
-          "name": "Shelby Thomas"
-        },
-        {
-          "name": "Sheng-Chieh Lin"
-        },
-        {
-          "name": "Shibani Likhite"
-        },
-        {
-          "name": "Shiqing Fan"
-        },
-        {
-          "name": "Shiyang Chen"
-        },
-        {
-          "name": "Shreya Gopal"
-        },
-        {
-          "name": "Shrimai Prabhumoye"
-        },
-        {
-          "name": "Shubham Pachori"
-        },
-        {
-          "name": "Shubham Toshniwal"
-        },
-        {
-          "name": "Shuo Zhang"
-        },
-        {
-          "name": "Shuoyang Ding"
-        },
-        {
-          "name": "Shyam Renjith"
-        },
-        {
-          "name": "Shyamala Prayaga"
-        },
-        {
-          "name": "Siddhartha Jain"
-        },
-        {
-          "name": "Simeng Sun"
-        },
-        {
-          "name": "Sirisha Rella"
-        },
-        {
-          "name": "Sirshak Das"
-        },
-        {
-          "name": "Smita Ithape"
-        },
-        {
-          "name": "Sneha Harishchandra S"
-        },
-        {
-          "name": "Somshubra Majumdar"
-        },
-        {
-          "name": "Soumye Singhal"
-        },
-        {
-          "name": "Sri Harsha Singudasu"
-        },
-        {
-          "name": "Sriharsha Niverty"
-        },
-        {
-          "name": "Stas Sergienko"
-        },
-        {
-          "name": "Stefana Gloginic"
-        },
-        {
-          "name": "Stefania Alborghetti"
-        },
-        {
-          "name": "Stephen Ge"
-        },
-        {
-          "name": "Stephen McCullough"
-        },
-        {
-          "name": "Sugam Dipak Devare"
-        },
-        {
-          "name": "Suguna Varshini Velury"
-        },
-        {
-          "name": "Sukrit Rao"
-        },
-        {
-          "name": "Sumeet Kumar Barua"
-        },
-        {
-          "name": "Sunny Gai"
-        },
-        {
-          "name": "Suseella Panguluri"
-        },
-        {
-          "name": "Sushil Koundinyan"
-        },
-        {
-          "name": "Swathi Patnam"
-        },
-        {
-          "name": "Sweta Priyadarshi"
-        },
-        {
-          "name": "Swetha Bhendigeri"
-        },
-        {
-          "name": "Syeda Nahida Akter"
-        },
-        {
-          "name": "Sylendran Arunagiri"
-        },
-        {
-          "name": "Tailling Yuan"
-        },
-        {
-          "name": "Talor Abramovich"
-        },
-        {
-          "name": "Tan Bui"
-        },
-        {
-          "name": "Tan Yu"
-        },
-        {
-          "name": "Terry Kong"
-        },
-        {
-          "name": "Thanh Do"
-        },
-        {
-          "name": "Thomas Gburek"
-        },
-        {
-          "name": "Thorgane Marques"
-        },
-        {
-          "name": "Tiffany Moore"
-        },
-        {
-          "name": "Tijmen Blankevoort"
-        },
-        {
-          "name": "Tim Moon"
-        },
-        {
-          "name": "Timothy Ma"
-        },
-        {
-          "name": "Tiyasa Mitra"
-        },
-        {
-          "name": "Tomasz Grzegorzek"
-        },
-        {
-          "name": "Tomer Asida"
-        },
-        {
-          "name": "Tomer Bar Natan"
-        },
-        {
-          "name": "Tomer Keren"
-        },
-        {
-          "name": "Tomer Ronen"
-        },
-        {
-          "name": "Traian Rebedea"
-        },
-        {
-          "name": "Trenton Starkey"
-        },
-        {
-          "name": "Tugrul Konuk"
-        },
-        {
-          "name": "Twinkle Vashishth"
-        },
-        {
-          "name": "Tyler Condensa"
-        },
-        {
-          "name": "Udi Karpas"
-        },
-        {
-          "name": "Ushnish De"
-        },
-        {
-          "name": "Vahid Noorozi"
-        },
-        {
-          "name": "Vahid Noroozi"
-        },
-        {
-          "name": "Vanshil Atul Shah"
-        },
-        {
-          "name": "Veena Vaidyanathan"
-        },
-        {
-          "name": "Venkat Srinivasan"
-        },
-        {
-          "name": "Venmugil Elango"
-        },
-        {
-          "name": "Victor Cui"
-        },
-        {
-          "name": "Vijay Korthikanti"
-        },
-        {
-          "name": "Vikas Mehta"
-        },
-        {
-          "name": "Virginia Adams"
-        },
-        {
-          "name": "Virginia Wu"
-        },
-        {
-          "name": "Vitaly Kurin"
-        },
-        {
-          "name": "Vitaly Lavrukhin"
-        },
-        {
-          "name": "Vladimir Anisimov"
-        },
-        {
-          "name": "Wan Seo"
-        },
-        {
-          "name": "Wanli Jiang"
-        },
-        {
-          "name": "Wasi Uddin Ahmad"
-        },
-        {
-          "name": "Wei Du"
-        },
-        {
-          "name": "Wei Ping"
-        },
-        {
-          "name": "Wei-Ming Chen"
-        },
-        {
-          "name": "Wendy Quan"
-        },
-        {
-          "name": "Wenliang Dai"
-        },
-        {
-          "name": "Wenwen Gao"
-        },
-        {
-          "name": "Will Jennings"
-        },
-        {
-          "name": "William Zhang"
-        },
-        {
-          "name": "Xiaowei Ren"
-        },
-        {
-          "name": "Xiaowen Xin"
-        },
-        {
-          "name": "Xin Li"
-        },
-        {
-          "name": "Yang Yu"
-        },
-        {
-          "name": "Yangyi Chen"
-        },
-        {
-          "name": "Yaniv Galron"
-        },
-        {
-          "name": "Yashaswi Karnati"
-        },
-        {
-          "name": "Yejin Choi"
-        },
-        {
-          "name": "Yev Meyer"
-        },
-        {
-          "name": "Yi-Fu Wu"
-        },
-        {
-          "name": "Yian Zhang"
-        },
-        {
-          "name": "Ying Lin"
-        },
-        {
-          "name": "Yonatan Geifman"
-        },
-        {
-          "name": "Yonggan Fu"
-        },
-        {
-          "name": "Yoshi Suhara"
-        },
-        {
-          "name": "Youngeun Kwon"
-        },
-        {
-          "name": "Yuan Zhang"
-        },
-        {
-          "name": "Yuki Huang"
-        },
-        {
-          "name": "Zach Moshe"
-        },
-        {
-          "name": "Zhilin Wang"
-        },
-        {
-          "name": "Zhiyu Cheng"
-        },
-        {
-          "name": "Zhongbo Zhu"
-        },
-        {
-          "name": "Zhuolin Yang"
-        },
-        {
-          "name": "Zihan Liu"
-        },
-        {
-          "name": "Zijia Chen"
-        },
-        {
-          "name": "Zijie Yan"
-        },
-        {
-          "name": "Zuhair Ahmed"
+          "name": "Haibing Guan"
         }
       ],
-      "published": "2026-04-14T07:02:32Z",
-      "published_date": "2026-04-14 07:02:32+00:00",
-      "updated": "2026-04-14T07:02:32Z",
-      "primary_category": "cs.LG",
+      "published": "2026-04-15T09:01:54Z",
+      "published_date": "2026-04-15 09:01:54+00:00",
+      "updated": "2026-04-15T09:01:54Z",
+      "comments": "ACL 2026 Main Conference",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL"
+        "cs.CL",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.12374v1",
-      "url": "http://arxiv.org/abs/2604.12374v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.13634v1",
+      "url": "http://arxiv.org/abs/2604.13634v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
@@ -2257,19 +101,20 @@
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "inference acceleration",
         "speculative decoding",
         "throughput",
-        "quantization",
         "cs.LG",
-        "cs.CL"
+        "cs.CL",
+        "memory",
+        "speedup",
+        "evaluation"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 4,
+        "text_match_count": 2,
         "matched_categories": [
           "cs.LG",
           "cs.CL"
@@ -2279,209 +124,239 @@
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput"
+          "throughput",
+          "memory",
+          "speedup"
         ],
-        "bonus_keyword_match_count": 1,
+        "bonus_keyword_match_count": 3,
         "analysis_keyword_matches": [
-          "throughput"
+          "evaluation",
+          "throughput",
+          "memory",
+          "speedup"
         ],
-        "analysis_keyword_match_count": 1,
+        "analysis_keyword_match_count": 4,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.18
+        "bonus_keyword_bonus": 0.5
       },
-      "selection_lane": "fresh",
-      "citationCount": 7
+      "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2604.12171v1",
-      "arxiv_id": "2604.12171v1",
-      "title": "PipeLive: Efficient Live In-place Pipeline Parallelism Reconfiguration for Dynamic LLM Serving",
-      "summary": "Pipeline parallelism (PP) is widely used to partition layers of large language models (LLMs) across GPUs, enabling scalable inference for large models. However, existing systems rely on static PP configurations that fail to adapt to dynamic settings, such as serverless platforms and heterogeneous GPU environments. Reconfiguring PP by stopping and redeploying service incurs prohibitive downtime, so reconfiguration must instead proceed live and in place, without interrupting inference. However, live in-place PP reconfiguration is fundamentally challenging. GPUs are already saturated with model weights and KV cache, leaving little room for new layer placements and necessitating KV cache resizing, at odds with systems like vLLM that preallocate for throughput. Moreover, maintaining KV consistency during execution is difficult: stop-and-copy introduces large pauses, while background synchronization risks inconsistency as states evolve. We present PipeLive, which enables live in-place PP reconfiguration with minimal disruption. PipeLive introduces a redesigned KV cache layout together with a co-designed extension to PageAttention, forming a unified mechanism for live KV resizing. It further adopts an incremental KV patching mechanism, inspired by live virtual machine migration, to synchronize KV states between source and target configurations and identify a safe switch point. PipeLive achieves a 2.5X reduction in time-to-first-token (TTFT) without KV cache overflow compared to disabling KV resizing. Furthermore, compared to a variant without KV patching, it reduces reconfiguration overhead from seconds to under 10ms, and improves TTFT and time-per-output-token (TPOT) by up to 54.7% and 14.7%, respectively.",
+      "id": "http://arxiv.org/abs/2604.13556v1",
+      "arxiv_id": "2604.13556v1",
+      "title": "YOCO++: Enhancing YOCO with KV Residual Connections for Efficient LLM Inference",
+      "summary": "Cross-layer key-value (KV) compression has been found to be effective in efficient inference of large language models (LLMs). Although they reduce the memory consumption of the KV cache, such methods usually introduce non-negligible performance degradation. In this work, we aim to enhance the performance of YOCO, a cross-layer KV compression method that shares the KVs of the middle layer with the top-half layers. We propose YOCO++, an enhanced YOCO that incorporates a weighted residual connection between the KVs of each bottom-half layer and the bottom layer. Compared to YOCO, YOCO++ increases model capacity while maintaining the same training and inference efficiency. Our experiments show that YOCO++ achieves state-of-the-art performance among the cross-layer KV compression methods at a 50% KV cache compression rate, outperforming the standard Transformer.",
       "authors": [
-        "Xu Bai",
-        "Muhammed Tawfiqul Islam",
-        "Chen Wang",
-        "Adel N. Toosi"
+        "You Wu",
+        "Ziheng Chen",
+        "Yizhen Zhang",
+        "Haoyi Wu",
+        "Chengting Yu",
+        "Yuchi Xu",
+        "Wenbo Su",
+        "Bo Zheng",
+        "Kewei Tu"
       ],
       "author_details": [
         {
-          "name": "Xu Bai"
+          "name": "You Wu"
         },
         {
-          "name": "Muhammed Tawfiqul Islam"
+          "name": "Ziheng Chen"
         },
         {
-          "name": "Chen Wang"
+          "name": "Yizhen Zhang"
         },
         {
-          "name": "Adel N. Toosi"
+          "name": "Haoyi Wu"
+        },
+        {
+          "name": "Chengting Yu"
+        },
+        {
+          "name": "Yuchi Xu"
+        },
+        {
+          "name": "Wenbo Su"
+        },
+        {
+          "name": "Bo Zheng"
+        },
+        {
+          "name": "Kewei Tu"
         }
       ],
-      "published": "2026-04-14T00:56:32Z",
-      "published_date": "2026-04-14 00:56:32+00:00",
-      "updated": "2026-04-14T00:56:32Z",
-      "primary_category": "cs.DC",
+      "published": "2026-04-15T07:05:14Z",
+      "published_date": "2026-04-15 07:05:14+00:00",
+      "updated": "2026-04-15T07:05:14Z",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.DC",
-        "cs.LG"
+        "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.12171v1",
-      "url": "http://arxiv.org/abs/2604.12171v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.13556v1",
+      "url": "http://arxiv.org/abs/2604.13556v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 9.97
+        "popularity": 1.8,
+        "quality": 1.8,
+        "recommendation": 9.8
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "llm serving",
-        "serving",
+        "llm inference",
         "kv cache",
-        "vllm",
-        "throughput",
-        "cs.LG",
-        "cs.DC"
+        "cs.CL",
+        "memory"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 5,
+        "text_match_count": 2,
         "matched_categories": [
-          "cs.LG",
-          "cs.DC"
+          "cs.CL"
         ],
         "required_signal_matches": [
-          "kv cache",
-          "vllm"
+          "kv cache"
         ],
-        "required_signal_match_count": 2,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput"
+          "memory"
         ],
         "bonus_keyword_match_count": 1,
         "analysis_keyword_matches": [
-          "throughput"
+          "memory"
         ],
         "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.7,
+        "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh"
     },
     {
-      "paper_id": "2211.17192",
-      "arxiv_id": "2211.17192",
-      "title": "Fast Inference from Transformers via Speculative Decoding",
-      "summary": "Formalizes speculative decoding as a way to accelerate autoregressive generation by pairing a cheaper draft process with exact verification from the target model without changing the output distribution.",
+      "id": "http://arxiv.org/abs/2604.13327v1",
+      "arxiv_id": "2604.13327v1",
+      "title": "Event Tensor: A Unified Abstraction for Compiling Dynamic Megakernel",
+      "summary": "Modern GPU workloads, especially large language model (LLM) inference, suffer from kernel launch overheads and coarse synchronization that limit inter-kernel parallelism. Recent megakernel techniques fuse multiple operators into a single persistent kernel to eliminate launch gaps and expose inter-kernel parallelism, but struggle to handle dynamic shapes and data-dependent computation in real workloads. We present Event Tensor, a unified compiler abstraction for dynamic megakernels. Event Tensor encodes dependencies between tiled tasks, and enables first-class support for both shape and data-dependent dynamism. Built atop this abstraction, our Event Tensor Compiler (ETC) applies static and dynamic scheduling transformations to generate high-performance persistent kernels. Evaluations show that ETC achieves state-of-the-art LLM serving latency while significantly reducing system warmup overhead.",
       "authors": [
-        "Yaniv Leviathan",
-        "Matan Kalman",
-        "Yossi Matias"
-      ],
-      "published": "2022-11-30",
-      "published_date": "2022-11-30 00:00:00",
-      "categories": [
-        "cs.LG",
-        "cs.CL"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "speculative-decoding",
-        "decoding",
-        "parallelism"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2211.17192",
-      "pdf_url": "https://arxiv.org/pdf/2211.17192.pdf",
-      "scores": {
-        "relevance": 2.9,
-        "recency": 0.0,
-        "popularity": 0.0,
-        "quality": 0.0,
-        "recommendation": 5.92
-      },
-      "classic_rotation_score": 10.4734,
-      "citationCount": 1385,
-      "influentialCitationCount": 242,
-      "venue": "International Conference on Machine Learning"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.12798v1",
-      "arxiv_id": "2604.12798v1",
-      "title": "VFA: Relieving Vector Operations in Flash Attention with Global Maximum Pre-computation",
-      "summary": "FlashAttention-style online softmax enables exact attention computation with linear memory by streaming score tiles through on-chip memory and maintaining a running maximum and normalizer. However, as attention kernels approach peak tensor-core/cube-core throughput on modern accelerators, non-matmul components of online softmax -- especially per-tile rowmax and rowsum reductions and rescale chains -- can become vector or SIMD limited and dominate latency. This paper revisits FlashAttention and proposes Vector Relieved Flash Attention (VFA), a hardware-friendly method that reduces rowmax-driven updates of the running maximum while retaining the online-softmax structure. VFA initializes the running maximum via a cheap approximation from key-block representations, reorders key-block traversal to prioritize high-impact sink and local blocks, and freezes the maximum for remaining blocks to avoid repeated reductions and rescaling. We further integrate VFA with block-sparse skipping methods such as BLASST to form Vector Relieved Sparse Attention (VSA), which reduces both block count and per-block overhead. Notably, VFA and VSA completely avoid the conditional rescale operation in the update stage used in FA4.0. Extensive evaluations on benchmarks including MMLU and MATH500, together with attention statistics, verify our design: (i) sink and local reordering stabilizes the running maximum early; (ii) simple Q and K block summaries fail due to intra-block heterogeneity; (iii) m-initialization is required when maxima appear in middle blocks. Overall, VFA and VSA efficiently alleviate online-softmax reduction bottlenecks without performance loss. Compared to the C16V32 baseline, C8V32, C4V32 and C4V16 achieve nearly two times speedup on modern hardware while hitting the vector bottleneck. With upcoming architecture improvements, C4V16 will deliver six times speedup by enhancing exponent capacity.",
-      "authors": [
-        "Yupeng Sun",
-        "Yanzhao Li",
-        "Zhiqiang Zou",
-        "Bai Du",
-        "Zhiyuan Zhang",
-        "Hui Dong",
-        "Gaoyige Fan",
-        "Hui Wang"
+        "Hongyi Jin",
+        "Bohan Hou",
+        "Guanjie Wang",
+        "Ruihang Lai",
+        "Jinqi Chen",
+        "Zihao Ye",
+        "Yaxing Cai",
+        "Yixin Dong",
+        "Xinhao Cheng",
+        "Zhihao Zhang",
+        "Yilong Zhao",
+        "Yingyi Huang",
+        "Lijie Yang",
+        "Jinchen Jiang",
+        "Gabriele Oliaro",
+        "Jianan Ji",
+        "Xupeng Miao",
+        "Vinod Grover",
+        "Todd C. Mowry",
+        "Zhihao Jia",
+        "Tianqi Chen"
       ],
       "author_details": [
         {
-          "name": "Yupeng Sun"
+          "name": "Hongyi Jin"
         },
         {
-          "name": "Yanzhao Li"
+          "name": "Bohan Hou"
         },
         {
-          "name": "Zhiqiang Zou"
+          "name": "Guanjie Wang"
         },
         {
-          "name": "Bai Du"
+          "name": "Ruihang Lai"
         },
         {
-          "name": "Zhiyuan Zhang"
+          "name": "Jinqi Chen"
         },
         {
-          "name": "Hui Dong"
+          "name": "Zihao Ye"
         },
         {
-          "name": "Gaoyige Fan"
+          "name": "Yaxing Cai"
         },
         {
-          "name": "Hui Wang"
+          "name": "Yixin Dong"
+        },
+        {
+          "name": "Xinhao Cheng"
+        },
+        {
+          "name": "Zhihao Zhang"
+        },
+        {
+          "name": "Yilong Zhao"
+        },
+        {
+          "name": "Yingyi Huang"
+        },
+        {
+          "name": "Lijie Yang"
+        },
+        {
+          "name": "Jinchen Jiang"
+        },
+        {
+          "name": "Gabriele Oliaro"
+        },
+        {
+          "name": "Jianan Ji"
+        },
+        {
+          "name": "Xupeng Miao"
+        },
+        {
+          "name": "Vinod Grover"
+        },
+        {
+          "name": "Todd C. Mowry"
+        },
+        {
+          "name": "Zhihao Jia"
+        },
+        {
+          "name": "Tianqi Chen"
         }
       ],
-      "published": "2026-04-14T14:28:50Z",
-      "published_date": "2026-04-14 14:28:50+00:00",
-      "updated": "2026-04-14T14:28:50Z",
-      "primary_category": "cs.LG",
+      "published": "2026-04-14T22:19:51Z",
+      "published_date": "2026-04-14 22:19:51+00:00",
+      "updated": "2026-04-14T22:19:51Z",
+      "comments": "16 pages. 18 figures. accepted in MLSys 2026",
+      "primary_category": "cs.DC",
       "categories": [
+        "cs.DC",
         "cs.LG",
-        "cs.AI"
+        "cs.PL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.12798v1",
-      "url": "http://arxiv.org/abs/2604.12798v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.13327v1",
+      "url": "http://arxiv.org/abs/2604.13327v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.98,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 9.26
+        "popularity": 1.8,
+        "quality": 1.8,
+        "recommendation": 9.8
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "flashattention",
-        "throughput",
+        "llm serving",
+        "serving",
         "latency",
         "cs.LG",
-        "memory",
-        "speedup",
-        "baseline"
+        "cs.DC",
+        "compiler"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -2490,73 +365,78 @@
         "domain": "LLM Inference Systems",
         "text_match_count": 3,
         "matched_categories": [
-          "cs.LG"
+          "cs.LG",
+          "cs.DC"
         ],
         "required_signal_matches": [
-          "flashattention"
+          "compiler"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput",
-          "latency",
-          "memory",
-          "speedup"
+          "latency"
         ],
-        "bonus_keyword_match_count": 4,
+        "bonus_keyword_match_count": 1,
         "analysis_keyword_matches": [
-          "baseline",
-          "throughput",
-          "latency",
-          "memory",
-          "speedup"
+          "latency"
         ],
-        "analysis_keyword_match_count": 5,
+        "analysis_keyword_match_count": 1,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
+        "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2604.12247v1",
-      "arxiv_id": "2604.12247v1",
-      "title": "SpecBound: Adaptive Bounded Self-Speculation with Layer-wise Confidence Calibration",
-      "summary": "Speculative decoding has emerged as a promising approach to accelerate autoregressive inference in large language models (LLMs). Self-draft methods, which leverage the base LLM itself for speculation, avoid the overhead of auxiliary draft models but face limitations: shallow layers often produce overconfident yet incorrect token predictions, and the presence of difficult tokens in a draft sequence forces redundant computation through deeper layers, undermining both draft acceptance and overall speedup. To address these issues, we propose a novel self-draft framework that suppresses spurious confidence via layer-wise temperature annealing in early-exit decision and adaptively bounds speculation length based on token-wise decoding difficulty. By reprocessing the hidden states of draft tokens in a unified parallel pass through deep layers, our method maintains exact output equivalence with the original model while maximizing computational efficiency. It requires no modifications to the base LLM parameters and achieves up to 2.33x wall-time speedup over standard autoregressive decoding across diverse long-form generation tasks and multiple model architectures.",
+      "id": "http://arxiv.org/abs/2604.13519v1",
+      "arxiv_id": "2604.13519v1",
+      "title": "ToolSpec: Accelerating Tool Calling via Schema-Aware and Retrieval-Augmented Speculative Decoding",
+      "summary": "Tool calling has greatly expanded the practical utility of large language models (LLMs) by enabling them to interact with external applications. As LLM capabilities advance, effective tool use increasingly involves multi-step, multi-turn interactions to solve complex tasks. However, the resulting growth in tool interactions incurs substantial latency, posing a key challenge for real-time LLM serving. Through empirical analysis, we find that tool-calling traces are highly structured, conform to constrained schemas, and often exhibit recurring invocation patterns. Motivated by this, we propose ToolSpec, a schema-aware, retrieval-augmented speculative decoding method for accelerating tool calling. ToolSpec exploits predefined tool schemas to generate accurate drafts, using a finite-state machine to alternate between deterministic schema token filling and speculative generation for variable fields. In addition, ToolSpec retrieves similar historical tool invocations and reuses them as drafts to further improve efficiency. ToolSpec presents a plug-and-play solution that can be seamlessly integrated into existing LLM workflows. Experiments across multiple benchmarks demonstrate that ToolSpec achieves up to a 4.2x speedup, substantially outperforming existing training-free speculative decoding methods.",
       "authors": [
-        "Zhuofan Wen",
-        "Yang Feng"
+        "Heming Xia",
+        "Yongqi Li",
+        "Cunxiao Du",
+        "Mingbo Song",
+        "Wenjie Li"
       ],
       "author_details": [
         {
-          "name": "Zhuofan Wen"
+          "name": "Heming Xia"
         },
         {
-          "name": "Yang Feng"
+          "name": "Yongqi Li"
+        },
+        {
+          "name": "Cunxiao Du"
+        },
+        {
+          "name": "Mingbo Song"
+        },
+        {
+          "name": "Wenjie Li"
         }
       ],
-      "published": "2026-04-14T03:47:04Z",
-      "published_date": "2026-04-14 03:47:04+00:00",
-      "updated": "2026-04-14T03:47:04Z",
-      "comments": "ACL 2026 Findings",
+      "published": "2026-04-15T06:05:11Z",
+      "published_date": "2026-04-15 06:05:11+00:00",
+      "updated": "2026-04-15T06:05:11Z",
       "primary_category": "cs.CL",
       "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.LG"
+        "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.12247v1",
-      "url": "http://arxiv.org/abs/2604.12247v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.13519v1",
+      "url": "http://arxiv.org/abs/2604.13519v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.76,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 9.19
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 9.55
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
+        "llm serving",
+        "serving",
         "speculative decoding",
-        "cs.LG",
+        "latency",
         "cs.CL",
         "speedup"
       ],
@@ -2565,9 +445,8 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 1,
+        "text_match_count": 4,
         "matched_categories": [
-          "cs.LG",
           "cs.CL"
         ],
         "required_signal_matches": [
@@ -2575,207 +454,88 @@
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
+          "latency",
           "speedup"
         ],
-        "bonus_keyword_match_count": 1,
+        "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
+          "latency",
           "speedup"
         ],
-        "analysis_keyword_match_count": 1,
+        "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.18
+        "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2604.12110v1",
-      "arxiv_id": "2604.12110v1",
-      "title": "SOLARIS: Speculative Offloading of Latent-bAsed Representation for Inference Scaling",
-      "summary": "Recent advances in recommendation scaling laws have led to foundation models of unprecedented complexity. While these models offer superior performance, their computational demands make real-time serving impractical, often forcing practitioners to rely on knowledge distillation-compromising serving quality for efficiency. To address this challenge, we present SOLARIS (Speculative Offloading of Latent-bAsed Representation for Inference Scaling), a novel framework inspired by speculative decoding. SOLARIS proactively precomputes user-item interaction embeddings by predicting which user-item pairs are likely to appear in future requests, and asynchronously generating their foundation model representations ahead of time. This approach decouples the costly foundation model inference from the latency-critical serving path, enabling real-time knowledge transfer from models previously considered too expensive for online use. Deployed across Meta's advertising system serving billions of daily requests, SOLARIS achieves 0.67% revenue-driving top-line metrics gain, demonstrating its effectiveness at scale.",
+      "id": "http://arxiv.org/abs/2604.13523v1",
+      "arxiv_id": "2604.13523v1",
+      "title": "ATLAAS: Automatic Tensor-Level Abstraction of Accelerator Semantics",
+      "summary": "Numerous tensor accelerator designs have been proposed, yet most lack well-documented ISAs and compiler backends, limiting evaluation to a handful of operators. Recent work has shown that given a tensor-level ISA specification, complete software stacks including compiler backends can be automatically generated--but writing such specifications remains a manual, expert-driven process.\n  We present ATLAAS, the first end-to-end MLIR-based pipeline that lifts RTL-extracted accelerator semantics to tensor ISA specifications. Starting from bit-level LLVM IR produced by prior architecture-level model extraction, ATLAAS applies an 8-pass semantic lifting pipeline that progressively recovers high-level tensor structure--MAC idioms, saturation semantics, multi-dimensional buffer organizations, and data layout transformations--emitting specifications that immediately enable automatic software stack generation through the ACT ecosystem.\n  We evaluate ATLAAS on the Gemmini systolic-array accelerator, where the pipeline collapses bit-level MLIR by up to 92.9% on processing elements and 24-34% on controller modules. ATLAAS discovers hardware features omitted from the hand-written reference, with correctness validated via Z3 SMT equivalence proofs. Generality is confirmed on TVM's VTA processor, where the same pipeline lifts all four datapath modules without accelerator-specific changes, enabling an automated path from RTL to a performance-competitive compiler backend.",
       "authors": [
-        "Zikun Liu",
-        "Liang Luo",
-        "Qianru Li",
-        "Zhengyu Zhang",
-        "Wei Ling",
-        "Jingyi Shen",
-        "Zeliang Chen",
-        "Yaning Huang",
-        "Jingxian Huang",
-        "Abdallah Aboelela",
-        "Chonglin Sun",
-        "Feifan Gu",
-        "Fenggang Wu",
-        "Hang Qu",
-        "Huayu Li",
-        "Jill Pan",
-        "Kaidi Pei",
-        "Laming Chen",
-        "Longhao Jin",
-        "Qin Huang",
-        "Tongyi Tang",
-        "Varna Puvvada",
-        "Wenlin Chen",
-        "Xiaohan Wei",
-        "Xu Cao",
-        "Yantao Yao",
-        "Yuan Jin",
-        "Yunchen Pu",
-        "Yuxin Chen",
-        "Zijian Shen",
-        "Zhengkai Zhang",
-        "Dong Liang",
-        "Ellie Wen"
+        "Ruijie Gao",
+        "Haoran Jin",
+        "Jirong Yang",
+        "Nathaniel Bleier"
       ],
       "author_details": [
         {
-          "name": "Zikun Liu"
+          "name": "Ruijie Gao"
         },
         {
-          "name": "Liang Luo"
+          "name": "Haoran Jin"
         },
         {
-          "name": "Qianru Li"
+          "name": "Jirong Yang"
         },
         {
-          "name": "Zhengyu Zhang"
-        },
-        {
-          "name": "Wei Ling"
-        },
-        {
-          "name": "Jingyi Shen"
-        },
-        {
-          "name": "Zeliang Chen"
-        },
-        {
-          "name": "Yaning Huang"
-        },
-        {
-          "name": "Jingxian Huang"
-        },
-        {
-          "name": "Abdallah Aboelela"
-        },
-        {
-          "name": "Chonglin Sun"
-        },
-        {
-          "name": "Feifan Gu"
-        },
-        {
-          "name": "Fenggang Wu"
-        },
-        {
-          "name": "Hang Qu"
-        },
-        {
-          "name": "Huayu Li"
-        },
-        {
-          "name": "Jill Pan"
-        },
-        {
-          "name": "Kaidi Pei"
-        },
-        {
-          "name": "Laming Chen"
-        },
-        {
-          "name": "Longhao Jin"
-        },
-        {
-          "name": "Qin Huang"
-        },
-        {
-          "name": "Tongyi Tang"
-        },
-        {
-          "name": "Varna Puvvada"
-        },
-        {
-          "name": "Wenlin Chen"
-        },
-        {
-          "name": "Xiaohan Wei"
-        },
-        {
-          "name": "Xu Cao"
-        },
-        {
-          "name": "Yantao Yao"
-        },
-        {
-          "name": "Yuan Jin"
-        },
-        {
-          "name": "Yunchen Pu"
-        },
-        {
-          "name": "Yuxin Chen"
-        },
-        {
-          "name": "Zijian Shen"
-        },
-        {
-          "name": "Zhengkai Zhang"
-        },
-        {
-          "name": "Dong Liang"
-        },
-        {
-          "name": "Ellie Wen"
+          "name": "Nathaniel Bleier"
         }
       ],
-      "published": "2026-04-13T22:33:28Z",
-      "published_date": "2026-04-13 22:33:28+00:00",
-      "updated": "2026-04-13T22:33:28Z",
-      "comments": "Accepted to SIGIR 2026 Industry Track",
-      "primary_category": "cs.LG",
+      "published": "2026-04-15T06:15:56Z",
+      "published_date": "2026-04-15 06:15:56+00:00",
+      "updated": "2026-04-15T06:15:56Z",
+      "primary_category": "cs.AR",
       "categories": [
-        "cs.LG"
+        "cs.AR"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.12110v1",
-      "url": "http://arxiv.org/abs/2604.12110v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.13523v1",
+      "url": "http://arxiv.org/abs/2604.13523v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.59,
+        "relevance": 2.27,
         "recency": 3.0,
         "popularity": 1.6,
         "quality": 1.6,
-        "recommendation": 8.88
+        "recommendation": 8.29
       },
-      "matched_domain": "LLM Inference Systems",
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "serving",
-        "speculative decoding",
-        "latency",
-        "cs.LG"
+        "mlir",
+        "llvm",
+        "cs.AR"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 2,
         "matched_categories": [
-          "cs.LG"
+          "cs.AR"
         ],
         "required_signal_matches": [
-          "speculative decoding"
+          "mlir",
+          "llvm"
         ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency"
-        ],
-        "bonus_keyword_match_count": 1,
-        "analysis_keyword_matches": [
-          "latency"
-        ],
-        "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.18
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh"
     }
