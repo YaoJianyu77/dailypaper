@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-16",
+  "last_updated": "2026-04-17",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -505,6 +505,33 @@
         }
       ],
       "cooldown_until": "2026-05-31"
+    },
+    {
+      "paper_id": "2604.14612v1",
+      "title": "ConfLayers: Adaptive Confidence-based Layer Skipping for Self-Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-16T04:39:30Z",
+      "source_lane": "fresh",
+      "topics": [
+        "self-speculative decoding",
+        "layer skipping",
+        "confidence-based selection",
+        "LLM inference acceleration",
+        "draft model construction"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-17",
+      "last_seen_date": "2026-04-17",
+      "last_recommended_date": "2026-04-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-17",
+          "recommendation": 9.3,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-16"
     },
     {
       "paper_id": "dblp:conf/cgo/HeY25",
@@ -1526,6 +1553,34 @@
       "cooldown_until": "2026-06-04"
     },
     {
+      "paper_id": "2604.15244v1",
+      "title": "From Tokens to Steps: Verification-Aware Speculative Decoding for Efficient Multi-Step Reasoning",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-16T17:20:13Z",
+      "source_lane": "fresh",
+      "topics": [
+        "speculative decoding",
+        "LLM inference",
+        "multi-step reasoning",
+        "step-level verification",
+        "attention grounding",
+        "log-probability confidence"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-17",
+      "last_seen_date": "2026-04-17",
+      "last_recommended_date": "2026-04-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-17",
+          "recommendation": 9.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-16"
+    },
+    {
       "paper_id": "2604.04335v1",
       "title": "GENSERVE: Efficient Co-Serving of Heterogeneous Diffusion Model Workloads",
       "domain": "LLM Inference Systems",
@@ -2537,6 +2592,34 @@
       "cooldown_until": "2026-05-07"
     },
     {
+      "paper_id": "2604.14825v1",
+      "title": "Nautilus: An Auto-Scheduling Tensor Compiler for Efficient Tiled GPU Kernels",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-16T09:55:23Z",
+      "source_lane": "fresh",
+      "topics": [
+        "tensor compiler",
+        "auto-scheduling",
+        "tiled GPU kernels",
+        "attention",
+        "FlashAttention-style kernels",
+        "reduction fusion"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-17",
+      "last_seen_date": "2026-04-17",
+      "last_recommended_date": "2026-04-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-17",
+          "recommendation": 9.59,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-16"
+    },
+    {
       "paper_id": "2603.11438v1",
       "title": "NCCLbpf: Verified, Composable Policy Execution for GPU Collective Communication",
       "domain": "LLM Inference Systems",
@@ -2829,6 +2912,34 @@
       "cooldown_until": "2026-06-14"
     },
     {
+      "paper_id": "2604.15039v1",
+      "title": "Prefill-as-a-Service: KVCache of Next-Generation Models Could Go Cross-Datacenter",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-16T14:07:41Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM serving",
+        "prefill-decode disaggregation",
+        "KV cache",
+        "cross-datacenter serving",
+        "hybrid attention",
+        "bandwidth-aware scheduling"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-17",
+      "last_seen_date": "2026-04-17",
+      "last_recommended_date": "2026-04-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-17",
+          "recommendation": 9.38,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-16"
+    },
+    {
       "paper_id": "2603.21576v1",
       "title": "PRISM: Breaking the O(n) Memory Wall in Long-Context LLM Inference via O(1) Photonic Block Selection",
       "domain": "LLM Inference Systems",
@@ -3089,6 +3200,34 @@
       "cooldown_until": "2026-06-13"
     },
     {
+      "paper_id": "2604.14885v1",
+      "title": "RACER: Retrieval-Augmented Contextual Rapid Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-16T11:23:55Z",
+      "source_lane": "fresh",
+      "topics": [
+        "speculative decoding",
+        "LLM inference systems",
+        "retrieval-augmented decoding",
+        "inference latency",
+        "training-free acceleration",
+        "LLM serving"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-17",
+      "last_seen_date": "2026-04-17",
+      "last_recommended_date": "2026-04-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-17",
+          "recommendation": 9.55,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-16"
+    },
+    {
       "paper_id": "2604.11109v1",
       "title": "Record-Remix-Replay: Hierarchical GPU Kernel Optimization using Evolutionary Search",
       "domain": "LLM Code Generation For CUDA Kernels",
@@ -3143,6 +3282,34 @@
         }
       ],
       "cooldown_until": "2026-05-17"
+    },
+    {
+      "paper_id": "2604.15186v1",
+      "title": "Scepsy: Serving Agentic Workflows Using Aggregate LLM Pipelines",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-16T16:15:29Z",
+      "source_lane": "fresh",
+      "topics": [
+        "agentic workflows",
+        "LLM serving",
+        "GPU allocation",
+        "throughput",
+        "latency",
+        "cluster scheduling"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-17",
+      "last_seen_date": "2026-04-17",
+      "last_recommended_date": "2026-04-17",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-17",
+          "recommendation": 9.69,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-16"
     },
     {
       "paper_id": "2604.05650v1",
