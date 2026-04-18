@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-17",
+  "last_updated": "2026-04-18",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -71,6 +71,62 @@
         }
       ],
       "cooldown_until": "2026-05-21"
+    },
+    {
+      "paper_id": "2604.14682v1",
+      "title": "Acceptance Dynamics Across Cognitive Domains in Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-16T06:38:44Z",
+      "source_lane": "fresh",
+      "topics": [
+        "speculative decoding",
+        "LLM inference",
+        "acceptance probability",
+        "tree-based decoding",
+        "draft model",
+        "target model verification"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-18",
+      "last_seen_date": "2026-04-18",
+      "last_recommended_date": "2026-04-18",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-18",
+          "recommendation": 8.88,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-17"
+    },
+    {
+      "paper_id": "2604.15180v1",
+      "title": "AdaSplash-2: Faster Differentiable Sparse Attention",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-16T16:03:13Z",
+      "source_lane": "fresh",
+      "topics": [
+        "differentiable sparse attention",
+        "alpha-entmax",
+        "long-context training",
+        "FlashAttention-2",
+        "GPU kernels",
+        "block sparsity"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-18",
+      "last_seen_date": "2026-04-18",
+      "last_recommended_date": "2026-04-18",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-18",
+          "recommendation": 8.11,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-17"
     },
     {
       "paper_id": "2604.04238v1",
@@ -3510,23 +3566,28 @@
       "topics": [
         "post-training quantization",
         "W8A8",
-        "LLM inference",
-        "INT8 serving",
-        "activation outliers"
+        "activation outliers",
+        "int8 inference",
+        "LLM serving"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-19",
-      "last_seen_date": "2026-03-19",
-      "last_recommended_date": "2026-03-19",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-18",
+      "last_recommended_date": "2026-04-18",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-03-19",
           "recommendation": 6.17,
           "lane": "classic"
+        },
+        {
+          "date": "2026-04-18",
+          "recommendation": 6.17,
+          "lane": "classic"
         }
       ],
-      "cooldown_until": "2026-04-09"
+      "cooldown_until": "2026-05-09"
     },
     {
       "paper_id": "2603.19173v1",

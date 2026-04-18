@@ -467,7 +467,7 @@
       "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
       "domain": "LLM Inference Systems",
       "quality_score": 6.17,
-      "updated": "2026-03-19"
+      "updated": "2026-04-18"
     },
     {
       "id": "2603.17800v1",
@@ -1035,6 +1035,20 @@
       "domain": "LLM Inference Systems",
       "quality_score": 9.3,
       "updated": "2026-04-17"
+    },
+    {
+      "id": "2604.14682v1",
+      "title": "Acceptance Dynamics Across Cognitive Domains in Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.88,
+      "updated": "2026-04-18"
+    },
+    {
+      "id": "2604.15180v1",
+      "title": "AdaSplash-2: Faster Differentiable Sparse Attention",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.11,
+      "updated": "2026-04-18"
     }
   ],
   "edges": [
@@ -3401,7 +3415,43 @@
       "target": "2604.14825v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.14682v1",
+      "target": "2604.15180v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.14682v1",
+      "target": "2211.10438",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.15180v1",
+      "target": "2604.14682v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.15180v1",
+      "target": "2211.10438",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2211.10438",
+      "target": "2604.14682v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2211.10438",
+      "target": "2604.15180v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-17"
+  "last_updated": "2026-04-18"
 }
