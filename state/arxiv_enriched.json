@@ -1,16 +1,16 @@
 {
-  "target_date": "2026-04-18",
+  "target_date": "2026-04-19",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-19",
-      "end": "2026-04-18"
+      "start": "2026-03-20",
+      "end": "2026-04-19"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-18",
-      "end": "2026-03-18"
+      "start": "2025-04-19",
+      "end": "2026-03-19"
     }
   },
   "total_found": 221,
@@ -22,60 +22,463 @@
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 3,
+    "selected_count": 6,
     "lane_counts": {
-      "fresh": 2,
+      "fresh": 6,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 23,
-      "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic": 0,
+      "history_filtered": 19,
+      "history_relaxed": 6,
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.14682v1",
-      "arxiv_id": "2604.14682v1",
-      "title": "Acceptance Dynamics Across Cognitive Domains in Speculative Decoding",
-      "summary": "Speculative decoding accelerates large language model (LLM) inference. It uses a small draft model to propose a tree of future tokens. A larger target model then verifies these tokens in a single batched forward pass. Despite the growing body of work on speculative methods, the degree to which the cognitive characteristics of a task affect acceptance probability remains largely unexplored. We present an empirical study of tree-based speculative decoding acceptance dynamics. Our study spans four well-established NLP benchmark domains: code generation, mathematical reasoning, logical reasoning, and open-ended chat. For this, we use TinyLlama-1.1B as the draft model against Llama-2-7B-Chat-GPTQ as the target. Over 99,768 speculative nodes collected from 200 prompts, we derive per-domain acceptance rates, expected accepted lengths, depth-acceptance profiles, and entropy-acceptance correlations. We find that task type is a stronger predictor of acceptance than tree depth. Furthermore, only the chat domain consistently yields an expected accepted length exceeding 1.0 token per step. We also show that the entropy-acceptance correlation is consistently negative but weak across all domains (rho in [-0.20, -0.15]). Counterintuitively, chat produces the highest entropy yet the highest acceptance rate. We attribute this divergence to the lexical predictability of RLHF-aligned register. These findings have direct implications for domain-aware speculation budgets and draft-model selection strategies. Index Terms--speculative decoding, large language model inference, tree attention, draft model, acceptance probability, LLM efficiency",
+      "id": "http://arxiv.org/abs/2604.15244v1",
+      "arxiv_id": "2604.15244v1",
+      "title": "From Tokens to Steps: Verification-Aware Speculative Decoding for Efficient Multi-Step Reasoning",
+      "summary": "Speculative decoding (SD) accelerates large language model inference by allowing a lightweight draft model to propose outputs that a stronger target model verifies. However, its token-centric nature allows erroneous steps to propagate. Prior approaches mitigate this using external reward models, but incur additional latency, computational overhead, and limit generalizability. We propose SpecGuard, a verification-aware speculative decoding framework that performs step-level verification using only model-internal signals. At each step, SpecGuard samples multiple draft candidates and selects the most consistent step, which is then validated using an ensemble of two lightweight model-internal signals: (i) an attention-based grounding score that measures attribution to the input and previously accepted steps, and (ii) a log-probability-based score that captures token-level confidence. These signals jointly determine whether a step is accepted or recomputed using the target, allocating compute selectively. Experiments across a range of reasoning benchmarks show that SpecGuard improves accuracy by 3.6% while reducing latency by ~11%, outperforming both SD and reward-guided SD.",
       "authors": [
-        "Saif Mahmoud"
+        "Kiran Purohit",
+        "Ramasuri Narayanam",
+        "Soumyabrata Pal"
       ],
       "author_details": [
         {
-          "name": "Saif Mahmoud"
+          "name": "Kiran Purohit"
+        },
+        {
+          "name": "Ramasuri Narayanam"
+        },
+        {
+          "name": "Soumyabrata Pal"
         }
       ],
-      "published": "2026-04-16T06:38:44Z",
-      "published_date": "2026-04-16 06:38:44+00:00",
-      "updated": "2026-04-16T06:38:44Z",
-      "primary_category": "cs.AI",
+      "published": "2026-04-16T17:20:13Z",
+      "published_date": "2026-04-16 17:20:13+00:00",
+      "updated": "2026-04-16T17:20:13Z",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.AI",
         "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.14682v1",
-      "url": "http://arxiv.org/abs/2604.14682v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.15244v1",
+      "url": "http://arxiv.org/abs/2604.15244v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 0.7,
-        "quality": 0.7,
-        "recommendation": 8.88
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.97
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "language model inference",
         "speculative decoding",
+        "latency",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "speculative decoding"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "latency"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "latency"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "history_relaxed": true,
+      "ai": {
+        "one_liner_zh": "A speculative decoding variant for reasoning that verifies whole steps with internal grounding and confidence signals to reduce error propagation.",
+        "summary_zh": "Speculative decoding can improve LLM inference speed, but token-level acceptance is a weak fit for multi-step reasoning because locally plausible tokens can still produce a bad intermediate step. This paper proposes SpecGuard, which moves verification to the step level by sampling multiple draft candidates, selecting the most consistent step, and checking it with two internal signals: attention-based grounding to the input and prior accepted steps, plus log-probability confidence. The intended effect is to recompute only unreliable steps with the target model instead of using an external reward model or accepting draft output too aggressively. In the abstract, the authors report gains on reasoning benchmarks over both standard speculative decoding and reward-guided speculative decoding, with 3.6% higher accuracy and about 11% lower latency. The main missing detail is whether the internal signals, step segmentation, and multi-candidate overhead remain reliable under realistic serving setups and fair baseline tuning.",
+        "background_zh": "As reasoning-heavy LLM use grows, inference acceleration needs to preserve intermediate step correctness rather than optimize token throughput alone, because early reasoning errors can corrupt later steps.",
+        "problem_zh": "The paper asks how to speed up multi-step reasoning with speculative decoding without depending on external reward models and without letting incorrect drafted steps propagate.",
+        "approach_zh": "SpecGuard samples several draft steps, picks the most consistent candidate, and then accepts or recomputes that step using an ensemble of attention-based grounding and log-probability confidence signals.",
+        "evidence_zh": "The abstract claims that on reasoning benchmarks the method improves accuracy by 3.6% and reduces latency by about 11% versus both standard speculative decoding and reward-guided speculative decoding, but it does not make the evaluation setup, hardware, or baseline matching clear.",
+        "value_zh": "If the method generalizes, it suggests a practical way to improve reasoning-time latency and quality by replacing external verifiers with lightweight model-internal checks and selective recomputation.",
+        "open_questions": [
+          "How are reasoning steps defined and segmented, and how sensitive are the results to that step granularity?",
+          "What is the actual overhead of multi-candidate draft sampling and internal scoring, broken down by model size and hardware?",
+          "Are the comparisons to vanilla and reward-guided speculative decoding matched on draft model strength, verifier budget, and target-model quality?"
+        ],
+        "core_contributions": [
+          "Recasts speculative decoding for reasoning as a step-level verification problem rather than a pure token-acceptance problem.",
+          "Introduces an internal verification policy that combines attention-based grounding with log-probability confidence instead of using an external reward model.",
+          "Claims simultaneous accuracy and latency improvements over both standard speculative decoding and reward-guided variants on reasoning benchmarks."
+        ],
+        "why_read": [
+          "It targets a real serving problem: speculative decoding often helps throughput but can hurt multi-step reasoning quality when token-level checks are too weak.",
+          "The accept-versus-recompute design is directly relevant to inference systems that want better reasoning quality without adding an external verifier.",
+          "It may clarify whether model-internal signals are strong enough to support low-latency verification decisions in reasoning workloads."
+        ],
+        "risks": [
+          "The abstract does not show whether the internal signals remain robust across different model families, prompt styles, or reasoning tasks.",
+          "Sampling multiple draft candidates may reduce or erase the latency gain if draft-side overhead is large in practice."
+        ],
+        "recommended_for": [
+          "Researchers working on speculative decoding and LLM serving systems.",
+          "Engineers optimizing latency-quality tradeoffs for reasoning-oriented inference pipelines.",
+          "Readers interested in selective verification policies for multi-step generation without external reward models."
+        ],
+        "keywords": [
+          "speculative decoding",
+          "multi-step reasoning",
+          "step-level verification",
+          "LLM inference",
+          "latency",
+          "attention-based grounding score"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "This is a strong fit for the current LLM inference systems focus and makes a concrete systems claim about the latency-accuracy tradeoff, but the abstract leaves key questions about overhead, evaluation fairness, and deployment assumptions unresolved.",
+        "fallback_summary": "Speculative decoding (SD) accelerates large language model inference by allowing a lightweight draft model to propose outputs that a stronger target model verifies."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.15186v1",
+      "arxiv_id": "2604.15186v1",
+      "title": "Scepsy: Serving Agentic Workflows Using Aggregate LLM Pipelines",
+      "summary": "Agentic workflows carry out complex tasks by orchestrating multiple large language models (LLMs) and tools. Serving such workflows at a target throughput with low latency is challenging because they can be defined using arbitrary agentic frameworks and exhibit unpredictable execution times: execution may branch, fan-out, or recur in data-dependent ways. Since LLMs in workflows often outnumber available GPUs, their execution also leads to GPU oversubscription.\n  We describe Scepsy, a new agentic serving system that efficiently schedules arbitrary multi-LLM agentic workflows onto a GPU cluster. Scepsy exploits the insight that, while agentic workflows have unpredictable end-to-end latencies, the shares of each LLM's total execution times are comparatively stable across executions. Scepsy decides on GPU allocations based on these aggregate shares: first, it profiles the LLMs under different parallelism degrees. It then uses these statistics to construct an Aggregate LLM Pipeline, which is a lightweight latency/throughput predictor for allocations. To find a GPU allocation that minimizes latency while achieving a target throughput, Scepsy uses the Aggregate LLM Pipeline to explore a search space over fractional GPU shares, tensor parallelism degrees, and replica counts. It uses a hierarchical heuristic to place the best allocation onto the GPU cluster, minimizing fragmentation, while respecting network topology constraints. Our evaluation on realistic agentic workflows shows that Scepsy achieves up to 2.4x higher throughput and 27x lower latency compared to systems that optimize LLMs independently or rely on user-specified allocations.",
+      "authors": [
+        "Marcel Wagenländer",
+        "Otto White",
+        "Britannio Jarrett",
+        "Pedro Silvestre",
+        "Yanda Tao",
+        "Guo Li",
+        "Huanzhou Zhu",
+        "Llúis Vilanova",
+        "Peter Pietzuch"
+      ],
+      "author_details": [
+        {
+          "name": "Marcel Wagenländer"
+        },
+        {
+          "name": "Otto White"
+        },
+        {
+          "name": "Britannio Jarrett"
+        },
+        {
+          "name": "Pedro Silvestre"
+        },
+        {
+          "name": "Yanda Tao"
+        },
+        {
+          "name": "Guo Li"
+        },
+        {
+          "name": "Huanzhou Zhu"
+        },
+        {
+          "name": "Llúis Vilanova"
+        },
+        {
+          "name": "Peter Pietzuch"
+        }
+      ],
+      "published": "2026-04-16T16:15:29Z",
+      "published_date": "2026-04-16 16:15:29+00:00",
+      "updated": "2026-04-16T16:15:29Z",
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.15186v1",
+      "url": "http://arxiv.org/abs/2604.15186v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.85,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.69
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "serving",
+        "throughput",
+        "latency",
+        "cs.DC",
+        "serving system",
+        "evaluation"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.DC"
+        ],
+        "required_signal_matches": [
+          "serving system"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "throughput",
+          "latency"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "evaluation",
+          "throughput",
+          "latency"
+        ],
+        "analysis_keyword_match_count": 3,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.36
+      },
+      "selection_lane": "fresh",
+      "history_relaxed": true,
+      "ai": {
+        "one_liner_zh": "A workflow-level serving system that allocates GPUs for arbitrary multi-LLM agents by modeling stable per-model execution-time shares instead of predicting full request paths.",
+        "summary_zh": "Agentic workflows combine multiple LLMs and tools with data-dependent branching, so the serving bottleneck becomes a cluster-level scheduling problem with unpredictable end-to-end runtimes and GPU oversubscription. Scepsy argues that although whole-workflow latency varies, each LLM's share of total execution time is comparatively stable, and it uses that signal to build an Aggregate LLM Pipeline that predicts latency and throughput under different allocations. The system profiles component LLMs, searches over fractional GPU shares, tensor parallelism degrees, and replica counts, then places the chosen allocation with a topology-aware heuristic to reduce fragmentation. The abstract claims up to 2.4x higher throughput and 27x lower latency than optimizing LLMs independently or relying on user-specified allocations on realistic agentic workflows. What still needs checking is whether the aggregate-share assumption holds under shifting workflow mixes, irregular branching, and realistic baseline tuning on heterogeneous clusters.",
+        "background_zh": "As agent systems chain more LLMs and tools, serving performance depends on workflow-level coordination across a GPU cluster rather than isolated optimization of each model.",
+        "problem_zh": "The paper tackles how to meet throughput targets and minimize latency for arbitrary agentic workflows whose control flow is data dependent and whose LLM set can oversubscribe available GPUs.",
+        "approach_zh": "Scepsy profiles each LLM under different parallelism settings, builds a lightweight Aggregate LLM Pipeline from stable execution-time shares, searches joint allocation knobs, and then performs topology-aware placement.",
+        "evidence_zh": "The abstract reports experiments on realistic agentic workflows and claims up to 2.4x higher throughput and 27x lower latency than independent per-LLM optimization or user-specified allocations, but it does not make the workload mix, hardware scale, or baseline tuning procedure clear.",
+        "value_zh": "If the approximation is robust, the system offers a practical way to schedule multi-LLM agent workloads under GPU scarcity without requiring users to hand-tune allocations.",
+        "open_questions": [
+          "How stable are per-LLM execution-time shares when workflows include rare branches, recursion, or rapidly changing prompt and tool mixes?",
+          "What cluster hardware, interconnect topology, and oversubscription regime were used, and how sensitive are the gains to those assumptions?",
+          "How were the baselines configured and retuned, and does Scepsy still win when independent optimizers are given equal profiling and search budget?"
+        ],
+        "core_contributions": [
+          "Introduces the Aggregate LLM Pipeline abstraction for predicting workflow latency and throughput from aggregate per-LLM execution shares.",
+          "Jointly optimizes fractional GPU shares, tensor parallelism degrees, and replica counts for arbitrary multi-LLM workflows.",
+          "Adds a hierarchical placement heuristic that aims to reduce fragmentation while respecting cluster network topology."
+        ],
+        "why_read": [
+          "It treats agent serving as a cluster scheduling problem, which is closer to real multi-LLM deployments than single-model serving papers.",
+          "The core assumption is explicit and testable, making the paper useful even if the final gains are workload dependent.",
+          "It connects performance modeling, search over serving knobs, and topology-aware placement in one system."
+        ],
+        "risks": [
+          "The aggregate-share model may be brittle when workflow structure or request composition changes quickly.",
+          "Reported improvements may depend on favorable topology, oversubscription level, or weak baseline allocations."
+        ],
+        "recommended_for": [
+          "Researchers studying LLM serving, cluster scheduling, and multi-model inference systems",
+          "Engineers operating agent platforms with shared GPU clusters and latency SLOs",
+          "Systems readers interested in joint optimization of placement, parallelism, and resource partitioning"
+        ],
+        "keywords": [
+          "agentic workflows",
+          "LLM serving",
+          "GPU allocation",
+          "throughput-latency tradeoff",
+          "GPU oversubscription",
+          "tensor parallelism"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High because it is a direct fit for LLM inference systems work and makes concrete cluster-level latency and throughput claims for multi-LLM agent serving, even though the full paper still needs a fairness and robustness check.",
+        "fallback_summary": "Agentic workflows carry out complex tasks by orchestrating multiple large language models (LLMs) and tools."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.14825v1",
+      "arxiv_id": "2604.14825v1",
+      "title": "Nautilus: An Auto-Scheduling Tensor Compiler for Efficient Tiled GPU Kernels",
+      "summary": "We present Nautilus, a novel tensor compiler that moves toward fully automated math-to-kernel optimization. Nautilus compiles a high-level algebraic specification of tensor operators into efficient tiled GPU kernels. Nautilus's successive lowering design allows high-level optimizations, expression rewrites, and tile optimizations to be jointly applied in a single end-to-end system. Nautilus presents a novel auto-scheduler that discovers sequences of high-level optimizations, while preserving the regular program structure needed by tile optimizers. Nautilus's auto-scheduler captures complex interactions and trade-offs in the high-level optimizations, including aggressive global transformations like advanced reduction fusion. Nautilus is the first end-to-end tensor compiler capable of starting from a math-like description of attention and automatically discovering FlashAttention-3-like kernels, offloading the entire burden of optimization from the programmer to the compiler. Across five transformer-based models and 150 evaluation configurations on NVIDIA GH200 and RTX 5090 GPUs, Nautilus achieves up to 23% higher throughput than state-of-the-art compilers on GH200 and up to 42% on RTX 5090, while matching or exceeding manually written cuDNN kernels on many long-sequence configurations.",
+      "authors": [
+        "Yifan Zhao",
+        "Yuchen Yang",
+        "Matei Budiu",
+        "Sasa Misailovic"
+      ],
+      "author_details": [
+        {
+          "name": "Yifan Zhao"
+        },
+        {
+          "name": "Yuchen Yang"
+        },
+        {
+          "name": "Matei Budiu"
+        },
+        {
+          "name": "Sasa Misailovic"
+        }
+      ],
+      "published": "2026-04-16T09:55:23Z",
+      "published_date": "2026-04-16 09:55:23+00:00",
+      "updated": "2026-04-16T09:55:23Z",
+      "primary_category": "cs.PL",
+      "categories": [
+        "cs.PL",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.14825v1",
+      "url": "http://arxiv.org/abs/2604.14825v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.66,
+        "recency": 3.0,
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 9.59
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "flashattention",
+        "throughput",
+        "cs.LG",
+        "compiler",
+        "evaluation"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 2,
+        "matched_categories": [
+          "cs.LG"
+        ],
+        "required_signal_matches": [
+          "flashattention",
+          "compiler"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "throughput"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "evaluation",
+          "throughput"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "history_relaxed": true,
+      "ai": {
+        "one_liner_zh": "A tensor compiler that auto-schedules math-level tensor programs into tiled GPU kernels and claims to automatically recover FlashAttention-3-like attention kernels.",
+        "summary_zh": "Nautilus targets the still-manual gap between algebraic tensor formulations and high-performance tiled GPU kernels, a problem that is especially important for attention-heavy transformer workloads. The paper proposes an end-to-end tensor compiler with successive lowering and an auto-scheduler that searches sequences of high-level rewrites while preserving the regular structure needed for tile optimization. The abstract supports this with throughput results across five transformer-based models and 150 configurations on NVIDIA GH200 and RTX 5090, reporting gains over state-of-the-art compilers and parity or better than manually written cuDNN kernels in many long-sequence settings. If the method is robust, the value is compiler/runtime co-design that reduces expert hand-tuning for attention-class kernels while still reaching competitive GPU performance. The main missing details are scheduler cost, search-space design, baseline fairness, and how well the approach generalizes beyond the reported operators and hardware.",
+        "background_zh": "Modern tensor compilers still leave a large amount of GPU kernel performance on the table for operators such as attention because high-level algebra and low-level tiling decisions interact in ways that are hard to automate.",
+        "problem_zh": "The paper asks whether a compiler can start from a math-like tensor specification and automatically discover the high-level rewrites and tiled schedules needed to reach near-handwritten GPU kernel performance.",
+        "approach_zh": "Nautilus combines successive lowering with an auto-scheduler that searches sequences of high-level transformations, including aggressive rewrites like reduction fusion, while keeping programs structured enough for downstream tile optimizers.",
+        "evidence_zh": "The abstract reports throughput comparisons across five transformer-based models and 150 configurations on GH200 and RTX 5090, with improvements over existing compilers and many long-sequence cases that match or exceed manually written cuDNN kernels.",
+        "value_zh": "If the reported results hold under fair baselines, this would make attention-style GPU kernel optimization much more compiler-driven and less dependent on expert manual schedule engineering.",
+        "open_questions": [
+          "How large is the auto-scheduler search cost in compile time, and is it practical for routine operator development?",
+          "What are the exact baselines and fairness conditions behind the compiler and cuDNN comparisons, especially for long-sequence attention?",
+          "How much of the reported gain comes from high-level rewrites versus tile-level optimization, and how well does the method transfer beyond attention-like operators?"
+        ],
+        "core_contributions": [
+          "An end-to-end tensor compiler that starts from high-level algebraic operator specifications and lowers them to tiled GPU kernels.",
+          "An auto-scheduler designed to search high-level optimization sequences while preserving regular structure for tile optimization.",
+          "A claim that the system can automatically discover FlashAttention-3-like kernels from a math-like attention description."
+        ],
+        "why_read": [
+          "It is directly aligned with compiler automation for attention and transformer inference kernels on modern GPUs.",
+          "The abstract makes concrete cross-hardware throughput claims on GH200 and RTX 5090 rather than only presenting a compiler architecture.",
+          "It may clarify how much high-level rewrite search can replace manual kernel design in practice."
+        ],
+        "risks": [
+          "The abstract does not explain scheduler overhead, so compile-time cost and usability are unclear.",
+          "The results may depend heavily on specific attention patterns, long-sequence regimes, or NVIDIA hardware assumptions that are not detailed here."
+        ],
+        "recommended_for": [
+          "Researchers working on tensor compilers, auto-scheduling, and transformer kernel generation.",
+          "Engineers interested in automating attention-kernel optimization for NVIDIA GPUs.",
+          "Readers evaluating compiler versus handwritten-kernel tradeoffs in LLM inference systems."
+        ],
+        "keywords": [
+          "tensor compiler",
+          "auto-scheduling",
+          "tiled GPU kernels",
+          "attention",
+          "FlashAttention",
+          "transformer inference"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "This is a strong fit for the stated focus on LLM inference systems and compiler-driven GPU kernel generation, and the abstract includes concrete performance claims on modern hardware, though the fairness and generality still need verification.",
+        "fallback_summary": "We present Nautilus, a novel tensor compiler that moves toward fully automated math-to-kernel optimization."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.14885v1",
+      "arxiv_id": "2604.14885v1",
+      "title": "RACER: Retrieval-Augmented Contextual Rapid Speculative Decoding",
+      "summary": "Autoregressive decoding in Large Language Models (LLMs) generates one token per step, causing high inference latency. Speculative decoding (SD) mitigates this through a guess-and-verify strategy, but existing training-free variants face trade-offs: retrieval-based drafts break when no exact match exists, while logits-based drafts lack structural guidance. We propose $\\textbf{RACER}$ ($\\textbf{R}$etrieval-$\\textbf{A}$ugmented $\\textbf{C}$ont$\\textbf{e}$xtual $\\textbf{R}$apid Speculative Decoding), a lightweight and training-free method that integrates retrieved exact patterns with logit-driven future cues. This unification supplies both reliable anchors and flexible extrapolation, yielding richer speculative drafts. Experiments on Spec-Bench, HumanEval, and MGSM-ZH demonstrate that RACER consistently accelerates inference, achieving more than $2\\times$ speedup over autoregressive decoding, and outperforms prior training-free methods, offering a scalable, plug-and-play solution for efficient LLM decoding. Our source code is available at $\\href{https://github.com/hkr04/RACER}{https://github.com/hkr04/RACER}$.",
+      "authors": [
+        "Zihong Zhang",
+        "Zuchao Li",
+        "Lefei Zhang",
+        "Ping Wang",
+        "Hai Zhao"
+      ],
+      "author_details": [
+        {
+          "name": "Zihong Zhang"
+        },
+        {
+          "name": "Zuchao Li"
+        },
+        {
+          "name": "Lefei Zhang"
+        },
+        {
+          "name": "Ping Wang"
+        },
+        {
+          "name": "Hai Zhao"
+        }
+      ],
+      "published": "2026-04-16T11:23:55Z",
+      "published_date": "2026-04-16 11:23:55+00:00",
+      "updated": "2026-04-16T11:23:55Z",
+      "comments": "Accepted to Findings of ACL 2026",
+      "primary_category": "cs.CL",
+      "categories": [
         "cs.CL",
-        "benchmark"
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.14885v1",
+      "url": "http://arxiv.org/abs/2604.14885v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 9.55
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "speculative decoding",
+        "latency",
+        "cs.CL",
+        "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -90,121 +493,260 @@
           "speculative decoding"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "benchmark"
+        "bonus_keyword_matches": [
+          "latency",
+          "speedup"
         ],
-        "analysis_keyword_match_count": 1,
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "latency",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh",
+      "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "An empirical study argues that speculative decoding acceptance depends more on task domain than tree depth, with chat behaving unusually well despite higher entropy.",
-        "summary_zh": "This paper studies a practical question inside speculative decoding: whether acceptance behavior is driven mainly by tree structure or by the type of cognitive task being served. Using TinyLlama-1.1B as the draft model and Llama-2-7B-Chat-GPTQ as the target, the author analyzes acceptance statistics over code generation, math reasoning, logical reasoning, and chat, including accepted length, depth profiles, and entropy correlations. The reported result is that task domain is a stronger predictor of acceptance than tree depth, and only chat exceeds an expected accepted length of 1.0 token per step, even though chat also has the highest entropy. If this holds more broadly, it matters for domain-aware speculation budgets and draft-model selection rather than using one speculation policy for every workload. The main missing detail is how well these conclusions transfer beyond one draft-target pair, 200 prompts, and the specific benchmark setup described in the abstract.",
-        "background_zh": "Speculative decoding is a leading LLM inference acceleration method, but most discussion centers on model pairing and tree structure rather than how workload type changes acceptance behavior.",
-        "problem_zh": "The paper asks whether acceptance probability in tree-based speculative decoding is materially shaped by task domain, because that directly affects real serving speedups and policy tuning.",
-        "approach_zh": "It runs a cross-domain empirical analysis of speculative trees using a fixed draft-target pair and measures per-domain acceptance rates, expected accepted lengths, depth-acceptance profiles, and entropy-acceptance correlations.",
-        "evidence_zh": "The abstract supports this with 99,768 speculative nodes from 200 prompts across four benchmark domains, and reports that domain predicts acceptance better than depth, chat is the only domain above 1.0 expected accepted token per step, and entropy is weakly negatively correlated with acceptance.",
-        "value_zh": "The practical value is a more workload-aware view of speculative decoding that could inform draft-model choice and speculation budgets for different application mixes.",
+        "one_liner_zh": "This paper proposes a training-free speculative decoding method that combines retrieval anchors with logit-based future cues to reduce autoregressive LLM latency.",
+        "summary_zh": "Autoregressive decoding is still latency-bound because it emits one token per step, and current training-free speculative decoding methods trade off between exact-match retrieval and weakly structured logit guessing. RACER tries to bridge that gap by combining retrieved exact patterns with logit-driven future cues, using retrieval as a reliable anchor while letting logits extend the draft beyond perfect matches. The abstract presents this as a lightweight, plug-and-play decoding method rather than a new trained draft model. It reports consistent acceleration on Spec-Bench, HumanEval, and MGSM-ZH, with more than 2x speedup over autoregressive decoding and better results than prior training-free methods. The main missing detail is what actually drives the end-to-end gain in practice, since the abstract does not make clear the retrieval overhead, acceptance dynamics, hardware setup, or baseline fairness.",
+        "background_zh": "Training-free speculative decoding is attractive for LLM serving because it can cut latency without training an auxiliary draft model, but existing methods either depend on exact retrieval matches or rely on poorly structured logit guesses.",
+        "problem_zh": "The paper asks how to generate stronger speculative drafts when exact context matches are incomplete or missing, while preserving the low-deployment-cost appeal of training-free decoding.",
+        "approach_zh": "It merges retrieved exact patterns with logit-based future cues so retrieval provides structural anchors and logits provide flexible continuation beyond strict matches.",
+        "evidence_zh": "The abstract claims evaluation on Spec-Bench, HumanEval, and MGSM-ZH, reporting more than 2x speedup over autoregressive decoding and better results than prior training-free methods, but it does not make the hardware setup or supporting ablations clear.",
+        "value_zh": "If the claims hold, this could offer a practical latency reduction layer for LLM inference that improves speculative decoding quality without requiring extra model training.",
         "open_questions": [
-          "Do the same domain effects hold for other draft-target model pairs, quantization setups, and stronger target models?",
-          "How are the prompts and benchmarks distributed within each domain, and could dataset composition be driving the observed chat advantage?",
-          "Does the paper connect acceptance differences to end-to-end latency or throughput gains, rather than acceptance statistics alone?"
+          "How much of the reported speedup comes from higher token acceptance versus better retrieval quality, and what happens when retrieval finds weak or no matches?",
+          "What retrieval overhead, cache assumptions, and hardware conditions sit behind the claimed end-to-end speedup?",
+          "Are the baseline comparisons fair across training-free speculative decoding methods, including the same verifier model, batching policy, and system setup?"
         ],
         "core_contributions": [
-          "Frames speculative decoding acceptance as a domain-dependent systems variable rather than only a tree-depth or model-pair property.",
-          "Provides a cross-domain empirical breakdown over code, math, logic, and chat with acceptance, accepted-length, and entropy analyses.",
-          "Highlights a counterintuitive result that chat shows the highest acceptance despite the highest entropy, with a hypothesis tied to RLHF-aligned lexical regularity."
+          "A hybrid training-free drafting scheme that combines retrieval anchors with logit-based continuation cues.",
+          "A speculative decoding design aimed at closing the gap between exact-match retrieval methods and purely logit-driven methods.",
+          "Reported benchmark results on Spec-Bench, HumanEval, and MGSM-ZH showing decoding acceleration over autoregressive and prior training-free baselines."
         ],
         "why_read": [
-          "Relevant if you tune speculative decoding for mixed workloads and need to know whether one policy fits all tasks.",
-          "Useful as a caution against treating tree depth as the main acceptance bottleneck without checking domain effects.",
-          "Potentially actionable for serving teams deciding where speculation is likely to pay off and where it may underperform."
+          "It directly targets LLM decoding latency, which is a core systems bottleneck.",
+          "The method is deployment-oriented because it claims gains without training a separate draft model.",
+          "It is relevant to speculative decoding design tradeoffs between structural guidance and flexible continuation."
         ],
         "risks": [
-          "The evidence appears limited to one draft-target pair, so generalization is unclear.",
-          "The abstract reports acceptance statistics, not full end-to-end serving gains, so system impact must be checked in the paper body."
+          "The abstract does not show whether retrieval cost erodes the claimed latency gains in realistic serving settings.",
+          "It is unclear how well the method holds up when exact-pattern retrieval is weak, especially on long or highly novel contexts without strong matches available."
         ],
         "recommended_for": [
-          "Researchers studying speculative decoding behavior and acceptance modeling.",
-          "Engineers tuning LLM serving policies for mixed chat, code, and reasoning workloads.",
-          "Readers interested in workload-aware inference optimization rather than new decoding algorithms."
+          "Researchers working on LLM inference systems and serving efficiency.",
+          "Engineers evaluating speculative decoding variants for production deployment.",
+          "Readers interested in training-free decoding methods that mix retrieval and model-side signals."
         ],
         "keywords": [
           "speculative decoding",
           "LLM inference",
-          "acceptance probability",
-          "tree-based decoding",
-          "draft model",
-          "target model verification"
+          "serving latency",
+          "retrieval-augmented decoding",
+          "training-free decoding"
         ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "Strong topic fit for LLM inference systems and speculative decoding, but the paper appears to be a narrow empirical study rather than a new acceleration method, and the abstract leaves transferability and end-to-end systems impact unclear.",
-        "fallback_summary": "Speculative decoding accelerates large language model (LLM) inference."
+        "reading_priority": "high",
+        "reading_priority_reason": "This is a strong fit for the highest-priority inference-systems focus and carries a high recommendation signal, but the full paper is needed to verify where the speedup comes from, how expensive retrieval is, and whether the baseline comparisons are fair.",
+        "fallback_summary": "Autoregressive decoding in Large Language Models (LLMs) generates one token per step, causing high inference latency."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.15180v1",
-      "arxiv_id": "2604.15180v1",
-      "title": "AdaSplash-2: Faster Differentiable Sparse Attention",
-      "summary": "Sparse attention has been proposed as a way to alleviate the quadratic cost of transformers, a central bottleneck in long-context training. A promising line of work is $α$-entmax attention, a differentiable sparse alternative to softmax that enables input-dependent sparsity yet has lagged behind softmax due to the computational overhead necessary to compute the normalizer $τ$. In this paper, we introduce AdaSplash-2, which addresses this limitation through a novel histogram-based initialization that reduces the number of iterations needed to compute $τ$ to typically 1--2. The key idea is to compute a coarse histogram of attention scores on the fly and store it in on-chip SRAM, yielding a more accurate initialization that enables fast forward and backward computation. Combined with a sparsity-aware GPU implementation that skips zero blocks with low overhead, AdaSplash-2 matches or improves per-step training time relative to FlashAttention-2 when block sparsity is moderate-to-high (e.g., $>$60\\%), which often occurs at long-context lengths. On downstream tasks, models trained with our efficient $α$-entmax attention match softmax baselines at short-context lengths and achieve substantial gains in long-context settings.",
+      "id": "http://arxiv.org/abs/2604.15039v1",
+      "arxiv_id": "2604.15039v1",
+      "title": "Prefill-as-a-Service: KVCache of Next-Generation Models Could Go Cross-Datacenter",
+      "summary": "Prefill-decode (PD) disaggregation has become the standard architecture for large-scale LLM serving, but in practice its deployment boundary is still determined by KVCache transfer. In conventional dense-attention models, prefill generates huge KVCache traffics that keep prefill and decode tightly coupled within a single high-bandwidth network domain, limiting heterogeneous deployment and resource elasticity. Recent hybrid-attention architectures substantially reduce KVCache size, making cross-cluster KVCache transport increasingly plausible. However, smaller KVCache alone does not make heterogeneous cross-datacenter PD serving practical: real workloads remain bursty, request lengths are highly skewed, prefix caches are unevenly distributed, and inter-cluster bandwidth fluctuates. A naive design that fully externalizes prefill can therefore still suffer from congestion, unstable queueing, and poor utilization.\n  We present Prefill-as-a-Service (PrfaaS), a cross-datacenter serving architecture that selectively offloads long-context prefill to standalone, compute-dense prefill clusters and transfers the resulting KVCache over commodity Ethernet to local PD clusters for decode. Rather than treating reduced KVCache as sufficient, PrfaaS combines model-side KV efficiency with system-side selective offloading, bandwidth-aware scheduling, and cache-aware request placement. This design removes the requirement that heterogeneous accelerators share the same low-latency RDMA fabric, enabling independent scaling of prefill and decode capacity across loosely coupled clusters. In a case study using an internal 1T-parameter hybrid model, a PrfaaS-augmented heterogeneous deployment achieves 54% and 32% higher serving throughput than homogeneous PD and naive heterogeneous baselines, respectively, while consuming only modest cross-datacenter bandwidth.",
       "authors": [
-        "Nuno Gonçalves",
-        "Hugo Pitorro",
-        "Vlad Niculae",
-        "Edoardo Ponti",
-        "Lei Li",
-        "Andre Martins",
-        "Marcos Treviso"
+        "Ruoyu Qin",
+        "Weiran He",
+        "Yaoyu Wang",
+        "Zheming Li",
+        "Xinran Xu",
+        "Yongwei Wu",
+        "Weimin Zheng",
+        "Mingxing Zhang"
       ],
       "author_details": [
         {
-          "name": "Nuno Gonçalves"
+          "name": "Ruoyu Qin"
         },
         {
-          "name": "Hugo Pitorro"
+          "name": "Weiran He"
         },
         {
-          "name": "Vlad Niculae"
+          "name": "Yaoyu Wang"
         },
         {
-          "name": "Edoardo Ponti"
+          "name": "Zheming Li"
         },
         {
-          "name": "Lei Li"
+          "name": "Xinran Xu"
         },
         {
-          "name": "Andre Martins"
+          "name": "Yongwei Wu"
         },
         {
-          "name": "Marcos Treviso"
+          "name": "Weimin Zheng"
+        },
+        {
+          "name": "Mingxing Zhang"
         }
       ],
-      "published": "2026-04-16T16:03:13Z",
-      "published_date": "2026-04-16 16:03:13+00:00",
-      "updated": "2026-04-16T16:03:13Z",
+      "published": "2026-04-16T14:07:41Z",
+      "published_date": "2026-04-16 14:07:41+00:00",
+      "updated": "2026-04-16T14:07:41Z",
+      "comments": "16 pages, 5 figures, 6 tables",
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.15039v1",
+      "url": "http://arxiv.org/abs/2604.15039v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.3,
+        "quality": 1.3,
+        "recommendation": 9.38
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm serving",
+        "serving",
+        "prefill",
+        "decode",
+        "kv cache",
+        "throughput",
+        "latency",
+        "cs.DC",
+        "bandwidth"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 7,
+        "matched_categories": [
+          "cs.DC"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "prefill",
+          "decode"
+        ],
+        "required_signal_match_count": 3,
+        "bonus_keyword_matches": [
+          "throughput",
+          "latency",
+          "bandwidth"
+        ],
+        "bonus_keyword_match_count": 3,
+        "analysis_keyword_matches": [
+          "throughput",
+          "latency",
+          "bandwidth"
+        ],
+        "analysis_keyword_match_count": 3,
+        "signal_bonus": 0.9,
+        "bonus_keyword_bonus": 0.5
+      },
+      "selection_lane": "fresh",
+      "history_relaxed": true,
+      "ai": {
+        "one_liner_zh": "This paper treats cross-datacenter prefill as a scheduling and placement problem, not just a smaller-KVCache problem, and proposes a selective offloading architecture for hybrid-attention LLM serving.",
+        "summary_zh": "Prefill-decode disaggregation is already standard in LLM serving, but KVCache transfer usually forces prefill and decode to stay inside one high-bandwidth network domain. This paper asks whether newer hybrid-attention models, which shrink KVCache, actually make cross-datacenter prefill practical under bursty demand, skewed sequence lengths, uneven prefix caches, and fluctuating inter-cluster bandwidth. PrfaaS answers that with selective offloading: long-context prefills run on remote compute-dense clusters, and the resulting KVCache is sent over commodity Ethernet to local decode clusters under bandwidth-aware scheduling and cache-aware request placement. In a case study on an internal 1T-parameter hybrid model, the authors report 54% higher throughput than homogeneous PD and 32% over a naive heterogeneous design while using only modest cross-datacenter bandwidth. The biggest missing detail is whether those gains hold beyond this internal setup once workload mix, hardware assumptions, network conditions, and baseline fairness are fully specified.",
+        "background_zh": "As LLM serving has converged on prefill-decode disaggregation, KVCache transfer has become the main systems constraint on how far prefill and decode can be separated across hardware and network domains.",
+        "problem_zh": "The paper asks whether reduced KVCache in hybrid-attention models is enough to make cross-datacenter prefill practical, or whether real serving effects still make naive remote offloading unstable and inefficient.",
+        "approach_zh": "PrfaaS selectively offloads long-context prefills to remote compute-dense clusters and combines commodity-Ethernet KVCache transport with bandwidth-aware scheduling and cache-aware request placement for local decode.",
+        "evidence_zh": "The abstract supports a case-study claim on an internal 1T-parameter hybrid model, reporting 54% higher throughput than homogeneous PD and 32% over a naive heterogeneous baseline with modest cross-datacenter bandwidth, but it does not make the evaluation setup clear.",
+        "value_zh": "If the assumptions hold, the design could relax same-fabric deployment requirements and enable more elastic prefill/decode scaling across loosely coupled heterogeneous clusters.",
+        "open_questions": [
+          "What workload mix, context-length distribution, burstiness, and prefix-cache hit pattern were used in the evaluation, and how sensitive are the gains to those assumptions?",
+          "What are the exact hardware and network assumptions for the remote prefill clusters, local decode clusters, and cross-datacenter links?",
+          "How fair are the homogeneous and naive heterogeneous baselines, and how stable is the scheduler under bandwidth drops or queue buildup?"
+        ],
+        "core_contributions": [
+          "It reframes cross-datacenter PD serving as a joint model-and-systems problem, arguing that smaller KVCache alone is not sufficient.",
+          "It proposes selective offloading of long-context prefill to standalone remote clusters with bandwidth-aware scheduling and cache-aware placement.",
+          "It reports case-study throughput gains for a heterogeneous deployment on an internal hybrid-attention model while claiming only modest WAN bandwidth use."
+        ],
+        "why_read": [
+          "It is directly relevant to KVCache transport limits in disaggregated LLM serving.",
+          "It connects hybrid-attention model design to deployment topology and scheduling decisions.",
+          "It gives a concrete systems design for decoupling prefill and decode across datacenters without assuming shared RDMA fabric."
+        ],
+        "risks": [
+          "The evidence is limited to an internal 1T-parameter hybrid model, so reproducibility and generality are unclear.",
+          "The abstract does not specify enough evaluation detail to judge baseline fairness or operational tradeoffs rigorously, including latency behavior and failure modes under WAN variability if those matter to deployment decisions at scale today clearly enough for independent assessment already, which they do not from the abstract alone and should be checked in the full paper carefully before drawing strong conclusions here due to missing setup details that materially affect systems claims in practice overall now highly context-sensitive across deployments and model families at this stage of the evidence presented here so far for external readers seeking robust engineering guidance from the abstract alone today."
+        ],
+        "recommended_for": [
+          "Researchers working on LLM serving architectures",
+          "Engineers evaluating prefill/decode disaggregation across clusters",
+          "Systems readers studying KVCache-driven deployment constraints in hybrid-attention models"
+        ],
+        "keywords": [
+          "LLM serving",
+          "prefill-decode disaggregation",
+          "KV cache",
+          "cross-datacenter serving",
+          "hybrid attention",
+          "bandwidth-aware scheduling"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High because it directly matches the LLM inference systems focus, centers on KVCache transfer and prefill/decode disaggregation, and reports concrete system-level gains, even though the evidence is still narrow and internally scoped.",
+        "fallback_summary": "Prefill-decode (PD) disaggregation has become the standard architecture for large-scale LLM serving, but in practice its deployment boundary is still determined by KVCache transfer."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.14612v1",
+      "arxiv_id": "2604.14612v1",
+      "title": "ConfLayers: Adaptive Confidence-based Layer Skipping for Self-Speculative Decoding",
+      "summary": "Self-speculative decoding is an inference technique for large language models designed to speed up generation without sacrificing output quality. It combines fast, approximate decoding using a compact version of the model as a draft model with selective re-evaluation by the full target model. Some existing methods form the draft model by dynamically learning which layers to skip during inference, effectively creating a smaller subnetwork to speed up computation. However, using heuristic-based approaches to select layers to skip can often be simpler and more effective. In this paper, we propose ConfLayers, a dynamic plug-and-play approach to forming the draft model in self-speculative decoding via confidence-based intermediate layer skipping. The process iteratively computes confidence scores for all layers, selects layers to skip based on an adaptive threshold, evaluates the performance of the resulting set, and updates the best selection until no further improvement is achieved or a maximum number of iterations is reached. This framework avoids the overhead and complexity of training a layer skipping policy and can provide more consistent speed-quality trade-offs while preserving the adaptivity of the draft model to diverse tasks and datasets. The performance evaluation of ConfLayers across different models and datasets shows that our novel approach offers up to 1.4x speedup over vanilla LLM generation.",
+      "authors": [
+        "Walaa Amer",
+        "Uday das",
+        "Fadi Kurdahi"
+      ],
+      "author_details": [
+        {
+          "name": "Walaa Amer"
+        },
+        {
+          "name": "Uday das"
+        },
+        {
+          "name": "Fadi Kurdahi"
+        }
+      ],
+      "published": "2026-04-16T04:39:30Z",
+      "published_date": "2026-04-16 04:39:30+00:00",
+      "updated": "2026-04-16T04:39:30Z",
+      "comments": "13 pages, 9 figures",
       "primary_category": "cs.LG",
       "categories": [
         "cs.LG",
         "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.15180v1",
-      "url": "http://arxiv.org/abs/2604.15180v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.14612v1",
+      "url": "http://arxiv.org/abs/2604.14612v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.58,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 0.7,
-        "quality": 0.7,
-        "recommendation": 8.11
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 9.3
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "flashattention",
+        "speculative decoding",
         "cs.LG",
-        "cs.CL"
+        "cs.CL",
+        "speedup",
+        "evaluation"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -217,170 +759,87 @@
           "cs.CL"
         ],
         "required_signal_matches": [
-          "flashattention"
+          "speculative decoding"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
+        "bonus_keyword_matches": [
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "evaluation",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh",
+      "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "AdaSplash-2 argues that alpha-entmax sparse attention can become practical for long-context training by cutting tau-solving overhead and exploiting the resulting block sparsity on GPU.",
-        "summary_zh": "This paper targets a core long-context systems problem: sparse attention is attractive in theory, but alpha-entmax has been held back by the cost of computing its normalizer tau. AdaSplash-2 uses an on-the-fly coarse histogram of attention scores, stored in on-chip SRAM, to initialize tau well enough that the solver reportedly finishes in 1-2 iterations, then pairs that with a sparsity-aware GPU path that skips zero blocks. The abstract claims this combination matches or beats FlashAttention-2 in per-step training time when block sparsity is moderate to high, especially above 60 percent, and that downstream models match softmax at short context while improving at long context. If that holds, the practical value is a learned sparse attention mechanism whose speedups come from cheaper normalization plus lower useful work, not just from a better sparsity story on paper. The biggest missing details are the hardware setup, baseline tuning fairness, and how sharply performance degrades outside the high-sparsity regime.",
-        "background_zh": "Long-context transformers need relief from quadratic attention cost, but sparse alternatives only matter in practice if their normalization and kernel overhead do not erase the theoretical savings.",
-        "problem_zh": "The paper asks whether alpha-entmax can be made fast enough for real long-context training by reducing the cost of computing tau and by turning its induced sparsity into efficient GPU execution.",
-        "approach_zh": "It builds a coarse histogram of attention scores on the fly in on-chip SRAM to initialize tau near the solution, then uses a sparsity-aware GPU implementation that skips zero blocks in forward and backward computation.",
-        "evidence_zh": "The abstract supports claims of 1-2 tau iterations, per-step training time matching or exceeding FlashAttention-2 at moderate-to-high sparsity, and downstream parity at short context with gains at long context, but it does not make the evaluation setup or ablations clear.",
-        "value_zh": "If the baselines are fair, this offers a concrete path to making learned sparse attention competitive with dense attention kernels in long-context training rather than paying large overhead for differentiability.",
+        "one_liner_zh": "The paper replaces learned layer-skipping policies in self-speculative decoding with an iterative confidence-based heuristic for choosing which layers to skip at inference time.",
+        "summary_zh": "This paper targets self-speculative decoding, where a cheaper draft path is used to accelerate LLM generation and the full model selectively re-evaluates outputs. Its main claim is that draft-model construction does not need a learned layer-skipping policy: ConfLayers scores intermediate layers by confidence, skips layers under an adaptive threshold, and iteratively updates the skip set based on measured performance. The abstract positions this as a plug-and-play way to keep adaptive behavior across tasks and datasets while avoiding policy-training overhead and complexity. Reported evidence is limited to evaluations on multiple models and datasets with up to 1.4x speedup over vanilla generation. The biggest missing details are the runtime cost of the confidence search itself, the exact quality trade-off, and whether the baselines are strong enough to justify the claimed advantage.",
+        "background_zh": "Self-speculative decoding is part of the current push to raise LLM serving throughput by using cheaper draft computation while preserving acceptable output quality.",
+        "problem_zh": "The paper asks whether adaptive layer skipping for draft-model formation can be done without training a separate policy, while still maintaining a useful speed-quality trade-off across tasks and datasets.",
+        "approach_zh": "ConfLayers iteratively computes per-layer confidence scores, skips layers using an adaptive threshold, evaluates the resulting configuration, and keeps the best selection until improvement stops or a maximum iteration count is reached.",
+        "evidence_zh": "The abstract supports only that the method was tested on different models and datasets and achieved up to 1.4x speedup over vanilla generation; it does not make the quality metrics, overhead, or baseline strength clear.",
+        "value_zh": "If the search overhead is small and quality holds, the method could offer a lower-friction way to deploy adaptive self-speculative decoding without training a layer-skipping policy.",
         "open_questions": [
-          "What GPUs, sequence lengths, head dimensions, and batch settings were used, and are the FlashAttention-2 baselines tuned comparably?",
-          "Where is the runtime crossover point as sparsity falls, and does AdaSplash-2 still help in workloads that do not sustain high block sparsity?",
-          "How much of the gain comes from the histogram initializer versus zero-block skipping, and what extra SRAM pressure or implementation complexity does that introduce?"
+          "How are layer confidence scores defined, and what extra runtime or calibration cost do they add during decoding?",
+          "What output-quality checks are used, and how does the method compare against strong learned layer-skipping and speculative decoding baselines?",
+          "Is the reported speedup measured end-to-end, and how stable is it across sequence lengths, model scales, and hardware settings?"
         ],
         "core_contributions": [
-          "A histogram-based initializer for alpha-entmax normalization that reportedly reduces tau solving to 1-2 iterations.",
-          "A sparsity-aware GPU implementation that skips zero attention blocks with low overhead in both forward and backward passes.",
-          "An end-to-end claim that differentiable sparse attention can match dense attention training speed at sufficiently high sparsity while improving long-context task behavior."
+          "Frames draft-model construction in self-speculative decoding as confidence-based intermediate layer skipping rather than learned policy training.",
+          "Uses an adaptive-threshold search loop that evaluates and updates the skipped-layer set during configuration selection.",
+          "Reports multi-model and multi-dataset evaluation with up to 1.4x speedup over vanilla generation."
         ],
         "why_read": [
-          "It gives a concrete systems answer to where the speedup is supposed to come from: cheaper tau solving plus block skipping, not vague sparse-attention intuition.",
-          "It compares against FlashAttention-2, which is the right practical baseline for attention efficiency work.",
-          "It is relevant to readers tracking whether learned sparse attention can survive contact with real GPU kernel costs."
+          "It is directly relevant to inference-time acceleration through adaptive compute reduction in LLM generation.",
+          "It tests whether a heuristic, training-free layer-selection method can replace a learned skipping policy.",
+          "It may clarify how much of the benefit in self-speculative decoding can come from draft-model construction rather than model retraining."
         ],
         "risks": [
-          "The speed win appears conditional on moderate-to-high sparsity, so the advantage may collapse in less sparse regimes.",
-          "The abstract does not specify hardware, implementation maturity, or baseline tuning, which makes fairness hard to assess from the summary alone."
+          "The abstract does not specify the confidence metric, which makes robustness and reproducibility hard to judge.",
+          "The iterative search and evaluation procedure may introduce enough overhead to reduce real serving gains under end-to-end measurement conditions that are not described in the abstract first abstract, so baseline fairness is not yet defensible from the provided text."
         ],
         "recommended_for": [
-          "Researchers studying long-context transformer training and sparse attention mechanisms.",
-          "Engineers comparing sparse attention kernels against FlashAttention-style dense baselines.",
-          "GPU systems readers interested in SRAM-aware statistics collection and block-sparse execution."
+          "Researchers studying speculative decoding and adaptive computation in LLM inference.",
+          "Engineers evaluating training-free acceleration methods for LLM serving.",
+          "Readers comparing heuristic versus learned control policies for layer skipping."
         ],
         "keywords": [
-          "differentiable sparse attention",
-          "alpha-entmax",
-          "long-context training",
-          "FlashAttention-2",
-          "GPU kernels",
-          "block sparsity"
-        ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "Medium: it sits in a priority domain and directly addresses attention-kernel efficiency, but the paper is centered on training-time sparse attention rather than serving or low-level code generation, and the abstract leaves key hardware and baseline details unresolved.",
-        "fallback_summary": "Sparse attention has been proposed as a way to alleviate the quadratic cost of transformers, a central bottleneck in long-context training."
-      }
-    },
-    {
-      "paper_id": "2211.10438",
-      "arxiv_id": "2211.10438",
-      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
-      "summary": "Proposes a training-free post-training quantization scheme that migrates activation outliers into weights, enabling efficient W8A8 inference with minimal quality loss on large language models.",
-      "authors": [
-        "Guangxuan Xiao",
-        "Ji Lin",
-        "Mickael Seznec",
-        "Hao Wu",
-        "Julien Demouth",
-        "Song Han"
-      ],
-      "published": "2022-11-18",
-      "published_date": "2022-11-18 00:00:00",
-      "categories": [
-        "cs.LG",
-        "cs.CL"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "quantization",
-        "int8",
-        "serving",
-        "activation-outliers"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2211.10438",
-      "pdf_url": "https://arxiv.org/pdf/2211.10438.pdf",
-      "scores": {
-        "relevance": 2.9,
-        "recency": 0.0,
-        "popularity": 0.3,
-        "quality": 0.3,
-        "recommendation": 6.17
-      },
-      "classic_rotation_score": 10.6489,
-      "citationCount": 1441,
-      "influentialCitationCount": 198,
-      "venue": "International Conference on Machine Learning",
-      "journal_ref": "ArXiv",
-      "ai": {
-        "one_liner_zh": "A training-free post-training quantization method that shifts activation outliers into weights so large language models can run in W8A8 with limited stated quality loss.",
-        "summary_zh": "LLM post-training quantization is attractive for serving because it can reduce memory pressure and use int8 execution paths, but large activation outliers make full W8A8 quantization brittle. This paper targets that bottleneck with a training-free scheme that moves activation outliers into the weights so activations become easier to quantize. The abstract claims that this enables accurate and efficient W8A8 inference for large language models with minimal quality loss. If that claim holds broadly, the method offers a practical route from pretrained checkpoints to lower-cost serving without retraining. The abstract does not say what calibration procedure, baselines, hardware path, or workload coverage support the claim, so those are the main details still missing.",
-        "background_zh": "Full W8A8 quantization is attractive for LLM serving, but activation outliers often break naive post-training quantization even when weight quantization is manageable.",
-        "problem_zh": "The paper asks whether large language models can achieve accurate post-training W8A8 inference without retraining by addressing activation outliers directly.",
-        "approach_zh": "Its core mechanism is to migrate activation outlier magnitude into the weights, making the activations more quantization-friendly while keeping the method training-free.",
-        "evidence_zh": "The abstract supports only a high-level claim that the method enables efficient W8A8 inference with minimal quality loss; it does not make the evaluation scope, baselines, or hardware evidence clear.",
-        "value_zh": "If the claim is robust, the method gives inference stacks a low-friction way to use full int8 execution on pretrained LLMs instead of relying on retraining or higher-precision activations.",
-        "open_questions": [
-          "What exact rescaling or transformation moves activation outliers into weights, and what calibration data does it require?",
-          "Which model families, tasks, and sequence settings were evaluated, and what post-training quantization baselines were used for comparison?",
-          "What hardware path actually realizes the W8A8 efficiency gain, and are any layers or operators left in higher precision?"
-        ],
-        "core_contributions": [
-          "A training-free post-training quantization method aimed at full W8A8 inference for large language models.",
-          "An outlier-handling mechanism that shifts activation extremes into the weights rather than leaving them in the activation path.",
-          "A claim that this makes W8A8 inference practical with only limited quality degradation."
-        ],
-        "why_read": [
-          "It targets activation outliers, which are a central blocker for aggressive LLM post-training quantization.",
-          "The method is deployment-oriented because it is described as training-free rather than requiring quantization-aware retraining.",
-          "It is directly relevant to engineers comparing full-int8 serving against mixed-precision alternatives."
-        ],
-        "risks": [
-          "The abstract does not reveal the calibration cost, operator coverage, or runtime integration details.",
-          "Minimal quality loss' is not defined with tasks, model scales, or baseline fairness in the abstract alone."
-        ],
-        "recommended_for": [
-          "LLM serving engineers evaluating int8 deployment paths",
-          "Researchers studying post-training quantization for transformer models",
-          "Systems and compiler researchers interested in model changes that enable integer inference kernels"
-        ],
-        "keywords": [
-          "post-training quantization",
-          "W8A8",
-          "activation outliers",
-          "int8 inference",
-          "LLM serving"
+          "self-speculative decoding",
+          "layer skipping",
+          "confidence-based inference",
+          "adaptive computation",
+          "LLM inference systems"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High fit with the stated focus: it directly targets LLM inference efficiency through W8A8 post-training quantization and addresses the activation-outlier bottleneck, even though the abstract leaves the evaluation details underspecified.",
-        "fallback_summary": "Proposes a training-free post-training quantization scheme that migrates activation outliers into weights, enabling efficient W8A8 inference with minimal quality loss on large language models."
+        "reading_priority_reason": "High because it is a direct fit with the LLM inference systems focus and the provided recommendation signal is strong, but a full read is still needed to verify overhead, quality preservation, and baseline fairness.",
+        "fallback_summary": "Self-speculative decoding is an inference technique for large language models designed to speed up generation without sacrificing output quality."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency. The set is anchored by Acceptance Dynamics Across… and AdaSplash-2: Faster Differentiable…. SmoothQuant: Accurate and… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by From Tokens to Steps:… and Scepsy: Serving Agentic Workflows…. Nautilus: An Auto-Scheduling… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
-      "training and inference efficiency"
+      "training and inference efficiency",
+      "factual reliability and verification"
     ],
     "reading_strategy": [
-      "Start with Acceptance Dynamics Across… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
-      "Then read AdaSplash-2: Faster Differentiable… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use SmoothQuant: Accurate and… as a final cross-check on experimental boundaries and practical value."
+      "Start with From Tokens to Steps:… and verify whether it defines the factual reliability and verification problem clearly and exposes a real mechanism.",
+      "Then read Scepsy: Serving Agentic Workflows… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use Nautilus: An Auto-Scheduling… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-04-18T11:06:07Z",
+    "generated_at": "2026-04-19T11:08:34Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 3,
+    "paper_results": 6,
     "paper_failures": 0
   }
 }

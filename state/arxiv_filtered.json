@@ -1,16 +1,16 @@
 {
-  "target_date": "2026-04-18",
+  "target_date": "2026-04-19",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-19",
-      "end": "2026-04-18"
+      "start": "2026-03-20",
+      "end": "2026-04-19"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-18",
-      "end": "2026-03-18"
+      "start": "2025-04-19",
+      "end": "2026-03-19"
     }
   },
   "total_found": 221,
@@ -22,60 +22,331 @@
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 3,
+    "selected_count": 6,
     "lane_counts": {
-      "fresh": 2,
+      "fresh": 6,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 23,
-      "history_relaxed": 0,
-      "classic_slot_active": 1
+      "classic": 0,
+      "history_filtered": 19,
+      "history_relaxed": 6,
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.14682v1",
-      "arxiv_id": "2604.14682v1",
-      "title": "Acceptance Dynamics Across Cognitive Domains in Speculative Decoding",
-      "summary": "Speculative decoding accelerates large language model (LLM) inference. It uses a small draft model to propose a tree of future tokens. A larger target model then verifies these tokens in a single batched forward pass. Despite the growing body of work on speculative methods, the degree to which the cognitive characteristics of a task affect acceptance probability remains largely unexplored. We present an empirical study of tree-based speculative decoding acceptance dynamics. Our study spans four well-established NLP benchmark domains: code generation, mathematical reasoning, logical reasoning, and open-ended chat. For this, we use TinyLlama-1.1B as the draft model against Llama-2-7B-Chat-GPTQ as the target. Over 99,768 speculative nodes collected from 200 prompts, we derive per-domain acceptance rates, expected accepted lengths, depth-acceptance profiles, and entropy-acceptance correlations. We find that task type is a stronger predictor of acceptance than tree depth. Furthermore, only the chat domain consistently yields an expected accepted length exceeding 1.0 token per step. We also show that the entropy-acceptance correlation is consistently negative but weak across all domains (rho in [-0.20, -0.15]). Counterintuitively, chat produces the highest entropy yet the highest acceptance rate. We attribute this divergence to the lexical predictability of RLHF-aligned register. These findings have direct implications for domain-aware speculation budgets and draft-model selection strategies. Index Terms--speculative decoding, large language model inference, tree attention, draft model, acceptance probability, LLM efficiency",
+      "id": "http://arxiv.org/abs/2604.15244v1",
+      "arxiv_id": "2604.15244v1",
+      "title": "From Tokens to Steps: Verification-Aware Speculative Decoding for Efficient Multi-Step Reasoning",
+      "summary": "Speculative decoding (SD) accelerates large language model inference by allowing a lightweight draft model to propose outputs that a stronger target model verifies. However, its token-centric nature allows erroneous steps to propagate. Prior approaches mitigate this using external reward models, but incur additional latency, computational overhead, and limit generalizability. We propose SpecGuard, a verification-aware speculative decoding framework that performs step-level verification using only model-internal signals. At each step, SpecGuard samples multiple draft candidates and selects the most consistent step, which is then validated using an ensemble of two lightweight model-internal signals: (i) an attention-based grounding score that measures attribution to the input and previously accepted steps, and (ii) a log-probability-based score that captures token-level confidence. These signals jointly determine whether a step is accepted or recomputed using the target, allocating compute selectively. Experiments across a range of reasoning benchmarks show that SpecGuard improves accuracy by 3.6% while reducing latency by ~11%, outperforming both SD and reward-guided SD.",
       "authors": [
-        "Saif Mahmoud"
+        "Kiran Purohit",
+        "Ramasuri Narayanam",
+        "Soumyabrata Pal"
       ],
       "author_details": [
         {
-          "name": "Saif Mahmoud"
+          "name": "Kiran Purohit"
+        },
+        {
+          "name": "Ramasuri Narayanam"
+        },
+        {
+          "name": "Soumyabrata Pal"
         }
       ],
-      "published": "2026-04-16T06:38:44Z",
-      "published_date": "2026-04-16 06:38:44+00:00",
-      "updated": "2026-04-16T06:38:44Z",
-      "primary_category": "cs.AI",
+      "published": "2026-04-16T17:20:13Z",
+      "published_date": "2026-04-16 17:20:13+00:00",
+      "updated": "2026-04-16T17:20:13Z",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.AI",
         "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.14682v1",
-      "url": "http://arxiv.org/abs/2604.14682v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.15244v1",
+      "url": "http://arxiv.org/abs/2604.15244v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 0.7,
-        "quality": 0.7,
-        "recommendation": 8.88
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.97
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "language model inference",
         "speculative decoding",
+        "latency",
+        "cs.CL"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "speculative decoding"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "latency"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "latency"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "history_relaxed": true
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.15186v1",
+      "arxiv_id": "2604.15186v1",
+      "title": "Scepsy: Serving Agentic Workflows Using Aggregate LLM Pipelines",
+      "summary": "Agentic workflows carry out complex tasks by orchestrating multiple large language models (LLMs) and tools. Serving such workflows at a target throughput with low latency is challenging because they can be defined using arbitrary agentic frameworks and exhibit unpredictable execution times: execution may branch, fan-out, or recur in data-dependent ways. Since LLMs in workflows often outnumber available GPUs, their execution also leads to GPU oversubscription.\n  We describe Scepsy, a new agentic serving system that efficiently schedules arbitrary multi-LLM agentic workflows onto a GPU cluster. Scepsy exploits the insight that, while agentic workflows have unpredictable end-to-end latencies, the shares of each LLM's total execution times are comparatively stable across executions. Scepsy decides on GPU allocations based on these aggregate shares: first, it profiles the LLMs under different parallelism degrees. It then uses these statistics to construct an Aggregate LLM Pipeline, which is a lightweight latency/throughput predictor for allocations. To find a GPU allocation that minimizes latency while achieving a target throughput, Scepsy uses the Aggregate LLM Pipeline to explore a search space over fractional GPU shares, tensor parallelism degrees, and replica counts. It uses a hierarchical heuristic to place the best allocation onto the GPU cluster, minimizing fragmentation, while respecting network topology constraints. Our evaluation on realistic agentic workflows shows that Scepsy achieves up to 2.4x higher throughput and 27x lower latency compared to systems that optimize LLMs independently or rely on user-specified allocations.",
+      "authors": [
+        "Marcel Wagenländer",
+        "Otto White",
+        "Britannio Jarrett",
+        "Pedro Silvestre",
+        "Yanda Tao",
+        "Guo Li",
+        "Huanzhou Zhu",
+        "Llúis Vilanova",
+        "Peter Pietzuch"
+      ],
+      "author_details": [
+        {
+          "name": "Marcel Wagenländer"
+        },
+        {
+          "name": "Otto White"
+        },
+        {
+          "name": "Britannio Jarrett"
+        },
+        {
+          "name": "Pedro Silvestre"
+        },
+        {
+          "name": "Yanda Tao"
+        },
+        {
+          "name": "Guo Li"
+        },
+        {
+          "name": "Huanzhou Zhu"
+        },
+        {
+          "name": "Llúis Vilanova"
+        },
+        {
+          "name": "Peter Pietzuch"
+        }
+      ],
+      "published": "2026-04-16T16:15:29Z",
+      "published_date": "2026-04-16 16:15:29+00:00",
+      "updated": "2026-04-16T16:15:29Z",
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.15186v1",
+      "url": "http://arxiv.org/abs/2604.15186v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.85,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.69
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "serving",
+        "throughput",
+        "latency",
+        "cs.DC",
+        "serving system",
+        "evaluation"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.DC"
+        ],
+        "required_signal_matches": [
+          "serving system"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "throughput",
+          "latency"
+        ],
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "evaluation",
+          "throughput",
+          "latency"
+        ],
+        "analysis_keyword_match_count": 3,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.36
+      },
+      "selection_lane": "fresh",
+      "history_relaxed": true
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.14825v1",
+      "arxiv_id": "2604.14825v1",
+      "title": "Nautilus: An Auto-Scheduling Tensor Compiler for Efficient Tiled GPU Kernels",
+      "summary": "We present Nautilus, a novel tensor compiler that moves toward fully automated math-to-kernel optimization. Nautilus compiles a high-level algebraic specification of tensor operators into efficient tiled GPU kernels. Nautilus's successive lowering design allows high-level optimizations, expression rewrites, and tile optimizations to be jointly applied in a single end-to-end system. Nautilus presents a novel auto-scheduler that discovers sequences of high-level optimizations, while preserving the regular program structure needed by tile optimizers. Nautilus's auto-scheduler captures complex interactions and trade-offs in the high-level optimizations, including aggressive global transformations like advanced reduction fusion. Nautilus is the first end-to-end tensor compiler capable of starting from a math-like description of attention and automatically discovering FlashAttention-3-like kernels, offloading the entire burden of optimization from the programmer to the compiler. Across five transformer-based models and 150 evaluation configurations on NVIDIA GH200 and RTX 5090 GPUs, Nautilus achieves up to 23% higher throughput than state-of-the-art compilers on GH200 and up to 42% on RTX 5090, while matching or exceeding manually written cuDNN kernels on many long-sequence configurations.",
+      "authors": [
+        "Yifan Zhao",
+        "Yuchen Yang",
+        "Matei Budiu",
+        "Sasa Misailovic"
+      ],
+      "author_details": [
+        {
+          "name": "Yifan Zhao"
+        },
+        {
+          "name": "Yuchen Yang"
+        },
+        {
+          "name": "Matei Budiu"
+        },
+        {
+          "name": "Sasa Misailovic"
+        }
+      ],
+      "published": "2026-04-16T09:55:23Z",
+      "published_date": "2026-04-16 09:55:23+00:00",
+      "updated": "2026-04-16T09:55:23Z",
+      "primary_category": "cs.PL",
+      "categories": [
+        "cs.PL",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.14825v1",
+      "url": "http://arxiv.org/abs/2604.14825v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.66,
+        "recency": 3.0,
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 9.59
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "flashattention",
+        "throughput",
+        "cs.LG",
+        "compiler",
+        "evaluation"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 2,
+        "matched_categories": [
+          "cs.LG"
+        ],
+        "required_signal_matches": [
+          "flashattention",
+          "compiler"
+        ],
+        "required_signal_match_count": 2,
+        "bonus_keyword_matches": [
+          "throughput"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "evaluation",
+          "throughput"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "history_relaxed": true
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.14885v1",
+      "arxiv_id": "2604.14885v1",
+      "title": "RACER: Retrieval-Augmented Contextual Rapid Speculative Decoding",
+      "summary": "Autoregressive decoding in Large Language Models (LLMs) generates one token per step, causing high inference latency. Speculative decoding (SD) mitigates this through a guess-and-verify strategy, but existing training-free variants face trade-offs: retrieval-based drafts break when no exact match exists, while logits-based drafts lack structural guidance. We propose $\\textbf{RACER}$ ($\\textbf{R}$etrieval-$\\textbf{A}$ugmented $\\textbf{C}$ont$\\textbf{e}$xtual $\\textbf{R}$apid Speculative Decoding), a lightweight and training-free method that integrates retrieved exact patterns with logit-driven future cues. This unification supplies both reliable anchors and flexible extrapolation, yielding richer speculative drafts. Experiments on Spec-Bench, HumanEval, and MGSM-ZH demonstrate that RACER consistently accelerates inference, achieving more than $2\\times$ speedup over autoregressive decoding, and outperforms prior training-free methods, offering a scalable, plug-and-play solution for efficient LLM decoding. Our source code is available at $\\href{https://github.com/hkr04/RACER}{https://github.com/hkr04/RACER}$.",
+      "authors": [
+        "Zihong Zhang",
+        "Zuchao Li",
+        "Lefei Zhang",
+        "Ping Wang",
+        "Hai Zhao"
+      ],
+      "author_details": [
+        {
+          "name": "Zihong Zhang"
+        },
+        {
+          "name": "Zuchao Li"
+        },
+        {
+          "name": "Lefei Zhang"
+        },
+        {
+          "name": "Ping Wang"
+        },
+        {
+          "name": "Hai Zhao"
+        }
+      ],
+      "published": "2026-04-16T11:23:55Z",
+      "published_date": "2026-04-16 11:23:55+00:00",
+      "updated": "2026-04-16T11:23:55Z",
+      "comments": "Accepted to Findings of ACL 2026",
+      "primary_category": "cs.CL",
+      "categories": [
         "cs.CL",
-        "benchmark"
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.14885v1",
+      "url": "http://arxiv.org/abs/2604.14885v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.5,
+        "quality": 1.5,
+        "recommendation": 9.55
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "speculative decoding",
+        "latency",
+        "cs.CL",
+        "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -90,77 +361,173 @@
           "speculative decoding"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "benchmark"
+        "bonus_keyword_matches": [
+          "latency",
+          "speedup"
         ],
-        "analysis_keyword_match_count": 1,
+        "bonus_keyword_match_count": 2,
+        "analysis_keyword_matches": [
+          "latency",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.36
       },
-      "selection_lane": "fresh"
+      "selection_lane": "fresh",
+      "history_relaxed": true
     },
     {
-      "id": "http://arxiv.org/abs/2604.15180v1",
-      "arxiv_id": "2604.15180v1",
-      "title": "AdaSplash-2: Faster Differentiable Sparse Attention",
-      "summary": "Sparse attention has been proposed as a way to alleviate the quadratic cost of transformers, a central bottleneck in long-context training. A promising line of work is $α$-entmax attention, a differentiable sparse alternative to softmax that enables input-dependent sparsity yet has lagged behind softmax due to the computational overhead necessary to compute the normalizer $τ$. In this paper, we introduce AdaSplash-2, which addresses this limitation through a novel histogram-based initialization that reduces the number of iterations needed to compute $τ$ to typically 1--2. The key idea is to compute a coarse histogram of attention scores on the fly and store it in on-chip SRAM, yielding a more accurate initialization that enables fast forward and backward computation. Combined with a sparsity-aware GPU implementation that skips zero blocks with low overhead, AdaSplash-2 matches or improves per-step training time relative to FlashAttention-2 when block sparsity is moderate-to-high (e.g., $>$60\\%), which often occurs at long-context lengths. On downstream tasks, models trained with our efficient $α$-entmax attention match softmax baselines at short-context lengths and achieve substantial gains in long-context settings.",
+      "id": "http://arxiv.org/abs/2604.15039v1",
+      "arxiv_id": "2604.15039v1",
+      "title": "Prefill-as-a-Service: KVCache of Next-Generation Models Could Go Cross-Datacenter",
+      "summary": "Prefill-decode (PD) disaggregation has become the standard architecture for large-scale LLM serving, but in practice its deployment boundary is still determined by KVCache transfer. In conventional dense-attention models, prefill generates huge KVCache traffics that keep prefill and decode tightly coupled within a single high-bandwidth network domain, limiting heterogeneous deployment and resource elasticity. Recent hybrid-attention architectures substantially reduce KVCache size, making cross-cluster KVCache transport increasingly plausible. However, smaller KVCache alone does not make heterogeneous cross-datacenter PD serving practical: real workloads remain bursty, request lengths are highly skewed, prefix caches are unevenly distributed, and inter-cluster bandwidth fluctuates. A naive design that fully externalizes prefill can therefore still suffer from congestion, unstable queueing, and poor utilization.\n  We present Prefill-as-a-Service (PrfaaS), a cross-datacenter serving architecture that selectively offloads long-context prefill to standalone, compute-dense prefill clusters and transfers the resulting KVCache over commodity Ethernet to local PD clusters for decode. Rather than treating reduced KVCache as sufficient, PrfaaS combines model-side KV efficiency with system-side selective offloading, bandwidth-aware scheduling, and cache-aware request placement. This design removes the requirement that heterogeneous accelerators share the same low-latency RDMA fabric, enabling independent scaling of prefill and decode capacity across loosely coupled clusters. In a case study using an internal 1T-parameter hybrid model, a PrfaaS-augmented heterogeneous deployment achieves 54% and 32% higher serving throughput than homogeneous PD and naive heterogeneous baselines, respectively, while consuming only modest cross-datacenter bandwidth.",
       "authors": [
-        "Nuno Gonçalves",
-        "Hugo Pitorro",
-        "Vlad Niculae",
-        "Edoardo Ponti",
-        "Lei Li",
-        "Andre Martins",
-        "Marcos Treviso"
+        "Ruoyu Qin",
+        "Weiran He",
+        "Yaoyu Wang",
+        "Zheming Li",
+        "Xinran Xu",
+        "Yongwei Wu",
+        "Weimin Zheng",
+        "Mingxing Zhang"
       ],
       "author_details": [
         {
-          "name": "Nuno Gonçalves"
+          "name": "Ruoyu Qin"
         },
         {
-          "name": "Hugo Pitorro"
+          "name": "Weiran He"
         },
         {
-          "name": "Vlad Niculae"
+          "name": "Yaoyu Wang"
         },
         {
-          "name": "Edoardo Ponti"
+          "name": "Zheming Li"
         },
         {
-          "name": "Lei Li"
+          "name": "Xinran Xu"
         },
         {
-          "name": "Andre Martins"
+          "name": "Yongwei Wu"
         },
         {
-          "name": "Marcos Treviso"
+          "name": "Weimin Zheng"
+        },
+        {
+          "name": "Mingxing Zhang"
         }
       ],
-      "published": "2026-04-16T16:03:13Z",
-      "published_date": "2026-04-16 16:03:13+00:00",
-      "updated": "2026-04-16T16:03:13Z",
+      "published": "2026-04-16T14:07:41Z",
+      "published_date": "2026-04-16 14:07:41+00:00",
+      "updated": "2026-04-16T14:07:41Z",
+      "comments": "16 pages, 5 figures, 6 tables",
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.15039v1",
+      "url": "http://arxiv.org/abs/2604.15039v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.3,
+        "quality": 1.3,
+        "recommendation": 9.38
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm serving",
+        "serving",
+        "prefill",
+        "decode",
+        "kv cache",
+        "throughput",
+        "latency",
+        "cs.DC",
+        "bandwidth"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 7,
+        "matched_categories": [
+          "cs.DC"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "prefill",
+          "decode"
+        ],
+        "required_signal_match_count": 3,
+        "bonus_keyword_matches": [
+          "throughput",
+          "latency",
+          "bandwidth"
+        ],
+        "bonus_keyword_match_count": 3,
+        "analysis_keyword_matches": [
+          "throughput",
+          "latency",
+          "bandwidth"
+        ],
+        "analysis_keyword_match_count": 3,
+        "signal_bonus": 0.9,
+        "bonus_keyword_bonus": 0.5
+      },
+      "selection_lane": "fresh",
+      "history_relaxed": true
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.14612v1",
+      "arxiv_id": "2604.14612v1",
+      "title": "ConfLayers: Adaptive Confidence-based Layer Skipping for Self-Speculative Decoding",
+      "summary": "Self-speculative decoding is an inference technique for large language models designed to speed up generation without sacrificing output quality. It combines fast, approximate decoding using a compact version of the model as a draft model with selective re-evaluation by the full target model. Some existing methods form the draft model by dynamically learning which layers to skip during inference, effectively creating a smaller subnetwork to speed up computation. However, using heuristic-based approaches to select layers to skip can often be simpler and more effective. In this paper, we propose ConfLayers, a dynamic plug-and-play approach to forming the draft model in self-speculative decoding via confidence-based intermediate layer skipping. The process iteratively computes confidence scores for all layers, selects layers to skip based on an adaptive threshold, evaluates the performance of the resulting set, and updates the best selection until no further improvement is achieved or a maximum number of iterations is reached. This framework avoids the overhead and complexity of training a layer skipping policy and can provide more consistent speed-quality trade-offs while preserving the adaptivity of the draft model to diverse tasks and datasets. The performance evaluation of ConfLayers across different models and datasets shows that our novel approach offers up to 1.4x speedup over vanilla LLM generation.",
+      "authors": [
+        "Walaa Amer",
+        "Uday das",
+        "Fadi Kurdahi"
+      ],
+      "author_details": [
+        {
+          "name": "Walaa Amer"
+        },
+        {
+          "name": "Uday das"
+        },
+        {
+          "name": "Fadi Kurdahi"
+        }
+      ],
+      "published": "2026-04-16T04:39:30Z",
+      "published_date": "2026-04-16 04:39:30+00:00",
+      "updated": "2026-04-16T04:39:30Z",
+      "comments": "13 pages, 9 figures",
       "primary_category": "cs.LG",
       "categories": [
         "cs.LG",
         "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.15180v1",
-      "url": "http://arxiv.org/abs/2604.15180v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.14612v1",
+      "url": "http://arxiv.org/abs/2604.14612v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.58,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 0.7,
-        "quality": 0.7,
-        "recommendation": 8.11
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 9.3
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "flashattention",
+        "speculative decoding",
         "cs.LG",
-        "cs.CL"
+        "cs.CL",
+        "speedup",
+        "evaluation"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -173,63 +540,23 @@
           "cs.CL"
         ],
         "required_signal_matches": [
-          "flashattention"
+          "speculative decoding"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
+        "bonus_keyword_matches": [
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "evaluation",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.18
       },
-      "selection_lane": "fresh"
-    },
-    {
-      "paper_id": "2211.10438",
-      "arxiv_id": "2211.10438",
-      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
-      "summary": "Proposes a training-free post-training quantization scheme that migrates activation outliers into weights, enabling efficient W8A8 inference with minimal quality loss on large language models.",
-      "authors": [
-        "Guangxuan Xiao",
-        "Ji Lin",
-        "Mickael Seznec",
-        "Hao Wu",
-        "Julien Demouth",
-        "Song Han"
-      ],
-      "published": "2022-11-18",
-      "published_date": "2022-11-18 00:00:00",
-      "categories": [
-        "cs.LG",
-        "cs.CL"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "quantization",
-        "int8",
-        "serving",
-        "activation-outliers"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2211.10438",
-      "pdf_url": "https://arxiv.org/pdf/2211.10438.pdf",
-      "scores": {
-        "relevance": 2.9,
-        "recency": 0.0,
-        "popularity": 0.3,
-        "quality": 0.3,
-        "recommendation": 6.17
-      },
-      "classic_rotation_score": 10.6489,
-      "citationCount": 1441,
-      "influentialCitationCount": 198,
-      "venue": "International Conference on Machine Learning",
-      "journal_ref": "ArXiv"
+      "selection_lane": "fresh",
+      "history_relaxed": true
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-18",
+  "last_updated": "2026-04-19",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -571,23 +571,28 @@
       "topics": [
         "self-speculative decoding",
         "layer skipping",
-        "confidence-based selection",
-        "LLM inference acceleration",
-        "draft model construction"
+        "confidence-based inference",
+        "adaptive computation",
+        "LLM inference systems"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-17",
-      "last_seen_date": "2026-04-17",
-      "last_recommended_date": "2026-04-17",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-19",
+      "last_recommended_date": "2026-04-19",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-04-17",
           "recommendation": 9.3,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-19",
+          "recommendation": 9.3,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-16"
+      "cooldown_until": "2026-06-18"
     },
     {
       "paper_id": "dblp:conf/cgo/HeY25",
@@ -1616,25 +1621,30 @@
       "source_lane": "fresh",
       "topics": [
         "speculative decoding",
-        "LLM inference",
         "multi-step reasoning",
         "step-level verification",
-        "attention grounding",
-        "log-probability confidence"
+        "LLM inference",
+        "latency",
+        "attention-based grounding score"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-17",
-      "last_seen_date": "2026-04-17",
-      "last_recommended_date": "2026-04-17",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-19",
+      "last_recommended_date": "2026-04-19",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-04-17",
           "recommendation": 9.97,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-19",
+          "recommendation": 9.97,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-16"
+      "cooldown_until": "2026-06-18"
     },
     {
       "paper_id": "2604.04335v1",
@@ -2658,22 +2668,27 @@
         "auto-scheduling",
         "tiled GPU kernels",
         "attention",
-        "FlashAttention-style kernels",
-        "reduction fusion"
+        "FlashAttention",
+        "transformer inference"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-17",
-      "last_seen_date": "2026-04-17",
-      "last_recommended_date": "2026-04-17",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-19",
+      "last_recommended_date": "2026-04-19",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-04-17",
           "recommendation": 9.59,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-19",
+          "recommendation": 9.59,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-16"
+      "cooldown_until": "2026-06-18"
     },
     {
       "paper_id": "2603.11438v1",
@@ -2983,17 +2998,22 @@
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-17",
-      "last_seen_date": "2026-04-17",
-      "last_recommended_date": "2026-04-17",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-19",
+      "last_recommended_date": "2026-04-19",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-04-17",
           "recommendation": 9.38,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-19",
+          "recommendation": 9.38,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-16"
+      "cooldown_until": "2026-06-18"
     },
     {
       "paper_id": "2603.21576v1",
@@ -3263,25 +3283,29 @@
       "source_lane": "fresh",
       "topics": [
         "speculative decoding",
-        "LLM inference systems",
+        "LLM inference",
+        "serving latency",
         "retrieval-augmented decoding",
-        "inference latency",
-        "training-free acceleration",
-        "LLM serving"
+        "training-free decoding"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-17",
-      "last_seen_date": "2026-04-17",
-      "last_recommended_date": "2026-04-17",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-19",
+      "last_recommended_date": "2026-04-19",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-04-17",
           "recommendation": 9.55,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-19",
+          "recommendation": 9.55,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-16"
+      "cooldown_until": "2026-06-18"
     },
     {
       "paper_id": "2604.11109v1",
@@ -3349,23 +3373,28 @@
         "agentic workflows",
         "LLM serving",
         "GPU allocation",
-        "throughput",
-        "latency",
-        "cluster scheduling"
+        "throughput-latency tradeoff",
+        "GPU oversubscription",
+        "tensor parallelism"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-17",
-      "last_seen_date": "2026-04-17",
-      "last_recommended_date": "2026-04-17",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-19",
+      "last_recommended_date": "2026-04-19",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-04-17",
           "recommendation": 9.69,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-19",
+          "recommendation": 9.69,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-16"
+      "cooldown_until": "2026-06-18"
     },
     {
       "paper_id": "2604.05650v1",

@@ -999,42 +999,42 @@
       "title": "From Tokens to Steps: Verification-Aware Speculative Decoding for Efficient Multi-Step Reasoning",
       "domain": "LLM Inference Systems",
       "quality_score": 9.97,
-      "updated": "2026-04-17"
+      "updated": "2026-04-19"
     },
     {
       "id": "2604.15186v1",
       "title": "Scepsy: Serving Agentic Workflows Using Aggregate LLM Pipelines",
       "domain": "LLM Inference Systems",
       "quality_score": 9.69,
-      "updated": "2026-04-17"
+      "updated": "2026-04-19"
     },
     {
       "id": "2604.14825v1",
       "title": "Nautilus: An Auto-Scheduling Tensor Compiler for Efficient Tiled GPU Kernels",
       "domain": "LLM Inference Systems",
       "quality_score": 9.59,
-      "updated": "2026-04-17"
+      "updated": "2026-04-19"
     },
     {
       "id": "2604.14885v1",
       "title": "RACER: Retrieval-Augmented Contextual Rapid Speculative Decoding",
       "domain": "LLM Inference Systems",
       "quality_score": 9.55,
-      "updated": "2026-04-17"
+      "updated": "2026-04-19"
     },
     {
       "id": "2604.15039v1",
       "title": "Prefill-as-a-Service: KVCache of Next-Generation Models Could Go Cross-Datacenter",
       "domain": "LLM Inference Systems",
       "quality_score": 9.38,
-      "updated": "2026-04-17"
+      "updated": "2026-04-19"
     },
     {
       "id": "2604.14612v1",
       "title": "ConfLayers: Adaptive Confidence-based Layer Skipping for Self-Speculative Decoding",
       "domain": "LLM Inference Systems",
       "quality_score": 9.3,
-      "updated": "2026-04-17"
+      "updated": "2026-04-19"
     },
     {
       "id": "2604.14682v1",
@@ -3451,7 +3451,25 @@
       "target": "2604.15180v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.15186v1",
+      "target": "2604.14825v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.14885v1",
+      "target": "2604.14825v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.15039v1",
+      "target": "2604.14825v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-18"
+  "last_updated": "2026-04-19"
 }
