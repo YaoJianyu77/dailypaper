@@ -1049,6 +1049,41 @@
       "domain": "LLM Inference Systems",
       "quality_score": 8.11,
       "updated": "2026-04-18"
+    },
+    {
+      "id": "2604.15672v1",
+      "title": "Faster LLM Inference via Sequential Monte Carlo",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.55,
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "2604.16007v1",
+      "title": "MemExplorer: Navigating the Heterogeneous Memory Design Space for Agentic Inference NPUs",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.38,
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "2604.15750v1",
+      "title": "DepCap: Adaptive Block-Wise Parallel Decoding for Efficient Diffusion LM Inference",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.75,
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "2604.16053v1",
+      "title": "T-RBFT: A Scalable and Efficient Byzantine Consensus Based on Trusted Execution Environment for Consortium Blockchain",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.52,
+      "updated": "2026-04-20"
+    },
+    {
+      "id": "2604.15768v1",
+      "title": "cuNNQS-SCI: A Fully GPU-Accelerated Framework for High-Performance Configuration Interaction Selection withNeural Network QQantum States",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 7.92,
+      "updated": "2026-04-20"
     }
   ],
   "edges": [
@@ -3469,7 +3504,79 @@
       "target": "2604.14825v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.15672v1",
+      "target": "2604.15750v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.15672v1",
+      "target": "2604.16007v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.15672v1",
+      "target": "2604.16053v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.16007v1",
+      "target": "2604.15672v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.16007v1",
+      "target": "2604.15750v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.16007v1",
+      "target": "2604.16053v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.15750v1",
+      "target": "2604.15672v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.15750v1",
+      "target": "2604.16007v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.15750v1",
+      "target": "2604.16053v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.16053v1",
+      "target": "2604.15672v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.16053v1",
+      "target": "2604.16007v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.16053v1",
+      "target": "2604.15750v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-19"
+  "last_updated": "2026-04-20"
 }

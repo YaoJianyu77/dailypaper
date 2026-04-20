@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-19",
+  "last_updated": "2026-04-20",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -649,6 +649,34 @@
       "cooldown_until": "2026-05-19"
     },
     {
+      "paper_id": "2604.15768v1",
+      "title": "cuNNQS-SCI: A Fully GPU-Accelerated Framework for High-Performance Configuration Interaction Selection withNeural Network QQantum States",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-04-17T07:15:18Z",
+      "source_lane": "fresh",
+      "topics": [
+        "GPU acceleration",
+        "CUDA kernels",
+        "distributed de-duplication",
+        "multi-GPU scaling",
+        "runtime memory management",
+        "neural network quantum states (NNQS)"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-20",
+      "last_seen_date": "2026-04-20",
+      "last_recommended_date": "2026-04-20",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-20",
+          "recommendation": 7.92,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-19"
+    },
+    {
       "paper_id": "2207.00032",
       "title": "DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale",
       "domain": "LLM Inference Systems",
@@ -708,6 +736,34 @@
         }
       ],
       "cooldown_until": "2026-05-10"
+    },
+    {
+      "paper_id": "2604.15750v1",
+      "title": "DepCap: Adaptive Block-Wise Parallel Decoding for Efficient Diffusion LM Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-17T06:53:27Z",
+      "source_lane": "fresh",
+      "topics": [
+        "diffusion language models",
+        "block-wise decoding",
+        "parallel decoding",
+        "adaptive block scheduling",
+        "inference acceleration",
+        "KV-cache compatibility"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-20",
+      "last_seen_date": "2026-04-20",
+      "last_recommended_date": "2026-04-20",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-20",
+          "recommendation": 8.75,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-19"
     },
     {
       "paper_id": "2603.08065v1",
@@ -1276,6 +1332,34 @@
         }
       ],
       "cooldown_until": "2026-06-05"
+    },
+    {
+      "paper_id": "2604.15672v1",
+      "title": "Faster LLM Inference via Sequential Monte Carlo",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-17T03:52:23Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "speculative decoding",
+        "sequential Monte Carlo",
+        "inference acceleration",
+        "throughput",
+        "approximate decoding"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-20",
+      "last_seen_date": "2026-04-20",
+      "last_recommended_date": "2026-04-20",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-20",
+          "recommendation": 9.55,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-19"
     },
     {
       "paper_id": "2603.05451v1",
@@ -2489,6 +2573,34 @@
         }
       ],
       "cooldown_until": "2026-06-08"
+    },
+    {
+      "paper_id": "2604.16007v1",
+      "title": "MemExplorer: Navigating the Heterogeneous Memory Design Space for Agentic Inference NPUs",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-17T12:29:54Z",
+      "source_lane": "fresh",
+      "topics": [
+        "agentic LLM inference",
+        "heterogeneous memory",
+        "NPU design",
+        "prefill",
+        "decode",
+        "energy efficiency"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-20",
+      "last_seen_date": "2026-04-20",
+      "last_recommended_date": "2026-04-20",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-20",
+          "recommendation": 9.38,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-19"
     },
     {
       "paper_id": "2603.11935v1",
@@ -3931,6 +4043,34 @@
         }
       ],
       "cooldown_until": "2026-06-08"
+    },
+    {
+      "paper_id": "2604.16053v1",
+      "title": "T-RBFT: A Scalable and Efficient Byzantine Consensus Based on Trusted Execution Environment for Consortium Blockchain",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-17T13:28:21Z",
+      "source_lane": "fresh",
+      "topics": [
+        "permissioned blockchain",
+        "Byzantine consensus",
+        "trusted execution environment",
+        "two-layer consensus",
+        "Raft",
+        "throughput precision latency"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-20",
+      "last_seen_date": "2026-04-20",
+      "last_recommended_date": "2026-04-20",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-20",
+          "recommendation": 8.52,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-19"
     },
     {
       "paper_id": "dblp:conf/cgo/CastelloBDIM24",
