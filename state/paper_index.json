@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-20",
+  "last_updated": "2026-04-21",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -210,6 +210,34 @@
         }
       ],
       "cooldown_until": "2026-05-17"
+    },
+    {
+      "paper_id": "2604.18137v1",
+      "title": "AQPIM: Breaking the PIM Capacity Wall for LLMs with In-Memory Activation Quantization",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-20T12:04:51Z",
+      "source_lane": "fresh",
+      "topics": [
+        "PIM",
+        "activation quantization",
+        "product quantization",
+        "KV cache",
+        "long-context LLM inference",
+        "attention acceleration"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-21",
+      "last_seen_date": "2026-04-21",
+      "last_recommended_date": "2026-04-21",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-21",
+          "recommendation": 9.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-20"
     },
     {
       "paper_id": "2604.13523v1",
@@ -593,6 +621,34 @@
         }
       ],
       "cooldown_until": "2026-06-18"
+    },
+    {
+      "paper_id": "2604.18170v1",
+      "title": "Copy-as-Decode: Grammar-Constrained Parallel Prefill for LLM Editing",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-20T12:29:53Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM editing",
+        "grammar-constrained decoding",
+        "parallel prefill",
+        "KV cache",
+        "speculative decoding",
+        "code editing"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-21",
+      "last_seen_date": "2026-04-21",
+      "last_recommended_date": "2026-04-21",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-21",
+          "recommendation": 9.38,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-20"
     },
     {
       "paper_id": "dblp:conf/cgo/HeY25",
@@ -1803,17 +1859,17 @@
       "published": "2022-10-31",
       "source_lane": "classic",
       "topics": [
-        "后训练量化",
         "GPTQ",
-        "3-4 bit 权重量化",
-        "GPT 类模型",
-        "受限硬件部署"
+        "post-training quantization",
+        "GPT-style models",
+        "3-4-bit weights",
+        "limited hardware deployment"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-03-07",
-      "last_recommended_date": "2026-03-07",
-      "recommended_count": 8,
+      "last_seen_date": "2026-04-21",
+      "last_recommended_date": "2026-04-21",
+      "recommended_count": 9,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -1854,9 +1910,14 @@
           "date": "2026-03-07",
           "recommendation": 6.83,
           "lane": "classic"
+        },
+        {
+          "date": "2026-04-21",
+          "recommendation": 6.83,
+          "lane": "classic"
         }
       ],
-      "cooldown_until": "2026-03-28"
+      "cooldown_until": "2026-05-12"
     },
     {
       "paper_id": "2603.28708v1",
@@ -1951,6 +2012,34 @@
         }
       ],
       "cooldown_until": "2026-05-18"
+    },
+    {
+      "paper_id": "2604.18529v1",
+      "title": "HybridGen: Efficient LLM Generative Inference via CPU-GPU Hybrid Computing",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-20T17:25:44Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "long-context serving",
+        "KV cache",
+        "CPU-GPU hybrid computing",
+        "tiered memory",
+        "CXL memory"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-21",
+      "last_seen_date": "2026-04-21",
+      "last_recommended_date": "2026-04-21",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-21",
+          "recommendation": 9.74,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-20"
     },
     {
       "paper_id": "2603.21321v1",
@@ -2208,6 +2297,34 @@
         }
       ],
       "cooldown_until": "2026-05-22"
+    },
+    {
+      "paper_id": "2604.18567v1",
+      "title": "Latent Phase-Shift Rollback: Inference-Time Error Correction via Residual Stream Monitoring and KV-Cache Steering",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-20T17:53:33Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "reasoning error correction",
+        "residual stream monitoring",
+        "KV-cache rollback",
+        "steering vectors",
+        "decoding control"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-21",
+      "last_seen_date": "2026-04-21",
+      "last_recommended_date": "2026-04-21",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-21",
+          "recommendation": 9.8,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-20"
     },
     {
       "paper_id": "2603.18477v1",
@@ -3474,6 +3591,34 @@
         }
       ],
       "cooldown_until": "2026-05-17"
+    },
+    {
+      "paper_id": "2604.18396v1",
+      "title": "River-LLM: Large Language Model Seamless Exit Based on KV Share",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-20T15:20:17Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "early exit",
+        "KV cache",
+        "decoder-only models",
+        "latency reduction",
+        "code generation"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-21",
+      "last_seen_date": "2026-04-21",
+      "last_recommended_date": "2026-04-21",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-21",
+          "recommendation": 9.34,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-20"
     },
     {
       "paper_id": "2604.15186v1",

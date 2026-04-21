@@ -1,107 +1,429 @@
 {
-  "target_date": "2026-04-20",
+  "target_date": "2026-04-21",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-21",
-      "end": "2026-04-20"
+      "start": "2026-03-22",
+      "end": "2026-04-21"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-20",
-      "end": "2026-03-20"
+      "start": "2025-04-21",
+      "end": "2026-03-21"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 19,
+  "total_filtered": 20,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 19,
+  "total_unique": 20,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 5,
+    "selected_count": 6,
     "lane_counts": {
       "fresh": 5,
       "established": 0,
-      "classic": 0,
-      "history_filtered": 11,
+      "classic": 1,
+      "history_filtered": 17,
       "history_relaxed": 0,
-      "classic_slot_active": 0
+      "classic_slot_active": 1
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": false
+      "slot_active_today": true
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.15672v1",
-      "arxiv_id": "2604.15672v1",
-      "title": "Faster LLM Inference via Sequential Monte Carlo",
-      "summary": "Speculative decoding (SD) accelerates language model inference by drafting tokens from a cheap proposal model and verifying them against an expensive target model via rejection sampling. Because rejection truncates the draft block at the first error, throughput degrades when draft and target diverge. Rather than rejecting draft tokens outright, we propose to reweight them. To this end, we introduce sequential Monte Carlo speculative decoding (SMC-SD), which replaces token-level rejection with importance-weighted resampling over a population of draft particles. SMC-SD is a principled approximate inference scheme that trades exactness for additional speed, while preserving theoretical bounds on its per-step approximation error. Because LLM inference is memory bandwidth-bound, the arithmetic needed to draft particles and to score them in parallel comes nearly for free -- SMC-SD uses idle compute to turn verification into a vectorized, fixed-size operation with no rollback. Empirically, SMC-SD achieves 2.36x speed-up over speculative decoding and a 5.2x speed-up over autoregressive decoding, while remaining within 3% of the target model's accuracy on reasoning, instruction-following, and coding benchmarks.",
+      "id": "http://arxiv.org/abs/2604.18137v1",
+      "arxiv_id": "2604.18137v1",
+      "title": "AQPIM: Breaking the PIM Capacity Wall for LLMs with In-Memory Activation Quantization",
+      "summary": "Processing-in-Memory (PIM) architectures offer a promising solution to the memory bottlenecks in data-intensive machine learning, yet often overlook the growing challenge of activation memory footprint. Conventional PIM approaches struggle with massive KV cache sizes generated in long-context scenarios by Transformer-based models, frequently exceeding PIM's limited memory capacity, while techniques like sparse attention can conflict with PIM's need for data locality. Existing PIM approaches and quantization methods are often insufficient or poorly suited for leveraging the unique characteristics of activations. This work identifies an opportunity for PIM-specialized activation quantization to enhance bandwidth and compute efficiency.\n  We explore clustering-based vector quantization approaches, which align well with activation characteristics and PIM's internal bandwidth capabilities. Building on this, we introduce AQPIM, a novel PIM-aware activation quantization framework based on Product Quantization (PQ), optimizing it for modern Large Language Models (LLMs). By performing quantization directly within memory, AQPIM leverages PIM's high internal bandwidth and enables direct computation on compressed data, significantly reducing both memory footprint and computational overhead for attention computation. AQPIM addresses PQ's accuracy challenges by introducing several algorithmic optimizations. Evaluations demonstrate that AQPIM achieves significant performance improvements, drastically reducing of GPU-CPU communication that can account for 90$\\sim$98.5\\% of decoding latency, together with 3.4$\\times$ speedup over a SOTA PIM approach.",
       "authors": [
-        "Yahya Emara",
-        "Mauricio Barba da Costa",
-        "Chi-Chih Chang",
-        "Cameron Freer",
-        "Tim Vieira",
-        "Ryan Cotterell",
-        "Mohamed S. Abdelfattah"
+        "Kosuke Matsushima",
+        "Yasuyuki Okoshi",
+        "Masato Motomura",
+        "Daichi Fujiki"
       ],
       "author_details": [
         {
-          "name": "Yahya Emara"
+          "name": "Kosuke Matsushima"
         },
         {
-          "name": "Mauricio Barba da Costa"
+          "name": "Yasuyuki Okoshi"
         },
         {
-          "name": "Chi-Chih Chang"
+          "name": "Masato Motomura"
         },
         {
-          "name": "Cameron Freer"
-        },
-        {
-          "name": "Tim Vieira"
-        },
-        {
-          "name": "Ryan Cotterell"
-        },
-        {
-          "name": "Mohamed S. Abdelfattah"
+          "name": "Daichi Fujiki"
         }
       ],
-      "published": "2026-04-17T03:52:23Z",
-      "published_date": "2026-04-17 03:52:23+00:00",
-      "updated": "2026-04-17T03:52:23Z",
-      "primary_category": "cs.LG",
+      "published": "2026-04-20T12:04:51Z",
+      "published_date": "2026-04-20 12:04:51+00:00",
+      "updated": "2026-04-20T12:04:51Z",
+      "comments": "Accepted to HPCA 2026",
+      "doi": "10.1109/HPCA68181.2026.11408452",
+      "primary_category": "cs.AR",
       "categories": [
-        "cs.LG",
-        "cs.CL"
+        "cs.AR",
+        "cs.AI",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.15672v1",
-      "url": "http://arxiv.org/abs/2604.15672v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.18137v1",
+      "url": "http://arxiv.org/abs/2604.18137v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.5,
-        "quality": 1.5,
-        "recommendation": 9.55
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.97
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "kv cache",
+        "latency",
+        "quantization",
+        "cs.LG",
+        "cs.AR",
+        "memory",
+        "bandwidth",
+        "speedup"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.LG",
+          "cs.AR"
+        ],
+        "required_signal_matches": [
+          "kv cache"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "latency",
+          "memory",
+          "bandwidth",
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 4,
+        "analysis_keyword_matches": [
+          "latency",
+          "memory",
+          "bandwidth",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 4,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.5
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper proposes in-memory product quantization of LLM activations and KV cache so PIM can hold more context and run attention with less interconnect traffic.",
+        "summary_zh": "The paper starts from a clear systems bottleneck: long-context LLM decoding can overflow limited PIM capacity because KV cache growth dominates memory usage, while locality-breaking methods such as sparse attention do not fit PIM well. It argues that activation-side quantization should be redesigned for PIM rather than borrowed from generic quantization pipelines, and introduces AQPIM, a PIM-aware product-quantization framework that quantizes in memory and computes attention directly on compressed data. The abstract claims this cuts memory footprint, reduces attention-side compute overhead, and sharply lowers GPU-CPU communication, which it says can account for 90 to 98.5% of decoding latency. It also reports a 3.4x speedup over a state-of-the-art PIM approach. The main missing details are the hardware setup, model and context regimes, baseline fairness, and the actual accuracy cost of the quantization.",
+        "background_zh": "PIM is attractive for LLM inference because memory movement, especially from long-context KV cache handling, can dominate attention latency, but PIM capacity is still limited.",
+        "problem_zh": "The paper asks how to keep growing LLM activations and KV cache within PIM memory and still preserve locality and usable model accuracy during decoding.",
+        "approach_zh": "AQPIM uses clustering-based vector quantization, specifically a PIM-aware product-quantization design, to quantize activations inside memory and operate on compressed representations, with extra optimizations to address PQ accuracy loss.",
+        "evidence_zh": "The abstract supports claims of lower memory and computation overhead, much less GPU-CPU communication, and a 3.4x speedup over a state-of-the-art PIM baseline, but it does not make the evaluation setting or accuracy impact clear.",
+        "value_zh": "If the results hold, this gives a concrete hardware-software co-design path for making PIM more viable for long-context LLM serving by turning activation compression into a capacity, bandwidth, and latency optimization.",
+        "open_questions": [
+          "What models, context lengths, and GPU-CPU-PIM hardware configuration were used for the reported 3.4x speedup?",
+          "How much accuracy, perplexity, or task quality is lost from the in-memory product quantization, and where do the proposed optimizations recover it?",
+          "How fair is the comparison against strong non-PIM KV-cache compression or locality-aware attention baselines?"
+        ],
+        "core_contributions": [
+          "Identifies activation and KV-cache footprint, not just generic memory bandwidth, as a key reason PIM struggles with long-context LLM inference.",
+          "Introduces a PIM-aware product-quantization framework that performs quantization in memory and enables attention computation on compressed activations.",
+          "Adds algorithmic changes intended to make product quantization workable for modern LLM activations rather than using an off-the-shelf PQ formulation."
+        ],
+        "why_read": [
+          "It directly targets KV-cache capacity and interconnect traffic, two central bottlenecks for long-context LLM decoding.",
+          "It is a concrete example of compression method design being shaped by PIM hardware properties instead of treated as a generic optimization.",
+          "It may be useful for comparing PIM-based serving against other KV-cache compression and bandwidth-reduction strategies."
+        ],
+        "risks": [
+          "The abstract does not provide concrete accuracy results, so the compression-quality tradeoff is still unresolved.",
+          "The reported gains may depend strongly on a particular heterogeneous GPU-CPU-PIM system and communication profile that may not generalize widely given only the abstract."
+        ],
+        "recommended_for": [
+          "Researchers working on LLM inference systems and long-context serving efficiency.",
+          "Engineers evaluating PIM or near-memory acceleration for attention-heavy workloads.",
+          "Readers interested in hardware-software co-design for KV-cache compression and decoding latency reduction."
+        ],
+        "keywords": [
+          "PIM",
+          "activation quantization",
+          "product quantization",
+          "KV cache",
+          "long-context LLM inference",
+          "attention acceleration"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High fit with the stated focus: it is directly about LLM inference systems, targets KV-cache capacity and decoding latency, and has very strong provided score signals, although the abstract still leaves key accuracy and evaluation details to verify.",
+        "fallback_summary": "Processing-in-Memory (PIM) architectures offer a promising solution to the memory bottlenecks in data-intensive machine learning, yet often overlook the growing challenge of activation memory footprint."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.18567v1",
+      "arxiv_id": "2604.18567v1",
+      "title": "Latent Phase-Shift Rollback: Inference-Time Error Correction via Residual Stream Monitoring and KV-Cache Steering",
+      "summary": "Large language models frequently commit unrecoverable reasoning errors mid-generation: once a wrong step is taken, subsequent tokens compound the mistake rather than correct it. We introduce $\\textbf{Latent Phase-Shift Rollback}$ (LPSR): at each generation step, we monitor the residual stream at a critical layer lcrit, detect abrupt directional reversals (phase shifts) via a cosine-similarity $+$ entropy dual gate, and respond by rolling back the KV-cache and injecting a pre-computed steering vector. No fine-tuning, gradient computation, or additional forward passes are required. LPSR achieves $\\mathbf{44.0\\%}$ on MATH-500 with an 8B model versus $28.8\\%$ for standard AR ($+15.2$ pp; McNemar $χ^2 = 66.96$, $p < 10^{-15}$). Critically, prompted self-correction, the most natural inference-time baseline, scores only $19.8\\%$, below standard AR; LPSR exceeds it by $+24.2$ pp ($χ^2 = 89.4$, $p \\approx 0$). LPSR also outperforms Best-of-16 ($+7.8$ pp) at $5.4\\times$ lower token cost, and surpasses a standard 70B model ($35.2\\%$) with $8.75\\times$ fewer parameters at ${\\sim}3\\times$ the token budget. A 32-layer sweep reveals a novel \\textbf{detection-correction dissociation}: error-detection AUC peaks at layer~14 ($0.718$) but task accuracy peaks at layer~16 ($44.0\\%$ vs.\\ $29.2\\%$), demonstrating that optimal monitoring depth differs for detection and correction.",
+      "authors": [
+        "Manan Gupta",
+        "Dhruv Kumar"
+      ],
+      "author_details": [
+        {
+          "name": "Manan Gupta"
+        },
+        {
+          "name": "Dhruv Kumar"
+        }
+      ],
+      "published": "2026-04-20T17:53:33Z",
+      "published_date": "2026-04-20 17:53:33+00:00",
+      "updated": "2026-04-20T17:53:33Z",
+      "comments": "Under Review",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.18567v1",
+      "url": "http://arxiv.org/abs/2604.18567v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.8,
+        "quality": 1.8,
+        "recommendation": 9.8
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "kv cache",
+        "cs.LG",
+        "cs.CL",
+        "baseline"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 1,
+        "matched_categories": [
+          "cs.LG",
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "kv cache"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "baseline"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "This paper proposes an inference-time control method that watches a model's residual stream for error-like phase shifts, then rolls back the KV cache and applies a steering vector to redirect generation.",
+        "summary_zh": "This paper targets a practical failure mode in autoregressive reasoning: once a model takes a wrong intermediate step, later tokens usually amplify the mistake instead of repairing it. The proposed method, Latent Phase-Shift Rollback, monitors the residual stream at a selected layer, detects abrupt directional reversals with a cosine-similarity plus entropy gate, and then rolls back the KV cache while injecting a pre-computed steering vector, all without fine-tuning, gradients, or extra forward passes. The abstract reports strong gains on MATH-500 for an 8B model over standard autoregressive decoding, prompted self-correction, and Best-of-16, and it also includes a layer sweep showing that the best layer for error detection is not the best layer for correction. If the method is robust, it points to a lightweight inference-time intervention path that sits between plain decoding and much more expensive search-based correction. The main missing details are deployment cost, how stable the steering vector and trigger thresholds are across tasks and models, and whether the gains extend beyond this reasoning benchmark.",
+        "background_zh": "Inference-time control for LLMs is attractive because decoding errors compound quickly, while stronger correction methods often require extra sampling, additional passes, or model updates.",
+        "problem_zh": "The paper asks whether a model's internal state can signal an emerging reasoning failure early enough to intervene during generation and recover accuracy more cheaply than standard self-correction or sampling-heavy baselines.",
+        "approach_zh": "It detects residual-stream phase shifts at a critical layer using a cosine-similarity and entropy gate, then restores an earlier KV-cache state and applies a pre-computed steering vector to redirect subsequent decoding.",
+        "evidence_zh": "The abstract supports the claim with MATH-500 results for an 8B model against standard autoregressive decoding, prompted self-correction, Best-of-16, and a 70B comparison, plus a 32-layer sweep showing a detection-correction mismatch; it does not make the runtime overhead, hardware setting, or cross-task generality clear.",
+        "value_zh": "For LLM inference work, the value is a potentially cheap intervention mechanism that uses internal signals and KV-cache control rather than extra search or retraining to improve reasoning trajectories.",
+        "open_questions": [
+          "How is the steering vector constructed, and how sensitive are results to that construction across models, prompts, and tasks?",
+          "What is the actual serving overhead of residual monitoring and rollback in wall-clock latency, memory traffic, and KV-cache management?",
+          "Do the gains hold outside MATH-500, or is the method tightly coupled to math-style reasoning errors and benchmark-specific tuning?"
+        ],
+        "core_contributions": [
+          "An inference-time error-correction pipeline based on residual-stream monitoring, KV-cache rollback, and steering-vector injection.",
+          "A dual-gated phase-shift detector that uses cosine similarity and entropy to trigger intervention during generation.",
+          "An empirical claim that the best layer for detecting errors differs from the best layer for correcting them, suggesting a detection-correction dissociation inside the model."
+        ],
+        "why_read": [
+          "It offers a concrete decoding-time alternative to self-correction and Best-of-N for reasoning recovery.",
+          "It uses mechanisms that are directly relevant to systems work: residual-state probes, KV-cache control, and intervention without extra forward passes.",
+          "The layer-sweep result is a potentially useful clue for designing internal monitors and control hooks in inference stacks."
+        ],
+        "risks": [
+          "The evidence in the abstract is concentrated on MATH-500, so generalization to broader workloads is unproven.",
+          "The method may depend heavily on layer choice, trigger thresholds, and steering-vector quality, which could make it brittle in deployment."
+        ],
+        "recommended_for": [
+          "Researchers working on LLM inference control and decoding-time intervention.",
+          "Engineers interested in KV-cache-aware serving mechanisms for reasoning models.",
+          "Readers studying how internal activations can be used for online error detection and correction."
+        ],
+        "keywords": [
+          "LLM inference",
+          "reasoning error correction",
+          "residual stream monitoring",
+          "KV-cache rollback",
+          "steering vectors",
+          "decoding control"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "This is a strong fit for the stated focus on LLM inference systems because it combines online internal-state monitoring with KV-cache manipulation and reports sizable reasoning gains without extra forward passes. The abstract also provides unusually specific baseline comparisons and a layer-analysis result that could matter for inference-control design, even though deployment cost and generality still need verification.",
+        "fallback_summary": "Large language models frequently commit unrecoverable reasoning errors mid-generation: once a wrong step is taken, subsequent tokens compound the mistake rather than correct it."
+      }
+    },
+    {
+      "paper_id": "2210.17323",
+      "arxiv_id": "2210.17323",
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "summary": "Introduces a scalable post-training quantization method for GPT-style models that preserves accuracy at 3-4 bit weight precision and makes much larger models deployable on limited hardware.",
+      "authors": [
+        "Elias Frantar",
+        "Saleh Ashkboos",
+        "Torsten Hoefler",
+        "Dan Alistarh"
+      ],
+      "published": "2022-10-31",
+      "published_date": "2022-10-31 00:00:00",
+      "categories": [
+        "cs.LG"
+      ],
+      "source": "classic_backlog",
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "quantization",
+        "gptq",
+        "4bit",
+        "single-gpu"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "selection_lane": "classic",
+      "is_hot_paper": false,
+      "source_url": "https://arxiv.org/abs/2210.17323",
+      "pdf_url": "https://arxiv.org/pdf/2210.17323.pdf",
+      "scores": {
+        "relevance": 2.9,
+        "recency": 0.0,
+        "popularity": 1.1,
+        "quality": 1.1,
+        "recommendation": 6.83
+      },
+      "classic_rotation_score": 10.6577,
+      "citationCount": 1860,
+      "influentialCitationCount": 309,
+      "venue": "arXiv.org",
+      "journal_ref": "ArXiv",
+      "ai": {
+        "one_liner_zh": "A post-training quantization method for GPT-style models that claims to preserve accuracy at 3-4-bit weight precision and make much larger models deployable on limited hardware.",
+        "summary_zh": "GPTQ tackles the deployment problem that large GPT-style models are hard to run on limited hardware because model weights are expensive to store and move. The paper proposes a scalable post-training quantization method whose main claim is that GPT-style models can be pushed to 3-4-bit weight precision while preserving accuracy. If that claim holds, the practical payoff is straightforward: much larger models become deployable under tighter memory budgets without a retraining-heavy pipeline. The abstract supports that headline at a high level, but it does not explain the quantization mechanism in enough detail to show where the robustness comes from. It also leaves the evaluation setup, hardware assumptions, and baseline comparisons unclear, which are the main items to verify in a full read.",
+        "background_zh": "Large GPT-style models are often constrained by inference-time memory limits, which makes low-bit post-training compression attractive because it can reduce deployment cost without retraining the model from scratch.",
+        "problem_zh": "The paper asks whether GPT-style models can be quantized after training down to 3-4-bit weight precision without unacceptable accuracy loss, enough to make larger models practical on limited hardware.",
+        "approach_zh": "It introduces a scalable post-training quantization method tailored to GPT-style models, with the stated goal of preserving accuracy at very low weight precision.",
+        "evidence_zh": "The abstract supports only the high-level claim that accuracy is preserved at 3-4-bit weight precision and that larger models become deployable on limited hardware; it does not make the evaluation setup or comparisons clear.",
+        "value_zh": "If the claim holds, the method offers a practical path to cut model memory footprint and widen deployment of large generative models on constrained hardware.",
+        "open_questions": [
+          "What is the actual quantization procedure, and which model components remain in higher precision versus being quantized to 3-4 bits?",
+          "On which GPT-style models and hardware settings does the claimed accuracy preservation hold, and where does it start to break down?",
+          "How fair are the baseline comparisons, and how much of the deployment gain comes from quantization alone versus runtime or implementation details?"
+        ],
+        "core_contributions": [
+          "Introduces a scalable post-training quantization method for GPT-style models.",
+          "Targets 3-4-bit weight precision while claiming to preserve model accuracy.",
+          "Frames low-bit quantization as a way to deploy much larger generative models on limited hardware."
+        ],
+        "why_read": [
+          "It is directly relevant to LLM inference deployment under tight memory budgets.",
+          "It addresses whether very low-bit post-training quantization is viable for GPT-style models without retraining.",
+          "It is a useful reference point for understanding compression-oriented deployment tradeoffs in large generative models."
+        ],
+        "risks": [
+          "The abstract does not explain the mechanism well enough to show why accuracy is preserved at such low precision.",
+          "Evaluation details, hardware assumptions, and baseline fairness are not specified in the abstract, so the strength of the claim is hard to judge from the summary alone."
+        ],
+        "recommended_for": [
+          "LLM inference engineers working on memory-constrained deployment.",
+          "Researchers studying post-training quantization for generative transformers.",
+          "Practitioners comparing low-bit compression approaches for large models."
+        ],
+        "keywords": [
+          "GPTQ",
+          "post-training quantization",
+          "GPT-style models",
+          "3-4-bit weights",
+          "limited hardware deployment"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High because low-bit post-training quantization for GPT-style deployment is a strong fit for LLM inference systems work, and the score signals make it a strong backlog paper despite limited abstract detail and no recency advantage.",
+        "fallback_summary": "Introduces a scalable post-training quantization method for GPT-style models that preserves accuracy at 3-4 bit weight precision and makes much larger models deployable on limited hardware."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.18529v1",
+      "arxiv_id": "2604.18529v1",
+      "title": "HybridGen: Efficient LLM Generative Inference via CPU-GPU Hybrid Computing",
+      "summary": "As modern LLMs support thousands to millions of tokens, KV caches grow to hundreds of gigabytes, stressing memory capacity and bandwidth. Existing solutions, such as KV cache pruning and offloading, alleviate these but underutilize hardware by relying solely on either GPU or CPU for attention computing, and considering yet limited CPU local memory for KV cache storage. We propose HybridGen, an efficient hybrid attention framework for long-context LLM inference. HybridGen enables CPU-GPU collaborative attention on systems with expanded tiered memory (e.g., CXL memory), addressing three key challenges: (1) multi-dimensional attention dependencies, (2) intensifying CPU-GPU load imbalance with longer sequences, and (3) NUMA penalty of tiered memories. HybridGen tackles these by introducing attention logit parallelism, a feedback-driven scheduler, and semantic-aware KV cache mapping. Experiments with three LLM models with eleven different sizes on three GPU platforms with a CXL-expanded memory show that HybridGen outperforms six state-of-the-art KV cache management methods by 1.41x--3.2x on average while maintaining superior accuracy.",
+      "authors": [
+        "Mao Lin",
+        "Xi Wang",
+        "Guilherme Cox",
+        "Dong Li",
+        "Hyeran Jeon"
+      ],
+      "author_details": [
+        {
+          "name": "Mao Lin"
+        },
+        {
+          "name": "Xi Wang"
+        },
+        {
+          "name": "Guilherme Cox"
+        },
+        {
+          "name": "Dong Li"
+        },
+        {
+          "name": "Hyeran Jeon"
+        }
+      ],
+      "published": "2026-04-20T17:25:44Z",
+      "published_date": "2026-04-20 17:25:44+00:00",
+      "updated": "2026-04-20T17:25:44Z",
+      "primary_category": "cs.PF",
+      "categories": [
+        "cs.PF",
+        "cs.DC"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.18529v1",
+      "url": "http://arxiv.org/abs/2604.18529v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.74,
+        "recency": 3.0,
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 9.74
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "llm inference",
-        "language model inference",
-        "speculative decoding",
-        "throughput",
-        "cs.LG",
-        "cs.CL",
+        "kv cache",
+        "cs.DC",
         "memory",
         "bandwidth"
       ],
@@ -110,166 +432,97 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 4,
+        "text_match_count": 2,
         "matched_categories": [
-          "cs.LG",
-          "cs.CL"
+          "cs.DC"
         ],
         "required_signal_matches": [
-          "speculative decoding"
+          "kv cache"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput",
           "memory",
           "bandwidth"
         ],
-        "bonus_keyword_match_count": 3,
+        "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
-          "throughput",
           "memory",
           "bandwidth"
         ],
-        "analysis_keyword_match_count": 3,
+        "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
+        "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper replaces speculative decoding's hard rejection with particle reweighting and resampling, aiming to turn rollback-heavy verification into a fixed-size parallel step for faster LLM inference.",
-        "summary_zh": "Speculative decoding speeds up LLM inference by drafting cheap tokens and checking them against a stronger model, but its throughput drops when mismatches force early rejection and rollback. This paper proposes sequential Monte Carlo speculative decoding (SMC-SD), which keeps multiple draft particles and replaces token-level rejection with importance weighting and resampling. The systems claim is that LLM inference is memory-bandwidth-bound, so the extra arithmetic for parallel particle scoring can use otherwise idle compute while making verification more vectorized and fixed-size. The abstract reports a 2.36x speed-up over standard speculative decoding and a 5.2x speed-up over autoregressive decoding, while staying within 3% of target-model accuracy on reasoning, instruction-following, and coding benchmarks. The main missing detail is that the abstract does not make clear the hardware setup, particle count, baseline implementation quality, or where the approximation starts to hurt quality.",
-        "background_zh": "Speculative decoding is a key LLM serving technique, but its gains are fragile because disagreement between draft and target models causes wasted drafted work and lower throughput.",
-        "problem_zh": "The paper asks how to avoid speculative decoding's rollback and truncation losses without paying an unacceptable quality penalty relative to the target model.",
-        "approach_zh": "It introduces SMC-SD, replacing exact token rejection with importance-weighted resampling over a population of draft particles, and frames the method as approximate inference with theoretical per-step error bounds.",
-        "evidence_zh": "According to the abstract, SMC-SD achieves 2.36x speed-up over speculative decoding and 5.2x over autoregressive decoding while remaining within 3% of target accuracy, but the abstract does not make the evaluation setup or baseline fairness clear.",
-        "value_zh": "If the tradeoff holds in real serving stacks, this offers a concrete way to stabilize and extend speculative decoding gains when proposal-target mismatch would otherwise erase them.",
+        "one_liner_zh": "The paper proposes a long-context LLM inference runtime that computes attention jointly on CPU and GPU, using tiered-memory-aware KV placement instead of treating the CPU as a passive offload target.",
+        "summary_zh": "This paper targets a central long-context inference bottleneck: KV caches grow large enough to overwhelm GPU memory capacity and bandwidth, while existing pruning or offloading schemes leave CPU compute and expanded memory underused. It proposes HybridGen, a CPU-GPU collaborative attention framework for tiered-memory systems such as CXL-expanded setups, built around attention logit parallelism, a feedback-driven scheduler, and semantic-aware KV cache mapping. The abstract claims experiments across three LLM families, eleven model sizes, and three GPU platforms with CXL-expanded memory, where HybridGen beats six prior KV-cache management methods by 1.41x to 3.2x on average while preserving better accuracy. If the method generalizes, the value is a more balanced way to trade compute, bandwidth, and memory locality for long-context serving. The biggest missing detail is how much of the gain depends on the specific CXL/tiered-memory hardware setup, scheduler overheads, and the fairness of the baseline configurations.",
+        "background_zh": "Long-context LLM inference is increasingly constrained by KV-cache capacity and bandwidth, which makes pure-GPU execution hard to scale and turns memory hierarchy design into a first-order systems problem.",
+        "problem_zh": "The paper asks how to use both CPU and GPU effectively for attention under very large KV caches and tiered memory, without suffering from dependency complexity, load imbalance, and NUMA penalties.",
+        "approach_zh": "HybridGen combines CPU-GPU collaborative attention with attention logit parallelism, a feedback-based load scheduler, and semantic-aware mapping of KV caches onto tiered memory.",
+        "evidence_zh": "The abstract states that experiments on three LLM models with eleven sizes and three GPU platforms with CXL-expanded memory show average improvements of 1.41x to 3.2x over six KV-cache management baselines while maintaining superior accuracy, but it does not make the per-workload setup or fairness details clear.",
+        "value_zh": "If the claims hold beyond the tested platforms, the work offers a concrete systems path to extend long-context serving by jointly exploiting heterogeneous compute and larger memory tiers rather than relying only on pruning or offload.",
         "open_questions": [
-          "What target and proposal model pairs, particle counts, and hardware configurations were used for the reported speedups?",
-          "How do the per-step approximation bounds translate into end-to-end generation quality on long outputs and harder reasoning traces?",
-          "Are the speculative decoding baselines fully optimized and compared under the same batching and memory-bandwidth conditions?"
+          "How is attention logit parallelism implemented across CPU and GPU, and what synchronization or transfer overhead does it introduce on the critical path?",
+          "How dependent are the reported gains on CXL-expanded memory capacity, NUMA topology, and specific CPU/GPU balance, and what happens on systems without CXL?",
+          "Are the six baselines configured with comparable memory budgets, batching, and accuracy targets, or do some speedups come from unequal operating points?"
         ],
         "core_contributions": [
-          "Recasts speculative decoding as an approximate inference procedure that reweights draft paths instead of discarding them at the first mismatch.",
-          "Uses a population of draft particles so verification can be executed as a fixed-size parallel scoring step with no rollback.",
-          "Claims both theoretical per-step approximation bounds and empirical speedups with limited accuracy loss."
+          "A hybrid attention framework that makes CPU and GPU both active participants in long-context inference.",
+          "A scheduling scheme that adapts CPU-GPU work allocation as sequence length changes and imbalance grows.",
+          "A semantic-aware KV-cache mapping strategy designed for tiered and NUMA-sensitive memory systems."
         ],
         "why_read": [
-          "It targets a real serving bottleneck: speculative decoding becomes less useful exactly when draft and target models diverge.",
-          "The claimed speedup mechanism is systems-relevant and explicit, relying on spare compute in a memory-bandwidth-bound inference regime.",
-          "It sits directly at the intersection of decoding algorithms and runtime design for LLM inference."
+          "It directly addresses long-context LLM serving, KV-cache pressure, and heterogeneous memory use, which are core systems concerns.",
+          "It makes a concrete co-design claim at the runtime and memory-placement level rather than only proposing another pruning or offload heuristic.",
+          "The abstract includes real comparative evidence against multiple baselines, making it plausible as a substantive systems paper rather than a speculative proposal."
         ],
         "risks": [
-          "The method is approximate, so quality loss may grow outside the benchmark mix summarized in the abstract.",
-          "The speedups may depend strongly on hardware characteristics, particle count, and proposal-target alignment quality with limited portability across deployments in the abstracted description provided here."
+          "The reported gains may rely heavily on CXL-expanded memory and may not transfer cleanly to standard CPU-GPU servers.",
+          "The abstract does not reveal whether CPU participation increases end-to-end latency variance or introduces scheduler overhead that matters at smaller contexts or batches."
         ],
         "recommended_for": [
-          "Researchers working on LLM inference acceleration and speculative decoding.",
-          "Engineers building bandwidth-bound LLM serving runtimes.",
-          "Readers interested in explicit speed-quality tradeoffs in decoding algorithms."
+          "Researchers working on LLM inference runtimes and long-context serving.",
+          "Engineers evaluating KV-cache placement across GPU, host memory, and emerging tiered-memory systems.",
+          "Systems readers interested in CPU-GPU co-execution and NUMA-aware runtime design."
         ],
         "keywords": [
           "LLM inference",
-          "speculative decoding",
-          "sequential Monte Carlo",
-          "inference acceleration",
-          "throughput",
-          "approximate decoding"
+          "long-context serving",
+          "KV cache",
+          "CPU-GPU hybrid computing",
+          "tiered memory",
+          "CXL memory"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High fit with LLM inference systems work: the paper proposes a concrete alternative to rollback-based speculative decoding, reports large speedups, and directly addresses a serving bottleneck that matters for production inference.",
-        "fallback_summary": "Speculative decoding (SD) accelerates language model inference by drafting tokens from a cheap proposal model and verifying them against an expensive target model via rejection sampling."
+        "reading_priority_reason": "This is a direct fit for LLM inference systems and memory-runtime co-design, and the abstract makes concrete claims about where the throughput gains come from: CPU-GPU collaborative attention, dynamic load balancing, and tiered-memory-aware KV placement.",
+        "fallback_summary": "As modern LLMs support thousands to millions of tokens, KV caches grow to hundreds of gigabytes, stressing memory capacity and bandwidth."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.16007v1",
-      "arxiv_id": "2604.16007v1",
-      "title": "MemExplorer: Navigating the Heterogeneous Memory Design Space for Agentic Inference NPUs",
-      "summary": "Emerging agentic LLM workloads are driving rapidly growing demand on both memory capacity and bandwidth, with different phases of inference (e.g., prefill and decode) imposing distinct requirements. Industry is responding by composing heterogeneous accelerators into single interconnected systems, as exemplified by NVIDIA's Vera Rubin platform, where each device brings its own memory architecture.\n  This heterogeneity is further compounded by a widening landscape of available memory technologies: high-density on-chip SRAM, HBM, LPDDR, GDDR, and emerging options such as high-bandwidth flash (HBF), each offering different capacity, bandwidth, and power trade-offs.\n  Identifying the right memory architecture for next-generation inference accelerators requires navigating a vast and rapidly evolving design space, in which the interplay between workload characteristics, NPU design dimensions, and memory system design remains largely underexplored.\n  To address this challenge, we present MemExplorer, a new memory system synthesizer for heterogeneous NPU systems. MemExplorer provides a unified abstraction for modeling diverse memory technologies across different hierarchy levels (e.g., on-chip and off-chip) and automatically determines an efficient heterogeneous memory system together with NPU design choices (e.g., matrix engine size) to balance throughput and power between prefilling and decoding devices in a multi-device NPU system.\n  Experimental results show that, under the same power budget for agentic workloads, MemExplorer achieves up to 2.3x higher energy efficiency than the baseline NPU and 3.23x higher than H100 in the prefill-only setting. Under equivalent performance targets in the decode setting, it further delivers up to 1.93x and 2.72x higher power efficiency over the baseline NPU and H100, respectively.",
+      "id": "http://arxiv.org/abs/2604.18170v1",
+      "arxiv_id": "2604.18170v1",
+      "title": "Copy-as-Decode: Grammar-Constrained Parallel Prefill for LLM Editing",
+      "summary": "LLMs edit text and code by autoregressively regenerating the full output, even when most tokens appear verbatim in the input. We study Copy-as-Decode, a decoding-layer mechanism that recasts edit generation as structured decoding over a two-primitive grammar: <copy lines=\"i-j\"/> references an input line range, <gen>...</gen> emits new content. A token-level FSM guarantees syntactic validity, and a serving-layer primitive updates the KV cache for each copy span via a single parallel-prefill forward rather than $N$ autoregressive steps -- sharing the parallel-forward kernel of speculative decoding but with input tokens as the draft and program-enforced acceptance replacing probabilistic verification. We report an upper-bound analysis that requires no end-to-end training. (i) Kernel speedup: on Qwen2.5-{1.5B, 7B}, copying $N$ tokens via parallel prefill is $6.8\\times$--$303\\times$ faster than autoregressive ($N \\in [8, 512]$, A100 80GB bf16). (ii) Copy ceiling: on ProbeEdit and HumanEvalPack-Fix (Py/JS), $74$--$98\\%$ of gold tokens are reachable under the line-level primitive; composed with the empirical kernel over each corpus's span histogram this yields a closed-form wall-clock bound of $29.0\\times / 3.4\\times / 4.2\\times$ ($13.0\\times$ pooled). A token-level extension reaches $91$--$99\\%$ coverage with $4.5\\times$--$6.5\\times$ floors. (iii) Pipeline losslessness: oracle programs round-trip through the deterministic resolver on all $482$ cases, localizing any downstream failure to span selection rather than the mechanism. A perturbation study shows pooled EM drops from $100\\%$ to $15.48\\%$ under off-by-one noise. A fine-tuning pilot on Qwen2.5-Coder-1.5B lifts HEvalFix-Py EM from $0/33$ (untrained) to $12$--$17\\%$, a learnability signal, not a production selector. Batched-serving integration and multi-file coverage are scoped as follow-up.",
       "authors": [
-        "Haoran Wu",
-        "Zeyu Cao",
-        "Yao Lai",
-        "Binglei Lou",
-        "Jiayi Nie",
-        "Can Xiao",
-        "Timi Adeniran",
-        "Przemyslaw Forys",
-        "Kauser Johar",
-        "Catriona Wright",
-        "Junyi Liu",
-        "Kai Shi",
-        "Nicholas D. Lane",
-        "Rika Antonova",
-        "Jianyi Cheng",
-        "Timothy Jones",
-        "Aaron Zhao",
-        "Robert Mullins"
+        "Ziyang Liu"
       ],
       "author_details": [
         {
-          "name": "Haoran Wu"
-        },
-        {
-          "name": "Zeyu Cao"
-        },
-        {
-          "name": "Yao Lai"
-        },
-        {
-          "name": "Binglei Lou"
-        },
-        {
-          "name": "Jiayi Nie"
-        },
-        {
-          "name": "Can Xiao"
-        },
-        {
-          "name": "Timi Adeniran"
-        },
-        {
-          "name": "Przemyslaw Forys"
-        },
-        {
-          "name": "Kauser Johar"
-        },
-        {
-          "name": "Catriona Wright"
-        },
-        {
-          "name": "Junyi Liu"
-        },
-        {
-          "name": "Kai Shi"
-        },
-        {
-          "name": "Nicholas D. Lane"
-        },
-        {
-          "name": "Rika Antonova"
-        },
-        {
-          "name": "Jianyi Cheng"
-        },
-        {
-          "name": "Timothy Jones"
-        },
-        {
-          "name": "Aaron Zhao"
-        },
-        {
-          "name": "Robert Mullins"
+          "name": "Ziyang Liu"
         }
       ],
-      "published": "2026-04-17T12:29:54Z",
-      "published_date": "2026-04-17 12:29:54+00:00",
-      "updated": "2026-04-17T12:29:54Z",
-      "primary_category": "cs.AR",
+      "published": "2026-04-20T12:29:53Z",
+      "published_date": "2026-04-20 12:29:53+00:00",
+      "updated": "2026-04-20T12:29:53Z",
+      "comments": "31 pages, 8 figures, 25 tables (17-page main body plus appendix)",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.AR"
+        "cs.CL",
+        "cs.AI"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.16007v1",
-      "url": "http://arxiv.org/abs/2604.16007v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.18170v1",
+      "url": "http://arxiv.org/abs/2604.18170v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
@@ -280,144 +533,13 @@
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
+        "serving",
         "prefill",
         "decode",
-        "throughput",
-        "cs.AR",
-        "h100",
-        "memory",
-        "bandwidth",
-        "baseline"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.AR"
-        ],
-        "required_signal_matches": [
-          "prefill",
-          "decode",
-          "h100"
-        ],
-        "required_signal_match_count": 3,
-        "bonus_keyword_matches": [
-          "throughput",
-          "memory",
-          "bandwidth"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "baseline",
-          "throughput",
-          "memory",
-          "bandwidth"
-        ],
-        "analysis_keyword_match_count": 4,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "This paper presents a synthesizer that co-designs heterogeneous memory hierarchies and NPU parameters for agentic LLM inference, with separate attention to prefill and decode efficiency under power or performance constraints.",
-        "summary_zh": "The paper targets a real systems problem: agentic LLM inference stresses both memory capacity and bandwidth, while prefill and decode phases pull the hardware in different directions. It proposes MemExplorer, a synthesizer that models multiple memory technologies across hierarchy levels and jointly selects memory-system choices and NPU design parameters such as matrix engine size for heterogeneous multi-device inference systems. The abstract claims sizeable modeled efficiency gains, including up to 2.3x higher energy efficiency than a baseline NPU and 3.23x higher than H100 for prefill-only workloads, plus up to 1.93x and 2.72x higher power efficiency for decode at matched performance targets. The practical value is in turning heterogeneous-memory design into a structured search problem rather than a fixed-architecture assumption for inference accelerators. The biggest missing detail is how realistic the workload model, baselines, and hardware cost assumptions are, and whether the gains survive under end-to-end serving constraints rather than phase-isolated comparisons.",
-        "background_zh": "Agentic LLM serving is making memory-system design a first-order bottleneck because capacity and bandwidth demands are rising and prefill versus decode stress the hierarchy differently.",
-        "problem_zh": "The paper asks how to choose memory technologies and NPU design parameters for heterogeneous inference systems when the design space is large and the optimal tradeoff depends on workload phase, throughput, and power targets.",
-        "approach_zh": "MemExplorer introduces a unified abstraction over on-chip and off-chip memory options and uses it to jointly synthesize heterogeneous memory configurations and NPU parameters for multi-device prefill/decode systems.",
-        "evidence_zh": "The abstract reports simulated or modeled efficiency improvements against a baseline NPU and H100 under specified power-budget or matched-performance settings, but it does not make the evaluation methodology or implementation fidelity clear.",
-        "value_zh": "If the methodology is sound, this could be useful for accelerator and serving architects who need a principled way to map LLM inference phases onto mixed memory technologies instead of relying on one-size-fits-all memory designs.",
-        "open_questions": [
-          "How are agentic workloads modeled, and do the prefill and decode benchmarks reflect realistic end-to-end serving traces rather than isolated kernels or phases?",
-          "What exactly is the baseline NPU, and are area, process, interconnect, and software-stack assumptions matched fairly against H100 and the synthesized designs?",
-          "How sensitive are the reported gains to memory-technology assumptions such as bandwidth, latency, capacity density, power models, and packaging constraints?"
-        ],
-        "core_contributions": [
-          "Frames heterogeneous memory selection for agentic inference NPUs as a joint synthesis problem across memory hierarchy and compute design.",
-          "Introduces a unified abstraction that covers SRAM, HBM, LPDDR, GDDR, and emerging high-bandwidth flash options within one search space.",
-          "Optimizes prefill and decode devices together to balance throughput and power in heterogeneous multi-device systems."
-        ],
-        "why_read": [
-          "Relevant to LLM inference systems because it focuses on the memory-side bottlenecks behind prefill/decode specialization rather than only model-side optimization.",
-          "Useful if you care about hardware-software co-design for serving, especially where bandwidth, capacity, and power tradeoffs dominate accelerator choices.",
-          "The abstract gives concrete efficiency claims against both a baseline NPU and H100, making it worth checking how much of the gain comes from modeling assumptions versus genuine architectural insight."
-        ],
-        "risks": [
-          "The abstract does not clarify whether results come from analytical modeling, cycle-level simulation, or hardware-backed evaluation.",
-          "Comparisons against H100 may not be informative unless the workload setup, utilization assumptions, and system boundaries are tightly controlled and fair to general-purpose GPUs."
-        ],
-        "recommended_for": [
-          "Researchers working on LLM inference hardware-software co-design",
-          "Engineers evaluating heterogeneous memory hierarchies for prefill/decode specialization",
-          "Architects interested in power-efficient multi-device NPU design"
-        ],
-        "keywords": [
-          "agentic LLM inference",
-          "heterogeneous memory",
-          "NPU design",
-          "prefill",
-          "decode",
-          "energy efficiency"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "This is a direct fit for LLM inference systems and hardware co-design, and the claimed gains center on memory hierarchy decisions that matter for serving efficiency; the main reason to read is to validate baseline fairness and modeling realism.",
-        "fallback_summary": "Emerging agentic LLM workloads are driving rapidly growing demand on both memory capacity and bandwidth, with different phases of inference (e.g., prefill and decode) imposing distinct requirements."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.15750v1",
-      "arxiv_id": "2604.15750v1",
-      "title": "DepCap: Adaptive Block-Wise Parallel Decoding for Efficient Diffusion LM Inference",
-      "summary": "Diffusion language models (DLMs) have emerged as a promising alternative to autoregressive language generation due to their potential for parallel decoding and global refinement of the entire sequence. To unlock this potential, DLM inference must carefully balance generation quality and decoding speed. Recent block-wise DLM decoding methods improve this trade-off by performing diffusion-based decoding sequentially in blocks. However, existing methods typically rely on fixed block schedules or current-step local signals to determine block boundaries, and use conservative confidence-based parallel decoding to avoid conflicts, limiting the quality-speed trade-off. In this paper, we argue that block-wise DLM inference requires more suitable signals for its two core decisions: cross-step signals for determining block boundaries, and token-level conflict signals for parallel decoding. Based on this view, we propose DepCap, a training-free framework for efficient block-wise DLM inference. Specifically, DepCap instantiates the cross-step signal as the influence of the last decoded block and uses it to adaptively determine how far the next block should extend, while identifying a conflict-free subset of tokens for safe parallel decoding within each block, enabling substantial inference acceleration with negligible quality degradation. DepCap is a plug-and-play method applicable to various DLMs, and compatible with existing KV-cache strategies for block-wise DLM. An information-theoretic analysis further suggests that the cumulative last-block influence on a candidate block is approximately additive across tokens, supporting the proposed block-partitioning criterion. Experimental results show that DepCap achieves favorable speed-quality trade-offs across multiple DLM backbones and reasoning and coding benchmarks, with up to 5.63$\\times$ speedup without significant performance degradation.",
-      "authors": [
-        "Xiang Xia",
-        "Wuyang Zhang",
-        "Jiazheng Liu",
-        "Cheng Yan",
-        "Yanyong Zhang"
-      ],
-      "author_details": [
-        {
-          "name": "Xiang Xia"
-        },
-        {
-          "name": "Wuyang Zhang"
-        },
-        {
-          "name": "Jiazheng Liu"
-        },
-        {
-          "name": "Cheng Yan"
-        },
-        {
-          "name": "Yanyong Zhang"
-        }
-      ],
-      "published": "2026-04-17T06:53:27Z",
-      "published_date": "2026-04-17 06:53:27+00:00",
-      "updated": "2026-04-17T06:53:27Z",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AI"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.15750v1",
-      "url": "http://arxiv.org/abs/2604.15750v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.52,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 8.75
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "inference acceleration",
+        "speculative decoding",
         "kv cache",
-        "cs.LG",
+        "cs.CL",
+        "a100",
         "speedup"
       ],
       "matched_domain_priority": 5,
@@ -425,14 +547,18 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 2,
+        "text_match_count": 5,
         "matched_categories": [
-          "cs.LG"
+          "cs.CL"
         ],
         "required_signal_matches": [
-          "kv cache"
+          "speculative decoding",
+          "kv cache",
+          "prefill",
+          "decode",
+          "a100"
         ],
-        "required_signal_match_count": 1,
+        "required_signal_match_count": 5,
         "bonus_keyword_matches": [
           "speedup"
         ],
@@ -441,363 +567,190 @@
           "speedup"
         ],
         "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.35,
+        "signal_bonus": 0.9,
         "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "A training-free block-wise diffusion LM decoder that adapts block size from cross-step influence and parallelizes only conflict-free tokens to improve the speed-quality trade-off.",
-        "summary_zh": "Diffusion language models are attractive because they can refine a whole sequence in parallel, but practical inference still depends on how well block-wise decoding balances speed against quality. This paper argues that current methods use weak signals for two key decisions: where a block should end and which tokens can be decoded in parallel without harmful conflicts. DepCap is a training-free, plug-and-play method that uses the influence of the last decoded block to adapt the next block length and then selects a conflict-free subset of tokens for safe within-block parallel decoding; the abstract also says it is compatible with existing KV-cache strategies. The paper reports favorable speed-quality trade-offs across multiple DLM backbones and reasoning and coding benchmarks, including up to 5.63x speedup without significant performance degradation, and adds an information-theoretic argument for its block-partitioning rule. The main missing detail is whether these gains remain strong after accounting for control overhead, hardware setup, and baseline fairness in true end-to-end latency.",
-        "background_zh": "Diffusion language models promise more parallel generation than autoregressive decoding, but inference efficiency still hinges on how aggressively decoding can be parallelized without damaging output quality.",
-        "problem_zh": "The paper targets the core control problem in block-wise DLM inference: choosing better block boundaries and safer parallel token sets than fixed schedules or local confidence heuristics provide.",
-        "approach_zh": "DepCap uses last-block influence as a cross-step signal to adapt block length and identifies a conflict-free token subset inside each block for parallel decoding, all without additional training.",
-        "evidence_zh": "The abstract reports experiments across multiple DLM backbones and reasoning and coding benchmarks, plus an information-theoretic analysis, and claims up to 5.63x speedup with no significant quality loss; it does not make the hardware or baseline setup clear.",
-        "value_zh": "If the claim holds, this is a low-friction decoding-side path to better diffusion LM serving efficiency that can work with existing KV-cache optimizations instead of requiring model retraining.",
+        "one_liner_zh": "The paper turns copy-heavy LLM editing into grammar-constrained decoding with explicit copy spans and replaces token-by-token copying with parallel-prefill KV-cache updates.",
+        "summary_zh": "LLM editing is wasteful because standard autoregressive decoding regenerates the full output even when most edited tokens are copied verbatim from the input. This paper reframes editing as structured decoding over `<copy>` spans and `<gen>` regions, then executes copy spans with a single parallel-prefill forward instead of many decode steps, reusing the kernel shape of speculative decoding while relying on program constraints rather than probabilistic acceptance. The abstract supports this mainly with an upper-bound analysis rather than a deployed end-to-end system: it reports 6.8x-303x kernel speedups for copying, 74-98% line-level oracle copy coverage on ProbeEdit and HumanEvalPack-Fix, and lossless round-trips on 482 oracle programs. A small fine-tuning pilot suggests the representation is learnable, but the paper explicitly does not claim a production-ready selector, and the perturbation study shows strong brittleness to span-boundary errors. The main missing detail is whether end-to-end span selection, batching, and multi-file editing preserve the claimed latency gains under fair serving baselines.",
+        "background_zh": "Editing and bug-fixing workloads are often dominated by copied context, yet current LLM serving paths still pay decode cost token by token for unchanged regions.",
+        "problem_zh": "The paper asks how to exploit that copy structure to reduce editing latency without breaking syntactic validity or forcing full-sequence regeneration.",
+        "approach_zh": "It defines a two-primitive grammar of input-line copying and free generation, enforces validity with a token-level FSM, and realizes copied spans as parallel-prefill KV-cache updates instead of autoregressive decode steps.",
+        "evidence_zh": "The abstract reports 6.8x-303x kernel speedups for copy spans on A100, high oracle-reachable coverage on ProbeEdit and HumanEvalPack-Fix, lossless resolver round-trips on all 482 oracle cases, severe degradation under off-by-one perturbations, and only a small fine-tuning pilot as evidence of learnability.",
+        "value_zh": "If the selector and serving integration work end to end, this could shift copy-heavy editing from decode-bound execution toward prefill-bound execution, which is directly relevant to low-latency code and text editing systems.",
         "open_questions": [
-          "How is last-block influence computed in practice, and what is its runtime overhead relative to the decoding work it saves?",
-          "Are the reported gains measured as end-to-end wall-clock latency on fixed hardware, and how strong are the baselines against prior block-wise DLM decoders?",
-          "How stable is the quality-speed trade-off across sequence lengths, model scales, and different KV-cache configurations?"
+          "How is span selection trained and evaluated end to end, and what wall-clock gain remains once selector errors are included?",
+          "What are the exact serving assumptions behind the reported speedups, including batch size, cache layout, and fairness against strong editing and speculative-decoding baselines?",
+          "How well does the method handle multi-file edits, partial-line or token-level copying, and longer reordering patterns outside the oracle setup?"
         ],
         "core_contributions": [
-          "Reframes block-wise DLM inference around two separate signals: cross-step block-boundary selection and token-level conflict detection for parallel decoding.",
-          "Introduces DepCap, a training-free adaptive decoding framework based on last-block influence and conflict-free token subsets.",
-          "Combines a theoretical additivity argument for the partitioning criterion with empirical speed-quality results across several DLM backbones."
+          "A structured edit-decoding formulation that separates copied input spans from newly generated content.",
+          "A serving-layer primitive that applies copied spans through one parallel-prefill KV-cache update rather than repeated decode steps.",
+          "An upper-bound evaluation that decomposes potential gains into kernel speed, copy coverage, resolver correctness, and selector learnability signals."
         ],
         "why_read": [
-          "It proposes a concrete decoding-policy change for diffusion LM inference rather than a new training recipe.",
-          "It directly targets reasoning and coding workloads, where quality regressions from aggressive parallel decoding matter.",
-          "It claims compatibility with existing KV-cache strategies, which makes systems integration more plausible than model-side changes."
+          "It makes the source of the speedup explicit: copied tokens are served through prefill-style computation instead of autoregressive decode.",
+          "It quantifies how much of common edit benchmarks is even reachable by span-copy primitives, which is useful for deciding whether this serving direction is worthwhile.",
+          "It cleanly separates mechanism correctness from selector quality by showing oracle losslessness and sharp failure under boundary noise."
         ],
         "risks": [
-          "The abstract does not say whether the speedups remain after including all scheduling and conflict-detection overhead in end-to-end latency.",
-          "Hardware assumptions, benchmark protocol, and baseline fairness are underspecified in the abstract, so the reported trade-off needs verification from the full paper."
+          "Most of the evidence is oracle-based or upper-bound analysis, so realized production gains are still unproven.",
+          "The method appears highly sensitive to span-boundary mistakes, which makes selector quality the dominant practical risk for end-to-end deployment."
         ],
         "recommended_for": [
-          "Researchers working on diffusion LM decoding and non-autoregressive generation",
-          "Engineers studying latency-quality trade-offs in LLM serving",
-          "People evaluating cache-aware parallel decoding policies"
+          "Researchers working on LLM inference and serving for editing or code-assist workloads.",
+          "Engineers interested in KV-cache, prefill/decode tradeoffs, and speculative-decoding-adjacent runtime design.",
+          "Readers tracking structured decoding interfaces for code editing systems."
         ],
         "keywords": [
-          "diffusion language models",
-          "block-wise decoding",
-          "parallel decoding",
-          "adaptive block scheduling",
-          "inference acceleration",
-          "KV-cache compatibility"
+          "LLM editing",
+          "grammar-constrained decoding",
+          "parallel prefill",
+          "KV cache",
+          "speculative decoding",
+          "code editing"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "Direct fit with the stated inference-systems focus and backed by a specific decoding mechanism plus a nontrivial speedup claim, though the full paper is needed to verify end-to-end measurement details and baseline fairness.",
-        "fallback_summary": "Diffusion language models (DLMs) have emerged as a promising alternative to autoregressive language generation due to their potential for parallel decoding and global refinement of the entire sequence."
+        "reading_priority_reason": "High fit for the current systems focus because the paper targets LLM editing latency through KV-cache and parallel-prefill design, and the abstract provides concrete mechanism-level evidence even though end-to-end serving results are still missing.",
+        "fallback_summary": "LLMs edit text and code by autoregressively regenerating the full output, even when most tokens appear verbatim in the input."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.16053v1",
-      "arxiv_id": "2604.16053v1",
-      "title": "T-RBFT: A Scalable and Efficient Byzantine Consensus Based on Trusted Execution Environment for Consortium Blockchain",
-      "summary": "With the continuous expansion of blockchain application scenarios, consortium chains have raised higher performance and security requirements for consensus mechanisms. Unlike public blockchains, consortium chains typically implement an admission mechanism that restricts participation to trusted entities, ensuring that most replicas are honest and the number of faulty nodes remains small under normal circumstances. In such settings, conventional Byzantine Fault Tolerant (BFT) protocols, which are designed for worst-case adversarial scenarios, incur excessive message exchanges and computational overhead, thereby limiting performance and scalability. To address this issue, this paper proposes T-RBFT, a two-layer consensus mechanism inspired by network sharding and enhanced by the trusted execution environment (TEE). In T-RBFT, consensus nodes are first dynamically grouped based on their runtime characteristics. Then, inter-group consensus is achieved through a TEE-assisted BFT protocol, while each group internally reaches agreement using an improved Raft-based mechanism. Experimental evaluation shows that T-RBFT reduces communication overhead and latency, and achieves higher throughput compared to existing two-layer consensus protocols, providing a scalable and communication-efficient consensus protocol for permissioned blockchain networks.",
+      "id": "http://arxiv.org/abs/2604.18396v1",
+      "arxiv_id": "2604.18396v1",
+      "title": "River-LLM: Large Language Model Seamless Exit Based on KV Share",
+      "summary": "Large Language Models (LLMs) have demonstrated exceptional performance across diverse domains but are increasingly constrained by high inference latency. Early Exit has emerged as a promising solution to accelerate inference by dynamically bypassing redundant layers. However, in decoder-only architectures, the efficiency of Early Exit is severely bottlenecked by the KV Cache Absence problem, where skipped layers fail to provide the necessary historical states for subsequent tokens. Existing solutions, such as recomputation or masking, either introduce significant latency overhead or incur severe precision loss, failing to bridge the gap between theoretical layer reduction and practical wall-clock speedup. In this paper, we propose River-LLM, a training-free framework that enables seamless token-level Early Exit. River-LLM introduces a lightweight KV-Shared Exit River that allows the backbone's missing KV cache to be naturally generated and preserved during the exit process, eliminating the need for costly recovery operations. Furthermore, we utilize state transition similarity within decoder blocks to predict cumulative KV errors and guide precise exit decisions. Extensive experiments on mathematical reasoning and code generation tasks demonstrate that River-LLM achieves 1.71 to 2.16 times of practical speedup while maintaining high generation quality.",
       "authors": [
-        "Wen Gao",
-        "Xinhong Hei",
-        "Yichuan Wang"
+        "Yingtao Shen",
+        "An Zou"
       ],
       "author_details": [
         {
-          "name": "Wen Gao"
+          "name": "Yingtao Shen"
         },
         {
-          "name": "Xinhong Hei"
-        },
-        {
-          "name": "Yichuan Wang"
+          "name": "An Zou"
         }
       ],
-      "published": "2026-04-17T13:28:21Z",
-      "published_date": "2026-04-17 13:28:21+00:00",
-      "updated": "2026-04-17T13:28:21Z",
-      "primary_category": "cs.DC",
+      "published": "2026-04-20T15:20:17Z",
+      "published_date": "2026-04-20 15:20:17+00:00",
+      "updated": "2026-04-20T15:20:17Z",
+      "comments": "Accepted to ACL 2026, 13pages, with appendix",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.DC"
+        "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.16053v1",
-      "url": "http://arxiv.org/abs/2604.16053v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.18396v1",
+      "url": "http://arxiv.org/abs/2604.18396v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.21,
+        "relevance": 2.84,
         "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 8.52
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 9.34
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "throughput",
+        "decoder-only",
+        "kv cache",
         "latency",
-        "cs.DC",
-        "runtime",
-        "evaluation"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "runtime"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "throughput",
-          "latency"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "evaluation",
-          "throughput",
-          "latency"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh",
-      "ai": {
-        "one_liner_zh": "A two-layer permissioned-blockchain consensus scheme uses TEE-assisted cross-group BFT and Raft-like intra-group agreement to reduce communication cost under mostly honest-node assumptions.",
-        "summary_zh": "This paper targets consortium-blockchain consensus, where classical BFT protocols can be expensive when participation is restricted and faulty replicas are usually few. It proposes T-RBFT, which dynamically groups nodes by runtime characteristics, runs a TEE-assisted BFT protocol across groups, and uses an improved Raft-based mechanism inside each group. The abstract claims experiments showing lower communication overhead and latency plus higher throughput than existing two-layer consensus protocols. If those results hold, the design could improve scalability for permissioned deployments that accept TEE-based trust assumptions. The biggest missing detail is that the abstract does not explain the grouping policy, the TEE trust model, or the evaluation setup well enough to judge correctness, fairness, or generality.",
-        "background_zh": "Permissioned blockchain networks often have stronger admission control and fewer faulty replicas than public chains, so worst-case BFT costs can become a practical scalability bottleneck.",
-        "problem_zh": "The paper asks how to retain Byzantine-style robustness in consortium chains while reducing the message and computation overhead that limits latency, throughput, and scale.",
-        "approach_zh": "T-RBFT splits consensus into dynamic groups, uses a TEE-assisted BFT protocol for inter-group agreement, and applies an improved Raft-style protocol within each group.",
-        "evidence_zh": "The abstract says experiments compare T-RBFT against existing two-layer consensus protocols and report lower communication overhead and latency with higher throughput, but it does not make the baselines, workload, hardware, or fault settings clear.",
-        "value_zh": "If the assumptions hold, the method offers a route to more communication-efficient permissioned consensus by combining hierarchical protocol structure with hardware-assisted trust.",
-        "open_questions": [
-          "How are nodes grouped by runtime characteristics, and how often can regrouping happen without destabilizing consensus or adding large overhead?",
-          "What exact TEE trust and failure model is assumed, and what happens if a TEE is compromised, unavailable, or behaves inconsistently across replicas?",
-          "Are the reported throughput and latency gains measured under fair conditions, including comparable replica counts, fault thresholds, network conditions, and implementation quality?"
-        ],
-        "core_contributions": [
-          "Reframes consortium-chain consensus as a setting where standard worst-case BFT may be overprovisioned relative to typical fault conditions.",
-          "Introduces a two-layer protocol that combines TEE-assisted inter-group BFT with improved Raft-based intra-group consensus.",
-          "Claims experimental improvements in communication overhead, latency, and throughput over prior two-layer consensus designs."
-        ],
-        "why_read": [
-          "It is a concrete example of using hierarchical decomposition plus hardware trust assumptions to lower consensus overhead.",
-          "It may be useful for comparing permissioned-consensus design tradeoffs around communication cost versus trust model strength.",
-          "The paper surfaces an engineering question that matters beyond blockchain: when worst-case fault models are too expensive for the deployment reality."
-        ],
-        "risks": [
-          "The dependence on TEE changes the trust model and may limit applicability where hardware trust is unacceptable or hard to validate.",
-          "The abstract underspecifies the improved Raft variant and dynamic grouping mechanism, so the real source of performance gains is not yet clear.* The evaluation claims are not detailed enough to assess fairness, reproducibility, or sensitivity to network and fault assumptions."
-        ],
-        "recommended_for": [
-          "Researchers studying permissioned blockchain consensus and hierarchical BFT designs.",
-          "Systems engineers evaluating communication-efficient consensus under mostly honest membership assumptions.",
-          "Readers interested in TEE-assisted protocol design rather than LLM inference or compiler/runtime systems."
-        ],
-        "keywords": [
-          "permissioned blockchain",
-          "Byzantine consensus",
-          "trusted execution environment",
-          "two-layer consensus",
-          "Raft",
-          "throughput precision latency"
-        ],
-        "reading_priority": "low",
-        "reading_priority_reason": "The paper discusses latency, throughput, and communication efficiency, but its actual topic is consortium-blockchain consensus rather than LLM inference acceleration, CUDA kernel generation, or compiler/runtime co-design. Its recommendation score is strong, yet the relevance score is low and the fit to the current research focus is weak.",
-        "fallback_summary": "With the continuous expansion of blockchain application scenarios, consortium chains have raised higher performance and security requirements for consensus mechanisms."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.15768v1",
-      "arxiv_id": "2604.15768v1",
-      "title": "cuNNQS-SCI: A Fully GPU-Accelerated Framework for High-Performance Configuration Interaction Selection withNeural Network QQantum States",
-      "summary": "AI-driven methods have demonstrated considerable success in tackling the central challenge of accurately solving the Schrödinger equation for complex many-body systems. Among neural network quantum state (NNQS) approaches, the NNQS-SCI (Selected Configuration Interaction) method stands out as a state-of-the-art technique, recognized for its high accuracy and scalability. However, its application to larger systems is severely constrained by a hybrid CPU-GPU architecture. Specifically, centralized CPU-based global de-duplication creates a severe scalability barrier due to communication bottlenecks, while host-resident coupled-configuration generation induces prohibitive computational overheads. We introduce cuNNQS-SCI, a fully GPU-accelerated SCI framework designed to overcome these bottlenecks. cuNNQS-SCI first integrates a distributed, load-balanced global de-duplication algorithm to minimize redundancy and communication overhead at scale. To address compute limitations, it employs specialized, fine-grained CUDA kernels for exact coupled configuration generation. Finally, to break the single-GPU memory barrier exposed by this full acceleration, it incorporates a GPU memory-centric runtime featuring GPU-side pooling, streaming mini-batches, and overlapped offloading. This design enables much larger configuration spaces and shifts the bottleneck from host-side limitations back to on-device inference. Our evaluation demonstrates that cuNNQS-SCI fundamentally expands the scale of solvable problems. On an NVIDIA A100 cluster with 64 GPUs, cuNNQS-SCI achieves up to 2.32X end-to-end speedup over the highly-optimized NNQS-SCI baseline while preserving the same chemical accuracy. Furthermore, it demonstrates excellent distributed performance, maintaining over 90% parallel efficiency in strong scaling tests.",
-      "authors": [
-        "Daran Sun",
-        "Bowen Kan",
-        "Haoquan Long",
-        "Hairui Zhao",
-        "Haoxu Li",
-        "Yicheng Liu",
-        "Pengyu Zhou",
-        "Ankang Feng",
-        "Wenjing Huang",
-        "Yida Gu",
-        "Zhenyu Li",
-        "Honghui Shang",
-        "Yunquan Zhang",
-        "Dingwen Tao",
-        "Ninghui Sun",
-        "Guangming Tan"
-      ],
-      "author_details": [
-        {
-          "name": "Daran Sun"
-        },
-        {
-          "name": "Bowen Kan"
-        },
-        {
-          "name": "Haoquan Long"
-        },
-        {
-          "name": "Hairui Zhao"
-        },
-        {
-          "name": "Haoxu Li"
-        },
-        {
-          "name": "Yicheng Liu"
-        },
-        {
-          "name": "Pengyu Zhou"
-        },
-        {
-          "name": "Ankang Feng"
-        },
-        {
-          "name": "Wenjing Huang"
-        },
-        {
-          "name": "Yida Gu"
-        },
-        {
-          "name": "Zhenyu Li"
-        },
-        {
-          "name": "Honghui Shang"
-        },
-        {
-          "name": "Yunquan Zhang"
-        },
-        {
-          "name": "Dingwen Tao"
-        },
-        {
-          "name": "Ninghui Sun"
-        },
-        {
-          "name": "Guangming Tan"
-        }
-      ],
-      "published": "2026-04-17T07:15:18Z",
-      "published_date": "2026-04-17 07:15:18+00:00",
-      "updated": "2026-04-17T07:15:18Z",
-      "comments": "Accepted by HPDC'2026, 13 pages, 12 figures",
-      "primary_category": "cs.DC",
-      "categories": [
-        "cs.DC",
-        "cs.AI",
-        "cs.CE"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.15768v1",
-      "url": "http://arxiv.org/abs/2604.15768v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.75,
-        "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 7.92
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "cuda",
-        "cs.DC",
-        "baseline",
+        "cs.CL",
         "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
         "matched_categories": [
-          "cs.DC"
+          "cs.CL"
         ],
         "required_signal_matches": [
-          "cuda"
+          "kv cache"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
+        "bonus_keyword_matches": [
+          "latency",
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
-          "baseline",
+          "latency",
           "speedup"
         ],
         "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh",
       "ai": {
-        "one_liner_zh": "This paper turns NNQS-SCI from a hybrid CPU-GPU pipeline into a fully GPU-resident distributed system by moving de-duplication, coupled-configuration generation, and memory management onto GPUs.",
-        "summary_zh": "NNQS-SCI is accurate and scalable for neural network quantum states, but the existing hybrid CPU-GPU pipeline is limited by CPU-side global de-duplication and host-resident coupled-configuration generation. This paper presents cuNNQS-SCI, which moves the workflow onto GPUs through distributed load-balanced de-duplication, specialized CUDA kernels for exact coupled-configuration generation, and a memory-centric runtime with GPU pooling, streaming mini-batches, and overlapped offloading. The abstract claims up to 2.32x end-to-end speedup over a highly optimized baseline on 64 NVIDIA A100 GPUs while preserving chemical accuracy, plus over 90% parallel efficiency in strong scaling. The main systems value is the pattern of removing host coordination from an irregular multi-GPU pipeline and shifting the bottleneck back to on-device inference and memory handling. The biggest missing detail is how much each subsystem contributes, how fair the baseline is, and how dependent the results are on workload shape and A100-class hardware.",
-        "background_zh": "Neural network quantum state methods can scale to harder many-body problems, but hybrid CPU-GPU execution becomes a bottleneck once candidate generation, de-duplication, and memory management outgrow host coordination.",
-        "problem_zh": "The paper asks how to remove CPU-side communication and compute bottlenecks in NNQS-SCI so larger configuration spaces can be explored efficiently across many GPUs without losing accuracy.",
-        "approach_zh": "It replaces the hybrid pipeline with a fully GPU-accelerated design combining distributed global de-duplication, fine-grained CUDA kernels for exact coupled-configuration generation, and a GPU memory-centric runtime for pooling, streaming, and overlapped offload.",
-        "evidence_zh": "From the abstract alone, the supported evidence is an end-to-end comparison against a highly optimized NNQS-SCI baseline on 64 A100 GPUs, reporting up to 2.32x speedup, preserved chemical accuracy, and over 90% strong-scaling efficiency; the abstract does not make ablations or workload coverage clear.",
-        "value_zh": "If the design generalizes, it provides a useful blueprint for moving irregular search-heavy scientific workloads off the CPU critical path and onto GPU compute, memory, and communication primitives.",
+        "one_liner_zh": "A training-free early-exit framework for decoder-only LLMs that shares KV state through an auxiliary exit path and claims real wall-clock speedups instead of only theoretical layer savings.",
+        "summary_zh": "River-LLM targets the main practical failure mode of early exit in decoder-only LLMs: once layers are skipped, later tokens no longer have the KV history those layers would have produced, so nominal compute savings do not cleanly turn into latency gains. The paper proposes a training-free \"KV-Shared Exit River\" that generates and preserves the missing KV states during token-level exits, avoiding recomputation or masking-based recovery. It also uses state-transition similarity inside decoder blocks to estimate cumulative KV error and choose exits more precisely. The abstract reports experiments on mathematical reasoning and code generation tasks, with claimed 1.71-2.16x practical speedup while keeping generation quality high. The main missing details are the hardware/setup assumptions, baseline fairness, and how stable the error-guided exit policy is across models and prompt distributions.",
+        "background_zh": "Decoder-only LLM inference is latency-sensitive, and early exit is appealing only if skipped layers do not break the KV-cache state needed for later token generation.",
+        "problem_zh": "The paper asks how to make token-level early exit practical in decoder-only LLMs without giving back the saved compute through KV-cache recovery overhead or severe quality loss.",
+        "approach_zh": "It introduces a lightweight shared exit pathway to supply the missing KV states during exits and uses decoder state-transition similarity to predict cumulative KV error for more accurate exit decisions.",
+        "evidence_zh": "The abstract claims experiments on mathematical reasoning and code generation tasks with 1.71-2.16x practical speedup and high generation quality, but it does not clearly specify the models, baselines, or hardware setup.",
+        "value_zh": "If the method holds up, it offers a deployment-friendly way to convert layer skipping into real latency reduction for existing decoder-only LLMs without retraining.",
         "open_questions": [
-          "How is the distributed global de-duplication implemented, and what are its communication, synchronization, and load-balance costs as GPU count grows?",
-          "Which component drives most of the reported gain: GPU-side de-duplication, coupled-configuration kernels, or the memory-centric runtime?",
-          "How broad is the evaluation across problem types and sizes, and does preserved chemical accuracy hold consistently rather than on selected cases?"
+          "What models, context lengths, hardware, and batching settings were used for the reported wall-clock speedups?",
+          "How does River-LLM compare against recomputation, masking, and no-exit baselines under matched quality targets?",
+          "When does the state-transition-based KV error predictor fail, especially on long-context, code, or distribution-shifted prompts?"
         ],
         "core_contributions": [
-          "Moves NNQS-SCI from a hybrid CPU-GPU workflow to a fully GPU-accelerated multi-GPU framework.",
-          "Introduces distributed, load-balanced global de-duplication to reduce host coordination and communication bottlenecks.",
-          "Adds exact coupled-configuration CUDA kernels plus a GPU memory-centric runtime with pooling, mini-batch streaming, and overlapped offloading."
+          "Identifies KV Cache Absence as the systems bottleneck that prevents early exit from delivering practical speedups in decoder-only LLMs.",
+          "Proposes a training-free KV-sharing exit path that preserves historical states during token-level exits without separate recovery passes.",
+          "Adds an error-aware exit criterion based on decoder state-transition similarity rather than layer skipping alone."
         ],
         "why_read": [
-          "It is a concrete case study in eliminating CPU orchestration from an irregular multi-GPU pipeline rather than only tuning dense kernels.",
-          "The paper combines algorithm restructuring, kernel specialization, and runtime memory policy in one end-to-end system.",
-          "The reported strong-scaling result makes it relevant for readers interested in how host-side control paths limit cluster efficiency."
+          "It addresses a concrete inference-systems gap between theoretical layer reduction and real wall-clock acceleration.",
+          "The mechanism is centered on KV-cache continuity, which is the right systems constraint for decoder-only serving.",
+          "The abstract reports results on both mathematical reasoning and code generation, which are relevant quality-retention stress tests."
         ],
         "risks": [
-          "The target workload is quantum SCI rather than LLM inference or serving, so transfer to token-generation systems may be limited.",
-          "The abstract does not show baseline fairness, subsystem breakdowns, or sensitivity to interconnect and memory configuration, so the source of the gain is still unclear from the abstract alone."
+          "The abstract does not disclose the evaluation setup, so the reported speedups are hard to map to real serving conditions.",
+          "High generation quality\" is underspecified and may hide task-specific or model-specific regressions. The abstract does not make those tradeoffs clear in detail."
         ],
         "recommended_for": [
-          "Researchers studying multi-GPU runtime design for irregular scientific or combinatorial workloads.",
-          "Engineers interested in CUDA kernel specialization and memory orchestration beyond dense linear algebra.",
-          "Readers looking for transferable host-bottleneck-removal patterns even outside LLM-specific systems."
+          "Researchers working on latency reduction for decoder-only LLM serving",
+          "Engineers evaluating KV-cache-aware early-exit designs",
+          "Systems readers interested in inference/runtime mechanisms rather than retraining-heavy methods"
         ],
         "keywords": [
-          "GPU acceleration",
-          "CUDA kernels",
-          "distributed de-duplication",
-          "multi-GPU scaling",
-          "runtime memory management",
-          "neural network quantum states (NNQS)"
+          "LLM inference",
+          "early exit",
+          "KV cache",
+          "decoder-only models",
+          "latency reduction",
+          "code generation"
         ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "Medium because the paper is clearly about CUDA kernels, runtime design, and multi-GPU scaling, but the application is scientific computing rather than LLM inference, serving efficiency, or low-level code generation for model workloads.",
-        "fallback_summary": "AI-driven methods have demonstrated considerable success in tackling the central challenge of accurately solving the Schrödinger equation for complex many-body systems."
+        "reading_priority": "high",
+        "reading_priority_reason": "High priority because it directly targets an LLM inference bottleneck that fits the stated focus, and the claimed speedups hinge on a concrete KV-cache mechanism rather than generic model optimization; a full read is still needed to verify hardware assumptions and baseline fairness.",
+        "fallback_summary": "Large Language Models (LLMs) have demonstrated exceptional performance across diverse domains but are increasingly constrained by high inference latency."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by Faster LLM Inference via… and MemExplorer: Navigating the…. DepCap: Adaptive Block-Wise… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by AQPIM: Breaking the PIM Capacity… and Latent Phase-Shift Rollback:…. GPTQ: Accurate Post-Training… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
       "training and inference efficiency",
       "factual reliability and verification"
     ],
     "reading_strategy": [
-      "Start with Faster LLM Inference via… and verify whether it defines the factual reliability and verification problem clearly and exposes a real mechanism.",
-      "Then read MemExplorer: Navigating the… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use DepCap: Adaptive Block-Wise… as a final cross-check on experimental boundaries and practical value."
+      "Start with AQPIM: Breaking the PIM Capacity… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
+      "Then read Latent Phase-Shift Rollback:… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use GPTQ: Accurate Post-Training… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-04-20T11:08:14Z",
+    "generated_at": "2026-04-21T11:10:31Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 5,
+    "paper_results": 6,
     "paper_failures": 0
   }
 }

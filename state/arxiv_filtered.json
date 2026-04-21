@@ -1,107 +1,298 @@
 {
-  "target_date": "2026-04-20",
+  "target_date": "2026-04-21",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-21",
-      "end": "2026-04-20"
+      "start": "2026-03-22",
+      "end": "2026-04-21"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-20",
-      "end": "2026-03-20"
+      "start": "2025-04-21",
+      "end": "2026-03-21"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 19,
+  "total_filtered": 20,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 19,
+  "total_unique": 20,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 5,
+    "selected_count": 6,
     "lane_counts": {
       "fresh": 5,
       "established": 0,
-      "classic": 0,
-      "history_filtered": 11,
+      "classic": 1,
+      "history_filtered": 17,
       "history_relaxed": 0,
-      "classic_slot_active": 0
+      "classic_slot_active": 1
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": false
+      "slot_active_today": true
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.15672v1",
-      "arxiv_id": "2604.15672v1",
-      "title": "Faster LLM Inference via Sequential Monte Carlo",
-      "summary": "Speculative decoding (SD) accelerates language model inference by drafting tokens from a cheap proposal model and verifying them against an expensive target model via rejection sampling. Because rejection truncates the draft block at the first error, throughput degrades when draft and target diverge. Rather than rejecting draft tokens outright, we propose to reweight them. To this end, we introduce sequential Monte Carlo speculative decoding (SMC-SD), which replaces token-level rejection with importance-weighted resampling over a population of draft particles. SMC-SD is a principled approximate inference scheme that trades exactness for additional speed, while preserving theoretical bounds on its per-step approximation error. Because LLM inference is memory bandwidth-bound, the arithmetic needed to draft particles and to score them in parallel comes nearly for free -- SMC-SD uses idle compute to turn verification into a vectorized, fixed-size operation with no rollback. Empirically, SMC-SD achieves 2.36x speed-up over speculative decoding and a 5.2x speed-up over autoregressive decoding, while remaining within 3% of the target model's accuracy on reasoning, instruction-following, and coding benchmarks.",
+      "id": "http://arxiv.org/abs/2604.18137v1",
+      "arxiv_id": "2604.18137v1",
+      "title": "AQPIM: Breaking the PIM Capacity Wall for LLMs with In-Memory Activation Quantization",
+      "summary": "Processing-in-Memory (PIM) architectures offer a promising solution to the memory bottlenecks in data-intensive machine learning, yet often overlook the growing challenge of activation memory footprint. Conventional PIM approaches struggle with massive KV cache sizes generated in long-context scenarios by Transformer-based models, frequently exceeding PIM's limited memory capacity, while techniques like sparse attention can conflict with PIM's need for data locality. Existing PIM approaches and quantization methods are often insufficient or poorly suited for leveraging the unique characteristics of activations. This work identifies an opportunity for PIM-specialized activation quantization to enhance bandwidth and compute efficiency.\n  We explore clustering-based vector quantization approaches, which align well with activation characteristics and PIM's internal bandwidth capabilities. Building on this, we introduce AQPIM, a novel PIM-aware activation quantization framework based on Product Quantization (PQ), optimizing it for modern Large Language Models (LLMs). By performing quantization directly within memory, AQPIM leverages PIM's high internal bandwidth and enables direct computation on compressed data, significantly reducing both memory footprint and computational overhead for attention computation. AQPIM addresses PQ's accuracy challenges by introducing several algorithmic optimizations. Evaluations demonstrate that AQPIM achieves significant performance improvements, drastically reducing of GPU-CPU communication that can account for 90$\\sim$98.5\\% of decoding latency, together with 3.4$\\times$ speedup over a SOTA PIM approach.",
       "authors": [
-        "Yahya Emara",
-        "Mauricio Barba da Costa",
-        "Chi-Chih Chang",
-        "Cameron Freer",
-        "Tim Vieira",
-        "Ryan Cotterell",
-        "Mohamed S. Abdelfattah"
+        "Kosuke Matsushima",
+        "Yasuyuki Okoshi",
+        "Masato Motomura",
+        "Daichi Fujiki"
       ],
       "author_details": [
         {
-          "name": "Yahya Emara"
+          "name": "Kosuke Matsushima"
         },
         {
-          "name": "Mauricio Barba da Costa"
+          "name": "Yasuyuki Okoshi"
         },
         {
-          "name": "Chi-Chih Chang"
+          "name": "Masato Motomura"
         },
         {
-          "name": "Cameron Freer"
-        },
-        {
-          "name": "Tim Vieira"
-        },
-        {
-          "name": "Ryan Cotterell"
-        },
-        {
-          "name": "Mohamed S. Abdelfattah"
+          "name": "Daichi Fujiki"
         }
       ],
-      "published": "2026-04-17T03:52:23Z",
-      "published_date": "2026-04-17 03:52:23+00:00",
-      "updated": "2026-04-17T03:52:23Z",
-      "primary_category": "cs.LG",
+      "published": "2026-04-20T12:04:51Z",
+      "published_date": "2026-04-20 12:04:51+00:00",
+      "updated": "2026-04-20T12:04:51Z",
+      "comments": "Accepted to HPCA 2026",
+      "doi": "10.1109/HPCA68181.2026.11408452",
+      "primary_category": "cs.AR",
       "categories": [
-        "cs.LG",
-        "cs.CL"
+        "cs.AR",
+        "cs.AI",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.15672v1",
-      "url": "http://arxiv.org/abs/2604.15672v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.18137v1",
+      "url": "http://arxiv.org/abs/2604.18137v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.5,
-        "quality": 1.5,
-        "recommendation": 9.55
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.97
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "kv cache",
+        "latency",
+        "quantization",
+        "cs.LG",
+        "cs.AR",
+        "memory",
+        "bandwidth",
+        "speedup"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.LG",
+          "cs.AR"
+        ],
+        "required_signal_matches": [
+          "kv cache"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "latency",
+          "memory",
+          "bandwidth",
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 4,
+        "analysis_keyword_matches": [
+          "latency",
+          "memory",
+          "bandwidth",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 4,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.5
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.18567v1",
+      "arxiv_id": "2604.18567v1",
+      "title": "Latent Phase-Shift Rollback: Inference-Time Error Correction via Residual Stream Monitoring and KV-Cache Steering",
+      "summary": "Large language models frequently commit unrecoverable reasoning errors mid-generation: once a wrong step is taken, subsequent tokens compound the mistake rather than correct it. We introduce $\\textbf{Latent Phase-Shift Rollback}$ (LPSR): at each generation step, we monitor the residual stream at a critical layer lcrit, detect abrupt directional reversals (phase shifts) via a cosine-similarity $+$ entropy dual gate, and respond by rolling back the KV-cache and injecting a pre-computed steering vector. No fine-tuning, gradient computation, or additional forward passes are required. LPSR achieves $\\mathbf{44.0\\%}$ on MATH-500 with an 8B model versus $28.8\\%$ for standard AR ($+15.2$ pp; McNemar $χ^2 = 66.96$, $p < 10^{-15}$). Critically, prompted self-correction, the most natural inference-time baseline, scores only $19.8\\%$, below standard AR; LPSR exceeds it by $+24.2$ pp ($χ^2 = 89.4$, $p \\approx 0$). LPSR also outperforms Best-of-16 ($+7.8$ pp) at $5.4\\times$ lower token cost, and surpasses a standard 70B model ($35.2\\%$) with $8.75\\times$ fewer parameters at ${\\sim}3\\times$ the token budget. A 32-layer sweep reveals a novel \\textbf{detection-correction dissociation}: error-detection AUC peaks at layer~14 ($0.718$) but task accuracy peaks at layer~16 ($44.0\\%$ vs.\\ $29.2\\%$), demonstrating that optimal monitoring depth differs for detection and correction.",
+      "authors": [
+        "Manan Gupta",
+        "Dhruv Kumar"
+      ],
+      "author_details": [
+        {
+          "name": "Manan Gupta"
+        },
+        {
+          "name": "Dhruv Kumar"
+        }
+      ],
+      "published": "2026-04-20T17:53:33Z",
+      "published_date": "2026-04-20 17:53:33+00:00",
+      "updated": "2026-04-20T17:53:33Z",
+      "comments": "Under Review",
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.18567v1",
+      "url": "http://arxiv.org/abs/2604.18567v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.8,
+        "quality": 1.8,
+        "recommendation": 9.8
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "kv cache",
+        "cs.LG",
+        "cs.CL",
+        "baseline"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 1,
+        "matched_categories": [
+          "cs.LG",
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "kv cache"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "baseline"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh"
+    },
+    {
+      "paper_id": "2210.17323",
+      "arxiv_id": "2210.17323",
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "summary": "Introduces a scalable post-training quantization method for GPT-style models that preserves accuracy at 3-4 bit weight precision and makes much larger models deployable on limited hardware.",
+      "authors": [
+        "Elias Frantar",
+        "Saleh Ashkboos",
+        "Torsten Hoefler",
+        "Dan Alistarh"
+      ],
+      "published": "2022-10-31",
+      "published_date": "2022-10-31 00:00:00",
+      "categories": [
+        "cs.LG"
+      ],
+      "source": "classic_backlog",
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "quantization",
+        "gptq",
+        "4bit",
+        "single-gpu"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "selection_lane": "classic",
+      "is_hot_paper": false,
+      "source_url": "https://arxiv.org/abs/2210.17323",
+      "pdf_url": "https://arxiv.org/pdf/2210.17323.pdf",
+      "scores": {
+        "relevance": 2.9,
+        "recency": 0.0,
+        "popularity": 1.1,
+        "quality": 1.1,
+        "recommendation": 6.83
+      },
+      "classic_rotation_score": 10.6577,
+      "citationCount": 1860,
+      "influentialCitationCount": 309,
+      "venue": "arXiv.org",
+      "journal_ref": "ArXiv"
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.18529v1",
+      "arxiv_id": "2604.18529v1",
+      "title": "HybridGen: Efficient LLM Generative Inference via CPU-GPU Hybrid Computing",
+      "summary": "As modern LLMs support thousands to millions of tokens, KV caches grow to hundreds of gigabytes, stressing memory capacity and bandwidth. Existing solutions, such as KV cache pruning and offloading, alleviate these but underutilize hardware by relying solely on either GPU or CPU for attention computing, and considering yet limited CPU local memory for KV cache storage. We propose HybridGen, an efficient hybrid attention framework for long-context LLM inference. HybridGen enables CPU-GPU collaborative attention on systems with expanded tiered memory (e.g., CXL memory), addressing three key challenges: (1) multi-dimensional attention dependencies, (2) intensifying CPU-GPU load imbalance with longer sequences, and (3) NUMA penalty of tiered memories. HybridGen tackles these by introducing attention logit parallelism, a feedback-driven scheduler, and semantic-aware KV cache mapping. Experiments with three LLM models with eleven different sizes on three GPU platforms with a CXL-expanded memory show that HybridGen outperforms six state-of-the-art KV cache management methods by 1.41x--3.2x on average while maintaining superior accuracy.",
+      "authors": [
+        "Mao Lin",
+        "Xi Wang",
+        "Guilherme Cox",
+        "Dong Li",
+        "Hyeran Jeon"
+      ],
+      "author_details": [
+        {
+          "name": "Mao Lin"
+        },
+        {
+          "name": "Xi Wang"
+        },
+        {
+          "name": "Guilherme Cox"
+        },
+        {
+          "name": "Dong Li"
+        },
+        {
+          "name": "Hyeran Jeon"
+        }
+      ],
+      "published": "2026-04-20T17:25:44Z",
+      "published_date": "2026-04-20 17:25:44+00:00",
+      "updated": "2026-04-20T17:25:44Z",
+      "primary_category": "cs.PF",
+      "categories": [
+        "cs.PF",
+        "cs.DC"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.18529v1",
+      "url": "http://arxiv.org/abs/2604.18529v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.74,
+        "recency": 3.0,
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 9.74
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "llm inference",
-        "language model inference",
-        "speculative decoding",
-        "throughput",
-        "cs.LG",
-        "cs.CL",
+        "kv cache",
+        "cs.DC",
         "memory",
         "bandwidth"
       ],
@@ -110,122 +301,53 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 4,
+        "text_match_count": 2,
         "matched_categories": [
-          "cs.LG",
-          "cs.CL"
+          "cs.DC"
         ],
         "required_signal_matches": [
-          "speculative decoding"
+          "kv cache"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput",
           "memory",
           "bandwidth"
         ],
-        "bonus_keyword_match_count": 3,
+        "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
-          "throughput",
           "memory",
           "bandwidth"
         ],
-        "analysis_keyword_match_count": 3,
+        "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
+        "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2604.16007v1",
-      "arxiv_id": "2604.16007v1",
-      "title": "MemExplorer: Navigating the Heterogeneous Memory Design Space for Agentic Inference NPUs",
-      "summary": "Emerging agentic LLM workloads are driving rapidly growing demand on both memory capacity and bandwidth, with different phases of inference (e.g., prefill and decode) imposing distinct requirements. Industry is responding by composing heterogeneous accelerators into single interconnected systems, as exemplified by NVIDIA's Vera Rubin platform, where each device brings its own memory architecture.\n  This heterogeneity is further compounded by a widening landscape of available memory technologies: high-density on-chip SRAM, HBM, LPDDR, GDDR, and emerging options such as high-bandwidth flash (HBF), each offering different capacity, bandwidth, and power trade-offs.\n  Identifying the right memory architecture for next-generation inference accelerators requires navigating a vast and rapidly evolving design space, in which the interplay between workload characteristics, NPU design dimensions, and memory system design remains largely underexplored.\n  To address this challenge, we present MemExplorer, a new memory system synthesizer for heterogeneous NPU systems. MemExplorer provides a unified abstraction for modeling diverse memory technologies across different hierarchy levels (e.g., on-chip and off-chip) and automatically determines an efficient heterogeneous memory system together with NPU design choices (e.g., matrix engine size) to balance throughput and power between prefilling and decoding devices in a multi-device NPU system.\n  Experimental results show that, under the same power budget for agentic workloads, MemExplorer achieves up to 2.3x higher energy efficiency than the baseline NPU and 3.23x higher than H100 in the prefill-only setting. Under equivalent performance targets in the decode setting, it further delivers up to 1.93x and 2.72x higher power efficiency over the baseline NPU and H100, respectively.",
+      "id": "http://arxiv.org/abs/2604.18170v1",
+      "arxiv_id": "2604.18170v1",
+      "title": "Copy-as-Decode: Grammar-Constrained Parallel Prefill for LLM Editing",
+      "summary": "LLMs edit text and code by autoregressively regenerating the full output, even when most tokens appear verbatim in the input. We study Copy-as-Decode, a decoding-layer mechanism that recasts edit generation as structured decoding over a two-primitive grammar: <copy lines=\"i-j\"/> references an input line range, <gen>...</gen> emits new content. A token-level FSM guarantees syntactic validity, and a serving-layer primitive updates the KV cache for each copy span via a single parallel-prefill forward rather than $N$ autoregressive steps -- sharing the parallel-forward kernel of speculative decoding but with input tokens as the draft and program-enforced acceptance replacing probabilistic verification. We report an upper-bound analysis that requires no end-to-end training. (i) Kernel speedup: on Qwen2.5-{1.5B, 7B}, copying $N$ tokens via parallel prefill is $6.8\\times$--$303\\times$ faster than autoregressive ($N \\in [8, 512]$, A100 80GB bf16). (ii) Copy ceiling: on ProbeEdit and HumanEvalPack-Fix (Py/JS), $74$--$98\\%$ of gold tokens are reachable under the line-level primitive; composed with the empirical kernel over each corpus's span histogram this yields a closed-form wall-clock bound of $29.0\\times / 3.4\\times / 4.2\\times$ ($13.0\\times$ pooled). A token-level extension reaches $91$--$99\\%$ coverage with $4.5\\times$--$6.5\\times$ floors. (iii) Pipeline losslessness: oracle programs round-trip through the deterministic resolver on all $482$ cases, localizing any downstream failure to span selection rather than the mechanism. A perturbation study shows pooled EM drops from $100\\%$ to $15.48\\%$ under off-by-one noise. A fine-tuning pilot on Qwen2.5-Coder-1.5B lifts HEvalFix-Py EM from $0/33$ (untrained) to $12$--$17\\%$, a learnability signal, not a production selector. Batched-serving integration and multi-file coverage are scoped as follow-up.",
       "authors": [
-        "Haoran Wu",
-        "Zeyu Cao",
-        "Yao Lai",
-        "Binglei Lou",
-        "Jiayi Nie",
-        "Can Xiao",
-        "Timi Adeniran",
-        "Przemyslaw Forys",
-        "Kauser Johar",
-        "Catriona Wright",
-        "Junyi Liu",
-        "Kai Shi",
-        "Nicholas D. Lane",
-        "Rika Antonova",
-        "Jianyi Cheng",
-        "Timothy Jones",
-        "Aaron Zhao",
-        "Robert Mullins"
+        "Ziyang Liu"
       ],
       "author_details": [
         {
-          "name": "Haoran Wu"
-        },
-        {
-          "name": "Zeyu Cao"
-        },
-        {
-          "name": "Yao Lai"
-        },
-        {
-          "name": "Binglei Lou"
-        },
-        {
-          "name": "Jiayi Nie"
-        },
-        {
-          "name": "Can Xiao"
-        },
-        {
-          "name": "Timi Adeniran"
-        },
-        {
-          "name": "Przemyslaw Forys"
-        },
-        {
-          "name": "Kauser Johar"
-        },
-        {
-          "name": "Catriona Wright"
-        },
-        {
-          "name": "Junyi Liu"
-        },
-        {
-          "name": "Kai Shi"
-        },
-        {
-          "name": "Nicholas D. Lane"
-        },
-        {
-          "name": "Rika Antonova"
-        },
-        {
-          "name": "Jianyi Cheng"
-        },
-        {
-          "name": "Timothy Jones"
-        },
-        {
-          "name": "Aaron Zhao"
-        },
-        {
-          "name": "Robert Mullins"
+          "name": "Ziyang Liu"
         }
       ],
-      "published": "2026-04-17T12:29:54Z",
-      "published_date": "2026-04-17 12:29:54+00:00",
-      "updated": "2026-04-17T12:29:54Z",
-      "primary_category": "cs.AR",
+      "published": "2026-04-20T12:29:53Z",
+      "published_date": "2026-04-20 12:29:53+00:00",
+      "updated": "2026-04-20T12:29:53Z",
+      "comments": "31 pages, 8 figures, 25 tables (17-page main body plus appendix)",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.AR"
+        "cs.CL",
+        "cs.AI"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.16007v1",
-      "url": "http://arxiv.org/abs/2604.16007v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.18170v1",
+      "url": "http://arxiv.org/abs/2604.18170v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
@@ -236,100 +358,13 @@
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
+        "serving",
         "prefill",
         "decode",
-        "throughput",
-        "cs.AR",
-        "h100",
-        "memory",
-        "bandwidth",
-        "baseline"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.AR"
-        ],
-        "required_signal_matches": [
-          "prefill",
-          "decode",
-          "h100"
-        ],
-        "required_signal_match_count": 3,
-        "bonus_keyword_matches": [
-          "throughput",
-          "memory",
-          "bandwidth"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "baseline",
-          "throughput",
-          "memory",
-          "bandwidth"
-        ],
-        "analysis_keyword_match_count": 4,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.15750v1",
-      "arxiv_id": "2604.15750v1",
-      "title": "DepCap: Adaptive Block-Wise Parallel Decoding for Efficient Diffusion LM Inference",
-      "summary": "Diffusion language models (DLMs) have emerged as a promising alternative to autoregressive language generation due to their potential for parallel decoding and global refinement of the entire sequence. To unlock this potential, DLM inference must carefully balance generation quality and decoding speed. Recent block-wise DLM decoding methods improve this trade-off by performing diffusion-based decoding sequentially in blocks. However, existing methods typically rely on fixed block schedules or current-step local signals to determine block boundaries, and use conservative confidence-based parallel decoding to avoid conflicts, limiting the quality-speed trade-off. In this paper, we argue that block-wise DLM inference requires more suitable signals for its two core decisions: cross-step signals for determining block boundaries, and token-level conflict signals for parallel decoding. Based on this view, we propose DepCap, a training-free framework for efficient block-wise DLM inference. Specifically, DepCap instantiates the cross-step signal as the influence of the last decoded block and uses it to adaptively determine how far the next block should extend, while identifying a conflict-free subset of tokens for safe parallel decoding within each block, enabling substantial inference acceleration with negligible quality degradation. DepCap is a plug-and-play method applicable to various DLMs, and compatible with existing KV-cache strategies for block-wise DLM. An information-theoretic analysis further suggests that the cumulative last-block influence on a candidate block is approximately additive across tokens, supporting the proposed block-partitioning criterion. Experimental results show that DepCap achieves favorable speed-quality trade-offs across multiple DLM backbones and reasoning and coding benchmarks, with up to 5.63$\\times$ speedup without significant performance degradation.",
-      "authors": [
-        "Xiang Xia",
-        "Wuyang Zhang",
-        "Jiazheng Liu",
-        "Cheng Yan",
-        "Yanyong Zhang"
-      ],
-      "author_details": [
-        {
-          "name": "Xiang Xia"
-        },
-        {
-          "name": "Wuyang Zhang"
-        },
-        {
-          "name": "Jiazheng Liu"
-        },
-        {
-          "name": "Cheng Yan"
-        },
-        {
-          "name": "Yanyong Zhang"
-        }
-      ],
-      "published": "2026-04-17T06:53:27Z",
-      "published_date": "2026-04-17 06:53:27+00:00",
-      "updated": "2026-04-17T06:53:27Z",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AI"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.15750v1",
-      "url": "http://arxiv.org/abs/2604.15750v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.52,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 8.75
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "inference acceleration",
+        "speculative decoding",
         "kv cache",
-        "cs.LG",
+        "cs.CL",
+        "a100",
         "speedup"
       ],
       "matched_domain_priority": 5,
@@ -337,14 +372,18 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 2,
+        "text_match_count": 5,
         "matched_categories": [
-          "cs.LG"
+          "cs.CL"
         ],
         "required_signal_matches": [
-          "kv cache"
+          "speculative decoding",
+          "kv cache",
+          "prefill",
+          "decode",
+          "a100"
         ],
-        "required_signal_match_count": 1,
+        "required_signal_match_count": 5,
         "bonus_keyword_matches": [
           "speedup"
         ],
@@ -353,208 +392,79 @@
           "speedup"
         ],
         "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.35,
+        "signal_bonus": 0.9,
         "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2604.16053v1",
-      "arxiv_id": "2604.16053v1",
-      "title": "T-RBFT: A Scalable and Efficient Byzantine Consensus Based on Trusted Execution Environment for Consortium Blockchain",
-      "summary": "With the continuous expansion of blockchain application scenarios, consortium chains have raised higher performance and security requirements for consensus mechanisms. Unlike public blockchains, consortium chains typically implement an admission mechanism that restricts participation to trusted entities, ensuring that most replicas are honest and the number of faulty nodes remains small under normal circumstances. In such settings, conventional Byzantine Fault Tolerant (BFT) protocols, which are designed for worst-case adversarial scenarios, incur excessive message exchanges and computational overhead, thereby limiting performance and scalability. To address this issue, this paper proposes T-RBFT, a two-layer consensus mechanism inspired by network sharding and enhanced by the trusted execution environment (TEE). In T-RBFT, consensus nodes are first dynamically grouped based on their runtime characteristics. Then, inter-group consensus is achieved through a TEE-assisted BFT protocol, while each group internally reaches agreement using an improved Raft-based mechanism. Experimental evaluation shows that T-RBFT reduces communication overhead and latency, and achieves higher throughput compared to existing two-layer consensus protocols, providing a scalable and communication-efficient consensus protocol for permissioned blockchain networks.",
+      "id": "http://arxiv.org/abs/2604.18396v1",
+      "arxiv_id": "2604.18396v1",
+      "title": "River-LLM: Large Language Model Seamless Exit Based on KV Share",
+      "summary": "Large Language Models (LLMs) have demonstrated exceptional performance across diverse domains but are increasingly constrained by high inference latency. Early Exit has emerged as a promising solution to accelerate inference by dynamically bypassing redundant layers. However, in decoder-only architectures, the efficiency of Early Exit is severely bottlenecked by the KV Cache Absence problem, where skipped layers fail to provide the necessary historical states for subsequent tokens. Existing solutions, such as recomputation or masking, either introduce significant latency overhead or incur severe precision loss, failing to bridge the gap between theoretical layer reduction and practical wall-clock speedup. In this paper, we propose River-LLM, a training-free framework that enables seamless token-level Early Exit. River-LLM introduces a lightweight KV-Shared Exit River that allows the backbone's missing KV cache to be naturally generated and preserved during the exit process, eliminating the need for costly recovery operations. Furthermore, we utilize state transition similarity within decoder blocks to predict cumulative KV errors and guide precise exit decisions. Extensive experiments on mathematical reasoning and code generation tasks demonstrate that River-LLM achieves 1.71 to 2.16 times of practical speedup while maintaining high generation quality.",
       "authors": [
-        "Wen Gao",
-        "Xinhong Hei",
-        "Yichuan Wang"
+        "Yingtao Shen",
+        "An Zou"
       ],
       "author_details": [
         {
-          "name": "Wen Gao"
+          "name": "Yingtao Shen"
         },
         {
-          "name": "Xinhong Hei"
-        },
-        {
-          "name": "Yichuan Wang"
+          "name": "An Zou"
         }
       ],
-      "published": "2026-04-17T13:28:21Z",
-      "published_date": "2026-04-17 13:28:21+00:00",
-      "updated": "2026-04-17T13:28:21Z",
-      "primary_category": "cs.DC",
+      "published": "2026-04-20T15:20:17Z",
+      "published_date": "2026-04-20 15:20:17+00:00",
+      "updated": "2026-04-20T15:20:17Z",
+      "comments": "Accepted to ACL 2026, 13pages, with appendix",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.DC"
+        "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.16053v1",
-      "url": "http://arxiv.org/abs/2604.16053v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.18396v1",
+      "url": "http://arxiv.org/abs/2604.18396v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.21,
+        "relevance": 2.84,
         "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 8.52
+        "popularity": 1.6,
+        "quality": 1.6,
+        "recommendation": 9.34
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "throughput",
+        "decoder-only",
+        "kv cache",
         "latency",
-        "cs.DC",
-        "runtime",
-        "evaluation"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "runtime"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "throughput",
-          "latency"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "evaluation",
-          "throughput",
-          "latency"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.15768v1",
-      "arxiv_id": "2604.15768v1",
-      "title": "cuNNQS-SCI: A Fully GPU-Accelerated Framework for High-Performance Configuration Interaction Selection withNeural Network QQantum States",
-      "summary": "AI-driven methods have demonstrated considerable success in tackling the central challenge of accurately solving the Schrödinger equation for complex many-body systems. Among neural network quantum state (NNQS) approaches, the NNQS-SCI (Selected Configuration Interaction) method stands out as a state-of-the-art technique, recognized for its high accuracy and scalability. However, its application to larger systems is severely constrained by a hybrid CPU-GPU architecture. Specifically, centralized CPU-based global de-duplication creates a severe scalability barrier due to communication bottlenecks, while host-resident coupled-configuration generation induces prohibitive computational overheads. We introduce cuNNQS-SCI, a fully GPU-accelerated SCI framework designed to overcome these bottlenecks. cuNNQS-SCI first integrates a distributed, load-balanced global de-duplication algorithm to minimize redundancy and communication overhead at scale. To address compute limitations, it employs specialized, fine-grained CUDA kernels for exact coupled configuration generation. Finally, to break the single-GPU memory barrier exposed by this full acceleration, it incorporates a GPU memory-centric runtime featuring GPU-side pooling, streaming mini-batches, and overlapped offloading. This design enables much larger configuration spaces and shifts the bottleneck from host-side limitations back to on-device inference. Our evaluation demonstrates that cuNNQS-SCI fundamentally expands the scale of solvable problems. On an NVIDIA A100 cluster with 64 GPUs, cuNNQS-SCI achieves up to 2.32X end-to-end speedup over the highly-optimized NNQS-SCI baseline while preserving the same chemical accuracy. Furthermore, it demonstrates excellent distributed performance, maintaining over 90% parallel efficiency in strong scaling tests.",
-      "authors": [
-        "Daran Sun",
-        "Bowen Kan",
-        "Haoquan Long",
-        "Hairui Zhao",
-        "Haoxu Li",
-        "Yicheng Liu",
-        "Pengyu Zhou",
-        "Ankang Feng",
-        "Wenjing Huang",
-        "Yida Gu",
-        "Zhenyu Li",
-        "Honghui Shang",
-        "Yunquan Zhang",
-        "Dingwen Tao",
-        "Ninghui Sun",
-        "Guangming Tan"
-      ],
-      "author_details": [
-        {
-          "name": "Daran Sun"
-        },
-        {
-          "name": "Bowen Kan"
-        },
-        {
-          "name": "Haoquan Long"
-        },
-        {
-          "name": "Hairui Zhao"
-        },
-        {
-          "name": "Haoxu Li"
-        },
-        {
-          "name": "Yicheng Liu"
-        },
-        {
-          "name": "Pengyu Zhou"
-        },
-        {
-          "name": "Ankang Feng"
-        },
-        {
-          "name": "Wenjing Huang"
-        },
-        {
-          "name": "Yida Gu"
-        },
-        {
-          "name": "Zhenyu Li"
-        },
-        {
-          "name": "Honghui Shang"
-        },
-        {
-          "name": "Yunquan Zhang"
-        },
-        {
-          "name": "Dingwen Tao"
-        },
-        {
-          "name": "Ninghui Sun"
-        },
-        {
-          "name": "Guangming Tan"
-        }
-      ],
-      "published": "2026-04-17T07:15:18Z",
-      "published_date": "2026-04-17 07:15:18+00:00",
-      "updated": "2026-04-17T07:15:18Z",
-      "comments": "Accepted by HPDC'2026, 13 pages, 12 figures",
-      "primary_category": "cs.DC",
-      "categories": [
-        "cs.DC",
-        "cs.AI",
-        "cs.CE"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.15768v1",
-      "url": "http://arxiv.org/abs/2604.15768v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 1.75,
-        "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 7.92
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "cuda",
-        "cs.DC",
-        "baseline",
+        "cs.CL",
         "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
         "matched_categories": [
-          "cs.DC"
+          "cs.CL"
         ],
         "required_signal_matches": [
-          "cuda"
+          "kv cache"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
+        "bonus_keyword_matches": [
+          "latency",
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
-          "baseline",
+          "latency",
           "speedup"
         ],
         "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh"
     }

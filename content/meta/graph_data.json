@@ -117,7 +117,7 @@
       "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
       "domain": "LLM Inference Systems",
       "quality_score": 6.83,
-      "updated": "2026-03-08"
+      "updated": "2026-04-21"
     },
     {
       "id": "2603.04716v1",
@@ -1084,6 +1084,41 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 7.92,
       "updated": "2026-04-20"
+    },
+    {
+      "id": "2604.18137v1",
+      "title": "AQPIM: Breaking the PIM Capacity Wall for LLMs with In-Memory Activation Quantization",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.97,
+      "updated": "2026-04-21"
+    },
+    {
+      "id": "2604.18567v1",
+      "title": "Latent Phase-Shift Rollback: Inference-Time Error Correction via Residual Stream Monitoring and KV-Cache Steering",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.8,
+      "updated": "2026-04-21"
+    },
+    {
+      "id": "2604.18529v1",
+      "title": "HybridGen: Efficient LLM Generative Inference via CPU-GPU Hybrid Computing",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.74,
+      "updated": "2026-04-21"
+    },
+    {
+      "id": "2604.18170v1",
+      "title": "Copy-as-Decode: Grammar-Constrained Parallel Prefill for LLM Editing",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.38,
+      "updated": "2026-04-21"
+    },
+    {
+      "id": "2604.18396v1",
+      "title": "River-LLM: Large Language Model Seamless Exit Based on KV Share",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.34,
+      "updated": "2026-04-21"
     }
   ],
   "edges": [
@@ -3576,7 +3611,115 @@
       "target": "2604.15750v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.18137v1",
+      "target": "2604.18529v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18137v1",
+      "target": "2604.18170v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18137v1",
+      "target": "2604.18396v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18567v1",
+      "target": "2604.18529v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18567v1",
+      "target": "2604.18396v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18567v1",
+      "target": "2604.18137v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2210.17323",
+      "target": "2604.18137v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2210.17323",
+      "target": "2604.18567v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2210.17323",
+      "target": "2604.18529v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18529v1",
+      "target": "2604.18396v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18529v1",
+      "target": "2604.18137v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18529v1",
+      "target": "2604.18567v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18170v1",
+      "target": "2604.18137v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18170v1",
+      "target": "2604.18529v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18170v1",
+      "target": "2604.18396v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18396v1",
+      "target": "2604.18529v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18396v1",
+      "target": "2604.18137v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.18396v1",
+      "target": "2604.18567v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-20"
+  "last_updated": "2026-04-21"
 }
