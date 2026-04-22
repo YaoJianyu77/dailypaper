@@ -1,300 +1,261 @@
 {
-  "target_date": "2026-04-21",
+  "target_date": "2026-04-22",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-22",
-      "end": "2026-04-21"
+      "start": "2026-03-23",
+      "end": "2026-04-22"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-21",
-      "end": "2026-03-21"
+      "start": "2025-04-22",
+      "end": "2026-03-22"
     }
   },
-  "total_found": 221,
+  "total_found": 21,
   "total_venue": 14,
-  "total_filtered": 20,
-  "total_recent": 200,
+  "total_filtered": 14,
+  "total_recent": 0,
   "total_hot": 7,
-  "total_unique": 20,
+  "total_unique": 14,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
     "selected_count": 6,
     "lane_counts": {
-      "fresh": 5,
-      "established": 0,
-      "classic": 1,
-      "history_filtered": 17,
-      "history_relaxed": 0,
-      "classic_slot_active": 1
+      "fresh": 2,
+      "established": 4,
+      "classic": 0,
+      "history_filtered": 11,
+      "history_relaxed": 6,
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.18137v1",
-      "arxiv_id": "2604.18137v1",
-      "title": "AQPIM: Breaking the PIM Capacity Wall for LLMs with In-Memory Activation Quantization",
-      "summary": "Processing-in-Memory (PIM) architectures offer a promising solution to the memory bottlenecks in data-intensive machine learning, yet often overlook the growing challenge of activation memory footprint. Conventional PIM approaches struggle with massive KV cache sizes generated in long-context scenarios by Transformer-based models, frequently exceeding PIM's limited memory capacity, while techniques like sparse attention can conflict with PIM's need for data locality. Existing PIM approaches and quantization methods are often insufficient or poorly suited for leveraging the unique characteristics of activations. This work identifies an opportunity for PIM-specialized activation quantization to enhance bandwidth and compute efficiency.\n  We explore clustering-based vector quantization approaches, which align well with activation characteristics and PIM's internal bandwidth capabilities. Building on this, we introduce AQPIM, a novel PIM-aware activation quantization framework based on Product Quantization (PQ), optimizing it for modern Large Language Models (LLMs). By performing quantization directly within memory, AQPIM leverages PIM's high internal bandwidth and enables direct computation on compressed data, significantly reducing both memory footprint and computational overhead for attention computation. AQPIM addresses PQ's accuracy challenges by introducing several algorithmic optimizations. Evaluations demonstrate that AQPIM achieves significant performance improvements, drastically reducing of GPU-CPU communication that can account for 90$\\sim$98.5\\% of decoding latency, together with 3.4$\\times$ speedup over a SOTA PIM approach.",
+      "id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
+      "paper_id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
+      "title": "From Threads to Tiles: T2T, a Compiler for CUDA-to-NPU Translation via 2D Vectorization.",
+      "summary": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
+      "abstract": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
       "authors": [
-        "Kosuke Matsushima",
-        "Yasuyuki Okoshi",
-        "Masato Motomura",
-        "Daichi Fujiki"
+        "Shuaijiang Li",
+        "Jiacheng Zhao",
+        "Ying Liu 0055",
+        "Shuoming Zhang",
+        "Lei Chen",
+        "Yijin Li",
+        "Yangyu Zhang",
+        "Zhicheng Li",
+        "Runyu Zhou",
+        "Xiyu Shi",
+        "Chunwei Xia",
+        "Yuan Wen",
+        "Xiaobing Feng 0002",
+        "Huimin Cui"
       ],
-      "author_details": [
-        {
-          "name": "Kosuke Matsushima"
-        },
-        {
-          "name": "Yasuyuki Okoshi"
-        },
-        {
-          "name": "Masato Motomura"
-        },
-        {
-          "name": "Daichi Fujiki"
-        }
-      ],
-      "published": "2026-04-20T12:04:51Z",
-      "published_date": "2026-04-20 12:04:51+00:00",
-      "updated": "2026-04-20T12:04:51Z",
-      "comments": "Accepted to HPCA 2026",
-      "doi": "10.1109/HPCA68181.2026.11408452",
-      "primary_category": "cs.AR",
-      "categories": [
-        "cs.AR",
-        "cs.AI",
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.18137v1",
-      "url": "http://arxiv.org/abs/2604.18137v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 9.97
+      "published": "2026",
+      "published_date": "2026-04-22 07:00:02.698283",
+      "publicationDate": "2026",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://ieeexplore.ieee.org/document/11395190/",
+      "url": "https://ieeexplore.ieee.org/document/11395190/",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/LiZLZCLZLZSXWFC26",
+      "doi": "10.1109/CGO68049.2026.11395190",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
       },
-      "matched_domain": "LLM Inference Systems",
+      "venue_source_priority": 5,
+      "venue_query_year": 2026,
+      "scores": {
+        "relevance": 1.71,
+        "recency": 3.0,
+        "popularity": 1.9,
+        "quality": 1.9,
+        "recommendation": 7.52
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "kv cache",
-        "latency",
-        "quantization",
-        "cs.LG",
-        "cs.AR",
-        "memory",
-        "bandwidth",
-        "speedup"
+        "cuda"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.LG",
-          "cs.AR"
-        ],
-        "required_signal_matches": [
-          "kv cache"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency",
-          "memory",
-          "bandwidth",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 4,
-        "analysis_keyword_matches": [
-          "latency",
-          "memory",
-          "bandwidth",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 4,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.18567v1",
-      "arxiv_id": "2604.18567v1",
-      "title": "Latent Phase-Shift Rollback: Inference-Time Error Correction via Residual Stream Monitoring and KV-Cache Steering",
-      "summary": "Large language models frequently commit unrecoverable reasoning errors mid-generation: once a wrong step is taken, subsequent tokens compound the mistake rather than correct it. We introduce $\\textbf{Latent Phase-Shift Rollback}$ (LPSR): at each generation step, we monitor the residual stream at a critical layer lcrit, detect abrupt directional reversals (phase shifts) via a cosine-similarity $+$ entropy dual gate, and respond by rolling back the KV-cache and injecting a pre-computed steering vector. No fine-tuning, gradient computation, or additional forward passes are required. LPSR achieves $\\mathbf{44.0\\%}$ on MATH-500 with an 8B model versus $28.8\\%$ for standard AR ($+15.2$ pp; McNemar $χ^2 = 66.96$, $p < 10^{-15}$). Critically, prompted self-correction, the most natural inference-time baseline, scores only $19.8\\%$, below standard AR; LPSR exceeds it by $+24.2$ pp ($χ^2 = 89.4$, $p \\approx 0$). LPSR also outperforms Best-of-16 ($+7.8$ pp) at $5.4\\times$ lower token cost, and surpasses a standard 70B model ($35.2\\%$) with $8.75\\times$ fewer parameters at ${\\sim}3\\times$ the token budget. A 32-layer sweep reveals a novel \\textbf{detection-correction dissociation}: error-detection AUC peaks at layer~14 ($0.718$) but task accuracy peaks at layer~16 ($44.0\\%$ vs.\\ $29.2\\%$), demonstrating that optimal monitoring depth differs for detection and correction.",
-      "authors": [
-        "Manan Gupta",
-        "Dhruv Kumar"
-      ],
-      "author_details": [
-        {
-          "name": "Manan Gupta"
-        },
-        {
-          "name": "Dhruv Kumar"
-        }
-      ],
-      "published": "2026-04-20T17:53:33Z",
-      "published_date": "2026-04-20 17:53:33+00:00",
-      "updated": "2026-04-20T17:53:33Z",
-      "comments": "Under Review",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.18567v1",
-      "url": "http://arxiv.org/abs/2604.18567v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.8,
-        "quality": 1.8,
-        "recommendation": 9.8
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "kv cache",
-        "cs.LG",
-        "cs.CL",
-        "baseline"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
+        "domain": "LLM Code Generation For CUDA Kernels",
         "text_match_count": 1,
-        "matched_categories": [
-          "cs.LG",
-          "cs.CL"
-        ],
+        "matched_categories": [],
         "required_signal_matches": [
-          "kv cache"
+          "cuda"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "baseline"
-        ],
-        "analysis_keyword_match_count": 1,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.0
       },
-      "selection_lane": "fresh"
+      "selection_lane": "fresh",
+      "history_relaxed": true,
+      "citationCount": 0,
+      "institutions": [
+        "University College of Applied Science",
+        "University of Leeds",
+        "University of Aberdeen",
+        "International Centre for Theoretical Physics Asia-Pacific"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://ieeexplore.ieee.org/document/11395190/",
+        "abstract_source": "openalex",
+        "pdf_source": ""
+      }
     },
     {
-      "paper_id": "2210.17323",
-      "arxiv_id": "2210.17323",
-      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
-      "summary": "Introduces a scalable post-training quantization method for GPT-style models that preserves accuracy at 3-4 bit weight precision and makes much larger models deployable on limited hardware.",
+      "id": "dblp:conf/cgo/FangKRAM26",
+      "paper_id": "dblp:conf/cgo/FangKRAM26",
+      "title": "LLM-VeriOpt: Verification-Guided Reinforcement Learning for LLM-Based Compiler Optimization.",
+      "summary": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations. While various techniques have been proposed to enhance LLMs’ ability to optimize LLVM IR or assembly code, ensuring the semantic equivalence of transformed instructions remains a fundamental prerequisite for safe and effective performance improvement. At the same time, code generated by LLMs is often so far away from being correct that it is very difficult to work out how to improve them to proceed in generating optimizations using the output.In this work, we present LLM-VeriOpt, a novel reinforcement-learning methodology that incorporates feedback from a formal verifier, Alive2, to guide the training of a small-scale model, Qwen-3B. This facilitates the use of Guided Reinforcement via Group Relative Policy Optimization (GRPO), using semantic-equivalence signals from the Alive2 formal verification tool as part of the reward function. This allows the model to self-correct based on observing and subsequently learning to give correctness feedback during training, giving high code coverage by successfully transforming large amounts of code, while also optimizing it significantly.We demonstrate our technique by designing an LLM-based peephole optimizer over LLVM-IR. Our method significantly improves the correctness of IR optimizations versus the base LLM Qwen-3B applied with just a prompt and no fine-tuning — achieving a 5.4× improvement in code successfully modified. The resulting model produces verifiably correct output 90% of the time, comfortably outperforming larger state-of-the-art LLMs, including Meta’s LLM Compiler. This yields speedups of 2.3× over O0-optimized code, comparable to the handwritten LLVM-instcombine pass, and producing emergent optimizations that outperform it in 20% of cases.",
+      "abstract": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations. While various techniques have been proposed to enhance LLMs’ ability to optimize LLVM IR or assembly code, ensuring the semantic equivalence of transformed instructions remains a fundamental prerequisite for safe and effective performance improvement. At the same time, code generated by LLMs is often so far away from being correct that it is very difficult to work out how to improve them to proceed in generating optimizations using the output.In this work, we present LLM-VeriOpt, a novel reinforcement-learning methodology that incorporates feedback from a formal verifier, Alive2, to guide the training of a small-scale model, Qwen-3B. This facilitates the use of Guided Reinforcement via Group Relative Policy Optimization (GRPO), using semantic-equivalence signals from the Alive2 formal verification tool as part of the reward function. This allows the model to self-correct based on observing and subsequently learning to give correctness feedback during training, giving high code coverage by successfully transforming large amounts of code, while also optimizing it significantly.We demonstrate our technique by designing an LLM-based peephole optimizer over LLVM-IR. Our method significantly improves the correctness of IR optimizations versus the base LLM Qwen-3B applied with just a prompt and no fine-tuning — achieving a 5.4× improvement in code successfully modified. The resulting model produces verifiably correct output 90% of the time, comfortably outperforming larger state-of-the-art LLMs, including Meta’s LLM Compiler. This yields speedups of 2.3× over O0-optimized code, comparable to the handwritten LLVM-instcombine pass, and producing emergent optimizations that outperform it in 20% of cases.",
       "authors": [
-        "Elias Frantar",
-        "Saleh Ashkboos",
-        "Torsten Hoefler",
-        "Dan Alistarh"
+        "Xiangxin Fang",
+        "Jiaqin Kang",
+        "Rodrigo Rocha",
+        "Sam Ainsworth 0001",
+        "Lev Mukhanov"
       ],
-      "published": "2022-10-31",
-      "published_date": "2022-10-31 00:00:00",
-      "categories": [
-        "cs.LG"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "quantization",
-        "gptq",
-        "4bit",
-        "single-gpu"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2210.17323",
-      "pdf_url": "https://arxiv.org/pdf/2210.17323.pdf",
-      "scores": {
-        "relevance": 2.9,
-        "recency": 0.0,
-        "popularity": 1.1,
-        "quality": 1.1,
-        "recommendation": 6.83
+      "published": "2026",
+      "published_date": "2026-04-22 07:00:02.698283",
+      "publicationDate": "2026",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://ieeexplore.ieee.org/document/11395239/",
+      "url": "https://ieeexplore.ieee.org/document/11395239/",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/FangKRAM26",
+      "doi": "10.1109/CGO68049.2026.11395239",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
       },
-      "classic_rotation_score": 10.6577,
-      "citationCount": 1860,
-      "influentialCitationCount": 309,
-      "venue": "arXiv.org",
-      "journal_ref": "ArXiv"
+      "venue_source_priority": 5,
+      "venue_query_year": 2026,
+      "scores": {
+        "relevance": 1.31,
+        "recency": 3.0,
+        "popularity": 1.0,
+        "quality": 1.0,
+        "recommendation": 5.83
+      },
+      "matched_domain": "Low-level Code And Assembly Generation",
+      "matched_keywords": [
+        "compiler optimization"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "Low-level Code And Assembly Generation",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "compiler optimization"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "fresh",
+      "history_relaxed": true,
+      "citationCount": 0,
+      "institutions": [
+        "Queen Mary University of London",
+        "University of Edinburgh"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://ieeexplore.ieee.org/document/11395239/",
+        "abstract_source": "openalex",
+        "pdf_source": ""
+      }
     },
     {
-      "id": "http://arxiv.org/abs/2604.18529v1",
-      "arxiv_id": "2604.18529v1",
-      "title": "HybridGen: Efficient LLM Generative Inference via CPU-GPU Hybrid Computing",
-      "summary": "As modern LLMs support thousands to millions of tokens, KV caches grow to hundreds of gigabytes, stressing memory capacity and bandwidth. Existing solutions, such as KV cache pruning and offloading, alleviate these but underutilize hardware by relying solely on either GPU or CPU for attention computing, and considering yet limited CPU local memory for KV cache storage. We propose HybridGen, an efficient hybrid attention framework for long-context LLM inference. HybridGen enables CPU-GPU collaborative attention on systems with expanded tiered memory (e.g., CXL memory), addressing three key challenges: (1) multi-dimensional attention dependencies, (2) intensifying CPU-GPU load imbalance with longer sequences, and (3) NUMA penalty of tiered memories. HybridGen tackles these by introducing attention logit parallelism, a feedback-driven scheduler, and semantic-aware KV cache mapping. Experiments with three LLM models with eleven different sizes on three GPU platforms with a CXL-expanded memory show that HybridGen outperforms six state-of-the-art KV cache management methods by 1.41x--3.2x on average while maintaining superior accuracy.",
+      "id": "dblp:conf/mlsys/0015LCKCW24",
+      "paper_id": "dblp:conf/mlsys/0015LCKCW24",
+      "title": "Q-Hitter: A Better Token Oracle for Efficient LLM Inference via Sparse-Quantized KV Cache.",
+      "summary": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs). LLMs, characterized by their extensive context length (e.g., $\\geq$4096), inherently demands vast memory resource and traffic to store and load the attention key and value embeddings within self-attention modules, referred to as the KV cache. In an effort to alleviate these resource-intensive aspects of LLM inference, techniques such as sparsification and quantization for KV cache reduction have been investigated as separate endeavors within the realm of LLMs. However, this paper illuminates the critical importance of considering the compound effects of these techniques when employed together, as a simplistic amalgamation of sparsification and quantization can yield sub-optimal performance.For instance, the \"Heavy Hitter Oracle\" has demonstrated that preserving just 20\\% of the KV cache attributed to pivotal tokens, denoted as \"Heavy Hitters\", can yield substantial memory savings while upholding the model's original performance. Furthermore, the KV cache of these \"Heavy Hitter\" tokens, which are identified as those with the highest accumulated attention scores, can be further quantized with encouraging throughput saving.Nevertheless, our investigation uncovers two primary deficiencies in such unrefined post-sparsification quantization in low-bit scenarios: (1) the application of low-bit KV cache quantization, specifically $\\leq$ 4-bit, significantly diminishes the accuracy of Heavy Hitter selection during the generation phase, particularly in deeper layers; (2) tokens selected by the \"Heavy Hitter Oracle\" are not necessarily well-suited for quantization, and their quantization can lead to sub-optimal performance. To surmount these challenges, we propose a novel rule-of-thumb for token selection during LLM generation, termed Q-Hitter. This approach combines both accumulated attention scores and \"Quantization Friendliness\" metrics for different layers, identifying tokens that are not only pivotal for preserving the generalization capabilities of LLMs but are also more amenable to KV cache quantization. Q-Hitter naturally offers a free lunch of KV cache quantization and can further escalate the affordability of state-of-the-art LLMs. Additionally, Q-Hitter empowers LLMs to effectively handle inputs of infinite sequence length. Extensive experiments conducted across various LLMs and tasks substantiate the superiority of the proposed Q-Hitter framework over the original H$_2$O framework. Remarkably, Q-Hitter achieves full model quality preservation while delivering up to a remarkable 20$\\times$ reduction in memory usage and up to 33$\\times$, 33$\\times$, 4$\\times$ and 1.3$\\times$ throughput improvements compared with the Hugginface Accelerate, DeepSpeed, FlexGen and $\\mathsf{H_2O}$, respectively. The code will be public upon acceptance.",
+      "abstract": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs). LLMs, characterized by their extensive context length (e.g., $\\geq$4096), inherently demands vast memory resource and traffic to store and load the attention key and value embeddings within self-attention modules, referred to as the KV cache. In an effort to alleviate these resource-intensive aspects of LLM inference, techniques such as sparsification and quantization for KV cache reduction have been investigated as separate endeavors within the realm of LLMs. However, this paper illuminates the critical importance of considering the compound effects of these techniques when employed together, as a simplistic amalgamation of sparsification and quantization can yield sub-optimal performance.For instance, the \"Heavy Hitter Oracle\" has demonstrated that preserving just 20\\% of the KV cache attributed to pivotal tokens, denoted as \"Heavy Hitters\", can yield substantial memory savings while upholding the model's original performance. Furthermore, the KV cache of these \"Heavy Hitter\" tokens, which are identified as those with the highest accumulated attention scores, can be further quantized with encouraging throughput saving.Nevertheless, our investigation uncovers two primary deficiencies in such unrefined post-sparsification quantization in low-bit scenarios: (1) the application of low-bit KV cache quantization, specifically $\\leq$ 4-bit, significantly diminishes the accuracy of Heavy Hitter selection during the generation phase, particularly in deeper layers; (2) tokens selected by the \"Heavy Hitter Oracle\" are not necessarily well-suited for quantization, and their quantization can lead to sub-optimal performance. To surmount these challenges, we propose a novel rule-of-thumb for token selection during LLM generation, termed Q-Hitter. This approach combines both accumulated attention scores and \"Quantization Friendliness\" metrics for different layers, identifying tokens that are not only pivotal for preserving the generalization capabilities of LLMs but are also more amenable to KV cache quantization. Q-Hitter naturally offers a free lunch of KV cache quantization and can further escalate the affordability of state-of-the-art LLMs. Additionally, Q-Hitter empowers LLMs to effectively handle inputs of infinite sequence length. Extensive experiments conducted across various LLMs and tasks substantiate the superiority of the proposed Q-Hitter framework over the original H$_2$O framework. Remarkably, Q-Hitter achieves full model quality preservation while delivering up to a remarkable 20$\\times$ reduction in memory usage and up to 33$\\times$, 33$\\times$, 4$\\times$ and 1.3$\\times$ throughput improvements compared with the Hugginface Accelerate, DeepSpeed, FlexGen and $\\mathsf{H_2O}$, respectively. The code will be public upon acceptance.",
       "authors": [
-        "Mao Lin",
-        "Xi Wang",
-        "Guilherme Cox",
-        "Dong Li",
-        "Hyeran Jeon"
+        "Zhenyu Zhang 0015",
+        "Shiwei Liu 0003",
+        "Runjin Chen",
+        "Bhavya Kailkhura",
+        "Beidi Chen",
+        "Atlas Wang"
       ],
-      "author_details": [
-        {
-          "name": "Mao Lin"
-        },
-        {
-          "name": "Xi Wang"
-        },
-        {
-          "name": "Guilherme Cox"
-        },
-        {
-          "name": "Dong Li"
-        },
-        {
-          "name": "Hyeran Jeon"
-        }
-      ],
-      "published": "2026-04-20T17:25:44Z",
-      "published_date": "2026-04-20 17:25:44+00:00",
-      "updated": "2026-04-20T17:25:44Z",
-      "primary_category": "cs.PF",
-      "categories": [
-        "cs.PF",
-        "cs.DC"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.18529v1",
-      "url": "http://arxiv.org/abs/2604.18529v1",
-      "source": "arxiv",
+      "published": "2024",
+      "published_date": "2024-07-01 00:00:00",
+      "publicationDate": "2024",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
+      "url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
+      "pdf_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Paper-Conference.pdf",
+      "venue": "MLSys",
+      "venue_source_name": "MLSys",
+      "venue_source_alias": "MLSys",
+      "dblp_key": "conf/mlsys/0015LCKCW24",
+      "doi": "",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "open",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "MLSys",
+        "venue_alias": "MLSys"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2024,
       "scores": {
-        "relevance": 2.74,
-        "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 9.74
+        "relevance": 3.0,
+        "recency": 0.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 7.97
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "llm inference",
-        "kv cache",
-        "cs.DC",
-        "memory",
-        "bandwidth"
+        "kv cache"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -302,171 +263,268 @@
       "match_details": {
         "domain": "LLM Inference Systems",
         "text_match_count": 2,
-        "matched_categories": [
-          "cs.DC"
-        ],
+        "matched_categories": [],
         "required_signal_matches": [
           "kv cache"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "memory",
-          "bandwidth"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "memory",
-          "bandwidth"
-        ],
-        "analysis_keyword_match_count": 2,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
+        "bonus_keyword_bonus": 0.0
       },
-      "selection_lane": "fresh"
+      "selection_lane": "established",
+      "history_relaxed": true,
+      "venue_metadata": {
+        "official_page_blocked": false,
+        "official_page_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
+        "abstract_source": "official_page",
+        "pdf_source": "official_page"
+      },
+      "citationCount": 45
     },
     {
-      "id": "http://arxiv.org/abs/2604.18170v1",
-      "arxiv_id": "2604.18170v1",
-      "title": "Copy-as-Decode: Grammar-Constrained Parallel Prefill for LLM Editing",
-      "summary": "LLMs edit text and code by autoregressively regenerating the full output, even when most tokens appear verbatim in the input. We study Copy-as-Decode, a decoding-layer mechanism that recasts edit generation as structured decoding over a two-primitive grammar: <copy lines=\"i-j\"/> references an input line range, <gen>...</gen> emits new content. A token-level FSM guarantees syntactic validity, and a serving-layer primitive updates the KV cache for each copy span via a single parallel-prefill forward rather than $N$ autoregressive steps -- sharing the parallel-forward kernel of speculative decoding but with input tokens as the draft and program-enforced acceptance replacing probabilistic verification. We report an upper-bound analysis that requires no end-to-end training. (i) Kernel speedup: on Qwen2.5-{1.5B, 7B}, copying $N$ tokens via parallel prefill is $6.8\\times$--$303\\times$ faster than autoregressive ($N \\in [8, 512]$, A100 80GB bf16). (ii) Copy ceiling: on ProbeEdit and HumanEvalPack-Fix (Py/JS), $74$--$98\\%$ of gold tokens are reachable under the line-level primitive; composed with the empirical kernel over each corpus's span histogram this yields a closed-form wall-clock bound of $29.0\\times / 3.4\\times / 4.2\\times$ ($13.0\\times$ pooled). A token-level extension reaches $91$--$99\\%$ coverage with $4.5\\times$--$6.5\\times$ floors. (iii) Pipeline losslessness: oracle programs round-trip through the deterministic resolver on all $482$ cases, localizing any downstream failure to span selection rather than the mechanism. A perturbation study shows pooled EM drops from $100\\%$ to $15.48\\%$ under off-by-one noise. A fine-tuning pilot on Qwen2.5-Coder-1.5B lifts HEvalFix-Py EM from $0/33$ (untrained) to $12$--$17\\%$, a learnability signal, not a production selector. Batched-serving integration and multi-file coverage are scoped as follow-up.",
+      "id": "dblp:conf/isca/0004HKCL00P25",
+      "paper_id": "dblp:conf/isca/0004HKCL00P25",
+      "title": "Oaken: Fast and Efficient LLM Serving with Online-Offline Hybrid KV Cache Quantization.",
+      "summary": "Modern Large Language Model (LLM) serving system batches multiple requests to achieve high throughput, while batching attention operations is challenging, rendering memory bandwidth a critical bottleneck.Today, to mitigate this issue, the community relies on high-end GPUs with multiple high-bandwidth memory (HBM) channels.Unfortunately, HBM's high bandwidth often comes at the expense of limited memory capacity, necessitating systems to scale, which reduces core utilization and increases costs.Moreover, recent advancements enabling longer contexts for LLMs have substantially increased the key-value (KV) cache size, further intensifying the pressures on memory capacity.To lower the pressure, the literature has explored KV cache quantization techniques, which commonly use low bitwidth (e.g., INT4) for most values, selectively using higher bitwidth (e.g., FP16) for outlier values.While this approach helps achieve high accuracy and low bitwidth simultaneously, it comes with the limitation that the cost for online outlier detection is excessively high, negating the advantages of quantization.Inspired by these insights, we propose Oaken, an acceleration solution that achieves high accuracy and high performance simultaneously through co-designing algorithm and hardware.To effectively find a sweet spot in the accuracy-performance trade-off space of KV cache quantization, Oaken employs an online-offline hybrid approach, setting outlier thresholds offline, which are then used to determine the quantization scale online.To translate the proposed algorithmic technique into tangible performance gains, Oaken also comes with custom quantization/dequantization engines and memory management units that can be integrated with any LLM accelerators.We built an Oaken accelerator on top of",
+      "abstract": "Modern Large Language Model (LLM) serving system batches multiple requests to achieve high throughput, while batching attention operations is challenging, rendering memory bandwidth a critical bottleneck.Today, to mitigate this issue, the community relies on high-end GPUs with multiple high-bandwidth memory (HBM) channels.Unfortunately, HBM's high bandwidth often comes at the expense of limited memory capacity, necessitating systems to scale, which reduces core utilization and increases costs.Moreover, recent advancements enabling longer contexts for LLMs have substantially increased the key-value (KV) cache size, further intensifying the pressures on memory capacity.To lower the pressure, the literature has explored KV cache quantization techniques, which commonly use low bitwidth (e.g., INT4) for most values, selectively using higher bitwidth (e.g., FP16) for outlier values.While this approach helps achieve high accuracy and low bitwidth simultaneously, it comes with the limitation that the cost for online outlier detection is excessively high, negating the advantages of quantization.Inspired by these insights, we propose Oaken, an acceleration solution that achieves high accuracy and high performance simultaneously through co-designing algorithm and hardware.To effectively find a sweet spot in the accuracy-performance trade-off space of KV cache quantization, Oaken employs an online-offline hybrid approach, setting outlier thresholds offline, which are then used to determine the quantization scale online.To translate the proposed algorithmic technique into tangible performance gains, Oaken also comes with custom quantization/dequantization engines and memory management units that can be integrated with any LLM accelerators.We built an Oaken accelerator on top of",
       "authors": [
-        "Ziyang Liu"
+        "Minsu Kim 0004",
+        "Seongmin Hong",
+        "Ryeowook Ko",
+        "Soongyu Choi",
+        "Hunjong Lee",
+        "Junsoo Kim 0002",
+        "Joo-Young Kim 0001",
+        "Jongse Park"
       ],
-      "author_details": [
-        {
-          "name": "Ziyang Liu"
-        }
-      ],
-      "published": "2026-04-20T12:29:53Z",
-      "published_date": "2026-04-20 12:29:53+00:00",
-      "updated": "2026-04-20T12:29:53Z",
-      "comments": "31 pages, 8 figures, 25 tables (17-page main body plus appendix)",
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL",
-        "cs.AI"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.18170v1",
-      "url": "http://arxiv.org/abs/2604.18170v1",
-      "source": "arxiv",
+      "published": "2025",
+      "published_date": "2025-07-01 00:00:00",
+      "publicationDate": "2025",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://dl.acm.org/doi/10.1145/3695053.3731019",
+      "url": "https://dl.acm.org/doi/10.1145/3695053.3731019",
+      "pdf_url": "https://dl.acm.org/doi/pdf/10.1145/3695053.3731019",
+      "venue": "ISCA",
+      "venue_source_name": "ISCA",
+      "venue_source_alias": "ISCA",
+      "dblp_key": "conf/isca/0004HKCL00P25",
+      "doi": "10.1145/3695053.3731019",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "ISCA",
+        "venue_alias": "ISCA"
+      },
+      "venue_source_priority": 4,
+      "venue_query_year": 2025,
       "scores": {
         "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.3,
-        "quality": 1.3,
-        "recommendation": 9.38
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "serving",
-        "prefill",
-        "decode",
-        "speculative decoding",
-        "kv cache",
-        "cs.CL",
-        "a100",
-        "speedup"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 5,
-        "matched_categories": [
-          "cs.CL"
-        ],
-        "required_signal_matches": [
-          "speculative decoding",
-          "kv cache",
-          "prefill",
-          "decode",
-          "a100"
-        ],
-        "required_signal_match_count": 5,
-        "bonus_keyword_matches": [
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 1,
-        "analysis_keyword_matches": [
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.18
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.18396v1",
-      "arxiv_id": "2604.18396v1",
-      "title": "River-LLM: Large Language Model Seamless Exit Based on KV Share",
-      "summary": "Large Language Models (LLMs) have demonstrated exceptional performance across diverse domains but are increasingly constrained by high inference latency. Early Exit has emerged as a promising solution to accelerate inference by dynamically bypassing redundant layers. However, in decoder-only architectures, the efficiency of Early Exit is severely bottlenecked by the KV Cache Absence problem, where skipped layers fail to provide the necessary historical states for subsequent tokens. Existing solutions, such as recomputation or masking, either introduce significant latency overhead or incur severe precision loss, failing to bridge the gap between theoretical layer reduction and practical wall-clock speedup. In this paper, we propose River-LLM, a training-free framework that enables seamless token-level Early Exit. River-LLM introduces a lightweight KV-Shared Exit River that allows the backbone's missing KV cache to be naturally generated and preserved during the exit process, eliminating the need for costly recovery operations. Furthermore, we utilize state transition similarity within decoder blocks to predict cumulative KV errors and guide precise exit decisions. Extensive experiments on mathematical reasoning and code generation tasks demonstrate that River-LLM achieves 1.71 to 2.16 times of practical speedup while maintaining high generation quality.",
-      "authors": [
-        "Yingtao Shen",
-        "An Zou"
-      ],
-      "author_details": [
-        {
-          "name": "Yingtao Shen"
-        },
-        {
-          "name": "An Zou"
-        }
-      ],
-      "published": "2026-04-20T15:20:17Z",
-      "published_date": "2026-04-20 15:20:17+00:00",
-      "updated": "2026-04-20T15:20:17Z",
-      "comments": "Accepted to ACL 2026, 13pages, with appendix",
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.18396v1",
-      "url": "http://arxiv.org/abs/2604.18396v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.84,
-        "recency": 3.0,
+        "recency": 0.0,
         "popularity": 1.6,
         "quality": 1.6,
-        "recommendation": 9.34
+        "recommendation": 7.63
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "decoder-only",
+        "llm serving",
+        "serving",
         "kv cache",
-        "latency",
-        "cs.CL",
-        "speedup"
+        "quantization"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.CL"
-        ],
+        "text_match_count": 4,
+        "matched_categories": [],
         "required_signal_matches": [
           "kv cache"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "latency",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 2,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
+        "bonus_keyword_bonus": 0.0
       },
-      "selection_lane": "fresh"
+      "selection_lane": "established",
+      "history_relaxed": true,
+      "citationCount": 4,
+      "institutions": [
+        "Korea Advanced Institute of Science and Technology"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://dl.acm.org/doi/10.1145/3695053.3731019",
+        "abstract_source": "openalex",
+        "pdf_source": "openalex"
+      }
+    },
+    {
+      "id": "dblp:conf/cgo/GeorgakoudisPB25",
+      "paper_id": "dblp:conf/cgo/GeorgakoudisPB25",
+      "title": "Proteus: Portable Runtime Optimization of GPU Kernel Execution with Just-in-Time Compilation.",
+      "summary": "In High-performance computing (HPC) fast application execution is the primary objective. HPC software is written in high-performance languages (C/C++, Fortran) and is statically compiled Ahead-of-Time (AOT) using optimizing compilers to generate fast code. AOT compilation optimizes source code with only limited information available at compile time, which precludes possible optimization leveraging runtime information. We propose Proteus, an easy-to-use, portable, and lightweight Just-In-Time (JIT) compilation approach to optimize GPU kernels at runtime. Proteus dynamically extracts, compiles, and optimizes language-agnostic LLVM IR to reduce compilation overhead while enhancing portability and versatility compared to language-specific solutions. Using a minimally intrusive annotation-based interface, Proteus specializes GPU kernels for input arguments and launch parameters. Evaluation on a diverse set of programs on AMD and NVIDIA GPUs shows that Proteus achieves significant end-to-end speedup, up to 2.8× for AMD and 1.78× on NVIDIA, over AOT optimization, while outperforming CUDA-specific Jitify with an average 1.23× speedp, thanks to reduced overhead and faster binary code in certain cases.",
+      "abstract": "In High-performance computing (HPC) fast application execution is the primary objective. HPC software is written in high-performance languages (C/C++, Fortran) and is statically compiled Ahead-of-Time (AOT) using optimizing compilers to generate fast code. AOT compilation optimizes source code with only limited information available at compile time, which precludes possible optimization leveraging runtime information. We propose Proteus, an easy-to-use, portable, and lightweight Just-In-Time (JIT) compilation approach to optimize GPU kernels at runtime. Proteus dynamically extracts, compiles, and optimizes language-agnostic LLVM IR to reduce compilation overhead while enhancing portability and versatility compared to language-specific solutions. Using a minimally intrusive annotation-based interface, Proteus specializes GPU kernels for input arguments and launch parameters. Evaluation on a diverse set of programs on AMD and NVIDIA GPUs shows that Proteus achieves significant end-to-end speedup, up to 2.8× for AMD and 1.78× on NVIDIA, over AOT optimization, while outperforming CUDA-specific Jitify with an average 1.23× speedp, thanks to reduced overhead and faster binary code in certain cases.",
+      "authors": [
+        "Giorgis Georgakoudis",
+        "Konstantinos Parasyris",
+        "David Beckingsale"
+      ],
+      "published": "2025",
+      "published_date": "2025-07-01 00:00:00",
+      "publicationDate": "2025",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
+      "url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/GeorgakoudisPB25",
+      "doi": "10.1145/3696443.3708939",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2025,
+      "scores": {
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 5.46
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "gpu kernel"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "gpu kernel"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "established",
+      "history_relaxed": true,
+      "citationCount": 2,
+      "institutions": [
+        "Lawrence Livermore National Laboratory"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
+        "abstract_source": "openalex",
+        "pdf_source": ""
+      }
+    },
+    {
+      "id": "dblp:conf/cgo/CastelloBDIM24",
+      "paper_id": "dblp:conf/cgo/CastelloBDIM24",
+      "title": "Tackling the Matrix Multiplication Micro-Kernel Generation with Exo.",
+      "summary": "The optimization of the matrix multiplication (or GEMM) has been a need during the last decades. This operation is considered the flagship of current linear algebra libraries such as BLIS, OpenBLAS, or Intel OneAPI because of its widespread use in a large variety of scientific applications. The GEMM is usually implemented following the GotoBLAS philosophy, which tiles the GEMM operands and uses a series of nested loops for performance improvement. These approaches extract the maximum computational power of the architectures through small pieces of hardware-oriented, high-performance code called micro-kernel. However, this approach forces developers to generate, with a nonnegligible effort, a dedicated micro-kernel for each new hardware. In this work, we present a step-by-step procedure for generating micro-kernels with the Exo compiler that perform close to (or even better than) manually developed microkernels written with intrinsic functions or assembly language. Our solution also improves the portability of the generated code, since a hardware target is fully specified by a concise library-based description of its instructions.",
+      "abstract": "The optimization of the matrix multiplication (or GEMM) has been a need during the last decades. This operation is considered the flagship of current linear algebra libraries such as BLIS, OpenBLAS, or Intel OneAPI because of its widespread use in a large variety of scientific applications. The GEMM is usually implemented following the GotoBLAS philosophy, which tiles the GEMM operands and uses a series of nested loops for performance improvement. These approaches extract the maximum computational power of the architectures through small pieces of hardware-oriented, high-performance code called micro-kernel. However, this approach forces developers to generate, with a nonnegligible effort, a dedicated micro-kernel for each new hardware. In this work, we present a step-by-step procedure for generating micro-kernels with the Exo compiler that perform close to (or even better than) manually developed microkernels written with intrinsic functions or assembly language. Our solution also improves the portability of the generated code, since a hardware target is fully specified by a concise library-based description of its instructions.",
+      "authors": [
+        "Adrián Castelló 0001",
+        "Julian Bellavita",
+        "Grace Dinh",
+        "Yuka Ikarashi",
+        "Héctor Martínez 0002"
+      ],
+      "published": "2024",
+      "published_date": "2024-07-01 00:00:00",
+      "publicationDate": "2024",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://ieeexplore.ieee.org/document/10444883/",
+      "url": "https://ieeexplore.ieee.org/document/10444883/",
+      "pdf_url": "https://riunet.upv.es/bitstreams/59bf8bb3-5882-4a01-93d4-478366e92e4e/download",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/CastelloBDIM24",
+      "doi": "10.1109/CGO57630.2024.10444883",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2024,
+      "scores": {
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 0.5,
+        "quality": 0.5,
+        "recommendation": 4.21
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "kernel generation"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "kernel generation"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "established",
+      "history_relaxed": true,
+      "citationCount": 9,
+      "institutions": [
+        "Universitat Politècnica de Catalunya",
+        "Cornell University",
+        "Berkeley College",
+        "University of California, Berkeley"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://ieeexplore.ieee.org/document/10444883/",
+        "abstract_source": "openalex",
+        "pdf_source": "openalex"
+      }
     }
   ]
 }
