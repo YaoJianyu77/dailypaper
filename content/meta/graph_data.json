@@ -1119,6 +1119,27 @@
       "domain": "LLM Inference Systems",
       "quality_score": 9.34,
       "updated": "2026-04-21"
+    },
+    {
+      "id": "2604.20420v1",
+      "title": "Scalable AI Inference: Performance Analysis and Optimization of AI Model Serving",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.36,
+      "updated": "2026-04-23"
+    },
+    {
+      "id": "2604.20503v1",
+      "title": "FASER: Fine-Grained Phase Management for Speculative Decoding in Dynamic LLM Serving",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.13,
+      "updated": "2026-04-23"
+    },
+    {
+      "id": "2604.20639v1",
+      "title": "Distributed Quantum-Enhanced Optimization: A Topographical Preconditioning Approach for High-Dimensional Search",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 7.01,
+      "updated": "2026-04-23"
     }
   ],
   "edges": [
@@ -3719,7 +3740,19 @@
       "target": "2604.18567v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.20420v1",
+      "target": "2604.20503v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.20503v1",
+      "target": "2604.20420v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-22"
+  "last_updated": "2026-04-23"
 }

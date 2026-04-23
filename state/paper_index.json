@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-22",
+  "last_updated": "2026-04-23",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -960,6 +960,34 @@
       "cooldown_until": "2026-05-17"
     },
     {
+      "paper_id": "2604.20639v1",
+      "title": "Distributed Quantum-Enhanced Optimization: A Topographical Preconditioning Approach for High-Dimensional Search",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-04-22T14:50:21Z",
+      "source_lane": "fresh",
+      "topics": [
+        "hybrid quantum-classical optimization",
+        "topographical preconditioning",
+        "CUDA-Q",
+        "GPU-accelerated BFGS",
+        "separable functions",
+        "Rastrigin benchmark function"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-23",
+      "last_seen_date": "2026-04-23",
+      "last_recommended_date": "2026-04-23",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-23",
+          "recommendation": 7.01,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-22"
+    },
+    {
       "paper_id": "2603.21465v1",
       "title": "DRTriton: Large-Scale Synthetic Data Reinforcement Learning for Triton Kernel Generation",
       "domain": "LLM Code Generation For CUDA Kernels",
@@ -1327,6 +1355,34 @@
         }
       ],
       "cooldown_until": "2026-05-16"
+    },
+    {
+      "paper_id": "2604.20503v1",
+      "title": "FASER: Fine-Grained Phase Management for Speculative Decoding in Dynamic LLM Serving",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-22T12:44:39Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "LLM serving",
+        "speculative decoding",
+        "continuous batching",
+        "vLLM",
+        "GPU utilization"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-23",
+      "last_seen_date": "2026-04-23",
+      "last_recommended_date": "2026-04-23",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-23",
+          "recommendation": 9.13,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-22"
     },
     {
       "paper_id": "2211.17192",
@@ -3644,6 +3700,34 @@
         }
       ],
       "cooldown_until": "2026-06-20"
+    },
+    {
+      "paper_id": "2604.20420v1",
+      "title": "Scalable AI Inference: Performance Analysis and Optimization of AI Model Serving",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-22T10:39:14Z",
+      "source_lane": "fresh",
+      "topics": [
+        "BentoML",
+        "AI model serving",
+        "inference latency",
+        "throughput",
+        "traffic distributions",
+        "K3s resilience"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-23",
+      "last_seen_date": "2026-04-23",
+      "last_recommended_date": "2026-04-23",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-23",
+          "recommendation": 9.36,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-22"
     },
     {
       "paper_id": "2604.15186v1",
