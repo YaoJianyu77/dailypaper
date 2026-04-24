@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-23",
+  "last_updated": "2026-04-24",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -651,6 +651,34 @@
       "cooldown_until": "2026-06-20"
     },
     {
+      "paper_id": "2604.21131v1",
+      "title": "Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-22T22:40:31Z",
+      "source_lane": "fresh",
+      "topics": [
+        "cross-session threat detection",
+        "AI agents",
+        "bounded-memory reader",
+        "KV-cache reuse",
+        "prefix stability",
+        "security benchmark"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-24",
+      "last_seen_date": "2026-04-24",
+      "last_recommended_date": "2026-04-24",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-24",
+          "recommendation": 9.63,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-23"
+    },
+    {
       "paper_id": "dblp:conf/cgo/HeY25",
       "title": "CuAsmRL: Optimizing GPU SASS Schedules via Deep Reinforcement Learning.",
       "domain": "Low-level Code And Assembly Generation",
@@ -958,6 +986,34 @@
         }
       ],
       "cooldown_until": "2026-05-17"
+    },
+    {
+      "paper_id": "2604.21072v1",
+      "title": "Distributed Generative Inference of LLM at Internet Scales with Multi-Dimensional Communication Optimization",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-22T20:36:47Z",
+      "source_lane": "fresh",
+      "topics": [
+        "decentralized LLM inference",
+        "communication optimization",
+        "heterogeneous nodes",
+        "layer assignment",
+        "micro-batching",
+        "tensor offloading"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-24",
+      "last_seen_date": "2026-04-24",
+      "last_recommended_date": "2026-04-24",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-24",
+          "recommendation": 9.3,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-23"
     },
     {
       "paper_id": "2604.20639v1",
@@ -2421,26 +2477,31 @@
       "published": "2020-10-27",
       "source_lane": "classic",
       "topics": [
-        "LLM inference systems",
-        "transformer inference",
         "CUDA",
+        "transformer inference",
         "kernel fusion",
-        "memory reuse",
-        "autoregressive decoding"
+        "dynamic memory reuse",
+        "autoregressive decoding",
+        "serving"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-28",
-      "last_seen_date": "2026-03-28",
-      "last_recommended_date": "2026-03-28",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-24",
+      "last_recommended_date": "2026-04-24",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-03-28",
           "recommendation": 5.22,
           "lane": "classic"
+        },
+        {
+          "date": "2026-04-24",
+          "recommendation": 5.22,
+          "lane": "classic"
         }
       ],
-      "cooldown_until": "2026-04-18"
+      "cooldown_until": "2026-05-15"
     },
     {
       "paper_id": "dblp:conf/cgo/FangKRAM26",
@@ -4042,6 +4103,34 @@
         }
       ],
       "cooldown_until": "2026-06-14"
+    },
+    {
+      "paper_id": "2604.21221v1",
+      "title": "Sparse Forcing: Native Trainable Sparse Attention for Real-time Autoregressive Diffusion Video Generation",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-23T02:22:25Z",
+      "source_lane": "fresh",
+      "topics": [
+        "sparse attention",
+        "KV cache",
+        "autoregressive video diffusion",
+        "block-sparse GPU kernel",
+        "PBSA",
+        "long-horizon decoding"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-24",
+      "last_seen_date": "2026-04-24",
+      "last_recommended_date": "2026-04-24",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-24",
+          "recommendation": 8.57,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-23"
     },
     {
       "paper_id": "2301.00774",

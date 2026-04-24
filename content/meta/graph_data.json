@@ -656,7 +656,7 @@
       "title": "LightSeq: A High Performance Inference Library for Sequence Processing and Generation",
       "domain": "LLM Inference Systems",
       "quality_score": 5.22,
-      "updated": "2026-03-28"
+      "updated": "2026-04-24"
     },
     {
       "id": "2603.28430v1",
@@ -1140,6 +1140,27 @@
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 7.01,
       "updated": "2026-04-23"
+    },
+    {
+      "id": "2604.21131v1",
+      "title": "Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.63,
+      "updated": "2026-04-24"
+    },
+    {
+      "id": "2604.21072v1",
+      "title": "Distributed Generative Inference of LLM at Internet Scales with Multi-Dimensional Communication Optimization",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.3,
+      "updated": "2026-04-24"
+    },
+    {
+      "id": "2604.21221v1",
+      "title": "Sparse Forcing: Native Trainable Sparse Attention for Real-time Autoregressive Diffusion Video Generation",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.57,
+      "updated": "2026-04-24"
     }
   ],
   "edges": [
@@ -3752,7 +3773,79 @@
       "target": "2604.20420v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.21131v1",
+      "target": "2604.21072v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.21131v1",
+      "target": "2604.21221v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.21131v1",
+      "target": "2010.13887",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.21072v1",
+      "target": "2604.21131v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.21072v1",
+      "target": "2604.21221v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.21072v1",
+      "target": "2010.13887",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2010.13887",
+      "target": "2604.21131v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2010.13887",
+      "target": "2604.21072v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2010.13887",
+      "target": "2604.21221v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.21221v1",
+      "target": "2604.21131v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.21221v1",
+      "target": "2604.21072v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.21221v1",
+      "target": "2010.13887",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-23"
+  "last_updated": "2026-04-24"
 }

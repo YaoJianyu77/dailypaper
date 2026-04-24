@@ -1,16 +1,16 @@
 {
-  "target_date": "2026-04-23",
+  "target_date": "2026-04-24",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-24",
-      "end": "2026-04-23"
+      "start": "2026-03-25",
+      "end": "2026-04-24"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-23",
-      "end": "2026-03-23"
+      "start": "2025-04-24",
+      "end": "2026-03-24"
     }
   },
   "total_found": 221,
@@ -22,66 +22,65 @@
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 3,
+    "selected_count": 4,
     "lane_counts": {
       "fresh": 3,
       "established": 0,
-      "classic": 0,
-      "history_filtered": 11,
+      "classic": 1,
+      "history_filtered": 17,
       "history_relaxed": 0,
-      "classic_slot_active": 0
+      "classic_slot_active": 1
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": false
+      "slot_active_today": true
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.20420v1",
-      "arxiv_id": "2604.20420v1",
-      "title": "Scalable AI Inference: Performance Analysis and Optimization of AI Model Serving",
-      "summary": "AI research often emphasizes model design and algorithmic performance, while deployment and inference remain comparatively underexplored despite being critical for real-world use. This study addresses that gap by investigating the performance and optimization of a BentoML-based AI inference system for scalable model serving developed in collaboration with graphworks.ai. The evaluation first establishes baseline performance under three realistic workload scenarios. To ensure a fair and reproducible assessment, a pre-trained RoBERTa sentiment analysis model is used throughout the experiments. The system is subjected to traffic patterns following gamma and exponential distributions in order to emulate real-world usage conditions, including steady, bursty, and high-intensity workloads. Key performance metrics, such as latency percentiles and throughput, are collected and analyzed to identify bottlenecks in the inference pipeline. Based on the baseline results, optimization strategies are introduced at multiple levels of the serving stack to improve efficiency and scalability. The optimized system is then reevaluated under the same workload conditions, and the results are compared with the baseline using statistical analysis to quantify the impact of the applied improvements. The findings demonstrate practical strategies for achieving efficient and scalable AI inference with BentoML. The study examines how latency and throughput scale under varying workloads, how optimizations at the runtime, service, and deployment levels affect response time, and how deployment in a single-node K3s cluster influences resilience during disruptions.",
+      "id": "http://arxiv.org/abs/2604.21131v1",
+      "arxiv_id": "2604.21131v1",
+      "title": "Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms",
+      "summary": "AI-agent guardrails are memoryless: each message is judged in isolation, so an adversary who spreads a single attack across dozens of sessions slips past every session-bound detector because only the aggregate carries the payload. We make three contributions to cross-session threat detection.\n  (1) Dataset. CSTM-Bench is 26 executable attack taxonomies classified by kill-chain stage and cross-session operation (accumulate, compose, launder, inject_on_reader), each bound to one of seven identity anchors that ground-truth \"violation\" as a policy predicate, plus matched Benign-pristine and Benign-hard confounders. Released on Hugging Face as intrinsec-ai/cstm-bench with two 54-scenario splits: dilution (compositional) and cross_session (12 isolation-invisible scenarios produced by a closed-loop rewriter that softens surface phrasing while preserving cross-session artefacts).\n  (2) Measurement. Framing cross-session detection as an information bottleneck to a downstream correlator LLM, we find that a session-bound judge and a Full-Log Correlator concatenating every prompt into one long-context call both lose roughly half their attack recall moving from dilution to cross_session, well inside any frontier context window. Scope: 54 scenarios per shard, one correlator family (Anthropic Claude), no prompt optimisation; we release it to motivate larger, multi-provider datasets.\n  (3) Algorithm and metric. A bounded-memory Coreset Memory Reader retaining highest-signal fragments at $K=50$ is the only reader whose recall survives both shards. Because ranker reshuffles break KV-cache prefix reuse, we promote $\\mathrm{CSR\\_prefix}$ (ordered prefix stability, LLM-free) to a first-class metric and fuse it with detection into $\\mathrm{CSTM} = 0.7 F_1(\\mathrm{CSDA@action}, \\mathrm{precision}) + 0.3 \\mathrm{CSR\\_prefix}$, benchmarking rankers on a single Pareto of recall versus serving stability.",
       "authors": [
-        "Hung Cuong Pham",
-        "Fatih Gedikli"
+        "Ari Azarafrooz"
       ],
       "author_details": [
         {
-          "name": "Hung Cuong Pham"
-        },
-        {
-          "name": "Fatih Gedikli"
+          "name": "Ari Azarafrooz"
         }
       ],
-      "published": "2026-04-22T10:39:14Z",
-      "published_date": "2026-04-22 10:39:14+00:00",
-      "updated": "2026-04-22T10:39:14Z",
-      "primary_category": "cs.LG",
+      "published": "2026-04-22T22:40:31Z",
+      "published_date": "2026-04-22 22:40:31+00:00",
+      "updated": "2026-04-22T22:40:31Z",
+      "comments": "46 pages, 8 figures. Dataset: https://huggingface.co/datasets/intrinsec-ai/cstm-bench",
+      "primary_category": "cs.CR",
       "categories": [
-        "cs.LG",
-        "cs.AI"
+        "cs.CR",
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.20420v1",
-      "url": "http://arxiv.org/abs/2604.20420v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.21131v1",
+      "url": "http://arxiv.org/abs/2604.21131v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.85,
+        "relevance": 3.0,
         "recency": 3.0,
         "popularity": 1.6,
         "quality": 1.6,
-        "recommendation": 9.36
+        "recommendation": 9.63
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "serving",
-        "throughput",
-        "latency",
+        "kv cache",
         "cs.LG",
-        "runtime",
-        "baseline",
+        "cs.CL",
+        "memory",
+        "benchmark",
         "evaluation"
       ],
       "matched_domain_priority": 5,
@@ -89,183 +88,270 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 3,
+        "text_match_count": 2,
         "matched_categories": [
-          "cs.LG"
+          "cs.LG",
+          "cs.CL"
         ],
         "required_signal_matches": [
-          "runtime"
+          "kv cache"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
-          "throughput",
-          "latency"
+          "memory"
         ],
-        "bonus_keyword_match_count": 2,
+        "bonus_keyword_match_count": 1,
         "analysis_keyword_matches": [
-          "baseline",
+          "benchmark",
           "evaluation",
-          "throughput",
-          "latency"
+          "memory"
         ],
-        "analysis_keyword_match_count": 4,
+        "analysis_keyword_match_count": 3,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
+        "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2604.20503v1",
-      "arxiv_id": "2604.20503v1",
-      "title": "FASER: Fine-Grained Phase Management for Speculative Decoding in Dynamic LLM Serving",
-      "summary": "Speculative decoding (SD) is a widely used approach for accelerating decode-heavy LLM inference workloads. While online inference workloads are highly dynamic, existing SD systems are rigid and take a coarse-grained approach to SD management. They typically set the speculative token length for an entire batch and serialize the execution of the draft and verification phases. Consequently, these systems fall short at adapting to volatile online inference traffic. Under low load, they exhibit prolonged latency because the draft phase blocks the verification phase for the entire batch, leaving GPU computing resources underutilized. Conversely, under high load, they waste computation on rejected tokens during the verification phase, overloading GPU resources.\n  We introduce FASER, a novel system that features fine-grained SD phase management. First, FASER minimizes computational waste by dynamically adjusting the speculative length for each request within a continuous batch and by performing early pruning of rejected tokens inside the verification phase. Second, FASER breaks the verification phase into frontiers, or chunks, to overlap them with the draft phase. This overlap is achieved via fine-grained spatial multiplexing with minimal resource interference. Our FASER prototype in vLLM improves throughput by up to 53% and reduces latency by up to 1.92$\\times$ compared to state-of-the-art systems.",
+      "id": "http://arxiv.org/abs/2604.21072v1",
+      "arxiv_id": "2604.21072v1",
+      "title": "Distributed Generative Inference of LLM at Internet Scales with Multi-Dimensional Communication Optimization",
+      "summary": "Decentralized LLM inference distributes computation among heterogeneous nodes across the internet, offering a performant and cost-efficient solution, alternative to traditional centralized inference. However, the low cross-node network bandwidth makes communication the primary bottleneck. In this paper, we introduce BloomBee, an internet-scale distributed LLM inference framework. BloomBee integrates LLM-layer assignment, micro-batching and tensor offloading to optimize communication from multiple dimensions. Additionally, BloomBee formulates the coordination of these techniques as an optimization problem and solves it using dynamic programming. BloomBee also customizes lossless compression and speculative decoding according to low-bandwidth network settings to reduce communication overhead. We evaluate BloomBee across a spectrum of network environments and show that it improves service throughput by up to 1.76x. It also reduces average latency by up to 43.20% compared to state-of-the-art decentralized LLM inference systems. BloomBee is open-sourced.",
       "authors": [
-        "Wenyan Chen",
-        "Chengzhi Lu",
-        "Yanying Lin",
-        "Dmitrii Ustiugov"
+        "Jiu Chen",
+        "Shuangyan Yang",
+        "Xu Xiong",
+        "Hexiao Duan",
+        "Xinran Zhang",
+        "Jie Ren",
+        "Dong Li"
       ],
       "author_details": [
         {
-          "name": "Wenyan Chen"
+          "name": "Jiu Chen"
         },
         {
-          "name": "Chengzhi Lu"
+          "name": "Shuangyan Yang"
         },
         {
-          "name": "Yanying Lin"
+          "name": "Xu Xiong"
         },
         {
-          "name": "Dmitrii Ustiugov"
+          "name": "Hexiao Duan"
+        },
+        {
+          "name": "Xinran Zhang"
+        },
+        {
+          "name": "Jie Ren"
+        },
+        {
+          "name": "Dong Li"
         }
       ],
-      "published": "2026-04-22T12:44:39Z",
-      "published_date": "2026-04-22 12:44:39+00:00",
-      "updated": "2026-04-22T12:44:39Z",
-      "comments": "14 pages, 17 figures",
+      "published": "2026-04-22T20:36:47Z",
+      "published_date": "2026-04-22 20:36:47+00:00",
+      "updated": "2026-04-22T20:36:47Z",
       "primary_category": "cs.DC",
       "categories": [
         "cs.DC"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.20503v1",
-      "url": "http://arxiv.org/abs/2604.20503v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.21072v1",
+      "url": "http://arxiv.org/abs/2604.21072v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.0,
-        "quality": 1.0,
-        "recommendation": 9.13
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 9.3
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "llm inference",
-        "llm serving",
-        "serving",
-        "decode",
         "speculative decoding",
-        "vllm",
         "throughput",
         "latency",
-        "cs.DC"
+        "cs.DC",
+        "bandwidth"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 8,
+        "text_match_count": 4,
         "matched_categories": [
           "cs.DC"
         ],
         "required_signal_matches": [
-          "speculative decoding",
-          "decode",
-          "vllm"
+          "speculative decoding"
         ],
-        "required_signal_match_count": 3,
+        "required_signal_match_count": 1,
         "bonus_keyword_matches": [
           "throughput",
-          "latency"
+          "latency",
+          "bandwidth"
         ],
-        "bonus_keyword_match_count": 2,
+        "bonus_keyword_match_count": 3,
         "analysis_keyword_matches": [
           "throughput",
-          "latency"
+          "latency",
+          "bandwidth"
         ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.36
+        "analysis_keyword_match_count": 3,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.5
       },
       "selection_lane": "fresh"
     },
     {
-      "id": "http://arxiv.org/abs/2604.20639v1",
-      "arxiv_id": "2604.20639v1",
-      "title": "Distributed Quantum-Enhanced Optimization: A Topographical Preconditioning Approach for High-Dimensional Search",
-      "summary": "Optimization problems become fundamentally challenging as the number of variables increases. Because the volume of the search space grows exponentially, classical algorithms frequently fail to locate the global minimum of non-convex functions. While quantum optimization offers a potential alternative, mapping continuous problems onto near-term quantum hardware introduces severe scaling limits and barren plateaus. To bridge this gap, we propose the Distributed Quantum-Enhanced Optimization (D-QEO) framework. Instead of forcing the quantum processor to find the exact minimum, we use it simply as a topographical preconditioner. The QPU maps the landscape to locate the most promising basin of attraction, generating high-quality seed points for a classical GPU-accelerated solver to refine. To make this approach viable for utility-scale problems, we exploit the mathematical structure of separable functions. This allows us to cut a 50-qubit (i.e., $2^{50}$) global search space into independent and manageable sub-spaces using 5-qubit subcircuits. By executing these fragments concurrently with CUDA-Q, we completely bypass the overhead of cross-register entanglement and classical tensor knitting for separable functions. Benchmarks on the 10-dimensional Rastrigin and Ackley functions show that D-QEO prevents the exponential failure rates observed in purely classical algorithms. Furthermore, this quantum warm-start significantly reduces the number of classical BFGS iterations required to converge, providing a highly practical blueprint for utilizing near-term quantum resources in complex global search.",
+      "paper_id": "2010.13887",
+      "arxiv_id": "2010.13887",
+      "title": "LightSeq: A High Performance Inference Library for Sequence Processing and Generation",
+      "summary": "Describes a CUDA-based high-performance inference library for transformer-family models, emphasizing coarse-grained fusion, dynamic memory reuse, and efficient autoregressive decoding.",
       "authors": [
-        "Dominik Soós",
-        "Marc Paterno",
-        "John Stenger",
-        "Nikos Chrisochoides"
+        "Xiaohui Wang",
+        "Ying Xiong",
+        "Yang Wei",
+        "Mingxuan Wang",
+        "Lei Li"
+      ],
+      "published": "2020-10-27",
+      "published_date": "2020-10-27 00:00:00",
+      "categories": [
+        "cs.DC",
+        "cs.CL"
+      ],
+      "source": "classic_backlog",
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "serving",
+        "inference-library",
+        "cuda",
+        "kernel-fusion"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.45,
+      "selection_lane": "classic",
+      "is_hot_paper": false,
+      "source_url": "https://arxiv.org/abs/2010.13887",
+      "pdf_url": "https://arxiv.org/pdf/2010.13887.pdf",
+      "scores": {
+        "relevance": 2.6,
+        "recency": 0.0,
+        "popularity": 0.0,
+        "quality": 0.0,
+        "recommendation": 5.22
+      },
+      "classic_rotation_score": 10.4943,
+      "citationCount": 0,
+      "influentialCitationCount": 0,
+      "venue": "arXiv.org",
+      "journal_ref": "ArXiv"
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.21221v1",
+      "arxiv_id": "2604.21221v1",
+      "title": "Sparse Forcing: Native Trainable Sparse Attention for Real-time Autoregressive Diffusion Video Generation",
+      "summary": "We introduce Sparse Forcing, a training-and-inference paradigm for autoregressive video diffusion models that improves long-horizon generation quality while reducing decoding latency. Sparse Forcing is motivated by an empirical observation in autoregressive diffusion rollouts: attention concentrates on a persistent subset of salient visual blocks, forming an implicit spatiotemporal memory in the KV cache, and exhibits a locally structured block-sparse pattern within sliding windows. Building on this observation, we propose a trainable native sparsity mechanism that learns to compress, preserve, and update these persistent blocks while restricting computation within each local window to a dynamically selected local neighborhood. To make the approach practical at scale for both training and inference, we further propose Persistent Block-Sparse Attention (PBSA), an efficient GPU kernel that accelerates sparse attention and memory updates for low-latency, memory-efficient decoding. Experiments show that Sparse Forcing improves the VBench score by +0.26 over Self-Forcing on 5-second text-to-video generation while delivering a 1.11-1.17x decoding speedup and 42% lower peak KV-cache footprint. The gains are more pronounced on longer-horizon rollouts, delivering improved visual quality with +0.68 and +2.74 VBench improvements, and 1.22x and 1.27x speedups on 20-second and 1-minute generations, respectively.",
+      "authors": [
+        "Boxun Xu",
+        "Yuming Du",
+        "Zichang Liu",
+        "Siyu Yang",
+        "Ziyang Jiang",
+        "Siqi Yan",
+        "Rajasi Saha",
+        "Albert Pumarola",
+        "Wenchen Wang",
+        "Peng Li"
       ],
       "author_details": [
         {
-          "name": "Dominik Soós"
+          "name": "Boxun Xu"
         },
         {
-          "name": "Marc Paterno"
+          "name": "Yuming Du"
         },
         {
-          "name": "John Stenger"
+          "name": "Zichang Liu"
         },
         {
-          "name": "Nikos Chrisochoides"
+          "name": "Siyu Yang"
+        },
+        {
+          "name": "Ziyang Jiang"
+        },
+        {
+          "name": "Siqi Yan"
+        },
+        {
+          "name": "Rajasi Saha"
+        },
+        {
+          "name": "Albert Pumarola"
+        },
+        {
+          "name": "Wenchen Wang"
+        },
+        {
+          "name": "Peng Li"
         }
       ],
-      "published": "2026-04-22T14:50:21Z",
-      "published_date": "2026-04-22 14:50:21+00:00",
-      "updated": "2026-04-22T14:50:21Z",
-      "primary_category": "quant-ph",
+      "published": "2026-04-23T02:22:25Z",
+      "published_date": "2026-04-23 02:22:25+00:00",
+      "updated": "2026-04-23T02:22:25Z",
+      "primary_category": "cs.CV",
       "categories": [
-        "quant-ph",
-        "cs.DC"
+        "cs.CV",
+        "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.20639v1",
-      "url": "http://arxiv.org/abs/2604.20639v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.21221v1",
+      "url": "http://arxiv.org/abs/2604.21221v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 1.75,
+        "relevance": 2.6,
         "recency": 3.0,
         "popularity": 1.2,
         "quality": 1.2,
-        "recommendation": 7.01
+        "recommendation": 8.57
       },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "cuda",
-        "cs.DC"
+        "kv cache",
+        "latency",
+        "cs.LG",
+        "memory",
+        "speedup"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
+        "domain": "LLM Inference Systems",
+        "text_match_count": 2,
         "matched_categories": [
-          "cs.DC"
+          "cs.LG"
         ],
         "required_signal_matches": [
-          "cuda"
+          "kv cache"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
+        "bonus_keyword_matches": [
+          "latency",
+          "memory",
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 3,
+        "analysis_keyword_matches": [
+          "latency",
+          "memory",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 3,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
+        "bonus_keyword_bonus": 0.5
       },
       "selection_lane": "fresh"
     }
