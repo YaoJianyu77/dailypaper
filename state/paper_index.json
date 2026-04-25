@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-24",
+  "last_updated": "2026-04-25",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -657,26 +657,31 @@
       "published": "2026-04-22T22:40:31Z",
       "source_lane": "fresh",
       "topics": [
-        "cross-session threat detection",
         "AI agents",
-        "bounded-memory reader",
-        "KV-cache reuse",
-        "prefix stability",
-        "security benchmark"
+        "cross-session threat detection",
+        "agent memory",
+        "guardrails",
+        "benchmark",
+        "KV cache reuse metrics"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-24",
-      "last_seen_date": "2026-04-24",
-      "last_recommended_date": "2026-04-24",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-25",
+      "last_recommended_date": "2026-04-25",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-04-24",
           "recommendation": 9.63,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-25",
+          "recommendation": 9.63,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-23"
+      "cooldown_until": "2026-06-24"
     },
     {
       "paper_id": "dblp:conf/cgo/HeY25",
@@ -994,26 +999,29 @@
       "published": "2026-04-22T20:36:47Z",
       "source_lane": "fresh",
       "topics": [
-        "decentralized LLM inference",
-        "communication optimization",
-        "heterogeneous nodes",
-        "layer assignment",
-        "micro-batching",
-        "tensor offloading"
+        "LLM Inference Systems",
+        "llm inference",
+        "speculative decoding",
+        "throughput"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-24",
-      "last_seen_date": "2026-04-24",
-      "last_recommended_date": "2026-04-24",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-25",
+      "last_recommended_date": "2026-04-25",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-04-24",
           "recommendation": 9.3,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-25",
+          "recommendation": 9.3,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-23"
+      "cooldown_until": "2026-06-24"
     },
     {
       "paper_id": "2604.20639v1",
@@ -1814,18 +1822,14 @@
       "published": "2026",
       "source_lane": "fresh",
       "topics": [
-        "CUDA",
-        "NPU",
-        "CUDA-to-NPU translation",
-        "2-D vectorization",
-        "tile instructions",
-        "warp-level intrinsics"
+        "LLM Code Generation For CUDA Kernels",
+        "cuda"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-04-22",
-      "last_recommended_date": "2026-04-22",
-      "recommended_count": 8,
+      "last_seen_date": "2026-04-25",
+      "last_recommended_date": "2026-04-25",
+      "recommended_count": 9,
       "scores_history": [
         {
           "date": "2026-03-17",
@@ -1866,9 +1870,14 @@
           "date": "2026-04-22",
           "recommendation": 7.52,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-25",
+          "recommendation": 7.52,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-21"
+      "cooldown_until": "2026-06-24"
     },
     {
       "paper_id": "2604.15244v1",
@@ -2510,18 +2519,18 @@
       "published": "2026",
       "source_lane": "fresh",
       "topics": [
+        "LLM compiler optimization",
         "LLVM IR",
-        "peephole optimization",
-        "formal verification",
         "Alive2",
-        "reinforcement learning",
-        "GRPO"
+        "verification-guided reinforcement learning",
+        "GRPO",
+        "peephole optimization"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-04-22",
-      "last_recommended_date": "2026-04-22",
-      "recommended_count": 8,
+      "last_seen_date": "2026-04-25",
+      "last_recommended_date": "2026-04-25",
+      "recommended_count": 9,
       "scores_history": [
         {
           "date": "2026-03-17",
@@ -2562,9 +2571,14 @@
           "date": "2026-04-22",
           "recommendation": 5.83,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-25",
+          "recommendation": 5.83,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-21"
+      "cooldown_until": "2026-06-24"
     },
     {
       "paper_id": "2208.07339",
@@ -3559,16 +3573,16 @@
       "topics": [
         "LLM inference",
         "KV cache",
-        "sparse-quantized KV cache",
-        "token selection",
-        "heavy hitter oracle",
-        "low-bit quantization"
+        "sparsification",
+        "quantization",
+        "heavy hitter tokens",
+        "low-bit inference"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-04-22",
-      "last_recommended_date": "2026-04-22",
-      "recommended_count": 9,
+      "last_seen_date": "2026-04-25",
+      "last_recommended_date": "2026-04-25",
+      "recommended_count": 10,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -3614,9 +3628,14 @@
           "date": "2026-04-22",
           "recommendation": 7.97,
           "lane": "established"
+        },
+        {
+          "date": "2026-04-25",
+          "recommendation": 7.97,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-06-21"
+      "cooldown_until": "2026-06-24"
     },
     {
       "paper_id": "2604.11501v1",
@@ -4113,24 +4132,29 @@
       "topics": [
         "sparse attention",
         "KV cache",
-        "autoregressive video diffusion",
-        "block-sparse GPU kernel",
-        "PBSA",
-        "long-horizon decoding"
+        "video diffusion",
+        "autoregressive decoding",
+        "GPU kernel",
+        "block-sparse attention"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-04-24",
-      "last_seen_date": "2026-04-24",
-      "last_recommended_date": "2026-04-24",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-25",
+      "last_recommended_date": "2026-04-25",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-04-24",
           "recommendation": 8.57,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-04-25",
+          "recommendation": 8.57,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-23"
+      "cooldown_until": "2026-06-24"
     },
     {
       "paper_id": "2301.00774",
