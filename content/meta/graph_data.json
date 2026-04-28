@@ -1161,6 +1161,34 @@
       "domain": "LLM Inference Systems",
       "quality_score": 8.57,
       "updated": "2026-04-25"
+    },
+    {
+      "id": "2604.24715v1",
+      "title": "Long-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling",
+      "domain": "LLM Inference Systems",
+      "quality_score": 10.0,
+      "updated": "2026-04-28"
+    },
+    {
+      "id": "2604.24647v1",
+      "title": "DepthKV: Layer-Dependent KV Cache Pruning for Long-Context LLM Inference",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.97,
+      "updated": "2026-04-28"
+    },
+    {
+      "id": "2604.24432v1",
+      "title": "Kwai Summary Attention Technical Report",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.47,
+      "updated": "2026-04-28"
+    },
+    {
+      "id": "2604.24351v1",
+      "title": "Diffusion Templates: A Unified Plugin Framework for Controllable Diffusion",
+      "domain": "LLM Inference Systems",
+      "quality_score": 7.05,
+      "updated": "2026-04-28"
     }
   ],
   "edges": [
@@ -3881,7 +3909,79 @@
       "target": "2604.21131v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.24715v1",
+      "target": "2604.24432v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.24715v1",
+      "target": "2604.24647v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.24715v1",
+      "target": "2604.24351v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.24647v1",
+      "target": "2604.24715v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.24647v1",
+      "target": "2604.24432v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.24647v1",
+      "target": "2604.24351v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.24432v1",
+      "target": "2604.24715v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.24432v1",
+      "target": "2604.24647v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.24432v1",
+      "target": "2604.24351v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.24351v1",
+      "target": "2604.24715v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.24351v1",
+      "target": "2604.24647v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.24351v1",
+      "target": "2604.24432v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-25"
+  "last_updated": "2026-04-28"
 }

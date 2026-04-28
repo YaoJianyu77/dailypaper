@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-25",
+  "last_updated": "2026-04-28",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -855,6 +855,34 @@
       "cooldown_until": "2026-06-19"
     },
     {
+      "paper_id": "2604.24647v1",
+      "title": "DepthKV: Layer-Dependent KV Cache Pruning for Long-Context LLM Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-27T16:15:37Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "KV cache",
+        "long-context inference",
+        "cache pruning",
+        "memory optimization",
+        "layer-wise allocation"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-28",
+      "last_seen_date": "2026-04-28",
+      "last_recommended_date": "2026-04-28",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-28",
+          "recommendation": 9.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-27"
+    },
+    {
       "paper_id": "2603.08065v1",
       "title": "Deterministic Differentiable Structured Pruning for Large Language Models",
       "domain": "LLM Inference Systems",
@@ -963,6 +991,34 @@
         }
       ],
       "cooldown_until": "2026-05-07"
+    },
+    {
+      "paper_id": "2604.24351v1",
+      "title": "Diffusion Templates: A Unified Plugin Framework for Controllable Diffusion",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-27T11:44:45Z",
+      "source_lane": "fresh",
+      "topics": [
+        "controllable diffusion",
+        "plugin framework",
+        "runtime hooks",
+        "Template cache",
+        "KV-Cache",
+        "LoRA"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-28",
+      "last_seen_date": "2026-04-28",
+      "last_recommended_date": "2026-04-28",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-28",
+          "recommendation": 7.05,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-27"
     },
     {
       "paper_id": "2603.16437v1",
@@ -2425,6 +2481,34 @@
       "cooldown_until": "2026-05-22"
     },
     {
+      "paper_id": "2604.24432v1",
+      "title": "Kwai Summary Attention Technical Report",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-27T12:59:53Z",
+      "source_lane": "fresh",
+      "topics": [
+        "long-context LLM",
+        "KV cache",
+        "attention compression",
+        "summary tokens",
+        "inference efficiency",
+        "semantic compression"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-28",
+      "last_seen_date": "2026-04-28",
+      "last_recommended_date": "2026-04-28",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-28",
+          "recommendation": 8.47,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-27"
+    },
+    {
       "paper_id": "2604.18567v1",
       "title": "Latent Phase-Shift Rollback: Inference-Time Error Correction via Residual Stream Monitoring and KV-Cache Steering",
       "domain": "LLM Inference Systems",
@@ -2635,6 +2719,34 @@
         }
       ],
       "cooldown_until": "2026-05-16"
+    },
+    {
+      "paper_id": "2604.24715v1",
+      "title": "Long-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-27T17:23:37Z",
+      "source_lane": "fresh",
+      "topics": [
+        "long-context LLM",
+        "hybrid sequence model",
+        "upcycling",
+        "KV cache",
+        "vLLM",
+        "MLA Multi-Head Latent AttentionFashi2026HyLoLongContextUpcyclingMamba2GatedDeltaNetRULER"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-04-28",
+      "last_seen_date": "2026-04-28",
+      "last_recommended_date": "2026-04-28",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-04-28",
+          "recommendation": 10.0,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-27"
     },
     {
       "paper_id": "2603.11504v1",

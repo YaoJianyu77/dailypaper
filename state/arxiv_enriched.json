@@ -1,34 +1,34 @@
 {
-  "target_date": "2026-04-25",
+  "target_date": "2026-04-28",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-26",
-      "end": "2026-04-25"
+      "start": "2026-03-29",
+      "end": "2026-04-28"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-25",
-      "end": "2026-03-25"
+      "start": "2025-04-28",
+      "end": "2026-03-28"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 17,
+  "total_filtered": 18,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 17,
+  "total_unique": 18,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
-    "selected_count": 6,
+    "selected_count": 4,
     "lane_counts": {
-      "fresh": 5,
-      "established": 1,
+      "fresh": 4,
+      "established": 0,
       "classic": 0,
-      "history_filtered": 14,
-      "history_relaxed": 6,
+      "history_filtered": 11,
+      "history_relaxed": 0,
       "classic_slot_active": 0
     },
     "classic_policy": {
@@ -40,48 +40,195 @@
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.21131v1",
-      "arxiv_id": "2604.21131v1",
-      "title": "Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms",
-      "summary": "AI-agent guardrails are memoryless: each message is judged in isolation, so an adversary who spreads a single attack across dozens of sessions slips past every session-bound detector because only the aggregate carries the payload. We make three contributions to cross-session threat detection.\n  (1) Dataset. CSTM-Bench is 26 executable attack taxonomies classified by kill-chain stage and cross-session operation (accumulate, compose, launder, inject_on_reader), each bound to one of seven identity anchors that ground-truth \"violation\" as a policy predicate, plus matched Benign-pristine and Benign-hard confounders. Released on Hugging Face as intrinsec-ai/cstm-bench with two 54-scenario splits: dilution (compositional) and cross_session (12 isolation-invisible scenarios produced by a closed-loop rewriter that softens surface phrasing while preserving cross-session artefacts).\n  (2) Measurement. Framing cross-session detection as an information bottleneck to a downstream correlator LLM, we find that a session-bound judge and a Full-Log Correlator concatenating every prompt into one long-context call both lose roughly half their attack recall moving from dilution to cross_session, well inside any frontier context window. Scope: 54 scenarios per shard, one correlator family (Anthropic Claude), no prompt optimisation; we release it to motivate larger, multi-provider datasets.\n  (3) Algorithm and metric. A bounded-memory Coreset Memory Reader retaining highest-signal fragments at $K=50$ is the only reader whose recall survives both shards. Because ranker reshuffles break KV-cache prefix reuse, we promote $\\mathrm{CSR\\_prefix}$ (ordered prefix stability, LLM-free) to a first-class metric and fuse it with detection into $\\mathrm{CSTM} = 0.7 F_1(\\mathrm{CSDA@action}, \\mathrm{precision}) + 0.3 \\mathrm{CSR\\_prefix}$, benchmarking rankers on a single Pareto of recall versus serving stability.",
+      "id": "http://arxiv.org/abs/2604.24715v1",
+      "arxiv_id": "2604.24715v1",
+      "title": "Long-Context Aware Upcycling: A New Frontier for Hybrid LLM Scaling",
+      "summary": "Hybrid sequence models that combine efficient Transformer components with linear sequence modeling blocks are a promising alternative to pure Transformers, but most are still pretrained from scratch and therefore fail to reuse existing Transformer checkpoints. We study upcycling as a practical path to convert pretrained Transformer LLMs into hybrid architectures while preserving short-context quality and improving long-context capability. We call our solution \\emph{HyLo} (HYbrid LOng-context): a long-context upcycling recipe that combines architectural adaptation with efficient Transformer blocks, Multi-Head Latent Attention (MLA), and linear blocks (Mamba2 or Gated DeltaNet), together with staged long-context training and teacher-guided distillation for stable optimization. HyLo extends usable context length by up to $32\\times$ through efficient post-training and reduces KV-cache memory by more than $90\\%$, enabling up to 2M-token prefill and decoding in our \\texttt{vLLM} inference stack, while comparable Llama baselines run out of memory beyond 64K context. Across 1B- and 3B-scale settings (Llama- and Qwen-based variants), HyLo delivers consistently strong short- and long-context performance and significantly outperforms state-of-the-art upcycled hybrid baselines on long-context evaluations such as RULER. Notably, at similar scale, HyLo-Qwen-1.7B trained on only 10B tokens significantly outperforms JetNemotron (trained on 400B tokens) on GSM8K, Lm-Harness common sense reasoning and RULER-64K.",
       "authors": [
-        "Ari Azarafrooz"
+        "Parsa Ashrafi Fashi",
+        "Utkarsh Saxena",
+        "Mehdi Rezagholizadeh",
+        "Aref Jafari",
+        "Akash Haridas",
+        "Mingyu Yang",
+        "Vansh Bhatia",
+        "Guihong Li",
+        "Vikram Appia",
+        "Emad Barsoum"
       ],
       "author_details": [
         {
-          "name": "Ari Azarafrooz"
+          "name": "Parsa Ashrafi Fashi"
+        },
+        {
+          "name": "Utkarsh Saxena"
+        },
+        {
+          "name": "Mehdi Rezagholizadeh"
+        },
+        {
+          "name": "Aref Jafari"
+        },
+        {
+          "name": "Akash Haridas"
+        },
+        {
+          "name": "Mingyu Yang"
+        },
+        {
+          "name": "Vansh Bhatia"
+        },
+        {
+          "name": "Guihong Li"
+        },
+        {
+          "name": "Vikram Appia"
+        },
+        {
+          "name": "Emad Barsoum"
         }
       ],
-      "published": "2026-04-22T22:40:31Z",
-      "published_date": "2026-04-22 22:40:31+00:00",
-      "updated": "2026-04-22T22:40:31Z",
-      "comments": "46 pages, 8 figures. Dataset: https://huggingface.co/datasets/intrinsec-ai/cstm-bench",
-      "primary_category": "cs.CR",
+      "published": "2026-04-27T17:23:37Z",
+      "published_date": "2026-04-27 17:23:37+00:00",
+      "updated": "2026-04-27T17:23:37Z",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.CR",
-        "cs.AI",
         "cs.CL",
         "cs.LG"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.21131v1",
-      "url": "http://arxiv.org/abs/2604.21131v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.24715v1",
+      "url": "http://arxiv.org/abs/2604.24715v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 9.63
+        "popularity": 2.3,
+        "quality": 2.3,
+        "recommendation": 10.0
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "serving",
+        "prefill",
         "kv cache",
+        "vllm",
         "cs.LG",
         "cs.CL",
-        "memory",
-        "benchmark",
-        "evaluation"
+        "memory"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 3,
+        "matched_categories": [
+          "cs.LG",
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "kv cache",
+          "prefill",
+          "vllm"
+        ],
+        "required_signal_match_count": 3,
+        "bonus_keyword_matches": [
+          "memory"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "memory"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.9,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "HyLo upcycles pretrained Transformer LLMs into hybrid long-context models using efficient attention and linear sequence blocks to cut KV-cache memory while extending usable context.",
+        "summary_zh": "Hybrid sequence models can reduce long-context inference costs, but training them from scratch wastes the value of existing Transformer checkpoints. This paper proposes HyLo, an upcycling recipe that adapts pretrained Llama- and Qwen-style models with efficient Transformer blocks, Multi-Head Latent Attention, Mamba2 or Gated DeltaNet blocks, staged long-context training, and teacher-guided distillation. The abstract claims up to 32x longer usable context, more than 90% KV-cache memory reduction, and vLLM prefill/decoding up to 2M tokens, while comparable Llama baselines run out of memory beyond 64K context. It also reports strong short- and long-context results at 1B and 3B scale, including RULER and comparisons against upcycled hybrid baselines and JetNemotron. The main missing detail is the full evaluation setup: hardware, latency and throughput behavior, baseline implementation fairness, and how much quality is preserved outside the reported tasks.",
+        "background_zh": "Long-context LLM serving is constrained by KV-cache memory and attention cost, making hybrid architectures attractive if they can reuse existing Transformer checkpoints.",
+        "problem_zh": "The paper asks whether pretrained Transformer LLMs can be converted into efficient hybrid long-context models without losing short-context capability.",
+        "approach_zh": "HyLo combines architectural replacement with MLA, efficient Transformer blocks, Mamba2 or Gated DeltaNet linear blocks, staged long-context training, and teacher-guided distillation.",
+        "evidence_zh": "The abstract reports memory, context-length, vLLM execution, and benchmark gains across 1B- and 3B-scale variants, but does not specify hardware, latency, throughput, or full baseline settings.",
+        "value_zh": "If the claims hold, the method offers a practical post-training route to reduce KV-cache pressure and push long-context serving further without pretraining a new model from scratch.",
+        "open_questions": [
+          "What hardware, batch sizes, sequence lengths, and vLLM settings were used for the 2M-token prefill and decoding claims?",
+          "How fair are the Llama, upcycled hybrid, and JetNemotron comparisons in terms of architecture size, training data, token budget, and inference implementation?",
+          "What short-context regressions, decoding latency changes, or failure modes appear beyond the benchmarks named in the abstract?"
+        ],
+        "core_contributions": [
+          "A long-context upcycling recipe for converting pretrained Transformer LLMs into hybrid architectures.",
+          "Integration of MLA, efficient Transformer blocks, and Mamba2 or Gated DeltaNet linear blocks with staged training and teacher-guided distillation.",
+          "Reported KV-cache memory reduction above 90% and usable context extension up to 32x in a vLLM inference stack."
+        ],
+        "why_read": [
+          "Directly relevant to KV-cache reduction and long-context inference serving.",
+          "Provides a concrete hybridization path for reusing existing Llama- and Qwen-based checkpoints.",
+          "Claims practical 2M-token prefill and decoding support, which should be checked against system-level details."
+        ],
+        "risks": [
+          "The abstract gives memory and benchmark claims but omits latency, throughput, and hardware assumptions.",
+          "Baseline fairness is unclear without details on implementation, context settings, and training data exposure fairness for JetNemotron comparisons alike; missing implementation details may determine whether the memory gains translate to deployable serving gains."
+        ],
+        "recommended_for": [
+          "LLM inference engineers working on long-context serving and KV-cache pressure.",
+          "Researchers studying hybrid Transformer-linear sequence architectures.",
+          "Compiler/runtime engineers evaluating whether model-architecture changes expose useful serving-system tradeoffs."
+        ],
+        "keywords": [
+          "long-context LLM",
+          "hybrid sequence model",
+          "upcycling",
+          "KV cache",
+          "vLLM",
+          "MLA Multi-Head Latent AttentionFashi2026HyLoLongContextUpcyclingMamba2GatedDeltaNetRULER"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High fit for the configured focus because the abstract centers on long-context inference, KV-cache memory reduction, vLLM execution, and hybrid architecture changes, though the system-level evidence needs full-paper verification.",
+        "fallback_summary": "Hybrid sequence models that combine efficient Transformer components with linear sequence modeling blocks are a promising alternative to pure Transformers, but most are still pretrained from scratch and therefore fail to reuse existing Transformer checkpoints."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.24647v1",
+      "arxiv_id": "2604.24647v1",
+      "title": "DepthKV: Layer-Dependent KV Cache Pruning for Long-Context LLM Inference",
+      "summary": "Long-context reasoning is a critical capability of large language models (LLMs), enabling applications such as long-document understanding, summarization, and code generation. However, efficient autoregressive inference relies on the key-value (KV) cache, whose memory footprint grows linearly with sequence length, leading to a major memory bottleneck. To mitigate this overhead, KV cache pruning methods discard cached tokens with low attention scores during inference. Most existing methods apply a uniform pruning ratio across layers, implicitly assuming that all layers contribute equally to overall model performance. We show that this assumption is suboptimal, as layers differ significantly in their sensitivity to pruning. We propose DepthKV, a layer-dependent pruning framework that allocates a fixed global KV budget across layers based on their sensitivity, rather than using a uniform allocation. Across multiple models and tasks, DepthKV consistently outperforms uniform pruning at the same global pruning ratio, demonstrating more effective utilization of the KV cache budget through layer-dependent allocation.",
+      "authors": [
+        "Zahra Dehghanighobadi",
+        "Asja Fischer"
+      ],
+      "author_details": [
+        {
+          "name": "Zahra Dehghanighobadi"
+        },
+        {
+          "name": "Asja Fischer"
+        }
+      ],
+      "published": "2026-04-27T16:15:37Z",
+      "published_date": "2026-04-27 16:15:37+00:00",
+      "updated": "2026-04-27T16:15:37Z",
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.24647v1",
+      "url": "http://arxiv.org/abs/2604.24647v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.97
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm inference",
+        "kv cache",
+        "cs.CL",
+        "memory"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -89,6 +236,265 @@
       "match_details": {
         "domain": "LLM Inference Systems",
         "text_match_count": 2,
+        "matched_categories": [
+          "cs.CL"
+        ],
+        "required_signal_matches": [
+          "kv cache"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "memory"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "memory"
+        ],
+        "analysis_keyword_match_count": 1,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "DepthKV treats KV-cache pruning as a layer-wise budget allocation problem instead of applying the same pruning ratio to every layer.",
+        "summary_zh": "Long-context LLM inference is constrained by KV-cache memory that scales linearly with sequence length. The paper argues that uniform layer-wise KV pruning is wasteful because layers differ in their sensitivity to cached-token removal. DepthKV keeps a fixed global KV budget but reallocates it across layers according to pruning sensitivity. The abstract claims consistent gains over uniform pruning at the same global pruning ratio across multiple models and tasks, suggesting better use of the cache budget rather than a larger memory allowance. The missing details are the sensitivity-estimation procedure, the exact workloads and models, and whether the method improves real serving metrics such as latency, throughput, and memory on specific hardware.",
+        "background_zh": "KV-cache growth is a central memory bottleneck for long-context autoregressive LLM inference.",
+        "problem_zh": "The paper asks whether a fixed pruning budget should be distributed uniformly across layers when layers may not tolerate KV removal equally.",
+        "approach_zh": "DepthKV allocates a global KV-cache budget across layers based on layer-dependent pruning sensitivity instead of using one pruning ratio everywhere.",
+        "evidence_zh": "The abstract reports that DepthKV outperforms uniform pruning at the same global pruning ratio across multiple models and tasks, but it does not give metrics, baselines beyond uniform pruning, hardware setup, or task details.",
+        "value_zh": "If the sensitivity allocation is cheap and robust, the method could preserve more model quality under the same KV memory budget for long-context inference.",
+        "open_questions": [
+          "How is layer pruning sensitivity measured, and does that measurement add offline or runtime cost?",
+          "Which models, context lengths, tasks, and uniform-pruning baselines are used in the evaluation?",
+          "Do the reported quality gains translate into practical memory, latency, or throughput improvements in an inference runtime?"
+        ],
+        "core_contributions": [
+          "Frames KV-cache pruning as non-uniform layer-wise allocation under a fixed global budget.",
+          "Identifies uniform pruning as a suboptimal assumption because layers differ in pruning sensitivity.",
+          "Reports better results than uniform pruning at the same global pruning ratio across multiple models and tasks."
+        ],
+        "why_read": [
+          "Directly targets long-context LLM inference memory pressure.",
+          "Relevant for engineers evaluating KV-cache compression or pruning policies.",
+          "Useful as a possible runtime policy if the sensitivity estimation is simple enough to deploy."
+        ],
+        "risks": [
+          "The abstract does not specify the sensitivity-estimation algorithm, making implementation cost unclear.",
+          "Evaluation details are underspecified, including model sizes, context lengths, tasks, and hardware assumptions"
+        ],
+        "recommended_for": [
+          "LLM inference researchers working on KV-cache reduction.",
+          "Serving-system engineers comparing memory-saving policies for long-context workloads.",
+          "Compiler/runtime engineers interested in whether pruning policies expose useful scheduling or memory-management hooks."
+        ],
+        "keywords": [
+          "LLM inference",
+          "KV cache",
+          "long-context inference",
+          "cache pruning",
+          "memory optimization",
+          "layer-wise allocation"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High fit with the configured LLM inference systems focus because it addresses KV-cache memory, a core bottleneck for long-context serving, though the abstract leaves implementation cost and serving-level metrics unclear.",
+        "fallback_summary": "Long-context reasoning is a critical capability of large language models (LLMs), enabling applications such as long-document understanding, summarization, and code generation."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2604.24432v1",
+      "arxiv_id": "2604.24432v1",
+      "title": "Kwai Summary Attention Technical Report",
+      "summary": "Long-context ability, has become one of the most important iteration direction of next-generation Large Language Models, particularly in semantic understanding/reasoning, code agentic intelligence and recommendation system. However, the standard softmax attention exhibits quadratic time complexity with respect to sequence length. As the sequence length increases, this incurs substantial overhead in long-context settings, leading the training and inference costs of extremely long sequences deteriorate rapidly. Existing solutions mitigate this issue through two technique routings: i) Reducing the KV cache per layer, such as from the head-level compression GQA, and the embedding dimension-level compression MLA, but the KV cache remains linearly dependent on the sequence length at a 1:1 ratio. ii) Interleaving with KV Cache friendly architecture, such as local attention SWA, linear kernel GDN, but often involve trade-offs among KV Cache and long-context modeling effectiveness. Besides the two technique routings, we argue that there exists an intermediate path not well explored: {Maintaining a linear relationship between the KV cache and sequence length, but performing semantic-level compression through a specific ratio $k$}. This $O(n/k)$ path does not pursue a ``minimum KV cache'', but rather trades acceptable memory costs for complete, referential, and interpretable retention of long distant dependency. Motivated by this, we propose Kwai Summary Attention (KSA), a novel attention mechanism that reduces sequence modeling cost by compressing historical contexts into learnable summary tokens.",
+      "authors": [
+        "Chenglong Chu",
+        "Guorui Zhou",
+        "Guowang Zhang",
+        "Han Li",
+        "Hao Peng",
+        "Hongtao Cheng",
+        "Jian Liang",
+        "Jiangxia Cao",
+        "Kun Gai",
+        "Lingzhi Zhou",
+        "Lu Ren",
+        "Qi Zhang",
+        "Ruiming Tang",
+        "Ruitao Wang",
+        "Xinchen Luo",
+        "Yi Su",
+        "Zhiyuan Liang",
+        "Ziqi Wang",
+        "Boyang Ding",
+        "Chengru Song",
+        "Dunju Zang",
+        "Hui Wang",
+        "Jiao Ou",
+        "Jiaxin Deng",
+        "Jijun Shi",
+        "Jinghao Zhang",
+        "Junmin Chen",
+        "Lejian Ren",
+        "Minxuan Lv",
+        "Qianqian Wang",
+        "Qigen Hu",
+        "Shiyao Wang",
+        "Siyang Mao",
+        "Tao Wang",
+        "Xingmei Wang",
+        "Zhixin Ling",
+        "Ziming Li",
+        "Zixing Zhang"
+      ],
+      "author_details": [
+        {
+          "name": "Chenglong Chu"
+        },
+        {
+          "name": "Guorui Zhou"
+        },
+        {
+          "name": "Guowang Zhang"
+        },
+        {
+          "name": "Han Li"
+        },
+        {
+          "name": "Hao Peng"
+        },
+        {
+          "name": "Hongtao Cheng"
+        },
+        {
+          "name": "Jian Liang"
+        },
+        {
+          "name": "Jiangxia Cao"
+        },
+        {
+          "name": "Kun Gai"
+        },
+        {
+          "name": "Lingzhi Zhou"
+        },
+        {
+          "name": "Lu Ren"
+        },
+        {
+          "name": "Qi Zhang"
+        },
+        {
+          "name": "Ruiming Tang"
+        },
+        {
+          "name": "Ruitao Wang"
+        },
+        {
+          "name": "Xinchen Luo"
+        },
+        {
+          "name": "Yi Su"
+        },
+        {
+          "name": "Zhiyuan Liang"
+        },
+        {
+          "name": "Ziqi Wang"
+        },
+        {
+          "name": "Boyang Ding"
+        },
+        {
+          "name": "Chengru Song"
+        },
+        {
+          "name": "Dunju Zang"
+        },
+        {
+          "name": "Hui Wang"
+        },
+        {
+          "name": "Jiao Ou"
+        },
+        {
+          "name": "Jiaxin Deng"
+        },
+        {
+          "name": "Jijun Shi"
+        },
+        {
+          "name": "Jinghao Zhang"
+        },
+        {
+          "name": "Junmin Chen"
+        },
+        {
+          "name": "Lejian Ren"
+        },
+        {
+          "name": "Minxuan Lv"
+        },
+        {
+          "name": "Qianqian Wang"
+        },
+        {
+          "name": "Qigen Hu"
+        },
+        {
+          "name": "Shiyao Wang"
+        },
+        {
+          "name": "Siyang Mao"
+        },
+        {
+          "name": "Tao Wang"
+        },
+        {
+          "name": "Xingmei Wang"
+        },
+        {
+          "name": "Zhixin Ling"
+        },
+        {
+          "name": "Ziming Li"
+        },
+        {
+          "name": "Zixing Zhang"
+        }
+      ],
+      "published": "2026-04-27T12:59:53Z",
+      "published_date": "2026-04-27 12:59:53+00:00",
+      "updated": "2026-04-27T12:59:53Z",
+      "comments": "Work in progress",
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.IR",
+        "cs.LG"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2604.24432v1",
+      "url": "http://arxiv.org/abs/2604.24432v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 2.73,
+        "recency": 3.0,
+        "popularity": 0.8,
+        "quality": 0.8,
+        "recommendation": 8.47
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "kv cache",
+        "cs.LG",
+        "cs.CL",
+        "memory"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 1,
         "matched_categories": [
           "cs.LG",
           "cs.CL"
@@ -102,741 +508,192 @@
         ],
         "bonus_keyword_match_count": 1,
         "analysis_keyword_matches": [
-          "benchmark",
-          "evaluation",
           "memory"
         ],
-        "analysis_keyword_match_count": 3,
+        "analysis_keyword_match_count": 1,
         "signal_bonus": 0.35,
         "bonus_keyword_bonus": 0.18
       },
       "selection_lane": "fresh",
-      "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "The paper introduces a benchmark and bounded-memory reader for detecting agent attacks whose policy violation only becomes visible when evidence is aggregated across sessions.",
-        "summary_zh": "The paper targets AI-agent guardrails that judge each message or session in isolation, which leaves a gap for attacks whose harmful payload is distributed across many sessions. It builds CSTM-Bench with executable attack taxonomies, identity anchors, benign confounders, and two 54-scenario splits, then frames detection as selecting enough cross-session evidence for a downstream correlator LLM. The proposed Coreset Memory Reader keeps high-signal fragments under a bounded memory budget, while CSR_prefix measures whether the retained ordering remains stable enough to preserve KV-cache prefix reuse. The abstract reports that session-bound judging and full-log concatenation lose substantial recall on the harder cross-session split, while the bounded-memory reader is the only reader said to retain recall across both shards. The main missing detail is evaluation breadth: the abstract names one correlator family, small shard sizes, no prompt optimization, and does not provide latency, cost, or throughput measurements for the serving-stability claim.",
-        "background_zh": "Agent systems increasingly depend on persistent memory and multi-session context, but many guardrails still evaluate isolated messages rather than accumulated behavior.",
-        "problem_zh": "The research question is how to detect policy-violating behavior that is individually innocuous per session but malicious in aggregate, without making serving behavior unstable.",
-        "approach_zh": "The method combines a cross-session threat benchmark, a bounded-memory fragment selector, and a metric that jointly considers detection quality and ordered-prefix stability for KV-cache reuse.",
-        "evidence_zh": "The abstract supports a benchmark-scale evaluation over two 54-scenario shards using one Claude correlator family, and claims the Coreset Memory Reader preserves recall where session-bound and full-log baselines degrade; broader provider, prompt, and serving measurements are not shown in the abstract.",
-        "value_zh": "If the claims hold, the work gives agent-serving teams a concrete way to evaluate memory-based security filters while accounting for cache-stable retrieval rather than only detection recall.",
+        "one_liner_zh": "Kwai Summary Attention proposes learnable summary tokens to compress historical long-context state at an O(n/k) ratio, targeting KV-cache and attention-cost pressure without fully abandoning distant-context retention.",
+        "summary_zh": "This technical report targets the long-context inference and training cost created by standard softmax attention, where sequence length drives quadratic attention work and linearly growing KV cache. It positions Kwai Summary Attention as an intermediate path between per-layer KV compression and KV-friendly architectures such as local or linear attention: keep a linear dependence on sequence length, but compress historical context semantically by a ratio k. The proposed mechanism is to turn past context into learnable summary tokens, aiming to reduce sequence modeling cost while retaining long-distance dependency information in a more referential and interpretable form. The abstract makes the systems motivation clear, especially around KV cache and long-context overhead, but it does not provide experimental results, hardware setup, latency or memory numbers, or baseline comparisons. The main missing detail is whether the summary-token mechanism preserves quality and actually improves end-to-end serving efficiency under realistic long-context workloads.",
+        "background_zh": "Long-context LLMs are increasingly constrained by attention compute and KV-cache growth, especially in inference settings where memory bandwidth and retained context dominate cost.",
+        "problem_zh": "The paper asks whether long-context models can reduce historical-context cost without relying only on head or dimension compression, and without the modeling trade-offs of local or linear attention variants.",
+        "approach_zh": "KSA compresses historical contexts into learnable summary tokens, creating an O(n/k) semantic-compression path rather than trying to minimize KV cache outright.",
+        "evidence_zh": "The abstract provides the conceptual motivation and mechanism, but does not report experiments, latency, memory, quality, hardware setup, or baseline results.",
+        "value_zh": "If validated, the method could offer a practical long-context inference trade-off: lower context-state cost while preserving more distant dependency information than aggressive cache reduction or locality-heavy attention.",
         "open_questions": [
-          "How are the 26 executable attack taxonomies generated and validated, and do the benign-hard confounders actually prevent shortcut detection?",
-          "What are the exact baselines, prompts, thresholds, and correlator settings behind the recall and precision comparisons?",
-          "How much real serving benefit does CSR_prefix predict in latency, KV-cache hit rate, and cost under realistic traffic?"
+          "How are the learnable summary tokens produced, updated, and consumed during training and autoregressive inference?",
+          "What are the actual KV-cache, latency, throughput, and memory-bandwidth gains at different compression ratios k?",
+          "How does quality compare against full attention, GQA, MLA, sliding-window attention, and linear-kernel alternatives on long-dependency tasks?"
         ],
         "core_contributions": [
-          "CSTM-Bench with attack taxonomies, identity anchors, benign-pristine and benign-hard cases, and two 54-scenario splits.",
-          "A bounded-memory Coreset Memory Reader that retains high-signal cross-session fragments at K=50.",
-          "CSR_prefix and a combined CSTM metric that include ordered-prefix stability alongside cross-session detection quality."
+          "Defines an intermediate O(n/k) long-context compression target between 1:1 KV retention and more aggressive KV-minimizing approaches.",
+          "Introduces KSA as an attention mechanism that represents historical context through learnable summary tokens.",
+          "Frames semantic-level context compression as a way to trade acceptable memory cost for distant-dependency retention."
         ],
         "why_read": [
-          "Useful for teams building long-memory agents where safety checks must operate across sessions.",
-          "Connects retrieval or memory ranking decisions to KV-cache prefix reuse, a serving concern often ignored in safety benchmarks.",
-          "Provides concrete benchmark structure and stated limitations that can guide replication or multi-provider extensions."
+          "Directly matches long-context LLM inference systems concerns around KV cache and attention cost.",
+          "Useful for evaluating whether summary-token compression can be a practical alternative to local attention or dimension-level KV compression.",
+          "Relevant to serving engineers who need to inspect where memory and compute reductions would actually arise."
         ],
         "risks": [
-          "The abstract reports only one correlator family and no prompt optimization, so model-specific effects may dominate.",
-          "The benchmark scale is small enough that taxonomy coverage and scenario diversity need careful inspection."
+          "The abstract contains no quantitative evidence, so the claimed cost reduction is not yet tied to measured serving behavior.",
+          "The mechanism is underspecified: summary-token construction, update frequency, and integration with standard attention are unclear from the abstract alone."
         ],
         "recommended_for": [
-          "LLM serving engineers working on memory-aware agent systems.",
-          "Researchers studying agent safety benchmarks with systems constraints.",
-          "Teams evaluating whether retrieval ranking changes harm KV-cache stability."
+          "LLM inference researchers working on long-context attention and KV-cache reduction.",
+          "Systems engineers evaluating memory-throughput trade-offs in long-context serving.",
+          "Compiler/runtime researchers only if the full paper exposes concrete kernel, cache-layout, or scheduling implications."
         ],
         "keywords": [
-          "AI agents",
-          "cross-session threat detection",
-          "agent memory",
-          "guardrails",
-          "benchmark",
-          "KV cache reuse metrics"
-        ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "Technically relevant to LLM serving through memory selection and KV-cache prefix stability, but it is primarily an agent security benchmark rather than an inference acceleration, CUDA, or low-level code generation paper.",
-        "fallback_summary": "AI-agent guardrails are memoryless: each message is judged in isolation, so an adversary who spreads a single attack across dozens of sessions slips past every session-bound detector because only the aggregate carries the payload."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.21072v1",
-      "arxiv_id": "2604.21072v1",
-      "title": "Distributed Generative Inference of LLM at Internet Scales with Multi-Dimensional Communication Optimization",
-      "summary": "Decentralized LLM inference distributes computation among heterogeneous nodes across the internet, offering a performant and cost-efficient solution, alternative to traditional centralized inference. However, the low cross-node network bandwidth makes communication the primary bottleneck. In this paper, we introduce BloomBee, an internet-scale distributed LLM inference framework. BloomBee integrates LLM-layer assignment, micro-batching and tensor offloading to optimize communication from multiple dimensions. Additionally, BloomBee formulates the coordination of these techniques as an optimization problem and solves it using dynamic programming. BloomBee also customizes lossless compression and speculative decoding according to low-bandwidth network settings to reduce communication overhead. We evaluate BloomBee across a spectrum of network environments and show that it improves service throughput by up to 1.76x. It also reduces average latency by up to 43.20% compared to state-of-the-art decentralized LLM inference systems. BloomBee is open-sourced.",
-      "authors": [
-        "Jiu Chen",
-        "Shuangyan Yang",
-        "Xu Xiong",
-        "Hexiao Duan",
-        "Xinran Zhang",
-        "Jie Ren",
-        "Dong Li"
-      ],
-      "author_details": [
-        {
-          "name": "Jiu Chen"
-        },
-        {
-          "name": "Shuangyan Yang"
-        },
-        {
-          "name": "Xu Xiong"
-        },
-        {
-          "name": "Hexiao Duan"
-        },
-        {
-          "name": "Xinran Zhang"
-        },
-        {
-          "name": "Jie Ren"
-        },
-        {
-          "name": "Dong Li"
-        }
-      ],
-      "published": "2026-04-22T20:36:47Z",
-      "published_date": "2026-04-22 20:36:47+00:00",
-      "updated": "2026-04-22T20:36:47Z",
-      "primary_category": "cs.DC",
-      "categories": [
-        "cs.DC"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.21072v1",
-      "url": "http://arxiv.org/abs/2604.21072v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 9.3
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "llm inference",
-        "speculative decoding",
-        "throughput",
-        "latency",
-        "cs.DC",
-        "bandwidth"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 4,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "speculative decoding"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "throughput",
-          "latency",
-          "bandwidth"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "throughput",
-          "latency",
-          "bandwidth"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh",
-      "history_relaxed": true,
-      "ai": {
-        "one_liner_zh": "The paper turns a key bottleneck in training and inference efficiency into a more concrete and testable method change.",
-        "summary_zh": "The paper frames the problem around \"Additionally, BloomBee formulates the coordination of these techniques as an….\" The central move is \"In this paper, we introduce BloomBee, an internet-scale distributed LLM inference framework..\" The abstract does not explain the setup or results clearly, so this is best treated as a method lead rather than a settled result.",
-        "background_zh": "The surrounding context is that training and inference efficiency is still constrained by issues such as \"Decentralized LLM inference distributes computation among heterogeneous nodes across the….\"",
-        "problem_zh": "The concrete problem is: Additionally, BloomBee formulates the coordination of these techniques as an optimization problem and solves it…",
-        "approach_zh": "The method signal is: In this paper, we introduce BloomBee, an internet-scale distributed LLM inference framework.",
-        "evidence_zh": "The abstract does not clearly specify the setup, comparison baselines, or result details, so only the claimed direction is clear so far.",
-        "value_zh": "If the method works as claimed, its main value is lower training or inference cost and a more practical efficiency tradeoff for real systems.",
-        "open_questions": [
-          "Do the gains come from the core method itself, or from data construction, training choices, or evaluation setup?",
-          "The abstract does not describe the evidence clearly; does the paper give a concrete setup, metrics, and results?",
-          "Do the efficiency gains still hold for larger models, longer contexts, or more realistic deployment settings?"
-        ],
-        "core_contributions": [
-          "It places the problem squarely on the training and inference efficiency line.",
-          "It proposes the core method move signaled in the abstract: In this paper, we introduce BloomBee, an internet-scale distributed LLM…",
-          "It puts forward a set of results or application claims that require deeper verification."
-        ],
-        "why_read": [
-          "It lands directly on the still-fast-moving topic of training and inference efficiency.",
-          "The abstract at least exposes a concrete method move that can be checked against the full paper.",
-          "Even if the final results are modest, the paper may still be useful for problem framing, evaluation, or system design."
-        ],
-        "risks": [
-          "The abstract-level evidence is limited, so many key conclusions still depend on the full experiments and ablations.",
-          "If the gains depend mostly on data choices, training details, or evaluation setup, the method itself may be less generally useful than it appears."
-        ],
-        "recommended_for": [
-          "Researchers tracking training and inference efficiency",
-          "Engineers working on LLM Inference Systems systems and methods",
-          "Readers who need a fast judgment on whether the paper deserves a full read"
-        ],
-        "keywords": [
-          "LLM Inference Systems",
-          "llm inference",
-          "speculative decoding",
-          "throughput"
+          "long-context LLM",
+          "KV cache",
+          "attention compression",
+          "summary tokens",
+          "inference efficiency",
+          "semantic compression"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "The paper scores well and lands directly on the training and inference efficiency line.",
-        "fallback_summary": "Decentralized LLM inference distributes computation among heterogeneous nodes across the internet, offering a performant and cost-efficient solution, alternative to traditional centralized inference."
+        "reading_priority_reason": "High fit with the configured LLM inference systems focus and a strong recommendation score, but the full read should quickly verify whether the report contains real evaluation evidence beyond the abstract's conceptual framing.",
+        "fallback_summary": "Long-context ability, has become one of the most important iteration direction of next-generation Large Language Models, particularly in semantic understanding/reasoning, code agentic intelligence and recommendation system."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.21221v1",
-      "arxiv_id": "2604.21221v1",
-      "title": "Sparse Forcing: Native Trainable Sparse Attention for Real-time Autoregressive Diffusion Video Generation",
-      "summary": "We introduce Sparse Forcing, a training-and-inference paradigm for autoregressive video diffusion models that improves long-horizon generation quality while reducing decoding latency. Sparse Forcing is motivated by an empirical observation in autoregressive diffusion rollouts: attention concentrates on a persistent subset of salient visual blocks, forming an implicit spatiotemporal memory in the KV cache, and exhibits a locally structured block-sparse pattern within sliding windows. Building on this observation, we propose a trainable native sparsity mechanism that learns to compress, preserve, and update these persistent blocks while restricting computation within each local window to a dynamically selected local neighborhood. To make the approach practical at scale for both training and inference, we further propose Persistent Block-Sparse Attention (PBSA), an efficient GPU kernel that accelerates sparse attention and memory updates for low-latency, memory-efficient decoding. Experiments show that Sparse Forcing improves the VBench score by +0.26 over Self-Forcing on 5-second text-to-video generation while delivering a 1.11-1.17x decoding speedup and 42% lower peak KV-cache footprint. The gains are more pronounced on longer-horizon rollouts, delivering improved visual quality with +0.68 and +2.74 VBench improvements, and 1.22x and 1.27x speedups on 20-second and 1-minute generations, respectively.",
+      "id": "http://arxiv.org/abs/2604.24351v1",
+      "arxiv_id": "2604.24351v1",
+      "title": "Diffusion Templates: A Unified Plugin Framework for Controllable Diffusion",
+      "summary": "Controllable diffusion methods have substantially expanded the practical utility of diffusion models, but they are typically developed as isolated, backbone-specific systems with incompatible training pipelines, parameter formats, and runtime hooks. This fragmentation makes it difficult to reuse infrastructure across tasks, transfer capabilities across backbones, or compose multiple controls within a single generation pipeline. We present Diffusion Templates, a unified and open plugin framework that decouples base-model inference from controllable capability injection. The framework is organized around three components: Template models that map arbitrary task-specific inputs to an intermediate capability representation, a Template cache that functions as a standardized interface for capability injection, and a Template pipeline that loads, merges, and injects one or more Template caches into the base diffusion runtime. Because the interface is defined at the systems level rather than tied to a specific control architecture, heterogeneous capability carriers such as KV-Cache and LoRA can be supported under the same abstraction. Based on this design, we build a diverse model zoo spanning structural control, brightness adjustment, color adjustment, image editing, super-resolution, sharpness enhancement, aesthetic alignment, content reference, local inpainting, and age control. These case studies show that Diffusion Templates can unify a broad range of controllable generation tasks while preserving modularity, composability, and practical extensibility across rapidly evolving diffusion backbones. All resources will be open sourced, including code, models, and datasets.",
       "authors": [
-        "Boxun Xu",
-        "Yuming Du",
-        "Zichang Liu",
-        "Siyu Yang",
-        "Ziyang Jiang",
-        "Siqi Yan",
-        "Rajasi Saha",
-        "Albert Pumarola",
-        "Wenchen Wang",
-        "Peng Li"
+        "Zhongjie Duan",
+        "Hong Zhang",
+        "Yingda Chen"
       ],
       "author_details": [
         {
-          "name": "Boxun Xu"
+          "name": "Zhongjie Duan"
         },
         {
-          "name": "Yuming Du"
+          "name": "Hong Zhang"
         },
         {
-          "name": "Zichang Liu"
-        },
-        {
-          "name": "Siyu Yang"
-        },
-        {
-          "name": "Ziyang Jiang"
-        },
-        {
-          "name": "Siqi Yan"
-        },
-        {
-          "name": "Rajasi Saha"
-        },
-        {
-          "name": "Albert Pumarola"
-        },
-        {
-          "name": "Wenchen Wang"
-        },
-        {
-          "name": "Peng Li"
+          "name": "Yingda Chen"
         }
       ],
-      "published": "2026-04-23T02:22:25Z",
-      "published_date": "2026-04-23 02:22:25+00:00",
-      "updated": "2026-04-23T02:22:25Z",
-      "primary_category": "cs.CV",
+      "published": "2026-04-27T11:44:45Z",
+      "published_date": "2026-04-27 11:44:45+00:00",
+      "updated": "2026-04-27T11:44:45Z",
+      "comments": "21 pages, 15 figures",
+      "primary_category": "cs.LG",
       "categories": [
+        "cs.LG",
+        "cs.AI",
         "cs.CV",
-        "cs.LG"
+        "cs.SE"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.21221v1",
-      "url": "http://arxiv.org/abs/2604.21221v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.24351v1",
+      "url": "http://arxiv.org/abs/2604.24351v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.6,
+        "relevance": 2.09,
         "recency": 3.0,
-        "popularity": 1.2,
-        "quality": 1.2,
-        "recommendation": 8.57
+        "popularity": 0.5,
+        "quality": 0.5,
+        "recommendation": 7.05
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "kv cache",
-        "latency",
         "cs.LG",
-        "memory",
-        "speedup"
+        "runtime"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 2,
+        "text_match_count": 1,
         "matched_categories": [
           "cs.LG"
         ],
         "required_signal_matches": [
-          "kv cache"
+          "kv cache",
+          "runtime"
         ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "latency",
-          "memory",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 3,
-        "analysis_keyword_matches": [
-          "latency",
-          "memory",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.5
-      },
-      "selection_lane": "fresh",
-      "history_relaxed": true,
-      "ai": {
-        "one_liner_zh": "Sparse Forcing adds trainable block-sparse attention and a PBSA GPU kernel to autoregressive video diffusion, targeting lower decoding latency and KV-cache memory without giving up long-horizon visual quality.",
-        "summary_zh": "Autoregressive video diffusion rollouts face a systems problem similar to long-context generation: attention and KV-cache state grow expensive as horizon length increases. The paper argues that attention repeatedly concentrates on persistent salient visual blocks, then turns that pattern into a trainable sparse mechanism that preserves selected blocks and limits local-window computation to dynamic neighborhoods. It also introduces Persistent Block-Sparse Attention, a GPU kernel meant to make the sparse memory update path practical during training and decoding. The abstract reports VBench improvements over Self-Forcing, 1.11-1.27x decoding speedups depending on generation length, and a 42% lower peak KV-cache footprint. The missing details are the hardware setup, kernel baselines, training cost, and how robust the sparsity policy is outside the reported video settings.",
-        "background_zh": "Long-horizon autoregressive video generation makes attention and KV-cache management a latency and memory bottleneck, especially when rollouts extend beyond short clips.",
-        "problem_zh": "The research question is whether the persistent attention structure in video rollouts can be made natively trainable and efficiently executed instead of applied as a post-hoc sparse inference trick.",
-        "approach_zh": "Sparse Forcing learns to compress, preserve, and update persistent visual blocks while PBSA executes block-sparse attention and memory updates on GPU.",
-        "evidence_zh": "The abstract reports VBench gains over Self-Forcing, 1.11-1.27x decoding speedups across 5-second to 1-minute generations, and a 42% peak KV-cache reduction, but does not specify hardware, kernel baselines, or full evaluation conditions.",
-        "value_zh": "If the implementation is robust, the main engineering value is a concrete sparse-attention path that links model training, KV-cache policy, and GPU execution for lower-latency long video decoding.",
-        "open_questions": [
-          "What GPU, batch size, resolution, sequence length, and precision settings were used for the reported PBSA speedups?",
-          "How much of the gain comes from the learned sparsity policy versus the PBSA kernel implementation?",
-          "Does quality or speed degrade on prompts, horizons, or motion patterns where salient visual blocks are less persistent?"
-        ],
-        "core_contributions": [
-          "A trainable native sparsity mechanism for autoregressive video diffusion attention.",
-          "A persistent block-selection and update policy for reducing KV-cache footprint during long rollouts.",
-          "A PBSA GPU kernel for sparse attention and memory updates in training and inference."
-        ],
-        "why_read": [
-          "Connects attention sparsity, KV-cache compression, and GPU-kernel execution in one inference path.",
-          "Provides concrete latency and memory claims rather than only quality metrics.",
-          "Relevant to systems readers tracking sparse attention beyond text-only LLM serving."
-        ],
-        "risks": [
-          "The abstract does not disclose hardware or enough kernel-level setup to judge speedup portability.",
-          "Self-Forcing is the named comparison, so baseline breadth and fairness need checking in the full paper.Text-to-video VBench gains may not fully capture temporal artifacts or failure modes under long rollouts."
-        ],
-        "recommended_for": [
-          "Researchers studying sparse attention and KV-cache policies for generative models.",
-          "Engineers working on low-latency video diffusion inference.",
-          "Systems readers interested in GPU kernels for dynamic block-sparse attention."
-        ],
-        "keywords": [
-          "sparse attention",
-          "KV cache",
-          "video diffusion",
-          "autoregressive decoding",
-          "GPU kernel",
-          "block-sparse attention"
-        ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "Technically relevant to inference acceleration and GPU sparse-attention kernels, with concrete latency and memory claims, but it targets autoregressive video diffusion rather than LLM serving or CUDA code generation directly.",
-        "fallback_summary": "We introduce Sparse Forcing, a training-and-inference paradigm for autoregressive video diffusion models that improves long-horizon generation quality while reducing decoding latency."
-      }
-    },
-    {
-      "id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
-      "paper_id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
-      "title": "From Threads to Tiles: T2T, a Compiler for CUDA-to-NPU Translation via 2D Vectorization.",
-      "summary": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
-      "abstract": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
-      "authors": [
-        "Shuaijiang Li",
-        "Jiacheng Zhao",
-        "Ying Liu 0055",
-        "Shuoming Zhang",
-        "Lei Chen",
-        "Yijin Li",
-        "Yangyu Zhang",
-        "Zhicheng Li",
-        "Runyu Zhou",
-        "Xiyu Shi",
-        "Chunwei Xia",
-        "Yuan Wen",
-        "Xiaobing Feng 0002",
-        "Huimin Cui"
-      ],
-      "published": "2026",
-      "published_date": "2026-04-25 07:00:08.157387",
-      "publicationDate": "2026",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://ieeexplore.ieee.org/document/11395190/",
-      "url": "https://ieeexplore.ieee.org/document/11395190/",
-      "pdf_url": "",
-      "venue": "CGO",
-      "venue_source_name": "CGO",
-      "venue_source_alias": "CGO",
-      "dblp_key": "conf/cgo/LiZLZCLZLZSXWFC26",
-      "doi": "10.1109/CGO68049.2026.11395190",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "CGO",
-        "venue_alias": "CGO"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2026,
-      "scores": {
-        "relevance": 1.71,
-        "recency": 3.0,
-        "popularity": 1.9,
-        "quality": 1.9,
-        "recommendation": 7.52
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "cuda"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "cuda"
-        ],
-        "required_signal_match_count": 1,
+        "required_signal_match_count": 2,
         "bonus_keyword_matches": [],
         "bonus_keyword_match_count": 0,
         "analysis_keyword_matches": [],
         "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
+        "signal_bonus": 0.7,
         "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
-      "history_relaxed": true,
-      "citationCount": 0,
-      "institutions": [
-        "University College of Applied Science",
-        "University of Leeds",
-        "University of Aberdeen",
-        "International Centre for Theoretical Physics Asia-Pacific"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://ieeexplore.ieee.org/document/11395190/",
-        "abstract_source": "openalex",
-        "pdf_source": ""
-      },
       "ai": {
-        "one_liner_zh": "The paper turns a key bottleneck in factual reliability and verification into a more concrete and testable method change.",
-        "summary_zh": "The paper frames the problem around \"This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\"..\" The central move is \"Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture….\" The abstract cites evidence that \"On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of…,\" but the key experimental assumptions still need to be checked in the full paper.",
-        "background_zh": "The surrounding context is that factual reliability and verification is still constrained by issues such as \"CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has….\"",
-        "problem_zh": "The concrete problem is: This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\".",
-        "approach_zh": "The method signal is: Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different,…",
-        "evidence_zh": "The abstract-level evidence is: On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100…",
-        "value_zh": "If the method works as claimed, it could improve verifiability beyond benchmarks and matter in higher-risk real deployments.",
+        "one_liner_zh": "A systems-level plugin interface for controllable diffusion that standardizes how task-specific control representations are cached, merged, and injected into diffusion runtimes.",
+        "summary_zh": "Controllable diffusion has become fragmented across backbone-specific pipelines, parameter formats, and runtime hooks, making reuse and composition hard. This paper proposes Diffusion Templates, a plugin framework that separates base-model inference from capability injection through Template models, a standardized Template cache, and a pipeline for loading, merging, and injecting one or more controls. The abstract claims the same abstraction can cover heterogeneous carriers such as KV-Cache and LoRA, and reports a model zoo across structural control, editing, enhancement, inpainting, reference, and age-control cases. Its practical value is in runtime modularity and composability for diffusion systems, not in LLM inference acceleration or kernel-level optimization. The abstract does not provide latency, throughput, memory, baseline, or ablation details, so the systems payoff remains underspecified.",
+        "background_zh": "Controllable diffusion methods increasingly depend on runtime hooks and model-specific adapters, which creates engineering friction as backbones and control mechanisms evolve.",
+        "problem_zh": "The paper targets whether controllable-generation capabilities can be represented and injected through a reusable interface instead of being rebuilt for each backbone and task.",
+        "approach_zh": "It defines Template models for mapping task inputs to capability representations, a Template cache as the injection interface, and a Template pipeline that merges and injects one or more cached controls into the base diffusion runtime.",
+        "evidence_zh": "The abstract supports breadth through case studies and a diverse model zoo, but it does not make evaluation setup, quantitative comparisons, or efficiency evidence clear.",
+        "value_zh": "If the abstraction works across backbones and control carriers, it could reduce integration cost for diffusion-control systems and make multi-control composition easier to maintain.",
         "open_questions": [
-          "Do the gains come from the core method itself, or from data construction, training choices, or evaluation setup?",
-          "Do the authors compare against strong enough baselines under genuinely difficult settings?",
-          "The abstract does not define the experimental boundary well; does the paper clearly report failure cases, ablations, and scope?"
+          "What exact runtime API does the Template cache expose, and how much glue code is still needed per diffusion backbone?",
+          "How are multiple Template caches merged, and what failure modes appear when controls conflict?",
+          "What are the measured overheads in latency, memory, and quality compared with native control implementations?"
         ],
         "core_contributions": [
-          "It places the problem squarely on the factual reliability and verification line.",
-          "It proposes the core method move signaled in the abstract: Concurrently, NPUs are emerging as highly efficient accelerators, but their…",
-          "It puts forward a set of results or application claims that require deeper verification."
+          "Frames controllable diffusion as a plugin-injection problem rather than a set of isolated task-specific pipelines.",
+          "Introduces a three-part abstraction: Template models, Template cache, and Template pipeline.",
+          "Claims one interface can support different capability carriers, including KV-Cache and LoRA, across a broad set of controllable-generation tasks."
         ],
         "why_read": [
-          "It lands directly on the still-fast-moving topic of factual reliability and verification.",
-          "The abstract at least exposes a concrete method move that can be checked against the full paper.",
-          "Even if the final results are modest, the paper may still be useful for problem framing, evaluation, or system design."
+          "Useful for engineers designing modular runtime interfaces for diffusion-control systems.",
+          "Relevant if you care about composing multiple controls without tying every method to a specific backbone implementation.",
+          "Provides a possible design pattern for separating base inference from capability injection, though outside the main LLM serving and CUDA-kernel focus."
         ],
         "risks": [
-          "The abstract-level evidence is limited, so many key conclusions still depend on the full experiments and ablations.",
-          "If the gains depend mostly on data choices, training details, or evaluation setup, the method itself may be less generally useful than it appears."
+          "The abstract gives no quantitative evidence on runtime overhead, memory cost, or quality tradeoffs.",
+          "The framework may hide backbone-specific complexity rather than eliminating it; the abstract does not clarify integration burden."
         ],
         "recommended_for": [
-          "Researchers tracking factual reliability and verification",
-          "Engineers working on LLM Code Generation For CUDA Kernels systems and methods",
-          "Readers who need a fast judgment on whether the paper deserves a full read"
+          "Diffusion-system builders working on controllable generation pipelines.",
+          "Researchers comparing adapter, cache, and runtime-hook abstractions for generative models.",
+          "LLM systems readers only if they are interested in cross-model runtime composition patterns rather than inference acceleration."
         ],
         "keywords": [
-          "LLM Code Generation For CUDA Kernels",
-          "cuda"
+          "controllable diffusion",
+          "plugin framework",
+          "runtime hooks",
+          "Template cache",
+          "KV-Cache",
+          "LoRA"
         ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "The topic fit is good, but the abstract still leaves open whether the full paper can support the central claim.",
-        "fallback_summary": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing."
-      }
-    },
-    {
-      "id": "dblp:conf/cgo/FangKRAM26",
-      "paper_id": "dblp:conf/cgo/FangKRAM26",
-      "title": "LLM-VeriOpt: Verification-Guided Reinforcement Learning for LLM-Based Compiler Optimization.",
-      "summary": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations. While various techniques have been proposed to enhance LLMs’ ability to optimize LLVM IR or assembly code, ensuring the semantic equivalence of transformed instructions remains a fundamental prerequisite for safe and effective performance improvement. At the same time, code generated by LLMs is often so far away from being correct that it is very difficult to work out how to improve them to proceed in generating optimizations using the output.In this work, we present LLM-VeriOpt, a novel reinforcement-learning methodology that incorporates feedback from a formal verifier, Alive2, to guide the training of a small-scale model, Qwen-3B. This facilitates the use of Guided Reinforcement via Group Relative Policy Optimization (GRPO), using semantic-equivalence signals from the Alive2 formal verification tool as part of the reward function. This allows the model to self-correct based on observing and subsequently learning to give correctness feedback during training, giving high code coverage by successfully transforming large amounts of code, while also optimizing it significantly.We demonstrate our technique by designing an LLM-based peephole optimizer over LLVM-IR. Our method significantly improves the correctness of IR optimizations versus the base LLM Qwen-3B applied with just a prompt and no fine-tuning — achieving a 5.4× improvement in code successfully modified. The resulting model produces verifiably correct output 90% of the time, comfortably outperforming larger state-of-the-art LLMs, including Meta’s LLM Compiler. This yields speedups of 2.3× over O0-optimized code, comparable to the handwritten LLVM-instcombine pass, and producing emergent optimizations that outperform it in 20% of cases.",
-      "abstract": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations. While various techniques have been proposed to enhance LLMs’ ability to optimize LLVM IR or assembly code, ensuring the semantic equivalence of transformed instructions remains a fundamental prerequisite for safe and effective performance improvement. At the same time, code generated by LLMs is often so far away from being correct that it is very difficult to work out how to improve them to proceed in generating optimizations using the output.In this work, we present LLM-VeriOpt, a novel reinforcement-learning methodology that incorporates feedback from a formal verifier, Alive2, to guide the training of a small-scale model, Qwen-3B. This facilitates the use of Guided Reinforcement via Group Relative Policy Optimization (GRPO), using semantic-equivalence signals from the Alive2 formal verification tool as part of the reward function. This allows the model to self-correct based on observing and subsequently learning to give correctness feedback during training, giving high code coverage by successfully transforming large amounts of code, while also optimizing it significantly.We demonstrate our technique by designing an LLM-based peephole optimizer over LLVM-IR. Our method significantly improves the correctness of IR optimizations versus the base LLM Qwen-3B applied with just a prompt and no fine-tuning — achieving a 5.4× improvement in code successfully modified. The resulting model produces verifiably correct output 90% of the time, comfortably outperforming larger state-of-the-art LLMs, including Meta’s LLM Compiler. This yields speedups of 2.3× over O0-optimized code, comparable to the handwritten LLVM-instcombine pass, and producing emergent optimizations that outperform it in 20% of cases.",
-      "authors": [
-        "Xiangxin Fang",
-        "Jiaqin Kang",
-        "Rodrigo Rocha",
-        "Sam Ainsworth 0001",
-        "Lev Mukhanov"
-      ],
-      "published": "2026",
-      "published_date": "2026-04-25 07:00:08.157387",
-      "publicationDate": "2026",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://ieeexplore.ieee.org/document/11395239/",
-      "url": "https://ieeexplore.ieee.org/document/11395239/",
-      "pdf_url": "",
-      "venue": "CGO",
-      "venue_source_name": "CGO",
-      "venue_source_alias": "CGO",
-      "dblp_key": "conf/cgo/FangKRAM26",
-      "doi": "10.1109/CGO68049.2026.11395239",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "CGO",
-        "venue_alias": "CGO"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2026,
-      "scores": {
-        "relevance": 1.31,
-        "recency": 3.0,
-        "popularity": 1.0,
-        "quality": 1.0,
-        "recommendation": 5.83
-      },
-      "matched_domain": "Low-level Code And Assembly Generation",
-      "matched_keywords": [
-        "compiler optimization"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "Low-level Code And Assembly Generation",
-        "text_match_count": 1,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "compiler optimization"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh",
-      "history_relaxed": true,
-      "citationCount": 0,
-      "institutions": [
-        "Queen Mary University of London",
-        "University of Edinburgh"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://ieeexplore.ieee.org/document/11395239/",
-        "abstract_source": "openalex",
-        "pdf_source": ""
-      },
-      "ai": {
-        "one_liner_zh": "LLM-VeriOpt trains a small LLM for LLVM IR peephole optimization by using Alive2 semantic-equivalence feedback inside reinforcement learning.",
-        "summary_zh": "LLM-based compiler optimization is attractive because it could automate low-level transformations, but unsafe rewrites make raw model outputs hard to use. This paper proposes LLM-VeriOpt, a verification-guided RL method that trains Qwen-3B with Alive2 semantic-equivalence signals as part of a GRPO reward. The target system is an LLVM IR peephole optimizer, with the main claim that verifier feedback improves both correctness and the amount of code the model can safely transform. The abstract reports a 5.4x improvement in successfully modified code over prompted Qwen-3B, 90% verifiably correct output, speedups of 2.3x over O0 code, and performance comparable to LLVM instcombine with some cases outperforming it. The largest missing detail is the evaluation setup: benchmark mix, rewrite distribution, timeout behavior, baseline prompting/fine-tuning fairness, and how the speedups were measured are not clear from the abstract.",
-        "background_zh": "LLM compiler optimizers need correctness guarantees because low-level IR and assembly rewrites can silently change program semantics.",
-        "problem_zh": "The paper addresses how to train an LLM to produce useful compiler optimizations when many candidate rewrites are initially incorrect and hard to improve by prompting alone.",
-        "approach_zh": "It uses Alive2 verification outcomes as reward feedback in GRPO to fine-tune Qwen-3B for LLVM IR peephole optimization.",
-        "evidence_zh": "The abstract reports improved modification success, 90% verifiably correct outputs, speedups over O0, and comparison with LLVM instcombine and larger LLMs, but does not specify the benchmark suite or measurement protocol.",
-        "value_zh": "If the evaluation holds up, the work is a concrete example of verifier-in-the-loop training for low-level code generation rather than ordinary LLM code synthesis.",
-        "open_questions": [
-          "What benchmarks, LLVM IR patterns, and program sizes were used to measure correctness coverage and speedups?",
-          "How were larger LLM baselines and Meta's LLM Compiler prompted or configured, and were they given the same verifier feedback loop?",
-          "What fraction of generated rewrites fail due to Alive2 limitations, verifier timeouts, undefined behavior modeling, or compilation issues?"
-        ],
-        "core_contributions": [
-          "Verification-guided RL setup that incorporates Alive2 semantic-equivalence signals into the reward for compiler optimization training.",
-          "An LLVM IR peephole optimizer trained from a small Qwen-3B model rather than relying only on prompting larger models.",
-          "Reported correctness and performance improvements against prompted Qwen-3B, larger LLMs, and LLVM instcombine."
-        ],
-        "why_read": [
-          "Relevant for low-level code generation systems that need correctness filters during training, not just post-hoc validation.",
-          "Provides a concrete mechanism for turning formal verification feedback into an RL signal for compiler optimization.",
-          "Useful for assessing whether small models can become practical compiler assistants when constrained by semantic equivalence."
-        ],
-        "risks": [
-          "The abstract does not reveal benchmark diversity, so the reported gains may depend on narrow peephole patterns.",
-          "Speedup claims over O0 may be easier to achieve than comparisons against stronger optimization pipelines beyond instcombine-level behavior unless fully contextualized in the paper."
-        ],
-        "recommended_for": [
-          "Compiler researchers working on verified optimization and LLVM IR transformations.",
-          "Engineers evaluating LLMs for low-level code generation where semantic equivalence is mandatory.",
-          "Researchers interested in verifier-guided RL for code models."
-        ],
-        "keywords": [
-          "LLM compiler optimization",
-          "LLVM IR",
-          "Alive2",
-          "verification-guided reinforcement learning",
-          "GRPO",
-          "peephole optimization"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "High fit for the low-level code and compiler-optimization focus, with unusually concrete claims about verifier-guided training and correctness; it is less directly tied to LLM inference acceleration or CUDA kernels.",
-        "fallback_summary": "Large Language Models (LLMs) for compiler optimization have recently emerged as a frontier research direction, with many studies demonstrating their potential to automate and improve low-level code transformations."
-      }
-    },
-    {
-      "id": "dblp:conf/mlsys/0015LCKCW24",
-      "paper_id": "dblp:conf/mlsys/0015LCKCW24",
-      "title": "Q-Hitter: A Better Token Oracle for Efficient LLM Inference via Sparse-Quantized KV Cache.",
-      "summary": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs). LLMs, characterized by their extensive context length (e.g., $\\geq$4096), inherently demands vast memory resource and traffic to store and load the attention key and value embeddings within self-attention modules, referred to as the KV cache. In an effort to alleviate these resource-intensive aspects of LLM inference, techniques such as sparsification and quantization for KV cache reduction have been investigated as separate endeavors within the realm of LLMs. However, this paper illuminates the critical importance of considering the compound effects of these techniques when employed together, as a simplistic amalgamation of sparsification and quantization can yield sub-optimal performance.For instance, the \"Heavy Hitter Oracle\" has demonstrated that preserving just 20\\% of the KV cache attributed to pivotal tokens, denoted as \"Heavy Hitters\", can yield substantial memory savings while upholding the model's original performance. Furthermore, the KV cache of these \"Heavy Hitter\" tokens, which are identified as those with the highest accumulated attention scores, can be further quantized with encouraging throughput saving.Nevertheless, our investigation uncovers two primary deficiencies in such unrefined post-sparsification quantization in low-bit scenarios: (1) the application of low-bit KV cache quantization, specifically $\\leq$ 4-bit, significantly diminishes the accuracy of Heavy Hitter selection during the generation phase, particularly in deeper layers; (2) tokens selected by the \"Heavy Hitter Oracle\" are not necessarily well-suited for quantization, and their quantization can lead to sub-optimal performance. To surmount these challenges, we propose a novel rule-of-thumb for token selection during LLM generation, termed Q-Hitter. This approach combines both accumulated attention scores and \"Quantization Friendliness\" metrics for different layers, identifying tokens that are not only pivotal for preserving the generalization capabilities of LLMs but are also more amenable to KV cache quantization. Q-Hitter naturally offers a free lunch of KV cache quantization and can further escalate the affordability of state-of-the-art LLMs. Additionally, Q-Hitter empowers LLMs to effectively handle inputs of infinite sequence length. Extensive experiments conducted across various LLMs and tasks substantiate the superiority of the proposed Q-Hitter framework over the original H$_2$O framework. Remarkably, Q-Hitter achieves full model quality preservation while delivering up to a remarkable 20$\\times$ reduction in memory usage and up to 33$\\times$, 33$\\times$, 4$\\times$ and 1.3$\\times$ throughput improvements compared with the Hugginface Accelerate, DeepSpeed, FlexGen and $\\mathsf{H_2O}$, respectively. The code will be public upon acceptance.",
-      "abstract": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs). LLMs, characterized by their extensive context length (e.g., $\\geq$4096), inherently demands vast memory resource and traffic to store and load the attention key and value embeddings within self-attention modules, referred to as the KV cache. In an effort to alleviate these resource-intensive aspects of LLM inference, techniques such as sparsification and quantization for KV cache reduction have been investigated as separate endeavors within the realm of LLMs. However, this paper illuminates the critical importance of considering the compound effects of these techniques when employed together, as a simplistic amalgamation of sparsification and quantization can yield sub-optimal performance.For instance, the \"Heavy Hitter Oracle\" has demonstrated that preserving just 20\\% of the KV cache attributed to pivotal tokens, denoted as \"Heavy Hitters\", can yield substantial memory savings while upholding the model's original performance. Furthermore, the KV cache of these \"Heavy Hitter\" tokens, which are identified as those with the highest accumulated attention scores, can be further quantized with encouraging throughput saving.Nevertheless, our investigation uncovers two primary deficiencies in such unrefined post-sparsification quantization in low-bit scenarios: (1) the application of low-bit KV cache quantization, specifically $\\leq$ 4-bit, significantly diminishes the accuracy of Heavy Hitter selection during the generation phase, particularly in deeper layers; (2) tokens selected by the \"Heavy Hitter Oracle\" are not necessarily well-suited for quantization, and their quantization can lead to sub-optimal performance. To surmount these challenges, we propose a novel rule-of-thumb for token selection during LLM generation, termed Q-Hitter. This approach combines both accumulated attention scores and \"Quantization Friendliness\" metrics for different layers, identifying tokens that are not only pivotal for preserving the generalization capabilities of LLMs but are also more amenable to KV cache quantization. Q-Hitter naturally offers a free lunch of KV cache quantization and can further escalate the affordability of state-of-the-art LLMs. Additionally, Q-Hitter empowers LLMs to effectively handle inputs of infinite sequence length. Extensive experiments conducted across various LLMs and tasks substantiate the superiority of the proposed Q-Hitter framework over the original H$_2$O framework. Remarkably, Q-Hitter achieves full model quality preservation while delivering up to a remarkable 20$\\times$ reduction in memory usage and up to 33$\\times$, 33$\\times$, 4$\\times$ and 1.3$\\times$ throughput improvements compared with the Hugginface Accelerate, DeepSpeed, FlexGen and $\\mathsf{H_2O}$, respectively. The code will be public upon acceptance.",
-      "authors": [
-        "Zhenyu Zhang 0015",
-        "Shiwei Liu 0003",
-        "Runjin Chen",
-        "Bhavya Kailkhura",
-        "Beidi Chen",
-        "Atlas Wang"
-      ],
-      "published": "2024",
-      "published_date": "2024-07-01 00:00:00",
-      "publicationDate": "2024",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
-      "url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
-      "pdf_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Paper-Conference.pdf",
-      "venue": "MLSys",
-      "venue_source_name": "MLSys",
-      "venue_source_alias": "MLSys",
-      "dblp_key": "conf/mlsys/0015LCKCW24",
-      "doi": "",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "open",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "MLSys",
-        "venue_alias": "MLSys"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2024,
-      "scores": {
-        "relevance": 3.0,
-        "recency": 0.0,
-        "popularity": 2.0,
-        "quality": 2.0,
-        "recommendation": 7.97
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "llm inference",
-        "kv cache"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "kv cache"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "established",
-      "history_relaxed": true,
-      "venue_metadata": {
-        "official_page_blocked": false,
-        "official_page_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
-        "abstract_source": "official_page",
-        "pdf_source": "official_page"
-      },
-      "citationCount": 46,
-      "ai": {
-        "one_liner_zh": "The paper argues that sparse KV-cache retention and low-bit KV quantization interact poorly, then proposes token selection that accounts for both attention importance and quantization friendliness.",
-        "summary_zh": "Long-context LLM inference pays substantial memory and bandwidth cost to store and load the KV cache, making sparse retention and quantization natural compression levers. The paper's central claim is that Heavy-Hitter-style token retention and low-bit KV-cache quantization are not safely composable: quantization can distort heavy-hitter selection during generation, especially in deeper layers, and high-attention tokens may not be the tokens that quantize best. Q-Hitter changes the token oracle by combining accumulated attention scores with layer-specific quantization-friendliness metrics. The supplied abstract supports the motivation and the stated failure modes, but it does not provide clear quantitative results, model coverage, hardware setup, or baseline details for Q-Hitter. If the full paper validates the claimed interaction, the value is in a more inference-aware KV-cache compression policy rather than another standalone sparsity or quantization recipe.",
-        "background_zh": "KV-cache size and bandwidth become major inference costs as LLM context lengths grow, so systems work often targets cache compression without degrading generation quality.",
-        "problem_zh": "The research question is whether token sparsification and low-bit KV-cache quantization can be combined without breaking the token-selection signal that sparsification depends on.",
-        "approach_zh": "Q-Hitter selects retained KV-cache tokens using both accumulated attention scores and per-layer quantization-friendliness metrics, instead of preserving only the highest-attention tokens.",
-        "evidence_zh": "The abstract states an investigation found two failure modes for unrefined post-sparsification quantization, but the provided text does not make Q-Hitter's experimental gains or evaluation setup clear.",
-        "value_zh": "The likely payoff is a KV-cache compression policy that better matches the joint constraints of sparse attention retention and low-bit inference serving.",
-        "open_questions": [
-          "What models, context lengths, datasets, and generation tasks are used to evaluate Q-Hitter?",
-          "How are quantization-friendliness metrics defined, computed, and updated during generation?",
-          "Are latency, throughput, memory, and bandwidth gains measured on real serving hardware against fair sparsity-only and quantization-only baselines?"
-        ],
-        "core_contributions": [
-          "Identifies that low-bit KV-cache quantization can reduce the accuracy of heavy-hitter token selection during generation.",
-          "Argues that high accumulated attention is not sufficient to decide which tokens should be retained under quantized KV-cache storage.",
-          "Proposes a token-selection rule that combines attention importance with quantization friendliness across layers."
-        ],
-        "why_read": [
-          "Directly targets LLM inference memory footprint and KV-cache bandwidth, matching systems-side serving concerns.",
-          "Focuses on the interaction between sparsification and quantization rather than treating them as independent optimizations.",
-          "Could inform practical cache-management policies for long-context decoding if the full evaluation is strong."
-        ],
-        "risks": [
-          "The provided abstract is truncated and does not report concrete Q-Hitter performance numbers.",
-          "Hardware assumptions, kernel/runtime integration, and serving setup are not specified in the supplied text."
-        ],
-        "recommended_for": [
-          "LLM inference researchers working on KV-cache compression",
-          "Engineers evaluating sparse and quantized decoding pipelines",
-          "Systems readers interested in serving-time memory bandwidth tradeoffs"
-        ],
-        "keywords": [
-          "LLM inference",
-          "KV cache",
-          "sparsification",
-          "quantization",
-          "heavy hitter tokens",
-          "low-bit inference"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "High fit with the configured focus on LLM inference efficiency and KV-cache systems, but the priority depends on checking the full paper because the supplied abstract omits quantitative results and hardware evaluation details.",
-        "fallback_summary": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs)."
+        "reading_priority": "low",
+        "reading_priority_reason": "The recommendation score is decent, but the provided relevance signal is low and the abstract focuses on diffusion-control modularity rather than LLM serving efficiency, CUDA kernel generation, or low-level code generation.",
+        "fallback_summary": "Controllable diffusion methods have substantially expanded the practical utility of diffusion models, but they are typically developed as isolated, backbone-specific systems with incompatible training pipelines, parameter formats, and runtime hooks."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are factual reliability and verification, training and inference efficiency. The set is anchored by Cross-Session Threats in AI… and Distributed Generative Inference…. Sparse Forcing: Native Trainable… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency. The set is anchored by Long-Context Aware Upcycling: A… and DepthKV: Layer-Dependent KV Cache…. Kwai Summary Attention Technical… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
-      "factual reliability and verification",
       "training and inference efficiency"
     ],
     "reading_strategy": [
-      "Start with Cross-Session Threats in AI… and verify whether it defines the factual reliability and verification problem clearly and exposes a real mechanism.",
-      "Then read Distributed Generative Inference… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use Sparse Forcing: Native Trainable… as a final cross-check on experimental boundaries and practical value."
+      "Start with Long-Context Aware Upcycling: A… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
+      "Then read DepthKV: Layer-Dependent KV Cache… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use Kwai Summary Attention Technical… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-04-25T11:25:51Z",
+    "generated_at": "2026-04-28T11:05:27Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
-    "paper_results": 5,
-    "paper_failures": 1
+    "paper_results": 4,
+    "paper_failures": 0
   }
 }
