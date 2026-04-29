@@ -1189,6 +1189,48 @@
       "domain": "LLM Inference Systems",
       "quality_score": 7.05,
       "updated": "2026-04-28"
+    },
+    {
+      "id": "2604.25326v1",
+      "title": "AHASD: Asynchronous Heterogeneous Architecture for LLM Adaptive Drafting Speculative Decoding on Mobile Devices",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.97,
+      "updated": "2026-04-29"
+    },
+    {
+      "id": "2604.25899v1",
+      "title": "Pythia: Toward Predictability-Driven Agent-Native LLM Serving",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.63,
+      "updated": "2026-04-29"
+    },
+    {
+      "id": "2604.25777v1",
+      "title": "SpecFed: Accelerating Federated LLM Inference with Speculative Decoding and Compressed Transmission",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.63,
+      "updated": "2026-04-29"
+    },
+    {
+      "id": "2604.25073v1",
+      "title": "Feasible-First Exploration for Constrained ML Deployment Optimization in Crash-Prone Hierarchical Search Spaces",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.58,
+      "updated": "2026-04-29"
+    },
+    {
+      "id": "2604.25306v1",
+      "title": "QFlash: Bridging Quantization and Memory Efficiency in Vision Transformer Attention",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.23,
+      "updated": "2026-04-29"
+    },
+    {
+      "id": "2604.25422v1",
+      "title": "CUDA Kernel Optimization and Counter-Free Performance Analysis for Depthwise Convolution in Cloud Environments",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 9.05,
+      "updated": "2026-04-29"
     }
   ],
   "edges": [
@@ -3981,7 +4023,97 @@
       "target": "2604.24432v1",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2604.25326v1",
+      "target": "2604.25777v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25326v1",
+      "target": "2604.25899v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25326v1",
+      "target": "2604.25073v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25899v1",
+      "target": "2604.25326v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25899v1",
+      "target": "2604.25777v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25899v1",
+      "target": "2604.25073v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25777v1",
+      "target": "2604.25326v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25777v1",
+      "target": "2604.25899v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25777v1",
+      "target": "2604.25073v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25073v1",
+      "target": "2604.25326v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25073v1",
+      "target": "2604.25899v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25073v1",
+      "target": "2604.25777v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25306v1",
+      "target": "2604.25326v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25306v1",
+      "target": "2604.25899v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2604.25306v1",
+      "target": "2604.25777v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-04-28"
+  "last_updated": "2026-04-29"
 }
