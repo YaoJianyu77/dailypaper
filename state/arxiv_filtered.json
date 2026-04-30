@@ -1,478 +1,137 @@
 {
-  "target_date": "2026-04-29",
+  "target_date": "2026-04-30",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-03-30",
-      "end": "2026-04-29"
+      "start": "2026-03-31",
+      "end": "2026-04-30"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-04-29",
-      "end": "2026-03-29"
+      "start": "2025-04-30",
+      "end": "2026-03-30"
     }
   },
-  "total_found": 207,
-  "total_venue": 0,
-  "total_filtered": 8,
-  "total_recent": 200,
+  "total_found": 18,
+  "total_venue": 11,
+  "total_filtered": 11,
+  "total_recent": 0,
   "total_hot": 7,
-  "total_unique": 8,
+  "total_unique": 11,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
     "selected_count": 6,
     "lane_counts": {
-      "fresh": 6,
-      "established": 0,
-      "classic": 0,
-      "history_filtered": 0,
-      "history_relaxed": 0,
-      "classic_slot_active": 0
+      "fresh": 0,
+      "established": 5,
+      "classic": 1,
+      "history_filtered": 13,
+      "history_relaxed": 5,
+      "classic_slot_active": 1
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": false
+      "slot_active_today": true
     }
   },
   "top_papers": [
     {
-      "id": "http://arxiv.org/abs/2604.25326v1",
-      "arxiv_id": "2604.25326v1",
-      "title": "AHASD: Asynchronous Heterogeneous Architecture for LLM Adaptive Drafting Speculative Decoding on Mobile Devices",
-      "summary": "Speculative decoding enhances the inference efficiency of large language models (LLMs) by generating drafts using a small draft language model (DLM) and verifying them in batches with a large target language model (TLM). However, adaptive drafting inference on a mobile single-NPU-PIM system faces idle overhead in traditional operator-level synchronous execution and wasted computation in asynchronous execution due to fluctuations in draft length. This paper introduces AHASD, a task-level asynchronous mobile NPU-PIM heterogeneous architecture for speculative decoding. Notably, AHASD achieves parallel drafting on the PIM and verification on a single NPU through task-level DLM-TLM decoupling and specifically, it incorporates Entropy-History-Aware Drafting Control and Time-Aware Pre-Verification Control to dynamically manage adaptive drafting algorithm execution and pre-verification timing, suppressing invalid drafting based on low-confidence drafts. Additionally, AHASD integrates Attention Algorithm Units and Gated Task Scheduling Units within LPDDR5-PIM to enable attention link localization and sub-microsecond task switching on the PIM side. Experimental results for different LLMs and adaptive drafting algorithms show that AHASD achieves up to 4.2$\\times$ in throughput and 5.6$\\times$ in energy efficiency improvements over a GPU-only baseline, and 1.5$\\times$ in throughput and 1.24$\\times$ in energy efficiency gains over the state-of-the-art GPU+PIM baseline, with hardware overhead below 3\\% of the DRAM area.",
+      "paper_id": "2205.14135",
+      "arxiv_id": "2205.14135",
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "summary": "Introduces an IO-aware exact attention algorithm that reduces HBM traffic with tiling and kernel fusion, setting the baseline for later FlashAttention variants and many modern attention kernels.",
       "authors": [
-        "Ma zirui",
-        "Fan Zhihua",
-        "Li Wenxing",
-        "Wu Haibin",
-        "Zhang Fulin",
-        "Ye Xiaochun",
-        "Li Wenming"
+        "Tri Dao",
+        "Daniel Y. Fu",
+        "Stefano Ermon",
+        "Atri Rudra",
+        "Christopher Re"
       ],
-      "author_details": [
-        {
-          "name": "Ma zirui"
-        },
-        {
-          "name": "Fan Zhihua"
-        },
-        {
-          "name": "Li Wenxing"
-        },
-        {
-          "name": "Wu Haibin"
-        },
-        {
-          "name": "Zhang Fulin"
-        },
-        {
-          "name": "Ye Xiaochun"
-        },
-        {
-          "name": "Li Wenming"
-        }
-      ],
-      "published": "2026-04-28T07:42:41Z",
-      "published_date": "2026-04-28 07:42:41+00:00",
-      "updated": "2026-04-28T07:42:41Z",
-      "comments": "7 pages, 9 figures, accepted by DAC 2026, repo: https://github.com/MAdrid1011/AHASD",
-      "doi": "10.1145/3770743.3803965",
-      "primary_category": "cs.AR",
+      "published": "2022-05-30",
+      "published_date": "2022-05-30 00:00:00",
       "categories": [
-        "cs.AR",
-        "cs.AI"
+        "cs.LG",
+        "cs.AR"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.25326v1",
-      "url": "http://arxiv.org/abs/2604.25326v1",
-      "source": "arxiv",
+      "source": "classic_backlog",
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "attention",
+        "kernel",
+        "memory-io",
+        "cuda"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "selection_lane": "classic",
+      "is_hot_paper": false,
+      "source_url": "https://arxiv.org/abs/2205.14135",
+      "pdf_url": "https://arxiv.org/pdf/2205.14135.pdf",
+      "scores": {
+        "relevance": 2.9,
+        "recency": 0.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 6.92
+      },
+      "classic_rotation_score": 10.6669,
+      "citationCount": 4122,
+      "influentialCitationCount": 369,
+      "venue": "Neural Information Processing Systems",
+      "journal_ref": "ArXiv"
+    },
+    {
+      "id": "dblp:conf/mlsys/0015LCKCW24",
+      "paper_id": "dblp:conf/mlsys/0015LCKCW24",
+      "title": "Q-Hitter: A Better Token Oracle for Efficient LLM Inference via Sparse-Quantized KV Cache.",
+      "summary": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs). LLMs, characterized by their extensive context length (e.g., $\\geq$4096), inherently demands vast memory resource and traffic to store and load the attention key and value embeddings within self-attention modules, referred to as the KV cache. In an effort to alleviate these resource-intensive aspects of LLM inference, techniques such as sparsification and quantization for KV cache reduction have been investigated as separate endeavors within the realm of LLMs. However, this paper illuminates the critical importance of considering the compound effects of these techniques when employed together, as a simplistic amalgamation of sparsification and quantization can yield sub-optimal performance.For instance, the \"Heavy Hitter Oracle\" has demonstrated that preserving just 20\\% of the KV cache attributed to pivotal tokens, denoted as \"Heavy Hitters\", can yield substantial memory savings while upholding the model's original performance. Furthermore, the KV cache of these \"Heavy Hitter\" tokens, which are identified as those with the highest accumulated attention scores, can be further quantized with encouraging throughput saving.Nevertheless, our investigation uncovers two primary deficiencies in such unrefined post-sparsification quantization in low-bit scenarios: (1) the application of low-bit KV cache quantization, specifically $\\leq$ 4-bit, significantly diminishes the accuracy of Heavy Hitter selection during the generation phase, particularly in deeper layers; (2) tokens selected by the \"Heavy Hitter Oracle\" are not necessarily well-suited for quantization, and their quantization can lead to sub-optimal performance. To surmount these challenges, we propose a novel rule-of-thumb for token selection during LLM generation, termed Q-Hitter. This approach combines both accumulated attention scores and \"Quantization Friendliness\" metrics for different layers, identifying tokens that are not only pivotal for preserving the generalization capabilities of LLMs but are also more amenable to KV cache quantization. Q-Hitter naturally offers a free lunch of KV cache quantization and can further escalate the affordability of state-of-the-art LLMs. Additionally, Q-Hitter empowers LLMs to effectively handle inputs of infinite sequence length. Extensive experiments conducted across various LLMs and tasks substantiate the superiority of the proposed Q-Hitter framework over the original H$_2$O framework. Remarkably, Q-Hitter achieves full model quality preservation while delivering up to a remarkable 20$\\times$ reduction in memory usage and up to 33$\\times$, 33$\\times$, 4$\\times$ and 1.3$\\times$ throughput improvements compared with the Hugginface Accelerate, DeepSpeed, FlexGen and $\\mathsf{H_2O}$, respectively. The code will be public upon acceptance.",
+      "abstract": "This paper focuses on addressing the substantial memory footprints and bandwidth costs associated with the deployment of Large Language Models (LLMs). LLMs, characterized by their extensive context length (e.g., $\\geq$4096), inherently demands vast memory resource and traffic to store and load the attention key and value embeddings within self-attention modules, referred to as the KV cache. In an effort to alleviate these resource-intensive aspects of LLM inference, techniques such as sparsification and quantization for KV cache reduction have been investigated as separate endeavors within the realm of LLMs. However, this paper illuminates the critical importance of considering the compound effects of these techniques when employed together, as a simplistic amalgamation of sparsification and quantization can yield sub-optimal performance.For instance, the \"Heavy Hitter Oracle\" has demonstrated that preserving just 20\\% of the KV cache attributed to pivotal tokens, denoted as \"Heavy Hitters\", can yield substantial memory savings while upholding the model's original performance. Furthermore, the KV cache of these \"Heavy Hitter\" tokens, which are identified as those with the highest accumulated attention scores, can be further quantized with encouraging throughput saving.Nevertheless, our investigation uncovers two primary deficiencies in such unrefined post-sparsification quantization in low-bit scenarios: (1) the application of low-bit KV cache quantization, specifically $\\leq$ 4-bit, significantly diminishes the accuracy of Heavy Hitter selection during the generation phase, particularly in deeper layers; (2) tokens selected by the \"Heavy Hitter Oracle\" are not necessarily well-suited for quantization, and their quantization can lead to sub-optimal performance. To surmount these challenges, we propose a novel rule-of-thumb for token selection during LLM generation, termed Q-Hitter. This approach combines both accumulated attention scores and \"Quantization Friendliness\" metrics for different layers, identifying tokens that are not only pivotal for preserving the generalization capabilities of LLMs but are also more amenable to KV cache quantization. Q-Hitter naturally offers a free lunch of KV cache quantization and can further escalate the affordability of state-of-the-art LLMs. Additionally, Q-Hitter empowers LLMs to effectively handle inputs of infinite sequence length. Extensive experiments conducted across various LLMs and tasks substantiate the superiority of the proposed Q-Hitter framework over the original H$_2$O framework. Remarkably, Q-Hitter achieves full model quality preservation while delivering up to a remarkable 20$\\times$ reduction in memory usage and up to 33$\\times$, 33$\\times$, 4$\\times$ and 1.3$\\times$ throughput improvements compared with the Hugginface Accelerate, DeepSpeed, FlexGen and $\\mathsf{H_2O}$, respectively. The code will be public upon acceptance.",
+      "authors": [
+        "Zhenyu Zhang 0015",
+        "Shiwei Liu 0003",
+        "Runjin Chen",
+        "Bhavya Kailkhura",
+        "Beidi Chen",
+        "Atlas Wang"
+      ],
+      "published": "2024",
+      "published_date": "2024-07-01 00:00:00",
+      "publicationDate": "2024",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
+      "url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
+      "pdf_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Paper-Conference.pdf",
+      "venue": "MLSys",
+      "venue_source_name": "MLSys",
+      "venue_source_alias": "MLSys",
+      "dblp_key": "conf/mlsys/0015LCKCW24",
+      "doi": "",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "open",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "MLSys",
+        "venue_alias": "MLSys"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2024,
       "scores": {
         "relevance": 3.0,
-        "recency": 3.0,
+        "recency": 0.0,
         "popularity": 2.0,
         "quality": 2.0,
-        "recommendation": 9.97
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "speculative decoding",
-        "throughput",
-        "cs.AR",
-        "baseline"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 2,
-        "matched_categories": [
-          "cs.AR"
-        ],
-        "required_signal_matches": [
-          "speculative decoding"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "throughput"
-        ],
-        "bonus_keyword_match_count": 1,
-        "analysis_keyword_matches": [
-          "baseline",
-          "throughput"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.18
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.25899v1",
-      "arxiv_id": "2604.25899v1",
-      "title": "Pythia: Toward Predictability-Driven Agent-Native LLM Serving",
-      "summary": "As LLM applications grow more complex, developers are increasingly adopting multi-agent architectures to decompose workflows into specialized, collaborative components, introducing structure that constrains agent behavior and exposes useful semantic predictability. Unlike traditional LLM serving, which operates under highly dynamic and uncertain conditions, this structured topology enables opportunities to reduce runtime uncertainty -- yet existing systems fail to exploit it, treating agentic workloads as generic traffic and incurring significant inefficiencies. Our analysis of production traces from an agent-serving platform and an internal coding assistant reveals key bottlenecks, including low prefix cache hit rates, severe resource contention from long-context requests, and substantial queuing delays due to suboptimal scaling. To address these challenges, we propose Pythia, a multi-agent serving system that captures workflow semantics through a simple interface at the serving layer, unlocking new optimization opportunities and substantially improving throughput and job completion time over state-of-the-art baselines.",
-      "authors": [
-        "Shan Yu",
-        "Junyi Shu",
-        "Yuanjiang Ni",
-        "Kun Qian",
-        "Xue Li",
-        "Yang Wang",
-        "Jinyuan Zhang",
-        "Ziyi Xu",
-        "Shuo Yang",
-        "Lingjun Zhu",
-        "Ennan Zhai",
-        "Qingda Lu",
-        "Jiarong Xing",
-        "Youyou Lu",
-        "Xin Jin",
-        "Xuanzhe Liu",
-        "Harry Xu"
-      ],
-      "author_details": [
-        {
-          "name": "Shan Yu"
-        },
-        {
-          "name": "Junyi Shu"
-        },
-        {
-          "name": "Yuanjiang Ni"
-        },
-        {
-          "name": "Kun Qian"
-        },
-        {
-          "name": "Xue Li"
-        },
-        {
-          "name": "Yang Wang"
-        },
-        {
-          "name": "Jinyuan Zhang"
-        },
-        {
-          "name": "Ziyi Xu"
-        },
-        {
-          "name": "Shuo Yang"
-        },
-        {
-          "name": "Lingjun Zhu"
-        },
-        {
-          "name": "Ennan Zhai"
-        },
-        {
-          "name": "Qingda Lu"
-        },
-        {
-          "name": "Jiarong Xing"
-        },
-        {
-          "name": "Youyou Lu"
-        },
-        {
-          "name": "Xin Jin"
-        },
-        {
-          "name": "Xuanzhe Liu"
-        },
-        {
-          "name": "Harry Xu"
-        }
-      ],
-      "published": "2026-04-28T17:41:53Z",
-      "published_date": "2026-04-28 17:41:53+00:00",
-      "updated": "2026-04-28T17:41:53Z",
-      "primary_category": "cs.MA",
-      "categories": [
-        "cs.MA",
-        "cs.DC",
-        "eess.SY"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.25899v1",
-      "url": "http://arxiv.org/abs/2604.25899v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 9.63
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "llm serving",
-        "serving",
-        "throughput",
-        "cs.DC",
-        "runtime",
-        "serving system"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "runtime",
-          "serving system"
-        ],
-        "required_signal_match_count": 2,
-        "bonus_keyword_matches": [
-          "throughput"
-        ],
-        "bonus_keyword_match_count": 1,
-        "analysis_keyword_matches": [
-          "throughput"
-        ],
-        "analysis_keyword_match_count": 1,
-        "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.18
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.25777v1",
-      "arxiv_id": "2604.25777v1",
-      "title": "SpecFed: Accelerating Federated LLM Inference with Speculative Decoding and Compressed Transmission",
-      "summary": "Federated inference enhances LLM performance in edge computing through weighted averaging of distributed model predictions. However, autoregressive LLM inference requires frequent full-model forward passes across workers, severely limiting decoding throughput. Distributed deployment further aggravates this due to a communication bottleneck: each worker must transmit full token probability distributions per draft token, dominating end-to-end latency. To address these challenges, we introduce speculative decoding to enable parallel LLM processing and propose a top-K compressed transmission scheme with two server-side reconstruction strategies. We theoretically analyze the robustness of our method in terms of local reconstruction error, aggregation bias, and acceptance-rate bias, and derive corresponding bounds. Experiments demonstrate that our scheme achieves high generation fidelity while significantly reducing communication overhead.",
-      "authors": [
-        "Ce Zheng",
-        "Xinghan Wang",
-        "Jiahong Ning",
-        "Yuxuan Shi",
-        "Ning Huang",
-        "Tingting Yang"
-      ],
-      "author_details": [
-        {
-          "name": "Ce Zheng"
-        },
-        {
-          "name": "Xinghan Wang"
-        },
-        {
-          "name": "Jiahong Ning"
-        },
-        {
-          "name": "Yuxuan Shi"
-        },
-        {
-          "name": "Ning Huang"
-        },
-        {
-          "name": "Tingting Yang"
-        }
-      ],
-      "published": "2026-04-28T15:44:50Z",
-      "published_date": "2026-04-28 15:44:50+00:00",
-      "updated": "2026-04-28T15:44:50Z",
-      "comments": "IEEE International Symposium on Information Theory (ISIT), 2026",
-      "primary_category": "eess.SP",
-      "categories": [
-        "eess.SP",
-        "cs.DC"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.25777v1",
-      "url": "http://arxiv.org/abs/2604.25777v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 9.63
+        "recommendation": 7.97
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "llm inference",
-        "speculative decoding",
-        "throughput",
-        "latency",
-        "cs.DC"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 4,
-        "matched_categories": [
-          "cs.DC"
-        ],
-        "required_signal_matches": [
-          "speculative decoding"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "throughput",
-          "latency"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "throughput",
-          "latency"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.25073v1",
-      "arxiv_id": "2604.25073v1",
-      "title": "Feasible-First Exploration for Constrained ML Deployment Optimization in Crash-Prone Hierarchical Search Spaces",
-      "summary": "Deploying machine learning models under production constraints requires joint optimization over model family, quantization scheme, runtime backend, and serving configuration. This induces a hierarchical mixed-variable search space in which many configurations are invalid: evaluations may crash, exceed memory limits, or violate latency constraints. Standard black-box optimizers such as Tree-structured Parzen Estimators (TPE) and constrained Bayesian optimization are effective when valid configurations are common, but they can spend a large fraction of a small evaluation budget on invalid or uninformative trials in hostile deployment spaces. This paper studies that regime and asks whether optimization should be decomposed into an explicit exploration stage followed by model-guided exploitation. We propose Thermal Budget Annealing (TBA), a feasible-first exploration procedure that maps valid and feasible regions before warm-starting TPE. The method includes two robustness mechanisms for hostile hardware: trial timeouts that abort clearly infeasible evaluations early, and subspace blacklisting that temporarily suppresses categorical subspaces after repeated failures. We also introduce DeployBench, a benchmark suite for deployment optimization with hierarchical structure, hidden crash zones, hard constraints, and unequal evaluation costs. On synthetic benchmarks and real GPU deployment with five pre-trained vision models across five GPU targets (NVIDIA H100, A100, RTX 5080, L4, and T4), the proposed hybrid improves model-family discovery under tight constraints while reducing wasted budget relative to cold-start TPE.",
-      "authors": [
-        "Christian Lysenstøen"
-      ],
-      "author_details": [
-        {
-          "name": "Christian Lysenstøen"
-        }
-      ],
-      "published": "2026-04-27T23:58:24Z",
-      "published_date": "2026-04-27 23:58:24+00:00",
-      "updated": "2026-04-27T23:58:24Z",
-      "comments": "22 pages, 5 figures, 10 tables. Code available at https://github.com/Chrislysen/Constrained-ML-Deployment",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.25073v1",
-      "url": "http://arxiv.org/abs/2604.25073v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.97,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 9.58
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "serving",
-        "latency",
-        "quantization",
-        "cs.LG",
-        "runtime",
-        "h100",
-        "a100",
-        "memory",
-        "benchmark",
-        "evaluation"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Inference Systems",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.LG"
-        ],
-        "required_signal_matches": [
-          "runtime",
-          "h100",
-          "a100"
-        ],
-        "required_signal_match_count": 3,
-        "bonus_keyword_matches": [
-          "latency",
-          "memory"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "benchmark",
-          "evaluation",
-          "latency",
-          "memory"
-        ],
-        "analysis_keyword_match_count": 4,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.36
-      },
-      "selection_lane": "fresh"
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.25306v1",
-      "arxiv_id": "2604.25306v1",
-      "title": "QFlash: Bridging Quantization and Memory Efficiency in Vision Transformer Attention",
-      "summary": "FlashAttention improves efficiency through tiling, but its online softmax still relies on floating-point arithmetic for numerical stability, making full quantization difficult. We identify three main obstacles to integer-only FlashAttention: (1) scale explosion during tile-wise accumulation, (2) inefficient shift-based exponential operations on GPUs, and (3) quantization granularity constraints requiring uniform scales for integer comparison. To address these challenges, we propose \\textit{QFlash}, an end-to-end integer FlashAttention design that performs softmax entirely in the integer domain and runs as a single Triton kernel. On seven attention workloads from ViT, DeiT, and Swin models, QFlash achieves up to 6.73$\\times$ speedup over I-ViT and up to 8.69$\\times$ speedup on Swin, while reducing energy consumption by 18.8\\% compared to FP16 FlashAttention, without sacrificing Top-1 accuracy on ViT/DeiT and remaining competitive on Swin under per-tensor quantization. Our code is publicly available at https://github.com/EfficientCompLab/qflash.",
-      "authors": [
-        "Sehyeon Oh",
-        "Yongin Kwon",
-        "Jemin Lee"
-      ],
-      "author_details": [
-        {
-          "name": "Sehyeon Oh"
-        },
-        {
-          "name": "Yongin Kwon"
-        },
-        {
-          "name": "Jemin Lee"
-        }
-      ],
-      "published": "2026-04-28T07:13:26Z",
-      "published_date": "2026-04-28 07:13:26+00:00",
-      "updated": "2026-04-28T07:13:26Z",
-      "comments": "11 pages, 6 figures",
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.AI"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.25306v1",
-      "url": "http://arxiv.org/abs/2604.25306v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.78,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 9.23
-      },
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "flashattention",
-        "quantization",
-        "cs.LG",
-        "memory",
-        "speedup"
+        "kv cache"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
@@ -480,104 +139,337 @@
       "match_details": {
         "domain": "LLM Inference Systems",
         "text_match_count": 2,
-        "matched_categories": [
-          "cs.LG"
-        ],
+        "matched_categories": [],
         "required_signal_matches": [
-          "flashattention"
+          "kv cache"
         ],
         "required_signal_match_count": 1,
-        "bonus_keyword_matches": [
-          "memory",
-          "speedup"
-        ],
-        "bonus_keyword_match_count": 2,
-        "analysis_keyword_matches": [
-          "memory",
-          "speedup"
-        ],
-        "analysis_keyword_match_count": 2,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
+        "bonus_keyword_bonus": 0.0
       },
-      "selection_lane": "fresh"
+      "selection_lane": "established",
+      "history_relaxed": true,
+      "venue_metadata": {
+        "official_page_blocked": false,
+        "official_page_url": "https://proceedings.mlsys.org/paper_files/paper/2024/hash/bbb7506579431a85861a05fff048d3e1-Abstract-Conference.html",
+        "abstract_source": "official_page",
+        "pdf_source": "official_page"
+      },
+      "citationCount": 46
     },
     {
-      "id": "http://arxiv.org/abs/2604.25422v1",
-      "arxiv_id": "2604.25422v1",
-      "title": "CUDA Kernel Optimization and Counter-Free Performance Analysis for Depthwise Convolution in Cloud Environments",
-      "summary": "Efficient GPU execution of convolution operators is governed by memory-access efficiency, on-chip data reuse, and execution mapping rather than arithmetic throughput alone. This paper presents a controlled operator-level study of CUDA kernel optimization for the depthwise convolution used in Structured State Space Model Convolutional Diagonal (S4ConvD), together with a cloud-compatible, counter-free performance analysis methodology. The operator, model, dataset, and training configuration are fixed, and only the CUDA kernel implementation is varied. The evaluated CUDA kernels comprise naive, global-memory-coalesced, shared-memory cache-blocked, and warp-tiled variants, covering forward, input-gradient, and weight-gradient execution paths under steady-state training conditions. Performance is characterized using a counter-free methodology that combines CUDA-event timing, execution-path decomposition, analytically derived memory-traffic modeling, effective-bandwidth estimation, and roofline analysis. This enables profiling-like architectural insights without requiring hardware performance counters or privileged profiling access. The warp-tiled kernel reduces convolution runtime by $3.26\\times$ relative to the naive CUDA baseline, while end-to-end training speedup reaches $1.29\\times$. A PyTorch implementation is used separately for numerical validation and runtime context, but is not treated as a controlled architectural baseline. Forward and input-gradient paths benefit substantially from improved locality and on-chip data reuse, whereas the reduction-dominated weight-gradient path remains the primary bottleneck. The results demonstrate that meaningful architecture-level GPU kernel analysis can be performed reproducibly in restricted cloud environments, even without access to hardware performance counters.",
+      "id": "dblp:conf/cgo/GeorgakoudisPB25",
+      "paper_id": "dblp:conf/cgo/GeorgakoudisPB25",
+      "title": "Proteus: Portable Runtime Optimization of GPU Kernel Execution with Just-in-Time Compilation.",
+      "summary": "In High-performance computing (HPC) fast application execution is the primary objective. HPC software is written in high-performance languages (C/C++, Fortran) and is statically compiled Ahead-of-Time (AOT) using optimizing compilers to generate fast code. AOT compilation optimizes source code with only limited information available at compile time, which precludes possible optimization leveraging runtime information. We propose Proteus, an easy-to-use, portable, and lightweight Just-In-Time (JIT) compilation approach to optimize GPU kernels at runtime. Proteus dynamically extracts, compiles, and optimizes language-agnostic LLVM IR to reduce compilation overhead while enhancing portability and versatility compared to language-specific solutions. Using a minimally intrusive annotation-based interface, Proteus specializes GPU kernels for input arguments and launch parameters. Evaluation on a diverse set of programs on AMD and NVIDIA GPUs shows that Proteus achieves significant end-to-end speedup, up to 2.8× for AMD and 1.78× on NVIDIA, over AOT optimization, while outperforming CUDA-specific Jitify with an average 1.23× speedp, thanks to reduced overhead and faster binary code in certain cases.",
+      "abstract": "In High-performance computing (HPC) fast application execution is the primary objective. HPC software is written in high-performance languages (C/C++, Fortran) and is statically compiled Ahead-of-Time (AOT) using optimizing compilers to generate fast code. AOT compilation optimizes source code with only limited information available at compile time, which precludes possible optimization leveraging runtime information. We propose Proteus, an easy-to-use, portable, and lightweight Just-In-Time (JIT) compilation approach to optimize GPU kernels at runtime. Proteus dynamically extracts, compiles, and optimizes language-agnostic LLVM IR to reduce compilation overhead while enhancing portability and versatility compared to language-specific solutions. Using a minimally intrusive annotation-based interface, Proteus specializes GPU kernels for input arguments and launch parameters. Evaluation on a diverse set of programs on AMD and NVIDIA GPUs shows that Proteus achieves significant end-to-end speedup, up to 2.8× for AMD and 1.78× on NVIDIA, over AOT optimization, while outperforming CUDA-specific Jitify with an average 1.23× speedp, thanks to reduced overhead and faster binary code in certain cases.",
       "authors": [
-        "Huriyeh Babak",
-        "Melanie Schaller"
+        "Giorgis Georgakoudis",
+        "Konstantinos Parasyris",
+        "David Beckingsale"
       ],
-      "author_details": [
-        {
-          "name": "Huriyeh Babak"
-        },
-        {
-          "name": "Melanie Schaller"
-        }
-      ],
-      "published": "2026-04-28T09:29:53Z",
-      "published_date": "2026-04-28 09:29:53+00:00",
-      "updated": "2026-04-28T09:29:53Z",
-      "comments": "12 pages, 9 figures. CUDA kernel optimization and counter-free performance analysis for depthwise convolution. Submitted to IEEE TPDS",
-      "primary_category": "cs.DC",
-      "categories": [
-        "cs.DC",
-        "eess.SY"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.25422v1",
-      "url": "http://arxiv.org/abs/2604.25422v1",
-      "source": "arxiv",
+      "published": "2025",
+      "published_date": "2025-07-01 00:00:00",
+      "publicationDate": "2025",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
+      "url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/GeorgakoudisPB25",
+      "doi": "10.1145/3696443.3708939",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2025,
       "scores": {
-        "relevance": 3.0,
-        "recency": 3.0,
-        "popularity": 0.9,
-        "quality": 0.9,
-        "recommendation": 9.05
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 5.46
       },
       "matched_domain": "LLM Code Generation For CUDA Kernels",
       "matched_keywords": [
-        "cuda",
-        "cuda kernel",
-        "gpu kernel",
-        "cs.DC",
-        "warp",
-        "baseline",
-        "speedup",
-        "throughput"
+        "gpu kernel"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.DC"
-        ],
+        "text_match_count": 1,
+        "matched_categories": [],
         "required_signal_matches": [
-          "cuda",
-          "cuda kernel",
           "gpu kernel"
         ],
-        "required_signal_match_count": 3,
-        "bonus_keyword_matches": [
-          "warp"
-        ],
-        "bonus_keyword_match_count": 1,
-        "analysis_keyword_matches": [
-          "baseline",
-          "speedup",
-          "throughput"
-        ],
-        "analysis_keyword_match_count": 3,
-        "signal_bonus": 0.9,
-        "bonus_keyword_bonus": 0.18
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
       },
-      "selection_lane": "fresh"
+      "selection_lane": "established",
+      "history_relaxed": true,
+      "citationCount": 2,
+      "institutions": [
+        "Lawrence Livermore National Laboratory"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://dl.acm.org/doi/10.1145/3696443.3708939",
+        "abstract_source": "openalex",
+        "pdf_source": ""
+      }
+    },
+    {
+      "id": "dblp:conf/cgo/CastelloBDIM24",
+      "paper_id": "dblp:conf/cgo/CastelloBDIM24",
+      "title": "Tackling the Matrix Multiplication Micro-Kernel Generation with Exo.",
+      "summary": "The optimization of the matrix multiplication (or GEMM) has been a need during the last decades. This operation is considered the flagship of current linear algebra libraries such as BLIS, OpenBLAS, or Intel OneAPI because of its widespread use in a large variety of scientific applications. The GEMM is usually implemented following the GotoBLAS philosophy, which tiles the GEMM operands and uses a series of nested loops for performance improvement. These approaches extract the maximum computational power of the architectures through small pieces of hardware-oriented, high-performance code called micro-kernel. However, this approach forces developers to generate, with a nonnegligible effort, a dedicated micro-kernel for each new hardware. In this work, we present a step-by-step procedure for generating micro-kernels with the Exo compiler that perform close to (or even better than) manually developed microkernels written with intrinsic functions or assembly language. Our solution also improves the portability of the generated code, since a hardware target is fully specified by a concise library-based description of its instructions.",
+      "abstract": "The optimization of the matrix multiplication (or GEMM) has been a need during the last decades. This operation is considered the flagship of current linear algebra libraries such as BLIS, OpenBLAS, or Intel OneAPI because of its widespread use in a large variety of scientific applications. The GEMM is usually implemented following the GotoBLAS philosophy, which tiles the GEMM operands and uses a series of nested loops for performance improvement. These approaches extract the maximum computational power of the architectures through small pieces of hardware-oriented, high-performance code called micro-kernel. However, this approach forces developers to generate, with a nonnegligible effort, a dedicated micro-kernel for each new hardware. In this work, we present a step-by-step procedure for generating micro-kernels with the Exo compiler that perform close to (or even better than) manually developed microkernels written with intrinsic functions or assembly language. Our solution also improves the portability of the generated code, since a hardware target is fully specified by a concise library-based description of its instructions.",
+      "authors": [
+        "Adrián Castelló 0001",
+        "Julian Bellavita",
+        "Grace Dinh",
+        "Yuka Ikarashi",
+        "Héctor Martínez 0002"
+      ],
+      "published": "2024",
+      "published_date": "2024-07-01 00:00:00",
+      "publicationDate": "2024",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://ieeexplore.ieee.org/document/10444883/",
+      "url": "https://ieeexplore.ieee.org/document/10444883/",
+      "pdf_url": "https://riunet.upv.es/bitstreams/59bf8bb3-5882-4a01-93d4-478366e92e4e/download",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/CastelloBDIM24",
+      "doi": "10.1109/CGO57630.2024.10444883",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2024,
+      "scores": {
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 0.5,
+        "quality": 0.5,
+        "recommendation": 4.21
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "kernel generation"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "kernel generation"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "established",
+      "history_relaxed": true,
+      "citationCount": 9,
+      "institutions": [
+        "Universitat Politècnica de Catalunya",
+        "Cornell University",
+        "Berkeley College",
+        "University of California, Berkeley"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://ieeexplore.ieee.org/document/10444883/",
+        "abstract_source": "openalex",
+        "pdf_source": "openalex"
+      }
+    },
+    {
+      "id": "dblp:conf/osdi/GuanF0RRY0A25",
+      "paper_id": "dblp:conf/osdi/GuanF0RRY0A25",
+      "title": "KPerfIR: Towards a Open and Compiler-centric Ecosystem for GPU Kernel Performance Tooling on Modern AI Workloads.",
+      "summary": "In this work, we propose KPerfIR, a novel multilevel compiler-centric infrastructure to enable the development of customizable, extendable, and portable profiling tools tailored for modern artificial intelligence (AI) workloads on modern GPUs. Our approach integrates profiling capabilities directly into the compiler workflow, allowing profiling functionalities to be implemented as compiler passes, offering a programmable and reusable framework for performance analysis. This design bridges the gap between compilers and profilers, enabling fine-grained insights into complex optimization challenges such as overlapping the execution of fine-grained function units on GPUs. KPerfIR is integrated into the Triton infrastructure to highlight the power of a compiler-centric approach to advance performance analysis and optimization in the ever-evolving landscape of AI compilers. Our evaluation shows that our tool incurs low overhead (8.2%), provides accurate measurements (2% relative error), and delivers actionable insights into complicated GPU intra-kernel optimizations.",
+      "abstract": "In this work, we propose KPerfIR, a novel multilevel compiler-centric infrastructure to enable the development of customizable, extendable, and portable profiling tools tailored for modern artificial intelligence (AI) workloads on modern GPUs. Our approach integrates profiling capabilities directly into the compiler workflow, allowing profiling functionalities to be implemented as compiler passes, offering a programmable and reusable framework for performance analysis. This design bridges the gap between compilers and profilers, enabling fine-grained insights into complex optimization challenges such as overlapping the execution of fine-grained function units on GPUs. KPerfIR is integrated into the Triton infrastructure to highlight the power of a compiler-centric approach to advance performance analysis and optimization in the ever-evolving landscape of AI compilers. Our evaluation shows that our tool incurs low overhead (8.2%), provides accurate measurements (2% relative error), and delivers actionable insights into complicated GPU intra-kernel optimizations.",
+      "authors": [
+        "Yue Guan 0003",
+        "Yuanwei Fang",
+        "Keren Zhou 0001",
+        "Corbin Robeck",
+        "Manman Ren",
+        "Zhongkai Yu",
+        "Yufei Ding 0001",
+        "Adnan Aziz"
+      ],
+      "published": "2025",
+      "published_date": "2025-07-01 00:00:00",
+      "publicationDate": "2025",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://www.usenix.org/conference/osdi25/presentation/guan",
+      "url": "https://www.usenix.org/conference/osdi25/presentation/guan",
+      "pdf_url": "https://www.usenix.org/system/files/osdi25-guan.pdf",
+      "venue": "OSDI",
+      "venue_source_name": "OSDI",
+      "venue_source_alias": "OSDI",
+      "dblp_key": "conf/osdi/GuanF0RRY0A25",
+      "doi": "",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "open",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "OSDI",
+        "venue_alias": "OSDI"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2025,
+      "scores": {
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 4.79
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "gpu kernel"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "gpu kernel"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "established",
+      "history_relaxed": true,
+      "citationCount": 0,
+      "venue_metadata": {
+        "official_page_blocked": false,
+        "official_page_url": "https://www.usenix.org/conference/osdi25/presentation/guan",
+        "abstract_source": "openalex",
+        "pdf_source": "official_page"
+      }
+    },
+    {
+      "id": "dblp:conf/cgo/HeY25",
+      "paper_id": "dblp:conf/cgo/HeY25",
+      "title": "CuAsmRL: Optimizing GPU SASS Schedules via Deep Reinforcement Learning.",
+      "summary": "Large language models (LLMs) are remarked by their substantial computational requirements. To mitigate the cost, researchers develop specialized CUDA kernels, which often fuse several tensor operations to maximize the utilization of GPUs as much as possible. However, those specialized kernels may still leave performance on the table as CUDA assembly experts show that manual optimization of GPU SASS schedules can lead to better performance, and trial-and-error is largely employed to manually find the best GPU SASS schedules. In this work, we employ an automatic approach to optimize GPU SASS schedules, which thus can be integrated into existing compiler frameworks. The key to automatic optimization is training an RL agent to mimic how human experts perform manual scheduling. To this end, we formulate an assembly game, where RL agents can play to find the best GPU SASS schedules. The assembly game starts from a -O3 optimized SASS schedule, and the RL agents can iteratively apply actions to mutate the current schedules. Positive rewards are generated if the mutated schedules get higher throughput by executing on GPUs. Experiments show that CuAsmRL can further improve the performance of existing specialized CUDA kernels transparently by up to 26%, and on average 9%. Moreover, it is used as a tool to reveal potential optimization moves learned automatically",
+      "abstract": "Large language models (LLMs) are remarked by their substantial computational requirements. To mitigate the cost, researchers develop specialized CUDA kernels, which often fuse several tensor operations to maximize the utilization of GPUs as much as possible. However, those specialized kernels may still leave performance on the table as CUDA assembly experts show that manual optimization of GPU SASS schedules can lead to better performance, and trial-and-error is largely employed to manually find the best GPU SASS schedules. In this work, we employ an automatic approach to optimize GPU SASS schedules, which thus can be integrated into existing compiler frameworks. The key to automatic optimization is training an RL agent to mimic how human experts perform manual scheduling. To this end, we formulate an assembly game, where RL agents can play to find the best GPU SASS schedules. The assembly game starts from a -O3 optimized SASS schedule, and the RL agents can iteratively apply actions to mutate the current schedules. Positive rewards are generated if the mutated schedules get higher throughput by executing on GPUs. Experiments show that CuAsmRL can further improve the performance of existing specialized CUDA kernels transparently by up to 26%, and on average 9%. Moreover, it is used as a tool to reveal potential optimization moves learned automatically",
+      "authors": [
+        "Guoliang He",
+        "Eiko Yoneki"
+      ],
+      "published": "2025",
+      "published_date": "2025-07-01 00:00:00",
+      "publicationDate": "2025",
+      "categories": [],
+      "source": "dblp_venue",
+      "source_provider": "dblp",
+      "source_url": "https://dl.acm.org/doi/10.1145/3696443.3708943",
+      "url": "https://dl.acm.org/doi/10.1145/3696443.3708943",
+      "pdf_url": "",
+      "venue": "CGO",
+      "venue_source_name": "CGO",
+      "venue_source_alias": "CGO",
+      "dblp_key": "conf/cgo/HeY25",
+      "doi": "10.1145/3696443.3708943",
+      "dblp_type": "Conference and Workshop Papers",
+      "access": "closed",
+      "selection_signals": {
+        "source": "dblp_venue",
+        "venue": "CGO",
+        "venue_alias": "CGO"
+      },
+      "venue_source_priority": 5,
+      "venue_query_year": 2025,
+      "scores": {
+        "relevance": 1.63,
+        "recency": 0.0,
+        "popularity": 0.9,
+        "quality": 0.9,
+        "recommendation": 4.34
+      },
+      "matched_domain": "Low-level Code And Assembly Generation",
+      "matched_keywords": [
+        "sass"
+      ],
+      "matched_domain_priority": 4,
+      "domain_preference_bonus": 0.6,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "Low-level Code And Assembly Generation",
+        "text_match_count": 1,
+        "matched_categories": [],
+        "required_signal_matches": [
+          "sass"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [],
+        "analysis_keyword_match_count": 0,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.0
+      },
+      "selection_lane": "established",
+      "history_relaxed": true,
+      "citationCount": 4,
+      "institutions": [
+        "University of Cambridge"
+      ],
+      "venue_metadata": {
+        "official_page_blocked": true,
+        "official_page_url": "https://dl.acm.org/doi/10.1145/3696443.3708943",
+        "abstract_source": "openalex",
+        "pdf_source": ""
+      }
     }
   ]
 }

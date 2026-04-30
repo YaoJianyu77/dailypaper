@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-29",
+  "last_updated": "2026-04-30",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -718,25 +718,31 @@
       "published": "2025",
       "source_lane": "established",
       "topics": [
-        "GPU SASS scheduling",
-        "CUDA kernel optimization",
-        "deep reinforcement learning",
-        "assembly-level optimization",
-        "specialized kernels"
+        "GPU SASS",
+        "CUDA kernels",
+        "reinforcement learning",
+        "instruction scheduling",
+        "compiler optimization",
+        "LLM inference systems"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-09",
-      "last_seen_date": "2026-03-09",
-      "last_recommended_date": "2026-03-09",
-      "recommended_count": 1,
+      "last_seen_date": "2026-04-30",
+      "last_recommended_date": "2026-04-30",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-03-09",
           "recommendation": 4.34,
           "lane": "established"
+        },
+        {
+          "date": "2026-04-30",
+          "recommendation": 4.34,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-08"
+      "cooldown_until": "2026-06-29"
     },
     {
       "paper_id": "2604.25422v1",
@@ -1747,18 +1753,18 @@
       "published": "2022-05-30",
       "source_lane": "classic",
       "topics": [
-        "attention",
-        "io-aware attention",
-        "kernel fusion",
-        "tiling",
+        "exact attention",
+        "IO-aware algorithms",
         "HBM traffic",
-        "CUDA"
+        "tiling",
+        "kernel fusion",
+        "CUDA kernels"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-10",
-      "last_seen_date": "2026-04-03",
-      "last_recommended_date": "2026-04-03",
-      "recommended_count": 2,
+      "last_seen_date": "2026-04-30",
+      "last_recommended_date": "2026-04-30",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-03-10",
@@ -1769,9 +1775,14 @@
           "date": "2026-04-03",
           "recommendation": 6.92,
           "lane": "classic"
+        },
+        {
+          "date": "2026-04-30",
+          "recommendation": 6.92,
+          "lane": "classic"
         }
       ],
-      "cooldown_until": "2026-04-24"
+      "cooldown_until": "2026-05-21"
     },
     {
       "paper_id": "2604.02110v1",
@@ -2539,17 +2550,17 @@
       "source_lane": "established",
       "topics": [
         "GPU kernel profiling",
-        "compiler-centric tooling",
         "Triton",
-        "AI workloads",
-        "performance analysis",
-        "intra-kernel optimization"
+        "AI compilers",
+        "compiler passes",
+        "intra-kernel optimization",
+        "performance tooling"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-09",
-      "last_seen_date": "2026-03-23",
-      "last_recommended_date": "2026-03-23",
-      "recommended_count": 2,
+      "last_seen_date": "2026-04-30",
+      "last_recommended_date": "2026-04-30",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-03-09",
@@ -2560,9 +2571,14 @@
           "date": "2026-03-23",
           "recommendation": 4.79,
           "lane": "established"
+        },
+        {
+          "date": "2026-04-30",
+          "recommendation": 4.79,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-05-22"
+      "cooldown_until": "2026-06-29"
     },
     {
       "paper_id": "2604.24432v1",
@@ -3705,17 +3721,17 @@
       "source_lane": "established",
       "topics": [
         "GPU kernel optimization",
-        "just-in-time compilation",
+        "JIT compilation",
         "LLVM IR",
         "runtime specialization",
-        "AMD GPUs",
-        "NVIDIA GPUs"
+        "AOT compilation",
+        "AMD GPUs NVIDIA GPUs"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-04-22",
-      "last_recommended_date": "2026-04-22",
-      "recommended_count": 8,
+      "last_seen_date": "2026-04-30",
+      "last_recommended_date": "2026-04-30",
+      "recommended_count": 9,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -3756,9 +3772,14 @@
           "date": "2026-04-22",
           "recommendation": 5.46,
           "lane": "established"
+        },
+        {
+          "date": "2026-04-30",
+          "recommendation": 5.46,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-06-21"
+      "cooldown_until": "2026-06-29"
     },
     {
       "paper_id": "2604.25899v1",
@@ -3799,14 +3820,14 @@
         "KV cache",
         "sparsification",
         "quantization",
-        "heavy hitter tokens",
-        "low-bit inference"
+        "Heavy Hitter Oracle",
+        "low-bit KV quantization"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-07",
-      "last_seen_date": "2026-04-25",
-      "last_recommended_date": "2026-04-25",
-      "recommended_count": 10,
+      "last_seen_date": "2026-04-30",
+      "last_recommended_date": "2026-04-30",
+      "recommended_count": 11,
       "scores_history": [
         {
           "date": "2026-03-07",
@@ -3857,9 +3878,14 @@
           "date": "2026-04-25",
           "recommendation": 7.97,
           "lane": "established"
+        },
+        {
+          "date": "2026-04-30",
+          "recommendation": 7.97,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-06-24"
+      "cooldown_until": "2026-06-29"
     },
     {
       "paper_id": "2604.25306v1",
@@ -4727,17 +4753,17 @@
       "source_lane": "established",
       "topics": [
         "GEMM",
-        "matrix multiplication",
         "micro-kernel generation",
-        "Exo",
-        "compiler-assisted optimization",
-        "low-level code generation"
+        "Exo compiler",
+        "low-level code generation",
+        "portable performance",
+        "intrinsics and assembly"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-09",
-      "last_seen_date": "2026-04-22",
-      "last_recommended_date": "2026-04-22",
-      "recommended_count": 5,
+      "last_seen_date": "2026-04-30",
+      "last_recommended_date": "2026-04-30",
+      "recommended_count": 6,
       "scores_history": [
         {
           "date": "2026-03-09",
@@ -4763,9 +4789,14 @@
           "date": "2026-04-22",
           "recommendation": 4.21,
           "lane": "established"
+        },
+        {
+          "date": "2026-04-30",
+          "recommendation": 4.21,
+          "lane": "established"
         }
       ],
-      "cooldown_until": "2026-06-21"
+      "cooldown_until": "2026-06-29"
     },
     {
       "paper_id": "2603.08960v1",
