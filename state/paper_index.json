@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-30",
+  "last_updated": "2026-05-01",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -798,6 +798,34 @@
         }
       ],
       "cooldown_until": "2026-05-19"
+    },
+    {
+      "paper_id": "2604.27486v1",
+      "title": "CuLifter: Lifting GPU Binaries to Typed IR",
+      "domain": "Low-level Code And Assembly Generation",
+      "published": "2026-04-30T06:34:54Z",
+      "source_lane": "fresh",
+      "topics": [
+        "GPU binary lifting",
+        "SASS",
+        "LLVM IR",
+        "type recovery",
+        "constraint propagation",
+        "control-flow reconstruction"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-05-01",
+      "last_seen_date": "2026-05-01",
+      "last_recommended_date": "2026-05-01",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-05-01",
+          "recommendation": 8.54,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-30"
     },
     {
       "paper_id": "2604.15768v1",
@@ -3976,6 +4004,34 @@
       "cooldown_until": "2026-06-18"
     },
     {
+      "paper_id": "2604.27384v1",
+      "title": "RCW-CIM: A Digital CIM-based LLM Accelerator with Read-Compute/Write",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-30T03:52:24Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "digital computing-in-memory",
+        "RCW architecture",
+        "weight update latency",
+        "prefill latency",
+        "decoding latency preservation issue? no, decoding latency reduction: keep keyword concise? better not; output schema allows strings. Need valid JSON no weird. I included a too-long weird keyword? This final must be valid. I need revise. Can't edit final? I am in final already? Actually I already output? Need ensure valid JSON; I inserted weird? Let's check final content above: keywords array ended"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-05-01",
+      "last_seen_date": "2026-05-01",
+      "last_recommended_date": "2026-05-01",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-05-01",
+          "recommendation": 8.44,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-30"
+    },
+    {
       "paper_id": "2604.11109v1",
       "title": "Record-Remix-Replay: Hierarchical GPU Kernel Optimization using Evolutionary Search",
       "domain": "LLM Code Generation For CUDA Kernels",
@@ -4690,6 +4746,34 @@
       "cooldown_until": "2026-05-07"
     },
     {
+      "paper_id": "2604.28175v1",
+      "title": "Strait: Perceiving Priority and Interference in ML Inference Serving",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-30T17:55:28Z",
+      "source_lane": "fresh",
+      "topics": [
+        "GPU inference serving",
+        "priority-aware scheduling",
+        "deadline violations",
+        "latency prediction",
+        "kernel interference",
+        "data-transfer contention"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-05-01",
+      "last_seen_date": "2026-05-01",
+      "last_recommended_date": "2026-05-01",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-05-01",
+          "recommendation": 7.39,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-30"
+    },
+    {
       "paper_id": "2604.06746v1",
       "title": "StructKV: Preserving the Structural Skeleton for Scalable Long-Context Inference",
       "domain": "LLM Inference Systems",
@@ -5079,6 +5163,34 @@
       "cooldown_until": "2026-04-27"
     },
     {
+      "paper_id": "2604.27861v1",
+      "title": "TwinGate: Stateful Defense against Decompositional Jailbreaks in Untraceable Traffic via Asymmetric Contrastive Learning",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-30T13:44:01Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM safety",
+        "decompositional jailbreaks",
+        "stateful defense",
+        "dual encoder",
+        "asymmetric contrastive learning",
+        "prefill-phase monitoring"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-05-01",
+      "last_seen_date": "2026-05-01",
+      "last_recommended_date": "2026-05-01",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-05-01",
+          "recommendation": 10.0,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-30"
+    },
+    {
       "paper_id": "2603.29002v1",
       "title": "Understand and Accelerate Memory Processing Pipeline for Disaggregated LLM Inference",
       "domain": "LLM Inference Systems",
@@ -5133,6 +5245,34 @@
         }
       ],
       "cooldown_until": "2026-06-14"
+    },
+    {
+      "paper_id": "2604.27396v1",
+      "title": "VitaLLM: A Versatile, Ultra-Compact Ternary LLM Accelerator with Dependency-Aware Scheduling",
+      "domain": "LLM Inference Systems",
+      "published": "2026-04-30T04:07:21Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "ternary quantization",
+        "edge accelerator",
+        "KV cache",
+        "decode throughput",
+        "dependency-aware scheduling"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-05-01",
+      "last_seen_date": "2026-05-01",
+      "last_recommended_date": "2026-05-01",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-05-01",
+          "recommendation": 10.0,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-06-30"
     },
     {
       "paper_id": "2603.16435v1",
