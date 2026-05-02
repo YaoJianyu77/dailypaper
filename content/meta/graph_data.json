@@ -397,7 +397,7 @@
       "title": "From Threads to Tiles: T2T, a Compiler for CUDA-to-NPU Translation via 2D Vectorization.",
       "domain": "LLM Code Generation For CUDA Kernels",
       "quality_score": 7.52,
-      "updated": "2026-04-25"
+      "updated": "2026-05-02"
     },
     {
       "id": "dblp:conf/cgo/FangKRAM26",
@@ -1237,35 +1237,35 @@
       "title": "TwinGate: Stateful Defense against Decompositional Jailbreaks in Untraceable Traffic via Asymmetric Contrastive Learning",
       "domain": "LLM Inference Systems",
       "quality_score": 10.0,
-      "updated": "2026-05-01"
+      "updated": "2026-05-02"
     },
     {
       "id": "2604.27396v1",
       "title": "VitaLLM: A Versatile, Ultra-Compact Ternary LLM Accelerator with Dependency-Aware Scheduling",
       "domain": "LLM Inference Systems",
       "quality_score": 10.0,
-      "updated": "2026-05-01"
+      "updated": "2026-05-02"
     },
     {
       "id": "2604.27486v1",
       "title": "CuLifter: Lifting GPU Binaries to Typed IR",
       "domain": "Low-level Code And Assembly Generation",
       "quality_score": 8.54,
-      "updated": "2026-05-01"
+      "updated": "2026-05-02"
     },
     {
       "id": "2604.27384v1",
       "title": "RCW-CIM: A Digital CIM-based LLM Accelerator with Read-Compute/Write",
       "domain": "LLM Inference Systems",
       "quality_score": 8.44,
-      "updated": "2026-05-01"
+      "updated": "2026-05-02"
     },
     {
       "id": "2604.28175v1",
       "title": "Strait: Perceiving Priority and Interference in ML Inference Serving",
       "domain": "LLM Inference Systems",
       "quality_score": 7.39,
-      "updated": "2026-05-01"
+      "updated": "2026-05-02"
     }
   ],
   "edges": [
@@ -4258,5 +4258,5 @@
       "weight": 0.7
     }
   ],
-  "last_updated": "2026-05-01"
+  "last_updated": "2026-05-02"
 }

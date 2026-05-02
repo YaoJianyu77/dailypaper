@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-01",
+  "last_updated": "2026-05-02",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -806,26 +806,29 @@
       "published": "2026-04-30T06:34:54Z",
       "source_lane": "fresh",
       "topics": [
-        "GPU binary lifting",
-        "SASS",
-        "LLVM IR",
-        "type recovery",
-        "constraint propagation",
-        "control-flow reconstruction"
+        "? Actually I cut due? Let's inspect final: It ended",
+        "Low-level Code And Assembly Generation",
+        "binary",
+        "sass"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-05-01",
-      "last_seen_date": "2026-05-01",
-      "last_recommended_date": "2026-05-01",
-      "recommended_count": 1,
+      "last_seen_date": "2026-05-02",
+      "last_recommended_date": "2026-05-02",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-05-01",
           "recommendation": 8.54,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-05-02",
+          "recommendation": 8.54,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-30"
+      "cooldown_until": "2026-07-01"
     },
     {
       "paper_id": "2604.15768v1",
@@ -2001,14 +2004,18 @@
       "published": "2026",
       "source_lane": "fresh",
       "topics": [
-        "LLM Code Generation For CUDA Kernels",
-        "cuda"
+        "CUDA",
+        "NPU",
+        "compiler",
+        "2-D vectorization",
+        "SIMT",
+        "tile instructions"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-17",
-      "last_seen_date": "2026-04-25",
-      "last_recommended_date": "2026-04-25",
-      "recommended_count": 9,
+      "last_seen_date": "2026-05-02",
+      "last_recommended_date": "2026-05-02",
+      "recommended_count": 10,
       "scores_history": [
         {
           "date": "2026-03-17",
@@ -2054,9 +2061,14 @@
           "date": "2026-04-25",
           "recommendation": 7.52,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-05-02",
+          "recommendation": 7.52,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-24"
+      "cooldown_until": "2026-07-01"
     },
     {
       "paper_id": "2604.15244v1",
@@ -4010,26 +4022,31 @@
       "published": "2026-04-30T03:52:24Z",
       "source_lane": "fresh",
       "topics": [
+        "digital CIM",
         "LLM inference",
-        "digital computing-in-memory",
-        "RCW architecture",
         "weight update latency",
-        "prefill latency",
-        "decoding latency preservation issue? no, decoding latency reduction: keep keyword concise? better not; output schema allows strings. Need valid JSON no weird. I included a too-long weird keyword? This final must be valid. I need revise. Can't edit final? I am in final already? Actually I already output? Need ensure valid JSON; I inserted weird? Let's check final content above: keywords array ended"
+        "prefill",
+        "decode",
+        "operator fusion"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-05-01",
-      "last_seen_date": "2026-05-01",
-      "last_recommended_date": "2026-05-01",
-      "recommended_count": 1,
+      "last_seen_date": "2026-05-02",
+      "last_recommended_date": "2026-05-02",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-05-01",
           "recommendation": 8.44,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-05-02",
+          "recommendation": 8.44,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-30"
+      "cooldown_until": "2026-07-01"
     },
     {
       "paper_id": "2604.11109v1",
@@ -4753,25 +4770,30 @@
       "source_lane": "fresh",
       "topics": [
         "GPU inference serving",
-        "priority-aware scheduling",
-        "deadline violations",
+        "priority scheduling",
+        "deadline satisfaction",
         "latency prediction",
         "kernel interference",
         "data-transfer contention"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-05-01",
-      "last_seen_date": "2026-05-01",
-      "last_recommended_date": "2026-05-01",
-      "recommended_count": 1,
+      "last_seen_date": "2026-05-02",
+      "last_recommended_date": "2026-05-02",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-05-01",
           "recommendation": 7.39,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-05-02",
+          "recommendation": 7.39,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-30"
+      "cooldown_until": "2026-07-01"
     },
     {
       "paper_id": "2604.06746v1",
@@ -5172,23 +5194,28 @@
         "LLM safety",
         "decompositional jailbreaks",
         "stateful defense",
+        "contrastive learning",
         "dual encoder",
-        "asymmetric contrastive learning",
-        "prefill-phase monitoring"
+        "serving latency"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-05-01",
-      "last_seen_date": "2026-05-01",
-      "last_recommended_date": "2026-05-01",
-      "recommended_count": 1,
+      "last_seen_date": "2026-05-02",
+      "last_recommended_date": "2026-05-02",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-05-01",
           "recommendation": 10.0,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-05-02",
+          "recommendation": 10.0,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-30"
+      "cooldown_until": "2026-07-01"
     },
     {
       "paper_id": "2603.29002v1",
@@ -5262,17 +5289,22 @@
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-05-01",
-      "last_seen_date": "2026-05-01",
-      "last_recommended_date": "2026-05-01",
-      "recommended_count": 1,
+      "last_seen_date": "2026-05-02",
+      "last_recommended_date": "2026-05-02",
+      "recommended_count": 2,
       "scores_history": [
         {
           "date": "2026-05-01",
           "recommendation": 10.0,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-05-02",
+          "recommendation": 10.0,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-06-30"
+      "cooldown_until": "2026-07-01"
     },
     {
       "paper_id": "2603.16435v1",
