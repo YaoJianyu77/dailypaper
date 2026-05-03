@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-02",
+  "last_updated": "2026-05-03",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -806,16 +806,18 @@
       "published": "2026-04-30T06:34:54Z",
       "source_lane": "fresh",
       "topics": [
-        "? Actually I cut due? Let's inspect final: It ended",
-        "Low-level Code And Assembly Generation",
-        "binary",
-        "sass"
+        "GPU binary lifting",
+        "SASS",
+        "LLVM IR",
+        "type recovery",
+        "constraint propagation",
+        "control-flow reconstruction"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-05-01",
-      "last_seen_date": "2026-05-02",
-      "last_recommended_date": "2026-05-02",
-      "recommended_count": 2,
+      "last_seen_date": "2026-05-03",
+      "last_recommended_date": "2026-05-03",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-05-01",
@@ -826,9 +828,14 @@
           "date": "2026-05-02",
           "recommendation": 8.54,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-05-03",
+          "recommendation": 8.54,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-07-01"
+      "cooldown_until": "2026-07-02"
     },
     {
       "paper_id": "2604.15768v1",
@@ -865,18 +872,18 @@
       "published": "2022-06-30",
       "source_lane": "classic",
       "topics": [
-        "transformer inference",
-        "LLM serving",
-        "multi-GPU",
+        "LLM inference",
+        "transformer serving",
+        "multi-GPU execution",
         "kernel optimization",
-        "heterogeneous memory",
-        "CPU/GPU/NVMe offload"
+        "CPU/GPU/NVMe memory",
+        "offload"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-03-13",
-      "last_seen_date": "2026-04-09",
-      "last_recommended_date": "2026-04-09",
-      "recommended_count": 2,
+      "last_seen_date": "2026-05-03",
+      "last_recommended_date": "2026-05-03",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-03-13",
@@ -887,9 +894,14 @@
           "date": "2026-04-09",
           "recommendation": 5.92,
           "lane": "classic"
+        },
+        {
+          "date": "2026-05-03",
+          "recommendation": 5.92,
+          "lane": "classic"
         }
       ],
-      "cooldown_until": "2026-04-30"
+      "cooldown_until": "2026-05-24"
     },
     {
       "paper_id": "2602.08005v1",
@@ -4022,18 +4034,18 @@
       "published": "2026-04-30T03:52:24Z",
       "source_lane": "fresh",
       "topics": [
-        "digital CIM",
         "LLM inference",
-        "weight update latency",
-        "prefill",
-        "decode",
-        "operator fusion"
+        "digital computing-in-memory",
+        "CIM accelerator",
+        "prefill latency",
+        "decode latency",
+        "weight update latency LLM serving bottlenecks"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-05-01",
-      "last_seen_date": "2026-05-02",
-      "last_recommended_date": "2026-05-02",
-      "recommended_count": 2,
+      "last_seen_date": "2026-05-03",
+      "last_recommended_date": "2026-05-03",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-05-01",
@@ -4044,9 +4056,14 @@
           "date": "2026-05-02",
           "recommendation": 8.44,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-05-03",
+          "recommendation": 8.44,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-07-01"
+      "cooldown_until": "2026-07-02"
     },
     {
       "paper_id": "2604.11109v1",
@@ -4769,18 +4786,18 @@
       "published": "2026-04-30T17:55:28Z",
       "source_lane": "fresh",
       "topics": [
-        "GPU inference serving",
-        "priority scheduling",
+        "ML inference serving",
+        "GPU scheduling",
         "deadline satisfaction",
+        "priority-aware scheduling",
         "latency prediction",
-        "kernel interference",
-        "data-transfer contention"
+        "kernel interference corrupted?"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-05-01",
-      "last_seen_date": "2026-05-02",
-      "last_recommended_date": "2026-05-02",
-      "recommended_count": 2,
+      "last_seen_date": "2026-05-03",
+      "last_recommended_date": "2026-05-03",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-05-01",
@@ -4791,9 +4808,14 @@
           "date": "2026-05-02",
           "recommendation": 7.39,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-05-03",
+          "recommendation": 7.39,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-07-01"
+      "cooldown_until": "2026-07-02"
     },
     {
       "paper_id": "2604.06746v1",
@@ -5192,17 +5214,17 @@
       "source_lane": "fresh",
       "topics": [
         "LLM safety",
-        "decompositional jailbreaks",
+        "decompositional jailbreak",
         "stateful defense",
-        "contrastive learning",
         "dual encoder",
-        "serving latency"
+        "contrastive learning",
+        "prefill overlap inference monitoring"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-05-01",
-      "last_seen_date": "2026-05-02",
-      "last_recommended_date": "2026-05-02",
-      "recommended_count": 2,
+      "last_seen_date": "2026-05-03",
+      "last_recommended_date": "2026-05-03",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-05-01",
@@ -5213,9 +5235,14 @@
           "date": "2026-05-02",
           "recommendation": 10.0,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-05-03",
+          "recommendation": 10.0,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-07-01"
+      "cooldown_until": "2026-07-02"
     },
     {
       "paper_id": "2603.29002v1",
@@ -5283,15 +5310,15 @@
         "LLM inference",
         "ternary quantization",
         "edge accelerator",
-        "KV cache",
         "decode throughput",
+        "KV cache",
         "dependency-aware scheduling"
       ],
       "reading_status": "unread",
       "first_seen_date": "2026-05-01",
-      "last_seen_date": "2026-05-02",
-      "last_recommended_date": "2026-05-02",
-      "recommended_count": 2,
+      "last_seen_date": "2026-05-03",
+      "last_recommended_date": "2026-05-03",
+      "recommended_count": 3,
       "scores_history": [
         {
           "date": "2026-05-01",
@@ -5302,9 +5329,14 @@
           "date": "2026-05-02",
           "recommendation": 10.0,
           "lane": "fresh"
+        },
+        {
+          "date": "2026-05-03",
+          "recommendation": 10.0,
+          "lane": "fresh"
         }
       ],
-      "cooldown_until": "2026-07-01"
+      "cooldown_until": "2026-07-02"
     },
     {
       "paper_id": "2603.16435v1",

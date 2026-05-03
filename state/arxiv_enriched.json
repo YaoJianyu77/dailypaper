@@ -1,16 +1,16 @@
 {
-  "target_date": "2026-05-02",
+  "target_date": "2026-05-03",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-04-02",
-      "end": "2026-05-02"
+      "start": "2026-04-03",
+      "end": "2026-05-03"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-05-02",
-      "end": "2026-04-01"
+      "start": "2025-05-03",
+      "end": "2026-04-02"
     }
   },
   "total_found": 221,
@@ -24,21 +24,116 @@
     "max_recommendations": 6,
     "selected_count": 6,
     "lane_counts": {
-      "fresh": 6,
+      "fresh": 5,
       "established": 0,
-      "classic": 0,
-      "history_filtered": 16,
-      "history_relaxed": 6,
-      "classic_slot_active": 0
+      "classic": 1,
+      "history_filtered": 21,
+      "history_relaxed": 5,
+      "classic_slot_active": 1
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": false
+      "slot_active_today": true
     }
   },
   "top_papers": [
+    {
+      "paper_id": "2207.00032",
+      "arxiv_id": "2207.00032",
+      "title": "DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale",
+      "summary": "Presents a transformer inference system that combines multi-GPU execution, kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support to scale model serving under latency and throughput constraints.",
+      "authors": [
+        "Reza Yazdani Aminabadi",
+        "Samyam Rajbhandari",
+        "Minjia Zhang",
+        "Ammar Ahmad Awan",
+        "Cheng Li",
+        "Du Li",
+        "Elton Zheng",
+        "Jeff Rasley",
+        "Shaden Smith",
+        "Olatunji Ruwase",
+        "Yuxiong He"
+      ],
+      "published": "2022-06-30",
+      "published_date": "2022-06-30 00:00:00",
+      "categories": [
+        "cs.DC",
+        "cs.LG"
+      ],
+      "source": "classic_backlog",
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "inference-system",
+        "serving",
+        "multi-gpu",
+        "offload"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.6,
+      "selection_lane": "classic",
+      "is_hot_paper": false,
+      "source_url": "https://arxiv.org/abs/2207.00032",
+      "pdf_url": "https://arxiv.org/pdf/2207.00032.pdf",
+      "scores": {
+        "relevance": 2.9,
+        "recency": 0.0,
+        "popularity": 0.0,
+        "quality": 0.0,
+        "recommendation": 5.92
+      },
+      "classic_rotation_score": 10.4484,
+      "citationCount": 577,
+      "influentialCitationCount": 64,
+      "venue": "International Conference for High Performance Computing, Networking, Storage and Analysis",
+      "journal_ref": "SC22: International Conference for High Performance Computing, Networking, Storage and Analysis",
+      "ai": {
+        "one_liner_zh": "DeepSpeed Inference is presented as a transformer serving system that combines multi-GPU execution, optimized kernels, and CPU/GPU/NVMe memory support for latency- and throughput-constrained inference.",
+        "summary_zh": "Transformer inference at large scale is constrained by latency, throughput, and memory capacity, especially when models exceed a single GPU's practical serving envelope. This paper presents DeepSpeed Inference as a serving system that combines multi-GPU execution, transformer kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support. The claimed mechanism is system-level coordination across parallel execution, optimized kernels, and an offload-capable memory hierarchy rather than a model-side change. The supplied abstract supports only the existence of these components and the goal of scaling serving under latency and throughput constraints; it does not report concrete measurements, baselines, hardware details, or workload sizes. Its practical value is in framing inference efficiency as runtime, kernel, and memory-management co-design, but a full read must verify where the actual gains come from and how much offload affects latency.",
+        "background_zh": "Large transformer serving pushes against GPU memory limits and latency-throughput tradeoffs, making inference systems depend on parallelism, kernel efficiency, and memory hierarchy decisions.",
+        "problem_zh": "The paper targets how to serve transformer models at larger scale while maintaining practical latency and throughput constraints.",
+        "approach_zh": "It combines multi-GPU execution, transformer-specific kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support in one inference system.",
+        "evidence_zh": "The abstract states the system design goals and components, but it does not provide performance numbers, baseline comparisons, hardware setup, or workload details.",
+        "value_zh": "If the claims hold, the work is useful for understanding how inference serving efficiency can come from coordinated runtime, kernel, and memory-system design.",
+        "open_questions": [
+          "What specific kernel optimizations are used, and are the gains from compute efficiency, memory bandwidth reduction, launch overhead reduction, or scheduling?",
+          "How are multi-GPU execution and heterogeneous CPU/GPU/NVMe memory managed under latency constraints, and what workloads trigger offload bottlenecks?",
+          "What baselines, model sizes, hardware configurations, and latency-throughput targets are used in the evaluation?"
+        ],
+        "core_contributions": [
+          "A transformer inference system aimed at scaling serving under latency and throughput constraints.",
+          "Integration of multi-GPU execution with transformer kernel optimizations.",
+          "Support for heterogeneous CPU/GPU/NVMe memory as part of the serving path."
+        ],
+        "why_read": [
+          "Directly aligned with LLM inference systems and serving efficiency.",
+          "Relevant for understanding system-level tradeoffs between GPU parallelism, kernel optimization, and offload-backed memory capacity.",
+          "Useful context for later inference runtimes that combine kernel work with distributed execution and memory hierarchy management."
+        ],
+        "risks": [
+          "The provided abstract is too high-level to judge baseline fairness or actual performance impact.",
+          "Offloading through CPU or NVMe may improve capacity while hurting latency, but the abstract does not quantify that tradeoff."
+        ],
+        "recommended_for": [
+          "Researchers and engineers studying LLM inference serving systems.",
+          "Practitioners comparing multi-GPU inference, kernel optimization, and offload-based scaling strategies.",
+          "Readers building context on classic transformer inference system designs."
+        ],
+        "keywords": [
+          "LLM inference",
+          "transformer serving",
+          "multi-GPU execution",
+          "kernel optimization",
+          "CPU/GPU/NVMe memory",
+          "offload"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High fit for the configured LLM inference systems focus, with strong topical signals for serving, multi-GPU execution, and offload, but the abstract is underspecified on evaluation and measured gains.",
+        "fallback_summary": "Presents a transformer inference system that combines multi-GPU execution, kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support to scale model serving under latency and throughput constraints."
+      }
+    },
     {
       "id": "http://arxiv.org/abs/2604.27861v1",
       "arxiv_id": "2604.27861v1",
@@ -125,47 +220,47 @@
       "selection_lane": "fresh",
       "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "TwinGate frames decompositional jailbreak defense as a stateful serving-time intent-tracking problem under anonymized, interleaved traffic.",
-        "summary_zh": "This paper targets jailbreaks where a malicious objective is split across many individually benign-looking requests, which is hard to detect when production traffic is anonymized and interleaved. TwinGate uses a dual-encoder design with asymmetric contrastive learning to place intent-matched malicious fragments in a shared latent space, while a frozen parallel encoder is used to reduce false positives from benign topical overlap. The serving claim is that each request needs only one lightweight forward pass and can run alongside the target model's prefill phase, so monitoring overhead should be small. The abstract reports evaluation on a 3.62M-instruction dataset covering 8,600 malicious intents, with high recall, low false positives, robustness to adaptive attacks, and better latency/throughput than stateful and stateless baselines. The main missing details are the exact metrics, hardware and deployment setup, baseline implementations, and how negligible latency overhead is measured.",
-        "background_zh": "LLM safety filters become harder in real deployments where requests lack reliable user identity and malicious intent can be distributed across time and traffic streams.",
-        "problem_zh": "The paper asks how to detect decompositional jailbreaks without trusted metadata or expensive generative monitoring in the serving path.",
-        "approach_zh": "TwinGate keeps state through a dual-encoder retrieval-style mechanism, using contrastive learning for malicious intent alignment and a frozen encoder to suppress benign topical collisions.",
-        "evidence_zh": "The abstract reports a large custom corpus, causal evaluation, adaptive-attack tests, and comparisons against stateful and stateless baselines, but it does not provide exact numbers or setup details.",
-        "value_zh": "If the latency claim holds, this is useful for serving-layer safety systems that need cross-request intent tracking without adding a heavy monitor model to the critical path.",
+        "one_liner_zh": "TwinGate targets decompositional jailbreaks in anonymized LLM traffic with a stateful dual-encoder monitor designed to run alongside prefill with low serving overhead.",
+        "summary_zh": "This paper addresses a safety problem that becomes harder in real LLM serving settings: malicious intent can be split across benign-looking, anonymized, interleaved requests. TwinGate uses a stateful dual-encoder design, with asymmetric contrastive learning to bring intent-matched malicious fragments together and a frozen parallel encoder to reduce false positives from benign topical overlap. The abstract claims each request needs only one lightweight forward pass that can run in parallel with the target model's prefill phase, so the system is positioned as a low-latency serving defense rather than a heavyweight generative monitor. Evidence is reported on a 3.62M-instruction dataset covering 8,600 malicious intents, with high recall, low false positives, adaptive robustness, and better throughput and latency than baselines. The main missing details are the exact metrics, hardware setup, baseline implementations, and how the state mechanism works under fully anonymized interleaving.",
+        "background_zh": "Decompositional jailbreaks exploit the gap between per-request moderation and intent that accumulates across a request stream.",
+        "problem_zh": "The paper asks how to detect distributed malicious intent when user identity is unavailable and generative monitoring is too expensive for real-time serving.",
+        "approach_zh": "TwinGate maps semantically different but intent-aligned malicious fragments into a shared latent space while using a frozen encoder branch to suppress benign topic-based collisions.",
+        "evidence_zh": "The abstract reports a large causal-protocol evaluation with 3.62M instructions and 8,600 malicious intents, but it does not provide exact recall, false-positive, throughput, latency, or hardware numbers.",
+        "value_zh": "If the latency claim holds, this is useful for LLM serving teams that need cross-request safety state without putting a generative model in the critical path.",
         "open_questions": [
-          "What are the exact recall, false positive, latency, and throughput numbers, and on what hardware and batch/traffic settings were they measured?",
-          "How are the stateful and stateless baselines implemented, and are they given comparable memory, retrieval, and monitoring budgets?",
-          "How realistic is the constructed 3.62M-instruction corpus for production anonymized traffic, especially under adaptive adversaries?"
+          "What are the exact recall, false-positive, latency, and throughput numbers, and on what serving hardware were they measured?",
+          "How does TwinGate maintain useful state in fully anonymized and arbitrarily interleaved traffic without reconstructing user identity?",
+          "Are the stateful and stateless baselines implemented with comparable batching, encoder size, and deployment assumptions?"
         ],
         "core_contributions": [
-          "Defines decompositional jailbreak detection under anonymized, interleaved, untraceable traffic as the target threat model.",
-          "Proposes a dual-encoder stateful defense using asymmetric contrastive learning for intent-level fragment clustering.",
-          "Claims a single lightweight forward pass per request that can overlap with the target model prefill phase."
+          "Frames decompositional jailbreak defense under anonymized, interleaved traffic rather than trusted user sessions.",
+          "Introduces an asymmetric contrastive dual-encoder design for clustering malicious intent fragments while limiting benign topical false positives.",
+          "Constructs a 3.62M-instruction evaluation corpus spanning 8,600 malicious intents, according to the abstract."
         ],
         "why_read": [
-          "Relevant to LLM serving systems where safety monitoring must fit within tight latency and throughput budgets.",
-          "Provides a concrete design for cross-request intent tracking without relying on user metadata.",
-          "Includes claimed large-scale evaluation and adaptive-attack testing, which are important to inspect for baseline fairness and reproducibility."
+          "Relevant to LLM serving safety where monitoring overhead and prefill-path placement matter.",
+          "Contains a concrete systems claim: one lightweight forward pass per request running in parallel with target-model prefill.",
+          "May provide useful evaluation methodology for strictly causal, stateful defenses against fragmented attacks."
         ],
         "risks": [
-          "The abstract does not disclose exact latency, throughput, or false positive numbers.",
-          "The serving-overhead claim depends on hardware, concurrency, batching, and prefill scheduling details that are not specified in the abstract."
+          "The abstract gives no concrete latency, throughput, recall, or false-positive numbers, so the strength of the systems claim is hard to judge.",
+          "The mechanism for state under anonymized interleaving is central but underspecified in the abstract exposed here."
         ],
         "recommended_for": [
-          "LLM serving engineers evaluating low-overhead safety filters.",
-          "Researchers studying multi-turn or distributed jailbreak detection.",
-          "Systems readers interested in safety mechanisms that run in parallel with inference."
+          "LLM serving engineers evaluating low-overhead safety monitors.",
+          "Researchers studying stateful defenses against multi-turn or fragmented jailbreaks.",
+          "Security teams comparing encoder-based monitoring against generative moderation."
         ],
         "keywords": [
           "LLM safety",
-          "decompositional jailbreaks",
+          "decompositional jailbreak",
           "stateful defense",
-          "contrastive learning",
           "dual encoder",
-          "serving latency"
+          "contrastive learning",
+          "prefill overlap inference monitoring"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "The paper is systems-adjacent because it claims low-overhead serving-time monitoring with latency and throughput benefits, but its core contribution is jailbreak defense rather than inference acceleration, CUDA generation, or compiler/runtime co-design.",
+        "reading_priority_reason": "High fit for LLM serving security and latency-aware monitoring, but only adjacent to the configured kernel/compiler acceleration focus and the abstract lacks the concrete performance details needed for a high-priority systems read.",
         "fallback_summary": "Decompositional jailbreaks pose a critical threat to large language models (LLMs) by allowing adversaries to fragment a malicious objective into a sequence of individually benign queries that collectively reconstruct prohibited content."
       }
     },
@@ -251,47 +346,47 @@
       "selection_lane": "fresh",
       "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "VitaLLM is a 16nm ternary LLM inference accelerator that combines heterogeneous compute cores, KV-fetch pruning, and dependency-aware scheduling for edge decoding.",
-        "summary_zh": "Edge LLM deployment is constrained by memory bandwidth and power, and ternary models reduce storage while introducing workload imbalance and dependency issues on general-purpose hardware. VitaLLM proposes a hardware-software co-designed accelerator for ternary LLM inference, splitting large ternary projections and mixed-precision attention across specialized TINT-Cores and a unified BoothFlex-Core. It adds Leading One Prediction to prune redundant KV-cache fetches and dependency-aware scheduling to hide nonlinear-operation latency. The abstract reports a TSMC 16nm implementation with 70.70 tokens/s decoding throughput, 0.223 mm^2 area, 65.97 mW power, and 17.4 TOPS/mm^2/W FOM, with a claim of outperforming prior accelerators. The biggest missing detail is the evaluation setup: model sizes, sequence lengths, baselines, workload mix, and comparison methodology are not specified in the abstract.",
-        "background_zh": "Ternary LLMs make edge inference more plausible by shrinking weights, but decode remains constrained by KV-cache bandwidth, control dependencies, and low-power hardware limits.",
-        "problem_zh": "The paper targets efficient ternary LLM inference under tight area and power budgets, where prefill and decode stress different parts of the accelerator.",
-        "approach_zh": "It combines specialized ternary projection cores, a mixed-precision attention core, KV-cache fetch pruning through Leading One Prediction, and scheduling that tries to overlap dependency-heavy nonlinear operations.",
-        "evidence_zh": "The abstract supports the claim with a reported TSMC 16nm implementation and headline throughput, area, power, and FOM numbers, but it does not make the baseline setup or workload coverage clear.",
-        "value_zh": "If the reported design generalizes beyond the stated setup, it could be useful for studying ASIC co-design points for low-power ternary LLM serving rather than GPU-oriented CUDA acceleration.",
+        "one_liner_zh": "VitaLLM is a hardware-software co-designed ternary LLM accelerator for edge inference that targets bandwidth-bound decoding, workload imbalance, and dependency stalls with specialized ternary compute, mixed-precision attention support, KV-fetch pruning, and scheduling.",
+        "summary_zh": "Ternary LLMs can reduce model footprint, but the abstract frames edge deployment as still limited by memory bandwidth, power, workload imbalance, and decode-stage dependencies. VitaLLM addresses this with a dual-core architecture: TINT-Cores handle large ternary projections, while a BoothFlex-Core supports mixed-precision attention across prefill and decode. It also adds Leading One Prediction to avoid redundant KV-cache fetches and dependency-aware scheduling to overlap or hide nonlinear-operation latency. The paper reports a TSMC 16nm implementation with 70.70 tokens/s decoding throughput, 0.223 mm^2 area, 65.97 mW power, and 17.4 TOPS/mm^2/W FOM, claiming superiority over prior accelerators. The abstract does not make the workload, model size, sequence length, baseline set, or measurement methodology clear, so the claimed efficiency needs a careful full-paper check.",
+        "background_zh": "Edge LLM inference is increasingly constrained by memory bandwidth and power even after aggressive quantization, especially during decode where KV-cache movement dominates.",
+        "problem_zh": "The research question is whether a tiny ternary-focused accelerator can keep utilization high across prefill and decode while reducing bandwidth waste and dependency stalls.",
+        "approach_zh": "The design combines ternary projection cores, a unified mixed-precision attention core, KV-cache fetch pruning via Leading One Prediction, and dependency-aware scheduling for nonlinear latency hiding.",
+        "evidence_zh": "The abstract reports a TSMC 16nm implementation with concrete throughput, area, power, and FOM numbers, but it does not specify model workloads, sequence lengths, baselines, or measurement conditions.",
+        "value_zh": "If the reported design holds under realistic LLM workloads, it offers a compact edge-inference template for ternary models where bandwidth and power dominate system cost.",
         "open_questions": [
-          "What exact models, context lengths, batch sizes, and prefill/decode ratios were used to measure the reported 70.70 tokens/s?",
-          "How is Leading One Prediction validated, and what accuracy or approximation risk does it introduce when pruning KV-cache fetches?",
-          "Are the FOM comparisons normalized fairly across process node, precision, model architecture, and memory-system assumptions?"
+          "What model sizes, context lengths, batch sizes, and prefill/decode ratios were used to measure the 70.70 tokens/s decoding throughput?",
+          "Which state-of-the-art accelerators are used as baselines, and are process node, precision, memory system, and workload assumptions normalized fairly?",
+          "How accurate and costly is Leading One Prediction, and what is the impact of misprediction or irregular KV-cache access patterns?"
         ],
         "core_contributions": [
-          "A heterogeneous dual-core architecture separating massive ternary projections from mixed-precision attention work.",
-          "A Leading One Prediction mechanism intended to reduce redundant KV-cache memory traffic during decoding.",
-          "A dependency-aware scheduling framework for hiding nonlinear-operation latency in ternary LLM inference pipelines."
+          "A heterogeneous dual-core accelerator structure separating massive ternary projections from mixed-precision attention work.",
+          "A Leading One Prediction mechanism intended to reduce redundant KV-cache fetches during decoding.",
+          "A dependency-aware scheduling framework aimed at hiding nonlinear-operation latency in ternary LLM inference."
         ],
         "why_read": [
-          "It directly targets LLM inference acceleration under edge power and area constraints.",
-          "It gives a concrete ASIC design point for ternary LLMs rather than only a quantization algorithm.",
-          "It frames decode bottlenecks around KV-cache bandwidth and operation dependencies, which are central serving-system concerns."
+          "It directly targets LLM decode bottlenecks on resource-constrained hardware rather than only reporting quantization compression.",
+          "It gives concrete silicon-area, power, throughput, and FOM claims for a TSMC 16nm implementation.",
+          "It may be useful for comparing accelerator-level approaches to bandwidth-bound ternary inference against compiler/runtime-only optimizations."
         ],
         "risks": [
-          "The abstract does not specify the evaluated LLMs, sequence lengths, or batching assumptions.",
-          "The comparison to state-of-the-art accelerators may depend heavily on process, precision, memory hierarchy, and workload normalization details not given here."
+          "The abstract does not expose enough evaluation detail to judge workload realism or baseline fairness.",
+          "The accelerator is specialized for ternary inference, so applicability to common mixed-precision or non-ternary LLM deployments may be limited unless BoothFlex-BS is convincing in the full paper/web appendix and evidence claims are checked against the paper text, rather than assumed from the abstract alone; no code or reproducibility path is described in the provided input."
         ],
         "recommended_for": [
-          "Researchers studying low-power LLM inference accelerators.",
-          "Engineers tracking ternary or BitNet-style hardware co-design.",
-          "Compiler and runtime researchers interested in scheduling around decode-stage dependencies."
+          "Researchers studying edge LLM inference accelerators and quantized decode bottlenecks.",
+          "Hardware architects comparing ternary LLM datapaths, attention support, and KV-cache bandwidth reduction techniques.",
+          "Systems readers who want a concrete ASIC-style counterpoint to CUDA/kernel-generation approaches."
         ],
         "keywords": [
           "LLM inference",
           "ternary quantization",
           "edge accelerator",
-          "KV cache",
           "decode throughput",
+          "KV cache",
           "dependency-aware scheduling"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High priority because it matches the configured LLM inference systems focus and reports a concrete accelerator implementation, while its relevance to CUDA or low-level code generation is indirect.",
+        "reading_priority_reason": "High fit for LLM inference acceleration and serving efficiency because it targets decode bandwidth, power, and scheduling with concrete hardware claims, though the full read should focus on evaluation assumptions and baseline normalization.",
         "fallback_summary": "Deploying Large Language Models (LLMs) on resource-constrained edge devices faces critical bottlenecks in memory bandwidth and power consumption."
       }
     },
@@ -378,45 +473,47 @@
       "selection_lane": "fresh",
       "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "CuLifter targets the missing type layer in GPU binary lifting, recovering SASS register types so binaries can be translated into valid LLVM IR.",
-        "summary_zh": "GPU binary analysis loses a key source of structure because compiler backends collapse typed values into an untyped register file. The paper frames type recovery as the central obstacle for lifting SASS into useful LLVM IR. CuLifter combines constraint-propagation-based register type recovery, conflict detection, explicit control-flow reconstruction, and aggregation of multi-instruction patterns. The abstract reports successful lifting for 99.98% of 24,437 functions across eight benchmark suites, plus an ablation where disabling type recovery reduces an x86 pass rate from 73.8% to 0%. The main missing detail is how semantic correctness is validated beyond valid IR and the reported pass-rate proxy.",
-        "background_zh": "Low-level GPU tooling needs typed, analyzable IR, but SASS binaries erase source-level type information during compilation.",
-        "problem_zh": "The core question is whether reliable type recovery from an untyped GPU register file is enough to make SASS-to-LLVM lifting practical at scale.",
-        "approach_zh": "CuLifter recovers register types with constraint propagation and conflict detection, then reconstructs control flow and recognizes multi-instruction patterns for LLVM IR generation.",
-        "evidence_zh": "The abstract supports scale and ablation evidence: 99.98% valid LLVM IR lifting across 24,437 functions in 919 cubins, and a type-recovery ablation that drops the x86 pass rate from 73.8% to 0%.",
-        "value_zh": "If the validation holds, the work could improve GPU binary analysis, reverse engineering, compiler debugging, and inspection of optimized ML runtime kernels.",
+        "one_liner_zh": "CuLifter turns SASS GPU binaries into typed LLVM IR by making register type recovery the core lifting problem.",
+        "summary_zh": "CuLifter addresses a practical blocker in GPU binary analysis: SASS binaries lose source-level type distinctions because GPU compilers map values into a unified register file. The paper frames type recovery from that untyped register file as the central lifting problem and builds a SASS-to-LLVM IR pipeline using constraint propagation with conflict detection, explicit control-flow reconstruction, and multi-instruction pattern aggregation. The abstract reports evaluation across eight benchmark suites, 24,437 GPU functions, and 919 cubins from open-source applications, vendor libraries, and optimized ML runtimes, with 99.98% of functions lifted to valid LLVM IR. It also reports an ablation where disabling type recovery drops the x86 pass rate from 73.8% to 0%, supporting the claim that type recovery is critical for semantic correctness. The biggest missing detail is how semantic equivalence, baseline fairness, GPU architecture coverage, and failure cases are defined beyond the headline lift and pass rates.",
+        "background_zh": "GPU binary lifting is hard because optimized SASS erases typed source-level structure that many binary-analysis and compiler tools expect.",
+        "problem_zh": "The research question is whether untyped GPU registers can be recovered accurately enough to produce useful, semantically correct typed IR from binaries.",
+        "approach_zh": "CuLifter recovers register types through constraint propagation with conflict detection, then reconstructs control flow and combines multi-instruction patterns before emitting LLVM IR.",
+        "evidence_zh": "The abstract supports the claim with large-scale lifting results and a type-recovery ablation, but it does not make the full semantic-checking methodology or baseline comparison clear.",
+        "value_zh": "If the method generalizes, it could make SASS-level inspection, retargeting, optimization analysis, and ML runtime reverse engineering more practical.",
         "open_questions": [
-          "What exactly does the x86 pass rate measure, and how well does it correspond to semantic correctness of lifted GPU code?",
-          "Which SASS features, GPU generations, or vendor-library patterns account for the remaining failed or conflicted lifts?",
-          "How much manual specification or architecture-specific knowledge is required to maintain the lifter as SASS evolves?"
+          "How does the paper define and validate semantic correctness beyond producing valid LLVM IR and the reported x86 pass rate?",
+          "Which GPU architectures, SASS versions, vendor libraries, and optimized ML runtime kernels are covered, and where do the remaining failures occur?",
+          "How does CuLifter compare against existing GPU binary lifters or binary-analysis workflows under comparable inputs and validation criteria?"
         ],
         "core_contributions": [
-          "Identifies type recovery from the unified GPU register file as the central bottleneck in GPU binary lifting.",
-          "Builds a SASS-to-LLVM IR framework with constraint-based type recovery, conflict detection, control-flow reconstruction, and pattern aggregation.",
-          "Reports large-scale lifting coverage across open-source applications, vendor libraries, and optimized ML runtimes."
+          "Identifies type recovery from the unified GPU register file as the central obstacle in SASS-to-typed-IR lifting.",
+          "Introduces a constraint-propagation type recovery method with conflict detection for GPU registers.",
+          "Builds a SASS-to-LLVM IR lifting pipeline with explicit control-flow reconstruction and multi-instruction pattern aggregation."
         ],
         "why_read": [
-          "Directly relevant to SASS-level analysis and typed IR recovery for GPU binaries.",
-          "Useful context for researchers working on CUDA kernel generation, binary inspection, or compiler/runtime co-design.",
-          "The ablation isolates type recovery as the decisive component, which makes the systems claim sharper than a generic lifting pipeline."
+          "Directly relevant to SASS, LLVM IR, and low-level GPU binary analysis.",
+          "Provides unusually concrete scale signals for a binary-lifting paper: eight suites, 24,437 functions, and 919 cubins.",
+          "The ablation isolates type recovery as the key mechanism behind semantic correctness, according to the abstract."
         ],
         "risks": [
-          "The abstract emphasizes valid LLVM IR, but semantic validation details are limited.",
-          "The x86 pass-rate proxy needs scrutiny before treating the lifted IR as behaviorally equivalent to original GPU binaries ? Wait we must output JSON valid, no Korean. Need final with schema. My final accidentally ends"
+          "The abstract does not specify the semantic equivalence oracle in enough detail to judge correctness rigorously.",
+          "The reported lift rate may hide important unsupported instruction patterns, architectures, or heavily optimized kernels in the small failure set without a full read."
         ],
         "recommended_for": [
-          "? Actually tool set final? It seems truncated? Need produce valid JSON. Wait final channel with response format codex_output_schema must be JSON object. The final shown ended in risks second string with",
-          "Researchers tracking Low-level Code And Assembly Generation",
-          "Engineers working on Low-level Code And Assembly Generation systems and methods"
+          "Researchers working on GPU binary analysis and lifting.",
+          "Engineers inspecting optimized CUDA, vendor library, or ML runtime binaries.",
+          "Compiler researchers interested in typed IR recovery from low-level GPU code."
         ],
         "keywords": [
-          "? Actually I cut due? Let's inspect final: It ended",
-          "Low-level Code And Assembly Generation",
-          "binary",
-          "sass"
+          "GPU binary lifting",
+          "SASS",
+          "LLVM IR",
+          "type recovery",
+          "constraint propagation",
+          "control-flow reconstruction"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "...",
+        "reading_priority_reason": "High fit for the low-level code and assembly-generation focus, with strong abstract-level evidence and direct relevance to SASS-to-IR tooling, though it is adjacent rather than central to LLM inference acceleration.",
         "fallback_summary": "GPU compilers merge all data types into a single unified register file, erasing the type information that binary-analysis tools rely on."
       }
     },
@@ -495,47 +592,47 @@
       "selection_lane": "fresh",
       "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "RCW-CIM proposes a fabricated digital compute-in-memory LLM accelerator that targets weight-update latency with read-compute/write scheduling, nonlinear operator fusion, and a WS-OCS dataflow.",
-        "summary_zh": "Digital CIM is positioned as a way to reduce LLM inference data movement while retaining precision, but the abstract argues that weight update latency becomes a major bottleneck when model weights exceed one CIM macro. RCW-CIM addresses this with a read-compute/write architecture, nonlinear operator fusion for dependency-induced latency, and a weight-stationary/output-column-stationary dataflow for prefill. The abstract reports latency, DRAM-access, and internal weight-update reductions on INT4-weight Llama2 settings, and states that the chip was fabricated in TSMC 22 nm CMOS at 100 MHz with dual DDR5-6400 memory. The likely value is a hardware design that attacks both decode and prefill bottlenecks through data placement and update scheduling rather than only raw compute throughput. The biggest missing detail is how baselines, model coverage, accuracy impact from approximation, and end-to-end serving assumptions were evaluated.",
-        "background_zh": "LLM inference hardware is increasingly limited by memory movement and weight movement, which makes CIM attractive but also exposes capacity and update costs when models exceed macro-local storage.",
-        "problem_zh": "The paper asks how a digital CIM accelerator can reduce weight update latency and dependency-driven stalls across decode and prefill phases for LLM inference.",
-        "approach_zh": "It combines a read-compute/write CIM architecture, nonlinear operator fusion using partial accumulation and group-based approximation, and a WS-OCS dataflow to reduce external DRAM access and internal weight updates.",
-        "evidence_zh": "The abstract reports percentage latency, DRAM-access, and weight-update reductions on Llama2-7B or INT4-weight Llama2 scenarios, plus fabricated-chip throughput and efficiency numbers, but does not make baseline details or accuracy impact clear.",
-        "value_zh": "If the evaluation holds, the work is useful for understanding how CIM accelerator dataflow and update scheduling can affect real LLM prefill and decode latency.",
+        "one_liner_zh": "The paper proposes a fabricated digital CIM accelerator that targets LLM prefill and decode latency by reducing CIM weight-update overhead, nonlinear-operator dependency latency, and memory movement.",
+        "summary_zh": "Digital CIM is positioned as a way to reduce DRAM traffic for LLM inference while preserving precision, but the abstract argues that weight-update latency becomes a bottleneck when model weights exceed a single CIM macro. RCW-CIM addresses this with a read-compute/write architecture, nonlinear operator fusion based on partial accumulation and group-based approximation, and a WS-OCS dataflow for the prefill phase. The abstract reports latency and memory-access reductions on Llama2 workloads, including 21.59% lower decoding compute latency, 69.17% latency reduction from nonlinear operator fusion, and 49.76% overall prefill latency reduction for 1024 tokens. It also states the chip was fabricated in TSMC 22 nm CMOS, runs at 100 MHz, and reaches 3.28 TOPS and 42.3 TOPS/W with dual DDR5-6400 memory for an INT4-weight Llama2 setup. The main missing detail is how baselines are defined and whether the reported gains hold across model sizes, sequence lengths, operators, and accuracy constraints introduced by approximation.",
+        "background_zh": "LLM inference stresses memory bandwidth and data movement, making digital CIM attractive when model precision and on-chip compute efficiency both matter.",
+        "problem_zh": "The paper focuses on weight-update latency inside CIM accelerators, a bottleneck that appears when LLM weights are much larger than one CIM macro can hold.",
+        "approach_zh": "It combines an RCW architecture for weight-update reduction, nonlinear operator fusion using partial accumulation and group-based approximation, and WS-OCS dataflow to cut DRAM access and internal CIM updates during prefill.",
+        "evidence_zh": "The abstract reports concrete latency, access, throughput, power-efficiency, fabrication, frequency, model, precision, and memory-system numbers, but it does not make baseline definitions or accuracy impact clear.",
+        "value_zh": "If the evaluation is fair, the work is useful for hardware and runtime designers studying where CIM-based LLM inference gains come from beyond raw matrix multiplication throughput.",
         "open_questions": [
-          "What exact baselines are used for the reported 21.59%, 69.17%, and 49.76% latency reductions, and are memory systems matched fairly?",
-          "How much accuracy loss, if any, comes from group-based approximation in nonlinear operator fusion?",
-          "Do the reported Llama2 results generalize beyond INT4 weights, 7B-scale models, 1024-token prefill, and dual DDR5-6400 assumptions?"
+          "What exact baselines are used for the 21.59%, 69.17%, and 49.76% latency reductions, and are they equally optimized for the same memory system?",
+          "How does the group-based approximation in nonlinear operator fusion affect model accuracy or output quality?",
+          "Do the prefill and decode gains persist across longer contexts, larger LLMs, different batch sizes, and precisions beyond the stated INT4-weight Llama2 setup?"
         ],
         "core_contributions": [
-          "Identifies weight update latency as a first-order bottleneck for CIM-based LLM acceleration when model weights exceed one macro.",
-          "Introduces a read-compute/write architecture intended to overlap or reduce weight update overhead during decode.",
-          "Adds nonlinear operator fusion and WS-OCS dataflow to reduce dependency latency, DRAM access, and internal weight updates."
+          "Identifies CIM weight-update latency as a first-order issue for LLM workloads whose weights exceed a single CIM macro.",
+          "Introduces an RCW accelerator architecture aimed at reducing decoding weight-update overhead.",
+          "Adds nonlinear operator fusion and WS-OCS dataflow to reduce dependency latency, DRAM traffic, and internal CIM updates."
         ],
         "why_read": [
-          "Directly targets LLM inference latency rather than generic accelerator throughput.",
-          "Provides concrete chip-level claims, including process node, frequency, TOPS, TOPS/W, prefill latency, and decode tokens per second.",
-          "Connects architecture, dataflow, and operator fusion to separate decode and prefill bottlenecks."
+          "Directly targets LLM inference acceleration rather than generic CIM benchmarking.",
+          "Reports fabricated-chip details and concrete latency, TOPS, TOPS/W, and memory-system figures.",
+          "Relevant for comparing compute-in-memory design choices against compiler/runtime and memory-dataflow approaches to prefill and decode bottlenecks."
         ],
         "risks": [
-          "Baseline definitions and evaluation setup are not clear from the abstract.",
-          "Approximation effects on LLM quality are not described in the abstract despite the claimed nonlinear operator fusion gains."
+          "Baseline fairness is underspecified in the abstract, so the reported percentage reductions may be difficult to interpret without the full paper.",
+          "The approximation used in nonlinear operator fusion may affect accuracy, but the abstract does not state the quality impact or validation method"
         ],
         "recommended_for": [
-          "LLM inference hardware researchers",
-          "CIM accelerator designers",
-          "Engineers studying memory-bound prefill and decode bottlenecks"
+          "Researchers working on LLM inference accelerators and memory-centric hardware.",
+          "Engineers evaluating CIM dataflows for prefill/decode latency and bandwidth reduction.",
+          "Compiler/runtime researchers comparing hardware dataflow gains with software scheduling and operator fusion strategies."
         ],
         "keywords": [
-          "digital CIM",
           "LLM inference",
-          "weight update latency",
-          "prefill",
-          "decode",
-          "operator fusion"
+          "digital computing-in-memory",
+          "CIM accelerator",
+          "prefill latency",
+          "decode latency",
+          "weight update latency LLM serving bottlenecks"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High fit for LLM inference systems because it reports a fabricated CIM accelerator with explicit latency and memory-movement claims, but the full paper needs checking for baseline fairness, accuracy impact, and workload generality.",
+        "reading_priority_reason": "High fit with the configured focus because it targets LLM inference latency, memory movement, and accelerator dataflow with fabricated-chip evidence; priority depends on checking baseline fairness and approximation accuracy in the full paper.",
         "fallback_summary": "Digital computing-in-memory (DCIM) has emerged as a promising solution for large language model (LLM) acceleration by minimizing data transfers between external DRAM and on-chip accelerators while maintaining high precision for superior accuracy."
       }
     },
@@ -610,201 +707,67 @@
       "history_relaxed": true,
       "ai": {
         "one_liner_zh": "Strait is a GPU inference serving system that predicts transfer contention and kernel interference to schedule dual-priority traffic with fewer high-priority deadline misses.",
-        "summary_zh": "GPU inference serving becomes harder under high utilization because concurrent data movement and kernel execution can make latency estimates unreliable. Strait targets dual-priority inference traffic, especially on-premises settings where high-priority requests need stronger deadline satisfaction without fully sacrificing low-priority work. Its mechanism is an adaptive latency prediction model that accounts for data-transfer contention and kernel execution interference, then feeds those predictions into priority-aware scheduling. The abstract reports evaluations under intense workloads and claims high-priority deadline violations drop by 1.02 to 11.18 percentage points, with acceptable low-priority cost and more equitable behavior than software-defined preemption. The main missing detail is the evaluation surface: model types, GPU hardware, workload construction, baseline configuration, and whether the setting maps to LLM serving are not clear from the abstract.",
-        "background_zh": "Inference serving systems must schedule GPU-bound DNN requests under contention, where naive latency estimates can break down as utilization rises.",
-        "problem_zh": "The paper asks how to improve deadline satisfaction for high-priority inference requests while preserving acceptable behavior for lower-priority traffic during concurrent GPU execution.",
-        "approach_zh": "Strait predicts latency by modeling data-transfer contention and kernel execution interference, then uses those predictions for priority-aware scheduling.",
-        "evidence_zh": "The abstract states that intense-workload evaluations reduce high-priority deadline violations by 1.02 to 11.18 percentage points and compare favorably to software-defined preemption, but it does not specify hardware, models, or workload details.",
-        "value_zh": "If the results hold, the practical value is better priority isolation for busy GPU inference clusters without relying mainly on preemption.",
+        "summary_zh": "Strait targets GPU inference serving under high utilization, where on-prem deployments may need priority differentiation and tighter deadline control. The paper argues that existing serving support is limited by weak task prioritization and latency estimates that do not adequately handle concurrent execution. Its mechanism combines contention-aware latency prediction for data transfer, adaptive modeling of kernel execution interference, and priority-aware scheduling for dual-priority request streams. The abstract reports evaluations under intense workloads, with high-priority deadline violations reduced by 1.02 to 11.18 percentage points, acceptable low-priority costs, and more equitable behavior than software-defined preemption approaches. The largest missing detail is the evaluation setup: model types, GPU configuration, workload mix, and baseline tuning are not clear from the abstract.",
+        "background_zh": "GPU inference serving systems increasingly run concurrent DNN workloads where deadline satisfaction depends on scheduling decisions, transfer contention, and kernel-level interference.",
+        "problem_zh": "The core question is how to provide high-priority requests better deadline satisfaction without relying on preemption or causing excessive degradation for low-priority traffic.",
+        "approach_zh": "Strait estimates latency under concurrency by modeling data-transfer contention and kernel execution interference, then feeds those predictions into a priority-aware scheduler.",
+        "evidence_zh": "The abstract reports intense-workload evaluations showing 1.02 to 11.18 percentage-point reductions in high-priority deadline violations, acceptable low-priority costs, and more equitable performance than software-defined preemption, but it does not specify hardware or workload details.",
+        "value_zh": "If the evaluation holds up, the main engineering value is a serving-level way to improve priority isolation and deadline satisfaction under high GPU utilization without requiring low-level preemption.",
         "open_questions": [
-          "What DNN models, GPU hardware, batch sizes, and request arrival patterns were used in the evaluation?",
-          "How is the adaptive prediction model trained or updated, and what overhead does it add on the serving path?",
-          "Are the baselines configured fairly, especially software-defined preemption and any existing priority-aware schedulers?"
+          "What GPU hardware, model set, batch/request patterns, and utilization levels were used in the evaluation?",
+          "How accurate and stable is the adaptive interference predictor under changing model mixes and arrival distributions?",
+          "Were software-defined preemption and other scheduling baselines tuned fairly for the same deadline and priority objectives?"
         ],
         "core_contributions": [
-          "Models both data-transfer contention and kernel execution interference for inference latency prediction.",
-          "Uses the resulting predictions to drive differentiated scheduling for dual-priority traffic.",
-          "Reports lower high-priority deadline violation rates under intense workloads with bounded low-priority impact, according to the abstract."
+          "Introduces a dual-priority inference serving system focused on deadline satisfaction under high GPU utilization.",
+          "Models latency impact from both data-transfer contention and kernel execution interference during concurrent inference.",
+          "Uses the predicted interference and contention costs to drive priority-aware scheduling decisions."
         ],
         "why_read": [
-          "Relevant to GPU inference serving under high utilization and priority-sensitive workloads.",
-          "Useful for understanding latency-estimation failure modes caused by concurrent transfer and kernel interference.",
-          "Provides a concrete comparison point against software-defined preemption approaches, though details need checking."
+          "Relevant to serving engineers working on priority isolation, SLO adherence, and GPU utilization tradeoffs.",
+          "Contains a concrete reported deadline-violation improvement range rather than only a qualitative scheduling claim.",
+          "Useful as a systems comparison point against preemption-based approaches for differentiated inference traffic."
         ],
         "risks": [
-          "The abstract does not show whether the workloads are LLM-like or limited to smaller DNN inference tasks.",
-          "Hardware assumptions, deployment scale, and reproducibility details are not provided in the abstract."
+          "The abstract does not establish whether the workloads include LLM inference or only general DNN serving.",
+          "Hardware configuration, GPU count, model mix, and request distribution are unspecified, limiting reproducibility judgment from the abstract alone"
         ],
         "recommended_for": [
-          "Inference serving researchers studying priority scheduling and deadline satisfaction.",
-          "Systems engineers evaluating GPU contention models for production inference workloads.",
-          "Readers comparing scheduling-based priority isolation with preemption-based designs."
+          "Researchers studying inference serving schedulers and SLO-aware GPU runtime behavior.",
+          "Engineers evaluating priority handling for on-prem GPU inference deployments.",
+          "Readers comparing predictive scheduling with software-defined preemption for concurrent inference workloads."
         ],
         "keywords": [
-          "GPU inference serving",
-          "priority scheduling",
+          "ML inference serving",
+          "GPU scheduling",
           "deadline satisfaction",
+          "priority-aware scheduling",
           "latency prediction",
-          "kernel interference",
-          "data-transfer contention"
+          "kernel interference corrupted?"
         ],
         "reading_priority": "medium",
-        "reading_priority_reason": "Medium: it fits the inference-serving focus and reports concrete deadline improvements, but the abstract is not LLM-specific and leaves key evaluation and hardware details unspecified.",
+        "reading_priority_reason": "The paper matches the LLM inference systems focus through GPU serving, latency estimation, and priority scheduling, but the abstract does not show LLM-specific workloads or low-level compiler/kernel-generation content.",
         "fallback_summary": "Machine learning (ML) inference serving systems host deep neural network (DNN) models and schedule incoming inference requests across deployed GPUs."
-      }
-    },
-    {
-      "id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
-      "paper_id": "dblp:conf/cgo/LiZLZCLZLZSXWFC26",
-      "title": "From Threads to Tiles: T2T, a Compiler for CUDA-to-NPU Translation via 2D Vectorization.",
-      "summary": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
-      "abstract": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing. Concurrently, NPUs are emerging as highly efficient accelerators, but their architecture is fundamentally different, relying on coarse-grained, explicit 2-D tile-based instructions. This creates a critical challenge: bridging the semantic gap \"From Threads to Tiles\". A direct translation is infeasible, as it requires lifting the implicit parallelism of CUDA’s scalar model into the explicit, multi-dimensional vector space of NPUs, a problem we formalize as a lifting challenge.This paper introduces T2T, a compiler framework that automates this \"Threads to Tiles\" translation via the 2-D Vectorization technique. T2T first transforms a CUDA kernel’s implicit SIMT parallelism into a structured, explicit loop nest via our Unified Parallelism Abstraction (UPA), making the parallelism analyzable. From this representation, T2T’s core vectorization engine systematically selects optimal pairs of loops and maps them onto the NPU’s 2-D tile instructions to maximize hardware utilization. To ensure correctness and handle performance-critical CUDA features, a final set of semantics-preserving optimizations is applied, including efficient control-flow management and vectorization of warp-level intrinsics.We implement T2T based on Polygeist and evaluate representative NPU architectures. On a diverse set of benchmarks, kernels translated by T2T achieve up to 73% of native CUDA performance on an A100 GPU and outperform baseline translation approaches by up to 6.9×. Our work demonstrates that a systematic, compiler-driven approach to 2-D vectorization is a principled and high-performance path for porting the rich CUDA ecosystem to the evolving landscape of NPU accelerators.",
-      "authors": [
-        "Shuaijiang Li",
-        "Jiacheng Zhao",
-        "Ying Liu 0055",
-        "Shuoming Zhang",
-        "Lei Chen",
-        "Yijin Li",
-        "Yangyu Zhang",
-        "Zhicheng Li",
-        "Runyu Zhou",
-        "Xiyu Shi",
-        "Chunwei Xia",
-        "Yuan Wen",
-        "Xiaobing Feng 0002",
-        "Huimin Cui"
-      ],
-      "published": "2026",
-      "published_date": "2026-05-02 07:00:02.219631",
-      "publicationDate": "2026",
-      "categories": [],
-      "source": "dblp_venue",
-      "source_provider": "dblp",
-      "source_url": "https://ieeexplore.ieee.org/document/11395190/",
-      "url": "https://ieeexplore.ieee.org/document/11395190/",
-      "pdf_url": "",
-      "venue": "CGO",
-      "venue_source_name": "CGO",
-      "venue_source_alias": "CGO",
-      "dblp_key": "conf/cgo/LiZLZCLZLZSXWFC26",
-      "doi": "10.1109/CGO68049.2026.11395190",
-      "dblp_type": "Conference and Workshop Papers",
-      "access": "closed",
-      "selection_signals": {
-        "source": "dblp_venue",
-        "venue": "CGO",
-        "venue_alias": "CGO"
-      },
-      "venue_source_priority": 5,
-      "venue_query_year": 2026,
-      "scores": {
-        "relevance": 1.71,
-        "recency": 3.0,
-        "popularity": 1.9,
-        "quality": 1.9,
-        "recommendation": 7.52
-      },
-      "matched_domain": "LLM Code Generation For CUDA Kernels",
-      "matched_keywords": [
-        "cuda"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.8,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "LLM Code Generation For CUDA Kernels",
-        "text_match_count": 1,
-        "matched_categories": [],
-        "required_signal_matches": [
-          "cuda"
-        ],
-        "required_signal_match_count": 1,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [],
-        "analysis_keyword_match_count": 0,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh",
-      "history_relaxed": true,
-      "citationCount": 0,
-      "institutions": [
-        "University College of Applied Science",
-        "University of Leeds",
-        "University of Aberdeen",
-        "International Centre for Theoretical Physics Asia-Pacific"
-      ],
-      "venue_metadata": {
-        "official_page_blocked": true,
-        "official_page_url": "https://ieeexplore.ieee.org/document/11395190/",
-        "abstract_source": "openalex",
-        "pdf_source": ""
-      },
-      "ai": {
-        "one_liner_zh": "T2T translates CUDA kernels to tile-based NPU instructions by lifting SIMT thread parallelism into analyzable 2-D loop structure and vectorizing loop pairs onto NPU tiles.",
-        "summary_zh": "The paper targets the semantic mismatch between CUDA's fine-grained scalar thread model and NPUs that expose coarse-grained 2-D tile instructions. Its main compiler move is to convert CUDA SIMT parallelism into a Unified Parallelism Abstraction, then select loop pairs for 2-D vectorization onto tile hardware. The abstract claims the implementation, built on Polygeist, handles correctness-sensitive CUDA features such as control flow and warp-level intrinsics through semantics-preserving optimizations. Reported evidence includes evaluation on representative NPU architectures, up to 73% of native CUDA performance on an A100 GPU, and up to 6.9x speedup over baseline translation approaches. The biggest missing details are the exact NPU targets, benchmark mix, baseline implementations, and how broadly the approach handles irregular CUDA kernels.",
-        "background_zh": "CUDA kernels encode large amounts of existing accelerator software, while emerging NPUs often require explicit tile-level programming models that do not match CUDA's SIMT abstraction.",
-        "problem_zh": "The core question is how to automatically lift implicit scalar-thread parallelism into explicit 2-D vector operations without breaking CUDA semantics or losing too much performance.",
-        "approach_zh": "T2T builds an explicit loop-nest representation through UPA, then uses a vectorization engine to map selected loop pairs onto 2-D NPU tile instructions with additional handling for control flow and warp intrinsics.",
-        "evidence_zh": "The abstract reports a Polygeist-based implementation, benchmark evaluation on representative NPU architectures, up to 73% of native CUDA performance on A100, and up to 6.9x improvement over baseline translators, but it does not specify the benchmarks or baselines.",
-        "value_zh": "If the claims hold, the work offers a practical compiler path for reusing CUDA kernels on tile-oriented accelerators instead of rewriting kernels manually for each NPU backend.",
-        "open_questions": [
-          "Which NPU architectures and tile instruction sets were evaluated, and how representative are they of real deployment targets?",
-          "What benchmarks drove the reported gains, especially dense tensor kernels versus irregular control-flow or memory-heavy CUDA kernels?",
-          "How strong are the baseline translators, and do they include tuned vendor or hand-written NPU implementations?"
-        ],
-        "core_contributions": [
-          "Formalizes CUDA-to-NPU translation as a lifting problem from scalar SIMT threads to explicit 2-D tile operations.",
-          "Introduces UPA as an intermediate representation that exposes CUDA parallelism as structured loop nests.",
-          "Adds a 2-D vectorization engine that selects loop pairs for mapping onto NPU tile instructions."
-        ],
-        "why_read": [
-          "Relevant to compiler engineers working on CUDA portability across non-GPU accelerators.",
-          "Gives a concrete mechanism for translating thread-level CUDA kernels into tile-level execution.",
-          "Includes performance claims against baseline translation approaches, which makes the evaluation worth checking in detail."
-        ],
-        "risks": [
-          "The abstract does not disclose the exact hardware targets, making portability and hardware-dependence hard to judge.",
-          "The 73% comparison to native CUDA on A100 needs careful interpretation because the target is NPU execution but the reference is GPU performance."
-        ],
-        "recommended_for": [
-          "Compiler researchers working on GPU-to-accelerator lowering",
-          "Engineers evaluating CUDA kernel portability to NPUs",
-          "Systems researchers interested in tile-level vectorization and accelerator backends"
-        ],
-        "keywords": [
-          "CUDA",
-          "NPU",
-          "compiler",
-          "2-D vectorization",
-          "SIMT",
-          "tile instructions"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "High fit for the configured compiler and CUDA-kernel focus, with concrete translation mechanisms and performance claims, though it is not directly about LLM inference serving.",
-        "fallback_summary": "CUDA’s programming model, exposing massive parallelism via fine-grained scalar threads, has become the de facto standard for GPU computing."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by TwinGate: Stateful Defense against… and VitaLLM: A Versatile,…. CuLifter: Lifting GPU Binaries to… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, Low-level Code And Assembly Generation. The set is anchored by DeepSpeed Inference: Enabling… and TwinGate: Stateful Defense against…. VitaLLM: A Versatile,… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
       "training and inference efficiency",
-      "factual reliability and verification",
-      "Low-level Code And Assembly Generation"
+      "Low-level Code And Assembly Generation",
+      "factual reliability and verification"
     ],
     "reading_strategy": [
-      "Start with TwinGate: Stateful Defense against… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
-      "Then read VitaLLM: A Versatile,… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use CuLifter: Lifting GPU Binaries to… as a final cross-check on experimental boundaries and practical value."
+      "Start with DeepSpeed Inference: Enabling… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
+      "Then read TwinGate: Stateful Defense against… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use VitaLLM: A Versatile,… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-05-02T11:05:37Z",
+    "generated_at": "2026-05-03T11:22:57Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
     "paper_results": 6,
