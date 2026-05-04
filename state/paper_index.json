@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-03",
+  "last_updated": "2026-05-04",
   "papers": [
     {
       "paper_id": "2604.02106v1",
@@ -1442,6 +1442,34 @@
       "cooldown_until": "2026-05-10"
     },
     {
+      "paper_id": "2605.00686v1",
+      "title": "Eliminating Hidden Serialization in Multi-Node Megakernel Communication",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "published": "2026-05-01T14:18:30Z",
+      "source_lane": "fresh",
+      "topics": [
+        "MoE inference",
+        "megakernel",
+        "RDMA",
+        "GPU-initiated communication",
+        "proxy transport",
+        "NIC orderingSerialization"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-05-04",
+      "last_seen_date": "2026-05-04",
+      "last_recommended_date": "2026-05-04",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-05-04",
+          "recommendation": 7.6,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-07-03"
+    },
+    {
       "paper_id": "2603.17800v1",
       "title": "Enabling RISC-V Vector Code Generation in MLIR through Custom xDSL Lowerings",
       "domain": "LLM Code Generation For CUDA Kernels",
@@ -2749,6 +2777,34 @@
       "cooldown_until": "2026-05-15"
     },
     {
+      "paper_id": "2605.00616v1",
+      "title": "LLM-Emu: Native Runtime Emulation of LLM Inference via Profile-Driven Sampling",
+      "domain": "LLM Inference Systems",
+      "published": "2026-05-01T12:35:21Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM serving",
+        "vLLM",
+        "inference emulation",
+        "profile-driven sampling",
+        "KV cache",
+        "online workload evaluation"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-05-04",
+      "last_seen_date": "2026-05-04",
+      "last_recommended_date": "2026-05-04",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-05-04",
+          "recommendation": 8.63,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-07-03"
+    },
+    {
       "paper_id": "dblp:conf/cgo/FangKRAM26",
       "title": "LLM-VeriOpt: Verification-Guided Reinforcement Learning for LLM-Based Compiler Optimization.",
       "domain": "Low-level Code And Assembly Generation",
@@ -2983,6 +3039,34 @@
         }
       ],
       "cooldown_until": "2026-05-09"
+    },
+    {
+      "paper_id": "2605.00342v1",
+      "title": "Making Every Verified Token Count: Adaptive Verification for MoE Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "published": "2026-05-01T01:52:01Z",
+      "source_lane": "fresh",
+      "topics": [
+        "MoE inference",
+        "speculative decoding",
+        "adaptive verification",
+        "expert activation cost",
+        "SGLang",
+        "LLM serving"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-05-04",
+      "last_seen_date": "2026-05-04",
+      "last_recommended_date": "2026-05-04",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-05-04",
+          "recommendation": 9.97,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-07-03"
     },
     {
       "paper_id": "2603.15569v1",
@@ -4150,6 +4234,34 @@
       "cooldown_until": "2026-06-20"
     },
     {
+      "paper_id": "2605.00528v1",
+      "title": "SAGA: Workflow-Atomic Scheduling for AI Agent Inference on GPU Clusters",
+      "domain": "LLM Inference Systems",
+      "published": "2026-05-01T09:05:28Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "agent serving",
+        "GPU scheduling",
+        "KV cache",
+        "workflow scheduling",
+        "vLLM"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-05-04",
+      "last_seen_date": "2026-05-04",
+      "last_recommended_date": "2026-05-04",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-05-04",
+          "recommendation": 9.3,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-07-03"
+    },
+    {
       "paper_id": "2604.20420v1",
       "title": "Scalable AI Inference: Performance Analysis and Optimization of AI Model Serving",
       "domain": "LLM Inference Systems",
@@ -4237,6 +4349,34 @@
         }
       ],
       "cooldown_until": "2026-06-07"
+    },
+    {
+      "paper_id": "2605.00519v1",
+      "title": "Silicon Showdown: Performance, Efficiency, and Ecosystem Barriers in Consumer-Grade LLM Inference",
+      "domain": "LLM Inference Systems",
+      "published": "2026-05-01T08:45:47Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "consumer hardware",
+        "Nvidia Blackwell",
+        "Apple Silicon",
+        "TensorRT-LLM",
+        "NVFP4 quantization provides reported 1.6x throughput over BF16, 151 tokens/s versus 92 tokens/s, while CPU offload is reported to reduce throughput by over 90% and Apple UMA is reported to improve memory scaling and energy efficiency."
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-05-04",
+      "last_seen_date": "2026-05-04",
+      "last_recommended_date": "2026-05-04",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-05-04",
+          "recommendation": 9.38,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-07-03"
     },
     {
       "paper_id": "2604.03088v1",
@@ -5299,6 +5439,34 @@
         }
       ],
       "cooldown_until": "2026-06-14"
+    },
+    {
+      "paper_id": "2605.00320v1",
+      "title": "VitaLLM: A Versatile and Tiny Accelerator for Mixed-Precision LLM Inference on Edge Devices",
+      "domain": "LLM Inference Systems",
+      "published": "2026-05-01T00:59:46Z",
+      "source_lane": "fresh",
+      "topics": [
+        "LLM inference",
+        "edge accelerator",
+        "mixed precision",
+        "ternary weights",
+        "BitNet b1.58",
+        "KV cache pruning architecture"
+      ],
+      "reading_status": "unread",
+      "first_seen_date": "2026-05-04",
+      "last_seen_date": "2026-05-04",
+      "last_recommended_date": "2026-05-04",
+      "recommended_count": 1,
+      "scores_history": [
+        {
+          "date": "2026-05-04",
+          "recommendation": 9.38,
+          "lane": "fresh"
+        }
+      ],
+      "cooldown_until": "2026-07-03"
     },
     {
       "paper_id": "2604.27396v1",

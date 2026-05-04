@@ -1,274 +1,300 @@
 {
-  "target_date": "2026-05-03",
+  "target_date": "2026-05-04",
   "date_windows": {
     "recent_window": {
       "days": 30,
-      "start": "2026-04-03",
-      "end": "2026-05-03"
+      "start": "2026-04-04",
+      "end": "2026-05-04"
     },
     "hot_window": {
       "days": 365,
       "exclude_recent_days": 30,
-      "start": "2025-05-03",
-      "end": "2026-04-02"
+      "start": "2025-05-04",
+      "end": "2026-04-03"
     }
   },
   "total_found": 221,
   "total_venue": 14,
-  "total_filtered": 19,
+  "total_filtered": 20,
   "total_recent": 200,
   "total_hot": 7,
-  "total_unique": 19,
+  "total_unique": 20,
   "total_classic_backlog_candidates": 11,
   "selection": {
     "max_recommendations": 6,
     "selected_count": 6,
     "lane_counts": {
-      "fresh": 5,
+      "fresh": 6,
       "established": 0,
-      "classic": 1,
-      "history_filtered": 21,
-      "history_relaxed": 5,
-      "classic_slot_active": 1
+      "classic": 0,
+      "history_filtered": 11,
+      "history_relaxed": 0,
+      "classic_slot_active": 0
     },
     "classic_policy": {
       "enabled": true,
       "cadence_days": 3,
       "anchor_date": "2026-03-07",
-      "slot_active_today": true
+      "slot_active_today": false
     }
   },
   "top_papers": [
     {
-      "paper_id": "2207.00032",
-      "arxiv_id": "2207.00032",
-      "title": "DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale",
-      "summary": "Presents a transformer inference system that combines multi-GPU execution, kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support to scale model serving under latency and throughput constraints.",
+      "id": "http://arxiv.org/abs/2605.00342v1",
+      "arxiv_id": "2605.00342v1",
+      "title": "Making Every Verified Token Count: Adaptive Verification for MoE Speculative Decoding",
+      "summary": "Tree-based speculative decoding accelerates autoregressive generation by verifying multiple draft candidates in parallel, but this advantage weakens for sparse Mixture-of-Experts (MoE) models. As the draft tree grows, different branches activate different experts, expanding the union of activated experts and substantially increasing target-side verification cost. We propose EVICT, a training-free, hyperparameter-free, and lossless adaptive verification method for MoE speculative decoding. EVICT makes every verified token count by truncating the draft tree before target verification and retaining only the cost-effective prefix. It leverages fine-grained drafter signals to estimate candidate benefit, combines them with offline-profiled verification cost, and remains highly compatible with the high-performance graph-based serving framework SGLang. Extensive experiments on diverse MoE backbones and benchmarks show that EVICT achieves up to 2.35x speedup over autoregressive decoding and an average 1.21x speedup over the state-of-the-art baseline EAGLE-3, while significantly reducing unnecessary expert activations during verification.",
       "authors": [
-        "Reza Yazdani Aminabadi",
-        "Samyam Rajbhandari",
-        "Minjia Zhang",
-        "Ammar Ahmad Awan",
-        "Cheng Li",
-        "Du Li",
-        "Elton Zheng",
-        "Jeff Rasley",
-        "Shaden Smith",
-        "Olatunji Ruwase",
-        "Yuxiong He"
-      ],
-      "published": "2022-06-30",
-      "published_date": "2022-06-30 00:00:00",
-      "categories": [
-        "cs.DC",
-        "cs.LG"
-      ],
-      "source": "classic_backlog",
-      "matched_domain": "LLM Inference Systems",
-      "matched_keywords": [
-        "inference-system",
-        "serving",
-        "multi-gpu",
-        "offload"
-      ],
-      "matched_domain_priority": 5,
-      "domain_preference_bonus": 0.6,
-      "selection_lane": "classic",
-      "is_hot_paper": false,
-      "source_url": "https://arxiv.org/abs/2207.00032",
-      "pdf_url": "https://arxiv.org/pdf/2207.00032.pdf",
-      "scores": {
-        "relevance": 2.9,
-        "recency": 0.0,
-        "popularity": 0.0,
-        "quality": 0.0,
-        "recommendation": 5.92
-      },
-      "classic_rotation_score": 10.4484,
-      "citationCount": 577,
-      "influentialCitationCount": 64,
-      "venue": "International Conference for High Performance Computing, Networking, Storage and Analysis",
-      "journal_ref": "SC22: International Conference for High Performance Computing, Networking, Storage and Analysis",
-      "ai": {
-        "one_liner_zh": "DeepSpeed Inference is presented as a transformer serving system that combines multi-GPU execution, optimized kernels, and CPU/GPU/NVMe memory support for latency- and throughput-constrained inference.",
-        "summary_zh": "Transformer inference at large scale is constrained by latency, throughput, and memory capacity, especially when models exceed a single GPU's practical serving envelope. This paper presents DeepSpeed Inference as a serving system that combines multi-GPU execution, transformer kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support. The claimed mechanism is system-level coordination across parallel execution, optimized kernels, and an offload-capable memory hierarchy rather than a model-side change. The supplied abstract supports only the existence of these components and the goal of scaling serving under latency and throughput constraints; it does not report concrete measurements, baselines, hardware details, or workload sizes. Its practical value is in framing inference efficiency as runtime, kernel, and memory-management co-design, but a full read must verify where the actual gains come from and how much offload affects latency.",
-        "background_zh": "Large transformer serving pushes against GPU memory limits and latency-throughput tradeoffs, making inference systems depend on parallelism, kernel efficiency, and memory hierarchy decisions.",
-        "problem_zh": "The paper targets how to serve transformer models at larger scale while maintaining practical latency and throughput constraints.",
-        "approach_zh": "It combines multi-GPU execution, transformer-specific kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support in one inference system.",
-        "evidence_zh": "The abstract states the system design goals and components, but it does not provide performance numbers, baseline comparisons, hardware setup, or workload details.",
-        "value_zh": "If the claims hold, the work is useful for understanding how inference serving efficiency can come from coordinated runtime, kernel, and memory-system design.",
-        "open_questions": [
-          "What specific kernel optimizations are used, and are the gains from compute efficiency, memory bandwidth reduction, launch overhead reduction, or scheduling?",
-          "How are multi-GPU execution and heterogeneous CPU/GPU/NVMe memory managed under latency constraints, and what workloads trigger offload bottlenecks?",
-          "What baselines, model sizes, hardware configurations, and latency-throughput targets are used in the evaluation?"
-        ],
-        "core_contributions": [
-          "A transformer inference system aimed at scaling serving under latency and throughput constraints.",
-          "Integration of multi-GPU execution with transformer kernel optimizations.",
-          "Support for heterogeneous CPU/GPU/NVMe memory as part of the serving path."
-        ],
-        "why_read": [
-          "Directly aligned with LLM inference systems and serving efficiency.",
-          "Relevant for understanding system-level tradeoffs between GPU parallelism, kernel optimization, and offload-backed memory capacity.",
-          "Useful context for later inference runtimes that combine kernel work with distributed execution and memory hierarchy management."
-        ],
-        "risks": [
-          "The provided abstract is too high-level to judge baseline fairness or actual performance impact.",
-          "Offloading through CPU or NVMe may improve capacity while hurting latency, but the abstract does not quantify that tradeoff."
-        ],
-        "recommended_for": [
-          "Researchers and engineers studying LLM inference serving systems.",
-          "Practitioners comparing multi-GPU inference, kernel optimization, and offload-based scaling strategies.",
-          "Readers building context on classic transformer inference system designs."
-        ],
-        "keywords": [
-          "LLM inference",
-          "transformer serving",
-          "multi-GPU execution",
-          "kernel optimization",
-          "CPU/GPU/NVMe memory",
-          "offload"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "High fit for the configured LLM inference systems focus, with strong topical signals for serving, multi-GPU execution, and offload, but the abstract is underspecified on evaluation and measured gains.",
-        "fallback_summary": "Presents a transformer inference system that combines multi-GPU execution, kernel optimizations, and heterogeneous CPU/GPU/NVMe memory support to scale model serving under latency and throughput constraints."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.27861v1",
-      "arxiv_id": "2604.27861v1",
-      "title": "TwinGate: Stateful Defense against Decompositional Jailbreaks in Untraceable Traffic via Asymmetric Contrastive Learning",
-      "summary": "Decompositional jailbreaks pose a critical threat to large language models (LLMs) by allowing adversaries to fragment a malicious objective into a sequence of individually benign queries that collectively reconstruct prohibited content. In real-world deployments, LLMs face a continuous, untraceable stream of fully anonymized and arbitrarily interleaved requests, infiltrated by covertly distributed adversarial queries. Under this rigorous threat model, state-of-the-art defensive strategies exhibit fundamental limitations. In the absence of trustworthy user metadata, they are incapable of tracking global historical contexts, while their deployment of generative models for real-time monitoring introduces computationally prohibitive overhead. To address this, we present TwinGate, a stateful dual-encoder defense framework. TwinGate employs Asymmetric Contrastive Learning (ACL) to cluster semantically disparate but intent-matched malicious fragments in a shared latent space, while a parallel frozen encoder suppresses false positives arising from benign topical overlap. Each request requires only a single lightweight forward pass, enabling the defense to execute in parallel with the target model's prefill phase at negligible latency overhead. To evaluate our approach and advance future research, we construct a comprehensive dataset of over 3.62 million instructions spanning 8,600 distinct malicious intents. Evaluated on this large-scale corpus under a strictly causal protocol, TwinGate achieves high malicious intent recall at a remarkably low false positive rate while remaining highly robust against adaptive attacks. Furthermore, our proposal substantially outperforms stateful and stateless baselines, delivering superior throughput and reduced latency.",
-      "authors": [
-        "Bowen Sun",
-        "Chaozhuo Li",
-        "Yaodong Yang",
-        "Yiwei Wang",
-        "Chaowei Xiao"
+        "Lehan Pan",
+        "Ziyang Tao",
+        "Ruoyu Pang",
+        "Xiao Wang",
+        "Jianjun Zhao",
+        "Yanyong Zhang"
       ],
       "author_details": [
         {
-          "name": "Bowen Sun"
+          "name": "Lehan Pan"
         },
         {
-          "name": "Chaozhuo Li"
+          "name": "Ziyang Tao"
         },
         {
-          "name": "Yaodong Yang"
+          "name": "Ruoyu Pang"
         },
         {
-          "name": "Yiwei Wang"
+          "name": "Xiao Wang"
         },
         {
-          "name": "Chaowei Xiao"
+          "name": "Jianjun Zhao"
+        },
+        {
+          "name": "Yanyong Zhang"
         }
       ],
-      "published": "2026-04-30T13:44:01Z",
-      "published_date": "2026-04-30 13:44:01+00:00",
-      "updated": "2026-04-30T13:44:01Z",
-      "primary_category": "cs.CR",
+      "published": "2026-05-01T01:52:01Z",
+      "published_date": "2026-05-01 01:52:01+00:00",
+      "updated": "2026-05-01T01:52:01Z",
+      "primary_category": "cs.CL",
       "categories": [
-        "cs.CR",
-        "cs.CL",
-        "cs.LG"
+        "cs.CL"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.27861v1",
-      "url": "http://arxiv.org/abs/2604.27861v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.00342v1",
+      "url": "http://arxiv.org/abs/2605.00342v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 10.0
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 9.97
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "prefill",
-        "throughput",
-        "latency",
-        "cs.LG",
-        "cs.CL"
+        "serving",
+        "speculative decoding",
+        "cs.CL",
+        "speedup",
+        "baseline"
       ],
       "matched_domain_priority": 5,
       "domain_preference_bonus": 0.8,
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 3,
+        "text_match_count": 2,
         "matched_categories": [
-          "cs.LG",
           "cs.CL"
         ],
         "required_signal_matches": [
-          "prefill"
+          "speculative decoding"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [
+          "speedup"
+        ],
+        "bonus_keyword_match_count": 1,
+        "analysis_keyword_matches": [
+          "baseline",
+          "speedup"
+        ],
+        "analysis_keyword_match_count": 2,
+        "signal_bonus": 0.35,
+        "bonus_keyword_bonus": 0.18
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "EVICT adapts MoE speculative-decoding verification by pruning draft-tree prefixes whose expected token benefit does not justify target-side expert activation cost.",
+        "summary_zh": "Tree-based speculative decoding can lose efficiency on sparse MoE models because wider draft trees make different branches activate different experts, raising target-side verification cost. EVICT is a training-free, hyperparameter-free, lossless method that truncates the draft tree before verification and keeps only the prefix estimated to be cost-effective. The estimate combines fine-grained drafter signals with offline-profiled verification cost, and the abstract says the method is compatible with SGLang. The paper reports experiments across diverse MoE backbones and benchmarks, with up to 2.35x speedup over autoregressive decoding and 1.21x average speedup over EAGLE-3, plus fewer unnecessary expert activations. The biggest missing details are the hardware and serving setup, the exact profiling procedure, and how robust the cost model is across workloads.",
+        "background_zh": "MoE LLM serving makes speculative decoding harder because verification cost depends on the union of experts activated by draft branches, not just token count.",
+        "problem_zh": "The paper asks how to preserve speculative decoding gains for MoE models when larger draft trees inflate target-side expert computation.",
+        "approach_zh": "EVICT scores candidate draft prefixes using drafter-side benefit signals and offline verification-cost profiles, then truncates the tree before target verification.",
+        "evidence_zh": "The abstract reports extensive experiments on diverse MoE backbones and benchmarks, claiming up to 2.35x speedup over autoregressive decoding, 1.21x average speedup over EAGLE-3, and reduced unnecessary expert activations; it does not specify hardware, batch settings, or baseline implementation details.",
+        "value_zh": "If the claims hold, this is a practical serving-side optimization for MoE speculative decoding that targets wasted expert activations without retraining.",
+        "open_questions": [
+          "How are the offline verification-cost profiles collected, and do they remain valid across hardware, batch size, sequence length, and routing distributions?",
+          "What exact drafter signals are used to estimate prefix benefit, and what runtime overhead do they add?",
+          "How fair is the EAGLE-3 comparison in terms of implementation, SGLang integration, batching policy, and MoE backbone configuration?"
+        ],
+        "core_contributions": [
+          "Identifies expert-union growth across speculative draft branches as a MoE-specific verification bottleneck.",
+          "Introduces adaptive pre-verification tree truncation that aims to keep only cost-effective draft prefixes.",
+          "Combines drafter-derived benefit estimates with offline-profiled target verification costs without training or hyperparameter tuning, according to the abstract."
+        ],
+        "why_read": [
+          "Directly targets LLM inference serving efficiency for sparse MoE models.",
+          "Relevant to speculative decoding systems where verification cost, not draft generation alone, determines throughput.",
+          "Includes claimed integration compatibility with SGLang, making it potentially useful for production-oriented serving work."
+        ],
+        "risks": [
+          "The abstract does not disclose hardware, batch sizes, sequence lengths, or request mix, which are central to serving-speed claims.",
+          "Offline cost profiling may be sensitive to deployment configuration, but the abstract does not establish portability across systems."
+        ],
+        "recommended_for": [
+          "LLM serving researchers working on speculative decoding",
+          "Engineers optimizing MoE inference throughput and expert activation cost",
+          "Systems readers tracking SGLang-compatible decoding optimizations"
+        ],
+        "keywords": [
+          "MoE inference",
+          "speculative decoding",
+          "adaptive verification",
+          "expert activation cost",
+          "SGLang",
+          "LLM serving"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High priority because it directly matches the LLM inference systems focus, targets a concrete MoE serving bottleneck, and reports speedups over both autoregressive decoding and EAGLE-3, though the full read must verify evaluation setup and cost-model robustness.",
+        "fallback_summary": "Tree-based speculative decoding accelerates autoregressive generation by verifying multiple draft candidates in parallel, but this advantage weakens for sparse Mixture-of-Experts (MoE) models."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2605.00519v1",
+      "arxiv_id": "2605.00519v1",
+      "title": "Silicon Showdown: Performance, Efficiency, and Ecosystem Barriers in Consumer-Grade LLM Inference",
+      "summary": "The operational landscape of local Large Language Model (LLM) inference has shifted from lightweight models to datacenter-class weights exceeding 70B parameters, creating profound systems challenges for consumer hardware. This paper presents a systematic empirical analysis of the Nvidia and Apple Silicon ecosystems, specifically characterizing the distinct intra-architecture trade-offs required to deploy these massive models. On the Nvidia Blackwell architecture, we identify a critical \"Backend Dichotomy\" within the TensorRT-LLM stack: while the new NVFP4 quantization format delivers a 1.6x throughput advantage over optimized BF16 baselines (151 tokens/s vs. 92 tokens/s), realizing this performance requires navigating complex runtime constraints that trade startup latency for generation speed. Furthermore, we characterize the \"VRAM Wall\" for 70B+ models: on discrete GPUs, users face a destructive choice between aggressive quantization (e.g., Q2) that degrades model intelligence to fit in VRAM, or PCIe-bottlenecked CPU offloading, which reduces throughput by over 90% compared to full-GPU execution. Conversely, Apple's Unified Memory Architecture (UMA) circumvents these bottlenecks, enabling linear scaling for 80B parameter models at practical 4-bit precisions. This architectural divergence extends to operational sustainability, where Apple's SoC design demonstrates up to a 23x advantage in energy efficiency (tokens/joule). We conclude that for consumer-grade inference, the optimal hardware is defined by a complex interplay between compute density (Nvidia) and memory capacity (Apple), moderated by the significant \"ecosystem friction\" of proprietary quantization workflows.",
+      "authors": [
+        "Allan Kazakov",
+        "Abdurrahman Javat"
+      ],
+      "author_details": [
+        {
+          "name": "Allan Kazakov"
+        },
+        {
+          "name": "Abdurrahman Javat"
+        }
+      ],
+      "published": "2026-05-01T08:45:47Z",
+      "published_date": "2026-05-01 08:45:47+00:00",
+      "updated": "2026-05-01T08:45:47Z",
+      "primary_category": "cs.PF",
+      "categories": [
+        "cs.PF",
+        "cs.AI",
+        "cs.AR"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2605.00519v1",
+      "url": "http://arxiv.org/abs/2605.00519v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 3.0,
+        "recency": 3.0,
+        "popularity": 1.3,
+        "quality": 1.3,
+        "recommendation": 9.38
+      },
+      "matched_domain": "LLM Inference Systems",
+      "matched_keywords": [
+        "llm inference",
+        "throughput",
+        "latency",
+        "quantization",
+        "cs.AR",
+        "runtime",
+        "memory",
+        "tokens/s"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Inference Systems",
+        "text_match_count": 4,
+        "matched_categories": [
+          "cs.AR"
+        ],
+        "required_signal_matches": [
+          "runtime"
         ],
         "required_signal_match_count": 1,
         "bonus_keyword_matches": [
           "throughput",
-          "latency"
+          "latency",
+          "memory",
+          "tokens/s"
         ],
-        "bonus_keyword_match_count": 2,
+        "bonus_keyword_match_count": 4,
         "analysis_keyword_matches": [
           "throughput",
-          "latency"
+          "latency",
+          "memory"
         ],
-        "analysis_keyword_match_count": 2,
+        "analysis_keyword_match_count": 3,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
+        "bonus_keyword_bonus": 0.5
       },
       "selection_lane": "fresh",
-      "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "TwinGate targets decompositional jailbreaks in anonymized LLM traffic with a stateful dual-encoder monitor designed to run alongside prefill with low serving overhead.",
-        "summary_zh": "This paper addresses a safety problem that becomes harder in real LLM serving settings: malicious intent can be split across benign-looking, anonymized, interleaved requests. TwinGate uses a stateful dual-encoder design, with asymmetric contrastive learning to bring intent-matched malicious fragments together and a frozen parallel encoder to reduce false positives from benign topical overlap. The abstract claims each request needs only one lightweight forward pass that can run in parallel with the target model's prefill phase, so the system is positioned as a low-latency serving defense rather than a heavyweight generative monitor. Evidence is reported on a 3.62M-instruction dataset covering 8,600 malicious intents, with high recall, low false positives, adaptive robustness, and better throughput and latency than baselines. The main missing details are the exact metrics, hardware setup, baseline implementations, and how the state mechanism works under fully anonymized interleaving.",
-        "background_zh": "Decompositional jailbreaks exploit the gap between per-request moderation and intent that accumulates across a request stream.",
-        "problem_zh": "The paper asks how to detect distributed malicious intent when user identity is unavailable and generative monitoring is too expensive for real-time serving.",
-        "approach_zh": "TwinGate maps semantically different but intent-aligned malicious fragments into a shared latent space while using a frozen encoder branch to suppress benign topic-based collisions.",
-        "evidence_zh": "The abstract reports a large causal-protocol evaluation with 3.62M instructions and 8,600 malicious intents, but it does not provide exact recall, false-positive, throughput, latency, or hardware numbers.",
-        "value_zh": "If the latency claim holds, this is useful for LLM serving teams that need cross-request safety state without putting a generative model in the critical path.",
+        "one_liner_zh": "The paper compares consumer Nvidia Blackwell and Apple Silicon paths for 70B+ local LLM inference, arguing that Nvidia's NVFP4 throughput gains collide with VRAM and runtime friction while Apple UMA offers memory headroom and energy-efficiency advantages.",
+        "summary_zh": "Local LLM inference is moving toward datacenter-scale 70B+ models, which stresses consumer hardware through memory capacity, bandwidth, runtime setup, and power limits. The paper presents an empirical comparison of Nvidia Blackwell and Apple Silicon, highlighting a TensorRT-LLM backend trade-off where NVFP4 improves throughput over BF16 but introduces runtime constraints and startup-latency trade-offs. It also frames a VRAM wall for large models on discrete GPUs, where aggressive quantization or CPU offload can damage quality or throughput, while Apple UMA is claimed to scale more smoothly for 80B models at practical 4-bit precision. The abstract reports concrete throughput, offload, and energy-efficiency numbers, including a 1.6x NVFP4 throughput gain and up to 23x tokens-per-joule advantage for Apple's SoC design. The main missing detail is the full benchmark setup: model set, prompt lengths, decoding settings, power measurement method, quality impact of quantization, and fairness of software baselines.",
+        "background_zh": "Consumer local inference is increasingly asked to run 70B+ models, making memory capacity, quantization format, runtime overhead, and power efficiency first-order systems constraints.",
+        "problem_zh": "The paper asks which consumer hardware ecosystem handles large-model inference better when compute density, VRAM limits, unified memory, offloading, and proprietary runtime workflows interact.",
+        "approach_zh": "It compares Nvidia Blackwell with TensorRT-LLM and Apple Silicon UMA, using measured throughput, energy efficiency, quantization behavior, and offload outcomes to characterize architectural trade-offs.",
+        "evidence_zh": "The abstract reports empirical measurements, including NVFP4 at 151 tokens/s versus 92 tokens/s for BF16, over 90% throughput loss under CPU offload, linear UMA scaling for 80B models, and up to 23x tokens-per-joule advantage, but it does not specify the full benchmark methodology.",
+        "value_zh": "If the evaluation is methodologically sound, the paper is useful for choosing consumer inference hardware and for understanding when kernel/runtime optimization is less important than memory architecture and ecosystem friction.",
         "open_questions": [
-          "What are the exact recall, false-positive, latency, and throughput numbers, and on what serving hardware were they measured?",
-          "How does TwinGate maintain useful state in fully anonymized and arbitrarily interleaved traffic without reconstructing user identity?",
-          "Are the stateful and stateless baselines implemented with comparable batching, encoder size, and deployment assumptions?"
+          "What exact models, prompt lengths, batch sizes, decoding settings, and software versions were used for the Nvidia and Apple measurements?",
+          "How was quantization quality evaluated, especially the claim that Q2 degrades model intelligence for fitting 70B+ models in VRAM?",
+          "How were power and energy-efficiency numbers measured, and were thermal limits, sustained runs, and comparable utilization controlled?"
         ],
         "core_contributions": [
-          "Frames decompositional jailbreak defense under anonymized, interleaved traffic rather than trusted user sessions.",
-          "Introduces an asymmetric contrastive dual-encoder design for clustering malicious intent fragments while limiting benign topical false positives.",
-          "Constructs a 3.62M-instruction evaluation corpus spanning 8,600 malicious intents, according to the abstract."
+          "Empirical framing of consumer 70B+ LLM inference as a trade-off between Nvidia compute density and Apple unified-memory capacity.",
+          "Identification of a TensorRT-LLM backend trade-off where NVFP4 throughput gains depend on accepting runtime and startup-latency constraints.",
+          "Characterization of discrete-GPU VRAM limits, CPU offload penalties, and Apple UMA scaling behavior for large local models."
         ],
         "why_read": [
-          "Relevant to LLM serving safety where monitoring overhead and prefill-path placement matter.",
-          "Contains a concrete systems claim: one lightweight forward pass per request running in parallel with target-model prefill.",
-          "May provide useful evaluation methodology for strictly causal, stateful defenses against fragmented attacks."
+          "Directly matches LLM inference systems and serving-efficiency interests with concrete throughput, memory, and energy signals.",
+          "Surfaces practical deployment constraints that are often hidden behind peak tokens-per-second numbers.",
+          "Useful as a hardware-selection and runtime-friction case study, provided the full methodology supports the claims."
         ],
         "risks": [
-          "The abstract gives no concrete latency, throughput, recall, or false-positive numbers, so the strength of the systems claim is hard to judge.",
-          "The mechanism for state under anonymized interleaving is central but underspecified in the abstract exposed here."
+          "The abstract gives headline measurements but not enough benchmark detail to judge fairness across hardware and software stacks.",
+          "Quantization quality claims may depend strongly on model, task, and evaluation metric, none of which are specified in the abstract."
         ],
         "recommended_for": [
-          "LLM serving engineers evaluating low-overhead safety monitors.",
-          "Researchers studying stateful defenses against multi-turn or fragmented jailbreaks.",
-          "Security teams comparing encoder-based monitoring against generative moderation."
+          "LLM inference engineers evaluating local 70B+ deployment paths.",
+          "Systems researchers studying memory-capacity limits, quantization trade-offs, and runtime overheads on consumer hardware.",
+          "Practitioners comparing Nvidia discrete GPUs with Apple Silicon for private or workstation-scale inference."
         ],
         "keywords": [
-          "LLM safety",
-          "decompositional jailbreak",
-          "stateful defense",
-          "dual encoder",
-          "contrastive learning",
-          "prefill overlap inference monitoring"
+          "LLM inference",
+          "consumer hardware",
+          "Nvidia Blackwell",
+          "Apple Silicon",
+          "TensorRT-LLM",
+          "NVFP4 quantization provides reported 1.6x throughput over BF16, 151 tokens/s versus 92 tokens/s, while CPU offload is reported to reduce throughput by over 90% and Apple UMA is reported to improve memory scaling and energy efficiency."
         ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "High fit for LLM serving security and latency-aware monitoring, but only adjacent to the configured kernel/compiler acceleration focus and the abstract lacks the concrete performance details needed for a high-priority systems read.",
-        "fallback_summary": "Decompositional jailbreaks pose a critical threat to large language models (LLMs) by allowing adversaries to fragment a malicious objective into a sequence of individually benign queries that collectively reconstruct prohibited content."
+        "reading_priority": "high",
+        "reading_priority_reason": "High fit for the configured focus because it is explicitly about LLM inference systems and reports concrete throughput, latency, memory, quantization, and energy-efficiency trade-offs, though the full read must verify benchmark fairness and measurement methodology.",
+        "fallback_summary": "The operational landscape of local Large Language Model (LLM) inference has shifted from lightweight models to datacenter-class weights exceeding 70B parameters, creating profound systems challenges for consumer hardware."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.27396v1",
-      "arxiv_id": "2604.27396v1",
-      "title": "VitaLLM: A Versatile, Ultra-Compact Ternary LLM Accelerator with Dependency-Aware Scheduling",
-      "summary": "Deploying Large Language Models (LLMs) on resource-constrained edge devices faces critical bottlenecks in memory bandwidth and power consumption. While ternary quantization (e.g., BitNet b1.58) significantly reduces model size, its direct deployment on general-purpose hardware is hindered by workload imbalance, bandwidth-bound decoding, and strict data dependencies. To address these challenges, we propose \\textbf{VitaLLM}, a hardware-software co-designed accelerator tailored for efficient ternary LLM inference. We introduce a heterogeneous \\textbf{Dual-Core Compute Strategy} that synergizes specialized TINT-Cores for massive ternary projections with a unified BoothFlex-Core for mixed-precision attention, ensuring high utilization across both compute-bound prefill and bandwidth-bound decode stages. Furthermore, we develop a \\textbf{Leading One Prediction (LOP)} mechanism to prune redundant Key-Value (KV) cache fetches and a \\textbf{Dependency-Aware Scheduling} framework to hide the latency of nonlinear operations. Implemented in TSMC 16nm technology, VitaLLM achieves a decoding throughput of 70.70 tokens/s within an ultra-compact area of 0.223 mm$^2$ and a power consumption of 65.97 mW. The design delivers a superior Figure of Merit (FOM) of 17.4 TOPS/mm$^2$/W, significantly outperforming state-of-the-art accelerators. Finally, we explore an extended bit-serial design (BoothFlex-BS) to demonstrate the architecture's adaptability for precision-agile inference.",
+      "id": "http://arxiv.org/abs/2605.00320v1",
+      "arxiv_id": "2605.00320v1",
+      "title": "VitaLLM: A Versatile and Tiny Accelerator for Mixed-Precision LLM Inference on Edge Devices",
+      "summary": "We present VitaLLM, a mixed precision accelerator that enables ternary weight large language models to run efficiently on edge devices. The design combines two compute cores, a multiplier free TINT core for ternary-INT projections and a BoothFlex core that reuses a radix-4 Booth datapath for both INT8$\\times$INT8 attention and ternary-INT-sustaining utilization without duplicating arrays. A predictive sparse attention mechanism employs a leading-one (LO) surrogate with a comparison-free top-$K$ selector to prune key/value (KV) fetches by roughly $1-K/M$ for $M$ cached tokens, confining exact attention to $K$ candidates. System-level integration uses head-level pipelining and an absmax-based quantization barrier to standardize cross-core interfaces and overlap nonlinear reductions with linear tiles. A 16 nm silicon prototype at 1 GHz/0.8 V achieves 72.46 tokens/s in decode and 0.88 s prefill (64 tokens) within 0.214 mm^2 and 120 KB on-chip memory, while reducing KV traffic and improving utilization in ablations. These results demonstrate practical BitNet b1.58 (3B) inference on edge-class platforms and provide a compact blueprint for future mixed-precision LLM accelerators.",
       "authors": [
         "Zi-Wei Lin",
         "Tian-Sheuan Chang"
@@ -281,34 +307,32 @@
           "name": "Tian-Sheuan Chang"
         }
       ],
-      "published": "2026-04-30T04:07:21Z",
-      "published_date": "2026-04-30 04:07:21+00:00",
-      "updated": "2026-04-30T04:07:21Z",
+      "published": "2026-05-01T00:59:46Z",
+      "published_date": "2026-05-01 00:59:46+00:00",
+      "updated": "2026-05-01T00:59:46Z",
+      "comments": "accepted in ISCAS 2026",
       "primary_category": "cs.AR",
       "categories": [
         "cs.AR"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.27396v1",
-      "url": "http://arxiv.org/abs/2604.27396v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.00320v1",
+      "url": "http://arxiv.org/abs/2605.00320v1",
       "source": "arxiv",
       "scores": {
         "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 2.3,
-        "quality": 2.3,
-        "recommendation": 10.0
+        "popularity": 1.3,
+        "quality": 1.3,
+        "recommendation": 9.38
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
         "llm inference",
         "prefill",
         "decode",
-        "throughput",
-        "latency",
         "quantization",
         "cs.AR",
         "memory",
-        "bandwidth",
         "tokens/s"
       ],
       "matched_domain_priority": 5,
@@ -316,7 +340,7 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 6,
+        "text_match_count": 4,
         "matched_categories": [
           "cs.AR"
         ],
@@ -326,241 +350,115 @@
         ],
         "required_signal_match_count": 2,
         "bonus_keyword_matches": [
-          "throughput",
-          "latency",
           "memory",
-          "bandwidth",
           "tokens/s"
         ],
-        "bonus_keyword_match_count": 5,
+        "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
-          "throughput",
-          "latency",
-          "memory",
-          "bandwidth"
+          "memory"
         ],
-        "analysis_keyword_match_count": 4,
+        "analysis_keyword_match_count": 1,
         "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.5
+        "bonus_keyword_bonus": 0.36
       },
       "selection_lane": "fresh",
-      "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "VitaLLM is a hardware-software co-designed ternary LLM accelerator for edge inference that targets bandwidth-bound decoding, workload imbalance, and dependency stalls with specialized ternary compute, mixed-precision attention support, KV-fetch pruning, and scheduling.",
-        "summary_zh": "Ternary LLMs can reduce model footprint, but the abstract frames edge deployment as still limited by memory bandwidth, power, workload imbalance, and decode-stage dependencies. VitaLLM addresses this with a dual-core architecture: TINT-Cores handle large ternary projections, while a BoothFlex-Core supports mixed-precision attention across prefill and decode. It also adds Leading One Prediction to avoid redundant KV-cache fetches and dependency-aware scheduling to overlap or hide nonlinear-operation latency. The paper reports a TSMC 16nm implementation with 70.70 tokens/s decoding throughput, 0.223 mm^2 area, 65.97 mW power, and 17.4 TOPS/mm^2/W FOM, claiming superiority over prior accelerators. The abstract does not make the workload, model size, sequence length, baseline set, or measurement methodology clear, so the claimed efficiency needs a careful full-paper check.",
-        "background_zh": "Edge LLM inference is increasingly constrained by memory bandwidth and power even after aggressive quantization, especially during decode where KV-cache movement dominates.",
-        "problem_zh": "The research question is whether a tiny ternary-focused accelerator can keep utilization high across prefill and decode while reducing bandwidth waste and dependency stalls.",
-        "approach_zh": "The design combines ternary projection cores, a unified mixed-precision attention core, KV-cache fetch pruning via Leading One Prediction, and dependency-aware scheduling for nonlinear latency hiding.",
-        "evidence_zh": "The abstract reports a TSMC 16nm implementation with concrete throughput, area, power, and FOM numbers, but it does not specify model workloads, sequence lengths, baselines, or measurement conditions.",
-        "value_zh": "If the reported design holds under realistic LLM workloads, it offers a compact edge-inference template for ternary models where bandwidth and power dominate system cost.",
+        "one_liner_zh": "VitaLLM is a 16 nm mixed-precision edge accelerator for ternary-weight LLM inference that attacks both projection compute and KV-cache traffic with specialized cores and predictive sparse attention.",
+        "summary_zh": "Edge LLM inference is constrained by decode latency, memory traffic, and mixed-precision support, especially for ternary-weight models that still require attention and KV movement. VitaLLM combines a multiplier-free TINT core for ternary-INT projections with a BoothFlex core that reuses a radix-4 Booth datapath for INT8 attention and ternary-INT utilization, avoiding duplicated compute arrays. It also uses a leading-one surrogate with a comparison-free top-K selector to prune KV fetches by roughly 1-K/M, while head-level pipelining and an absmax quantization barrier coordinate cross-core execution. The abstract reports a 16 nm, 1 GHz/0.8 V prototype reaching 72.46 tokens/s decode and 0.88 s prefill for 64 tokens within 0.214 mm^2 and 120 KB on-chip memory, with ablations claiming lower KV traffic and better utilization. The main missing detail is how broadly these results hold across model sizes, sequence lengths, accuracy impact from sparse attention, and baseline accelerator comparisons.",
+        "background_zh": "Ternary-weight LLMs reduce model compute and storage, but edge deployment still needs efficient attention, KV-cache access, and mixed-precision datapaths.",
+        "problem_zh": "The core problem is how to keep a tiny edge accelerator utilized across ternary projections and INT8 attention without letting KV traffic dominate inference latency and energy.",
+        "approach_zh": "The design pairs specialized mixed-precision cores with predictive sparse attention, head-level pipelining, and a quantization barrier that standardizes data exchange between compute stages.",
+        "evidence_zh": "The abstract provides concrete silicon prototype numbers for decode, prefill, area, clock, voltage, and memory, and says ablations show reduced KV traffic and improved utilization, but it does not specify baseline systems or accuracy impact.",
+        "value_zh": "If the reported tradeoffs hold, the paper offers a compact hardware blueprint for practical edge-class inference with ternary LLMs and attention-aware memory reduction.",
         "open_questions": [
-          "What model sizes, context lengths, batch sizes, and prefill/decode ratios were used to measure the 70.70 tokens/s decoding throughput?",
-          "Which state-of-the-art accelerators are used as baselines, and are process node, precision, memory system, and workload assumptions normalized fairly?",
-          "How accurate and costly is Leading One Prediction, and what is the impact of misprediction or irregular KV-cache access patterns?"
+          "What are the accuracy and perplexity effects of the leading-one surrogate and top-K sparse attention across sequence lengths and tasks?",
+          "Which baselines are used for decode/prefill, KV traffic, utilization, area, and energy comparisons, and are they normalized fairly?",
+          "How sensitive are the gains to BitNet b1.58 3B specifically versus other model sizes, cache lengths, and quantization settings?"
         ],
         "core_contributions": [
-          "A heterogeneous dual-core accelerator structure separating massive ternary projections from mixed-precision attention work.",
-          "A Leading One Prediction mechanism intended to reduce redundant KV-cache fetches during decoding.",
-          "A dependency-aware scheduling framework aimed at hiding nonlinear-operation latency in ternary LLM inference."
+          "A 16 nm mixed-precision accelerator targeting ternary-weight LLM inference on edge devices.",
+          "A multiplier-free TINT core for ternary-INT projections and a BoothFlex core reusing a radix-4 Booth datapath for INT8 attention and ternary-INT work.",
+          "A predictive sparse attention path that prunes KV fetches by roughly 1-K/M using a leading-one surrogate and comparison-free top-K selection."
         ],
         "why_read": [
-          "It directly targets LLM decode bottlenecks on resource-constrained hardware rather than only reporting quantization compression.",
-          "It gives concrete silicon-area, power, throughput, and FOM claims for a TSMC 16nm implementation.",
-          "It may be useful for comparing accelerator-level approaches to bandwidth-bound ternary inference against compiler/runtime-only optimizations."
+          "Directly aligned with edge LLM inference acceleration and hardware/runtime co-design.",
+          "Includes concrete prototype metrics rather than only architectural simulation claims.",
+          "Addresses both compute-array reuse and KV-cache bandwidth, which are central bottlenecks in decode."
         ],
         "risks": [
-          "The abstract does not expose enough evaluation detail to judge workload realism or baseline fairness.",
-          "The accelerator is specialized for ternary inference, so applicability to common mixed-precision or non-ternary LLM deployments may be limited unless BoothFlex-BS is convincing in the full paper/web appendix and evidence claims are checked against the paper text, rather than assumed from the abstract alone; no code or reproducibility path is described in the provided input."
+          "The abstract does not report energy efficiency, accuracy degradation, or detailed baseline comparisons.",
+          "Sparse attention claims may depend heavily on K, sequence length M, and workload distribution, which are not detailed here."
         ],
         "recommended_for": [
-          "Researchers studying edge LLM inference accelerators and quantized decode bottlenecks.",
-          "Hardware architects comparing ternary LLM datapaths, attention support, and KV-cache bandwidth reduction techniques.",
-          "Systems readers who want a concrete ASIC-style counterpoint to CUDA/kernel-generation approaches."
+          "LLM accelerator researchers",
+          "Edge inference system engineers",
+          "Hardware architects studying ternary or mixed-precision LLM datapaths"
         ],
         "keywords": [
           "LLM inference",
-          "ternary quantization",
           "edge accelerator",
-          "decode throughput",
-          "KV cache",
-          "dependency-aware scheduling"
+          "mixed precision",
+          "ternary weights",
+          "BitNet b1.58",
+          "KV cache pruning architecture"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High fit for LLM inference acceleration and serving efficiency because it targets decode bandwidth, power, and scheduling with concrete hardware claims, though the full read should focus on evaluation assumptions and baseline normalization.",
-        "fallback_summary": "Deploying Large Language Models (LLMs) on resource-constrained edge devices faces critical bottlenecks in memory bandwidth and power consumption."
+        "reading_priority_reason": "High fit for the configured focus because it reports a concrete silicon prototype for LLM inference acceleration, targets decode and prefill bottlenecks, and connects mixed-precision datapath design with KV-traffic reduction.",
+        "fallback_summary": "We present VitaLLM, a mixed precision accelerator that enables ternary weight large language models to run efficiently on edge devices."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.27486v1",
-      "arxiv_id": "2604.27486v1",
-      "title": "CuLifter: Lifting GPU Binaries to Typed IR",
-      "summary": "GPU compilers merge all data types into a single unified register file, erasing the type information that binary-analysis tools rely on. We show that type recovery from this untyped register file is the central challenge of GPU binary lifting. We present CuLifter, a SASS-to-LLVM IR lifting framework that recovers register types via constraint propagation with conflict detection, reconstructs explicit control flow, and aggregates multi-instruction patterns. Across eight benchmark suites (24,437 GPU functions in 919 cubins) spanning open-source applications, vendor libraries, and optimized ML runtimes, CuLifter successfully lifts 99.98% of functions to valid LLVM IR. An ablation study confirms that type recovery is the only step required to produce semantically correct IR: disabling it drops the x86 pass rate from 73.8% to 0%, a 73.8 percentage-point drop.",
+      "id": "http://arxiv.org/abs/2605.00528v1",
+      "arxiv_id": "2605.00528v1",
+      "title": "SAGA: Workflow-Atomic Scheduling for AI Agent Inference on GPU Clusters",
+      "summary": "AI agents execute tens to hundreds of chained LLM calls per task, yet GPU schedulers treat each call as independent, discarding gigabytes of intermediate state between steps and inflating end-to-end latency by 3-8x. We argue that this request-level abstraction is fundamentally mismatched to compound AI workloads, and propose a shift to program-level scheduling: treating the entire agent workflow (not individual inference calls) as the first-class schedulable unit. We present SAGA, a distributed scheduler that implements this abstraction through three mechanisms: (1) Agent Execution Graphs that capture workflow structure to predict KV cache reuse across tool-call boundaries, achieving within 1.31x of Bélády's optimal offline policy; (2) session-affinity batching with work stealing that co-locates correlated requests while maintaining global load balance; and (3) Agent Fair Share, a task-completion-time fairness metric with provable bounded-deviation guarantees. On a 64-GPU cluster serving SWE-bench coding agents and WebArena browser tasks, SAGA reduces task completion time by 1.64x (geometric mean, p < 0.001) over vLLM v0.15.1 with prefix caching and affinity routing, while improving GPU memory utilization by 1.22x and achieving 99.2% SLO attainment under multi-tenant interference. These latency gains come at a quantified cost: approximately 30% lower peak throughput than throughput-optimal batch scheduling, a tradeoff appropriate for the latency-sensitive interactive deployments that dominate compound AI usage. Our results demonstrate that workflow-aware scheduling is essential for efficient compound AI serving.",
       "authors": [
-        "Jisheng Zhao",
-        "Huanzhi Pu",
-        "Shinnung Jeong",
-        "Chihyo Ahn",
-        "Hyesoon Kim"
+        "Dongxin Guo",
+        "Jikun Wu",
+        "Siu Ming Yiu"
       ],
       "author_details": [
         {
-          "name": "Jisheng Zhao"
+          "name": "Dongxin Guo"
         },
         {
-          "name": "Huanzhi Pu"
+          "name": "Jikun Wu"
         },
         {
-          "name": "Shinnung Jeong"
-        },
-        {
-          "name": "Chihyo Ahn"
-        },
-        {
-          "name": "Hyesoon Kim"
+          "name": "Siu Ming Yiu"
         }
       ],
-      "published": "2026-04-30T06:34:54Z",
-      "published_date": "2026-04-30 06:34:54+00:00",
-      "updated": "2026-04-30T06:34:54Z",
-      "comments": "15 pages, 11 figures, 11 tables. Preprint",
-      "primary_category": "cs.AR",
+      "published": "2026-05-01T09:05:28Z",
+      "published_date": "2026-05-01 09:05:28+00:00",
+      "updated": "2026-05-01T09:05:28Z",
+      "comments": "15 pages, 3 figures, 11 tables. Accepted to HPDC '26 (35th International Symposium on High-Performance Parallel and Distributed Computing), July 13-16, 2026, Cleveland, OH, USA",
+      "doi": "10.1145/3806645.3807598",
+      "primary_category": "cs.DC",
       "categories": [
-        "cs.AR"
+        "cs.DC",
+        "cs.AI",
+        "cs.LG",
+        "cs.OS"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.27486v1",
-      "url": "http://arxiv.org/abs/2604.27486v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.00528v1",
+      "url": "http://arxiv.org/abs/2605.00528v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.83,
+        "relevance": 3.0,
         "recency": 3.0,
-        "popularity": 0.9,
-        "quality": 0.9,
-        "recommendation": 8.54
-      },
-      "matched_domain": "Low-level Code And Assembly Generation",
-      "matched_keywords": [
-        "binary",
-        "sass",
-        "llvm ir",
-        "cs.AR",
-        "benchmark",
-        "ablation"
-      ],
-      "matched_domain_priority": 4,
-      "domain_preference_bonus": 0.6,
-      "is_hot_paper": false,
-      "match_details": {
-        "domain": "Low-level Code And Assembly Generation",
-        "text_match_count": 3,
-        "matched_categories": [
-          "cs.AR"
-        ],
-        "required_signal_matches": [
-          "sass",
-          "llvm ir"
-        ],
-        "required_signal_match_count": 2,
-        "bonus_keyword_matches": [],
-        "bonus_keyword_match_count": 0,
-        "analysis_keyword_matches": [
-          "benchmark",
-          "ablation"
-        ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.7,
-        "bonus_keyword_bonus": 0.0
-      },
-      "selection_lane": "fresh",
-      "history_relaxed": true,
-      "ai": {
-        "one_liner_zh": "CuLifter turns SASS GPU binaries into typed LLVM IR by making register type recovery the core lifting problem.",
-        "summary_zh": "CuLifter addresses a practical blocker in GPU binary analysis: SASS binaries lose source-level type distinctions because GPU compilers map values into a unified register file. The paper frames type recovery from that untyped register file as the central lifting problem and builds a SASS-to-LLVM IR pipeline using constraint propagation with conflict detection, explicit control-flow reconstruction, and multi-instruction pattern aggregation. The abstract reports evaluation across eight benchmark suites, 24,437 GPU functions, and 919 cubins from open-source applications, vendor libraries, and optimized ML runtimes, with 99.98% of functions lifted to valid LLVM IR. It also reports an ablation where disabling type recovery drops the x86 pass rate from 73.8% to 0%, supporting the claim that type recovery is critical for semantic correctness. The biggest missing detail is how semantic equivalence, baseline fairness, GPU architecture coverage, and failure cases are defined beyond the headline lift and pass rates.",
-        "background_zh": "GPU binary lifting is hard because optimized SASS erases typed source-level structure that many binary-analysis and compiler tools expect.",
-        "problem_zh": "The research question is whether untyped GPU registers can be recovered accurately enough to produce useful, semantically correct typed IR from binaries.",
-        "approach_zh": "CuLifter recovers register types through constraint propagation with conflict detection, then reconstructs control flow and combines multi-instruction patterns before emitting LLVM IR.",
-        "evidence_zh": "The abstract supports the claim with large-scale lifting results and a type-recovery ablation, but it does not make the full semantic-checking methodology or baseline comparison clear.",
-        "value_zh": "If the method generalizes, it could make SASS-level inspection, retargeting, optimization analysis, and ML runtime reverse engineering more practical.",
-        "open_questions": [
-          "How does the paper define and validate semantic correctness beyond producing valid LLVM IR and the reported x86 pass rate?",
-          "Which GPU architectures, SASS versions, vendor libraries, and optimized ML runtime kernels are covered, and where do the remaining failures occur?",
-          "How does CuLifter compare against existing GPU binary lifters or binary-analysis workflows under comparable inputs and validation criteria?"
-        ],
-        "core_contributions": [
-          "Identifies type recovery from the unified GPU register file as the central obstacle in SASS-to-typed-IR lifting.",
-          "Introduces a constraint-propagation type recovery method with conflict detection for GPU registers.",
-          "Builds a SASS-to-LLVM IR lifting pipeline with explicit control-flow reconstruction and multi-instruction pattern aggregation."
-        ],
-        "why_read": [
-          "Directly relevant to SASS, LLVM IR, and low-level GPU binary analysis.",
-          "Provides unusually concrete scale signals for a binary-lifting paper: eight suites, 24,437 functions, and 919 cubins.",
-          "The ablation isolates type recovery as the key mechanism behind semantic correctness, according to the abstract."
-        ],
-        "risks": [
-          "The abstract does not specify the semantic equivalence oracle in enough detail to judge correctness rigorously.",
-          "The reported lift rate may hide important unsupported instruction patterns, architectures, or heavily optimized kernels in the small failure set without a full read."
-        ],
-        "recommended_for": [
-          "Researchers working on GPU binary analysis and lifting.",
-          "Engineers inspecting optimized CUDA, vendor library, or ML runtime binaries.",
-          "Compiler researchers interested in typed IR recovery from low-level GPU code."
-        ],
-        "keywords": [
-          "GPU binary lifting",
-          "SASS",
-          "LLVM IR",
-          "type recovery",
-          "constraint propagation",
-          "control-flow reconstruction"
-        ],
-        "reading_priority": "high",
-        "reading_priority_reason": "High fit for the low-level code and assembly-generation focus, with strong abstract-level evidence and direct relevance to SASS-to-IR tooling, though it is adjacent rather than central to LLM inference acceleration.",
-        "fallback_summary": "GPU compilers merge all data types into a single unified register file, erasing the type information that binary-analysis tools rely on."
-      }
-    },
-    {
-      "id": "http://arxiv.org/abs/2604.27384v1",
-      "arxiv_id": "2604.27384v1",
-      "title": "RCW-CIM: A Digital CIM-based LLM Accelerator with Read-Compute/Write",
-      "summary": "Digital computing-in-memory (DCIM) has emerged as a promising solution for large language model (LLM) acceleration by minimizing data transfers between external DRAM and on-chip accelerators while maintaining high precision for superior accuracy. However, existing CIM architectures often overlook weight update latency, which becomes critical as LLM weights are far larger than a single CIM macro capacity. To address this issue, this paper proposes a read-compute/write (RCW) architecture that effectively minimizes weight update latency, along with a nonlinear operator fusion that further mitigates dependencyinduced latency. The proposed RCW reduces decoding computing latency by 21.59% on the Llama2-7B model. In addition, the nonlinear operator fusion mechanism achieves a 69.17% latency reduction through efficient partial accumulation and group-based approximation. Furthermore, a weight-stationary and output column stationary (WS-OCS) dataflow is introduced to reduce both external DRAM access and internal CIM weight updates by 51.6% and 87.6% respectively during the prefill phase of 1024 tokens, leading to an overall 49.76% latency reduction. Fabricated using TSMC 22 nm CMOS technology and operating at 100 MHz, the proposed RCW-CIM achieves 3.28 TOPS and 42.3 TOPS/W, enabling 4.2 ms prefill latency and 26.87 decoded tokens per second for the INT4-weight Llama2 model with dual DDR5-6400 memory.",
-      "authors": [
-        "Yan-Cheng Guo",
-        "Tian-Sheuan Chang",
-        "Jian-Wei Su"
-      ],
-      "author_details": [
-        {
-          "name": "Yan-Cheng Guo"
-        },
-        {
-          "name": "Tian-Sheuan Chang"
-        },
-        {
-          "name": "Jian-Wei Su"
-        }
-      ],
-      "published": "2026-04-30T03:52:24Z",
-      "published_date": "2026-04-30 03:52:24+00:00",
-      "updated": "2026-04-30T03:52:24Z",
-      "comments": "accepted in ISCAS 2026",
-      "primary_category": "cs.AR",
-      "categories": [
-        "cs.AR"
-      ],
-      "pdf_url": "https://arxiv.org/pdf/2604.27384v1",
-      "url": "http://arxiv.org/abs/2604.27384v1",
-      "source": "arxiv",
-      "scores": {
-        "relevance": 2.35,
-        "recency": 3.0,
-        "popularity": 1.6,
-        "quality": 1.6,
-        "recommendation": 8.44
+        "popularity": 1.2,
+        "quality": 1.2,
+        "recommendation": 9.3
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
-        "prefill",
+        "serving",
+        "kv cache",
+        "vllm",
+        "throughput",
         "latency",
-        "cs.AR",
+        "cs.LG",
+        "cs.DC",
         "memory"
       ],
       "matched_domain_priority": 5,
@@ -568,114 +466,123 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 2,
+        "text_match_count": 5,
         "matched_categories": [
-          "cs.AR"
+          "cs.LG",
+          "cs.DC"
         ],
         "required_signal_matches": [
-          "prefill"
+          "kv cache",
+          "vllm"
         ],
-        "required_signal_match_count": 1,
+        "required_signal_match_count": 2,
         "bonus_keyword_matches": [
+          "throughput",
           "latency",
           "memory"
         ],
-        "bonus_keyword_match_count": 2,
+        "bonus_keyword_match_count": 3,
         "analysis_keyword_matches": [
+          "throughput",
           "latency",
           "memory"
         ],
-        "analysis_keyword_match_count": 2,
-        "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.36
+        "analysis_keyword_match_count": 3,
+        "signal_bonus": 0.7,
+        "bonus_keyword_bonus": 0.5
       },
       "selection_lane": "fresh",
-      "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "The paper proposes a fabricated digital CIM accelerator that targets LLM prefill and decode latency by reducing CIM weight-update overhead, nonlinear-operator dependency latency, and memory movement.",
-        "summary_zh": "Digital CIM is positioned as a way to reduce DRAM traffic for LLM inference while preserving precision, but the abstract argues that weight-update latency becomes a bottleneck when model weights exceed a single CIM macro. RCW-CIM addresses this with a read-compute/write architecture, nonlinear operator fusion based on partial accumulation and group-based approximation, and a WS-OCS dataflow for the prefill phase. The abstract reports latency and memory-access reductions on Llama2 workloads, including 21.59% lower decoding compute latency, 69.17% latency reduction from nonlinear operator fusion, and 49.76% overall prefill latency reduction for 1024 tokens. It also states the chip was fabricated in TSMC 22 nm CMOS, runs at 100 MHz, and reaches 3.28 TOPS and 42.3 TOPS/W with dual DDR5-6400 memory for an INT4-weight Llama2 setup. The main missing detail is how baselines are defined and whether the reported gains hold across model sizes, sequence lengths, operators, and accuracy constraints introduced by approximation.",
-        "background_zh": "LLM inference stresses memory bandwidth and data movement, making digital CIM attractive when model precision and on-chip compute efficiency both matter.",
-        "problem_zh": "The paper focuses on weight-update latency inside CIM accelerators, a bottleneck that appears when LLM weights are much larger than one CIM macro can hold.",
-        "approach_zh": "It combines an RCW architecture for weight-update reduction, nonlinear operator fusion using partial accumulation and group-based approximation, and WS-OCS dataflow to cut DRAM access and internal CIM updates during prefill.",
-        "evidence_zh": "The abstract reports concrete latency, access, throughput, power-efficiency, fabrication, frequency, model, precision, and memory-system numbers, but it does not make baseline definitions or accuracy impact clear.",
-        "value_zh": "If the evaluation is fair, the work is useful for hardware and runtime designers studying where CIM-based LLM inference gains come from beyond raw matrix multiplication throughput.",
+        "one_liner_zh": "SAGA makes an agent workflow, rather than each LLM call, the scheduling unit for GPU-cluster inference so KV-cache reuse and task-level latency can be optimized across chained calls.",
+        "summary_zh": "This paper targets compound AI workloads where agents issue many dependent LLM calls and request-level GPU schedulers lose reuse opportunities between steps. SAGA shifts scheduling to the workflow level using Agent Execution Graphs for KV-cache reuse prediction, session-affinity batching with work stealing, and a task-completion-time fairness metric. The abstract reports evaluation on a 64-GPU cluster with SWE-bench coding agents and WebArena browser tasks, claiming 1.64x lower task completion time than vLLM v0.15.1 with prefix caching and affinity routing, plus better memory utilization and SLO attainment. The important systems claim is that latency improves by preserving workflow locality and correlated state, not by a faster kernel or model change. The main caveat is explicit: peak throughput is about 30% lower than throughput-optimal batch scheduling, and the abstract leaves implementation overheads and workload generality for the full paper.",
+        "background_zh": "Agent serving turns one user task into a chain of correlated LLM calls, which makes per-request scheduling a poor fit when intermediate KV/cache state can carry across steps.",
+        "problem_zh": "The core question is whether GPU cluster schedulers should optimize task completion time for whole agent workflows instead of maximizing throughput over isolated inference requests.",
+        "approach_zh": "SAGA represents workflows with Agent Execution Graphs, co-locates related requests through session-affinity batching while using work stealing for balance, and adds Agent Fair Share for task-level fairness.",
+        "evidence_zh": "The abstract supports the claim with a 64-GPU evaluation on SWE-bench and WebArena workloads against a vLLM v0.15.1 baseline with prefix caching and affinity routing, reporting latency, memory-utilization, SLO, and throughput-tradeoff numbers.",
+        "value_zh": "If the results hold, this is useful for latency-sensitive agent serving systems where preserving workflow locality is more valuable than peak batch throughput.",
         "open_questions": [
-          "What exact baselines are used for the 21.59%, 69.17%, and 49.76% latency reductions, and are they equally optimized for the same memory system?",
-          "How does the group-based approximation in nonlinear operator fusion affect model accuracy or output quality?",
-          "Do the prefill and decode gains persist across longer contexts, larger LLMs, different batch sizes, and precisions beyond the stated INT4-weight Llama2 setup?"
+          "How much scheduler overhead and profiling state does Agent Execution Graph construction add at runtime?",
+          "Is the vLLM baseline tuned comparably for batching, prefix caching, affinity routing, and multi-tenant load?",
+          "Do the gains persist on less structured or shorter agent workflows where cross-step KV-cache reuse is weaker?"
         ],
         "core_contributions": [
-          "Identifies CIM weight-update latency as a first-order issue for LLM workloads whose weights exceed a single CIM macro.",
-          "Introduces an RCW accelerator architecture aimed at reducing decoding weight-update overhead.",
-          "Adds nonlinear operator fusion and WS-OCS dataflow to reduce dependency latency, DRAM traffic, and internal CIM updates."
+          "Defines workflow-atomic scheduling as the abstraction for chained agent inference on GPU clusters.",
+          "Introduces Agent Execution Graphs to predict KV-cache reuse across tool-call boundaries.",
+          "Combines session-affinity batching, work stealing, and a task-completion-time fairness metric for multi-tenant serving."
         ],
         "why_read": [
-          "Directly targets LLM inference acceleration rather than generic CIM benchmarking.",
-          "Reports fabricated-chip details and concrete latency, TOPS, TOPS/W, and memory-system figures.",
-          "Relevant for comparing compute-in-memory design choices against compiler/runtime and memory-dataflow approaches to prefill and decode bottlenecks."
+          "Directly matches LLM inference serving and GPU-cluster scheduling concerns.",
+          "Gives concrete latency, memory, SLO, and throughput tradeoff claims rather than only proposing an abstraction.",
+          "Frames a specific systems tradeoff: lower task latency through workflow locality at the cost of peak throughput."
         ],
         "risks": [
-          "Baseline fairness is underspecified in the abstract, so the reported percentage reductions may be difficult to interpret without the full paper.",
-          "The approximation used in nonlinear operator fusion may affect accuracy, but the abstract does not state the quality impact or validation method"
+          "The reported 30% lower peak throughput may be unacceptable for throughput-dominated batch services.",
+          "Results may depend heavily on SWE-bench and WebArena-style agent workflows with reusable intermediate state."
         ],
         "recommended_for": [
-          "Researchers working on LLM inference accelerators and memory-centric hardware.",
-          "Engineers evaluating CIM dataflows for prefill/decode latency and bandwidth reduction.",
-          "Compiler/runtime researchers comparing hardware dataflow gains with software scheduling and operator fusion strategies."
+          "LLM serving researchers",
+          "GPU cluster scheduler engineers",
+          "Teams operating latency-sensitive agent systems"
         ],
         "keywords": [
           "LLM inference",
-          "digital computing-in-memory",
-          "CIM accelerator",
-          "prefill latency",
-          "decode latency",
-          "weight update latency LLM serving bottlenecks"
+          "agent serving",
+          "GPU scheduling",
+          "KV cache",
+          "workflow scheduling",
+          "vLLM"
         ],
         "reading_priority": "high",
-        "reading_priority_reason": "High fit with the configured focus because it targets LLM inference latency, memory movement, and accelerator dataflow with fabricated-chip evidence; priority depends on checking baseline fairness and approximation accuracy in the full paper.",
-        "fallback_summary": "Digital computing-in-memory (DCIM) has emerged as a promising solution for large language model (LLM) acceleration by minimizing data transfers between external DRAM and on-chip accelerators while maintaining high precision for superior accuracy."
+        "reading_priority_reason": "High fit with LLM inference systems and serving efficiency, with concrete cluster-scale evidence and explicit latency-throughput tradeoff claims that merit a full read.",
+        "fallback_summary": "AI agents execute tens to hundreds of chained LLM calls per task, yet GPU schedulers treat each call as independent, discarding gigabytes of intermediate state between steps and inflating end-to-end latency by 3-8x."
       }
     },
     {
-      "id": "http://arxiv.org/abs/2604.28175v1",
-      "arxiv_id": "2604.28175v1",
-      "title": "Strait: Perceiving Priority and Interference in ML Inference Serving",
-      "summary": "Machine learning (ML) inference serving systems host deep neural network (DNN) models and schedule incoming inference requests across deployed GPUs. However, limited support for task prioritization and insufficient latency estimation under concurrent execution may restrict their applicability in on-premises scenarios. We present \\emph{Strait}, a serving system designed to enhance deadline satisfaction for dual-priority inference traffic under high GPU utilization. To improve latency estimation, Strait models potential contention during data transfer and accounts for kernel execution interference through an adaptive prediction model. By drawing on these predictions, it performs priority-aware scheduling to deliver differentiated handling. Evaluation results under intense workloads suggest that Strait reduces deadline violations for high-priority tasks by 1.02 to 11.18 percentage points while incurring acceptable costs on low-priority tasks. Compared to software-defined preemption approaches, Strait also exhibits more equitable performance.",
+      "id": "http://arxiv.org/abs/2605.00616v1",
+      "arxiv_id": "2605.00616v1",
+      "title": "LLM-Emu: Native Runtime Emulation of LLM Inference via Profile-Driven Sampling",
+      "summary": "Realistic evaluation of LLM serving systems requires online workloads, dynamic arrivals, queueing, and the serving engine's local scheduling for execution batching, but running such experiments on GPUs is expensive. Existing simulators reduce this cost, but often operate offline or in time-warped mode, re-implement serving-engine schedulers, or require accurate operator/kernel-level latency models. We present LLM-Emu, a serving-native emulator for vLLM that preserves the production HTTP, scheduling, KV-cache, and output-processing paths while replacing only GPU forward execution with profile-sampled latency and synthetic output tokens. Tested on two different GPUs, four model variants, two model families, two attention backends, and both Poisson and bursty ShareGPT workloads, LLM-Emu closely tracks real vLLM serving behavior: TPOT and ITL stay within $4.8\\%$ absolute error, E2E latency within $5.3\\%$, and output throughput within $1.9\\%$; TTFT is less stable, with maximum error $10.4\\%$, reflecting its sensitivity to admission and queue state. These results suggest that lightweight, serving-native emulation can support practical online experimentation for LLM-serving systems. LLM-Emu is open sourced at https://github.com/AKafakA/llm-emu.",
       "authors": [
-        "Haidong Zhao",
-        "Nikolaos Georgantas"
+        "Wei Da",
+        "Evangelia Kalyvianaki"
       ],
       "author_details": [
         {
-          "name": "Haidong Zhao"
+          "name": "Wei Da"
         },
         {
-          "name": "Nikolaos Georgantas"
+          "name": "Evangelia Kalyvianaki"
         }
       ],
-      "published": "2026-04-30T17:55:28Z",
-      "published_date": "2026-04-30 17:55:28+00:00",
-      "updated": "2026-04-30T17:55:28Z",
-      "primary_category": "cs.LG",
+      "published": "2026-05-01T12:35:21Z",
+      "published_date": "2026-05-01 12:35:21+00:00",
+      "updated": "2026-05-01T12:35:21Z",
+      "comments": "6 page, 2 figures, workshop paper shape",
+      "primary_category": "cs.DC",
       "categories": [
-        "cs.LG"
+        "cs.DC"
       ],
-      "pdf_url": "https://arxiv.org/pdf/2604.28175v1",
-      "url": "http://arxiv.org/abs/2604.28175v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.00616v1",
+      "url": "http://arxiv.org/abs/2605.00616v1",
       "source": "arxiv",
       "scores": {
-        "relevance": 2.32,
+        "relevance": 3.0,
         "recency": 3.0,
         "popularity": 0.4,
         "quality": 0.4,
-        "recommendation": 7.39
+        "recommendation": 8.63
       },
       "matched_domain": "LLM Inference Systems",
       "matched_keywords": [
+        "llm inference",
+        "llm serving",
         "serving",
+        "kv cache",
+        "vllm",
+        "throughput",
         "latency",
-        "cs.LG",
-        "serving system",
+        "cs.DC",
+        "runtime",
         "evaluation"
       ],
       "matched_domain_priority": 5,
@@ -683,91 +590,203 @@
       "is_hot_paper": false,
       "match_details": {
         "domain": "LLM Inference Systems",
-        "text_match_count": 2,
+        "text_match_count": 7,
         "matched_categories": [
-          "cs.LG"
+          "cs.DC"
         ],
         "required_signal_matches": [
-          "serving system"
+          "kv cache",
+          "vllm",
+          "runtime"
         ],
-        "required_signal_match_count": 1,
+        "required_signal_match_count": 3,
         "bonus_keyword_matches": [
+          "throughput",
           "latency"
         ],
-        "bonus_keyword_match_count": 1,
+        "bonus_keyword_match_count": 2,
         "analysis_keyword_matches": [
           "evaluation",
+          "throughput",
+          "latency"
+        ],
+        "analysis_keyword_match_count": 3,
+        "signal_bonus": 0.9,
+        "bonus_keyword_bonus": 0.36
+      },
+      "selection_lane": "fresh",
+      "ai": {
+        "one_liner_zh": "A vLLM-native emulator replaces GPU forward passes with profile-sampled latency while preserving the serving stack needed to approximate online LLM inference behavior cheaply.",
+        "summary_zh": "Online LLM serving evaluation is expensive because realistic tests need dynamic arrivals, queueing, batching, KV-cache effects, and the serving engine's local scheduler. LLM-Emu keeps vLLM's HTTP, scheduling, KV-cache, and output-processing paths intact, replacing only GPU forward execution with profile-sampled latency and synthetic output tokens. The abstract reports tests across two GPUs, four model variants, two model families, two attention backends, and Poisson plus bursty ShareGPT workloads, with small errors for TPOT, ITL, end-to-end latency, and throughput. TTFT is less stable, which the authors attribute to sensitivity to admission and queue state. The main missing detail for a full read is how profile collection, profile reuse, and workload drift affect accuracy outside the reported setup.",
+        "background_zh": "LLM serving systems are hard to evaluate cheaply because offline or time-warped simulators often miss production scheduler, queueing, and runtime behavior.",
+        "problem_zh": "The paper asks whether online LLM-serving experiments can be emulated without GPUs while still preserving enough of the real serving stack to predict latency and throughput.",
+        "approach_zh": "LLM-Emu integrates with vLLM and swaps GPU forward execution for sampled latencies and synthetic tokens while leaving HTTP, scheduling, KV-cache, and output handling in place.",
+        "evidence_zh": "The abstract supports the claim with comparisons against real vLLM on two GPUs, multiple models, attention backends, and workload shapes, reporting low errors for most serving metrics and higher TTFT error.",
+        "value_zh": "If the reported accuracy holds, this gives systems researchers a cheaper way to test serving policies, load conditions, and runtime behavior before spending GPU time.",
+        "open_questions": [
+          "How are the latency profiles collected, parameterized, and refreshed when hardware, model shape, attention backend, or batch composition changes?",
+          "Does preserving vLLM paths remain enough when evaluating scheduler or KV-cache changes that alter queue state and TTFT behavior?",
+          "How does the emulator behave on workloads beyond Poisson and bursty ShareGPT traces, especially under saturation or long-context regimes?"
+        ],
+        "core_contributions": [
+          "Introduces a serving-native emulation path for vLLM rather than a separate offline simulator.",
+          "Preserves production HTTP, scheduler, KV-cache, and output-processing paths while emulating GPU forward latency.",
+          "Reports accuracy across multiple GPUs, model variants, model families, attention backends, and workload arrival patterns."
+        ],
+        "why_read": [
+          "Directly relevant to low-cost evaluation of LLM serving systems and runtime policies.",
+          "Useful for understanding which parts of serving behavior require native runtime preservation versus kernel-level simulation.",
+          "Provides concrete metric-level error claims that can be checked against real vLLM runs."
+        ],
+        "risks": [
+          "TTFT accuracy is explicitly weaker, which matters for admission control and user-visible latency studies.",
+          "Profile-sampled latency may not extrapolate to unprofiled hardware, model shapes, attention backends, or kernel changes without additional validation."
+        ],
+        "recommended_for": [
+          "LLM serving researchers evaluating scheduling, batching, and queueing behavior.",
+          "Systems engineers using vLLM who need cheaper online workload experiments.",
+          "Runtime and infrastructure teams comparing simulation, emulation, and GPU-backed serving evaluation methods."
+        ],
+        "keywords": [
+          "LLM serving",
+          "vLLM",
+          "inference emulation",
+          "profile-driven sampling",
+          "KV cache",
+          "online workload evaluation"
+        ],
+        "reading_priority": "high",
+        "reading_priority_reason": "High fit with the LLM inference systems focus: it targets serving evaluation cost, preserves key runtime paths, and reports concrete latency and throughput error metrics, though the full read should verify profile robustness and TTFT limitations.",
+        "fallback_summary": "Realistic evaluation of LLM serving systems requires online workloads, dynamic arrivals, queueing, and the serving engine's local scheduling for execution batching, but running such experiments on GPUs is expensive."
+      }
+    },
+    {
+      "id": "http://arxiv.org/abs/2605.00686v1",
+      "arxiv_id": "2605.00686v1",
+      "title": "Eliminating Hidden Serialization in Multi-Node Megakernel Communication",
+      "summary": "Recent megakernel designs for Mixture-of-Experts (MoE) inference fuse expert computation with fine-grained, GPU-initiated communication into a single persistent GPU kernel, and outperform collective-based MoE on a single node by overlapping data transfer with compute at tile granularity. This benefit does not carry over cleanly to multi-node inference, where experts span many nodes connected by an RDMA fabric. Communication-bound MoE models regress by up to $10\\times$ on 8 nodes, and the regression worsens with node count. We trace this regression to hidden serialization in proxy-based RDMA transports. The ordering requirement between each tile transfer and its completion signal forces a fence that drains the NIC pipeline, and its cost grows with the number of concurrent transfers. As a result, models whose per-expert compute is too small to absorb this inflated network latency expose communication on the critical path. We present \\emph{Perseus}, which eliminates this serialization through two techniques. \\emph{Decoupled signaling} batches fences at per-destination granularity, reducing fence count by $8\\times$. \\emph{NIC-side ordering} replaces proxy stalls with hardware fence flags, so the proxy never blocks. On proxy-based transports, Perseus achieves up to 10.3$\\times$ end-to-end speedup. Perseus on IBRC matches or exceeds IBGDA GPU-direct by up to 1.2$\\times$, which shows that serialization, rather than the choice between proxy-based and GPU-direct transport, is what bounds multi-node megakernel performance.",
+      "authors": [
+        "Byungsoo Oh",
+        "Rachee Singh"
+      ],
+      "author_details": [
+        {
+          "name": "Byungsoo Oh"
+        },
+        {
+          "name": "Rachee Singh"
+        }
+      ],
+      "published": "2026-05-01T14:18:30Z",
+      "published_date": "2026-05-01 14:18:30+00:00",
+      "updated": "2026-05-01T14:18:30Z",
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2605.00686v1",
+      "url": "http://arxiv.org/abs/2605.00686v1",
+      "source": "arxiv",
+      "scores": {
+        "relevance": 1.71,
+        "recency": 3.0,
+        "popularity": 2.0,
+        "quality": 2.0,
+        "recommendation": 7.6
+      },
+      "matched_domain": "LLM Code Generation For CUDA Kernels",
+      "matched_keywords": [
+        "gpu kernel",
+        "cs.DC",
+        "speedup",
+        "latency"
+      ],
+      "matched_domain_priority": 5,
+      "domain_preference_bonus": 0.8,
+      "is_hot_paper": false,
+      "match_details": {
+        "domain": "LLM Code Generation For CUDA Kernels",
+        "text_match_count": 1,
+        "matched_categories": [
+          "cs.DC"
+        ],
+        "required_signal_matches": [
+          "gpu kernel"
+        ],
+        "required_signal_match_count": 1,
+        "bonus_keyword_matches": [],
+        "bonus_keyword_match_count": 0,
+        "analysis_keyword_matches": [
+          "speedup",
           "latency"
         ],
         "analysis_keyword_match_count": 2,
         "signal_bonus": 0.35,
-        "bonus_keyword_bonus": 0.18
+        "bonus_keyword_bonus": 0.0
       },
       "selection_lane": "fresh",
-      "history_relaxed": true,
       "ai": {
-        "one_liner_zh": "Strait is a GPU inference serving system that predicts transfer contention and kernel interference to schedule dual-priority traffic with fewer high-priority deadline misses.",
-        "summary_zh": "Strait targets GPU inference serving under high utilization, where on-prem deployments may need priority differentiation and tighter deadline control. The paper argues that existing serving support is limited by weak task prioritization and latency estimates that do not adequately handle concurrent execution. Its mechanism combines contention-aware latency prediction for data transfer, adaptive modeling of kernel execution interference, and priority-aware scheduling for dual-priority request streams. The abstract reports evaluations under intense workloads, with high-priority deadline violations reduced by 1.02 to 11.18 percentage points, acceptable low-priority costs, and more equitable behavior than software-defined preemption approaches. The largest missing detail is the evaluation setup: model types, GPU configuration, workload mix, and baseline tuning are not clear from the abstract.",
-        "background_zh": "GPU inference serving systems increasingly run concurrent DNN workloads where deadline satisfaction depends on scheduling decisions, transfer contention, and kernel-level interference.",
-        "problem_zh": "The core question is how to provide high-priority requests better deadline satisfaction without relying on preemption or causing excessive degradation for low-priority traffic.",
-        "approach_zh": "Strait estimates latency under concurrency by modeling data-transfer contention and kernel execution interference, then feeds those predictions into a priority-aware scheduler.",
-        "evidence_zh": "The abstract reports intense-workload evaluations showing 1.02 to 11.18 percentage-point reductions in high-priority deadline violations, acceptable low-priority costs, and more equitable performance than software-defined preemption, but it does not specify hardware or workload details.",
-        "value_zh": "If the evaluation holds up, the main engineering value is a serving-level way to improve priority isolation and deadline satisfaction under high GPU utilization without requiring low-level preemption.",
+        "one_liner_zh": "The paper identifies fence-induced serialization in proxy-based RDMA as the bottleneck that breaks multi-node MoE megakernel scaling and proposes batching and NIC-side ordering to remove it.",
+        "summary_zh": "Recent MoE megakernels overlap expert compute with fine-grained GPU-initiated communication, but the abstract argues that this single-node advantage collapses across RDMA-connected nodes. The failure mode is hidden serialization in proxy-based transports: each tile transfer must be ordered before its completion signal, forcing fences that drain the NIC pipeline and expose network latency when expert compute is small. Perseus attacks this with decoupled signaling, which batches fences per destination, and NIC-side ordering, which avoids proxy stalls by using hardware fence flags. The abstract reports up to 10.3x end-to-end speedup on proxy-based transports and up to 1.2x over IBGDA GPU-direct, suggesting the bottleneck is ordering serialization rather than proxy transport itself. The missing details are the exact hardware assumptions, workload shapes, and baseline configuration needed to judge how general the result is.",
+        "background_zh": "MoE inference is increasingly limited by cross-GPU and cross-node communication, especially when persistent megakernels try to overlap small expert-compute tiles with network transfers.",
+        "problem_zh": "The paper asks why megakernel communication that works on a single node regresses badly at multi-node scale, and whether the bottleneck is transport choice or ordering semantics.",
+        "approach_zh": "Perseus reduces synchronization pressure through per-destination fence batching and moves ordering enforcement to NIC-side hardware fence flags so the proxy does not block.",
+        "evidence_zh": "The abstract reports communication-bound MoE regression up to 10x on 8 nodes, an 8x fence-count reduction, up to 10.3x end-to-end speedup on proxy-based transports, and up to 1.2x over IBGDA GPU-direct.",
+        "value_zh": "If the evaluation holds, this is directly useful for multi-node LLM inference runtimes that rely on GPU-initiated fine-grained communication and need to keep RDMA latency off the critical path.",
         "open_questions": [
-          "What GPU hardware, model set, batch/request patterns, and utilization levels were used in the evaluation?",
-          "How accurate and stable is the adaptive interference predictor under changing model mixes and arrival distributions?",
-          "Were software-defined preemption and other scheduling baselines tuned fairly for the same deadline and priority objectives?"
+          "What GPUs, NICs, RDMA transports, node counts, and MoE model shapes were used for the reported speedups?",
+          "Are the proxy-based and GPU-direct baselines matched on batching, proxy scheduling, fence semantics, and overlap opportunities?",
+          "How portable is NIC-side ordering across current production NICs, and what happens when hardware fence flags are unavailable?"
         ],
         "core_contributions": [
-          "Introduces a dual-priority inference serving system focused on deadline satisfaction under high GPU utilization.",
-          "Models latency impact from both data-transfer contention and kernel execution interference during concurrent inference.",
-          "Uses the predicted interference and contention costs to drive priority-aware scheduling decisions."
+          "Traces multi-node megakernel slowdown to hidden serialization from per-tile transfer and completion-signal ordering.",
+          "Introduces decoupled signaling that batches fences per destination and reduces fence count by 8x.",
+          "Introduces NIC-side ordering to avoid proxy stalls while preserving required transfer-signal ordering."
         ],
         "why_read": [
-          "Relevant to serving engineers working on priority isolation, SLO adherence, and GPU utilization tradeoffs.",
-          "Contains a concrete reported deadline-violation improvement range rather than only a qualitative scheduling claim.",
-          "Useful as a systems comparison point against preemption-based approaches for differentiated inference traffic."
+          "Strong fit for LLM inference systems and low-level communication/runtime co-design.",
+          "Gives a concrete mechanism for why GPU-initiated megakernels can lose their overlap advantage at RDMA scale.",
+          "Targets a specific kernel/runtime bottleneck rather than presenting generic MoE serving optimizations."
         ],
         "risks": [
-          "The abstract does not establish whether the workloads include LLM inference or only general DNN serving.",
-          "Hardware configuration, GPU count, model mix, and request distribution are unspecified, limiting reproducibility judgment from the abstract alone"
+          "The abstract does not specify hardware details, so the NIC-side ordering requirement may limit deployability.",
+          "The reported wins may depend on communication-bound MoE shapes with too little expert compute to hide inflated network latency absolute behavior for compute-heavy models is unclear from the abstract alone may be smaller for compute-heavy models than for the highlighted cases simply not addressed by the abstract."
         ],
         "recommended_for": [
-          "Researchers studying inference serving schedulers and SLO-aware GPU runtime behavior.",
-          "Engineers evaluating priority handling for on-prem GPU inference deployments.",
-          "Readers comparing predictive scheduling with software-defined preemption for concurrent inference workloads."
+          "LLM serving engineers working on multi-node MoE inference.",
+          "Runtime and communication-stack researchers optimizing RDMA-backed GPU communication.",
+          "CUDA megakernel and persistent-kernel developers concerned with overlap, fences, and proxy transports."
         ],
         "keywords": [
-          "ML inference serving",
-          "GPU scheduling",
-          "deadline satisfaction",
-          "priority-aware scheduling",
-          "latency prediction",
-          "kernel interference corrupted?"
+          "MoE inference",
+          "megakernel",
+          "RDMA",
+          "GPU-initiated communication",
+          "proxy transport",
+          "NIC orderingSerialization"
         ],
-        "reading_priority": "medium",
-        "reading_priority_reason": "The paper matches the LLM inference systems focus through GPU serving, latency estimation, and priority scheduling, but the abstract does not show LLM-specific workloads or low-level compiler/kernel-generation content.",
-        "fallback_summary": "Machine learning (ML) inference serving systems host deep neural network (DNN) models and schedule incoming inference requests across deployed GPUs."
+        "reading_priority": "high",
+        "reading_priority_reason": "High priority because it directly matches multi-node LLM inference acceleration and provides a concrete bottleneck mechanism with reported end-to-end speedups, though full confidence depends on hardware and baseline details not included in the abstract.",
+        "fallback_summary": "Recent megakernel designs for Mixture-of-Experts (MoE) inference fuse expert computation with fine-grained, GPU-initiated communication into a single persistent GPU kernel, and outperform collective-based MoE on a single node by overlapping data transfer with compute at tile granularity."
       }
     }
   ],
   "daily_brief": {
-    "overview_zh": "Today's main threads are training and inference efficiency, Low-level Code And Assembly Generation. The set is anchored by DeepSpeed Inference: Enabling… and TwinGate: Stateful Defense against…. VitaLLM: A Versatile,… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
+    "overview_zh": "Today's main threads are training and inference efficiency, factual reliability and verification. The set is anchored by Making Every Verified Token Count:… and Silicon Showdown: Performance,…. VitaLLM: A Versatile and Tiny… adds another data point on whether the same line of work carries stronger evidence or engineering value.",
     "top_themes": [
       "training and inference efficiency",
-      "Low-level Code And Assembly Generation",
       "factual reliability and verification"
     ],
     "reading_strategy": [
-      "Start with DeepSpeed Inference: Enabling… and verify whether it defines the training and inference efficiency problem clearly and exposes a real mechanism.",
-      "Then read TwinGate: Stateful Defense against… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
-      "Use VitaLLM: A Versatile,… as a final cross-check on experimental boundaries and practical value."
+      "Start with Making Every Verified Token Count:… and verify whether it defines the factual reliability and verification problem clearly and exposes a real mechanism.",
+      "Then read Silicon Showdown: Performance,… to see whether the novelty comes from model design, training procedure, or evaluation reframing.",
+      "Use VitaLLM: A Versatile and Tiny… as a final cross-check on experimental boundaries and practical value."
     ]
   },
   "ai_enrichment": {
     "enabled": true,
     "model": "codex-cli",
-    "generated_at": "2026-05-03T11:22:57Z",
+    "generated_at": "2026-05-04T11:06:10Z",
     "provider": "codex-cli",
     "strategy": "per-paper",
     "paper_results": 6,

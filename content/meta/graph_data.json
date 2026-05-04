@@ -1266,6 +1266,48 @@
       "domain": "LLM Inference Systems",
       "quality_score": 7.39,
       "updated": "2026-05-03"
+    },
+    {
+      "id": "2605.00342v1",
+      "title": "Making Every Verified Token Count: Adaptive Verification for MoE Speculative Decoding",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.97,
+      "updated": "2026-05-04"
+    },
+    {
+      "id": "2605.00519v1",
+      "title": "Silicon Showdown: Performance, Efficiency, and Ecosystem Barriers in Consumer-Grade LLM Inference",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.38,
+      "updated": "2026-05-04"
+    },
+    {
+      "id": "2605.00320v1",
+      "title": "VitaLLM: A Versatile and Tiny Accelerator for Mixed-Precision LLM Inference on Edge Devices",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.38,
+      "updated": "2026-05-04"
+    },
+    {
+      "id": "2605.00528v1",
+      "title": "SAGA: Workflow-Atomic Scheduling for AI Agent Inference on GPU Clusters",
+      "domain": "LLM Inference Systems",
+      "quality_score": 9.3,
+      "updated": "2026-05-04"
+    },
+    {
+      "id": "2605.00616v1",
+      "title": "LLM-Emu: Native Runtime Emulation of LLM Inference via Profile-Driven Sampling",
+      "domain": "LLM Inference Systems",
+      "quality_score": 8.63,
+      "updated": "2026-05-04"
+    },
+    {
+      "id": "2605.00686v1",
+      "title": "Eliminating Hidden Serialization in Multi-Node Megakernel Communication",
+      "domain": "LLM Code Generation For CUDA Kernels",
+      "quality_score": 7.6,
+      "updated": "2026-05-04"
     }
   ],
   "edges": [
@@ -4286,7 +4328,103 @@
       "target": "2207.00032",
       "type": "related",
       "weight": 0.7
+    },
+    {
+      "source": "2605.00342v1",
+      "target": "2605.00616v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00342v1",
+      "target": "2605.00519v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00342v1",
+      "target": "2605.00320v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00519v1",
+      "target": "2605.00320v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00519v1",
+      "target": "2605.00528v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00519v1",
+      "target": "2605.00342v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00320v1",
+      "target": "2605.00519v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00320v1",
+      "target": "2605.00528v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00320v1",
+      "target": "2605.00342v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00528v1",
+      "target": "2605.00616v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00528v1",
+      "target": "2605.00519v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00528v1",
+      "target": "2605.00320v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00616v1",
+      "target": "2605.00528v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00616v1",
+      "target": "2605.00342v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00616v1",
+      "target": "2605.00519v1",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "2605.00686v1",
+      "target": "2605.00342v1",
+      "type": "related",
+      "weight": 0.7
     }
   ],
-  "last_updated": "2026-05-03"
+  "last_updated": "2026-05-04"
 }
