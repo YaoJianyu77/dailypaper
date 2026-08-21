@@ -18,9 +18,9 @@ ai:
     - "skills/paper-note-search/SKILL.md"
     - "skills/paper-image-extractor/SKILL.md"
   github_models_api_base: "https://models.github.ai"
-  github_models_paper_limit: 6
+  github_models_paper_limit: 5
   github_models_abstract_chars: 1200
-  codex_paper_limit: 6
+  codex_paper_limit: 5
   codex_abstract_chars: 2200
   codex_timeout_seconds: 1200
   preferred_models:
@@ -52,7 +52,7 @@ publish:
 
 search:
   max_results: 200
-  top_n: 6
+  top_n: 5
   recent_window_days: 30
   hot_window_days: 365
   hot_exclude_recent_days: 30
@@ -68,7 +68,7 @@ search:
       quota: 2
     established:
       max_age_days: 1095
-      quota: 3
+      quota: 2
     classic:
       quota: 1
     fill_order:
