@@ -8631,7 +8631,13 @@
       ]
     },
     {
-      "archive": null,
+      "archive": {
+        "path": "chatgpt_daily/reports/2026-08-31.md",
+        "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+        "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+        "verified_at": "2026-08-31T15:57:17.987Z",
+        "exact_content_verified": true
+      },
       "authors": [
         "Xinhao Cheng",
         "Zhihao Zhang",
@@ -8699,7 +8705,7 @@
         "preprint": "https://arxiv.org/abs/2512.22219",
         "venue": "OSDI 2026"
       },
-      "status": "reserved",
+      "status": "archived",
       "title": "MPK: A Compiler and Runtime for Mega-Kernelizing Tensor Programs",
       "title_aliases": [
         "MPK: A Compiler and Runtime for Mega-Kernelizing Tensor Programs",
@@ -8708,7 +8714,13 @@
       "work_id": "arxiv:2512.22219"
     },
     {
-      "archive": null,
+      "archive": {
+        "path": "chatgpt_daily/reports/2026-08-31.md",
+        "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+        "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+        "verified_at": "2026-08-31T15:57:17.987Z",
+        "exact_content_verified": true
+      },
       "authors": [
         "Shan Yu",
         "Yifan Qiao",
@@ -8780,7 +8792,7 @@
         "preprint": "https://arxiv.org/abs/2505.04021",
         "venue": "OSDI 2026"
       },
-      "status": "reserved",
+      "status": "archived",
       "title": "Prism: Cost-Efficient Multi-LLM Serving via GPU Memory Ballooning",
       "title_aliases": [
         "Prism: Cost-Efficient Multi-LLM Serving via GPU Memory Ballooning",
@@ -8789,7 +8801,13 @@
       "work_id": "arxiv:2505.04021"
     },
     {
-      "archive": null,
+      "archive": {
+        "path": "chatgpt_daily/reports/2026-08-31.md",
+        "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+        "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+        "verified_at": "2026-08-31T15:57:17.987Z",
+        "exact_content_verified": true
+      },
       "authors": [
         "Wei Zhang",
         "Zhiyu Wu",
@@ -8847,7 +8865,7 @@
         "preprint": "https://arxiv.org/abs/2504.20068",
         "venue": "NSDI 2026"
       },
-      "status": "reserved",
+      "status": "archived",
       "title": "JITServe: SLO-aware LLM Serving with Imprecise Request Information",
       "title_aliases": [
         "JITServe: SLO-aware LLM Serving with Imprecise Request Information",
@@ -8856,7 +8874,13 @@
       "work_id": "arxiv:2504.20068"
     },
     {
-      "archive": null,
+      "archive": {
+        "path": "chatgpt_daily/reports/2026-08-31.md",
+        "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+        "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+        "verified_at": "2026-08-31T15:57:17.987Z",
+        "exact_content_verified": true
+      },
       "authors": [
         "Yuhong Zhong",
         "Fiodar Kazhamiaka",
@@ -8909,7 +8933,7 @@
         "preprint": "https://arxiv.org/abs/2501.09020",
         "venue": "NSDI 2026"
       },
-      "status": "reserved",
+      "status": "archived",
       "title": "Octopus: Enhancing CXL Memory Pods via Sparse Topology",
       "title_aliases": [
         "Octopus: Enhancing CXL Memory Pods via Sparse Topology",
@@ -8918,7 +8942,13 @@
       "work_id": "arxiv:2501.09020"
     },
     {
-      "archive": null,
+      "archive": {
+        "path": "chatgpt_daily/reports/2026-08-31.md",
+        "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+        "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+        "verified_at": "2026-08-31T15:57:17.987Z",
+        "exact_content_verified": true
+      },
       "authors": [
         "Woosuk Kwon",
         "Zhuohan Li",
@@ -8981,7 +9011,7 @@
         "preprint": "https://arxiv.org/abs/2309.06180",
         "venue": "SOSP 2023"
       },
-      "status": "reserved",
+      "status": "archived",
       "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
       "title_aliases": [
         "Efficient Memory Management for Large Language Model Serving with PagedAttention"
@@ -8994,7 +9024,7 @@
       "run_id": "systems-paper-daily:2026-08-31",
       "local_date": "2026-08-31",
       "timezone": "America/New_York",
-      "status": "reserved",
+      "status": "archived",
       "work_ids": [
         "arxiv:2512.22219",
         "arxiv:2505.04021",
@@ -9011,11 +9041,18 @@
       "history_read_sha": "54791f53e4db062ff2790c5b0e3f41924e392fb4",
       "reservation_attempt": 1,
       "reserved_at": "2026-08-31T15:56:10.128Z",
-      "reservation_commit_sha": null,
-      "reserved_history_sha": null,
-      "report_commit_sha": null,
-      "report_blob_sha": null,
-      "archive_verified_at": null
+      "reservation_commit_sha": "4be698a25564f0ea30d4488774164066d5f2f23e",
+      "reserved_history_sha": "bb1226174057563a6a6d317f8cfd3ddbcea55a58",
+      "report_commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+      "report_blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+      "archive_verified_at": "2026-08-31T15:57:17.987Z",
+      "archived_at": "2026-08-31T15:57:17.987Z",
+      "verification": {
+        "report_exact_content": true,
+        "prior_history_records_preserved": true,
+        "legacy_sources_unchanged": true,
+        "final_history_readback_pending": true
+      }
     }
   ],
   "deployment_status": {
