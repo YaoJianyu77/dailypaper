@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "task_name": "Systems Paper Daily",
+  "repository": "YaoJianyu77/dailypaper",
+  "branch": "main",
+  "timezone": "America/New_York",
+  "config_path": "chatgpt_daily/prompt.md",
+  "report_directory": "chatgpt_daily/reports",
+  "created_on": "2026-08-31",
+  "policy": {
+    "permanent_exclusion": true,
+    "fail_closed": true,
+    "excluded_statuses": ["imported", "reserved", "archived"],
+    "conditional_updates_required": true,
+    "verify_before_output": true,
+    "automatic_expiration": false,
+    "scope": "This task and verified, imported GitHub recommendation history. Independent writers are not coordinated automatically."
+  },
+  "legacy_import": {
+    "status": "pending",
+    "baseline_commit": "bd4aa7e4a4307177658c1ccb3182a54fd54b79d3",
+    "sources": [
+      {"path": "state/paper_index.json", "kind": "recommendation_index", "read_baseline_and_current": true},
+      {"path": "content/daily", "kind": "published_daily_reports", "read_baseline_and_current": true}
+    ],
+    "completed_at": null,
+    "verified_source_versions": {},
+    "note": "No historical papers have been imported into this new file yet. Import and verify legacy recommendations before setting complete or producing recommendations. Never treat this empty papers array as an empty prior history."
+  },
+  "papers": [],
+  "runs": [],
+  "deployment_status": {
+    "scheduled_task_created": false,
+    "scheduled_runtime_write_verified": false,
+    "note": "Creating repository files does not create a ChatGPT scheduled task or prove its runtime permissions."
+  }
+}
