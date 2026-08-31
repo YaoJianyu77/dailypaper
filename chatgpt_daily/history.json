@@ -312,6 +312,14 @@
       "formal_report_entries": 255,
       "unique_reported_works": 172,
       "index_only_recommendation_records": 2
+    },
+    "last_incremental_check": {
+      "checked_at": "2026-08-31T15:56:10.128Z",
+      "main_commit": "bd3f2b596f361c45dacb7e89505b94e95696e43b",
+      "sources_changed": false,
+      "state_paper_index_blob_sha": "415a81cdcc51d54824f16c6841f7d6cdce4c8d23",
+      "daily_reports_checked": 50,
+      "verified_against_imported_blob_set": true
     }
   },
   "papers": [
@@ -8621,9 +8629,395 @@
       "report_paths": [
         "content/daily/2026-03-19.md"
       ]
+    },
+    {
+      "archive": null,
+      "authors": [
+        "Xinhao Cheng",
+        "Zhihao Zhang",
+        "Yu Zhou",
+        "Jianan Ji",
+        "Jinchen Jiang",
+        "Zepeng Zhao",
+        "Ziruo Xiao",
+        "Zihao Ye",
+        "Yingyi Huang",
+        "Ruihang Lai",
+        "Hongyi Jin",
+        "Bohan Hou",
+        "Mengdi Wu",
+        "Yixin Dong",
+        "Anthony Yip",
+        "Zihao Ye",
+        "Songting Wang",
+        "Wenqin Yang",
+        "Xupeng Miao",
+        "Tianqi Chen",
+        "Zhihao Jia"
+      ],
+      "category": "最新",
+      "first_registered_date": "2026-08-31",
+      "identifiers": {
+        "arxiv": [
+          "2512.22219"
+        ],
+        "dblp": [
+          "journals/corr/abs-2512-22219"
+        ],
+        "doi": [],
+        "venue_record": [
+          "usenix:318585"
+        ]
+      },
+      "normalized_title": "mpk a compiler and runtime for mega kernelizing tensor programs",
+      "preprint_first_public_date": "2025-12-22",
+      "publication_date": "2026-07-13",
+      "report_path": "chatgpt_daily/reports/2026-08-31.md",
+      "report_paths": [
+        "chatgpt_daily/reports/2026-08-31.md"
+      ],
+      "run_id": "systems-paper-daily:2026-08-31",
+      "source_urls": [
+        "https://www.usenix.org/conference/osdi26/presentation/cheng",
+        "https://www.usenix.org/system/files/osdi26-cheng.pdf",
+        "https://arxiv.org/abs/2512.22219",
+        "https://github.com/mirage-project/mirage"
+      ],
+      "sources": {
+        "code": "https://github.com/mirage-project/mirage",
+        "figure_checks": [
+          "Figure 4 PDF page 5",
+          "Figure 9 PDF page 12",
+          "Figure 11 PDF page 13",
+          "Table 2 PDF page 14"
+        ],
+        "formal_date_basis": "USENIX proceedings open when OSDI 2026 began on 2026-07-13",
+        "full_text": "https://www.usenix.org/system/files/osdi26-cheng.pdf",
+        "identity_relation": "Same arXiv work; title changed from Mirage Persistent Kernel to MPK",
+        "official_page": "https://www.usenix.org/conference/osdi26/presentation/cheng",
+        "pages": "1909-1926",
+        "preprint": "https://arxiv.org/abs/2512.22219",
+        "venue": "OSDI 2026"
+      },
+      "status": "reserved",
+      "title": "MPK: A Compiler and Runtime for Mega-Kernelizing Tensor Programs",
+      "title_aliases": [
+        "MPK: A Compiler and Runtime for Mega-Kernelizing Tensor Programs",
+        "Mirage Persistent Kernel: A Compiler and Runtime for Mega-Kernelizing Tensor Programs"
+      ],
+      "work_id": "arxiv:2512.22219"
+    },
+    {
+      "archive": null,
+      "authors": [
+        "Shan Yu",
+        "Yifan Qiao",
+        "Mingyuan Ma",
+        "Yangmin Li",
+        "Shuo Yang",
+        "Xinyuan Tong",
+        "Yang Wang",
+        "Zhiqiang Xie",
+        "Yuwei An",
+        "Shiyi Cao",
+        "Ke Bao",
+        "Deepak Vij",
+        "Xiaoning Ding",
+        "Yichen Wang",
+        "Qingda Lu",
+        "Zhong Wang",
+        "Gao Gao",
+        "Harry Xu",
+        "Junyi Shu",
+        "Jiarong Xing",
+        "Ying Sheng"
+      ],
+      "category": "最新",
+      "first_registered_date": "2026-08-31",
+      "identifiers": {
+        "arxiv": [
+          "2505.04021"
+        ],
+        "dblp": [
+          "journals/corr/abs-2505-04021"
+        ],
+        "doi": [],
+        "venue_record": [
+          "usenix:318391"
+        ]
+      },
+      "normalized_title": "prism cost efficient multi llm serving via gpu memory ballooning",
+      "preprint_first_public_date": "2025-05-06",
+      "publication_date": "2026-07-13",
+      "report_path": "chatgpt_daily/reports/2026-08-31.md",
+      "report_paths": [
+        "chatgpt_daily/reports/2026-08-31.md"
+      ],
+      "run_id": "systems-paper-daily:2026-08-31",
+      "source_urls": [
+        "https://www.usenix.org/conference/osdi26/presentation/yu-shan",
+        "https://www.usenix.org/system/files/osdi26-yu-shan.pdf",
+        "https://arxiv.org/abs/2505.04021",
+        "https://github.com/Multi-LLM/prism-research",
+        "https://github.com/ovg-project/kvcached"
+      ],
+      "sources": {
+        "code": [
+          "https://github.com/Multi-LLM/prism-research",
+          "https://github.com/ovg-project/kvcached"
+        ],
+        "figure_checks": [
+          "Table 1 PDF page 4",
+          "Figure 3 PDF page 7",
+          "Figure 5 PDF page 12",
+          "Figures 9-10 PDF page 14"
+        ],
+        "formal_date_basis": "USENIX proceedings open when OSDI 2026 began on 2026-07-13",
+        "full_text": "https://www.usenix.org/system/files/osdi26-yu-shan.pdf",
+        "identity_relation": "Same arXiv work; formal OSDI title replaces the preprint title",
+        "official_page": "https://www.usenix.org/conference/osdi26/presentation/yu-shan",
+        "pages": "75-93",
+        "preprint": "https://arxiv.org/abs/2505.04021",
+        "venue": "OSDI 2026"
+      },
+      "status": "reserved",
+      "title": "Prism: Cost-Efficient Multi-LLM Serving via GPU Memory Ballooning",
+      "title_aliases": [
+        "Prism: Cost-Efficient Multi-LLM Serving via GPU Memory Ballooning",
+        "Prism: Unleashing GPU Sharing for Cost-Efficient Multi-LLM Serving"
+      ],
+      "work_id": "arxiv:2505.04021"
+    },
+    {
+      "archive": null,
+      "authors": [
+        "Wei Zhang",
+        "Zhiyu Wu",
+        "Yi Mu",
+        "Rui Ning",
+        "Banruo Liu",
+        "Nikhil Sarda",
+        "Myungjin Lee",
+        "Fan Lai"
+      ],
+      "category": "最新",
+      "first_registered_date": "2026-08-31",
+      "identifiers": {
+        "arxiv": [
+          "2504.20068"
+        ],
+        "dblp": [
+          "journals/corr/abs-2504-20068"
+        ],
+        "doi": [
+          "10.5555/3833220.3833264"
+        ],
+        "venue_record": [
+          "usenix:316748"
+        ]
+      },
+      "normalized_title": "jitserve slo aware llm serving with imprecise request information",
+      "preprint_first_public_date": "2025-04-24",
+      "publication_date": "2026-05-04",
+      "report_path": "chatgpt_daily/reports/2026-08-31.md",
+      "report_paths": [
+        "chatgpt_daily/reports/2026-08-31.md"
+      ],
+      "run_id": "systems-paper-daily:2026-08-31",
+      "source_urls": [
+        "https://www.usenix.org/conference/nsdi26/presentation/zhang-wei",
+        "https://www.usenix.org/system/files/nsdi26-zhang-wei.pdf",
+        "https://doi.org/10.5555/3833220.3833264",
+        "https://arxiv.org/abs/2504.20068",
+        "https://github.com/UIUC-MLSys/JITServe"
+      ],
+      "sources": {
+        "code": "https://github.com/UIUC-MLSys/JITServe",
+        "figure_checks": [
+          "Figures 4-5 PDF page 6",
+          "Figure 10 PDF page 8",
+          "Figure 18",
+          "Figure 20"
+        ],
+        "formal_date_basis": "USENIX proceedings open when NSDI 2026 began on 2026-05-04",
+        "full_text": "https://www.usenix.org/system/files/nsdi26-zhang-wei.pdf",
+        "identity_relation": "arXiv v1 was Tempo; later versions and formal NSDI paper are JITServe",
+        "official_page": "https://www.usenix.org/conference/nsdi26/presentation/zhang-wei",
+        "pages": "825-848",
+        "preprint": "https://arxiv.org/abs/2504.20068",
+        "venue": "NSDI 2026"
+      },
+      "status": "reserved",
+      "title": "JITServe: SLO-aware LLM Serving with Imprecise Request Information",
+      "title_aliases": [
+        "JITServe: SLO-aware LLM Serving with Imprecise Request Information",
+        "Tempo: Application-aware LLM Serving with Mixed SLO Requirements"
+      ],
+      "work_id": "arxiv:2504.20068"
+    },
+    {
+      "archive": null,
+      "authors": [
+        "Yuhong Zhong",
+        "Fiodar Kazhamiaka",
+        "Pantea Zardoshti",
+        "Shuwei Teng",
+        "Rodrigo Fonseca",
+        "Mark D. Hill",
+        "Daniel S. Berger"
+      ],
+      "category": "最新",
+      "first_registered_date": "2026-08-31",
+      "identifiers": {
+        "arxiv": [
+          "2501.09020"
+        ],
+        "dblp": [
+          "conf/nsdi/ZhongKZTFHB26"
+        ],
+        "doi": [],
+        "venue_record": [
+          "usenix:316578"
+        ]
+      },
+      "normalized_title": "octopus enhancing cxl memory pods via sparse topology",
+      "preprint_first_public_date": "2025-01-15",
+      "publication_date": "2026-05-04",
+      "report_path": "chatgpt_daily/reports/2026-08-31.md",
+      "report_paths": [
+        "chatgpt_daily/reports/2026-08-31.md"
+      ],
+      "run_id": "systems-paper-daily:2026-08-31",
+      "source_urls": [
+        "https://www.usenix.org/conference/nsdi26/presentation/zhong",
+        "https://www.usenix.org/system/files/nsdi26-zhong.pdf",
+        "https://arxiv.org/abs/2501.09020",
+        "https://github.com/yuhong-zhong/Octopus-CXL-Pod"
+      ],
+      "sources": {
+        "code": "https://github.com/yuhong-zhong/Octopus-CXL-Pod",
+        "figure_checks": [
+          "Figure 1 PDF page 2",
+          "Figures 10-12 PDF page 10",
+          "Table 5 PDF page 12"
+        ],
+        "formal_date_basis": "USENIX proceedings open when NSDI 2026 began on 2026-05-04",
+        "full_text": "https://www.usenix.org/system/files/nsdi26-zhong.pdf",
+        "identity_relation": "Same arXiv work; early preprint title was Scalable Low-Cost CXL Memory Pooling",
+        "official_page": "https://www.usenix.org/conference/nsdi26/presentation/zhong",
+        "pages": "1303-1322",
+        "preprint": "https://arxiv.org/abs/2501.09020",
+        "venue": "NSDI 2026"
+      },
+      "status": "reserved",
+      "title": "Octopus: Enhancing CXL Memory Pods via Sparse Topology",
+      "title_aliases": [
+        "Octopus: Enhancing CXL Memory Pods via Sparse Topology",
+        "Octopus: Scalable Low-Cost CXL Memory Pooling"
+      ],
+      "work_id": "arxiv:2501.09020"
+    },
+    {
+      "archive": null,
+      "authors": [
+        "Woosuk Kwon",
+        "Zhuohan Li",
+        "Siyuan Zhuang",
+        "Ying Sheng",
+        "Lianmin Zheng",
+        "Cody Hao Yu",
+        "Joseph E. Gonzalez",
+        "Hao Zhang",
+        "Ion Stoica"
+      ],
+      "category": "经典",
+      "first_registered_date": "2026-08-31",
+      "identifiers": {
+        "arxiv": [
+          "2309.06180"
+        ],
+        "dblp": [
+          "conf/sosp/KwonLZSZYGZS23"
+        ],
+        "doi": [
+          "10.1145/3600006.3613165"
+        ],
+        "venue_record": [
+          "acm:sosp23:3600006.3613165"
+        ]
+      },
+      "normalized_title": "efficient memory management for large language model serving with pagedattention",
+      "preprint_first_public_date": "2023-09-12",
+      "publication_date": "2023-10-23",
+      "report_path": "chatgpt_daily/reports/2026-08-31.md",
+      "report_paths": [
+        "chatgpt_daily/reports/2026-08-31.md"
+      ],
+      "run_id": "systems-paper-daily:2026-08-31",
+      "source_urls": [
+        "https://dl.acm.org/doi/10.1145/3600006.3613165",
+        "https://arxiv.org/abs/2309.06180",
+        "https://arxiv.org/pdf/2309.06180",
+        "https://github.com/vllm-project/vllm"
+      ],
+      "sources": {
+        "classic_evidence": [
+          "https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf",
+          "https://arxiv.org/pdf/2405.04437",
+          "https://vllm.ai/blog/2025-01-10-vllm-2024-wrapped-2025-vision"
+        ],
+        "code": "https://github.com/vllm-project/vllm",
+        "figure_checks": [
+          "Figure 2 PDF page 2",
+          "Figure 4 PDF page 5",
+          "Figures 12-13 PDF page 10",
+          "Figure 15 PDF page 11",
+          "Figure 18 PDF page 12"
+        ],
+        "formal_date_basis": "ACM proceedings published 2023-10-23",
+        "full_text": "https://arxiv.org/pdf/2309.06180",
+        "official_page": "https://dl.acm.org/doi/10.1145/3600006.3613165",
+        "pages": "611-626",
+        "preprint": "https://arxiv.org/abs/2309.06180",
+        "venue": "SOSP 2023"
+      },
+      "status": "reserved",
+      "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+      "title_aliases": [
+        "Efficient Memory Management for Large Language Model Serving with PagedAttention"
+      ],
+      "work_id": "doi:10.1145/3600006.3613165"
     }
   ],
-  "runs": [],
+  "runs": [
+    {
+      "run_id": "systems-paper-daily:2026-08-31",
+      "local_date": "2026-08-31",
+      "timezone": "America/New_York",
+      "status": "reserved",
+      "work_ids": [
+        "arxiv:2512.22219",
+        "arxiv:2505.04021",
+        "arxiv:2504.20068",
+        "arxiv:2501.09020",
+        "doi:10.1145/3600006.3613165"
+      ],
+      "category_counts": {
+        "最新": 4,
+        "经典": 1
+      },
+      "report_path": "chatgpt_daily/reports/2026-08-31.md",
+      "config_sha": "9c59cd06c7c44371bee8ce77b0a68b7689a880b9",
+      "history_read_sha": "54791f53e4db062ff2790c5b0e3f41924e392fb4",
+      "reservation_attempt": 1,
+      "reserved_at": "2026-08-31T15:56:10.128Z",
+      "reservation_commit_sha": null,
+      "reserved_history_sha": null,
+      "report_commit_sha": null,
+      "report_blob_sha": null,
+      "archive_verified_at": null
+    }
+  ],
   "deployment_status": {
     "scheduled_task_created": false,
     "scheduled_runtime_write_verified": false,
