@@ -8633,10 +8633,18 @@
     {
       "archive": {
         "path": "chatgpt_daily/reports/2026-08-31.md",
-        "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
-        "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
-        "verified_at": "2026-08-31T15:57:17.987Z",
-        "exact_content_verified": true
+        "blob_sha": "499ade8a1b6561a8203768dfc588d795b6c21b69",
+        "commit_sha": "c56eb9cc8c866a1274ae5981e095d74f7dc7346a",
+        "verified_at": "2026-08-31T15:59:44.995Z",
+        "exact_content_verified": true,
+        "previous_versions": [
+          {
+            "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+            "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+            "verified_at": "2026-08-31T15:57:17.987Z"
+          }
+        ],
+        "revision_reason": "Clarified the scope of PagedAttention influence; paper selection and technical evidence unchanged."
       },
       "authors": [
         "Xinhao Cheng",
@@ -8716,10 +8724,18 @@
     {
       "archive": {
         "path": "chatgpt_daily/reports/2026-08-31.md",
-        "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
-        "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
-        "verified_at": "2026-08-31T15:57:17.987Z",
-        "exact_content_verified": true
+        "blob_sha": "499ade8a1b6561a8203768dfc588d795b6c21b69",
+        "commit_sha": "c56eb9cc8c866a1274ae5981e095d74f7dc7346a",
+        "verified_at": "2026-08-31T15:59:44.995Z",
+        "exact_content_verified": true,
+        "previous_versions": [
+          {
+            "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+            "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+            "verified_at": "2026-08-31T15:57:17.987Z"
+          }
+        ],
+        "revision_reason": "Clarified the scope of PagedAttention influence; paper selection and technical evidence unchanged."
       },
       "authors": [
         "Shan Yu",
@@ -8803,10 +8819,18 @@
     {
       "archive": {
         "path": "chatgpt_daily/reports/2026-08-31.md",
-        "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
-        "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
-        "verified_at": "2026-08-31T15:57:17.987Z",
-        "exact_content_verified": true
+        "blob_sha": "499ade8a1b6561a8203768dfc588d795b6c21b69",
+        "commit_sha": "c56eb9cc8c866a1274ae5981e095d74f7dc7346a",
+        "verified_at": "2026-08-31T15:59:44.995Z",
+        "exact_content_verified": true,
+        "previous_versions": [
+          {
+            "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+            "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+            "verified_at": "2026-08-31T15:57:17.987Z"
+          }
+        ],
+        "revision_reason": "Clarified the scope of PagedAttention influence; paper selection and technical evidence unchanged."
       },
       "authors": [
         "Wei Zhang",
@@ -8876,10 +8900,18 @@
     {
       "archive": {
         "path": "chatgpt_daily/reports/2026-08-31.md",
-        "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
-        "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
-        "verified_at": "2026-08-31T15:57:17.987Z",
-        "exact_content_verified": true
+        "blob_sha": "499ade8a1b6561a8203768dfc588d795b6c21b69",
+        "commit_sha": "c56eb9cc8c866a1274ae5981e095d74f7dc7346a",
+        "verified_at": "2026-08-31T15:59:44.995Z",
+        "exact_content_verified": true,
+        "previous_versions": [
+          {
+            "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+            "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+            "verified_at": "2026-08-31T15:57:17.987Z"
+          }
+        ],
+        "revision_reason": "Clarified the scope of PagedAttention influence; paper selection and technical evidence unchanged."
       },
       "authors": [
         "Yuhong Zhong",
@@ -8944,10 +8976,18 @@
     {
       "archive": {
         "path": "chatgpt_daily/reports/2026-08-31.md",
-        "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
-        "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
-        "verified_at": "2026-08-31T15:57:17.987Z",
-        "exact_content_verified": true
+        "blob_sha": "499ade8a1b6561a8203768dfc588d795b6c21b69",
+        "commit_sha": "c56eb9cc8c866a1274ae5981e095d74f7dc7346a",
+        "verified_at": "2026-08-31T15:59:44.995Z",
+        "exact_content_verified": true,
+        "previous_versions": [
+          {
+            "blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+            "commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+            "verified_at": "2026-08-31T15:57:17.987Z"
+          }
+        ],
+        "revision_reason": "Clarified the scope of PagedAttention influence; paper selection and technical evidence unchanged."
       },
       "authors": [
         "Woosuk Kwon",
@@ -9043,9 +9083,9 @@
       "reserved_at": "2026-08-31T15:56:10.128Z",
       "reservation_commit_sha": "4be698a25564f0ea30d4488774164066d5f2f23e",
       "reserved_history_sha": "bb1226174057563a6a6d317f8cfd3ddbcea55a58",
-      "report_commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
-      "report_blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
-      "archive_verified_at": "2026-08-31T15:57:17.987Z",
+      "report_commit_sha": "c56eb9cc8c866a1274ae5981e095d74f7dc7346a",
+      "report_blob_sha": "499ade8a1b6561a8203768dfc588d795b6c21b69",
+      "archive_verified_at": "2026-08-31T15:59:44.995Z",
       "archived_at": "2026-08-31T15:57:17.987Z",
       "verification": {
         "report_exact_content": true,
@@ -9056,9 +9096,18 @@
         "final_history_readback_verified_at": "2026-08-31T15:58:02.813Z",
         "verified_archive_history_sha": "18c1577386f1fb0b50820b5ae9359fb5bb95d50a",
         "verified_archive_history_commit_sha": "14a8ee6915d315ed4655d11f29be3f62d928ef83",
-        "verified_report_blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+        "verified_report_blob_sha": "499ade8a1b6561a8203768dfc588d795b6c21b69",
         "old_record_count": 174,
         "final_paper_count": 179
+      },
+      "report_revision": {
+        "revised_at": "2026-08-31T15:59:44.995Z",
+        "reason": "Clarified the scope of PagedAttention influence; paper selection and technical evidence unchanged.",
+        "previous_blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+        "previous_commit_sha": "dbd8efd9fabc97519b4400a0b190bd42d171a8ba",
+        "final_blob_sha": "499ade8a1b6561a8203768dfc588d795b6c21b69",
+        "final_commit_sha": "c56eb9cc8c866a1274ae5981e095d74f7dc7346a",
+        "exact_content_verified": true
       }
     }
   ],
