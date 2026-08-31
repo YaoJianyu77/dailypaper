@@ -9051,7 +9051,14 @@
         "report_exact_content": true,
         "prior_history_records_preserved": true,
         "legacy_sources_unchanged": true,
-        "final_history_readback_pending": true
+        "final_history_readback_pending": false,
+        "final_history_readback_completed": true,
+        "final_history_readback_verified_at": "2026-08-31T15:58:02.813Z",
+        "verified_archive_history_sha": "18c1577386f1fb0b50820b5ae9359fb5bb95d50a",
+        "verified_archive_history_commit_sha": "14a8ee6915d315ed4655d11f29be3f62d928ef83",
+        "verified_report_blob_sha": "2719baa3dcb36b5d1c6c2820847094e3e1e1b050",
+        "old_record_count": 174,
+        "final_paper_count": 179
       }
     }
   ],
