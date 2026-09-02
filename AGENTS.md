@@ -34,7 +34,9 @@ The final answer is the report itself. Do not return only a path, a list of link
 - Scheduled-task history lives in `state/recommendation_history.json` and is permanent: no cooldown or expiration.
 - Daily reports live in `content/daily/`.
 - Shared visual assets live in `content/assets/papers/<stable-paper-key>/images/`.
-- The report must render original figures/tables inline when technically possible. If not, render a faithful reconstruction inline and label it as reconstructed.
+- The repository report must use site-valid image paths such as `/assets/papers/<stable-paper-key>/images/<file>.png`.
+- The final ChatGPT response must embed the committed image itself using an absolute public URL, preferably `https://raw.githubusercontent.com/YaoJianyu77/dailypaper/main/content/assets/papers/<stable-paper-key>/images/<file>.png`, after verifying that the URL resolves to the committed image. A repository page link, relative path, or textual file location is not an inline image.
+- When an original binary image cannot be committed or rendered, display a faithful Mermaid diagram, Markdown table, or compact ASCII reconstruction directly in both outputs and label it as reconstructed.
 - Treat a preprint, renamed paper, conference version, journal version, and revised URL as one research work unless the technical contribution is demonstrably different.
 - Re-read history immediately before writing because another run may have committed concurrently.
 - Use a stable run ID based on `America/New_York` local date. Retries must resume or verify the same run rather than create another set.
