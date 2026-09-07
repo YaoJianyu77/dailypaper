@@ -9541,7 +9541,7 @@
           }
         ],
         "benchmark_results_reproduced": false,
-        "final_history_readback_pending": true,
+        "final_history_readback_pending": false,
         "report_exact_content": true,
         "all_ten_original_images_exact_bytes_verified": true,
         "raw_image_urls_http_200": true,
@@ -9549,7 +9549,10 @@
         "previous_reports_unchanged": true,
         "final_paper_count": 184,
         "selected_work_ids_unique": true,
-        "final_history_readback_completed": false
+        "final_history_readback_completed": true,
+        "final_history_readback_verified_at": "2026-09-07T16:20:08.295Z",
+        "verified_archive_history_sha": "b872e3a34851bb724a2388a1a14ddf91a03fe254",
+        "verified_archive_history_commit_sha": "eb9761f707e3df2b7048b0b5dcb75bdd60679829"
       },
       "reservation_commit_sha": "db67869571fc86087ddc8aaa5cc8a3ebb8fd5732",
       "reserved_history_sha": "ce9611046872b2f597086a4d84dd9bd56dcec341",
