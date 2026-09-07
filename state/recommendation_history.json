@@ -9109,7 +9109,7 @@
         "https://www.usenix.org/system/files/osdi26-du.pdf",
         "https://arxiv.org/abs/2504.18154"
       ],
-      "status": "reserved",
+      "status": "archived",
       "title": "Efficient LLM Serving on Commodity GPU Clusters with Data-Reduced Cross-Instance Orchestration",
       "title_aliases": [
         "Efficient LLM Serving on Commodity GPU Clusters with Data-Reduced Cross-Instance Orchestration",
@@ -9127,7 +9127,10 @@
         "visual_count": 2
       },
       "work_id": "arxiv:2504.18154",
-      "reserved_at": "2026-09-07T16:15:39.357Z"
+      "reserved_at": "2026-09-07T16:15:39.357Z",
+      "archived_at": "2026-09-07T16:19:24.024Z",
+      "report_commit_sha": "c0bb0f2e5d576a5b2de14c8b608e78e3ff5dcf03",
+      "report_blob_sha": "275800cc20370a9255719bed78d6b3447178af98"
     },
     {
       "authors": [
@@ -9168,7 +9171,7 @@
         "https://www.usenix.org/system/files/osdi26-xie-zhiqiang.pdf",
         "https://arxiv.org/abs/2508.18572"
       ],
-      "status": "reserved",
+      "status": "archived",
       "title": "Strata: Hierarchical Context Caching for Long Context Language Model Serving",
       "title_aliases": [
         "Strata: Hierarchical Context Caching for Long Context Language Model Serving"
@@ -9185,7 +9188,10 @@
         "visual_count": 2
       },
       "work_id": "arxiv:2508.18572",
-      "reserved_at": "2026-09-07T16:15:39.357Z"
+      "reserved_at": "2026-09-07T16:15:39.357Z",
+      "archived_at": "2026-09-07T16:19:24.024Z",
+      "report_commit_sha": "c0bb0f2e5d576a5b2de14c8b608e78e3ff5dcf03",
+      "report_blob_sha": "275800cc20370a9255719bed78d6b3447178af98"
     },
     {
       "authors": [
@@ -9223,7 +9229,7 @@
         "https://www.usenix.org/system/files/osdi26-soi.pdf",
         "https://arxiv.org/abs/2512.18134"
       ],
-      "status": "reserved",
+      "status": "archived",
       "title": "Optimal Software Pipelining and Warp Specialization for Tensor Core GPUs",
       "title_aliases": [
         "Optimal Software Pipelining and Warp Specialization for Tensor Core GPUs"
@@ -9240,7 +9246,10 @@
         "visual_count": 2
       },
       "work_id": "arxiv:2512.18134",
-      "reserved_at": "2026-09-07T16:15:39.357Z"
+      "reserved_at": "2026-09-07T16:15:39.357Z",
+      "archived_at": "2026-09-07T16:19:24.024Z",
+      "report_commit_sha": "c0bb0f2e5d576a5b2de14c8b608e78e3ff5dcf03",
+      "report_blob_sha": "275800cc20370a9255719bed78d6b3447178af98"
     },
     {
       "authors": [
@@ -9275,7 +9284,7 @@
         "https://proceedings.mlsys.org/paper_files/paper/2026/file/ff997469ac66cf893c4183efeb22212a-Supplemental-Conference.pdf",
         "https://arxiv.org/abs/2511.13940"
       ],
-      "status": "reserved",
+      "status": "archived",
       "title": "ParallelKittens: Systematic and Practical Simplification of Multi-GPU AI Kernels",
       "title_aliases": [
         "ParallelKittens: Systematic and Practical Simplification of Multi-GPU AI Kernels",
@@ -9295,7 +9304,10 @@
         "visual_count": 2
       },
       "work_id": "arxiv:2511.13940",
-      "reserved_at": "2026-09-07T16:15:39.357Z"
+      "reserved_at": "2026-09-07T16:15:39.357Z",
+      "archived_at": "2026-09-07T16:19:24.024Z",
+      "report_commit_sha": "c0bb0f2e5d576a5b2de14c8b608e78e3ff5dcf03",
+      "report_blob_sha": "275800cc20370a9255719bed78d6b3447178af98"
     },
     {
       "authors": [
@@ -9346,7 +9358,7 @@
         "https://www.usenix.org/conference/osdi22/presentation/yu",
         "https://www.usenix.org/system/files/osdi22-yu.pdf"
       ],
-      "status": "reserved",
+      "status": "archived",
       "title": "Orca: A Distributed Serving System for Transformer-Based Generative Models",
       "title_aliases": [
         "Orca: A Distributed Serving System for Transformer-Based Generative Models"
@@ -9363,7 +9375,10 @@
         "visual_count": 2
       },
       "work_id": "dblp:conf/osdi/YuJKKC22",
-      "reserved_at": "2026-09-07T16:15:39.357Z"
+      "reserved_at": "2026-09-07T16:15:39.357Z",
+      "archived_at": "2026-09-07T16:19:24.024Z",
+      "report_commit_sha": "c0bb0f2e5d576a5b2de14c8b608e78e3ff5dcf03",
+      "report_blob_sha": "275800cc20370a9255719bed78d6b3447178af98"
     }
   ],
   "policy": {
@@ -9448,7 +9463,7 @@
       "local_date": "2026-09-07",
       "timezone": "America/New_York",
       "execution_mode": "one-time end-to-end integration test; no scheduled-task mutation",
-      "status": "reserved",
+      "status": "archived",
       "work_ids": [
         "arxiv:2504.18154",
         "arxiv:2508.18572",
@@ -9526,8 +9541,155 @@
           }
         ],
         "benchmark_results_reproduced": false,
-        "final_history_readback_pending": true
-      }
+        "final_history_readback_pending": true,
+        "report_exact_content": true,
+        "all_ten_original_images_exact_bytes_verified": true,
+        "raw_image_urls_http_200": true,
+        "configuration_skills_application_code_unchanged": true,
+        "previous_reports_unchanged": true,
+        "final_paper_count": 184,
+        "selected_work_ids_unique": true,
+        "final_history_readback_completed": false
+      },
+      "reservation_commit_sha": "db67869571fc86087ddc8aaa5cc8a3ebb8fd5732",
+      "reserved_history_sha": "ce9611046872b2f597086a4d84dd9bd56dcec341",
+      "report_commit_sha": "c0bb0f2e5d576a5b2de14c8b608e78e3ff5dcf03",
+      "report_blob_sha": "275800cc20370a9255719bed78d6b3447178af98",
+      "report_sha256": "8e88e6d1356aefd1df8f39aacc41ef38309c55fc6d10a26491156980768e7476",
+      "archive_verified_at": "2026-09-07T16:19:24.024Z",
+      "archived_at": "2026-09-07T16:19:24.024Z",
+      "visual_assets": [
+        {
+          "bytes": 306526,
+          "dimensions": [
+            2530,
+            1375
+          ],
+          "exact_committed_image": true,
+          "mime": "image/png",
+          "repo_path": "content/assets/papers/usenix-osdi26-ecoserve/images/figure-5-architecture.png",
+          "sha256": "9db7d480d467c69b1d7a39c20c5ba4c59d9911d39c7baf026818146bbda75391",
+          "status": 200,
+          "url": "https://raw.githubusercontent.com/YaoJianyu77/dailypaper/main/content/assets/papers/usenix-osdi26-ecoserve/images/figure-5-architecture.png"
+        },
+        {
+          "bytes": 54103,
+          "dimensions": [
+            1200,
+            300
+          ],
+          "exact_committed_image": true,
+          "mime": "image/png",
+          "repo_path": "content/assets/papers/usenix-osdi26-ecoserve/images/figure-10-slo-sensitivity.png",
+          "sha256": "df44262d2679d6571a1ba89b3e0efe4791b330e2d333b32e06db2419fde64444",
+          "status": 200,
+          "url": "https://raw.githubusercontent.com/YaoJianyu77/dailypaper/main/content/assets/papers/usenix-osdi26-ecoserve/images/figure-10-slo-sensitivity.png"
+        },
+        {
+          "bytes": 50411,
+          "dimensions": [
+            726,
+            585
+          ],
+          "exact_committed_image": true,
+          "mime": "image/png",
+          "repo_path": "content/assets/papers/usenix-osdi26-strata/images/figure-4-system-architecture.png",
+          "sha256": "4d87ed21ef038d85547008e119021783656870e7fcb5e44bfa94d32ece600315",
+          "status": 200,
+          "url": "https://raw.githubusercontent.com/YaoJianyu77/dailypaper/main/content/assets/papers/usenix-osdi26-strata/images/figure-4-system-architecture.png"
+        },
+        {
+          "bytes": 61976,
+          "dimensions": [
+            741,
+            459
+          ],
+          "exact_committed_image": true,
+          "mime": "image/png",
+          "repo_path": "content/assets/papers/usenix-osdi26-strata/images/figure-9-io-scheduling-ablation.png",
+          "sha256": "829def1e534ed3b1b90242fe706419bf0b47f2897a45dcece92e29b2797d978d",
+          "status": 200,
+          "url": "https://raw.githubusercontent.com/YaoJianyu77/dailypaper/main/content/assets/papers/usenix-osdi26-strata/images/figure-9-io-scheduling-ablation.png"
+        },
+        {
+          "bytes": 112498,
+          "dimensions": [
+            720,
+            783
+          ],
+          "exact_committed_image": true,
+          "mime": "image/png",
+          "repo_path": "content/assets/papers/usenix-osdi26-twill/images/figure-9-blackwell-warp-specialization.png",
+          "sha256": "86b6b6b90a8e9dcdace45b4acc56dad490ac1918504493e8f0388c72a872282e",
+          "status": 200,
+          "url": "https://raw.githubusercontent.com/YaoJianyu77/dailypaper/main/content/assets/papers/usenix-osdi26-twill/images/figure-9-blackwell-warp-specialization.png"
+        },
+        {
+          "bytes": 31755,
+          "dimensions": [
+            720,
+            537
+          ],
+          "exact_committed_image": true,
+          "mime": "image/png",
+          "repo_path": "content/assets/papers/usenix-osdi26-twill/images/figure-8-blackwell-forward-attention.png",
+          "sha256": "1d3ac1dab867167aad28591b63d035a3f91cd6e22ec43230d47ab2e4f1cd2d27",
+          "status": 200,
+          "url": "https://raw.githubusercontent.com/YaoJianyu77/dailypaper/main/content/assets/papers/usenix-osdi26-twill/images/figure-8-blackwell-forward-attention.png"
+        },
+        {
+          "bytes": 338655,
+          "dimensions": [
+            1467,
+            555
+          ],
+          "exact_committed_image": true,
+          "mime": "image/png",
+          "repo_path": "content/assets/papers/mlsys26-parallelkittens/images/figure-1-system-overview.png",
+          "sha256": "0f540de164b109aae728d2bc9a709aa4fbcdebb334f4b9583fc679dbd55ba68c",
+          "status": 200,
+          "url": "https://raw.githubusercontent.com/YaoJianyu77/dailypaper/main/content/assets/papers/mlsys26-parallelkittens/images/figure-1-system-overview.png"
+        },
+        {
+          "bytes": 38632,
+          "dimensions": [
+            723,
+            444
+          ],
+          "exact_committed_image": true,
+          "mime": "image/png",
+          "repo_path": "content/assets/papers/mlsys26-parallelkittens/images/figure-4-schedule-ablation.png",
+          "sha256": "56ec9dc9c9606215e966fee692d960e916a938a5c28bf6618863edb02379ae88",
+          "status": 200,
+          "url": "https://raw.githubusercontent.com/YaoJianyu77/dailypaper/main/content/assets/papers/mlsys26-parallelkittens/images/figure-4-schedule-ablation.png"
+        },
+        {
+          "bytes": 52011,
+          "dimensions": [
+            750,
+            450
+          ],
+          "exact_committed_image": true,
+          "mime": "image/png",
+          "repo_path": "content/assets/papers/usenix-osdi22-orca/images/figure-5-selective-batching.png",
+          "sha256": "d6ba66348123b245edb63507bdb62171d2f125ca61c61b52407709cdbefa3efd",
+          "status": 200,
+          "url": "https://raw.githubusercontent.com/YaoJianyu77/dailypaper/main/content/assets/papers/usenix-osdi22-orca/images/figure-5-selective-batching.png"
+        },
+        {
+          "bytes": 45242,
+          "dimensions": [
+            672,
+            484
+          ],
+          "exact_committed_image": true,
+          "mime": "image/png",
+          "repo_path": "content/assets/papers/usenix-osdi22-orca/images/figure-10-throughput-latency.png",
+          "sha256": "bf2d4b04eb8d3ccb93e1ad24120398d8634209edee5f01f77de6e9d6ed3a9e60",
+          "status": 200,
+          "url": "https://raw.githubusercontent.com/YaoJianyu77/dailypaper/main/content/assets/papers/usenix-osdi22-orca/images/figure-10-throughput-latency.png"
+        }
+      ]
     }
   ],
   "schema_version": 1,
