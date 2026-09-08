@@ -2,7 +2,7 @@
 
 Read a complete systems-paper digest on the existing website. Change its requirements in one settings page.
 
-**[Read the website](https://YaoJianyu77.github.io/dailypaper/)** · **[Edit daily-paper settings](https://github.com/YaoJianyu77/dailypaper/edit/main/DAILY_REPORT_PRODUCT_REQUIREMENTS.md)** · **[View the settings](DAILY_REPORT_PRODUCT_REQUIREMENTS.md)**
+**[Read the website](https://YaoJianyu77.github.io/dailypaper/)** · **[Edit daily-paper settings](https://github.com/YaoJianyu77/dailypaper/edit/main/DAILY_REPORT_PRODUCT_REQUIREMENTS.md)** · **[View the settings](DAILY_REPORT_PRODUCT_REQUIREMENTS.md)** · **[Run once](#run-once)**
 
 ## What do you want to change?
 
@@ -32,6 +32,14 @@ This is the intended production path, not a claim that unattended generation has
 | `content/daily/` and `content/assets/papers/` | Reports and their visible images | Generator |
 | `state/recommendation_history.json` | Permanent recommendation history | Generator |
 | `scripts/` and existing helper directories | Implementation | Maintainer / Codex |
+
+## Run once
+
+In a Codex session with this repository checked out and authorized GitHub access, send:
+
+> Read `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`, `PROJECT_STATE.md`, and `AGENTS.md` from the current `main` branch. Execute Systems Paper Daily once using the required repository skills. Prepare the complete report for the existing website, preserve permanent recommendation history, verify the report and rendered visuals, then commit and push only validated report, asset, and history changes. Resume an existing run for today's configured local date instead of choosing another set. Do not create a branch, install a timer, modify a scheduled task, or weaken the settings to accommodate legacy scripts. Stop and report the exact blocker if a required check fails.
+
+This is a real integration test: successfully committed recommendations enter permanent history. It is not a promise that the legacy `scripts/run_local_daily.py` command already implements this workflow.
 
 ## Implementation status
 
