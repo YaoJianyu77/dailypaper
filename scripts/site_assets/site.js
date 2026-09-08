@@ -19,7 +19,7 @@
         if (matches) count += 1;
       });
       groups.forEach(group => { group.hidden = !group.querySelector('[data-report]:not([hidden])'); });
-      document.querySelector('#result-count').textContent = `${count} ${count === 1 ? 'issue' : 'issues'}`;
+      document.querySelector('#result-count').textContent = `${count} ${count === 1 ? 'report' : 'reports'}`;
       document.querySelector('#no-results').hidden = count !== 0;
       reset.hidden = !search.value && !month.value;
       const url = new URL(location.href);

@@ -54,8 +54,8 @@ class BuildSiteTests(unittest.TestCase):
         reader = (self.output / 'daily/2026-09-07/index.html').read_text()
         self.assertIn('<title>Newly archived report - DailyPaper</title>', reader)
         self.assertIn('Latest paper analysis.', reader)
-        self.assertIn('href="/dailypaper/daily/2026-09-07/">Read this issue', home)
-        self.assertNotIn('href="/dailypaper/daily/2026-05-04/">Read this issue', home)
+        self.assertIn('href="/dailypaper/daily/2026-09-07/">Read report', home)
+        self.assertNotIn('href="/dailypaper/daily/2026-05-04/">Read report', home)
         self.assertNotIn('Latest report', home + archive + reader)
         self.assertEqual(archive.count('href="/dailypaper/daily/2026-09-07/"'), 1)
         self.assertEqual(archive.count('href="/dailypaper/daily/2026-05-04/"'), 1)
@@ -73,7 +73,7 @@ class BuildSiteTests(unittest.TestCase):
         home = (self.output / 'index.html').read_text()
         reader = (self.output / 'daily/2026-09-07/index.html').read_text()
         self.assertIn('<title>Title from frontmatter - DailyPaper</title>', reader)
-        self.assertIn('href="/daily/2026-09-07/">Read this issue', home)
+        self.assertIn('href="/daily/2026-09-07/">Read report', home)
 
     def test_deleted_reports_do_not_survive_in_navigation(self):
         stale = {'date': '2026-05-04', 'path': '/daily/2026-05-04/'}

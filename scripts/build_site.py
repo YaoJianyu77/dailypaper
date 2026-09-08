@@ -63,7 +63,7 @@ def layout(site_title, title, content, base_url, page_kind):
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Systems research notes on GPUs, inference, compilers, and distributed computing.">
+  <meta name="description" content="Research notes on AI, machine learning, and computer systems.">
   <title>{escape(title)} - {escape(site_title)}</title>
   <link rel="stylesheet" href="{escape(apply_base_url('/assets/style.css', base_url))}">
   <script defer src="{escape(apply_base_url('/assets/site.js', base_url))}"></script>
@@ -74,7 +74,7 @@ def layout(site_title, title, content, base_url, page_kind):
     <div class="header-inner">
       <a class="brand" href="{home_url}" aria-label="{escape(site_title)} home">
         <span class="brand-mark" aria-hidden="true">dp<span>.</span></span>
-        <span class="brand-name">{escape(site_title)}<small>SYSTEMS RESEARCH</small></span>
+        <span class="brand-name">{escape(site_title)}<small>RESEARCH NOTES</small></span>
       </a>
       <nav aria-label="Main navigation">
         <a class="archive-nav" href="{archive_url}"{current}>Archive <span aria-hidden="true">↗</span></a>
@@ -94,7 +94,7 @@ def category_badge(category):
 
 def homepage(reports, base_url):
     if not reports:
-        return '<section class="empty-state"><p class="eyebrow">DAILYPAPER</p><h1>No report yet</h1><p>Published issues will appear here.</p></section>'
+        return '<section class="empty-state"><p class="eyebrow">DAILYPAPER</p><h1>No report yet</h1><p>Published reports will appear here.</p></section>'
     report = reports[0]
     link = escape(apply_base_url(report.path, base_url))
     previews = []
@@ -109,19 +109,19 @@ def homepage(reports, base_url):
         </li>''')
     return f'''
     <section class="home-hero">
-      <div class="hero-copy"><p class="eyebrow">THE SYSTEMS RESEARCH NOTEBOOK</p>
-        <h1>Systems research.<br><em>A closer look.</em></h1>
-        <p class="hero-description">GPU systems, inference, compilers, and distributed computing.</p>
+      <div class="hero-copy"><p class="eyebrow">DAILY RESEARCH NOTES</p>
+        <h1>AI &amp; computer science.<br><em>A closer look.</em></h1>
+        <p class="hero-description">Papers and ideas across AI, machine learning, and computer systems.</p>
       </div>
       <div class="issue-cover">
-        <p class="eyebrow">CURRENT ISSUE</p>
+        <p class="eyebrow">CURRENT REPORT</p>
         <time datetime="{report.date}"><span>{report.date:%B}</span><strong>{report.date.day:02}</strong><span>{report.date:%Y · %A}</span></time>
         <div class="cover-meta">{report_count(report)} <span>·</span> ~{reading_time(report)} min read</div>
-        <a class="button button-primary" href="{link}">Read this issue <span aria-hidden="true">→</span></a>
+        <a class="button button-primary" href="{link}">Read report <span aria-hidden="true">→</span></a>
       </div>
     </section>
     <section class="issue-preview" aria-labelledby="issue-heading">
-      <div class="section-heading"><div><p class="eyebrow">{formatted_date(report)}</p><h2 id="issue-heading">Inside this issue</h2></div><span class="count-label">{report_count(report)}</span></div>
+      <div class="section-heading"><div><p class="eyebrow">{formatted_date(report)}</p><h2 id="issue-heading">Featured papers</h2></div><span class="count-label">{report_count(report)}</span></div>
       <ol class="paper-preview-list">{''.join(previews)}</ol>
     </section>'''
 
@@ -148,15 +148,15 @@ def archive_page(reports, base_url):
             </li>''')
         groups.append(f'<section class="archive-month" data-month-group><h2>{label}</h2><ul>{"".join(rows)}</ul></section>')
     return f'''
-    <header class="page-heading"><p class="eyebrow">THE COLLECTION</p><h1>The archive<span>.</span></h1><p>Browse past issues. Find a paper, a topic, or a date.</p></header>
+    <header class="page-heading"><p class="eyebrow">THE COLLECTION</p><h1>The archive<span>.</span></h1><p>Browse past reports. Find a paper, a topic, or a date.</p></header>
     <section class="archive-tools" data-enhanced hidden aria-label="Filter reports">
       <div class="search-field"><label for="archive-search">Search the archive</label><div class="input-wrap"><span aria-hidden="true">⌕</span><input id="archive-search" type="search" placeholder="Paper title, keyword, or date…" autocomplete="off" aria-controls="archive-results"></div></div>
       <div class="month-field"><label for="archive-month">Month</label><select id="archive-month" aria-controls="archive-results">{''.join(options)}</select></div>
       <button type="button" class="button button-quiet" id="reset-filters" hidden>Clear filters</button>
     </section>
-    <div class="archive-summary"><p id="result-count" role="status" aria-live="polite">{len(reports)} issues</p><span>Newest first</span></div>
+    <div class="archive-summary"><p id="result-count" role="status" aria-live="polite">{len(reports)} {'report' if len(reports) == 1 else 'reports'}</p><span>Newest first</span></div>
     <div id="archive-results">{''.join(groups)}</div>
-    <div class="empty-state" id="no-results" hidden><h2>No matching issues</h2><p>Try another paper title, keyword, or month.</p></div>'''
+    <div class="empty-state" id="no-results" hidden><h2>No matching reports</h2><p>Try another paper title, keyword, or month.</p></div>'''
 
 
 def report_page(report: Report, older, newer, base_url):
@@ -179,13 +179,13 @@ def report_page(report: Report, older, newer, base_url):
         else:
             intro = f'<div class="report-intro prose">{rendered}</div>'
     navigation = []
-    for neighbor, label, arrow in ((older, 'Older issue', '←'), (newer, 'Newer issue', '→')):
+    for neighbor, label, arrow in ((older, 'Older report', '←'), (newer, 'Newer report', '→')):
         if neighbor:
             navigation.append(f'<a class="issue-neighbor" href="{escape(apply_base_url(neighbor.path, base_url))}"><span>{label} {arrow}</span><strong>{formatted_date(neighbor)}</strong></a>')
-    contents = f'<aside class="toc"><details open><summary>In this issue <span>{len(report.papers):02}</span></summary><nav aria-label="Issue contents"><ol>{"".join(toc)}</ol></nav></details><a class="back-top" href="#top">Back to top ↑</a></aside>' if toc else ''
+    contents = f'<aside class="toc"><details open><summary>In this report <span>{len(report.papers):02}</span></summary><nav aria-label="Report contents"><ol>{"".join(toc)}</ol></nav></details><a class="back-top" href="#top">Back to top ↑</a></aside>' if toc else ''
     return f'''
     <header class="report-header"><p class="eyebrow">DAILY BRIEFING <span>/</span> {report.date:%A}</p><h1>{formatted_date(report)}</h1><div class="report-meta"><span>{report_count(report)}</span><span>~{reading_time(report)} min read</span></div></header>
-    <div class="reader-layout">{contents}<article id="report-body">{intro}{''.join(papers)}<nav class="issue-pagination" aria-label="Adjacent issues">{''.join(navigation)}</nav></article></div>
+    <div class="reader-layout">{contents}<article id="report-body">{intro}{''.join(papers)}<nav class="issue-pagination" aria-label="Adjacent reports">{''.join(navigation)}</nav></article></div>
     <dialog id="figure-dialog" aria-label="Enlarged paper figure"><button class="dialog-close" type="button" aria-label="Close enlarged figure">×</button><img alt=""><p></p></dialog>'''
 
 
@@ -222,7 +222,7 @@ def main():
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(layout(site_title, title, content, base, kind), encoding='utf-8')
 
-    write(Path(), 'Systems research', homepage(reports, base), 'home')
+    write(Path(), 'AI & Computer Science Research', homepage(reports, base), 'home')
     write(Path('archive'), 'Archive', archive_page(reports, base), 'archive')
     for index, report in enumerate(reports):
         older = reports[index + 1] if index + 1 < len(reports) else None

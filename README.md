@@ -1,10 +1,10 @@
 # DailyPaper
 
-Read a complete systems-paper digest on the existing website. Change its requirements in one settings page.
+Read daily research reports covering AI and computer science on the existing website. Change their requirements in one settings page.
 
 **[Read the website](https://YaoJianyu77.github.io/dailypaper/)** · **[Edit daily-paper settings](https://github.com/YaoJianyu77/dailypaper/edit/main/DAILY_REPORT_PRODUCT_REQUIREMENTS.md)** · **[View the settings](DAILY_REPORT_PRODUCT_REQUIREMENTS.md)** · **[Run once](#run-once)**
 
-The homepage previews the current issue. The archive supports paper-title search and month filters; each daily article includes a paper directory, complete analyses, expandable figures, and links to adjacent issues.
+The homepage previews the current report. The archive supports paper-title search and month filters; each daily article includes a paper directory, complete analyses, expandable figures, and links to adjacent reports.
 
 ## What do you want to change?
 
