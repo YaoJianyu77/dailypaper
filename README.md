@@ -4,6 +4,8 @@ Read a complete systems-paper digest on the existing website. Change its require
 
 **[Read the website](https://YaoJianyu77.github.io/dailypaper/)** · **[Edit daily-paper settings](https://github.com/YaoJianyu77/dailypaper/edit/main/DAILY_REPORT_PRODUCT_REQUIREMENTS.md)** · **[View the settings](DAILY_REPORT_PRODUCT_REQUIREMENTS.md)** · **[Run once](#run-once)**
 
+The homepage previews the current issue. The archive supports paper-title search and month filters; each daily article includes a paper directory, complete analyses, expandable figures, and links to adjacent issues.
+
 ## What do you want to change?
 
 All six sections are in **Daily Paper Settings**. You do not need to search the scripts or skills for routine changes.
@@ -46,3 +48,5 @@ This is a real integration test: successfully committed recommendations enter pe
 The settings page is the **agent's instruction source**, not yet a configuration parser for the legacy Python runner. That runner still reads `config.yaml` and has conflicting older defaults. Editing the settings page does **not** silently update that runner or a server's timer. See [current implementation gaps](PROJECT_STATE.md).
 
 For implementation work, start with [AGENTS.md](AGENTS.md). Superseded setup instructions and the old roadmap are in [the historical archive](docs/archive/README.md), not part of the current setup.
+
+Website rendering uses `scripts/build_site.py`, `scripts/site_content.py`, and `scripts/site_assets/`. The Pages workflow builds directly from `content/daily/` and deploys on pushes to `main`; rendering preserves the source reports and recommendation history.
