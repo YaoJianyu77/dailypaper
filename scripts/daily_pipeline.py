@@ -25,7 +25,7 @@ def make_backend(name, root, settings, infrastructure):
     if name == 'codex':
         from codex_enrich import CodexBackend
         return CodexBackend(root, settings, infrastructure)
-    raise RuntimeError('The unified settings require verified Codex Ultra. Hosted API transports cannot verify this mode; use the local Codex runner. No downgrade selected.')
+    raise RuntimeError('The unified settings require the verified strongest Codex model and reasoning setting. Hosted API transports cannot verify this policy; use the local Codex runner. No downgrade selected.')
 
 
 def discovery(root, settings, day, sources, history):
@@ -110,16 +110,22 @@ def prepare(root, backend_name='codex', *, day=None, sources=None, backend=None,
         return {'already_archived': True, 'run_id': run_id, 'date': day.isoformat()}
     stage = Path(stage_dir) if stage_dir else root / '.cache/dailypaper/runs' / day.isoformat()
     stage.mkdir(parents=True, exist_ok=True)
-    if prior_run:
-        bundle_path = stage / 'bundle.json'
-        require(bundle_path.is_file(), 'Reserved run has no recovery bundle; recover the original artifacts before retrying')
-        return json.loads(bundle_path.read_text())
     sources = sources or Sources(infrastructure)
     backend = backend or make_backend(backend_name, root, settings, infrastructure)
     require(getattr(backend, 'settings', settings).sha256 == settings.sha256,
             'Settings changed after runtime verification; restart preparation with current settings')
     if hasattr(backend, 'preflight'):
         backend.preflight()
+    runtime = backend.bind_report(stage) if hasattr(backend, 'bind_report') else None
+    if prior_run:
+        bundle_path = stage / 'bundle.json'
+        require(bundle_path.is_file(), 'Reserved run has no recovery bundle; recover the original artifacts before retrying')
+        recovered = json.loads(bundle_path.read_text())
+        if runtime is not None:
+            from codex_runtime import resolution_identity
+            require(resolution_identity(recovered.get('runtime', {})) == resolution_identity(runtime),
+                    'Reserved report used a different runtime configuration; generation stopped')
+        return recovered
     checkpoint_path = stage / 'selection.json'
     if checkpoint_path.exists():
         checkpoint = json.loads(checkpoint_path.read_text())
@@ -133,6 +139,8 @@ def prepare(root, backend_name='codex', *, day=None, sources=None, backend=None,
     validate_selection(chosen['papers'], settings, day, load_history(root), chosen['shortfall_reason'])
     bundle = {'date': day.isoformat(), 'run_id': run_id, 'settings_sha256': settings.sha256,
               'shortfall_reason': chosen['shortfall_reason'], 'papers': [], 'assets': []}
+    if runtime is not None:
+        bundle['runtime'] = runtime
     for selected in chosen['papers']:
         paper = copy.deepcopy(selected)
         directory = stage / ('paper-' + sha256(work_id(paper).encode())[:20])

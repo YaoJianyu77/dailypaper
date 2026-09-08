@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Local Codex transport for the same full-paper stages used by API models."""
 
+import copy
 from pathlib import Path
 
 import jsonschema
 
 from pipeline_prompts import build_messages, stage_schema
-from codex_runtime import execute, resolve_runtime, require
+from codex_runtime import execute, resolve_runtime, require, bind_report, resolution_identity
 from codex_checks import check_capabilities
 from report_settings import load_settings
 
@@ -23,7 +24,12 @@ class CodexBackend:
             resolution['capabilities'] = check_capabilities(self.root, resolution,
                 timeout=int(self.options.get('codex_timeout_seconds', 1200)))
             self.resolution = resolution
-        return self.resolution
+            self.identity = resolution_identity(resolution)
+        require(resolution_identity(self.resolution) == self.identity, 'Resolved report configuration was changed; generation stopped')
+        return copy.deepcopy(self.resolution)
+
+    def bind_report(self, stage):
+        return bind_report(stage, self.preflight())
 
     def generate(self, stage, context, images=()):
         resolution = self.preflight()

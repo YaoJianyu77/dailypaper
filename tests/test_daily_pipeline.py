@@ -206,6 +206,38 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(before, {p: p.read_bytes() for p in before})
         self.assertEqual(len(load_history(self.root).data['runs']), 1)
 
+    def test_runtime_change_cannot_reuse_or_replace_prepared_selection(self):
+        from codex_runtime import bind_report, RuntimeVerificationError
+        resolved = {'model': 'fixture-flagship', 'mode': 'fixture-deepest',
+                    'cli_version': 'fixture-cli', 'settings_sha256': self.settings.sha256}
+        self.backend.bind_report = lambda stage: bind_report(stage, resolved)
+        original_generate = self.backend.generate
+
+        def interrupt_analysis(stage, context, images=()):
+            if stage == 'analyze':
+                raise RuntimeError('fixture interruption after selection')
+            return original_generate(stage, context, images)
+        self.backend.generate = interrupt_analysis
+        with self.assertRaisesRegex(RuntimeError, 'fixture interruption'):
+            self.prepare()
+        checkpoint = self.root / '.cache/dailypaper/runs' / DAY.isoformat() / 'selection.json'
+        selection = checkpoint.read_bytes()
+        calls = len(self.backend.calls)
+        self.backend.generate = original_generate
+        resolved['mode'] = 'new-deepest'
+        with self.assertRaisesRegex(RuntimeVerificationError, 'Mixed configurations'):
+            self.prepare()
+        self.assertEqual(len(self.backend.calls), calls)
+        self.assertEqual(checkpoint.read_bytes(), selection)
+        self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
+        resolved['mode'] = 'fixture-deepest'
+        bundle = self.prepare()
+        self.assertEqual(bundle['runtime'], resolved)
+        self.assertEqual(sum(call[0] == 'select' for call in self.backend.calls), 1)
+        self.assertEqual(checkpoint.read_bytes(), selection)
+        self.assertFalse((self.root / 'content').exists())
+        self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
+
     def test_changing_only_settings_changes_generation_and_rendering(self):
         self.edit('**4** previously', '**1** previously')
         self.edit('**1** previously unrecommended work.', '**0** previously unrecommended work.')

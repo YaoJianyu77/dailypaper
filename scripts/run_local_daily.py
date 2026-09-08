@@ -131,8 +131,8 @@ def main() -> int:
     parser.add_argument('--repo-root', default=None, help='Repository root path')
     parser.add_argument('--skip-push', action='store_true', help='Generate locally without pushing')
     parser.add_argument('--dry-run', action='store_true', help='Prepare and render in a temporary workspace without publishing, committing, or pushing')
-    parser.add_argument('--check-runtime', action='store_true', help='Verify live model, Ultra, tools and skill routing using a synthetic PDF; no report or history writes')
-    parser.add_argument('--enricher', choices=['codex', 'openai', 'github_models'], default='codex', help='Production requires Codex Ultra; API transports fail closed')
+    parser.add_argument('--check-runtime', action='store_true', help='Verify the strongest model/reasoning, subagents, tools and skill routing using a synthetic PDF; no report or history writes')
+    parser.add_argument('--enricher', choices=['codex', 'openai', 'github_models'], default='codex', help='Production requires the verified strongest Codex model and reasoning; API transports fail closed')
     parser.add_argument('--remote', default=None, help='Git remote to pull from and push to (auto-detected by default)')
     args = parser.parse_args()
 

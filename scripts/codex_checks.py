@@ -30,7 +30,7 @@ def check_capabilities(root, resolution, timeout=600):
         expected_hash = hashlib.sha256((directory / 'diagnostic.pdf').read_bytes()).hexdigest()
         properties = {key: {'type': 'string'} for key in ('first_nonce', 'last_nonce', 'pdf_sha256', 'visual_description')}
         properties.update(page_count={'type': 'integer'}, generation_skills={'type': 'array', 'items': {'type': 'string'}},
-                          maintenance_starts_generation={'type': 'boolean'})
+                          maintenance_starts_generation={'type': 'boolean'}, subagent_result={'type': 'integer'})
         schema = {'type': 'object', 'additionalProperties': False, 'properties': properties, 'required': list(properties)}
         prompt = f'''This is an isolated runtime diagnostic, not a DailyPaper generation request.
 Read the linked AGENTS.md and the discoverable skill descriptions. Classify these hypothetical
@@ -41,6 +41,9 @@ diagnostic.pdf, read ALL pages, calculate its SHA-256, and render the first page
 Use the image-viewing tool to inspect inspected.png and describe its colors and shapes.
 Use the native web search tool to find official OpenAI Codex documentation, proving that the
 search tool works. Do not search for research papers or read/change recommendation history.
+Spawn exactly one native subagent with explicit model {resolution['model']} and reasoning effort
+{resolution['mode']}, ask it only to calculate 17 times 19, and wait for its result. Return that
+result as subagent_result. This verifies delegation with the same required configuration.
 Return the actual nonce from each PDF page, page count, hash, visual description and routing
 classification in the requested JSON. Only write temporary artifacts inside this workspace.
 If tools or permissions prevent these checks, stop and report the failure; do not bypass them.'''
@@ -66,7 +69,11 @@ If tools or permissions prevent these checks, stop and report the failure; do no
                 'No image-inspection tool receipt was emitted by Codex')
         require(any(item['type'] == 'webSearch' and item.get('query') for item in events),
                 'No native web-search receipt was emitted by Codex')
-        logging.getLogger(__name__).info('Runtime check passed: model=%s mode=%s; PDF, rendering, image inspection, web search, skill routing',
+        require(result.get('subagent_result') == 323 and any(item['type'] == 'subAgentActivity'
+                and item.get('kind') == 'completed' for item in events),
+                'No completed native subagent with verified effective settings was observed')
+        logging.getLogger(__name__).info('Runtime check passed: model=%s mode=%s; PDF, rendering, image inspection, web search, skill routing, subagent settings',
                                          resolution['model'], resolution['mode'])
         return {'pdf_pages': 2, 'rendering': True, 'image_inspection': True, 'web_search': True,
-                'generation_skills': result['generation_skills'], 'maintenance_starts_generation': False}
+                'generation_skills': result['generation_skills'], 'maintenance_starts_generation': False,
+                'subagent_settings_verified': True}
