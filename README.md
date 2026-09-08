@@ -188,6 +188,14 @@ AI digest tuning lives in:
 
 Enable GitHub Pages for the repository and let GitHub Actions deploy it.
 
+To publish reports that already exist in `content/daily/`, use the **Deploy
+Pages** workflow (`.github/workflows/pages.yml`). It runs automatically on a push
+to `main`, or can be started manually from the repository's Actions tab. This
+path only builds and deploys existing content; it does not search for papers or
+call an AI model. The homepage, latest-report link, and archive are derived
+directly from the report files, including reports archived without the local
+publisher. `content/meta/` indexes are not required for the website build.
+
 The included workflows live at:
 
 - `.github/workflows/daily.yml`

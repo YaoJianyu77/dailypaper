@@ -16,12 +16,10 @@ import yaml
 from content_store import (
     get_content_root,
     get_daily_root,
-    get_meta_root,
     get_paper_assets_root,
     get_papers_root,
     get_repo_root,
     load_markdown,
-    read_json,
 )
 
 DEFAULT_SITE_TITLE = 'DailyPaper'
@@ -430,8 +428,20 @@ def main() -> int:
     (dist_root / '.nojekyll').write_text('', encoding='utf-8')
 
     content_root = get_content_root(repo_root)
-    latest = read_json(get_meta_root(repo_root) / 'latest.json', {}) or {}
-    daily_index = read_json(get_meta_root(repo_root) / 'daily-index.json', []) or []
+    # Reports may be archived directly by an agent without running the local
+    # publisher. Derive every navigation entry from the same files we render.
+    daily_docs = []
+    daily_index = []
+    for path in sorted(get_daily_root(repo_root).glob('*.md'), reverse=True):
+        frontmatter, body = load_markdown(path)
+        heading = re.search(r'^#\s+(.+)$', body, flags=re.MULTILINE)
+        frontmatter.setdefault('title', heading.group(1).strip() if heading else path.stem)
+        daily_docs.append((frontmatter, body, path))
+        daily_index.append({
+            'date': path.stem,
+            'path': f'/daily/{path.stem}/',
+        })
+    latest = daily_index[0] if daily_index else {}
 
     nav_links = [
         f'<a href="{apply_base_url("/", base_url)}">Home</a>',
@@ -441,10 +451,7 @@ def main() -> int:
 
     sidebar_html = build_sidebar(latest, daily_index, base_url)
 
-    daily_docs = []
-    for path in sorted(get_daily_root(repo_root).glob('*.md'), reverse=True):
-        frontmatter, body = load_markdown(path)
-        daily_docs.append((frontmatter, body, path))
+    for frontmatter, body, path in daily_docs:
         build_page(
             dist_root,
             dist_root / 'daily' / path.stem / 'index.html',

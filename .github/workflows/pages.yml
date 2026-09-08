@@ -34,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Verify report navigation
+        run: python -m unittest discover -s tests -v
+
       - name: Build static site
         run: |
           SITE_BASE_URL=""
