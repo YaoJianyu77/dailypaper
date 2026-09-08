@@ -4,7 +4,7 @@ This file explains execution, not the user's preferences. Do not send the user h
 
 ## Read before acting
 
-Read `DAILY_REPORT_PRODUCT_REQUIREMENTS.md` completely for the current settings. Read `PROJECT_STATE.md` for verified implementation limitations. Load the relevant active skills for the stage being executed.
+Read `PROJECT_STATE.md`, then `DAILY_REPORT_PRODUCT_REQUIREMENTS.md` completely. Before selection, read the complete canonical history and prior recommendation evidence through `scripts/recommendation_history.py`. Load the relevant active skills for the stage being executed, and inspect their callers before changing implementation.
 
 The precedence is: the user's current explicit request, then the settings page, then these execution rules, then skill implementation details. Older documentation, example configurations, cached prompts, and script defaults cannot silently override the settings. Do not ask the user to maintain the same preference in several files.
 
@@ -18,7 +18,7 @@ The precedence is: the user's current explicit request, then the settings page, 
 | Inspect, extract, render, and verify visuals | `skills/paper-image-extractor/SKILL.md` |
 | Assemble and check the daily article | `skills/daily-paper-editor/SKILL.md` |
 
-`skills/daily-paper-curator/SKILL.md` is a compatibility index, not an additional competing workflow. Read skills explicitly when the runtime does not discover their current paths automatically. Legacy `skill.md` files inside helper directories and `docs/archive/` are historical references, not current instructions.
+`scripts/pipeline_prompts.py` loads these skills explicitly for both model transports. `docs/archive/` contains historical references, not current instructions.
 
 ## One publication path
 
@@ -33,9 +33,10 @@ The website is the primary reading surface. Do not create a second daily-paper p
 - Retained visual assets: `content/assets/papers/`, in the existing per-paper image layout.
 - Authoritative permanent recommendation history: `state/recommendation_history.json`.
 - Legacy `state/paper_index.json`: prior recommendation evidence and compatibility data; never a replacement for permanent history.
-- `config.yaml` and `config.example.yaml`: inputs to the legacy Python helpers, not additional user-facing instructions. Changes here do not by themselves prove compliance with the settings page.
+- `config.yaml` and `config.example.yaml`: infrastructure only (transport/model, network and document limits, site paths). The parser rejects additional preference keys.
+- `.cache/dailypaper/`: ignored preparation and recovery artifacts; never a replacement for permanent history.
 
-Do not relocate helper scripts, rename schema fields, delete data, install a timer, or change server credentials merely as part of a documentation cleanup.
+Preserve existing reports, images, prior evidence, and unrelated changes. Do not install timers or change schedules or credentials without explicit authorization.
 
 ## Permanent identity and safe publication
 
@@ -57,4 +58,6 @@ Inspect the rendered website output. Markdown image syntax, a successful file wr
 
 Read back the committed report and history. Distinguish generated, committed, pushed, deployed, and verified states in execution status; a commit does not prove deployment. Do not infer unattended permissions or a server schedule from repository documentation.
 
-For a documentation-only request, do not generate a report, alter recommendation history, or run the legacy publisher. For a production-generation request, do not silently use the legacy abstract-enrichment runner as if it fulfilled full-paper analysis and permanent deduplication.
+Use `scripts/run_local_daily.py` for production generation. The manual GitHub Action uses the same runner. `scripts/ai_enrich.py` and `scripts/codex_enrich.py` own transport only; keep shared prompts, stage orchestration, and output contracts in their common modules. Update callers and isolated tests together when changing those contracts. Module responsibilities and retained manual utilities are documented in `docs/implementation.md`.
+
+For maintenance-only requests, use isolated fixtures; do not generate recommendations, alter production history, or run the publisher against production content. A settings edit must affect the next run without a second preference edit. Never discard a pending reservation to accommodate changed settings: reconcile and revalidate its existing selection.

@@ -29,6 +29,6 @@ Follow section 6 of the settings page for the heading, count, explanatory chain,
 
 Use the single publication transaction in `AGENTS.md`; do not maintain a second state machine here. The website article is the deliverable. Report generation, commit, push, and deployment status accurately. Reposting the entire article in ChatGPT is only needed when explicitly requested, not a mandatory second production stage.
 
-## Legacy schema compatibility
+## Runtime contract
 
-Some legacy field names end in `_zh`. They do not determine output language. Do not rename them without updating producers, schemas, consumers, and compatibility tests together. Keep `scripts/ai_enrich.py` and `scripts/codex_enrich.py` aligned when changing code, but do not pretend that their limited abstract context constitutes full-paper reading.
+`scripts/pipeline_prompts.py` provides the shared settings-derived stage contracts. `scripts/report_validation.py` assembles the reviewed sections and visible assets; `scripts/publish_daily.py` verifies an isolated site build before archiving. Legacy reports retain their existing schema through the site parser; they are not inputs to new analysis generation.

@@ -129,10 +129,13 @@ def read_report(path):
     groups = [h for h in headings if h[0] == 'h2' and h[1] in GROUPS]
     for _, _, start, end in groups:
         ignored.update(range(start, end))
-    trend_heading = next((h for h in headings if h[1] in TRENDS), None)
+    trend_names = TRENDS | ({metadata['trend_heading']} if metadata.get('trend_heading') else set())
+    trend_heading = next((h for h in headings if h[1] in trend_names), None)
     end = trend_heading[2] if trend_heading else len(lines)
+    declared = {item['heading']: item for item in metadata.get('paper_headings', [])}
     modern = [h for h in headings if h[0] == 'h2' and MODERN_PAPER.match(h[1])]
-    paper_headings = modern or [h for h in headings if h[0] == 'h3' and LEGACY_PAPER.match(h[1])]
+    paper_headings = ([h for h in headings if h[0] == 'h2' and h[1] in declared] if declared else
+                      modern or [h for h in headings if h[0] == 'h3' and LEGACY_PAPER.match(h[1])])
     paper_headings = [h for h in paper_headings if h[2] < end]
 
     def content(start, stop):
@@ -141,10 +144,14 @@ def read_report(path):
 
     papers = []
     for index, (_, heading, start, body_start) in enumerate(paper_headings):
-        match = (MODERN_PAPER if modern else LEGACY_PAPER).match(heading)
-        label, paper_title = match.groups()
-        group = next((h[1] for h in reversed(groups) if h[2] < start), '')
-        category = 'Classic' if label == 'Classic' or group in {'Classic Revisit', '经典论文'} else 'Latest' if modern else 'Research'
+        if declared:
+            item = declared[heading]
+            paper_title, category = item['title'], item['category'].title()
+        else:
+            match = (MODERN_PAPER if modern else LEGACY_PAPER).match(heading)
+            label, paper_title = match.groups()
+            group = next((h[1] for h in reversed(groups) if h[2] < start), '')
+            category = 'Classic' if label == 'Classic' or group in {'Classic Revisit', '经典论文'} else 'Latest' if modern else 'Research'
         stop = paper_headings[index + 1][2] if index + 1 < len(paper_headings) else end
         paper_body = content(body_start, stop)
         papers.append(Paper(paper_title, category, paper_body, f'paper-{index + 1}', paper_excerpt(paper_body)))

@@ -13,7 +13,7 @@ Read `DAILY_REPORT_PRODUCT_REQUIREMENTS.md` Sections 1–4 for current topics, s
 
 Compute calendar-month and calendar-year boundaries from the actual local date, clamping to the last valid day when needed. The classic window ends the day before the latest window starts. Print inclusive dates. Revisions, mirror updates, or issue assignments do not reset first official publication.
 
-Search the configured official proceedings and journal pages first. Use bibliographic services to discover and cross-check, not to invent official publication status. arXiv or an author copy may provide full text after its identity is verified. An acceptance listing without a qualifying publication date is insufficient when the date affects eligibility. A year-only record cannot justify an invented exact day.
+For each configured venue, find its proceedings or journal articles directly or through a bibliographic index, then verify the official publisher record. Bibliographic services can discover and cross-check records; they cannot establish publication status by themselves. arXiv or an author copy may provide full text after its identity is verified. An acceptance listing without a qualifying publication date is insufficient when the date affects eligibility. A year-only record cannot justify an invented exact day.
 
 Do not silently narrow broad systems interests to AI or use metadata popularity in place of relevance. Respect configured publication-type exclusions. If sources fail or rate-limit, use other eligible sources and report material coverage limits rather than weakening eligibility.
 
@@ -25,7 +25,7 @@ Match normalized DOI, versionless arXiv ID, stable bibliographic identifiers, no
 
 Preprint/formal versions, renamed camera-ready titles, mirrors, and extensions of the same core contribution do not become new recommendations. If the evidence cannot resolve identity, hold out the candidate rather than guessing it is new.
 
-Read the complete canonical ledger under the protocol in `AGENTS.md`. Use `skills/paper-note-search/SKILL.md` to resolve aliases and inspect prior reports. Prior recommendation evidence in legacy indexes or reports must be excluded even when not yet reflected in the canonical ledger. Never reopen a work because a cooldown elapsed.
+Use `skills/paper-note-search/SKILL.md` for evidence lookup and the permanent-history protocol in `AGENTS.md` for exclusion and state updates.
 
 # Selection and handoff
 
@@ -37,4 +37,4 @@ Hand off verified metadata, stable work identity and aliases, publication-date e
 
 # Existing helpers
 
-`start-my-day/scripts/search_arxiv.py` can assist discovery. Its current `config.yaml` values and cooldown index are legacy implementation, not authority for final selection. Preserve sensible service fallbacks, but do not present its output as automatically compliant with the current full-report contract.
+`scripts/paper_sources.py` implements venue-index discovery, publisher verification, and complete PDF retrieval. `start-my-day/scripts/search_arxiv.py` is a command adapter to that discovery stage. Discovery JSON is screening evidence; only the shared pipeline can prepare a publishable bundle. Coverage limitations belong in the selection handoff, not in relaxed eligibility rules.

@@ -11,13 +11,13 @@ Read `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`, especially section 5, before writin
 
 Read the complete paper: main text, important figures/tables, experiments, footnotes, and relevant appendices. Inspect actual figure/table pages rather than inferring their contents from captions. Metadata, abstract text, old repository summaries, and search snippets are screening inputs, not substitutes for reading the paper.
 
-Base technical analysis on the paper. Keep separately verified publication metadata and classic-selection evidence distinct from technical claims. Preserve exact results, hardware/software, models, workloads, baseline comparisons, and conditions. State missing details as “Not specified in the paper.” Label conclusions not explicitly stated by the authors as “Interpretation.” Cite the relevant page, section, figure, table, or algorithm when possible.
+Base technical analysis on the paper. Keep separately verified publication metadata and classic-selection evidence distinct from technical claims. Preserve exact results, hardware/software, models, workloads, baseline comparisons, and conditions. Use the settings page's labels for missing details and interpretation. Cite the relevant page, section, figure, table, or algorithm when possible.
 
 Distinguish a maximum from an average, component performance from end-to-end performance, throughput from latency, and measured behavior from author claims. Never repair missing evidence by inventing an implementation detail. Replace an unreadable candidate or leave the slot unfilled.
 
 ## Writing sequence
 
-Center the explanation on **problem → bottleneck → insight → method → evidence → limitations**. Do not mechanically summarize every paper section, repeat the same result across sections, or substitute generic praise for a causal explanation.
+Use the narrative and ordered headings from section 5 of the settings. The roles below explain how to write those sections; they do not override edited headings. Do not mechanically summarize every paper section, repeat the same result across sections, or substitute generic praise for a causal explanation.
 
 ### 1. Paper in brief
 
@@ -49,7 +49,7 @@ Explain the source of gain: reduced work, scheduling, parallelism, communication
 
 ### 6. Contributions and limitations
 
-Identify two or three genuine contributions, distinguishing conceptual insight, algorithm, system design, and engineering implementation. Explain assumptions and performance/accuracy/memory/complexity trade-offs, acknowledged limitations, design/evaluation limitations, favorable settings, and settings with little benefit or regression. Mark inferred limitations as “Interpretation.”
+Distinguish contributions in conceptual insight, algorithm, system design, and engineering implementation. Explain assumptions and performance/accuracy/memory/complexity trade-offs, acknowledged limitations, design/evaluation limitations, favorable settings, and settings with little benefit or regression. Label inferred limitations according to the settings.
 
 ### 7. Final assessment
 

@@ -1,31 +1,28 @@
-# Implementation Status
+# Verified implementation status
 
-Maintainer reference, not another settings page. For routine use, open [README.md](README.md); to change report requirements, edit [Daily Paper Settings](DAILY_REPORT_PRODUCT_REQUIREMENTS.md).
+This file records evidence and gaps. [README.md](README.md) is the entry page; [Daily Paper Settings](DAILY_REPORT_PRODUCT_REQUIREMENTS.md) owns preferences; [AGENTS.md](AGENTS.md) owns execution rules.
 
-## Intended product
+## Implemented boundary
 
-Server/Codex generation → GitHub `main` → existing static website. Reports and figures stay in the existing `content/` layout, and permanent exclusions stay in `state/recommendation_history.json`. ChatGPT is optional for discussion, not a required content-delivery hop.
+The local command and manual GitHub Action share `scripts/daily_pipeline.py`. Both model transports use `scripts/pipeline_prompts.py`; settings and output contracts are rebuilt from the six-section settings page. YAML is restricted to infrastructure. The old split quotas, expiring exclusions, abstract caps, fallback summaries, and missing full-analysis command have been removed from the generation path.
 
-This describes the requested architecture. It does not certify the current server, timer, or unattended generation.
+`scripts/recommendation_history.py` reads the complete canonical ledger plus prior recommendation evidence in archived reports and the legacy index. Publication reconciles that evidence without resetting existing records. A prepared run is reserved, written, verified, and finalized under a stable date-based ID. Retries verify the same artifacts; a non-forced Git update prevents overwriting another clone's commits.
 
-## Verified repository boundary
+No production reports, images, or history were generated or migrated during cleanup. Schedules and credentials were not changed. Technical module responsibilities and isolated test commands are in [implementation notes](docs/implementation.md).
 
-The documentation cleanup inspected the repository based on commit `8e1c31550f1b394da91f7867d3ffd495bdd0629a`. It reorganizes instructions without changing runtime code, data, server configuration, or scheduled tasks.
+## Verification
 
-| Component | Current evidence / remaining gap |
-|---|---|
-| User settings | One six-section page at `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`, linked directly from README. Agents must read it each run. |
-| Legacy runner | `scripts/run_local_daily.py` exists. Its established search/enrich/publish path must not be advertised as a verified implementation of the full-paper product. |
-| Legacy configuration | `config.yaml` still contains 2 fresh + 2 established + 1 classic quotas, day-based windows, and recommendation cooldowns. These conflict with current user settings. This cleanup does not synchronize them. |
-| Legacy analysis | `config.yaml` still describes short enrichment, with abstract context limits. A full-paper skill alone does not make an abstract-only input complete. |
-| History | Legacy helpers use `state/paper_index.json`; agent instructions require `state/recommendation_history.json`. Production writers still need a verified common history contract. Neither file was edited or reset in this cleanup. |
-| Website | Existing content is built with `scripts/build_site.py` and deployed through `.github/workflows/pages.yml`. No site build or deployment verification was performed by the documentation cleanup. |
-| Scheduling | A local cron helper exists, and previous discussions covered ChatGPT scheduling. Neither a currently installed server timer nor unattended runtime permissions were checked here. |
+- All 26 offline tests pass, covering settings-only changes, both transports' full inputs, classic-influence retrieval, permanent aliases/imports, interrupted reservations, rejected evidence, and failed-push recovery against a temporary Git remote.
+- Desktop (1440 px) and mobile (390 px) browser checks display the fixture's five figures and five HTML tables, with working figure zoom, no page overflow, and no JavaScript errors.
+- All 52 existing reports build; their 51 image references are retained. Existing run/report/asset hashes verify. All 1,127 tracked content, state, cron-helper, and Pages-workflow files remain byte-for-byte unchanged from the cleanup baseline (`539994c`).
+- Every prior work identity reaches the model prompts after evidence reconciliation: 622 source records produce 185 distinct work entries without dropping identity tokens. Complete raw evidence remains available to the controller and is preserved by ledger reconciliation.
 
-## Maintenance rule
+## Remaining operational limitations
 
-Before calling the server production-ready, wire the generator to the authoritative settings, eliminate conflicting selection/history behavior, and verify a full end-to-end run with rendered visuals and safe retries. Do not ask the user to synchronize several configuration files by hand or claim that editing Markdown has changed code that never reads it.
+- Live model/provider generation and unattended server permissions have not been exercised by this cleanup. Offline fixtures verify orchestration and rejection paths; they do not certify a model's scientific judgment or provider availability.
+- Discovery uses configured venues through DBLP/OpenAlex and verifies publisher evidence. Service indexing, request budgets, rate limits, inaccessible publisher pages, and ambiguous publication dates can reduce coverage. It is not an exhaustive proceedings crawl.
+- Full-paper acquisition requires a readable PDF with extractable text on every page. Scanned pages requiring OCR, inaccessible appendices, oversized inputs, model refusals, and unverified publication or classic-influence evidence stop publication; no abstract fallback is used.
+- Scientific claims, topic fit, renamed-work relationships without matching identifiers, and visual fidelity also undergo model review. Deterministic checks cover identity matches, evidence receipts, limits, paths, hashes, and rendering; they cannot prove semantic correctness.
+- Interrupted reservations require the original preparation cache. Conflicting settings or concurrent Git changes stop safely and require reconciliation and revalidation of the same run. Neither pending reservations nor historical exclusions expire.
 
-Keep useful legacy helper paths in place until their imports, subprocess calls, tests, and deployment references can be updated together. Obsolete quickstart instructions and the old roadmap have been moved to `docs/archive/`; they are not the current setup procedure.
-
-An old saved task may still reference this file and `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`; both paths remain valid. This cleanup does not modify that task or its execution time.
+The existing Pages workflow builds archived content on pushes to `main`. A successful local build or commit is not evidence of a successful deployment; inspect the corresponding Pages run when deploying.

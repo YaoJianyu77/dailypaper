@@ -12,12 +12,14 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List
 
-import yaml
-
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
 from content_store import get_repo_root
+from daily_pipeline import prepare
+from publish_daily import publish, verify_archived_run
+from recommendation_history import HISTORY_PATH, load_history
+from report_settings import load_infrastructure, load_settings
 
 logger = logging.getLogger(__name__)
 
@@ -41,13 +43,6 @@ def load_local_env(repo_root: Path) -> None:
             if key and value and key not in os.environ:
                 os.environ[key] = value
 
-
-def load_config(repo_root: Path) -> tuple[Path, Dict[str, Any]]:
-    config_path = repo_root / 'config.yaml'
-    if not config_path.exists():
-        config_path = repo_root / 'config.example.yaml'
-    config = yaml.safe_load(config_path.read_text(encoding='utf-8')) or {}
-    return config_path, config
 
 def run(cmd: List[str], *, cwd: Path, env: Dict[str, str] | None = None) -> None:
     logger.info('Running: %s', ' '.join(cmd))
@@ -119,93 +114,68 @@ def main() -> int:
 
     parser = argparse.ArgumentParser(description='Run local daily paper generation and push results')
     parser.add_argument('--repo-root', default=None, help='Repository root path')
-    parser.add_argument('--target-date', default=None, help='Override report date (YYYY-MM-DD)')
     parser.add_argument('--skip-push', action='store_true', help='Generate locally without pushing')
-    parser.add_argument('--skip-build', action='store_true', help='Skip local static site build')
-    parser.add_argument('--enricher', choices=['codex', 'openai', 'none'], default='codex', help='Enrichment backend to use locally')
+    parser.add_argument('--dry-run', action='store_true', help='Prepare and render in a temporary workspace without publishing, committing, or pushing')
+    parser.add_argument('--enricher', choices=['codex', 'openai', 'github_models'], default='codex', help='Model transport; all use the same settings and checks')
     parser.add_argument('--remote', default=None, help='Git remote to pull from and push to (auto-detected by default)')
     args = parser.parse_args()
 
     repo_root = get_repo_root(args.repo_root, __file__)
     load_local_env(repo_root)
-    config_path, config = load_config(repo_root)
-    search_cfg = config.get('search', {}) if isinstance(config, dict) else {}
-    remote_name = pick_remote(repo_root, args.remote)
-
-    if not is_git_clean(repo_root):
-        logger.error('Repository is not clean. Commit or stash local changes before running the scheduled job.')
-        return 1
-
-    run(['git', 'pull', '--rebase', remote_name, 'main'], cwd=repo_root)
-
-    search_cmd = [
-        sys.executable,
-        str(repo_root / 'start-my-day' / 'scripts' / 'search_arxiv.py'),
-        '--config', str(config_path),
-        '--output', 'state/arxiv_filtered.json',
-        '--max-results', str(search_cfg.get('max_results', 200)),
-        '--top-n', str(search_cfg.get('top_n', 10)),
-        '--categories', ','.join(search_cfg.get('categories', ['cs.AI', 'cs.LG', 'cs.CL', 'cs.CV', 'cs.MM', 'cs.MA', 'cs.RO'])),
-    ]
-    if args.target_date:
-        search_cmd.extend(['--target-date', args.target_date])
-    if search_cfg.get('skip_hot_papers', False):
-        search_cmd.append('--skip-hot-papers')
-    run(search_cmd, cwd=repo_root)
-
-    enriched_file = 'state/arxiv_enriched.json'
-    if args.enricher == 'codex':
-        run([
-            sys.executable,
-            str(repo_root / 'scripts' / 'codex_enrich.py'),
-            '--config', str(config_path),
-            '--input', 'state/arxiv_filtered.json',
-            '--output', enriched_file,
-            '--strict',
-        ], cwd=repo_root, env={**os.environ, 'PATH': f"{Path.home() / '.npm-global' / 'bin'}:{os.environ.get('PATH', '')}"})
-    elif args.enricher == 'openai':
-        run([
-            sys.executable,
-            str(repo_root / 'scripts' / 'ai_enrich.py'),
-            '--config', str(config_path),
-            '--input', 'state/arxiv_filtered.json',
-            '--output', enriched_file,
-            '--strict',
-        ], cwd=repo_root)
-    else:
-        enriched_file = 'state/arxiv_filtered.json'
-
-    run([
-        sys.executable,
-        str(repo_root / 'scripts' / 'publish_daily.py'),
-        '--config', str(config_path),
-        '--input', enriched_file,
-    ], cwd=repo_root)
-
-    if not args.skip_build:
-        env = dict(os.environ)
-        if 'SITE_BASE_URL' not in env:
-            env['SITE_BASE_URL'] = infer_site_base_url(repo_root, remote_name, config)
-        run([
-            sys.executable,
-            str(repo_root / 'scripts' / 'build_site.py'),
-            '--output-dir', 'dist',
-        ], cwd=repo_root, env=env)
-
-    subprocess.run(['git', 'add', 'content', 'state'], cwd=str(repo_root), check=True)
-    diff = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=str(repo_root))
-    if diff.returncode == 0:
-        logger.info('No content changes detected. Nothing to commit.')
+    if args.dry_run:
+        import tempfile
+        with tempfile.TemporaryDirectory(prefix='dailypaper-dry-run-') as directory:
+            bundle = prepare(repo_root, args.enricher, stage_dir=Path(directory))
+            logger.info('Isolated preparation verified: %s; production content and history unchanged', bundle['run_id'])
         return 0
-
-    commit_msg = 'chore: update local daily paper content'
-    if args.target_date:
-        commit_msg = f'chore: update daily paper content for {args.target_date}'
-    run(['git', 'commit', '-m', commit_msg], cwd=repo_root)
-
+    if capture(['git', 'branch', '--show-current'], cwd=repo_root) != 'main':
+        raise RuntimeError('Daily generation must run on the existing main branch')
+    remote_name = pick_remote(repo_root, args.remote)
+    clean = is_git_clean(repo_root)
+    if clean:
+        run(['git', 'pull', '--ff-only', remote_name, 'main'], cwd=repo_root)
+    # Read settings after synchronization, never retain a pre-pull configuration.
+    settings = load_settings(repo_root)
+    config = load_infrastructure(repo_root)
+    current_run = load_history(repo_root).run(settings.run_id(settings.local_date()))
+    if not clean:
+        if not current_run:
+            raise RuntimeError('Unrelated uncommitted changes; refusing to include them in generation')
+        allowed = {HISTORY_PATH, f'content/daily/{current_run["local_date"]}.md',
+                   *[asset.get('path') or asset.get('repo_path') for asset in current_run.get('visual_assets', [])]}
+        changed = set(capture(['git', 'diff', '--name-only', 'HEAD'], cwd=repo_root).splitlines())
+        untracked = set(capture(['git', 'ls-files', '--others', '--exclude-standard'], cwd=repo_root).splitlines())
+        if (changed | untracked) - allowed:
+            raise RuntimeError('Unrelated changes exist alongside the recoverable run')
+    bundle = prepare(repo_root, args.enricher)
+    if bundle.get('already_archived'):
+        current_run = load_history(repo_root).run(bundle['run_id'])
+        report_path = verify_archived_run(repo_root, current_run)
+        result = {'paths': [HISTORY_PATH, report_path,
+                           *[a.get('path') or a.get('repo_path') for a in current_run.get('visual_assets', [])]]}
+    else:
+        run(['git', 'fetch', remote_name, 'main'], cwd=repo_root)
+        if clean:
+            run(['git', 'merge', '--ff-only', f'{remote_name}/main'], cwd=repo_root)
+        result = publish(repo_root, bundle)
+    env = dict(os.environ)
+    env.setdefault('SITE_BASE_URL', infer_site_base_url(repo_root, remote_name, config))
+    run([sys.executable, str(repo_root / 'scripts/build_site.py'), '--repo-root', str(repo_root)], cwd=repo_root, env=env)
+    run(['git', 'add', '--', *result['paths']], cwd=repo_root)
+    diff = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=str(repo_root))
+    if diff.returncode == 1:
+        staged = set(capture(['git', 'diff', '--cached', '--name-only'], cwd=repo_root).splitlines())
+        if staged - set(result['paths']):
+            raise RuntimeError('Unrelated staged changes; refusing to commit')
+        run(['git', 'commit', '-m', f'chore: archive {bundle["run_id"]}'], cwd=repo_root)
+    elif diff.returncode != 0:
+        raise RuntimeError('Could not verify staged content')
     if not args.skip_push:
-        run(['git', 'push', remote_name, 'main'], cwd=repo_root)
-
+        outgoing = set(capture(['git', 'diff', '--name-only', f'{remote_name}/main', 'HEAD'], cwd=repo_root).splitlines())
+        if outgoing - set(result['paths']):
+            raise RuntimeError('Unrelated outgoing commits or concurrent changes; refusing to push')
+        run(['git', 'push', remote_name, 'HEAD:main'], cwd=repo_root)
+    logger.info('Run verified: %s', bundle['run_id'])
     return 0
 
 

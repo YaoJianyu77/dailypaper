@@ -12,10 +12,9 @@ from pathlib import Path
 import re
 import shutil
 
-import yaml
-
 from content_store import get_repo_root
-from site_content import Report, apply_base_url, markdown_parser, md_to_html, plain_text, read_reports
+from site_content import Report, apply_base_url, md_to_html, read_reports
+from report_settings import load_infrastructure, research_topics as load_research_topics
 
 
 SITE_ASSETS = Path(__file__).resolve().parent / 'site_assets'
@@ -34,36 +33,8 @@ def load_site_settings(root):
     for name in ('config.yaml', 'config.example.yaml'):
         path = root / name
         if path.is_file():
-            return yaml.safe_load(path.read_text(encoding='utf-8')) or {}
+            return load_infrastructure(root, path)
     return {}
-
-
-def load_research_topics(root):
-    """Use the positive research-area rows from the user's single settings page."""
-    path = root / 'DAILY_REPORT_PRODUCT_REQUIREMENTS.md'
-    if not path.is_file():
-        return []
-    tokens = markdown_parser().parse(path.read_text(encoding='utf-8'))
-    in_areas = False
-    cells = []
-    topics = {}
-    for index, token in enumerate(tokens):
-        if token.type == 'heading_open' and token.tag == 'h2':
-            heading = re.sub(r'^\d+\.\s*', '', tokens[index + 1].content).casefold()
-            if in_areas:
-                break
-            in_areas = heading == 'research areas'
-        elif in_areas:
-            if token.type == 'tr_open':
-                cells = []
-            elif token.type == 'inline' and tokens[index - 1].type in {'th_open', 'td_open'}:
-                cells.append(plain_text(token.content))
-            elif token.type == 'tr_close' and len(cells) == 2 and cells[0].casefold() in {'primary', 'also include'}:
-                for item in cells[1].split(';'):
-                    item = item.strip().removesuffix('.')
-                    if item:
-                        topics.setdefault(item.casefold(), item)
-    return list(topics.values())
 
 
 def formatted_date(report):

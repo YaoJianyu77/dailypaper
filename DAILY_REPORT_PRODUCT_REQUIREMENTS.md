@@ -4,7 +4,7 @@
 
 Read the finished report on the existing DailyPaper website. Keep all paper summaries in the same daily article, with their figures and tables inline. Detailed execution rules belong in [AGENTS.md](AGENTS.md) and the [active skills](skills/), not in another user configuration.
 
-> Implementation boundary: these settings govern agents that read this file. The legacy Python runner still uses `config.yaml` and is not automatically synchronized. Its remaining differences are tracked in [PROJECT_STATE.md](PROJECT_STATE.md). Editing this page does not create or change a timer.
+The generation pipeline reads this page on each run. Edit the values and prose here; keep the six section names and table labels so the parser can identify them. Unsupported or contradictory values stop generation instead of falling back to old defaults. Verified limitations are tracked in [PROJECT_STATE.md](PROJECT_STATE.md).
 
 ## 1. Research areas
 
@@ -64,6 +64,8 @@ The reader should understand the paper without opening the original. Explain **p
 | Summary length | **900–1,100 words per paper**, excluding figure captions; hard maximum **1,200 words**. |
 | Opening brief | **100–150 words**. |
 | Final assessment | One paragraph, **at most 120 words**. |
+| Central insights | At most **2**. |
+| Major experimental findings | At most **3**. |
 | Visuals | **1–2** important figures, tables, or faithful rendered reconstructions per paper; no decorative padding. |
 | Reading requirement | Complete paper, including important figures, tables, experiments, footnotes, and relevant appendices. |
 
@@ -77,7 +79,7 @@ Use these seven headings in each paper entry:
 6. Contributions and limitations
 7. Final assessment
 
-Explain no more than two central insights and three major experimental findings. Preserve hardware/software configurations, workloads, baseline comparisons, exact results, and the conditions under which the results hold. Use paper references for important claims. Write **“Not specified in the paper.”** for missing details and label conclusions not explicitly stated by the authors as **“Interpretation.”**
+Follow the insight and finding limits above. Preserve hardware/software configurations, workloads, baseline comparisons, exact results, and the conditions under which the results hold. Use paper references for important claims. Write **“Not specified in the paper.”** for missing details and label conclusions not explicitly stated by the authors as **“Interpretation.”**
 
 Display the actual selected visuals next to their explanation in the website article. Prefer an original method/architecture figure and the strongest experimental plot or table. A PDF link, image path, figure number, unrendered Mermaid code, or ASCII text does not replace a visible figure. A verified numerical table may be rendered directly as a Markdown table.
 
@@ -91,8 +93,9 @@ Omit unnecessary history, broad related work, secondary experiments, reading pla
 |---|---|
 | Final heading | **Clear Research Trends in Today's Papers** |
 | Maximum trends | **3** |
+| Minimum latest papers per trend | **2** |
 | Explanatory chain | **Shared problem → emerging design direction → unresolved trade-off** |
-| Evidence | Name the supporting papers; use at least two of today's latest papers per trend where supported. |
+| Evidence | Name the supporting papers; meet the minimum latest-paper support above where supported. |
 
 The classic can explain historical development but cannot be the sole evidence of a current trend. Describe signals from today's selected set, not definitive claims about the whole field. State that evidence is insufficient when no shared trend is supported. Do not append a paper-of-the-day ranking, study schedule, or generic closing advice.
 
