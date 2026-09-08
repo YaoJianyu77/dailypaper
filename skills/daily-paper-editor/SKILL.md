@@ -1,118 +1,34 @@
 ---
 name: daily-paper-editor
-description: Assemble the final English Systems Paper Daily report from verified full-paper analyses and inline visuals.
+description: Assemble the website's daily article from verified full-paper analyses and visibly rendered figures and tables.
 ---
 
-# Purpose
+# Daily article assembly
 
-Use this skill to assemble the complete daily report after search, deduplication, full-paper analysis, and visual inspection have succeeded.
+Read `DAILY_REPORT_PRODUCT_REQUIREMENTS.md` for language, selection counts, summary limits, visuals, and the final trend section. Do not duplicate those settings here. Follow `AGENTS.md` for publication and history transactions.
 
-The authoritative output requirements are in `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`. Use `skills/paper-deep-analysis/SKILL.md` for each paper and `skills/paper-image-extractor/SKILL.md` for every visual.
+## Input quality
 
-## Language
+Accept only papers with verified publication identity/date, complete-paper reading, permanent-history checks, a finished analysis satisfying the current settings, and verified visuals and experimental claims. Use the deep-analysis and image-extractor skills for those checks.
 
-Write the prompt-derived report, all headings, captions, explanations, metadata prose, and trend analysis in clear, precise English.
+Abstract-only enrichment is screening or legacy data, never the final technical summary. Missing evidence requires replacement, omission with explanation, or a failed run as appropriate; it does not authorize invented detail.
 
-Some legacy JSON schema fields end in `_zh` (`summary_zh`, `overview_zh`, and similar). These names are historical implementation details and do not set the language. When the configured output language is English, their values must be English until the schema is renamed.
+## Article shape
 
-## Input quality gate
+Keep the entire report in `content/daily/YYYY-MM-DD.md`: compact run metadata, latest-paper entries, classic-paper entries, and the configured final trend section. Print the actual local date/timezone, date windows, paper counts, and honest verification status. Keep long execution logs outside the reading article.
 
-The final report may include a paper only when all of the following are available:
+Preserve the per-paper headings defined in the settings. Each entry must develop one argument: **problem → bottleneck → insight → method → evidence → limitations**. Define technical terms, keep metadata compact, and remove redundant descriptions and generic praise without deleting the mechanism or experimental conditions.
 
-- verified official publication identity and date;
-- complete readable paper;
-- permanent-history duplicate check;
-- a completed 900–1,100-word analysis that satisfies the deep-analysis skill;
-- at least one visible, verified inline visual or faithful reconstruction;
-- verified quantitative claims and source references.
+Place each visual next to its explanation. Do not append an asset inventory or force the reader into a separate detail page. Verify the final website rendering, not just the Markdown source.
 
-Abstract-only enrichment may be used to screen candidates, but it must never be presented as the final full-paper analysis. Replace or omit a paper when the quality gate fails.
+## Trends
 
-## Report shape
+Follow section 6 of the settings page for the heading, count, explanatory chain, and evidence requirements. Name supporting papers; distinguish signals from the selected set from claims about the whole field. Do not force unrelated papers into a trend, infer a current trend from the classic alone, or add a reading plan or paper-of-the-day recommendation.
 
-Write the public artifact directly to:
+## Publication
 
-`content/daily/YYYY-MM-DD.md`
+Use the single publication transaction in `AGENTS.md`; do not maintain a second state machine here. The website article is the deliverable. Report generation, commit, push, and deployment status accurately. Reposting the entire article in ChatGPT is only needed when explicitly requested, not a mandatory second production stage.
 
-The daily report is the primary reading experience. Do not require a click into a separate per-paper page to understand the work.
+## Legacy schema compatibility
 
-Use this order:
-
-1. report metadata and verification status;
-2. latest papers;
-3. classic paper;
-4. `Clear Research Trends in Today's Papers`.
-
-At the top, state:
-
-- execution date and `America/New_York` timezone;
-- exact latest and classic date windows;
-- actual paper count;
-- permanent-history file and verification status;
-- report archive path.
-
-## Per-paper editing
-
-Preserve the seven-section structure required by the deep-analysis skill. Do not collapse a full analysis into a feed summary, and do not split it into many repetitive micro-fields.
-
-Every paper should advance one main explanatory line:
-
-**Problem → bottleneck → insight → method → evidence → limitations.**
-
-Keep metadata compact. Do not repeat the title in the opening sentence, restate the same result in multiple sections, or add generic praise.
-
-Use exact values and conditions. Distinguish:
-
-- maximum versus average result;
-- throughput versus latency;
-- component versus end-to-end improvement;
-- offline versus online workloads;
-- single-GPU versus distributed evaluation;
-- authors' claim versus demonstrated evidence versus interpretation.
-
-## Visual integration
-
-Place each selected figure, table, or reconstruction next to the paragraph that explains it. The report is incomplete when it only names a figure or gives its page/path.
-
-Do not append a raw asset inventory at the end of a paper. Visuals must participate in the argument:
-
-**visual evidence → what to inspect → supported conclusion → caveat.**
-
-## Trend section
-
-End with exactly:
-
-# Clear Research Trends in Today's Papers
-
-Include no more than three trends. Each must follow:
-
-**Shared problem → emerging design direction → unresolved trade-off.**
-
-Name the papers supporting each trend. Prefer at least two latest papers per trend. The classic paper may provide historical context but cannot be the sole evidence for a current trend.
-
-If the selected papers do not support a meaningful common trend, say so directly. Do not invent a trend to fill the section.
-
-Do not add a paper-of-the-day ranking, reading order, study plan, comprehension questions, or generic closing advice.
-
-## History and publication transaction
-
-The report must be drafted before history reservations are finalized, but it must not be returned to the user until the repository transaction is verified.
-
-Required order:
-
-1. draft the complete report with visuals;
-2. re-read `state/recommendation_history.json`;
-3. reserve the selected research works under the stable run ID;
-4. write the report and any assets;
-5. read the report back and verify content and visuals;
-6. mark the history entries archived/completed with the final path;
-7. read history back and verify;
-8. return the complete report, including visuals, in ChatGPT.
-
-If any required write or verification fails, report the failure instead of presenting the draft as a successful daily recommendation.
-
-## Local enrichment compatibility
-
-For `scripts/ai_enrich.py` and `scripts/codex_enrich.py`, stay grounded in the supplied metadata and abstract. Do not invent details unavailable to those scripts. Their concise enrichment is a candidate-screening or legacy local-pipeline layer; it does not replace the full-paper scheduled report.
-
-Continue to keep the two scripts aligned. Any future schema cleanup may rename `_zh` fields, but a rename must update both scripts, schemas, publishing code, and existing data handling together.
+Some legacy field names end in `_zh`. They do not determine output language. Do not rename them without updating producers, schemas, consumers, and compatibility tests together. Keep `scripts/ai_enrich.py` and `scripts/codex_enrich.py` aligned when changing code, but do not pretend that their limited abstract context constitutes full-paper reading.

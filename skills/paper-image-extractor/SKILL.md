@@ -1,121 +1,38 @@
 ---
 name: paper-image-extractor
-description: Inspect paper visuals, select the two most informative items, and render them inline in the daily report.
+description: Inspect, extract, and visibly render the paper's key figures and tables inside the website article.
 ---
 
-# Completion criterion
+# Visual evidence
 
-A paper entry is not complete merely because it names a figure, gives a PDF page, links to a file, or records an asset path. The selected visual content must be visibly rendered inline in:
+Read section 5 of `DAILY_REPORT_PRODUCT_REQUIREMENTS.md` for visual limits and presentation requirements. The completion criterion is a visible, legible visual in the rendered daily article, not a file path, PDF link, caption, extraction manifest, or unrendered diagram source.
 
-1. `content/daily/YYYY-MM-DD.md`; and
-2. the final ChatGPT task response.
+## Select and inspect
 
-Every paper entry must contain at least one visible visual element and no more than two, following `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`.
+Prioritize the main architecture/workflow/algorithm figure and the strongest end-to-end result, ablation, scalability plot, or explanatory table. Avoid logos, decorative graphics, prose screenshots, and unrelated plots.
 
-## Visual selection
+Inspect the actual paper page or source image, read its caption, and compare it with surrounding text. Verify axes, units, labels, arrows, legends, baselines, workload/hardware conditions, and the conclusion it supports. Reject a visual whose meaning cannot be verified; do not infer its contents from its caption alone.
 
-Prefer, in order:
+## Extract and embed
 
-1. the main architecture, workflow, request lifecycle, algorithm, or system-design figure;
-2. the strongest end-to-end result, scalability result, ablation, or decision-relevant table;
-3. a faithful reconstruction when the original cannot be embedded reliably.
+Prefer a verified original source asset. When necessary, use a source-package PDF figure or a legible crop of the rendered paper page. Retain assets in the existing per-paper image layout under `content/assets/papers/`, as specified by `AGENTS.md`.
 
-Do not choose decorative figures, logos, screenshots of prose, generic model diagrams, or plots unrelated to the paper's primary claim.
+Use descriptive filenames such as `figure-3-system-overview.png` or `figure-8-throughput.png`. Embed the actual asset with Markdown image syntax next to its explanation. Use paths compatible with the site builder and deployment base path; a GitHub file-browser page is not an image asset.
 
-## Inspection requirement
+The existing helper is `extract-paper-images/scripts/extract_images.py`. Inspect its supported input before calling it; do not assume every publisher URL is accepted. An updated `images/index.md` is only an intermediate extraction result.
 
-For every candidate visual:
+## Tables and faithful reconstructions
 
-1. inspect the actual PDF page or extracted source image;
-2. read the original caption;
-3. verify axes, units, legends, labels, arrows, components, workloads, baselines, and experimental conditions;
-4. compare the visual against the surrounding paper text;
-5. reject the item if its meaning cannot be verified.
+A verified numerical table can be rendered directly as a Markdown table. Preserve column names, units, baseline names, conditions, and the exact values supporting the conclusion. Identify omitted rows or columns. Do not replace a renderable table with a fenced text block.
 
-Never infer the contents of a figure or table from its caption alone.
+When an original item cannot be embedded, a faithful simplified reconstruction may be used. Render it visibly and label it **“Reconstructed from Figure/Table X.”** Mermaid source must be rendered to an image or through a verified diagram renderer. Raw Mermaid code and ASCII text do not satisfy the image requirement.
 
-## Original-image workflow
+Preserve the paper's real components, directions, labels, units, and values. Do not interpolate missing measurements, invent labels, or present a reconstruction as the original. If no verified original or reconstruction can be shown, replace the candidate or report the unfilled slot.
 
-Prefer the arXiv source package when available. Fall back to source-package PDF figures, then a crop from the rendered PDF page.
+## Explain and validate
 
-Store retained assets under:
+For each item, provide its original number, a permitted caption quotation or labeled accurate paraphrase, PDF file page and printed page when available, an explanation of relevant visual elements, the supported conclusion, and the main caveat.
 
-`content/assets/papers/<stable-paper-key>/images/`
+Inspect the rendered article for broken paths, unreadable labels, clipping, incorrect table layout, and diagrams shown as source text. Check that committed assets match those inspected. Distinguish local-render verification from verification of the deployed website.
 
-Use stable descriptive names such as:
-
-- `figure-3-system-overview.png`
-- `figure-8-end-to-end-throughput.png`
-- `table-2-ablation.png`
-
-Embed the asset in the daily report with a site-valid absolute path:
-
-```markdown
-![Figure 3: system overview](/assets/papers/<stable-paper-key>/images/figure-3-system-overview.png)
-```
-
-Immediately below it, include the original number and caption, followed by a concise explanation of what the reader should notice and the most important caveat.
-
-Do not use a repository browser URL as an image source. Do not write only:
-
-- “Figure 3 is on page 7”;
-- “see the PDF”;
-- “image saved at …”;
-- a bare link to the asset.
-
-## Table workflow
-
-When the selected item is a table and the values can be read reliably, render the relevant rows directly as a Markdown table in the report. Preserve:
-
-- column names;
-- units;
-- baseline names;
-- workload/model/hardware conditions;
-- values necessary to support the stated conclusion.
-
-Label it with the original table number and caption. State when rows or columns were omitted for compactness.
-
-Do not render a usable table only as a fenced text block. A fenced block is a fallback for layout that cannot be represented as Markdown, not the default.
-
-## Reconstruction fallback
-
-When the original item cannot be embedded because the runtime cannot save binary assets, the source format is unusable, or the visual is too dense, render a faithful simplified reconstruction inline.
-
-Label it exactly:
-
-> **Reconstructed from Figure/Table X.**
-
-Allowed forms:
-
-- Mermaid flowchart for architecture or control/data flow;
-- compact ASCII diagram for a sequential pipeline;
-- Markdown table for numerical evidence;
-- a simple chart only when every plotted value is explicitly available and verified in the paper.
-
-A reconstruction must preserve actual components, directionality, labels, units, and reported numbers. Do not add inferred components or interpolate missing data. Do not use image generation to imitate an original research figure.
-
-A location-only fallback is not allowed. If neither an original item nor a faithful reconstruction can be displayed, replace the paper or leave the slot unfilled.
-
-## Explanation attached to every visual
-
-For each displayed visual, provide:
-
-- original Figure/Table number;
-- original caption, quoted or accurately paraphrased within reasonable length;
-- PDF file page and paper page when available;
-- axes, units, arrows, labels, or columns that matter;
-- the exact conclusion it supports;
-- the strongest caveat or limitation.
-
-## Existing repository extractor
-
-For the local repository workflow, the existing command remains:
-
-```bash
-python extract-paper-images/scripts/extract_images.py \
-  <paper_id_or_pdf_path> \
-  content/assets/papers/<stable-paper-key>/images \
-  content/assets/papers/<stable-paper-key>/images/index.md
-```
-
-Extraction is only an intermediate step. After extraction, explicitly select and embed the useful item in the daily report. An updated `images/index.md` does not satisfy the final display requirement by itself.
+If the user also requests the report in ChatGPT, use supported inline rendering of the same verified visual; do not treat an untested public image URL as proof that the user can see it. A separate ChatGPT copy is not required for website publication.
