@@ -52,6 +52,8 @@ class BuildSiteTests(unittest.TestCase):
         self.assertNotIn('href="/dailypaper/daily/2026-05-04/">Latest report</a>', home)
         self.assertIn('href="/dailypaper/daily/2026-09-07/">2026-09-07</a>', archive)
         self.assertIn('href="/dailypaper/daily/2026-05-04/">2026-05-04</a>', archive)
+        self.assertEqual(archive.count('>2026-09-07</a>'), 1)
+        self.assertEqual(archive.count('>2026-05-04</a>'), 1)
         self.assertLess(archive.index('>2026-09-07</a>'), archive.index('>2026-05-04</a>'))
         for date in ['2026-05-04', '2026-09-07']:
             self.assertTrue((self.output / 'daily' / date / 'index.html').is_file())

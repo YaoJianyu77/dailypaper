@@ -48,57 +48,45 @@ body {
 a { color: var(--accent); }
 a:hover { color: var(--accent-2); }
 .shell {
-  width: min(1100px, calc(100vw - 32px));
+  width: min(920px, calc(100vw - 32px));
   margin: 0 auto;
-  padding: 28px 0 64px;
+  padding: 20px 0 64px;
 }
-.hero {
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  padding: 28px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,245,233,0.92));
-  box-shadow: var(--shadow);
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
 }
-.hero h1 {
-  margin: 0;
-  font-size: clamp(2.4rem, 5vw, 4.4rem);
-  line-height: 0.95;
-  letter-spacing: -0.05em;
-}
-.hero p {
-  max-width: 66ch;
-  color: var(--muted);
-  font-size: 1rem;
+.brand {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 .nav {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-top: 18px;
 }
-.nav a, .pill {
+.nav a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 10px 16px;
+  padding: 8px 14px;
   background: rgba(255,255,255,0.7);
   color: var(--ink);
-}
-.grid {
-  display: grid;
-  grid-template-columns: 2.2fr 1fr;
-  gap: 24px;
-  margin-top: 24px;
 }
 .card {
   border: 1px solid var(--line);
   border-radius: 24px;
   background: var(--panel);
   box-shadow: var(--shadow);
-  padding: 24px;
+  padding: clamp(20px, 4vw, 44px);
 }
 .card h2, .card h3 { margin-top: 0; }
 .article {
@@ -139,21 +127,6 @@ a:hover { color: var(--accent-2); }
   border-radius: 16px;
   background: #201b17;
   color: #f8efe1;
-}
-.list { list-style: none; margin: 0; padding: 0; }
-.list li + li { margin-top: 12px; }
-.meta {
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-.footer {
-  margin-top: 32px;
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-@media (max-width: 900px) {
-  .grid { grid-template-columns: 1fr; }
-  .hero { padding: 22px; }
 }
 """
 
@@ -316,7 +289,7 @@ def md_to_html(text: str, base_url: str) -> str:
     return ''.join(part for part in html_parts if part)
 
 
-def render_layout(site_title: str, title: str, body_html: str, sidebar_html: str, nav_html: str, base_url: str) -> str:
+def render_layout(site_title: str, title: str, body_html: str, nav_html: str, base_url: str) -> str:
     return f"""<!doctype html>
 <html lang=\"en\">
 <head>
@@ -327,16 +300,11 @@ def render_layout(site_title: str, title: str, body_html: str, sidebar_html: str
 </head>
 <body>
   <main class=\"shell\">
-    <section class=\"hero\">
-      <h1>{html.escape(site_title)}</h1>
-      <p>Automated paper watchtower. Today first, archive second, raw repository history always available.</p>
-      <nav class=\"nav\">{nav_html}</nav>
-    </section>
-    <section class=\"grid\">
-      <article class=\"card article\">{body_html}</article>
-      <aside class=\"card\">{sidebar_html}</aside>
-    </section>
-    <footer class=\"footer\">Generated from the repository content store. Clone the repo to browse and edit the source markdown locally.</footer>
+    <header class=\"site-header\">
+      <span class=\"brand\">{html.escape(site_title)}</span>
+      <nav class=\"nav\" aria-label=\"Main navigation\">{nav_html}</nav>
+    </header>
+    <article class=\"card article\">{body_html}</article>
   </main>
 </body>
 </html>
@@ -368,39 +336,16 @@ def copy_asset_dirs(repo_root: Path, dist_root: Path) -> None:
         shutil.copytree(image_dir, target)
 
 
-def build_sidebar(
-    latest: Dict,
-    daily_index: List[Dict],
-    base_url: str,
-) -> str:
-    latest_html = '<p class="meta">No daily report published yet.</p>'
-    if latest:
-        latest_html = f'<p><a href="{apply_base_url(latest["path"], base_url)}">Latest report</a></p><p class="meta">{latest.get("date", "")}</p>'
-
-    archive_items = ''.join(
-        f'<li><a href="{apply_base_url(entry["path"], base_url)}">{entry["date"]}</a></li>' for entry in daily_index[:10]
-    ) or '<li class="meta">No history yet.</li>'
-    sections = [
-        '<h2>Latest</h2>'
-        f'{latest_html}'
-        '<h3>Recent Reports</h3>'
-        f'<ul class="list">{archive_items}</ul>'
-    ]
-
-    return ''.join(sections)
-
-
 def build_page(
     dist_root: Path,
     out_path: Path,
     site_title: str,
     title: str,
     body_md: str,
-    sidebar_html: str,
     nav_html: str,
     base_url: str,
 ) -> None:
-    html_text = render_layout(site_title, title, md_to_html(body_md, base_url), sidebar_html, nav_html, base_url)
+    html_text = render_layout(site_title, title, md_to_html(body_md, base_url), nav_html, base_url)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(html_text, encoding='utf-8')
 
@@ -443,13 +388,11 @@ def main() -> int:
         })
     latest = daily_index[0] if daily_index else {}
 
-    nav_links = [
-        f'<a href="{apply_base_url("/", base_url)}">Home</a>',
-        f'<a href="{apply_base_url("/archive/", base_url)}">Archive</a>',
-    ]
+    nav_links = []
+    if latest:
+        nav_links.append(f'<a href="{apply_base_url(latest["path"], base_url)}">Latest report</a>')
+    nav_links.append(f'<a href="{apply_base_url("/archive/", base_url)}">Archive</a>')
     nav_html = ''.join(nav_links)
-
-    sidebar_html = build_sidebar(latest, daily_index, base_url)
 
     for frontmatter, body, path in daily_docs:
         build_page(
@@ -458,7 +401,6 @@ def main() -> int:
             site_title,
             frontmatter.get('title', path.stem),
             body,
-            sidebar_html,
             nav_html,
             base_url,
         )
@@ -471,7 +413,6 @@ def main() -> int:
             site_title,
             latest_frontmatter.get('title', 'Latest Report'),
             latest_body,
-            sidebar_html,
             nav_html,
             base_url,
         )
@@ -482,7 +423,6 @@ def main() -> int:
             site_title,
             'No Report Yet',
             '# No report yet\n\nRun the daily workflow to publish the first report.\n',
-            sidebar_html,
             nav_html,
             base_url,
         )
@@ -490,7 +430,7 @@ def main() -> int:
     archive_md = '# Archive\n\n' + '\n'.join(
         f'- [{item["date"]}]({item["path"]})' for item in daily_index
     )
-    build_page(dist_root, dist_root / 'archive' / 'index.html', site_title, 'Archive', archive_md, sidebar_html, nav_html, base_url)
+    build_page(dist_root, dist_root / 'archive' / 'index.html', site_title, 'Archive', archive_md, nav_html, base_url)
 
     if content_root.exists():
         copy_asset_dirs(repo_root, dist_root)
