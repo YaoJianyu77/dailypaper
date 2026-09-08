@@ -86,6 +86,35 @@ class BuildSiteTests(unittest.TestCase):
         self.assertNotIn('/daily/2026-05-04/', home)
         self.assertNotIn('/daily/2026-05-04/', archive)
 
+    def test_homepage_topics_follow_settings_and_exclude_negative_preferences(self):
+        (self.daily / '2026-09-07.md').write_text('# Daily report\n')
+        settings = self.root / 'DAILY_REPORT_PRODUCT_REQUIREMENTS.md'
+        settings.write_text('''## 1. Research areas
+
+| Priority | Current focus |
+|---|---|
+| Primary | **GPU systems**; LLM inference. |
+| Also include | Networking; GPU systems. |
+| Exclude | Marketing. |
+
+## 2. Search sources
+
+| Priority | Current focus |
+|---|---|
+| Primary | Unrelated venue settings. |
+''')
+        self.build()
+        home = (self.output / 'index.html').read_text()
+        self.assertIn('<h1>Computer science.</h1>', home)
+        self.assertIn('GPU systems · LLM inference · Networking</p>', home)
+        self.assertNotIn('Marketing', home)
+        self.assertNotIn('Unrelated venue settings', home)
+        settings.write_text(settings.read_text().replace('LLM inference', 'Storage & memory'))
+        self.build()
+        home = (self.output / 'index.html').read_text()
+        self.assertIn('GPU systems · Storage &amp; memory · Networking</p>', home)
+        self.assertNotIn('LLM inference', home)
+
     def test_paper_directory_does_not_treat_analysis_subheadings_as_papers(self):
         path = self.daily / '2026-09-07.md'
         path.write_text('''# Report

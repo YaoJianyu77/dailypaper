@@ -38,8 +38,7 @@ h1, h2, h3, p { margin-top: 0; }
 .eyebrow { font-size: 10px; letter-spacing: 1.8px; font-weight: 650; color: var(--muted); line-height: 1.6; text-transform: uppercase; margin-bottom: 24px; }
 .home-hero { display: grid; grid-template-columns: 1fr 285px; align-items: center; gap: 70px; padding: 76px 0 68px; }
 .hero-copy h1 { font-family: var(--serif); font-size: clamp(42px, 5.7vw, 72px); font-weight: 400; line-height: 1.04; letter-spacing: -2.7px; margin-bottom: 24px; }
-.hero-copy h1 em { color: var(--accent); font-weight: 400; }
-.hero-description { color: var(--muted); font-size: 15px; line-height: 1.7; max-width: 360px; margin: 0; }
+.hero-description { color: var(--muted); font-size: 13px; line-height: 1.85; max-width: 680px; margin: 0; }
 .issue-cover { background: var(--tint); border: 1px solid #d7e1d0; padding: 28px; text-align: center; position: relative; }
 .issue-cover:before { content: ""; position: absolute; top: -1px; left: -1px; height: 4px; width: calc(100% + 2px); background: var(--accent); }
 .issue-cover .eyebrow { margin-bottom: 22px; font-size: 9px; }

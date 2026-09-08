@@ -15,7 +15,7 @@ import shutil
 import yaml
 
 from content_store import get_repo_root
-from site_content import Report, apply_base_url, md_to_html, read_reports
+from site_content import Report, apply_base_url, markdown_parser, md_to_html, plain_text, read_reports
 
 
 SITE_ASSETS = Path(__file__).resolve().parent / 'site_assets'
@@ -36,6 +36,34 @@ def load_site_settings(root):
         if path.is_file():
             return yaml.safe_load(path.read_text(encoding='utf-8')) or {}
     return {}
+
+
+def load_research_topics(root):
+    """Use the positive research-area rows from the user's single settings page."""
+    path = root / 'DAILY_REPORT_PRODUCT_REQUIREMENTS.md'
+    if not path.is_file():
+        return []
+    tokens = markdown_parser().parse(path.read_text(encoding='utf-8'))
+    in_areas = False
+    cells = []
+    topics = {}
+    for index, token in enumerate(tokens):
+        if token.type == 'heading_open' and token.tag == 'h2':
+            heading = re.sub(r'^\d+\.\s*', '', tokens[index + 1].content).casefold()
+            if in_areas:
+                break
+            in_areas = heading == 'research areas'
+        elif in_areas:
+            if token.type == 'tr_open':
+                cells = []
+            elif token.type == 'inline' and tokens[index - 1].type in {'th_open', 'td_open'}:
+                cells.append(plain_text(token.content))
+            elif token.type == 'tr_close' and len(cells) == 2 and cells[0].casefold() in {'primary', 'also include'}:
+                for item in cells[1].split(';'):
+                    item = item.strip().removesuffix('.')
+                    if item:
+                        topics.setdefault(item.casefold(), item)
+    return list(topics.values())
 
 
 def formatted_date(report):
@@ -63,7 +91,7 @@ def layout(site_title, title, content, base_url, page_kind):
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Research notes on AI, machine learning, and computer systems.">
+  <meta name="description" content="Daily computer science research reports.">
   <title>{escape(title)} - {escape(site_title)}</title>
   <link rel="stylesheet" href="{escape(apply_base_url('/assets/style.css', base_url))}">
   <script defer src="{escape(apply_base_url('/assets/site.js', base_url))}"></script>
@@ -92,11 +120,12 @@ def category_badge(category):
     return f'<span class="badge {"badge-classic" if category == "Classic" else ""}">{escape(category)}</span>'
 
 
-def homepage(reports, base_url):
+def homepage(reports, base_url, research_topics):
     if not reports:
         return '<section class="empty-state"><p class="eyebrow">DAILYPAPER</p><h1>No report yet</h1><p>Published reports will appear here.</p></section>'
     report = reports[0]
     link = escape(apply_base_url(report.path, base_url))
+    subtitle = f'<p class="hero-description">{escape(" · ".join(research_topics))}</p>' if research_topics else ''
     previews = []
     for index, paper in enumerate(report.papers, 1):
         excerpt = f'<p>{escape(paper.excerpt)}</p>' if paper.excerpt else ''
@@ -110,8 +139,8 @@ def homepage(reports, base_url):
     return f'''
     <section class="home-hero">
       <div class="hero-copy"><p class="eyebrow">DAILY RESEARCH NOTES</p>
-        <h1>AI &amp; computer science.<br><em>A closer look.</em></h1>
-        <p class="hero-description">Papers and ideas across AI, machine learning, and computer systems.</p>
+        <h1>Computer science.</h1>
+        {subtitle}
       </div>
       <div class="issue-cover">
         <p class="eyebrow">CURRENT REPORT</p>
@@ -222,7 +251,7 @@ def main():
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(layout(site_title, title, content, base, kind), encoding='utf-8')
 
-    write(Path(), 'AI & Computer Science Research', homepage(reports, base), 'home')
+    write(Path(), 'Computer science', homepage(reports, base, load_research_topics(root)), 'home')
     write(Path('archive'), 'Archive', archive_page(reports, base), 'archive')
     for index, report in enumerate(reports):
         older = reports[index + 1] if index + 1 < len(reports) else None
