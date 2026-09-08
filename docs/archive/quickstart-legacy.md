@@ -98,7 +98,7 @@ For Netlify or Cloudflare Pages:
 - output directory: `dist`
 - leave `SITE_BASE_URL` empty unless you deploy under a custom subpath
 
-`.github/workflows/daily.yml` remains available as a manual GitHub-side fallback, but it is no longer the primary path.
+The legacy manual GitHub report-generation workflow has been removed. Use the [current local setup](../../README.md).
 
 ## Output layout
 

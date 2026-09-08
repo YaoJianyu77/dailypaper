@@ -22,7 +22,7 @@ Preparation caches are ignored under `.cache/dailypaper/runs/<date>/`. They cont
 
 Classic selection can retrieve later citing texts when the initial screening has no independently verifiable influence source. A separate evidence check must establish use, adoption, or another configured influence criterion; a citation count or reference-list entry is insufficient. Unverified slots follow the settings' shortfall policy.
 
-For debugging, `start-my-day/scripts/search_arxiv.py --output <path>` now delegates to the same venue discovery stage; its old filename is retained for existing command callers. `scripts/{codex_enrich,ai_enrich}.py --output <path>` prepare the same complete bundle. `scripts/publish_daily.py --input <bundle>` accepts only a validated bundle, never raw discovery or legacy abstract-enrichment JSON. Use the main runner for normal operation.
+For debugging, `start-my-day/scripts/search_arxiv.py --output <path>` now delegates to the same venue discovery stage; its old filename is retained for existing command callers. `scripts/codex_enrich.py --output <path>` prepares a complete bundle using the verified production runtime. The API adapter is retained for isolated compatibility checks; it cannot bypass the Codex Ultra policy. `scripts/publish_daily.py --input <bundle>` accepts only a validated bundle, never raw discovery or legacy abstract-enrichment JSON. Use the main runner for normal operation.
 
 ## Isolated checks
 
@@ -38,7 +38,7 @@ The installed runtime's app-server protocol is used because its completed tool i
 
 Cronie interprets the settings' local wall time through `CRON_TZ`; the managed block restores the preceding timezone afterward. Reinstallation migrates this checkout's old runner entry and replaces the same marked job, retaining unrelated lines. An advisory lock covers synchronization, verification, generation and publication, including manual runner invocations. Logs and the last successful runtime receipt live in ignored `state/logs/`. The host must remain on, with its cron daemon running. Changing the scheduled time in the settings requires rerunning the setup command.
 
-The manual GitHub Models Action is retained without changes to its schedule or credentials. Its transport is rejected by the production backend because it cannot demonstrate the required Codex Ultra mode. It is not an alternative daily schedule. API smoke utilities remain available independently; they cannot bypass the production policy.
+The sole GitHub Actions workflow, `.github/workflows/pages.yml`, runs isolated tests and deploys archived content. Production report generation runs through the local cron job.
 
 ## Retained manual utilities
 

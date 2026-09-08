@@ -64,6 +64,6 @@ Inspect the rendered website output. Markdown image syntax, a successful file wr
 
 Read back the committed report and history. Distinguish generated, committed, pushed, deployed, and verified states in execution status; a commit does not prove deployment. Do not infer unattended permissions or a server schedule from repository documentation.
 
-Use `scripts/run_local_daily.py` for production generation. The manual GitHub Action uses the same runner. `scripts/ai_enrich.py` and `scripts/codex_enrich.py` own transport only; keep shared prompts, stage orchestration, and output contracts in their common modules. Update callers and isolated tests together when changing those contracts. Module responsibilities and retained manual utilities are documented in `docs/implementation.md`.
+Use `scripts/run_local_daily.py` for production generation. `scripts/ai_enrich.py` and `scripts/codex_enrich.py` own transport only; keep shared prompts, stage orchestration, and output contracts in their common modules. Update callers and isolated tests together when changing those contracts. Module responsibilities and retained manual utilities are documented in `docs/implementation.md`.
 
 For maintenance-only requests, use isolated fixtures; do not generate recommendations, alter production history, or run the publisher against production content. A settings edit must affect the next run without a second preference edit. Never discard a pending reservation to accommodate changed settings: reconcile and revalidate its existing selection.

@@ -27,6 +27,6 @@ bash scripts/install_local_cron.sh --logs
 bash scripts/install_local_cron.sh --check  # live runtime check; no report/history writes
 ```
 
-Each daily run refreshes official model recommendations, checks account access and exact Ultra support, and logs the resolved model and mode. Failure stops generation without a downgrade. Successful runs verify, archive, commit, and push through the existing runner; retries resume the same date. Keep the checkout clean. The older manual GitHub Models Action cannot meet the Codex Ultra policy and stops without publishing. Existing reports still deploy through Pages.
+Each daily run refreshes official model recommendations, checks account access and exact Ultra support, and logs the resolved model and mode. Failure stops generation without a downgrade. Successful runs verify, archive, commit, and push through the existing runner; retries resume the same date. Keep the checkout clean. Existing reports deploy through the Pages workflow.
 
 Maintainers: [execution rules](AGENTS.md) · [stage techniques](skills/) · [verified status and limitations](PROJECT_STATE.md) · [implementation and testing](docs/implementation.md). Older setup notes are [archived](docs/archive/README.md).
