@@ -1,6 +1,6 @@
 ---
 name: paper-deep-analysis
-description: Read a complete paper and explain its mechanism, evidence, and limitations within the limits in Daily Paper Settings.
+description: Use for each selected DailyPaper paper or an explicit request to analyze a paper in depth; read the complete paper and explain its mechanism, experiments, and limitations using the unified settings. Do not generate analyses during unrelated maintenance.
 ---
 
 # Full-paper technical analysis

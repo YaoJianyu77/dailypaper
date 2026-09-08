@@ -206,7 +206,7 @@ def load_infrastructure(root, config_path=None):
     data = yaml.safe_load(path.read_text(encoding='utf-8')) or {}
     allowed = {
         'site': {'title', 'base_url'},
-        'ai': {'provider', 'model', 'preferred_models', 'api_base', 'github_models_api_base',
+        'ai': {'api_base', 'github_models_api_base',
                'timeout_seconds', 'codex_timeout_seconds', 'max_output_tokens'},
         'search': {'max_candidates_per_venue', 'request_interval_seconds', 'timeout_seconds', 'retries'},
         'documents': {'max_pdf_bytes', 'max_pages', 'render_dpi'},

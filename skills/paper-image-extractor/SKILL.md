@@ -1,6 +1,6 @@
 ---
 name: paper-image-extractor
-description: Inspect, extract, and visibly render the paper's key figures and tables inside the website article.
+description: Use when preparing DailyPaper visuals or explicitly inspecting, extracting, or rendering paper figures and tables; verify the source pages and make visuals visible and legible. Do not start report generation for image-tool maintenance.
 ---
 
 # Visual evidence

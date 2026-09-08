@@ -541,10 +541,11 @@ class PipelineTests(unittest.TestCase):
                     raise subprocess.CalledProcessError(1, cmd)
                 return actual_run(cmd, **kwargs)
 
-            def fixture_prepare(root, backend):
+            def fixture_prepare(root, name, **kwargs):
                 return self.prepare()
 
             with patch.object(run_local_daily, 'prepare', side_effect=fixture_prepare), \
+                 patch.object(run_local_daily, 'verify_runtime', return_value=self.backend), \
                  patch.object(run_local_daily, 'run', side_effect=fail_push_once), \
                  patch('report_settings.ReportSettings.local_date', return_value=DAY), \
                  patch.object(sys, 'argv', ['run_local_daily.py', '--repo-root', str(self.root)]):
@@ -577,15 +578,16 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(len(api_input[1]['content']), 3)
         captured = {}
 
-        def codex_run(cmd, **kwargs):
-            captured.update(prompt=kwargs['input'], cmd=cmd)
-            Path(cmd[cmd.index('--output-last-message') + 1]).write_text(json.dumps(result))
+        def codex_run(executable, resolution, root, prompt, schema, images, **kwargs):
+            captured.update(prompt=prompt, images=images)
+            return result, []
 
-        with patch('codex_enrich.shutil.which', return_value='/fixture/codex'), patch('codex_enrich.subprocess.run', side_effect=codex_run):
+        resolution = {'executable': '/fixture/codex', 'model': 'verified-fixture', 'mode': 'ultra', 'settings_sha256': self.settings.sha256}
+        with patch.object(CodexBackend, 'preflight', return_value=resolution), patch('codex_enrich.execute', side_effect=codex_run):
             self.assertEqual(CodexBackend(self.root, self.settings, self.infrastructure).generate('analyze', context, images), result)
         self.assertEqual(captured['prompt'], api_input[0]['content'] + '\n\n' + api_input[1]['content'][0]['text'])
         self.assertIn('TAIL_EVIDENCE_NOT_IN_ABSTRACT', captured['prompt'])
-        self.assertEqual(captured['cmd'].count('--image'), 2)
+        self.assertEqual(captured['images'], images)
         response.json.return_value = {'status': 'incomplete', 'output_text': '{}'}
         with self.assertRaisesRegex(RuntimeError, 'incomplete'):
             api.generate('analyze', context, images)

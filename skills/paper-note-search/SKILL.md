@@ -1,6 +1,6 @@
 ---
 name: paper-note-search
-description: Search persistent recommendation history, archived daily reports, paper aliases, and existing repository notes.
+description: Use during DailyPaper generation to check candidates against permanent history, or when asked to find prior papers, reports, aliases, notes, or recommendation evidence. History lookup alone does not authorize a new report.
 ---
 
 # Purpose

@@ -35,6 +35,7 @@ Formal publication, including official early access, is required for the date-ba
 | Setting | Current value |
 |---|---|
 | Date and timezone | Actual execution date in `America/New_York`. |
+| Daily schedule | **07:00 America/New_York**, one persistent daily job; update that job on reinstall and prevent overlapping runs. |
 | Latest-paper pool | The preceding **6 calendar months**, including the execution date. |
 | Classic-paper pool | The preceding **5 calendar years**, excluding the latest-paper pool. |
 | Date basis | First verified official online publication, not an arXiv revision, code update, or later issue assignment. |
@@ -61,6 +62,8 @@ The reader should understand the paper without opening the original. Explain **p
 | Setting | Current value |
 |---|---|
 | Prompt and report language | **English**, including headings, captions, tables, and trend analysis. |
+| Production model policy | Before each daily run, read the current [official Codex model recommendations](https://learn.chatgpt.com/docs/models.md) and verify account availability. Use the uniquely identified most capable recommended Codex model for research. Do not guess model names or fall back to a less capable model. |
+| Required Codex mode | **Ultra**, using the exact settings advertised and accepted by the installed non-interactive Codex runtime. Verify against the [official mode guidance](https://learn.chatgpt.com/docs/agent-configuration/subagents.md). `xhigh` and `max` are not substitutes. Stop clearly if model access or Ultra cannot be verified; log the resolved model and mode for every run and apply them to every production model call. |
 | Summary length | **900–1,100 words per paper**, excluding figure captions; hard maximum **1,200 words**. |
 | Opening brief | **100–150 words**. |
 | Final assessment | One paragraph, **at most 120 words**. |

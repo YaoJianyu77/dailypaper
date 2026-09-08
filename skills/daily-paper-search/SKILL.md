@@ -1,6 +1,6 @@
 ---
 name: daily-paper-search
-description: Discover and verify eligible systems papers using the single preference file and canonical recommendation history.
+description: Use when generating DailyPaper or explicitly finding eligible research papers; discover configured venues, verify official publication and dates, and rank candidates. Do not begin paper discovery for code, setup, or documentation maintenance.
 ---
 
 # Inputs and authority

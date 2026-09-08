@@ -1,6 +1,6 @@
 ---
 name: daily-paper-editor
-description: Assemble the website's daily article from verified full-paper analyses and visibly rendered figures and tables.
+description: Use after DailyPaper search, history checks, full-paper analysis, and visual preparation to assemble and check the daily article and research trends; also use for explicitly requested report edits. Do not publish reports during code or documentation work.
 ---
 
 # Daily article assembly

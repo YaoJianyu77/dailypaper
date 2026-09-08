@@ -18,9 +18,15 @@ The precedence is: the user's current explicit request, then the settings page, 
 | Inspect, extract, render, and verify visuals | `skills/paper-image-extractor/SKILL.md` |
 | Assemble and check the daily article | `skills/daily-paper-editor/SKILL.md` |
 
-`scripts/pipeline_prompts.py` loads these skills explicitly for both model transports. `docs/archive/` contains historical references, not current instructions.
+`scripts/pipeline_prompts.py` supplies the applicable skill instructions to each generation stage. Native Codex discovery uses the same linked folders. `docs/archive/` contains historical references, not current instructions.
 
 ## One publication path
+
+When the user asks to generate DailyPaper (including equivalent requests in another language), read `DAILY_REPORT_PRODUCT_REQUIREMENTS.md` and execute the existing skills in this order: `daily-paper-search` → `paper-note-search` → `paper-deep-analysis` → `paper-image-extractor` → `daily-paper-editor`. Read complete history before discovery as required above, then perform candidate identity checks at the history stage. The user does not need to name the skills. Codex discovers them through `.agents/skills/`, which links to the canonical folders in `skills/`.
+
+For code review, debugging, installation, configuration, documentation, or workflow-selection tests, use only the skills relevant to that task. Mentioning DailyPaper or its workflow is not a request to generate a report. Do not start discovery, reserve recommendations, or publish as a side effect of maintenance.
+
+The production runner must enforce the model and mode policy in the settings before generation. Use tools to retrieve/read complete papers, inspect page images, run checks, and prepare visuals in scratch storage. Ultra may delegate independent research checks; delegated agents inherit the verified model, mode, and permission boundaries. Only the controller writes production reports/history or runs Git publication. A stage task must not recursively launch the production runner.
 
 **Read settings and complete history → search and verify → deduplicate → read full papers → prepare complete analyses and rendered visuals → validate the article → reserve and commit safely → verify committed content and history → publish the static website.**
 
@@ -33,7 +39,7 @@ The website is the primary reading surface. Do not create a second daily-paper p
 - Retained visual assets: `content/assets/papers/`, in the existing per-paper image layout.
 - Authoritative permanent recommendation history: `state/recommendation_history.json`.
 - Legacy `state/paper_index.json`: prior recommendation evidence and compatibility data; never a replacement for permanent history.
-- `config.yaml` and `config.example.yaml`: infrastructure only (transport/model, network and document limits, site paths). The parser rejects additional preference keys.
+- `config.yaml` and `config.example.yaml`: infrastructure only (transport endpoints, network and document limits, site paths). The parser rejects additional preference keys.
 - `.cache/dailypaper/`: ignored preparation and recovery artifacts; never a replacement for permanent history.
 
 Preserve existing reports, images, prior evidence, and unrelated changes. Do not install timers or change schedules or credentials without explicit authorization.

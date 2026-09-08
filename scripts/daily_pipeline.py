@@ -25,8 +25,7 @@ def make_backend(name, root, settings, infrastructure):
     if name == 'codex':
         from codex_enrich import CodexBackend
         return CodexBackend(root, settings, infrastructure)
-    from ai_enrich import APIBackend
-    return APIBackend(root, settings, infrastructure, None if name == 'api' else name)
+    raise RuntimeError('The unified settings require verified Codex Ultra. Hosted API transports cannot verify this mode; use the local Codex runner. No downgrade selected.')
 
 
 def discovery(root, settings, day, sources, history):
@@ -117,6 +116,10 @@ def prepare(root, backend_name='codex', *, day=None, sources=None, backend=None,
         return json.loads(bundle_path.read_text())
     sources = sources or Sources(infrastructure)
     backend = backend or make_backend(backend_name, root, settings, infrastructure)
+    require(getattr(backend, 'settings', settings).sha256 == settings.sha256,
+            'Settings changed after runtime verification; restart preparation with current settings')
+    if hasattr(backend, 'preflight'):
+        backend.preflight()
     checkpoint_path = stage / 'selection.json'
     if checkpoint_path.exists():
         checkpoint = json.loads(checkpoint_path.read_text())
