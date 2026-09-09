@@ -59,7 +59,7 @@ The installed runtime's ordinary `thread/read` metadata omits approval and sandb
 
 Cronie interprets the settings' local wall time through `CRON_TZ`; the managed block restores the preceding timezone afterward. Reinstallation migrates this checkout's old runner entry and replaces the same marked job, retaining unrelated lines. An advisory lock covers synchronization, verification, generation and publication, including manual runner invocations. Logs and the last successful runtime receipt live in ignored `state/logs/`. The host must remain on, with its cron daemon running. Changing the scheduled time in the settings requires rerunning the setup command.
 
-The sole GitHub Actions workflow, `.github/workflows/pages.yml`, installs the matching test browser, runs isolated tests, and deploys archived content. Its triggers, permissions and deployment path are unchanged. Production report generation runs through the local cron job.
+The sole GitHub Actions workflow, `.github/workflows/pages.yml`, installs the matching test browser, runs isolated tests, and deploys archived content. It uses the supported `ubuntu-22.04` image because the 24.04 runner's AppArmor policy blocks user namespaces for Playwright's Chromium binary ([Chromium explanation](https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md)). Chromium's sandbox stays enabled; the workflow does not change host security policies. Its triggers, permissions and deployment path are unchanged. Production report generation runs through the local cron job.
 
 ## Retained manual utilities
 

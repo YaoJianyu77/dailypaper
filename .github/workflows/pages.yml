@@ -17,7 +17,9 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    # Chromium's sandbox needs user namespaces; Ubuntu 24.04's AppArmor
+    # policy blocks the Playwright binary. Keep sandboxing enabled on 22.04.
+    runs-on: ubuntu-22.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
