@@ -10,7 +10,7 @@ import unittest
 from collections import Counter
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from site_content import md_to_html, read_report, read_reports, markdown_parser
+from site_content import read_report, read_reports, markdown_parser
 from content_store import load_markdown
 
 
@@ -162,27 +162,6 @@ Evidence connecting both papers.
         for anchor in ('paper-1', 'paper-2'):
             self.assertIn(f'/reader/?date=2026-09-07#{anchor}', home)
         self.assertEqual(entry['trends_title'], report.trends_title)
-
-    def test_markdown_preserves_link_queries_and_renders_tables(self):
-        rendered = md_to_html('''[Source](/papers/?a=1&b=2)
-
-![A & B](/assets/figure.png)
-
-*Figure 1. Caption.*
-
-| Model | Throughput |
-| --- | --- |
-| A | 2x |
-
-<script>alert(1)</script>
-''', '/dailypaper')
-        self.assertIn('href="/dailypaper/papers/?a=1&amp;b=2"', rendered)
-        self.assertNotIn('&amp;amp;', rendered)
-        self.assertIn('src="/dailypaper/assets/figure.png"', rendered)
-        self.assertIn('class="figure-caption"', rendered)
-        self.assertIn('<table>', rendered)
-        self.assertIn('<td>2x</td>', rendered)
-        self.assertNotIn('<script>', rendered)
 
     def test_all_archived_prose_and_figures_survive_report_splitting(self):
         def content_blocks(text):

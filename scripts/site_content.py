@@ -69,36 +69,6 @@ def apply_base_url(url, base_url):
     return url
 
 
-def md_to_html(text, base_url=''):
-    md = markdown_parser()
-    tokens = md.parse(text)
-
-    def rewrite_links(items):
-        for token in items:
-            for attr in ('href', 'src'):
-                value = token.attrGet(attr)
-                if value:
-                    token.attrSet(attr, apply_base_url(value, base_url))
-            if token.type == 'image':
-                token.attrSet('loading', 'lazy')
-                token.attrSet('decoding', 'async')
-            if token.children:
-                rewrite_links(token.children)
-
-    rewrite_links(tokens)
-    for index, token in enumerate(tokens[:-2]):
-        if token.type != 'paragraph_open':
-            continue
-        children = tokens[index + 1].children or []
-        if len(children) == 1 and children[0].type == 'image':
-            token.attrSet('class', 'figure')
-            if index + 4 < len(tokens) and tokens[index + 3].type == 'paragraph_open':
-                caption = tokens[index + 4].children or []
-                if caption and caption[0].type == 'em_open' and caption[-1].type == 'em_close':
-                    tokens[index + 3].attrSet('class', 'figure-caption')
-    return md.renderer.render(tokens, md.options, {})
-
-
 def plain_text(text):
     pieces = []
     for token in markdown_parser().parse(text):

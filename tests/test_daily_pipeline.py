@@ -19,7 +19,6 @@ import requests
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / 'scripts'))
 
-from ai_enrich import APIBackend
 from codex_enrich import CodexBackend
 from daily_pipeline import discovery, prepare
 from paper_sources import EvidenceError, Sources, label_matches, publication_venue_matches
@@ -921,7 +920,7 @@ class PipelineTests(unittest.TestCase):
                     raise subprocess.CalledProcessError(1, cmd)
                 return actual_run(cmd, **kwargs)
 
-            def fixture_prepare(root, name, **kwargs):
+            def fixture_prepare(root, **kwargs):
                 return self.prepare()
 
             with patch.object(run_local_daily, 'prepare', side_effect=fixture_prepare), \
@@ -942,38 +941,45 @@ class PipelineTests(unittest.TestCase):
                 self.assertEqual(git('rev-parse', 'origin/main'), commit)
                 self.assertEqual(git('status', '--porcelain'), '')
 
-    def test_both_transports_receive_identical_untruncated_stage_prompt(self):
+    def test_codex_receives_full_stage_inputs_and_rejects_invalid_output(self):
         document = self.sources.full_paper(self.sources.candidates[0], self.root / 'transport')
         context = {'document': document}
         result = analysis_result(document, self.settings)
-        response = Mock()
-        response.json.return_value = {'status': 'completed', 'output_text': json.dumps(result)}
-        session = Mock()
-        session.post.return_value = response
         images = [page['image'] for page in document['pages']]
-        with patch.dict(os.environ, {'OPENAI_API_KEY': 'fixture-not-a-credential', 'OPENAI_MODEL': 'fixture-model'}, clear=True):
-            api = APIBackend(self.root, self.settings, self.infrastructure, 'openai', session)
-            self.assertEqual(api.generate('analyze', context, images), result)
-        api_input = session.post.call_args.kwargs['json']['input']
-        self.assertEqual(len(api_input[1]['content']), 3)
         captured = {}
 
         def codex_run(executable, resolution, root, prompt, schema, images, **kwargs):
-            captured.update(prompt=prompt, images=images)
+            captured.update(prompt=prompt, images=images, schema=schema)
             return result, []
 
         resolution = {'executable': '/fixture/codex', 'model': 'verified-fixture', 'mode': 'ultra', 'settings_sha256': self.settings.sha256}
+        backend = CodexBackend(self.root, self.settings, self.infrastructure)
         with patch.object(CodexBackend, 'preflight', return_value=resolution), patch('codex_enrich.execute', side_effect=codex_run):
-            self.assertEqual(CodexBackend(self.root, self.settings, self.infrastructure).generate('analyze', context, images), result)
-        self.assertEqual(captured['prompt'], api_input[0]['content'] + '\n\n' + api_input[1]['content'][0]['text'])
-        self.assertIn('TAIL_EVIDENCE_NOT_IN_ABSTRACT', captured['prompt'])
-        self.assertEqual(captured['images'], images)
-        response.json.return_value = {'status': 'incomplete', 'output_text': '{}'}
-        with self.assertRaisesRegex(RuntimeError, 'incomplete'):
-            api.generate('analyze', context, images)
-        with patch.dict(os.environ, {}, clear=True):
-            with self.assertRaisesRegex(RuntimeError, 'credentials'):
-                APIBackend(self.root, self.settings, self.infrastructure, 'openai', session).generate('analyze', context)
+            self.assertEqual(backend.generate('analyze', context, images), result)
+            self.assertIn('TAIL_EVIDENCE_NOT_IN_ABSTRACT', captured['prompt'])
+            self.assertIn(self.settings.raw, captured['prompt'])
+            self.assertEqual(captured['images'], images)
+            self.assertEqual(captured['schema'], stage_schema('analyze', self.settings))
+            result = {'partial': 'not a complete analysis'}
+            with self.assertRaises(jsonschema.ValidationError):
+                backend.generate('analyze', context, images)
+
+    def test_retained_skill_extractor_reads_local_pdf_without_network(self):
+        helper = REPO / 'skills/paper-image-extractor/scripts/extract_images.py'
+        source = self.root / 'sample.pdf'
+        pixels = fitz.Pixmap(fitz.csRGB, (0, 0, 80, 40), False)
+        pixels.clear_with(120)
+        with fitz.open() as document:
+            document.new_page().insert_image(fitz.Rect(20, 20, 180, 100), pixmap=pixels)
+            document.save(source)
+        output = self.root / 'extracted'
+        subprocess.run([sys.executable, str(helper), str(source), str(output), str(output / 'index.md')],
+                       check=True, capture_output=True, timeout=30)
+        images = list(output.glob('*.png'))
+        self.assertEqual(len(images), 1)
+        image = fitz.Pixmap(str(images[0]))
+        self.assertEqual((image.width, image.height), (80, 40))
+        self.assertIn(images[0].name, (output / 'index.md').read_text())
 
 
 if __name__ == '__main__':

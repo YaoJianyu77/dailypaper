@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Local Codex transport for the same full-paper stages used by API models."""
+"""Verified Codex transport for full-paper research and review stages."""
 
 import copy
 import logging
@@ -48,12 +48,3 @@ class CodexBackend:
         jsonschema.validate(result, schema)
         logger.info('Completed Codex stage %s', stage)
         return result
-
-
-def main():
-    from daily_pipeline import enrichment_cli
-    return enrichment_cli('codex')
-
-
-if __name__ == '__main__':
-    raise SystemExit(main())

@@ -37,11 +37,7 @@ def asset_url(name, base_url):
 
 
 def load_site_settings(root):
-    for name in ('config.yaml', 'config.example.yaml'):
-        path = root / name
-        if path.is_file():
-            return load_infrastructure(root, path)
-    return {}
+    return load_infrastructure(root) if (root / 'config.yaml').is_file() else {}
 
 
 def formatted_date(report):

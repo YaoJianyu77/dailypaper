@@ -1,6 +1,5 @@
 """Exercise the actual shared reader offline; never run research or publication."""
 
-import json
 import mimetypes
 import os
 from pathlib import Path
@@ -14,7 +13,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from site_content import md_to_html, read_report, read_reports
+from site_content import apply_base_url, markdown_parser, read_reports
 
 
 class ReaderTests(unittest.TestCase):
@@ -185,7 +184,10 @@ title: '<img src=x onerror=alert(1)>'
                 sections = [s for s in [report.intro, *(p.body for p in report.papers), report.trends] if s]
                 self.assertEqual(len(actual), len(sections))
                 for index, section in enumerate(sections):
-                    expected = page.evaluate(signature, md_to_html(section, self.base))
+                    expected = page.evaluate(signature, markdown_parser().render(section))
+                    for field in ('images', 'links'):
+                        for item in expected[field]:
+                            item[0] = apply_base_url(item[0], self.base)
                     rendered = page.evaluate(signature, page.locator('#report-body .prose').nth(index).inner_html())
                     self.assertEqual(rendered, expected)
                 page.locator('#report-body img').evaluate_all("images => images.forEach(img => img.loading = 'eager')")

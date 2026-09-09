@@ -8,14 +8,13 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 from zoneinfo import ZoneInfo
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / 'scripts'))
 import codex_runtime as runtime
 from codex_enrich import CodexBackend
-from daily_pipeline import make_backend
 from local_schedule import BEGIN, END, daily_schedule, exclusive_lock, install, read_crontab, render_crontab
 from report_settings import load_settings
 
@@ -419,8 +418,15 @@ class RuntimeTests(unittest.TestCase):
             with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'Tool access failed'):
                 backend.generate('select', {})
             execute.assert_not_called()
-        with self.assertRaisesRegex(RuntimeError, 'cannot verify this policy'):
-            make_backend('github_models', REPO, self.settings, {})
+        import run_local_daily
+        for provider in ('openai', 'github_models'):
+            with patch.object(sys, 'argv', ['run_local_daily.py', '--enricher', provider]), \
+                 patch.object(sys, 'stderr', Mock()), \
+                 patch.object(run_local_daily, 'verify_runtime') as verify:
+                with self.assertRaises(SystemExit) as stopped:
+                    run_local_daily.main()
+                self.assertEqual(stopped.exception.code, 2)
+                verify.assert_not_called()
 
     def test_unattended_protocol_never_grants_new_permissions(self):
         # Real subprocess exercises buffered notifications and authorization requests.

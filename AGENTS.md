@@ -1,71 +1,57 @@
 # Agent Instructions
 
-This file explains execution, not the user's preferences. Do not send the user here to change topics, sources, dates, counts, summary length, or visuals.
+Execution rules belong here; user preferences belong only in `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`.
 
-## Read before acting
+## Read and route
 
-Read `PROJECT_STATE.md`, then `DAILY_REPORT_PRODUCT_REQUIREMENTS.md` completely. Before selection, read the complete canonical history and prior recommendation evidence through `scripts/recommendation_history.py`. Load the relevant active skills for the stage being executed, and inspect their callers before changing implementation.
+Read `PROJECT_STATE.md`, then the complete settings page. Before selection, read complete canonical history and prior recommendation evidence through `scripts/recommendation_history.py`. Before implementation changes, read the relevant skills and their callers.
 
-The precedence is: the user's current explicit request, then the settings page, then these execution rules, then skill implementation details. Older documentation, example configurations, cached prompts, and script defaults cannot silently override the settings. Do not ask the user to maintain the same preference in several files.
+Precedence: the user's explicit request → settings → this file → skill details. Older files, cached prompts, and defaults cannot override settings or require a second preference edit.
 
-## Skill responsibilities
+When asked to generate DailyPaper, execute these skills in order. Read full history before discovery, then resolve candidate identities at the history stage. The user need not name skills individually.
 
-| Stage | Skill |
+| Stage | Canonical skill |
 |---|---|
-| Discover, verify, and rank eligible papers | `skills/daily-paper-search/SKILL.md` |
-| Resolve identities and consult prior recommendations | `skills/paper-note-search/SKILL.md` |
-| Read and explain the complete paper | `skills/paper-deep-analysis/SKILL.md` |
-| Inspect, extract, render, and verify visuals | `skills/paper-image-extractor/SKILL.md` |
-| Assemble and check the daily article | `skills/daily-paper-editor/SKILL.md` |
+| Discover, verify, rank | `skills/daily-paper-search/SKILL.md` |
+| Resolve identities and prior recommendations | `skills/paper-note-search/SKILL.md` |
+| Read and explain complete papers | `skills/paper-deep-analysis/SKILL.md` |
+| Inspect and prepare visuals | `skills/paper-image-extractor/SKILL.md` |
+| Assemble and check the article | `skills/daily-paper-editor/SKILL.md` |
 
-`scripts/pipeline_prompts.py` supplies the applicable skill instructions to each generation stage. Native Codex discovery uses the same linked folders. `docs/archive/` contains historical references, not current instructions.
+`.agents/skills/` links to these folders; `scripts/pipeline_prompts.py` supplies the applicable instructions to each stage. For code, documentation, setup, and tests, use only relevant skills and isolated fixtures. Maintenance must not discover papers, reserve recommendations, alter production history, or publish a report.
 
-## One publication path
+## Runtime and permissions
 
-When the user asks to generate DailyPaper (including equivalent requests in another language), read `DAILY_REPORT_PRODUCT_REQUIREMENTS.md` and execute the existing skills in this order: `daily-paper-search` → `paper-note-search` → `paper-deep-analysis` → `paper-image-extractor` → `daily-paper-editor`. Read complete history before discovery as required above, then perform candidate identity checks at the history stage. The user does not need to name the skills. Codex discovers them through `.agents/skills/`, which links to the canonical folders in `skills/`.
+Use `scripts/run_local_daily.py` for production. It must verify the model and reasoning policy from the settings before generation. Apply the exact resolved configuration to every stage and delegated research check; verify parent and descendant settings and reject substitutions. Retain the configuration in preparation checkpoints so retries cannot mix models or reasoning settings.
 
-For code review, debugging, installation, configuration, documentation, or workflow-selection tests, use only the skills relevant to that task. Mentioning DailyPaper or its workflow is not a request to generate a report. Do not start discovery, reserve recommendations, or publish as a side effect of maintenance.
+Production, dry-run, retry, and delegated Codex threads use explicit `approvalPolicy="never"` with the existing `workspaceWrite` sandbox. Verify effective approval and sandbox settings; never inherit an interactive policy. `never` grants no additional filesystem, network, or host permissions. Operations outside the sandbox must fail without escalation, permission grants, or automatic approval.
 
-The production runner must enforce the model and reasoning policy in the settings before generation. Use tools to retrieve/read complete papers, inspect page images, run checks, and prepare visuals in scratch storage. Delegate independent research checks with the exact resolved model and reasoning setting explicitly applied. Verify effective settings for the parent and every subagent; reject substitutions and preserve permission boundaries. Retain the resolved configuration with the report's preparation checkpoints so retries cannot mix configurations. Only the controller writes production reports/history or runs Git publication. A stage task must not recursively launch the production runner.
-
-Production, dry-run, retry, and delegated Codex threads use explicit `approvalPolicy="never"` with the existing `workspaceWrite` sandbox. Verify effective approval and sandbox settings; never inherit an interactive policy. `never` does not grant filesystem, network, or host permissions. Operations outside the sandbox must fail without escalation, permission grants, or automatic approval.
-
-**Read settings and complete history → search and verify → deduplicate → read full papers → prepare complete analyses and rendered visuals → validate the article → reserve and commit safely → verify committed content and history → publish the static website.**
-
-The website is the primary reading surface. Do not create a second daily-paper product, configuration, history, or `chatgpt_daily/` directory. A ChatGPT delivery step is not required. When the user explicitly requests a report in chat, provide that report with the available verified visuals as an additional presentation, not a second selection run.
+Use tools to read full papers, inspect pages, calculate results, and prepare visuals in scratch storage. Only the controller writes production content/history or runs Git publication. Stage tasks must not recursively launch generation or publication. Keep transport in `scripts/codex_enrich.py`, prompts/contracts in `scripts/pipeline_prompts.py`, and orchestration in `scripts/daily_pipeline.py`; update callers and isolated tests with contract changes.
 
 ## File ownership
 
-- User preferences: `DAILY_REPORT_PRODUCT_REQUIREMENTS.md` only.
-- Reports: `content/daily/YYYY-MM-DD.md`.
-- Retained visual assets: `content/assets/papers/`, in the existing per-paper image layout.
-- Authoritative permanent recommendation history: `state/recommendation_history.json`.
-- Legacy `state/paper_index.json`: prior recommendation evidence and compatibility data; never a replacement for permanent history.
-- `config.yaml` and `config.example.yaml`: infrastructure only (transport endpoints, network and document limits, site paths). The parser rejects additional preference keys.
-- `.cache/dailypaper/`: ignored preparation and recovery artifacts; never a replacement for permanent history.
+- User settings: `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`.
+- Infrastructure only: `config.yaml`; additional preference keys are rejected.
+- Reports: `content/daily/YYYY-MM-DD.md`; retained images: `content/assets/papers/`.
+- Permanent history: `state/recommendation_history.json`. `state/paper_index.json` and archived reports remain independent prior evidence, never replacement histories.
+- Preparation/recovery: ignored `.cache/dailypaper/`, never an authoritative ledger.
 
-Preserve existing reports, images, prior evidence, and unrelated changes. Do not install timers or change schedules or credentials without explicit authorization.
+Preserve reports, images, prior evidence, useful notes, and unrelated changes. Do not change schedules or credentials without explicit authorization. Do not create another product, settings layer, history, or `chatgpt_daily/` directory. The website is the reading surface; an explicitly requested chat report presents the same selection and verified visuals.
 
-## Permanent identity and safe publication
+## Identity and publication transaction
 
-Read the full history from a known current version, not a search excerpt. Normalize DOI, versionless arXiv IDs, stable venue/DBLP identifiers, title aliases, and author information. Resolve renamed and republished versions by research-work identity. An ambiguous match is not permission to re-recommend it.
+Normalize DOI, versionless arXiv IDs, stable venue/DBLP identifiers, titles/aliases, authors, and explicit version relationships. Renamed or republished versions of the same work remain excluded. An ambiguous match does not permit re-recommendation.
 
-Import and reconcile prior recommendation evidence when necessary; do not infer that an unread or missing index is empty. Preserve every existing work, alias, status, and run record. Reserved, imported, archived, and completed works remain excluded from new runs. Pending reservations must not expire automatically.
+Reconcile existing evidence without dropping any work, alias, status, or run record. Missing or unread evidence is not empty history. Reserved, imported, archived, and completed works stay excluded permanently; pending reservations never expire automatically.
 
-Use a stable logical run ID derived from the configured local date, such as `systems-paper-daily:2026-09-08`. Resume or verify the same run on retry; do not create a second paper set. Do not overwrite a completed report without explicit permission.
+Use the configured local date's stable run ID, such as `systems-paper-daily:2026-09-08`. Retries resume or verify the same selection and artifacts. Never discard a pending reservation to accommodate changed settings: preserve it, reconcile, and revalidate. Never overwrite a completed report without explicit permission.
 
-Prepare the full report and visual assets before reserving works. Immediately before updating state, re-read the current history and check for concurrent changes. Use a conditional file update or a non-forced branch update based on the validated version. On conflict, re-read, reconcile, and revalidate; never force-push or drop another run's records.
+Prepare and validate the complete article and assets before reserving. Immediately before state changes, reread current history and check for concurrent changes. Use conditional writes and non-forced Git updates. On conflict, reread, reconcile, and revalidate; never force-push or drop another run's records.
 
-Prefer committing the completed report, assets, and final history together. If reservations require a separate write, reserve under the run ID, archive and verify the completed report, then finalize history and verify it. Never expose a partial draft as a completed report. On interruption, retain enough reservation state to recover safely, and report the exact failure instead of claiming success.
+Prefer committing the report, assets, and final history together. If reservation is separate, reserve under the run ID, archive and verify the report, then finalize and verify history. Do not expose partial drafts as completed reports. Preserve recovery artifacts on interruption and report the exact failure.
 
-## Quality and deployment checks
+## Quality and completion
 
-Read current limits and output structure from the settings page rather than hard-coding copies in this file or the skills. Verify full-text reading, eligibility, identity, exact experimental claims, word counts, visible figures/tables, and the trend section.
+Validate against current settings: publication/date eligibility, permanent identity, full-paper reading, experimental claims and conditions, word counts, visuals, and trends. Inspect the rendered website at its deployment base path; image syntax, file existence, and asset inventories do not prove visible, legible figures or tables.
 
-Inspect the rendered website output. Markdown image syntax, a successful file write, or an asset inventory alone does not prove that a figure is visible and legible. Check relative asset paths with the site's deployment base path.
-
-Read back the committed report and history. Distinguish generated, committed, pushed, deployed, and verified states in execution status; a commit does not prove deployment. Do not infer unattended permissions or a server schedule from repository documentation.
-
-Use `scripts/run_local_daily.py` for production generation. `scripts/ai_enrich.py` and `scripts/codex_enrich.py` own transport only; keep shared prompts, stage orchestration, and output contracts in their common modules. Update callers and isolated tests together when changing those contracts. Module responsibilities and retained manual utilities are documented in `docs/implementation.md`.
-
-For maintenance-only requests, use isolated fixtures; do not generate recommendations, alter production history, or run the publisher against production content. A settings edit must affect the next run without a second preference edit. Never discard a pending reservation to accommodate changed settings: reconcile and revalidate its existing selection.
+Read back committed content and history. Distinguish generated, committed, pushed, deployed, and verified states; a commit alone proves no deployment. Verify schedules and unattended capabilities from actual execution, not documentation. Implementation details and test commands are in `docs/implementation.md`.

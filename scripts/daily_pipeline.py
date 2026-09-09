@@ -1,8 +1,7 @@
-"""One resumable generation chain, shared by local and hosted transports."""
+"""The resumable DailyPaper preparation chain used by the production runner."""
 
 from __future__ import annotations
 
-import argparse
 import copy
 import json
 import logging
@@ -10,7 +9,7 @@ from pathlib import Path
 
 import requests
 
-from content_store import get_repo_root
+from codex_enrich import CodexBackend
 from paper_sources import EvidenceError, Sources, request_failure
 from recommendation_history import atomic_write, json_bytes, load_history, match_record, normalize_title, sha256, work_id
 from report_settings import load_infrastructure, load_settings
@@ -22,13 +21,6 @@ logger = logging.getLogger(__name__)
 
 def save_checkpoint(path, value):
     atomic_write(path, json_bytes(value), replace=True)
-
-
-def make_backend(name, root, settings, infrastructure):
-    if name == 'codex':
-        from codex_enrich import CodexBackend
-        return CodexBackend(root, settings, infrastructure)
-    raise RuntimeError('The unified settings require the verified strongest Codex model and reasoning setting. Hosted API transports cannot verify this policy; use the local Codex runner. No downgrade selected.')
 
 
 def discovery(root, settings, day, sources, history, *, backend=None, diagnostics_path=None):
@@ -134,7 +126,7 @@ def select(root, settings, day, backend, sources, pool, history):
     return {'papers': papers, 'shortfall_reason': reason}
 
 
-def prepare(root, backend_name='codex', *, day=None, sources=None, backend=None, pool=None, stage_dir=None):
+def prepare(root, *, day=None, sources=None, backend=None, pool=None, stage_dir=None):
     """Prepare and verify artifacts only; publication owns production writes."""
     root = Path(root)
     settings = load_settings(root)
@@ -150,7 +142,7 @@ def prepare(root, backend_name='codex', *, day=None, sources=None, backend=None,
     stage = Path(stage_dir) if stage_dir else root / '.cache/dailypaper/runs' / day.isoformat()
     stage.mkdir(parents=True, exist_ok=True)
     sources = sources or Sources(infrastructure)
-    backend = backend or make_backend(backend_name, root, settings, infrastructure)
+    backend = backend or CodexBackend(root, settings, infrastructure)
     require(getattr(backend, 'settings', settings).sha256 == settings.sha256,
             'Settings changed after runtime verification; restart preparation with current settings')
     if hasattr(backend, 'preflight'):
@@ -247,35 +239,3 @@ def prepare(root, backend_name='codex', *, day=None, sources=None, backend=None,
     validate_bundle(root, bundle, settings)
     save_checkpoint(stage / 'bundle.json', bundle)
     return bundle
-
-
-def discovery_cli():
-    parser = argparse.ArgumentParser(description='Discover papers using the six unified settings')
-    parser.add_argument('--repo-root')
-    parser.add_argument('--output', required=True)
-    parser.add_argument('--config', help='Infrastructure YAML only')
-    args = parser.parse_args()
-    root = get_repo_root(args.repo_root, __file__)
-    settings = load_settings(root)
-    infrastructure = load_infrastructure(root, args.config)
-    history = load_history(root)
-    backend = make_backend('codex', root, settings, infrastructure)
-    backend.preflight()
-    result = discovery(root, settings, settings.local_date(), Sources(infrastructure), history, backend=backend)
-    output = Path(args.output)
-    save_checkpoint(output if output.is_absolute() else root / output, result)
-    return 0
-
-
-def enrichment_cli(backend_name):
-    parser = argparse.ArgumentParser(description='Prepare a complete reviewed report without publishing')
-    parser.add_argument('--repo-root')
-    parser.add_argument('--input', help='Verified discovery output; omit to discover papers')
-    parser.add_argument('--output', required=True)
-    args = parser.parse_args()
-    root = get_repo_root(args.repo_root, __file__)
-    pool = json.loads((root / args.input).read_text()) if args.input else None
-    result = prepare(root, backend_name, pool=pool)
-    output = Path(args.output)
-    save_checkpoint(output if output.is_absolute() else root / output, result)
-    return 0

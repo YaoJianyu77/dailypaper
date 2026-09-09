@@ -17,7 +17,8 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
 from content_store import get_repo_root
-from daily_pipeline import prepare, make_backend
+from daily_pipeline import prepare
+from codex_enrich import CodexBackend
 from local_schedule import exclusive_lock
 from publish_daily import publish, verify_archived_run
 from recommendation_history import HISTORY_PATH, load_history
@@ -106,9 +107,9 @@ def infer_site_base_url(repo_root: Path, remote_name: str, config: Dict[str, Any
     return f'/{repo_name}'
 
 
-def verify_runtime(repo_root, enricher='codex'):
+def verify_runtime(repo_root):
     settings = load_settings(repo_root)
-    backend = make_backend(enricher, repo_root, settings, load_infrastructure(repo_root))
+    backend = CodexBackend(repo_root, settings, load_infrastructure(repo_root))
     resolution = backend.preflight()
     log_dir = repo_root / 'state/logs'
     log_dir.mkdir(parents=True, exist_ok=True)
@@ -132,7 +133,6 @@ def main() -> int:
     parser.add_argument('--skip-push', action='store_true', help='Generate locally without pushing')
     parser.add_argument('--dry-run', action='store_true', help='Prepare and render in a temporary workspace without publishing, committing, or pushing')
     parser.add_argument('--check-runtime', action='store_true', help='Verify the strongest model/reasoning, subagents, tools and skill routing using a synthetic PDF; no report or history writes')
-    parser.add_argument('--enricher', choices=['codex', 'openai', 'github_models'], default='codex', help='Production requires the verified strongest Codex model and reasoning; API transports fail closed')
     parser.add_argument('--remote', default=None, help='Git remote to pull from and push to (auto-detected by default)')
     args = parser.parse_args()
 
@@ -148,13 +148,13 @@ def main() -> int:
 def run_locked(repo_root, args):
     logger.info('DailyPaper invocation started (pid=%s)', os.getpid())
     if args.check_runtime:
-        verify_runtime(repo_root, args.enricher)
+        verify_runtime(repo_root)
         return 0
     if args.dry_run:
         import tempfile
-        backend = verify_runtime(repo_root, args.enricher)
+        backend = verify_runtime(repo_root)
         with tempfile.TemporaryDirectory(prefix='dailypaper-dry-run-') as directory:
-            bundle = prepare(repo_root, args.enricher, backend=backend, stage_dir=Path(directory))
+            bundle = prepare(repo_root, backend=backend, stage_dir=Path(directory))
             logger.info('Isolated preparation verified: %s; production content and history unchanged', bundle['run_id'])
         return 0
     if capture(['git', 'branch', '--show-current'], cwd=repo_root) != 'main':
@@ -176,8 +176,8 @@ def run_locked(repo_root, args):
         untracked = set(capture(['git', 'ls-files', '--others', '--exclude-standard'], cwd=repo_root).splitlines())
         if (changed | untracked) - allowed:
             raise RuntimeError('Unrelated changes exist alongside the recoverable run')
-    backend = verify_runtime(repo_root, args.enricher)
-    bundle = prepare(repo_root, args.enricher, backend=backend)
+    backend = verify_runtime(repo_root)
+    bundle = prepare(repo_root, backend=backend)
     if bundle.get('already_archived'):
         current_run = load_history(repo_root).run(bundle['run_id'])
         report_path = verify_archived_run(repo_root, current_run)

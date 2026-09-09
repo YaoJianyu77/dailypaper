@@ -1,34 +1,34 @@
 # DailyPaper
 
-Read the reports on the **[DailyPaper website](https://yaojianyu77.github.io/dailypaper/)**.
+Read the **[website](https://yaojianyu77.github.io/dailypaper/)** or choose a date in the [report reader](https://yaojianyu77.github.io/dailypaper/reader/). One shared HTML page displays the daily Markdown; article text stays in `content/daily/`.
 
-All dates use one [report reader](https://yaojianyu77.github.io/dailypaper/reader/). Choose a date there or in the archive. Daily content stays in `content/daily/YYYY-MM-DD.md`; JavaScript displays it using the shared page, so no new daily HTML file or AI-generated layout is needed.
+Edit **[DAILY_REPORT_PRODUCT_REQUIREMENTS.md](DAILY_REPORT_PRODUCT_REQUIREMENTS.md)** to change the next report. It is the only user settings file.
 
-Change reports by editing **[DAILY_REPORT_PRODUCT_REQUIREMENTS.md](DAILY_REPORT_PRODUCT_REQUIREMENTS.md)**. The production pipeline and its Codex skills read this file on every run.
-
-| Six settings | What to edit |
+| Six settings | Controls |
 |---|---|
 | [Research areas](DAILY_REPORT_PRODUCT_REQUIREMENTS.md#1-research-areas) | Topics, priorities, exclusions |
-| [Search sources](DAILY_REPORT_PRODUCT_REQUIREMENTS.md#2-search-sources) | Eligible venues and publication types |
-| [Time windows](DAILY_REPORT_PRODUCT_REQUIREMENTS.md#3-time-windows) | Calendar windows, timezone, daily schedule |
+| [Search sources](DAILY_REPORT_PRODUCT_REQUIREMENTS.md#2-search-sources) | Venues and publication types |
+| [Time windows](DAILY_REPORT_PRODUCT_REQUIREMENTS.md#3-time-windows) | Date windows, timezone, schedule |
 | [Selection](DAILY_REPORT_PRODUCT_REQUIREMENTS.md#4-selection) | Counts, ranking, shortfalls |
-| [Per-paper content](DAILY_REPORT_PRODUCT_REQUIREMENTS.md#5-per-paper-content) | Language, depth, visuals, model and reasoning policy |
-| [Final research trends](DAILY_REPORT_PRODUCT_REQUIREMENTS.md#6-final-research-trends) | Heading, count, evidence requirements |
+| [Per-paper content](DAILY_REPORT_PRODUCT_REQUIREMENTS.md#5-per-paper-content) | Language, depth, visuals, model and reasoning |
+| [Final research trends](DAILY_REPORT_PRODUCT_REQUIREMENTS.md#6-final-research-trends) | Heading, count, supporting evidence |
 
-Install or update from `main` on the always-on Linux host, with Python 3.11+, Node.js/npm, Git, a running Cronie service, the existing Codex login, and Git push access:
+Install or update from a clean `main` checkout on the always-on Linux host:
 
 ```bash
 bash scripts/install_local_cron.sh
 ```
 
-This updates Codex, Python dependencies, and the headless browser, checks the authenticated runtime and local rendering, and installs or updates **one daily job at 07:00 America/New_York**. It preserves unrelated schedules, follows daylight saving time, and blocks overlapping runs. Setup does not generate a report. If Codex needs authentication, use `codex login` and rerun setup. Unattended threads explicitly use `never` approvals inside the existing workspace sandbox; global credentials and permission settings are unchanged.
+Requires Python 3.11+, Node.js/npm, Git, a running Cronie service, an authenticated Codex account, and Git push access. Setup updates dependencies, verifies the runtime, and manages one **07:00 America/New_York** job with an overlap lock. It preserves unrelated schedules and does not generate a report.
 
 ```bash
 bash scripts/install_local_cron.sh --status
 bash scripts/install_local_cron.sh --logs
-bash scripts/install_local_cron.sh --check  # live runtime check; no report/history writes
+bash scripts/install_local_cron.sh --check   # live capability check
+.cache/dailypaper/venv/bin/python scripts/run_local_daily.py --dry-run
+.cache/dailypaper/venv/bin/python scripts/run_local_daily.py
 ```
 
-Each daily run verifies the officially recommended research model, account access, and its strongest supported reasoning setting. Logs record selection evidence, effective model/reasoning, and Codex version. Every stage and subagent must match; retries retain the same report configuration. Unverifiable choices or substitutions stop generation without a downgrade. Successful runs verify, archive, commit, and push through the existing runner. Keep the checkout clean. Existing reports deploy through the Pages workflow.
+The dry-run prepares and checks an article in temporary storage. The normal run verifies the current recommended model and strongest supported reasoning, generates the report, commits, and pushes. Unverified capabilities stop the run without a downgrade. GitHub Pages deploys the committed content.
 
-Maintainers: [execution rules](AGENTS.md) · [stage techniques](skills/) · [verified status and limitations](PROJECT_STATE.md) · [implementation and testing](docs/implementation.md). Older setup notes are [archived](docs/archive/README.md).
+Maintainers: [execution rules](AGENTS.md) · [skills](skills/) · [current status](PROJECT_STATE.md) · [implementation and tests](docs/implementation.md).

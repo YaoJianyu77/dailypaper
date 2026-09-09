@@ -4,10 +4,7 @@ site:
   base_url: ""
 
 ai:
-  github_models_api_base: "https://models.github.ai"
-  timeout_seconds: 240
   codex_timeout_seconds: 1200
-  max_output_tokens: 16000
 
 search:
   max_candidates_per_venue: 12

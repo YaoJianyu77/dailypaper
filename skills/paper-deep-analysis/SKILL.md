@@ -5,7 +5,7 @@ description: Use for each selected DailyPaper paper or an explicit request to an
 
 # Full-paper technical analysis
 
-Read `DAILY_REPORT_PRODUCT_REQUIREMENTS.md`, especially section 5, before writing. Language, length, brief/assessment limits, visual count, and output structure come from that page; do not maintain competing numeric defaults here. Use this skill for every selected paper, not just the highest-ranked one.
+Use settings section 5 for every selected paper. Its language, lengths, counts, and headings govern the writing roles below; edited headings take precedence over these role names. Follow `AGENTS.md` for history, runtime, and publication.
 
 ## Read and verify
 
@@ -17,7 +17,7 @@ Distinguish a maximum from an average, component performance from end-to-end per
 
 ## Writing sequence
 
-Use the narrative and ordered headings from section 5 of the settings. The roles below explain how to write those sections; they do not override edited headings. Do not mechanically summarize every paper section, repeat the same result across sections, or substitute generic praise for a causal explanation.
+Develop a causal explanation; avoid mechanically summarizing every source section or repeating the same result.
 
 ### 1. Paper in brief
 
@@ -37,9 +37,7 @@ For systems work, cover relevant architecture, task/request lifecycle, control a
 
 ### 4. Key figures or tables
 
-Use `skills/paper-image-extractor/SKILL.md`. Choose the mechanism and evidence visuals that explain the core contribution, within the settings limit. Show them directly inside the daily article. For each, identify the original item and caption, explain relevant axes/labels/arrows/conditions, state the supported conclusion, and identify the main caveat. Reproduced captions must respect source-use limits; accurate paraphrases must be labeled as such.
-
-A path or figure location is not a displayed figure. A reconstruction must be faithful, visibly rendered, and labeled with its original Figure/Table number. Do not fabricate measurements or add decorative graphics.
+Use `skills/paper-image-extractor/SKILL.md` to choose, verify, render, and explain the core mechanism/evidence visuals.
 
 ### 5. Experimental evidence
 
@@ -57,6 +55,4 @@ Within the configured assessment limit, give one paragraph covering what is conv
 
 ## Final editorial check
 
-Use precise language and define paper-specific terms on first use. Omit nonessential history, broad related work, minor implementation details, and secondary experiments. No reading guide, comprehension questions, study plan, or request to consult the original is allowed. The daily article itself must carry the complete explanation; a separate per-paper public page is not required.
-
-Follow `AGENTS.md` for archive paths and publication. Preserve useful manual notes when an existing artifact is explicitly being edited; do not rewrite historical reports just because the template changed.
+Define paper-specific terms on first use. Apply the settings' exclusions for unnecessary history, related work, secondary experiments, and reading advice. The daily article must carry the explanation; a separate public paper page is not required. Preserve useful notes and historical reports when editing existing artifacts.

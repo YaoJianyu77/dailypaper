@@ -196,18 +196,13 @@ def load_settings(root):
     return result
 
 
-def load_infrastructure(root, config_path=None):
+def load_infrastructure(root):
     root = Path(root)
-    path = Path(config_path) if config_path else root / 'config.yaml'
-    if not path.is_absolute():
-        path = root / path
-    if not config_path and not path.exists():
-        path = root / 'config.example.yaml'
+    path = root / 'config.yaml'
     data = yaml.safe_load(path.read_text(encoding='utf-8')) or {}
     allowed = {
         'site': {'title', 'base_url'},
-        'ai': {'api_base', 'github_models_api_base',
-               'timeout_seconds', 'codex_timeout_seconds', 'max_output_tokens'},
+        'ai': {'codex_timeout_seconds'},
         'search': {'max_candidates_per_venue', 'request_interval_seconds', 'timeout_seconds', 'retries'},
         'documents': {'max_pdf_bytes', 'max_pages', 'render_dpi'},
     }
