@@ -8,7 +8,7 @@ from recommendation_history import sha256
 from report_validation import require
 
 
-def inspect_site(site, article, output, expected_images, expected_tables):
+def inspect_site(site, article, output, expected_images, expected_tables, *, image_prefix=None):
     """Render fixed local build files; no arbitrary URLs, commands, or live network."""
     try:
         from playwright.sync_api import sync_playwright, Error
@@ -33,7 +33,7 @@ def inspect_site(site, article, output, expected_images, expected_tables):
             route.abort()
             return
         route.fulfill(path=str(path), content_type=mimetypes.guess_type(str(path))[0] or 'application/octet-stream',
-                      headers={'Content-Security-Policy': "default-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'"})
+                      headers={'Content-Security-Policy': "default-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'"})
 
     def capture(target, name, width):
         path = output / f'{width}-{name}.png'
@@ -54,7 +54,10 @@ def inspect_site(site, article, output, expected_images, expected_tables):
                     page = context.new_page()
                     page.on('pageerror', lambda error: failures.append('Website JavaScript error: ' + str(error)))
                     page.goto(origin + prefix + article.lstrip('/'), wait_until='networkidle')
-                    page.locator('#report-body').wait_for()
+                    page.locator('#report-body, #reader-retry').first.wait_for()
+                    require(page.locator('#report-body').count(),
+                            'Reader failed: ' + (page.locator('#reader-status').inner_text()
+                                                if page.locator('#reader-status').count() else 'article missing'))
                     require(not failures, '; '.join(failures))
                     images, tables = page.locator('#report-body img'), page.locator('#report-body table')
                     require(images.count() == expected_images, 'Browser did not display every report figure')
@@ -63,6 +66,8 @@ def inspect_site(site, article, output, expected_images, expected_tables):
                     capture(page, 'article-top', width)
                     for index in range(images.count()):
                         element = images.nth(index)
+                        if image_prefix:
+                            require(element.get_attribute('src').startswith(image_prefix), 'Image URL ignores site base path')
                         element.scroll_into_view_if_needed()
                         page.wait_for_function('img => img.complete', arg=element.element_handle())
                         require(element.is_visible() and element.evaluate('e => e.complete && e.naturalWidth > 0 && e.getBoundingClientRect().width > 32'),

@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Build the homepage, searchable archive, and complete report reading pages."""
+"""Build the homepage, archive, and one Markdown report reader."""
 
 from __future__ import annotations
 
 import argparse
 from collections import defaultdict
 import html
+import hashlib
+import json
 import math
 import os
 from pathlib import Path
@@ -13,7 +15,7 @@ import re
 import shutil
 
 from content_store import get_repo_root
-from site_content import Report, apply_base_url, md_to_html, read_reports
+from site_content import apply_base_url, read_reports
 from report_settings import load_infrastructure, research_topics as load_research_topics
 
 
@@ -27,6 +29,11 @@ def escape(value):
 def normalize_base_url(value):
     value = (value or '').strip().strip('/')
     return '/' + value if value else ''
+
+
+def asset_url(name, base_url):
+    digest = hashlib.sha256((SITE_ASSETS / name).read_bytes()).hexdigest()[:12]
+    return apply_base_url(f'/assets/{name}?v={digest}', base_url)
 
 
 def load_site_settings(root):
@@ -57,6 +64,8 @@ def layout(site_title, title, content, base_url, page_kind):
     home_url = escape(apply_base_url('/', base_url))
     archive_url = escape(apply_base_url('/archive/', base_url))
     current = ' aria-current="page"' if page_kind == 'archive' else ''
+    reader_scripts = ''.join(f'<script defer src="{escape(asset_url(name, base_url))}"></script>'
+                             for name in ('vendor/markdown-it.min.js', 'reader.js')) if page_kind in {'report', 'not-found'} else ''
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -64,10 +73,11 @@ def layout(site_title, title, content, base_url, page_kind):
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Daily computer science research reports.">
   <title>{escape(title)} - {escape(site_title)}</title>
-  <link rel="stylesheet" href="{escape(apply_base_url('/assets/style.css', base_url))}">
-  <script defer src="{escape(apply_base_url('/assets/site.js', base_url))}"></script>
+  <link rel="stylesheet" href="{escape(asset_url('style.css', base_url))}">
+  <script defer src="{escape(asset_url('site.js', base_url))}"></script>
+  {reader_scripts}
 </head>
-<body class="page-{page_kind}" id="top">
+<body class="page-{page_kind}" id="top" data-base-url="{escape(base_url)}" data-site-title="{escape(site_title)}">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="header-inner">
@@ -159,33 +169,12 @@ def archive_page(reports, base_url):
     <div class="empty-state" id="no-results" hidden><h2>No matching reports</h2><p>Try another paper title, keyword, or month.</p></div>'''
 
 
-def report_page(report: Report, older, newer, base_url):
-    toc = []
-    papers = []
-    for index, paper in enumerate(report.papers, 1):
-        toc.append(f'<li><a href="#{paper.anchor}"><span>{index:02}</span>{escape(paper.short_title)}</a></li>')
-        papers.append(f'''<section class="paper-section" id="{paper.anchor}">
-          <header class="paper-heading"><div class="paper-kicker"><span class="paper-number">{index:02}</span>{category_badge(paper.category)}</div><h2>{escape(paper.title)}</h2></header>
-          <div class="prose">{md_to_html(paper.body, base_url)}</div>
-        </section>''')
-    if report.trends:
-        toc.append('<li><a href="#research-trends"><span>↳</span>Research trends</a></li>')
-        papers.append(f'<section class="trends-section" id="research-trends"><p class="eyebrow">CONNECTING THE PAPERS</p><h2>{escape(report.trends_title)}</h2><div class="prose">{md_to_html(report.trends, base_url)}</div></section>')
-    intro = ''
-    if report.intro:
-        rendered = md_to_html(report.intro, base_url)
-        if re.search(r'Run ID|Permanent history|执行日期|归档位置', report.intro):
-            intro = f'<details class="report-notes"><summary>Publication &amp; verification notes <span aria-hidden="true">+</span></summary><div class="prose">{rendered}</div></details>'
-        else:
-            intro = f'<div class="report-intro prose">{rendered}</div>'
-    navigation = []
-    for neighbor, label, arrow in ((older, 'Older report', '←'), (newer, 'Newer report', '→')):
-        if neighbor:
-            navigation.append(f'<a class="issue-neighbor" href="{escape(apply_base_url(neighbor.path, base_url))}"><span>{label} {arrow}</span><strong>{formatted_date(neighbor)}</strong></a>')
-    contents = f'<aside class="toc"><details open><summary>In this report <span>{len(report.papers):02}</span></summary><nav aria-label="Report contents"><ol>{"".join(toc)}</ol></nav></details><a class="back-top" href="#top">Back to top ↑</a></aside>' if toc else ''
-    return f'''
-    <header class="report-header"><p class="eyebrow">DAILY BRIEFING <span>/</span> {report.date:%A}</p><h1>{formatted_date(report)}</h1><div class="report-meta"><span>{report_count(report)}</span><span>~{reading_time(report)} min read</span></div></header>
-    <div class="reader-layout">{contents}<article id="report-body">{intro}{''.join(papers)}<nav class="issue-pagination" aria-label="Adjacent reports">{''.join(navigation)}</nav></article></div>
+def reader_page():
+    return '''
+    <div class="reader-tools"><label for="report-date">Report date</label><select id="report-date" disabled aria-label="Choose report date"><option>Loading…</option></select></div>
+    <div id="reader-status" class="empty-state" role="status" aria-live="polite"><h1>Loading report…</h1></div>
+    <noscript><p>This reader needs JavaScript to display the selected report.</p></noscript>
+    <div id="reader-content" aria-busy="true"></div>
     <dialog id="figure-dialog" aria-label="Enlarged paper figure">
       <div class="dialog-toolbar">
         <button class="dialog-fit" type="button">Fit</button>
@@ -201,8 +190,9 @@ def report_page(report: Report, older, newer, base_url):
 
 
 def copy_assets(root, output):
-    for name in ('style.css', 'site.js'):
+    for name in ('style.css', 'site.js', 'reader.js'):
         shutil.copy2(SITE_ASSETS / name, output / 'assets' / name)
+    shutil.copytree(SITE_ASSETS / 'vendor', output / 'assets/vendor')
     for source_root, target_root in ((root / 'content/assets/papers', output / 'assets/papers'),
                                      (root / 'content/papers', output / 'papers')):
         for directory in source_root.glob('*/images'):
@@ -235,13 +225,25 @@ def main():
 
     write(Path(), 'Computer science', homepage(reports, base, load_research_topics(root)), 'home')
     write(Path('archive'), 'Archive', archive_page(reports, base), 'archive')
-    for index, report in enumerate(reports):
-        older = reports[index + 1] if index + 1 < len(reports) else None
-        newer = reports[index - 1] if index else None
-        write(Path('daily') / report.date.isoformat(), report.title,
-              report_page(report, older, newer, base), 'report')
+    write(Path('reader'), 'Read report', reader_page(), 'report')
+    (output / '404.html').write_text(layout(site_title, 'Page not found',
+        '<section class="empty-state"><h1>Page not found</h1><p>Find a report in the archive.</p>'
+        f'<a class="button" href="{escape(apply_base_url("/archive/", base))}">Browse archive →</a></section>',
+        base, 'not-found'), encoding='utf-8')
+    (output / 'reports').mkdir()
+    manifest = []
+    for report in reports:
+        raw = report.source.read_bytes()
+        (output / 'reports' / report.source.name).write_bytes(raw)
+        manifest.append({'date': report.date.isoformat(), 'title': report.title,
+                         'formatted_date': formatted_date(report), 'weekday': report.date.strftime('%A'),
+                         'reading_minutes': reading_time(report), 'sha256': hashlib.sha256(raw).hexdigest(),
+                         'papers': [{'title': p.title, 'short_title': p.short_title,
+                                     'category': p.category, 'anchor': p.anchor} for p in report.papers],
+                         'trends_title': report.trends_title, 'source_spans': report.source_spans})
+    (output / 'reports/index.json').write_text(json.dumps(manifest, ensure_ascii=False), encoding='utf-8')
     copy_assets(root, output)
-    print(f'Built {len(reports)} reports, homepage, and archive in {output}')
+    print(f'Built one reader, {len(reports)} Markdown reports, homepage, and archive in {output}')
     return 0
 
 

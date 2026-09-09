@@ -2,6 +2,8 @@
 
 Read the reports on the **[DailyPaper website](https://yaojianyu77.github.io/dailypaper/)**.
 
+All dates use one [report reader](https://yaojianyu77.github.io/dailypaper/reader/). Choose a date there or in the archive. Daily content stays in `content/daily/YYYY-MM-DD.md`; JavaScript displays it using the shared page, so no new daily HTML file or AI-generated layout is needed.
+
 Change reports by editing **[DAILY_REPORT_PRODUCT_REQUIREMENTS.md](DAILY_REPORT_PRODUCT_REQUIREMENTS.md)**. The production pipeline and its Codex skills read this file on every run.
 
 | Six settings | What to edit |

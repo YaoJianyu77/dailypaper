@@ -230,3 +230,9 @@ h1, h2, h3, p { margin-top: 0; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+/* The shared reader's date selector stays outside the article content. */
+.reader-tools { display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding-top: 28px; }
+.reader-tools label { font-size: .85rem; color: var(--muted); }
+.reader-tools select { max-width: 70%; padding: 9px 32px 9px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); color: inherit; font: inherit; }
+.reader-recovery { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }

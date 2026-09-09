@@ -7,7 +7,7 @@ import re
 
 from markdown_it import MarkdownIt
 
-from content_store import load_markdown
+from content_store import parse_frontmatter
 
 
 GROUPS = {'Overview', 'Papers', 'Lead Paper', 'Supporting Reads', 'Classic Revisit', '最新论文', '经典论文'}
@@ -43,10 +43,11 @@ class Report:
     trends: str
     trends_title: str
     source: Path
+    source_spans: dict
 
     @property
     def path(self):
-        return f'/daily/{self.date.isoformat()}/'
+        return f'/reader/?date={self.date.isoformat()}'
 
     @property
     def month(self):
@@ -118,7 +119,8 @@ def paper_excerpt(body):
 
 
 def read_report(path):
-    metadata, body = load_markdown(path)
+    raw = path.read_text(encoding='utf-8')
+    metadata, body = parse_frontmatter(raw)
     lines = body.splitlines()
     tokens = markdown_parser().parse(body)
     headings = [(token.tag, tokens[i + 1].content, *token.map)
@@ -142,7 +144,7 @@ def read_report(path):
         value = '\n'.join(line for i, line in enumerate(lines[start:stop], start) if i not in ignored).strip()
         return re.sub(r'(?:\n\s*---\s*)+$', '', value).strip()
 
-    papers = []
+    papers, spans = [], []
     for index, (_, heading, start, body_start) in enumerate(paper_headings):
         if declared:
             item = declared[heading]
@@ -154,11 +156,17 @@ def read_report(path):
             category = 'Classic' if label == 'Classic' or group in {'Classic Revisit', '经典论文'} else 'Latest' if modern else 'Research'
         stop = paper_headings[index + 1][2] if index + 1 < len(paper_headings) else end
         paper_body = content(body_start, stop)
+        spans.append([body_start, stop])
         papers.append(Paper(paper_title, category, paper_body, f'paper-{index + 1}', paper_excerpt(paper_body)))
     intro = content(0, paper_headings[0][2] if paper_headings else end)
     return Report(date.fromisoformat(path.stem), str(title), intro, papers,
                   content(trend_heading[3], len(lines)) if trend_heading else '',
-                  trend_heading[1] if trend_heading else '', path)
+                  trend_heading[1] if trend_heading else '', path,
+                  {'body_line': raw[:len(raw) - len(body)].count('\n'),
+                   'ignored_lines': sorted(ignored),
+                   'intro': [0, paper_headings[0][2] if paper_headings else end],
+                   'papers': spans,
+                   'trends': [trend_heading[3], len(lines)] if trend_heading else [0, 0]})
 
 
 def read_reports(root):

@@ -51,17 +51,22 @@ class BuildSiteTests(unittest.TestCase):
 
         home = (self.output / 'index.html').read_text()
         archive = (self.output / 'archive' / 'index.html').read_text()
-        reader = (self.output / 'daily/2026-09-07/index.html').read_text()
-        self.assertIn('<title>Newly archived report - DailyPaper</title>', reader)
-        self.assertIn('Latest paper analysis.', reader)
-        self.assertIn('href="/dailypaper/daily/2026-09-07/">Read report', home)
-        self.assertNotIn('href="/dailypaper/daily/2026-05-04/">Read report', home)
+        reader = (self.output / 'reader/index.html').read_text()
+        manifest = json.loads((self.output / 'reports/index.json').read_text())
+        self.assertEqual(manifest[0]['title'], 'Newly archived report')
+        self.assertNotIn('Latest paper analysis.', reader)
+        self.assertEqual((self.output / 'reports/2026-09-07.md').read_text(), new_report)
+        self.assertIn('href="/dailypaper/reader/?date=2026-09-07">Read report', home)
+        self.assertNotIn('href="/dailypaper/reader/?date=2026-05-04">Read report', home)
         self.assertNotIn('Latest report', home + archive + reader)
-        self.assertEqual(archive.count('href="/dailypaper/daily/2026-09-07/"'), 1)
-        self.assertEqual(archive.count('href="/dailypaper/daily/2026-05-04/"'), 1)
+        self.assertEqual(archive.count('href="/dailypaper/reader/?date=2026-09-07"'), 1)
+        self.assertEqual(archive.count('href="/dailypaper/reader/?date=2026-05-04"'), 1)
         self.assertLess(archive.index('datetime="2026-09-07"'), archive.index('datetime="2026-05-04"'))
         for date in ['2026-05-04', '2026-09-07']:
-            self.assertTrue((self.output / 'daily' / date / 'index.html').is_file())
+            self.assertTrue((self.output / 'reports' / f'{date}.md').is_file())
+        self.assertFalse((self.output / 'daily').exists())
+        self.assertEqual(sorted(str(p.relative_to(self.output)) for p in self.output.rglob('*.html')),
+                         ['404.html', 'archive/index.html', 'index.html', 'reader/index.html'])
         for path, before in source_files.items():
             self.assertEqual(path.read_bytes(), before)
 
@@ -71,9 +76,10 @@ class BuildSiteTests(unittest.TestCase):
         )
         self.build(base_url='')
         home = (self.output / 'index.html').read_text()
-        reader = (self.output / 'daily/2026-09-07/index.html').read_text()
-        self.assertIn('<title>Title from frontmatter - DailyPaper</title>', reader)
-        self.assertIn('href="/daily/2026-09-07/">Read report', home)
+        reader = (self.output / 'reader/index.html').read_text()
+        self.assertIn('data-base-url=""', reader)
+        self.assertEqual(json.loads((self.output / 'reports/index.json').read_text())[0]['title'], 'Title from frontmatter')
+        self.assertIn('href="/reader/?date=2026-09-07">Read report', home)
 
     def test_deleted_reports_do_not_survive_in_navigation(self):
         stale = {'date': '2026-05-04', 'path': '/daily/2026-05-04/'}
@@ -149,13 +155,13 @@ Evidence connecting both papers.
         self.assertIn('This is code', report.papers[0].body)
         self.assertNotIn('Evidence connecting', report.papers[-1].body)
         self.build()
-        reader = (self.output / 'daily/2026-09-07/index.html').read_text()
+        reader = (self.output / 'reader/index.html').read_text()
         home = (self.output / 'index.html').read_text()
+        entry = json.loads((self.output / 'reports/index.json').read_text())[0]
+        self.assertEqual([p['anchor'] for p in entry['papers']], ['paper-1', 'paper-2'])
         for anchor in ('paper-1', 'paper-2'):
-            self.assertIn(f'id="{anchor}"', reader)
-            self.assertIn(f'href="#{anchor}"', reader)
-            self.assertIn(f'/daily/2026-09-07/#{anchor}', home)
-        self.assertIn('id="research-trends"', reader)
+            self.assertIn(f'/reader/?date=2026-09-07#{anchor}', home)
+        self.assertEqual(entry['trends_title'], report.trends_title)
 
     def test_markdown_preserves_link_queries_and_renders_tables(self):
         rendered = md_to_html('''[Source](/papers/?a=1&b=2)

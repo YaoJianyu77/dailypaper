@@ -7,7 +7,6 @@ import argparse
 import copy
 from contextlib import nullcontext
 from datetime import date, datetime, timezone
-from html.parser import HTMLParser
 import json
 import os
 from pathlib import Path
@@ -15,7 +14,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-from urllib.parse import unquote, urlparse
 
 import fitz
 
@@ -75,18 +73,6 @@ def validate_bundle(root, bundle, settings, *, allow_run_id=None):
 
 def verify_rendered(root, bundle, settings, *, output_dir=None):
     """Build the isolated article and capture actual desktop/mobile browser views."""
-    class Visuals(HTMLParser):
-        def __init__(self):
-            super().__init__()
-            self.images, self.tables = [], 0
-
-        def handle_starttag(self, tag, attributes):
-            attributes = dict(attributes)
-            if tag == 'img' and attributes.get('src'):
-                self.images.append(attributes['src'])
-            if tag == 'table':
-                self.tables += 1
-
     with (nullcontext(str(output_dir)) if output_dir else tempfile.TemporaryDirectory(prefix='dailypaper-render-')) as directory:
         staged = Path(directory)
         report = staged / 'content/daily' / f'{bundle["date"]}.md'
@@ -99,20 +85,12 @@ def verify_rendered(root, bundle, settings, *, output_dir=None):
             shutil.copyfile(asset['source'], target)
         subprocess.run([sys.executable, str(Path(__file__).parent / 'build_site.py'), '--repo-root', str(staged)],
                        env={**os.environ, 'SITE_BASE_URL': '/dailypaper'}, check=True, capture_output=True, text=True)
-        html = (staged / f'dist/daily/{bundle["date"]}/index.html').read_text()
-        parsed = Visuals()
-        parsed.feed(html)
-        require(len(parsed.images) == len(bundle['assets']), 'Not all verified figures rendered in the daily article')
+        copied = staged / 'dist/reports' / f'{bundle["date"]}.md'
+        require(copied.read_bytes() == report.read_bytes(), 'Reader Markdown differs from the verified report')
         table_count = sum(v['kind'] == 'table' for paper in bundle['papers'] for v in paper['analysis']['visuals'])
-        require(parsed.tables == table_count, 'Verified tables did not render as HTML tables')
-        for url in parsed.images:
-            require(url.startswith('/dailypaper/assets/papers/'), 'Image URL ignores site base path')
-            target = safe_target(staged / 'dist', unquote(urlparse(url).path.removeprefix('/dailypaper/')))
-            pixels = fitz.Pixmap(str(target))
-            require(pixels.width > 0 and pixels.height > 0, 'Rendered figure is broken')
         from browser_render import inspect_site
-        rendering = inspect_site(staged / 'dist', f'daily/{bundle["date"]}/', staged / 'screenshots',
-                                 len(bundle['assets']), table_count)
+        rendering = inspect_site(staged / 'dist', f'reader/?date={bundle["date"]}', staged / 'screenshots',
+                                 len(bundle['assets']), table_count, image_prefix='/dailypaper/assets/papers/')
         return {**rendering, 'report_sha256': sha256(bundle['report_markdown'].encode())}
 
 
