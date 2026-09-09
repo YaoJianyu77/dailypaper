@@ -9,11 +9,11 @@ Use settings section 5 for every selected paper. Its language, lengths, counts, 
 
 ## Read and verify
 
-Read the complete paper: main text, important figures/tables, experiments, footnotes, and relevant appendices. Inspect actual figure/table pages rather than inferring their contents from captions. Metadata, abstract text, old repository summaries, and search snippets are screening inputs, not substitutes for reading the paper.
+Read the complete source material required by settings section 5, inspecting figures/tables in context rather than inferring them from captions. Metadata, old summaries, and search snippets cannot establish technical claims. When linked author versions or supplements differ, compare their appendices and experimental details, attribute version-specific evidence, and do not conflate versions.
 
-Base technical analysis on the paper. Keep separately verified publication metadata and classic-selection evidence distinct from technical claims. Preserve exact results, hardware/software, models, workloads, baseline comparisons, and conditions. Use the settings page's labels for missing details and interpretation. Cite the relevant page, section, figure, table, or algorithm when possible.
+Keep publication metadata and classic-selection evidence separate from paper-based technical claims. Use settings section 5 for required experimental detail and missing-detail/interpretation labels. Cite the relevant page, section, figure, table, or algorithm.
 
-Distinguish a maximum from an average, component performance from end-to-end performance, throughput from latency, and measured behavior from author claims. Never repair missing evidence by inventing an implementation detail. Replace an unreadable candidate or leave the slot unfilled.
+Distinguish a maximum from an average, component performance from end-to-end performance, throughput from latency, and measured behavior from author claims. Never repair missing evidence by inventing an implementation detail. Report unreadable or missing evidence to the controller; analysis does not replace the selection.
 
 ## Writing sequence
 
@@ -55,4 +55,4 @@ Within the configured assessment limit, give one paragraph covering what is conv
 
 ## Final editorial check
 
-Define paper-specific terms on first use. Apply the settings' exclusions for unnecessary history, related work, secondary experiments, and reading advice. The daily article must carry the explanation; a separate public paper page is not required. Preserve useful notes and historical reports when editing existing artifacts.
+Define paper-specific terms on first use and apply the settings' content exclusions. Use `daily-paper-editor` for article assembly and final review.

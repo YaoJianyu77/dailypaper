@@ -230,7 +230,7 @@ def prepare(root, *, day=None, sources=None, backend=None, pool=None, stage_dir=
     bundle['rendering'] = verify_rendered(root, bundle, settings, output_dir=stage / 'website')
     screenshots = bundle['rendering']['screenshots']
     bundle['review'] = backend.generate('review', {'kind': 'trends', 'report_markdown': bundle['report_markdown'],
-        'papers': [{'work_id': work_id(p), 'title': p['title'], 'category': p['category'], 'analysis': p['analysis'],
+        'papers': [{'work_id': work_id(p), 'title': p['title'], 'category': p['category'],
                     'review': p['review']} for p in bundle['papers']], 'trends': trends,
         'selection_shortfall': bundle['shortfall_reason'],
         'rendering': bundle['rendering'], 'image_order': [f'{s["viewport_width"]}px {s["item"]}' for s in screenshots]},

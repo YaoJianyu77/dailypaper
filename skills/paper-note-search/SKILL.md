@@ -5,13 +5,13 @@ description: Use during DailyPaper generation to check candidates against perman
 
 # History and existing material
 
-Read complete history through `scripts/recommendation_history.py`, which reconciles `state/recommendation_history.json`, archived daily reports, and the retained `state/paper_index.json`. A snippet search cannot establish that a work is new. Follow `AGENTS.md` for permanent exclusion and safe history updates.
+Use `scripts/recommendation_history.py` to read and reconcile the evidence sources owned by `AGENTS.md`. Follow its full-history, permanent-exclusion, and safe-update rules.
 
 ## Identity checks
 
-Search normalized DOI, versionless arXiv ID, stable DBLP/venue identifiers, exact/normalized titles, former titles, author overlap, and explicit publication/preprint relationships. Different titles, venues, or URLs alone do not make a new work. For a proposed technical extension, compare its main contribution and evaluation with the earlier paper and record the relationship.
+Apply the identity normalization in `AGENTS.md`; cross-check title aliases with author overlap and explicit publication/preprint relationships. For a proposed technical extension, compare its main contribution and evaluation with the earlier paper and record the relationship.
 
-An archived report is evidence of prior recommendation even when canonical identifiers are incomplete. Resolve gaps before publication through the existing transaction; do not ignore them or infer empty history.
+When an archived report has incomplete canonical identifiers, use its cited source and authors to resolve the relationship before publication.
 
 ## Reuse and response
 

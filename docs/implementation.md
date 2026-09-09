@@ -27,6 +27,8 @@
 
 All modules above live in `scripts/`. The useful manual extractor lives with its skill at `skills/paper-image-extractor/scripts/extract_images.py`; it supports arXiv source figures and local PDF images. Existing notes can be searched directly with `rg -n 'keyword' content/papers`. Legacy notes, metadata, indexes, and recommendation evidence are retained as data, not active settings or alternative pipelines.
 
+Stage prompts load current settings, execution rules, and each applicable canonical skill once; task text supplies field meanings and controller handoffs. Paper reviews load search, history, analysis, and visual skills. Final article reviews load editing and visual skills, using the completed paper-review receipts for paper-specific checks; article prose is sent once as Markdown, without another copy of each analysis. Unknown review kinds are rejected. The same generated JSON schema supplies both the prompt's output contract and the runtime's structured-output constraint.
+
 ## Evidence and recovery
 
 Discovery skips an index for the rest of an invocation after an access challenge, rate limit, or outage. If verified pools remain short, Codex searches official sources; the controller independently checks title, venue, type, and exact publication date. Author pages supply full text, not publication proof. A classic can be checked against retrieved later-use evidence; citation counts alone do not establish influence. Diagnostics stay in `discovery.json`.

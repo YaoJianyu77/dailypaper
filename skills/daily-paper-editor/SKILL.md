@@ -9,14 +9,14 @@ Apply the current settings and the publication transaction in `AGENTS.md`. Accep
 
 ## Assemble and edit
 
-Keep all entries in one daily Markdown article. Show the configured local date/timezone, inclusive date windows, actual counts, and a concise explanation of unfilled slots. Controller records own verification, commit, push, and deployment status.
+Keep all entries in one daily Markdown article. Show the configured local date/timezone, inclusive date windows, and actual counts. Edit selection diagnostics into a concise explanation of unfilled slots, preserving verified counts and uncertainty. Omit tool diagnostics, preparation status, and remarks about unselected alternatives when their pool is already filled. Controller records own verification, commit, push, and deployment status.
 
-Preserve configured headings and causal explanations. Define paper-specific terms, tighten repeated prose, and retain mechanisms, experimental conditions, exact results, and limitations. Place each verified visual beside its explanation; asset inventories and separate detail pages do not replace inline presentation.
+Preserve the structure and causal explanations established by `paper-deep-analysis`; tighten repeated prose without losing mechanisms, experimental conditions, results, or limitations. Place each verified visual beside its explanation.
 
-Use settings section 6 for trends. Name supporting papers and describe signals from this selection, including insufficient shared evidence where appropriate. Do not force unrelated papers into a trend or infer a current trend from the classic alone.
+Apply settings section 6 to the complete selected analyses: group papers by shared problem and design direction, then test each proposed trend against its supporting evidence. Explain insufficient shared evidence where necessary.
 
 ## Check the result
 
-Check word counts, structure, coverage explanations, scientific claims, and rendered figures/tables against the source evidence and current settings. Final browser screenshots must demonstrate readable desktop/mobile presentation, including enlarged views of wide figures.
+Check word counts, structure, coverage explanations, and trend support against current settings. Use per-paper review evidence for scientific claims, and `paper-image-extractor` for visual fidelity and legibility checks on the final desktop/mobile browser screenshots.
 
 `scripts/report_validation.py` assembles Markdown, `scripts/publish_daily.py` validates an isolated site and archives the transaction, and `scripts/pipeline_prompts.py` owns stage output contracts. Legacy reports retain their schema through the site parser; do not regenerate them when changing templates.

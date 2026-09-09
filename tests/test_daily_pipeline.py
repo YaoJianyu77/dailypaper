@@ -191,6 +191,14 @@ class PipelineTests(unittest.TestCase):
             self.assertEqual(len(images), 2)
             self.assertGreater(len(context['document']['pages'][1]['text']), 2200)
             self.assertIn('TAIL_EVIDENCE_NOT_IN_ABSTRACT', messages[1]['content'])
+        _, final_context, final_images, _ = self.backend.calls[-1]
+        self.assertEqual(final_context['kind'], 'trends')
+        self.assertEqual(final_context['report_markdown'], bundle['report_markdown'])
+        self.assertEqual(final_images, [s['path'] for s in bundle['rendering']['screenshots']])
+        for entry, paper in zip(final_context['papers'], bundle['papers'], strict=True):
+            self.assertNotIn('analysis', entry)  # Prose already appears in the assembled article.
+            self.assertEqual(entry['review'], paper['review'])
+            self.assertEqual(entry['title'], paper['title'])
         result = publish(self.root, bundle)
         self.assertEqual(result['status'], 'archived')
         report = read_report(self.root / f'content/daily/{DAY}.md')
@@ -963,6 +971,62 @@ class PipelineTests(unittest.TestCase):
             result = {'partial': 'not a complete analysis'}
             with self.assertRaises(jsonschema.ValidationError):
                 backend.generate('analyze', context, images)
+
+    def test_stage_prompts_use_current_authorities_once(self):
+        self.edit('**English**', '**Spanish**')
+        routes = [
+            ('discover', {}, ('daily-paper-search', 'paper-note-search')),
+            ('select', {}, ('daily-paper-search', 'paper-note-search')),
+            ('influence', {}, ('daily-paper-search',)),
+            ('analyze', {}, ('paper-deep-analysis', 'paper-image-extractor')),
+            ('trends', {}, ('daily-paper-editor',)),
+            ('review', {'kind': 'paper'}, ('daily-paper-search', 'paper-note-search',
+                                         'paper-deep-analysis', 'paper-image-extractor')),
+            ('review', {'kind': 'trends'}, ('daily-paper-editor', 'paper-image-extractor')),
+        ]
+        skills = {path.parent.name: path for path in (self.root / 'skills').glob('*/SKILL.md')}
+        # A canonical skill edit must reach its next applicable call without a prompt edit.
+        for name, path in skills.items():
+            path.write_text(path.read_text() + f'\nFixture instruction update for {name}.\n')
+        rules = (self.root / 'AGENTS.md').read_text()
+        for stage, context, expected in routes:
+            with self.subTest(stage=stage, context=context):
+                messages = build_messages(self.root, self.settings, stage, context)
+                prompt = messages[0]['content']
+                self.assertEqual(prompt.count(self.settings.raw), 1)
+                self.assertEqual(prompt.count(rules), 1)
+                for name, path in skills.items():
+                    self.assertEqual(prompt.count(path.read_text()), int(name in expected), name)
+                self.assertEqual(json.loads(messages[1]['content']), context)
+
+    def test_codex_review_routes_original_evidence_and_rejects_unknown_kind(self):
+        document = self.sources.full_paper(self.sources.candidates[0], self.root / 'review-transport')
+        paper = {**self.sources.candidates[0], 'document': document,
+                 'analysis': analysis_result(document, self.settings)}
+        images = [page['image'] for page in document['pages']]
+        contexts = [
+            {'kind': 'paper', 'paper': paper, 'prior_recommendation_evidence': ['fixture prior work']},
+            {'kind': 'trends', 'report_markdown': 'Fixture assembled article',
+             'papers': [{'title': paper['title'], 'review': review_result()}],
+             'rendering': {'screenshots': [{'path': images[0], 'viewport_width': 390}]}},
+        ]
+        resolution = {'executable': '/fixture/codex', 'settings_sha256': self.settings.sha256}
+        backend = CodexBackend(self.root, self.settings, self.infrastructure)
+        with patch.object(CodexBackend, 'preflight', return_value=resolution), \
+             patch('codex_enrich.execute', return_value=(review_result(), [])) as run:
+            for context in contexts:
+                with self.subTest(kind=context['kind']):
+                    self.assertEqual(backend.generate('review', context, images), review_result())
+                    _, actual_resolution, _, prompt, schema, actual_images = run.call_args.args
+                    self.assertIs(actual_resolution, resolution)
+                    self.assertTrue(prompt.endswith(json.dumps(context, ensure_ascii=False)))
+                    self.assertEqual(actual_images, images)
+                    self.assertEqual(schema, stage_schema('review', self.settings))
+            for context in ({}, {'kind': 'unknown'}):
+                run.reset_mock()
+                with self.assertRaisesRegex(ValueError, 'Unknown review kind'):
+                    backend.generate('review', context, images)
+                run.assert_not_called()
 
     def test_retained_skill_extractor_reads_local_pdf_without_network(self):
         helper = REPO / 'skills/paper-image-extractor/scripts/extract_images.py'

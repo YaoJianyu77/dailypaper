@@ -9,17 +9,17 @@ Use settings section 5 for counts and presentation requirements, and `AGENTS.md`
 
 ## Inspect and extract
 
-Choose visuals that explain the mechanism and strongest experimental evidence. Inspect original pages and surrounding text: verify axes, units, arrows, legends, baselines, workload/hardware conditions, and supported conclusions. Captions alone cannot establish visual meaning.
+Inspect candidate visuals on original pages with surrounding text: verify axes, units, arrows, legends, baselines, workload/hardware conditions, and supported conclusions. Captions alone cannot establish visual meaning.
 
 Prefer original source assets, source-package PDF figures, or legible page crops. The manual helper `skills/paper-image-extractor/scripts/extract_images.py` accepts an arXiv ID or local PDF, output directory, and index path. Its inventory is an intermediate artifact; check selected images yourself. Production uses the verified document pages and crop/table contracts in `scripts/report_validation.py`.
 
-Use descriptive image filenames and embed assets next to their explanation with deployment-compatible paths. A GitHub file-browser URL is not an image URL.
+Use descriptive image filenames and deployment-compatible asset paths. A GitHub file-browser URL is not an image URL; article placement belongs to `daily-paper-editor`.
 
 ## Tables and reconstructions
 
 Render verified numerical tables directly as Markdown tables, preserving headers, units, baselines, conditions, exact values, and any indicated omissions. Do not substitute fenced text.
 
-If reconstruction is needed, retain actual components, arrows, labels, axes, units, and measurements. Render it visibly and identify the original Figure/Table number with the reconstruction label from settings. Mermaid source and ASCII diagrams do not substitute for a rendered visual. If no faithful visual is possible, report the evidence gap rather than inventing it.
+For reconstructions, apply the fidelity, rendering, and labeling requirements in settings section 5. If no faithful visual is possible, report the evidence gap.
 
 ## Explain and validate
 
