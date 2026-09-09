@@ -5,16 +5,19 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import logging
 from pathlib import Path
 
 import requests
 
 from content_store import get_repo_root
-from paper_sources import EvidenceError, Sources
+from paper_sources import EvidenceError, Sources, request_failure
 from recommendation_history import atomic_write, json_bytes, load_history, match_record, normalize_title, sha256, work_id
 from report_settings import load_infrastructure, load_settings
-from report_validation import (prepare_visuals, render_report, require, validate_analysis,
+from report_validation import (ValidationError, prepare_visuals, render_report, require, validate_analysis,
                                validate_review, validate_selection, validate_trends)
+
+logger = logging.getLogger(__name__)
 
 
 def save_checkpoint(path, value):
@@ -28,29 +31,65 @@ def make_backend(name, root, settings, infrastructure):
     raise RuntimeError('The unified settings require the verified strongest Codex model and reasoning setting. Hosted API transports cannot verify this policy; use the local Codex runner. No downgrade selected.')
 
 
-def discovery(root, settings, day, sources, history):
+def discovery(root, settings, day, sources, history, *, backend=None, diagnostics_path=None):
     verified, rejected = [], []
-    for candidate in sources.discover(settings, day):
-        previous, reason = match_record(candidate, history.records)
-        if previous:
-            rejected.append({'title': candidate['title'], 'reason': reason})
-            continue
-        try:
-            paper = sources.verify_publication(candidate)
-            category = settings.category(paper['publication_date'], day)
-            if not category or not settings.quotas[category]:
-                raise EvidenceError('Outside current date windows')
-            paper['category'] = category
-            previous, reason = match_record(paper, history.records + verified)
-            if previous:
-                raise EvidenceError(reason)
-            verified.append(paper)
-        except (EvidenceError, ValueError) as error:
-            rejected.append({'title': candidate['title'], 'reason': str(error)})
-    require(verified, 'No eligible publication evidence found; generation stopped')
-    return {'date': day.isoformat(), 'settings_sha256': settings.sha256,
+    def verify(candidates):
+        for candidate in candidates:
+            try:
+                require(candidate['venue'] in settings.venues, 'Venue is not configured')
+                previous, reason = match_record(candidate, history.records + verified)
+                if previous:
+                    raise EvidenceError('Previously recommended or duplicate work: ' + reason)
+                paper = sources.verify_publication(candidate)
+                category = settings.category(paper['publication_date'], day)
+                if not category or not settings.quotas[category]:
+                    raise EvidenceError('Outside current date windows')
+                paper['category'] = category
+                previous, reason = match_record(paper, history.records + verified)
+                if previous:
+                    raise EvidenceError('Previously recommended or duplicate work: ' + reason)
+                verified.append(paper)
+                logger.info('Publication verified: %s (%s, %s)', paper['title'], paper['venue'], paper['publication_date'])
+            except (ValueError, requests.RequestException) as error:
+                reason = request_failure(error) if isinstance(error, requests.RequestException) else str(error)
+                rejected.append({'title': candidate['title'], 'reason': reason})
+                logger.info('Candidate excluded: %s: %s', candidate['title'], reason)
+
+    logger.info('Discovering configured venues; complete history contains %s source records', len(history.records))
+    verify(sources.discover(settings, day))
+    counts = {category: sum(p['category'] == category for p in verified) for category in settings.quotas}
+    if backend is not None and any(counts[key] < quota for key, quota in settings.quotas.items()):
+        logger.info('Index coverage insufficient (%s); searching official sources with verified Codex runtime', counts)
+        from pipeline_prompts import stage_schema
+        import jsonschema
+        result = backend.generate('discover', {'date': day.isoformat(), 'date_windows': settings.windows(day),
+            'prior_recommendation_evidence': history.prompt_records, 'existing_verified_candidates': verified,
+            'source_failures': list(sources.failures),
+            'max_candidates_per_venue': int(sources.options.get('max_candidates_per_venue', 12))})
+        jsonschema.validate(result, stage_schema('discover', settings))
+        for limitation in result['coverage_limits']:
+            sources.failure(limitation)
+        used = {}
+        candidates = []
+        for candidate in result['candidates']:
+            venue = candidate['venue']
+            used[venue] = used.get(venue, 0) + 1
+            if used[venue] > int(sources.options.get('max_candidates_per_venue', 12)):
+                sources.failure(f'{venue}: web discovery exceeded the configured candidate budget; extra leads excluded')
+                continue
+            candidate['candidate_id'] = work_id(candidate)
+            candidates.append(candidate)
+        verify(candidates)
+    result = {'date': day.isoformat(), 'settings_sha256': settings.sha256,
             'windows': settings.windows(day), 'candidates': verified, 'rejected': rejected,
             'source_failures': list(sources.failures)}
+    if diagnostics_path:
+        save_checkpoint(diagnostics_path, result)
+    logger.info('Discovery finished: %s verified, %s excluded, %s coverage limits',
+                len(verified), len(rejected), len(sources.failures))
+    details = '; '.join([*sources.failures, *[f'{r["title"]}: {r["reason"]}' for r in rejected[:5]]])
+    require(verified, 'No eligible publication evidence found; generation stopped. ' + details)
+    return result
 
 
 def select(root, settings, day, backend, sources, pool, history):
@@ -133,7 +172,8 @@ def prepare(root, backend_name='codex', *, day=None, sources=None, backend=None,
                 'Settings changed during a pending run; keep its selection and explicitly revalidate before resuming')
         chosen = checkpoint['selection']
     else:
-        pool = pool or discovery(root, settings, day, sources, history)
+        pool = pool or discovery(root, settings, day, sources, history, backend=backend,
+                                 diagnostics_path=stage / 'discovery.json')
         chosen = select(root, settings, day, backend, sources, pool, history)
         save_checkpoint(checkpoint_path, {'settings_sha256': settings.sha256, 'run_id': run_id, 'selection': chosen})
     validate_selection(chosen['papers'], settings, day, load_history(root), chosen['shortfall_reason'])
@@ -154,17 +194,25 @@ def prepare(root, backend_name='codex', *, day=None, sources=None, backend=None,
             context = {'date': day.isoformat(), 'paper': paper, 'document': document,
                        'image_order': [f'PDF page {page["page"]}' for page in document['pages']]}
             images = [page['image'] for page in document['pages']]
-            analysis = backend.generate('analyze', context, images)
-            counts = validate_analysis(analysis, document, settings)
-            assets, blocks = prepare_visuals(paper, analysis, document, directory / 'prepared')
-            paper.update(document=document, analysis=analysis, assets=assets, visual_blocks=blocks,
-                         counts=counts, settings_sha256=settings.sha256)
-            review = backend.generate('review', {'kind': 'paper', 'paper': paper,
-                    'prior_recommendation_evidence': history.prompt_records,
-                    'date_windows': settings.windows(day),
-                    'image_order': context['image_order'] + [asset['path'] for asset in assets]},
-                    images + [asset['source'] for asset in assets])
-            validate_review(review, settings)
+            for attempt in range(3):
+                analysis = backend.generate('analyze', context, images)
+                try:
+                    counts = validate_analysis(analysis, document, settings)
+                    assets, blocks = prepare_visuals(paper, analysis, document, directory / 'prepared')
+                    paper = {**copy.deepcopy(selected), 'document': document, 'analysis': analysis,
+                             'assets': assets, 'visual_blocks': blocks, 'counts': counts, 'settings_sha256': settings.sha256}
+                    review = backend.generate('review', {'kind': 'paper', 'paper': paper,
+                            'prior_recommendation_evidence': history.prompt_records,
+                            'date_windows': settings.windows(day),
+                            'image_order': context['image_order'] + [asset['path'] for asset in assets]},
+                            images + [asset['source'] for asset in assets])
+                    validate_review(review, settings)
+                    break
+                except ValidationError as error:
+                    if attempt == 2:
+                        raise
+                    logger.warning('Revising the same paper after validation: %s: %s', selected['title'], error)
+                    context = {**context, 'prior_analysis': analysis, 'revision_feedback': str(error)}
             paper['review'] = review
             paper['reviewed_sha256'] = sha256(json_bytes({key: value for key, value in paper.items() if key not in {'review', 'reviewed_sha256'}}))
             save_checkpoint(cached, paper)
@@ -178,20 +226,25 @@ def prepare(root, backend_name='codex', *, day=None, sources=None, backend=None,
     if trends_path.exists():
         trends = json.loads(trends_path.read_text())
     else:
-        trends = backend.generate('trends', {'papers': [{'work_id': work_id(p), 'title': p['title'],
+        trends = backend.generate('trends', {'date': day.isoformat(), 'selection_shortfall': chosen['shortfall_reason'],
+                    'papers': [{'work_id': work_id(p), 'title': p['title'],
                     'category': p['category'], 'analysis': p['analysis']} for p in bundle['papers']]})
         validate_trends(trends, bundle['papers'], settings)
         save_checkpoint(trends_path, trends)
     bundle['trends'] = trends
     validate_trends(trends, bundle['papers'], settings)
     bundle['report_markdown'] = render_report(bundle, settings)
+    from publish_daily import validate_bundle, verify_rendered
+    bundle['rendering'] = verify_rendered(root, bundle, settings, output_dir=stage / 'website')
+    screenshots = bundle['rendering']['screenshots']
     bundle['review'] = backend.generate('review', {'kind': 'trends', 'report_markdown': bundle['report_markdown'],
         'papers': [{'work_id': work_id(p), 'title': p['title'], 'category': p['category'], 'analysis': p['analysis'],
-                    'review': p['review']} for p in bundle['papers']], 'trends': trends})
+                    'review': p['review']} for p in bundle['papers']], 'trends': trends,
+        'selection_shortfall': bundle['shortfall_reason'],
+        'rendering': bundle['rendering'], 'image_order': [f'{s["viewport_width"]}px {s["item"]}' for s in screenshots]},
+        [s['path'] for s in screenshots])
     validate_review(bundle['review'], settings)
-    from publish_daily import validate_bundle, verify_rendered
     validate_bundle(root, bundle, settings)
-    verify_rendered(root, bundle, settings)
     save_checkpoint(stage / 'bundle.json', bundle)
     return bundle
 
@@ -204,7 +257,11 @@ def discovery_cli():
     args = parser.parse_args()
     root = get_repo_root(args.repo_root, __file__)
     settings = load_settings(root)
-    result = discovery(root, settings, settings.local_date(), Sources(load_infrastructure(root, args.config)), load_history(root))
+    infrastructure = load_infrastructure(root, args.config)
+    history = load_history(root)
+    backend = make_backend('codex', root, settings, infrastructure)
+    backend.preflight()
+    result = discovery(root, settings, settings.local_date(), Sources(infrastructure), history, backend=backend)
     output = Path(args.output)
     save_checkpoint(output if output.is_absolute() else root / output, result)
     return 0

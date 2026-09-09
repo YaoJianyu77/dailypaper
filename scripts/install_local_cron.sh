@@ -68,14 +68,15 @@ if [[ "$MODE" == install ]]; then
     "$VENV/bin/python" -m pip install --upgrade pip
     "$VENV/bin/python" -m pip install --upgrade -r "$REPO_ROOT/requirements.txt"
   fi
+  "$VENV/bin/python" -m playwright install chromium --only-shell
 fi
 
 if [[ ! -x "$VENV/bin/python" ]]; then
   echo 'Run bash scripts/install_local_cron.sh to install dependencies first.' >&2
   exit 1
 fi
-# Same runner and model/tool preflight as production. Authentication and approval
-# settings are inherited; no report is generated and no recommendation is reserved.
+# Same runner and model/tool preflight as production. Authentication is retained;
+# threads require never approvals inside the existing sandbox. No report or reservation.
 "$VENV/bin/python" "$REPO_ROOT/scripts/run_local_daily.py" --repo-root "$REPO_ROOT" --check-runtime 2>&1 | tee -a "$LOG_DIR/local_daily.log"
 if [[ "$MODE" == --check ]]; then
   exit 0

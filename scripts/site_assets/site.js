@@ -64,6 +64,25 @@
   const dialog = document.querySelector('#figure-dialog');
   if (dialog && typeof dialog.showModal === 'function') {
     const enlarged = dialog.querySelector('img');
+    const viewport = dialog.querySelector('.figure-viewport');
+    let scale = 1;
+    function setScale(value) {
+      if (!enlarged.naturalWidth) return;
+      scale = Math.min(4, Math.max(.125, value));
+      enlarged.style.width = `${Math.round(enlarged.naturalWidth * scale)}px`;
+      dialog.querySelector('.dialog-scale').textContent = `${Math.round(scale * 100)}%`;
+      dialog.querySelector('.dialog-smaller').disabled = scale <= .125;
+      dialog.querySelector('.dialog-larger').disabled = scale >= 4;
+    }
+    function originalSize() { setScale(1); viewport.scrollTo(0, 0); }
+    enlarged.addEventListener('load', originalSize);
+    dialog.querySelector('.dialog-fit').addEventListener('click', () => {
+      setScale(Math.min(1, viewport.clientWidth / enlarged.naturalWidth, innerHeight * .7 / enlarged.naturalHeight));
+      viewport.scrollTo(0, 0);
+    });
+    dialog.querySelector('.dialog-actual').addEventListener('click', originalSize);
+    dialog.querySelector('.dialog-larger').addEventListener('click', () => setScale(scale * 1.5));
+    dialog.querySelector('.dialog-smaller').addEventListener('click', () => setScale(scale / 1.5));
     document.querySelectorAll('.figure img').forEach(img => {
       const button = document.createElement('button');
       button.type = 'button';
@@ -71,11 +90,16 @@
       button.setAttribute('aria-label', `Enlarge figure: ${img.alt || 'paper figure'}`);
       img.replaceWith(button);
       button.append(img);
+      const hint = document.createElement('span');
+      hint.className = 'figure-hint';
+      hint.textContent = 'Expand ↗';
+      button.append(hint);
       button.addEventListener('click', () => {
         enlarged.src = img.currentSrc || img.src;
         enlarged.alt = img.alt;
-        dialog.querySelector('p').textContent = img.alt;
+        dialog.querySelector('.dialog-caption').textContent = img.alt;
         dialog.showModal();
+        if (enlarged.complete) originalSize();
       });
     });
     dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());

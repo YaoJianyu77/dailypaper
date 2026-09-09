@@ -27,6 +27,8 @@ def word_count(text):
 
 
 def validate_document(document):
+    require(document.get('source_documents'),
+            'Missing complete-paper source receipts; preserve the selection and revalidate its original documents')
     raw = Path(document['pdf']).read_bytes()
     require(sha256(raw) == document['sha256'], 'PDF changed after acquisition')
     with fitz.open(stream=raw, filetype='pdf') as pdf:
@@ -35,6 +37,17 @@ def validate_document(document):
         for page, info in zip(pdf, document['pages']):
             require(info['text'] == page.get_text(sort=True), 'Full-paper text was altered or truncated')
             require(sha256(Path(info['image']).read_bytes()) == info['image_sha256'], 'PDF page image changed')
+        offset = 0
+        for source in document['source_documents']:
+            source_raw = Path(source['pdf']).read_bytes()
+            require(sha256(source_raw) == source['sha256'], 'Original paper or supplement changed')
+            with fitz.open(stream=source_raw, filetype='pdf') as part:
+                require(source['first_page'] == offset + 1 and source['page_count'] == len(part), 'Source page mapping changed')
+                for page in part:
+                    require(offset < len(pdf) and page.get_text(sort=True) == pdf[offset].get_text(sort=True),
+                            'Paper or supplement omitted or changed during assembly')
+                    offset += 1
+        require(offset == len(pdf), 'Incomplete paper and supplement source receipt')
 
 
 def validate_analysis(analysis, document, settings):
@@ -102,6 +115,8 @@ def validate_selection(papers, settings, day, history, shortfall_reason='', run_
 
 def validate_trends(trends, papers, settings):
     jsonschema.validate(trends, stage_schema('trends', settings))
+    if any(sum(p['category'] == category for p in papers) < quota for category, quota in settings.quotas.items()):
+        require(trends['coverage_note'].strip(), 'Unfilled slots need a reader-facing coverage explanation')
     by_id = {work_id(p): p for p in papers}
     for trend in trends['trends']:
         supporting = set(trend['supporting_work_ids'])
@@ -139,7 +154,11 @@ def prepare_visuals(paper, analysis, document, directory, dpi=200):
             else:
                 rendered = table_markdown(visual)
             labels = analysis['visual_labels']
-            blocks.append(f'{rendered}\n\n*{visual["label"]}, {labels["pdf_page"]} {visual["page"]}. {labels["paraphrased_caption"]}: {visual["caption"]}*\n\n'
+            source = document['pages'][visual['page'] - 1]
+            source_page = source['source_page']
+            source_url = source['source_url'].split('#')[0] + f'#page={source_page}'
+            reference = f'[{labels["pdf_page"]} {source_page}]({source_url})'
+            blocks.append(f'{rendered}\n\n*{visual["label"]}, {reference}. {labels["paraphrased_caption"]}: {visual["caption"]}*\n\n'
                           f'{visual["explanation"]}\n\n{visual["caveat"]}')
     return assets, blocks
 
@@ -152,8 +171,8 @@ def render_report(bundle, settings):
              f'**{labels["timezone"]}:** {settings.timezone}', '',
              f'**{labels["latest_window"]}:** {windows["latest"]["start"]} – {windows["latest"]["end"]} ({labels["inclusive"]}). '
              f'**{labels["classic_window"]}:** {windows["classic"]["start"]} – {windows["classic"]["end"]} ({labels["inclusive"]}).', '']
-    if bundle['shortfall_reason']:
-        lines.extend([bundle['shortfall_reason'], ''])
+    if bundle['trends']['coverage_note']:
+        lines.extend([bundle['trends']['coverage_note'], ''])
     numbers = {'latest': 0, 'classic': 0}
     paper_headings = []
     for paper in bundle['papers']:
@@ -164,9 +183,13 @@ def render_report(bundle, settings):
         heading = f'{label} — {title}'
         paper_headings.append({'heading': heading, 'title': title, 'category': category})
         evidence_url = paper['publication_evidence'][0]['url']
+        documents = paper['document']['source_documents']
+        source_links = ' · '.join(f'[{labels["full_paper"]}'
+            + (f' ({index}/{len(documents)})' if len(documents) > 1 else '') + f']({document["url"]})'
+            for index, document in enumerate(documents, 1))
         lines.extend([f'## {heading}', '',
                       f'**{paper["venue"]} · {paper["publication_date"]} · {", ".join(paper["authors"])}.** '
-                      f'[{labels["official_publication"]}]({evidence_url}) · [{labels["full_paper"]}]({paper["document"]["url"]})', ''])
+                      f'[{labels["official_publication"]}]({evidence_url}) · {source_links}', ''])
         for index, section in enumerate(paper['analysis']['sections'], 1):
             lines.extend([f'### {index}. {section["heading"]}', '', section['text'], ''])
             if section['heading'] == paper['analysis']['visual_section']:

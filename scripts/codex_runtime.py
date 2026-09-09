@@ -23,10 +23,17 @@ from pipeline_prompts import STAGE_SKILLS
 
 logger = logging.getLogger(__name__)
 OFFICIAL_HOSTS = {'learn.chatgpt.com', 'developers.openai.com', 'platform.openai.com'}
+APPROVAL_POLICY = 'never'
 
 
 class RuntimeVerificationError(RuntimeError):
     pass
+
+
+class RuntimeRPCError(RuntimeVerificationError):
+    def __init__(self, method, error):
+        self.method, self.error = method, error
+        super().__init__(f'Codex could not verify {method}: {error}')
 
 
 def require(value, message):
@@ -48,7 +55,7 @@ def verify_skill_links(root):
 
 
 def prepare_workspace(root, directory):
-    """Expose source instructions through links; only the scratch root is writable."""
+    """Expose source instructions through links inside the existing workspace sandbox."""
     root, directory = Path(root).resolve(), Path(directory).resolve()
     verify_skill_links(root)
     for name in ('AGENTS.md', 'PROJECT_STATE.md', 'DAILY_REPORT_PRODUCT_REQUIREMENTS.md', 'skills', 'scripts'):
@@ -67,7 +74,8 @@ class AppServer:
         self.executable, self.cwd, self.timeout = executable, str(cwd), timeout
 
     def __enter__(self):
-        self.process = subprocess.Popen([self.executable, '--search', 'app-server', '--strict-config', '--listen', 'stdio://'],
+        self.process = subprocess.Popen([self.executable, '--search', '--ask-for-approval', APPROVAL_POLICY,
+            'app-server', '--strict-config', '--listen', 'stdio://'],
             cwd=self.cwd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
             text=True, bufsize=1, start_new_session=True)
         self.messages = queue.Queue()
@@ -101,7 +109,8 @@ class AppServer:
         while time.monotonic() < deadline:
             value = self.receive(deadline)
             if value.get('id') == request_id and ('result' in value or 'error' in value):
-                require('error' not in value, f'Codex could not verify {method}: {value.get("error")}')
+                if 'error' in value:
+                    raise RuntimeRPCError(method, value['error'])
                 return value['result']
             self.events.append(value)
         raise RuntimeVerificationError(f'Timed out verifying Codex {method}; generation stopped')
@@ -115,7 +124,7 @@ class AppServer:
         value = json.loads(line)
         if 'method' in value and 'id' in value:
             # This unattended client never approves escalation, login, or new permissions.
-            raise RuntimeVerificationError(f'Codex requires interactive authorization ({value["method"]}); unattended run stopped. Use the existing login/permission controls interactively.')
+            raise RuntimeVerificationError(f'Codex requested interactive authorization ({value["method"]}) despite approvalPolicy={APPROVAL_POLICY}; unattended run stopped without granting permissions.')
         return value
 
     def __exit__(self, *args):
@@ -262,8 +271,24 @@ def runtime_overrides(resolution):
             'agents.default_subagent_reasoning_effort': resolution['mode']}
 
 
-def verify_thread(server, resolution, thread_id):
-    thread = server.call('thread/read', {'threadId': thread_id, 'includeTurns': False})['thread']
+def verify_thread(server, resolution, thread_id, *, timeout=45):
+    deadline = time.monotonic() + timeout
+    while True:
+        try:
+            thread = server.call('thread/read', {'threadId': thread_id, 'includeTurns': False})['thread']
+            break
+        except RuntimeRPCError as error:
+            # Codex can announce a new thread before its buffered session metadata
+            # is visible on disk. Retry this read only; never resume/start a turn
+            # or accept missing settings. Other protocol failures remain fatal.
+            message = error.error.get('message', '')
+            transient = (error.method == 'thread/read' and error.error.get('code') == -32603
+                         and 'failed to read session metadata' in message and message.endswith(' is empty'))
+            if not transient:
+                raise
+            require(time.monotonic() < deadline,
+                    f'Codex thread {thread_id} session metadata remained empty; generation stopped')
+            time.sleep(0.1)
     require(thread.get('id') == thread_id and thread.get('model') == resolution['model'],
             f'Codex thread {thread_id} substituted a different or unverifiable model; generation stopped')
     require(thread.get('reasoningEffort') == resolution['mode'],
@@ -276,17 +301,62 @@ def verify_thread(server, resolution, thread_id):
     return thread
 
 
-def verify_effective(server, resolution, directory):
+def verify_permissions(result, directory, expected_sandbox=None):
+    require(result.get('approvalPolicy') == APPROVAL_POLICY,
+            'Codex did not apply approvalPolicy=never; unattended execution stopped')
+    sandbox = result.get('sandbox', {})
+    require(sandbox.get('type') == 'workspaceWrite', 'The isolated workspace sandbox could not be verified')
+    require(sandbox.get('networkAccess') is False, 'Codex sandbox network access is not disabled; generation stopped')
+    roots = sandbox.get('writableRoots', []) + result.get('runtimeWorkspaceRoots', [])
+    require(all(Path(path).resolve().is_relative_to(Path(directory).resolve()) for path in roots),
+            'Existing Codex configuration grants extra writable roots; unattended research requires an isolated scratch workspace')
+    require(expected_sandbox is None or sandbox == expected_sandbox,
+            'Codex changed sandbox permissions during execution; generation stopped')
+
+
+def read_turn_permissions(thread, turn_id=None, timeout=45):
+    """Read Codex's effective turn receipt without resuming or altering a child."""
+    path = Path(thread.get('path') or '')
+    require(path.is_absolute() and path.name.endswith(thread['id'] + '.jsonl'),
+            'Codex has no verifiable turn permission receipt; generation stopped')
+    deadline = time.monotonic() + timeout
+    while True:
+        context, owner = None, None
+        if path.is_file():
+            with path.open() as stream:
+                for line in stream:
+                    # The last record can still be in the process of being appended.
+                    if not line.endswith('\n'):
+                        break
+                    record = json.loads(line)
+                    if record.get('type') == 'session_meta':
+                        owner = record['payload']['id']
+                    elif record.get('type') == 'turn_context':
+                        payload = record['payload']
+                        if turn_id is None or payload.get('turn_id') == turn_id:
+                            context = payload
+        if context is not None:
+            require(owner == thread['id'], 'Permission receipt belongs to another Codex thread')
+            sandbox = context.get('sandbox_policy', {})
+            return {'approvalPolicy': context.get('approval_policy'),
+                    'runtimeWorkspaceRoots': context.get('workspace_roots', []),
+                    'sandbox': {'type': 'workspaceWrite' if sandbox.get('type') == 'workspace-write' else sandbox.get('type'),
+                        'writableRoots': sandbox.get('writable_roots', []), 'networkAccess': sandbox.get('network_access'),
+                        'excludeTmpdirEnvVar': sandbox.get('exclude_tmpdir_env_var', False),
+                        'excludeSlashTmp': sandbox.get('exclude_slash_tmp', False)}}
+        require(time.monotonic() < deadline, 'Codex did not record effective turn permissions; generation stopped')
+        time.sleep(0.05)
+
+
+def verify_effective(server, resolution, directory, *, ephemeral=True):
     result = server.call('thread/start', {'model': resolution['model'], 'cwd': str(directory),
-        'sandbox': 'workspace-write', 'ephemeral': True, 'allowProviderModelFallback': False,
+        'sandbox': 'workspace-write', 'approvalPolicy': APPROVAL_POLICY,
+        'ephemeral': ephemeral, 'allowProviderModelFallback': False,
         'config': runtime_overrides(resolution)})
     require(result.get('model') == resolution['model'], 'Codex substituted a different model; generation stopped')
     require(result.get('reasoningEffort') == resolution['mode'], 'Codex substituted a different reasoning setting; generation stopped')
     require(result.get('modelProvider') == 'openai', 'Model availability was not verified against the OpenAI account')
-    require(result.get('sandbox', {}).get('type') == 'workspaceWrite', 'The isolated workspace sandbox could not be verified')
-    require(all(Path(path).resolve().is_relative_to(Path(directory).resolve())
-                for path in result['sandbox'].get('writableRoots', [])),
-            'Existing Codex configuration grants extra writable roots; unattended research requires an isolated scratch workspace')
+    verify_permissions(result, directory)
     verify_thread(server, resolution, result['thread']['id'])
     return {'model': result['model'], 'mode': result['reasoningEffort'],
             'approval_policy': result['approvalPolicy'], 'sandbox': result['sandbox'], 'thread_id': result['thread']['id']}
@@ -339,25 +409,35 @@ def resolve_runtime(root, settings):
 
 class ExecutionGuard:
     """Audit parent and native subagent settings, including reroutes mid-turn."""
-    def __init__(self, server, resolution, thread_id):
+    def __init__(self, server, resolution, thread_id, directory, sandbox):
         self.server, self.resolution, self.root_thread = server, resolution, thread_id
+        self.directory, self.sandbox = directory, sandbox
         self.threads = {thread_id}
         self.active_turns = set()
         self.active_agents = set()
 
-    def verify(self, thread_id):
+    def verify(self, thread_id, turn_id=None):
         require(thread_id, 'Codex emitted a subagent without a verifiable thread identity')
-        verify_thread(self.server, self.resolution, thread_id)
+        thread = verify_thread(self.server, self.resolution, thread_id)
+        live = read_turn_permissions(thread, turn_id)
+        verify_permissions(live, self.directory, self.sandbox)
+        logger.info('Effective Codex permissions verified: thread=%s approvalPolicy=%s sandbox=%s networkAccess=%s',
+                    thread_id, live['approvalPolicy'], live['sandbox']['type'], live['sandbox']['networkAccess'])
         self.threads.add(thread_id)
 
     def inspect(self, event):
         method, params = event.get('method'), event.get('params', {})
         require(method != 'model/rerouted', f'Codex rerouted a model during execution: {params}; generation stopped')
+        if method == 'thread/settings/updated':
+            settings = params['threadSettings']
+            verify_permissions({'approvalPolicy': settings.get('approvalPolicy'),
+                                'sandbox': settings.get('sandboxPolicy')}, self.directory, self.sandbox)
+            self.verify(params['threadId'])
         if method == 'thread/started':
             self.verify(params['thread']['id'])
         if method in {'turn/started', 'turn/completed'}:
             thread_id = params['threadId']
-            self.verify(thread_id)
+            self.verify(thread_id, params['turn']['id'])
             if method == 'turn/started':
                 self.active_turns.add(thread_id)
             else:
@@ -373,8 +453,10 @@ class ExecutionGuard:
                     self.active_agents.add(child)
                 elif item.get('kind') == 'completed':
                     self.active_agents.discard(child)
+                elif item.get('kind') == 'interacted':
+                    pass  # A message is activity, not completion of the child task.
                 else:
-                    raise RuntimeVerificationError('Unrecognized subagent activity; completion cannot be verified')
+                    raise RuntimeVerificationError(f'Subagent activity {item.get("kind")!r} cannot establish successful completion')
             if item.get('type') == 'collabAgentToolCall':
                 for key, required in (('model', self.resolution['model']), ('reasoningEffort', self.resolution['mode'])):
                     require(item.get(key) in (None, required), f'Subagent requested a conflicting {key}; generation stopped')
@@ -403,20 +485,24 @@ def execute(executable, resolution, root, prompt, schema, images=(), timeout=120
         logger.info('Codex stage call: model=%s mode=%s cli=%s sandbox=workspace-write scratch=%s',
                     resolution['model'], resolution['mode'], actual_version, directory)
         with AppServer(executable, directory) as server:
-            effective = verify_effective(server, resolution, directory)
+            effective = verify_effective(server, resolution, directory, ephemeral=False)
             contract = (f'The verified DailyPaper runtime for this report is model={resolution["model"]}, '
                         f'reasoning_effort={resolution["mode"]}. Explicitly use these exact values for every native '
                         'subagent spawn, including further delegation. Do not select another model, effort, or custom '
                         'agent configuration that changes them. Do not launch a nested Codex runtime or model API '
-                        'to evade this policy. Stop if the required settings cannot be used.\n\n')
+                        f'to evade this policy. Approval policy is {APPROVAL_POLICY} for this thread and all descendants. '
+                        'Keep the inherited workspace-write sandbox and its existing permissions. Operations outside '
+                        'that sandbox must fail; do not request escalation, extra permissions, or a different approval policy. '
+                        'Stop if the required settings cannot be used.\n\n')
             inputs = [{'type': 'text', 'text': contract + prompt}]
             inputs.extend({'type': 'localImage', 'path': str(Path(path).resolve()), 'detail': 'original'} for path in images)
             started = server.call('turn/start', {'threadId': effective['thread_id'], 'input': inputs,
-                'model': resolution['model'], 'effort': resolution['mode'], 'outputSchema': schema})
+                'model': resolution['model'], 'effort': resolution['mode'],
+                'approvalPolicy': APPROVAL_POLICY, 'outputSchema': schema})
             turn_id = started['turn']['id']
             deadline = time.monotonic() + timeout
             items = []
-            guard = ExecutionGuard(server, resolution, effective['thread_id'])
+            guard = ExecutionGuard(server, resolution, effective['thread_id'], directory, effective['sandbox'])
             pending = list(server.events)
             server.events.clear()
             while True:

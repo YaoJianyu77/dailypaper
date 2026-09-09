@@ -146,6 +146,7 @@ h1, h2, h3, p { margin-top: 0; }
 .prose .figure-caption { font-family: var(--sans); font-size: 11px; line-height: 1.75; color: var(--muted); margin-bottom: 28px; }
 .prose .figure-caption em { font-style: normal; }
 .figure-zoom { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
+.figure-hint { display: block; padding-top: 8px; text-align: right; font: 12px var(--sans); color: var(--accent); }
 .prose table { display: block; overflow-x: auto; border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 12px; margin: 24px 0; }
 .prose th, .prose td { border-bottom: 1px solid var(--line); padding: 10px 14px; text-align: left; }
 .prose th { background: var(--tint); font-weight: 600; }
@@ -158,11 +159,16 @@ h1, h2, h3, p { margin-top: 0; }
 .issue-neighbor:hover { background: var(--tint); }
 .issue-neighbor > span { color: var(--muted); font-size: 10px; }
 .issue-neighbor strong { font-family: var(--serif); font-size: 20px; font-weight: 400; }
-#figure-dialog { width: min(96vw, 1600px); max-height: 94vh; padding: 52px 20px 20px; border: 0; border-radius: 6px; background: white; box-shadow: 0 30px 120px #0005; }
+#figure-dialog { width: min(96vw, 1600px); max-height: 94vh; padding: 12px; overflow: hidden; border: 0; border-radius: 6px; background: white; box-shadow: 0 30px 120px #0005; }
 #figure-dialog::backdrop { background: #10231dde; }
-#figure-dialog img { display: block; max-width: 100%; max-height: 75vh; object-fit: contain; margin: auto; }
+.figure-viewport { width: 100%; max-height: 72vh; min-height: 60px; overflow: auto; overscroll-behavior: contain; border: 1px solid var(--line); }
+#figure-dialog img { display: block; max-width: none; max-height: none; height: auto; margin: 0 auto; }
+.dialog-toolbar { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; font: 12px var(--sans); }
+.dialog-toolbar button { min-width: 36px; min-height: 38px; padding: 5px 8px; border: 1px solid var(--line); background: var(--paper); border-radius: 4px; font: inherit; cursor: pointer; }
+.dialog-toolbar button:disabled { opacity: .4; cursor: default; }
+.dialog-scale { min-width: 38px; color: var(--muted); text-align: center; }
 #figure-dialog > p { font-size: 12px; line-height: 1.6; color: var(--muted); text-align: center; margin: 16px 0 0; }
-.dialog-close { position: absolute; right: 12px; top: 8px; width: 38px; height: 38px; font-size: 28px; border: 1px solid var(--line); background: var(--paper); border-radius: 4px; }
+.dialog-toolbar .dialog-close { margin-left: auto; font-size: 24px; line-height: 1; }
 @media (min-width: 1500px) { .site-main, .header-inner { max-width: 1260px; } .reader-layout { gap: 80px; } }
 @media (max-width: 900px) {
   .home-hero { grid-template-columns: 1fr 245px; gap: 35px; padding: 50px 0; }

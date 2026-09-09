@@ -15,7 +15,7 @@ Abstract-only enrichment is screening or legacy data, never the final technical 
 
 ## Article shape
 
-Keep the entire report in `content/daily/YYYY-MM-DD.md`: compact run metadata, latest-paper entries, classic-paper entries, and the configured final trend section. Print the actual local date/timezone, date windows, paper counts, and honest verification status. Keep long execution logs outside the reading article.
+Keep the entire report in `content/daily/YYYY-MM-DD.md`: compact run metadata, latest-paper entries, classic-paper entries, and the configured final trend section. Print the actual local date/timezone, date windows, paper counts, and a concise coverage explanation when needed. Record verification, commit, push, and deployment status in the controller's execution records as required by `AGENTS.md`.
 
 Preserve the per-paper headings defined in the settings. Each entry must develop one argument: **problem → bottleneck → insight → method → evidence → limitations**. Define technical terms, keep metadata compact, and remove redundant descriptions and generic praise without deleting the mechanism or experimental conditions.
 

@@ -19,7 +19,7 @@ Install or update from `main` on the always-on Linux host, with Python 3.11+, No
 bash scripts/install_local_cron.sh
 ```
 
-This updates Codex and Python dependencies, checks the authenticated runtime with a synthetic PDF, and installs or updates **one daily job at 07:00 America/New_York**. It preserves unrelated schedules, follows daylight saving time, and blocks overlapping runs. Setup does not generate a report. If Codex needs authentication, use `codex login` and rerun setup; approval settings remain intact.
+This updates Codex, Python dependencies, and the headless browser, checks the authenticated runtime and local rendering, and installs or updates **one daily job at 07:00 America/New_York**. It preserves unrelated schedules, follows daylight saving time, and blocks overlapping runs. Setup does not generate a report. If Codex needs authentication, use `codex login` and rerun setup. Unattended threads explicitly use `never` approvals inside the existing workspace sandbox; global credentials and permission settings are unchanged.
 
 ```bash
 bash scripts/install_local_cron.sh --status

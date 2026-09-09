@@ -41,10 +41,19 @@ def normalize_title(value):
 def identifier_tokens(value):
     text = unquote(str(value)).strip()
     found = set()
-    for match in re.finditer(r'(?:arxiv:|arxiv\.org/(?:abs|pdf)/)?(\d{4}\.\d{4,5}|[a-z-]+(?:\.[A-Z]{2})?/\d{7})(?:v\d+)?', text, re.I):
-        found.add('arxiv:' + match.group(1).casefold())
-    for match in re.finditer(r'10\.\d{4,9}/[^\s<>"\]]+', text, re.I):
-        found.add('doi:' + match.group().rstrip('.,);}').casefold())
+    arxiv_id = r'(\d{4}\.\d{4,5}|[a-z-]+(?:\.[A-Z]{2})?/\d{7})(?:v\d+)?'
+    doi_matches = list(re.finditer(r'10\.\d{4,9}/[^\s<>"\]]+', text, re.I))
+    for match in doi_matches:
+        doi = match.group().rstrip('.,);}').casefold()
+        found.add('doi:' + doi)
+        # arXiv's own DOI is an explicit alias, unlike arbitrary DOI digits.
+        # Format: https://info.arxiv.org/help/doi.html
+        arxiv_doi = re.fullmatch(r'10\.48550/arxiv\.' + arxiv_id, doi, re.I)
+        if arxiv_doi:
+            found.add('arxiv:' + arxiv_doi.group(1).casefold())
+    for match in re.finditer(r'(?<![\w])(?:arxiv:|arxiv\.org/(?:abs|pdf)/)?' + arxiv_id + r'(?![\w])', text, re.I):
+        if not any(doi.start() <= match.start() < doi.end() for doi in doi_matches):
+            found.add('arxiv:' + match.group(1).casefold())
     for match in re.finditer(r'(?:dblp:|dblp\.(?:org|uni-trier\.de)/rec/)((?:conf|journals)/[^\s?#]+)', text, re.I):
         found.add('dblp:' + re.sub(r'\.(?:html|xml|bib)$', '', match.group(1)).rstrip(').'))
     return found

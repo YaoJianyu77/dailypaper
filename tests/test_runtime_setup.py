@@ -84,7 +84,9 @@ class FakeServer:
             self.selected = self.model_override or params['model']
             self.effort = self.effort_override or params['config']['model_reasoning_effort']
             return {'model': self.selected, 'reasoningEffort': self.effort, 'modelProvider': 'openai',
-                    'approvalPolicy': 'on-request', 'sandbox': {'type': 'workspaceWrite'}, 'thread': {'id': 'fixture-thread'}}
+                    'approvalPolicy': self.approval_override or params['approvalPolicy'],
+                    'sandbox': self.sandbox_override or {'type': 'workspaceWrite', 'writableRoots': [], 'networkAccess': False},
+                    'thread': {'id': 'fixture-thread'}}
         if method == 'thread/read':
             thread = {'id': params['threadId'], 'model': self.selected, 'reasoningEffort': self.effort,
                       'modelProvider': 'openai', 'cliVersion': 'fixture-cli'}
@@ -106,6 +108,9 @@ class RuntimeTests(unittest.TestCase):
         FakeServer.model_override = None
         FakeServer.effort_override = None
         FakeServer.thread_overrides = {}
+        FakeServer.approval_override = None
+        FakeServer.sandbox_override = None
+        FakeServer.permission_overrides = {}
         FakeServer.final_events = completed_events()
         self.resolution = {'model': 'fixture-research', 'mode': 'ultra', 'cli_version': 'fixture-cli',
                            'executable': '/fixture/codex', 'settings_sha256': self.settings.sha256}
@@ -120,7 +125,12 @@ class RuntimeTests(unittest.TestCase):
             return runtime.resolve_runtime(REPO, self.settings)
 
     def execute(self):
+        def receipt(thread, turn_id=None):
+            value = {'approvalPolicy': 'never', 'sandbox': {'type': 'workspaceWrite', 'writableRoots': [], 'networkAccess': False}}
+            value.update(FakeServer.permission_overrides.get(thread['id'], {}))
+            return value
         with patch.object(runtime, 'AppServer', FakeServer), \
+             patch.object(runtime, 'read_turn_permissions', side_effect=receipt), \
              patch.object(runtime.subprocess, 'check_output', return_value='fixture-cli'):
             return runtime.execute('/fixture/codex', self.resolution, REPO, 'fixture', {}, images=[REPO / 'fixture.png'])
 
@@ -130,6 +140,42 @@ class RuntimeTests(unittest.TestCase):
                          recommendation().replace('## Other models', recommendation('another-research'))):
             with self.assertRaises(runtime.RuntimeVerificationError):
                 runtime.recommended_model(document)
+
+    def test_empty_startup_session_is_retried_read_only_then_fully_verified(self):
+        server = FakeServer()
+        valid = server.call('thread/read', {'threadId': 'fixture-thread'})
+        empty = runtime.RuntimeRPCError('thread/read', {'code': -32603,
+            'message': 'failed to read session metadata /fixture.jsonl: rollout at /fixture.jsonl is empty'})
+        with patch.object(server, 'call', side_effect=[empty, valid]) as call, patch.object(runtime.time, 'sleep'):
+            self.assertEqual(runtime.verify_thread(server, self.resolution, 'fixture-thread'), valid['thread'])
+        self.assertEqual([c.args[0] for c in call.call_args_list], ['thread/read', 'thread/read'])
+        valid['thread']['model'] = 'substituted-model'
+        with patch.object(server, 'call', side_effect=[empty, valid]), patch.object(runtime.time, 'sleep'):
+            with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'substituted'):
+                runtime.verify_thread(server, self.resolution, 'fixture-thread')
+
+    def test_empty_session_timeout_and_other_protocol_errors_stop(self):
+        server = FakeServer()
+        empty = runtime.RuntimeRPCError('thread/read', {'code': -32603,
+            'message': 'failed to read session metadata /fixture.jsonl: rollout at /fixture.jsonl is empty'})
+        with patch.object(server, 'call', side_effect=empty) as call:
+            with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'remained empty'):
+                runtime.verify_thread(server, self.resolution, 'fixture-thread', timeout=0)
+        self.assertEqual(call.call_count, 1)
+        for error in (runtime.RuntimeRPCError('thread/read', {'code': -32603, 'message': 'permission denied'}),
+                      runtime.RuntimeVerificationError('interactive authorization')):
+            with patch.object(server, 'call', side_effect=error) as call, self.assertRaises(type(error)):
+                runtime.verify_thread(server, self.resolution, 'fixture-thread')
+            self.assertEqual(call.call_count, 1)
+
+    def test_browser_failure_stops_preflight_before_any_model_turn(self):
+        from codex_checks import check_capabilities
+        with tempfile.TemporaryDirectory() as directory, \
+             patch('browser_render.check_browser', side_effect=RuntimeError('Browser unavailable')), \
+             patch('codex_checks.execute') as execute:
+            with self.assertRaisesRegex(RuntimeError, 'Browser unavailable'):
+                check_capabilities(REPO, self.resolution)
+            execute.assert_not_called()
 
     def test_new_flagship_wins_over_newer_names_or_defaults(self):
         FakeServer.catalog_model = 'future-research-flagship'
@@ -146,7 +192,7 @@ class RuntimeTests(unittest.TestCase):
         start = next(params for method, params in FakeServer.calls if method == 'thread/start')
         self.assertFalse(start['allowProviderModelFallback'])
         self.assertEqual(start['config']['agents.default_subagent_reasoning_effort'], 'ultra')
-        self.assertNotIn('approvalPolicy', start)
+        self.assertEqual(start['approvalPolicy'], 'never')
         self.assertNotIn('approvalsReviewer', start)
         self.assertEqual(start['config']['agents.default_subagent_model'], value['model'])
         self.assertEqual(value['selection_evidence']['reasoning']['selected'], 'ultra')
@@ -200,6 +246,7 @@ class RuntimeTests(unittest.TestCase):
         start = next(params for method, params in FakeServer.calls if method == 'turn/start')
         self.assertEqual(start['model'], self.resolution['model'])
         self.assertEqual(start['effort'], 'ultra')
+        self.assertEqual(start['approvalPolicy'], 'never')
         self.assertEqual(start['input'][1]['type'], 'localImage')
         self.assertEqual(start['input'][1]['detail'], 'original')
         self.assertIn('Explicitly use these exact values', start['input'][0]['text'])
@@ -233,6 +280,7 @@ class RuntimeTests(unittest.TestCase):
             return {'method': 'item/completed', 'params': {'threadId': parent, 'item': {
                 'type': 'subAgentActivity', 'agentThreadId': child, 'kind': kind}}}
         FakeServer.final_events = [activity('fixture-thread', 'child', 'started'),
+            activity('fixture-thread', 'child', 'interacted'),
             activity('child', 'grandchild', 'started'), activity('child', 'grandchild', 'completed'),
             activity('fixture-thread', 'child', 'completed')] + completed_events()
         self.assertTrue(self.execute()[0]['ok'])
@@ -250,6 +298,72 @@ class RuntimeTests(unittest.TestCase):
             'threadId': 'fixture-thread', 'item': {'type': 'subAgentActivity', 'agentThreadId': 'child', 'kind': 'started'}}})
         with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'still running'):
             self.execute()
+
+    def test_never_is_explicit_on_initial_calls_and_retries(self):
+        for _ in range(2):
+            self.assertTrue(self.execute()[0]['ok'])
+        for method, params in FakeServer.calls:
+            if method in {'thread/start', 'turn/start'}:
+                self.assertEqual(params['approvalPolicy'], 'never')
+            if method == 'thread/start':
+                self.assertEqual(params['sandbox'], 'workspace-write')
+                self.assertNotIn('permissions', params)
+        self.assertFalse(any(method in {'thread/resume', 'thread/settings/update'} for method, _ in FakeServer.calls))
+
+    def test_effective_turn_receipts_are_read_without_altering_threads(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'rollout-fixture-thread.jsonl'
+            rows = [{'type': 'session_meta', 'payload': {'id': 'fixture-thread'}},
+                    {'type': 'turn_context', 'payload': {'turn_id': 'first', 'approval_policy': 'never',
+                        'workspace_roots': [directory], 'sandbox_policy': {'type': 'workspace-write', 'network_access': False}}},
+                    {'type': 'turn_context', 'payload': {'turn_id': 'second', 'approval_policy': 'on-request',
+                        'sandbox_policy': {'type': 'workspace-write', 'network_access': False}}}]
+            raw = ''.join(json.dumps(row) + '\n' for row in rows) + '{"type":"incomplete'
+            path.write_text(raw)
+            thread = {'id': 'fixture-thread', 'path': str(path)}
+            first = runtime.read_turn_permissions(thread, 'first', timeout=0)
+            runtime.verify_permissions(first, directory)
+            with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'approvalPolicy=never'):
+                runtime.verify_permissions(runtime.read_turn_permissions(thread, 'second', timeout=0), directory)
+            with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'did not record'):
+                runtime.read_turn_permissions(thread, 'missing', timeout=0)
+            self.assertEqual(path.read_text(), raw)
+            rows[0]['payload']['id'] = 'another-thread'
+            path.write_text(''.join(json.dumps(row) + '\n' for row in rows))
+            with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'another Codex thread'):
+                runtime.read_turn_permissions(thread, 'first', timeout=0)
+
+    def test_interactive_or_missing_approval_policy_stops_before_turn(self):
+        for policy in ('on-request', 'untrusted', {'granular': {'sandbox_approval': True}}):
+            FakeServer.approval_override = policy
+            FakeServer.calls = []
+            with self.subTest(policy=policy), self.assertRaisesRegex(runtime.RuntimeVerificationError, 'approvalPolicy=never'):
+                self.execute()
+            self.assertFalse(any(method == 'turn/start' for method, _ in FakeServer.calls))
+        with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'approvalPolicy=never'):
+            runtime.verify_permissions({'sandbox': {'type': 'workspaceWrite', 'networkAccess': False}}, REPO)
+
+    def test_parent_and_subagent_effective_permissions_cannot_change(self):
+        activity = lambda kind: {'method': 'item/completed', 'params': {'threadId': 'fixture-thread',
+            'item': {'type': 'subAgentActivity', 'agentThreadId': 'child', 'kind': kind}}}
+        FakeServer.final_events = [activity('started'), activity('completed')] + completed_events()
+        for thread in ('fixture-thread', 'child'):
+            for bad in ({'approvalPolicy': 'on-request'}, {'approvalPolicy': None},
+                        {'sandbox': {'type': 'dangerFullAccess'}},
+                        {'sandbox': {'type': 'workspaceWrite', 'networkAccess': True}},
+                        {'sandbox': {'type': 'workspaceWrite', 'networkAccess': False, 'writableRoots': ['/']}},
+                        {'runtimeWorkspaceRoots': ['/']}):
+                FakeServer.permission_overrides = {thread: bad}
+                with self.subTest(thread=thread, bad=bad), self.assertRaises(runtime.RuntimeVerificationError):
+                    self.execute()
+
+    def test_never_does_not_allow_a_broader_starting_sandbox(self):
+        for sandbox in ({'type': 'dangerFullAccess'}, {'type': 'externalSandbox'},
+                        {'type': 'workspaceWrite', 'networkAccess': True},
+                        {'type': 'workspaceWrite', 'networkAccess': False, 'writableRoots': ['/']}):
+            FakeServer.sandbox_override = sandbox
+            with self.subTest(sandbox=sandbox), self.assertRaises(runtime.RuntimeVerificationError):
+                self.execute()
 
     def test_codex_version_cannot_change_between_calls(self):
         self.resolution['cli_version'] = 'previous-version'
@@ -314,6 +428,7 @@ class RuntimeTests(unittest.TestCase):
             executable = Path(directory) / 'codex-fixture'
             executable.write_text('''#!/usr/bin/env python3
 import sys,json
+assert sys.argv[1:] == ['--search','--ask-for-approval','never','app-server','--strict-config','--listen','stdio://']
 for line in sys.stdin:
     value=json.loads(line)
     if value.get('method') == 'initialize':

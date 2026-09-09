@@ -2,6 +2,7 @@
 """Local Codex transport for the same full-paper stages used by API models."""
 
 import copy
+import logging
 from pathlib import Path
 
 import jsonschema
@@ -10,6 +11,8 @@ from pipeline_prompts import build_messages, stage_schema
 from codex_runtime import execute, resolve_runtime, require, bind_report, resolution_identity
 from codex_checks import check_capabilities
 from report_settings import load_settings
+
+logger = logging.getLogger(__name__)
 
 
 class CodexBackend:
@@ -38,9 +41,12 @@ class CodexBackend:
         messages = build_messages(self.root, self.settings, stage, context)
         schema = stage_schema(stage, self.settings)
         prompt = '\n\n'.join(message['content'] for message in messages)
+        logger.info('Starting Codex stage %s%s', stage,
+                    ': ' + context['paper']['title'] if context.get('paper', {}).get('title') else '')
         result, _ = execute(resolution['executable'], resolution, self.root, prompt, schema, images,
                             timeout=int(self.options.get('codex_timeout_seconds', 1200)))
         jsonschema.validate(result, schema)
+        logger.info('Completed Codex stage %s', stage)
         return result
 
 

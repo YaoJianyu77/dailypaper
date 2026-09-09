@@ -14,6 +14,7 @@ from unittest.mock import Mock, patch
 
 import fitz
 import jsonschema
+import requests
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / 'scripts'))
@@ -21,13 +22,13 @@ sys.path.insert(0, str(REPO / 'scripts'))
 from ai_enrich import APIBackend
 from codex_enrich import CodexBackend
 from daily_pipeline import discovery, prepare
-from paper_sources import EvidenceError, Sources, label_matches
+from paper_sources import EvidenceError, Sources, label_matches, publication_venue_matches
 from pipeline_prompts import build_messages, stage_schema
 from publish_daily import publish
 from recommendation_history import (HISTORY_PATH, HistoryError, assert_unchanged, json_bytes,
-                                    load_history, write_history)
+                                    identifier_tokens, load_history, match_record, write_history)
 from report_settings import SettingsError, calendar_shift, load_infrastructure, load_settings
-from report_validation import ValidationError, validate_analysis, validate_trends
+from report_validation import ValidationError, prepare_visuals, validate_analysis, validate_document, validate_trends
 from site_content import read_report
 
 DAY = date(2026, 9, 8)
@@ -80,6 +81,7 @@ class FixtureSources(Sources):
                          'index_evidence': {'url': 'https://index.example', 'record': {'fixture': True}}, 'abstract': 'Screening only.'}
             self.candidates.append(candidate)
             crossref = {'message': {'title': [title], 'type': 'proceedings-article',
+                        'container-title': [settings.venues[0]],
                         'published-online': {'date-parts': [[int(n) for n in published.split('-')]]},
                         'URL': url, 'link': [{'URL': pdf_url, 'content-type': 'application/pdf'}]}}
             self.files['https://api.crossref.org/works/' + doi.replace('/', '%2F')] = json_bytes(crossref)
@@ -145,7 +147,8 @@ class FixtureBackend:
                               'timezone': 'Timezone', 'latest_window': 'Latest window', 'classic_window': 'Classic window',
                               'inclusive': 'inclusive', 'official_publication': 'Official publication',
                               'full_paper': 'Full paper', 'supporting_papers': 'Supporting papers'},
-                    'trends': [], 'insufficient_evidence': 'Synthetic fixtures cannot support a scientific trend.'}
+                    'trends': [], 'insufficient_evidence': 'Synthetic fixtures cannot support a scientific trend.',
+                    'coverage_note': context.get('selection_shortfall', '')}
         result = review_result()
         if self.reject:
             result.update(approved=False, problems=['Fixture models rejection of unresolved evidence.'])
@@ -247,8 +250,7 @@ class PipelineTests(unittest.TestCase):
         self.edit("**Clear Research Trends in Today's Papers**", '**Fixture Research Direction**')
         self.edit('GPU systems;', 'Storage research;')
         self.edit('SOSP, OSDI, NSDI', 'PLDI, OSDI, NSDI')
-        for paper in self.sources.candidates:
-            paper['venue'] = self.settings.venues[0]
+        self.sources = FixtureSources(self.settings, self.infrastructure)
         bundle = self.prepare()
         self.assertEqual(len(bundle['papers']), 1)
         self.assertEqual(bundle['papers'][0]['title'], 'GPU Scheduling Fixture')
@@ -398,6 +400,30 @@ class PipelineTests(unittest.TestCase):
         with self.assertRaisesRegex(SettingsError, 'Competing'):
             load_infrastructure(self.root)
 
+    def test_editor_explains_unfilled_slots_without_publishing_preparation_notes(self):
+        self.sources.candidates = self.sources.candidates[:4]
+        pool = discovery(self.root, self.settings, DAY, self.sources, load_history(self.root))
+        raw = 'No classic was verified. Analysis is pending; screenshot tools returned no pixels.'
+        edited = 'No eligible classic paper was verified in this search.'
+        generate = self.backend.generate
+        def edit_note(stage, context, images=()):
+            result = generate(stage, context, images)
+            if stage == 'select':
+                result['shortfall_reason'] = raw
+            if stage == 'trends':
+                self.assertEqual(context['selection_shortfall'], raw)
+                result['coverage_note'] = edited
+            return result
+        with patch.object(self.backend, 'generate', side_effect=edit_note):
+            bundle = self.prepare(pool=pool)
+        self.assertEqual(bundle['shortfall_reason'], raw)
+        self.assertIn(edited, bundle['report_markdown'])
+        self.assertNotIn('Analysis is pending', bundle['report_markdown'])
+        self.assertNotIn('no pixels', bundle['report_markdown'])
+        incomplete = {**bundle['trends'], 'coverage_note': ''}
+        with self.assertRaisesRegex(ValidationError, 'reader-facing coverage explanation'):
+            validate_trends(incomplete, bundle['papers'], self.settings)
+
     def test_trend_support_and_language_reach_contract_and_renderer(self):
         self.edit('**English**', '**Spanish**')
         messages = build_messages(self.root, self.settings, 'trends', {'papers': []})
@@ -408,13 +434,115 @@ class PipelineTests(unittest.TestCase):
         self.edit('**2** |', '**3** |')
         self.assertEqual(stage_schema('trends', self.settings)['properties']['trends']['maxItems'], 1)
         papers = [{'title': str(i), 'doi': f'10.9999/{i}', 'category': 'latest'} for i in range(3)]
-        trends = self.backend.generate('trends', {'papers': papers})
+        trends = self.backend.generate('trends', {'papers': papers, 'selection_shortfall': 'Fixture subset leaves slots unfilled.'})
         trends['trends'] = [{'title': 'Fixture', 'text': 'Shared problem and direction with an unresolved trade-off.',
                              'supporting_work_ids': ['doi:10.9999/0', 'doi:10.9999/1']}]
         with self.assertRaisesRegex(ValidationError, 'latest-paper support'):
             validate_trends(trends, papers, self.settings)
         trends['trends'][0]['supporting_work_ids'].append('doi:10.9999/2')
         validate_trends(trends, papers, self.settings)
+
+    def supplement_fixture(self):
+        candidate = copy.deepcopy(self.sources.candidates[0])
+        article = 'https://proceedings.mlsys.org/paper_files/paper/2026/hash/fixture.html'
+        supplement = 'https://proceedings.mlsys.org/paper_files/paper/2026/file/attachment.pdf'
+        candidate.update(doi='', venue='MLSys', source_urls=[article], official_urls=[article])
+        self.sources.files[article] = (f'<meta name="citation_title" content="{candidate["title"]}">'
+            '<meta name="citation_journal_title" content="Proceedings of Machine Learning and Systems">'
+            '<meta name="citation_publication_date" content="2026-05-18">'
+            f'<meta name="citation_pdf_url" content="{candidate["pdf_urls"][0]}">'
+            f'<a href="{supplement}"><span>Supplemental appendix</span></a>').encode()
+        with fitz.open() as extra:
+            extra.new_page().insert_text((40, 50), 'APPENDIX_ONLY_EVIDENCE: batch size is 32.')
+            self.sources.files[supplement] = extra.tobytes()
+        return self.sources.verify_publication(candidate), supplement
+
+    def test_published_supplement_is_read_rendered_and_bound_to_original_sources(self):
+        candidate, supplement = self.supplement_fixture()
+        self.assertEqual(candidate['supplements'][0]['url'], supplement)
+        self.assertNotIn(supplement, candidate['pdf_urls'])
+        document = self.sources.full_paper(candidate, self.root / 'complete')
+        validate_document(document)
+        self.assertEqual(len(document['pages']), 3)
+        self.assertIn('APPENDIX_ONLY_EVIDENCE', document['pages'][-1]['text'])
+        self.assertEqual(document['pages'][-1]['source_page'], 1)
+        self.assertEqual(document['pages'][-1]['source_url'], supplement)
+        analysis = analysis_result(document, self.settings)
+        validate_analysis(analysis, document, self.settings)
+        analysis['visuals'][1]['page'] = 3
+        _, blocks = prepare_visuals(candidate, analysis, document, self.root / 'supplement-visuals')
+        self.assertIn(f'[PDF page 1]({supplement}#page=1)', blocks[1])
+        with self.assertRaisesRegex(ValidationError, 'preserve the selection and revalidate'):
+            validate_document({key: value for key, value in document.items() if key != 'source_documents'})
+        Path(document['source_documents'][-1]['pdf']).write_bytes(b'changed supplement')
+        with self.assertRaisesRegex(ValidationError, 'supplement changed'):
+            validate_document(document)
+
+    def author_fixture(self):
+        candidate = self.sources.verify_publication(self.sources.candidates[0])
+        candidate['source_urls'].append('https://arxiv.org/abs/2601.12345v2')
+        url = 'https://arxiv.org/pdf/2601.12345v2'
+        raw = self.sources.files[candidate['pdf_urls'][0]]
+        with fitz.open(stream=raw, filetype='pdf') as author:
+            author.new_page().insert_text((40, 50), 'AUTHOR_APPENDIX_EVIDENCE: compilation can take several minutes.')
+            self.sources.files[url] = author.tobytes()
+        return candidate, url, raw
+
+    def test_linked_author_appendix_is_retained_without_replacing_publisher_copy(self):
+        candidate, url, original = self.author_fixture()
+        document = self.sources.full_paper(candidate, self.root / 'author-complete')
+        validate_document(document)
+        self.assertEqual(len(document['pages']), 5)
+        self.assertEqual([d['kind'] for d in document['source_documents']], ['main', 'author-version'])
+        self.assertEqual(Path(document['source_documents'][0]['pdf']).read_bytes(), original)
+        self.assertEqual(document['pages'][-1]['source_page'], 3)
+        self.assertEqual(document['pages'][-1]['source_url'], url)
+        self.assertIn('AUTHOR_APPENDIX_EVIDENCE', document['pages'][-1]['text'])
+
+    def test_identical_author_copy_is_not_duplicated_and_wrong_work_is_rejected(self):
+        candidate, url, original = self.author_fixture()
+        self.sources.files[url] = original
+        document = self.sources.full_paper(candidate, self.root / 'identical')
+        self.assertEqual(len(document['pages']), 2)
+        self.assertEqual(len(document['source_documents']), 1)
+        self.sources.files[url] = self.sources.files[self.sources.candidates[1]['pdf_urls'][0]]
+        with self.assertRaisesRegex(EvidenceError, 'Author-copy title does not match'):
+            self.sources.full_paper(candidate, self.root / 'wrong-author')
+
+    def test_unreadable_linked_author_copy_stops_complete_paper_claim(self):
+        candidate, url, original = self.author_fixture()
+        get = self.sources.get
+        def unavailable(target, *args, **kwargs):
+            if target == url:
+                raise requests.Timeout('fixture unavailable')
+            return get(target, *args, **kwargs)
+        with patch.object(self.sources, 'get', side_effect=unavailable):
+            with self.assertRaisesRegex(EvidenceError, 'Linked author version could not be verified'):
+                self.sources.full_paper(candidate, self.root / 'unavailable-author')
+
+    def test_inaccessible_published_supplement_stops_instead_of_using_main_only(self):
+        candidate, supplement = self.supplement_fixture()
+        original = self.sources.get
+        def get(url, *args, **kwargs):
+            if url == supplement:
+                raise requests.ConnectionError('fixture unavailable')
+            return original(url, *args, **kwargs)
+        with patch.object(self.sources, 'get', side_effect=get):
+            with self.assertRaisesRegex(EvidenceError, 'Required published supplement unavailable'):
+                self.sources.full_paper(candidate, self.root / 'incomplete')
+        self.assertFalse((self.root / 'incomplete/paper.pdf').exists())
+
+    def test_combined_paper_limit_and_supplement_text_requirements_are_enforced(self):
+        candidate, supplement = self.supplement_fixture()
+        self.sources.documents['max_pages'] = 2
+        with self.assertRaisesRegex(EvidenceError, 'exceed page limit'):
+            self.sources.full_paper(candidate, self.root / 'limited')
+        self.sources.documents['max_pages'] = 100
+        with fitz.open() as blank:
+            blank.new_page()
+            self.sources.files[supplement] = blank.tobytes()
+        with self.assertRaisesRegex(EvidenceError, 'verified OCR is required'):
+            self.sources.full_paper(candidate, self.root / 'scanned')
 
     def test_source_publication_dates_and_complete_pdf_failures(self):
         candidate = self.sources.candidates[0]
@@ -497,6 +625,226 @@ class PipelineTests(unittest.TestCase):
         self.assertTrue(any(year == 2021 for _, year, _ in calls))
         self.assertLessEqual(len(result), len(self.settings.venues) * 12)
         self.assertTrue(sources.failures)  # Budget limitations are handed to selection.
+
+    def test_blocked_indexes_stop_repeated_requests_and_redact_credentials(self):
+        session = Mock()
+        challenge = Mock(status_code=200, url='https://dblp.org/search/publ/api')
+        challenge.iter_content.return_value = [b'<html>Making sure you are not a bot</html>']
+        limited = Mock(status_code=429)
+        session.get.side_effect = [challenge, limited]
+        sources = Sources({'search': {'request_interval_seconds': 0, 'retries': 2}}, session)
+        with patch.dict(os.environ, {'OPENALEX_API_KEY': 'private-fixture-token'}):
+            self.assertEqual(sources.discover(self.settings, DAY), [])
+        self.assertEqual(session.get.call_count, 2)
+        self.assertEqual(len(sources.failures), 2)
+        self.assertIn('non-JSON', sources.failures[0])
+        self.assertIn('HTTP 429', sources.failures[1])
+        self.assertNotIn('private-fixture-token', str(sources.failures))
+        # Repeated access in this run fails locally; a fresh run may retry the service.
+        with self.assertRaisesRegex(EvidenceError, 'HTTP 429'):
+            sources.json('https://api.openalex.org/works/fixture')
+        self.assertEqual(session.get.call_count, 2)
+        self.assertEqual(Sources({}).unavailable, {})
+
+    def test_index_timeout_is_not_an_empty_result_or_repeated_per_venue(self):
+        session = Mock()
+        session.get.side_effect = requests.Timeout('https://api.openalex.org/?api_key=private-fixture-token')
+        sources = Sources({'search': {'request_interval_seconds': 0}}, session)
+        self.assertEqual(sources.discover(self.settings, DAY), [])
+        self.assertEqual(session.get.call_count, 2)
+        self.assertTrue(all('Timeout' in item for item in sources.failures))
+        self.assertNotIn('private-fixture-token', str(sources.failures))
+
+    def discovery_result(self):
+        keys = stage_schema('discover', self.settings)['properties']['candidates']['items']['properties']
+        return {'candidates': [{key: copy.deepcopy(paper[key]) for key in keys} for paper in self.sources.candidates],
+                'coverage_limits': ['Fixture official search coverage is incomplete.']}
+
+    def test_official_search_fallback_prepares_and_renders_without_history_writes(self):
+        original = self.backend.generate
+        calls = []
+        def fallback(stage, context, images=()):
+            if stage == 'discover':
+                calls.append(context)
+                self.assertEqual(context['date_windows'], self.settings.windows(DAY))
+                self.assertEqual(context['prior_recommendation_evidence'], load_history(self.root).prompt_records)
+                return self.discovery_result()
+            return original(stage, context, images)
+        with patch.object(self.sources, 'discover', return_value=[]), \
+             patch.object(self.backend, 'generate', side_effect=fallback):
+            bundle = self.prepare()
+            resumed = self.prepare()
+        self.assertEqual(len(calls), 1)  # A retry keeps the existing selection.
+        self.assertEqual(bundle['report_markdown'], resumed['report_markdown'])
+        self.assertEqual(len(bundle['papers']), 5)
+        self.assertEqual(len(bundle['assets']), 5)
+        self.assertEqual(bundle['report_markdown'].count('| System | Latency (ms) |'), 5)
+        self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
+        self.assertFalse((self.root / 'content').exists())
+        diagnostics = json.loads((self.root / '.cache/dailypaper/runs/2026-09-08/discovery.json').read_text())
+        self.assertEqual(len(diagnostics['candidates']), 5)
+        self.assertTrue(diagnostics['source_failures'])
+
+    def test_rejected_analysis_is_revised_without_reselecting_or_changing_history(self):
+        original = self.backend.generate
+        attempts, reviews = [], []
+        def revise(stage, context, images=()):
+            result = original(stage, context, images)
+            if stage == 'analyze' and context['paper']['title'] == self.sources.candidates[0]['title']:
+                attempts.append(context)
+            if stage == 'review' and context['kind'] == 'paper' and not reviews:
+                reviews.append(context)
+                result.update(approved=False, problems=['Include the workload conditions for the measured result.'])
+            if stage == 'review' and context['kind'] == 'trends':
+                self.assertTrue(context['rendering']['offline'])
+                self.assertTrue(context['rendering']['chromium_sandbox'])
+                self.assertEqual([s['path'] for s in context['rendering']['screenshots']], images)
+                self.assertEqual({s['viewport_width'] for s in context['rendering']['screenshots']}, {1440, 390})
+                for view in context['rendering']['views']:
+                    self.assertEqual(len(view['expanded_figures']), view['images'])
+                    for figure in view['expanded_figures']:
+                        self.assertEqual(figure['scale'], 1)
+                        self.assertEqual(max(t['left'] for t in figure['tiles']), max(0, figure['full_width'] - figure['width']))
+                        self.assertEqual(max(t['top'] for t in figure['tiles']), max(0, figure['full_height'] - figure['height']))
+            return result
+        with patch.object(self.backend, 'generate', side_effect=revise):
+            self.prepare()
+        self.assertEqual(len(attempts), 2)
+        self.assertEqual(attempts[0]['paper'], attempts[1]['paper'])
+        self.assertEqual(attempts[0]['document'], attempts[1]['document'])
+        self.assertIn('workload conditions', attempts[1]['revision_feedback'])
+        self.assertIn('prior_analysis', attempts[1])
+        self.assertEqual(sum(stage == 'select' for stage, *_ in self.backend.calls), 1)
+        self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
+
+    def test_revision_limit_does_not_bypass_failed_review(self):
+        self.backend.reject = True
+        with self.assertRaisesRegex(ValidationError, 'review rejected'):
+            self.prepare()
+        self.assertEqual(sum(stage == 'analyze' for stage, *_ in self.backend.calls), 3)
+        self.assertEqual(sum(stage == 'select' for stage, *_ in self.backend.calls), 1)
+        self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
+
+    def test_browser_blocks_remote_resources_and_binds_screenshots_to_report(self):
+        from browser_render import inspect_site
+        site = self.root / 'browser-source'
+        site.mkdir()
+        (site / 'index.html').write_text('<article id="report-body"><img src="https://untrusted.invalid/figure.png"></article>')
+        with self.assertRaises(ValidationError):
+            inspect_site(site, 'index.html', self.root / 'browser-output', 1, 0)
+        bundle = self.prepare()
+        from publish_daily import validate_bundle
+        del bundle['rendering']
+        with self.assertRaisesRegex(ValidationError, 'browser verification'):
+            validate_bundle(self.root, bundle, self.settings)
+
+    def test_fallback_rechecks_complete_history_and_publisher_evidence(self):
+        data = json.loads(self.original_history)
+        data['papers'] = [self.sources.candidates[0]]
+        (self.root / HISTORY_PATH).write_bytes(json_bytes(data))
+        before = (self.root / HISTORY_PATH).read_bytes()
+        result = self.discovery_result()
+        invented = copy.deepcopy(result['candidates'][1])
+        invented['title'] = 'Invented publisher title'
+        result['candidates'].insert(0, invented)
+        self.backend.generate = Mock(return_value=result)
+        with patch.object(self.sources, 'discover', return_value=[]):
+            pool = discovery(self.root, self.settings, DAY, self.sources, load_history(self.root), backend=self.backend)
+        self.assertEqual(len(pool['candidates']), 4)
+        self.assertEqual(len(pool['rejected']), 2)
+        self.assertTrue(any('Previously recommended' in r['reason'] for r in pool['rejected']))
+        self.assertTrue(any('DOI title differs' in r['reason'] for r in pool['rejected']))
+        self.assertEqual((self.root / HISTORY_PATH).read_bytes(), before)
+
+    def test_fallback_uses_updated_settings_and_rejects_unconfigured_venue(self):
+        self.edit('SOSP, OSDI, NSDI', 'PLDI, OSDI, NSDI')
+        self.edit('**6 calendar months**', '**1 calendar month**')
+        messages = build_messages(self.root, self.settings, 'discover', {})
+        self.assertIn(self.settings.raw, messages[0]['content'])
+        self.assertIn('skills/daily-paper-search/SKILL.md', messages[0]['content'])
+        result = self.discovery_result()  # Still contains old SOSP fixture candidates.
+        self.backend.generate = Mock(return_value=result)
+        with patch.object(self.sources, 'discover', return_value=[]), self.assertRaises(jsonschema.ValidationError):
+            discovery(self.root, self.settings, DAY, self.sources, load_history(self.root), backend=self.backend)
+        context = self.backend.generate.call_args.args[1]
+        self.assertEqual(context['date_windows']['latest']['start'], '2026-08-08')
+
+    def test_empty_discovery_retains_actionable_diagnostics(self):
+        self.sources.failures = ['DBLP: HTML challenge', 'OpenAlex: HTTP 429']
+        self.backend.generate = Mock(return_value={'candidates': [], 'coverage_limits': ['No exact publisher dates.']})
+        diagnostics = self.root / 'isolated-diagnostics.json'
+        with patch.object(self.sources, 'discover', return_value=[]), self.assertRaisesRegex(ValidationError, 'HTTP 429'):
+            discovery(self.root, self.settings, DAY, self.sources, load_history(self.root), backend=self.backend,
+                      diagnostics_path=diagnostics)
+        self.assertEqual(json.loads(diagnostics.read_text())['candidates'], [])
+        self.assertIn('No exact publisher dates.', json.loads(diagnostics.read_text())['source_failures'])
+        self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
+
+    def test_doi_digits_do_not_create_false_arxiv_history_collisions(self):
+        first = {'title': 'Unrelated first work', 'doi': '10.1145/3600006.3613147'}
+        second = {'title': 'Unrelated second work', 'doi': '10.1145/3600006.3613165'}
+        for paper in (first, second):
+            self.assertEqual(identifier_tokens(paper['doi']), {'doi:' + paper['doi']})
+        self.assertIsNone(match_record(first, [second])[0])
+        self.assertEqual(match_record(first, [first])[0], first)
+        self.assertEqual(identifier_tokens('10.9999/2401.12345'), {'doi:10.9999/2401.12345'})
+        self.assertEqual(identifier_tokens('1234567.1234567'), set())
+
+    def test_real_arxiv_aliases_remain_permanently_excluded(self):
+        for value in ('arxiv:2309.06180v1', 'https://arxiv.org/pdf/2309.06180v2.pdf',
+                      '2309.06180', 'https://doi.org/10.48550/arXiv.2309.06180'):
+            self.assertIn('arxiv:2309.06180', identifier_tokens(value))
+            self.assertIsNotNone(match_record({'title': 'Renamed work', 'url': value},
+                                              [{'title': 'Prior work', 'arxiv_id': '2309.06180v1'}])[0])
+        self.assertIn('arxiv:hep-th/9901001', identifier_tokens('https://arxiv.org/abs/hep-th/9901001v2'))
+        self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
+
+    def test_web_leads_cannot_self_declare_official_sources_or_venues(self):
+        candidate = copy.deepcopy(self.sources.candidates[0])
+        crossref_url = next(url for url in self.sources.files if 'crossref.org' in url)
+        record = json.loads(self.sources.files[crossref_url])
+        record['message']['container-title'] = ['SOSP Companion Workshops']
+        self.sources.files[crossref_url] = json_bytes(record)
+        with self.assertRaisesRegex(EvidenceError, 'Publisher venue'):
+            self.sources.verify_publication(candidate)
+        candidate['doi'] = ''  # The author page is listed as official by the untrusted model.
+        with self.assertRaisesRegex(EvidenceError, 'No exact official'):
+            self.sources.verify_publication(candidate)
+        self.assertTrue(publication_venue_matches(["Proceedings ... (ASPLOS '26)"], 'ASPLOS'))
+        self.assertFalse(publication_venue_matches(['Proceedings ... (ASPLOS Workshops 2026)'], 'ASPLOS'))
+
+    def test_official_landing_requires_matching_venue_title_and_exact_date(self):
+        candidate = {'title': 'Fixture research', 'venue': 'MLSys', 'official_urls': ['https://proceedings.mlsys.org/fixture']}
+        prefix = ('<meta name="citation_title" content="Fixture research">'
+                  '<meta name="citation_journal_title" content="Proceedings of Machine Learning and Systems">')
+        url = candidate['official_urls'][0]
+        self.sources.files[url] = (prefix + '<meta name="citation_publication_date" content="2026-05-18">').encode()
+        self.assertEqual(self.sources.verify_publication(candidate)['publication_date'], '2026-05-18')
+        for untrusted in ('https://people.acm.org/fixture', 'https://proceedings.mlsys.org.example/fixture'):
+            self.sources.files[untrusted] = self.sources.files[url]
+            with self.assertRaisesRegex(EvidenceError, 'No exact official'):
+                self.sources.verify_publication({**candidate, 'official_urls': [untrusted]})
+        self.sources.files[url] = (prefix + '<meta name="citation_publication_date" content="2026">').encode()
+        with self.assertRaisesRegex(EvidenceError, 'No exact official'):
+            self.sources.verify_publication(candidate)
+        candidate['venue'] = 'SOSP'
+        self.sources.files[url] = (prefix + '<meta name="citation_publication_date" content="2026-05-18">').encode()
+        with self.assertRaisesRegex(EvidenceError, 'No exact official'):
+            self.sources.verify_publication(candidate)
+
+    def test_pacmpl_conference_issue_is_verified_without_admitting_other_journals(self):
+        candidate = copy.deepcopy(self.sources.candidates[0])
+        candidate['venue'] = 'PLDI'
+        url = next(url for url in self.sources.files if 'crossref.org' in url)
+        record = json.loads(self.sources.files[url])
+        record['message'].update(type='journal-article', issue='PLDI',
+                                 **{'container-title': ['Proceedings of the ACM on Programming Languages']})
+        self.sources.files[url] = json_bytes(record)
+        self.assertEqual(self.sources.verify_publication(candidate)['venue'], 'PLDI')
+        record['message']['container-title'] = ['Unrelated journal']
+        self.sources.files[url] = json_bytes(record)
+        with self.assertRaisesRegex(EvidenceError, 'Publisher venue'):
+            self.sources.verify_publication(candidate)
 
     def test_later_issue_and_author_pages_cannot_supply_first_publication_date(self):
         candidate = copy.deepcopy(self.sources.candidates[0])

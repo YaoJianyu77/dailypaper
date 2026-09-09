@@ -6,6 +6,7 @@ from datetime import date
 import html
 from html.parser import HTMLParser
 import json
+import logging
 import math
 import os
 from pathlib import Path
@@ -18,9 +19,22 @@ import requests
 
 from recommendation_history import identifier_tokens, normalize_title, sha256, work_id
 
+logger = logging.getLogger(__name__)
+INDEX_HOSTS = {'dblp.org', 'api.openalex.org'}
+
 
 class EvidenceError(ValueError):
     pass
+
+
+class SourceUnavailable(EvidenceError):
+    """An index is unavailable for this invocation, not an empty search result."""
+
+
+def request_failure(error):
+    # Request exception strings can contain query credentials. Log only status/type.
+    response = getattr(error, 'response', None)
+    return f'HTTP {response.status_code}' if response is not None else type(error).__name__
 
 
 def listify(value):
@@ -49,10 +63,60 @@ def label_matches(actual, configured):
     return actual in aliases
 
 
+def publication_venue_matches(labels, configured, issue=''):
+    """Match publisher venue labels, allowing conference years/ordinal prefixes."""
+    labels = [str(label) for label in labels if label]
+    # Do not let a main-conference acronym admit companion/workshop proceedings.
+    if any(re.search(r'\b(workshops?|companion|posters?|demonstrations?|tutorials?|extended abstracts?)\b',
+                     label, re.I) for label in labels):
+        return False
+    # PACMPL publishes conference proceedings as named journal issues (e.g. PLDI).
+    # The issue is a venue label only in this specific publisher container.
+    if (any(normalize_title(label) == 'proceedings of the acm on programming languages' for label in labels)
+            and label_matches(str(issue), configured)):
+        return True
+    for label in labels:
+        if label_matches(label, configured):
+            return True
+        normalized = normalize_title(label)
+        for alias in configured.split(' / '):
+            # E.g. "Proceedings ... (ASPLOS '26)". Whole tokens, never substrings.
+            if f' {normalize_title(alias)} ' in f' {normalized} ':
+                return True
+    return False
+
+
+def official_landing(url, page, venue):
+    """Untrusted discovery cannot designate an arbitrary author page as official."""
+    host = urlparse(url).hostname or ''
+    publishers = {'usenix.org', 'www.usenix.org', 'dl.acm.org', 'ieeexplore.ieee.org', 'proceedings.mlsys.org'}
+    if host not in publishers:
+        return False
+    labels = [page.get('citation_conference_title'), page.get('citation_journal_title')]
+    return publication_venue_matches(labels, venue, page.get('citation_issue'))
+
+
+def author_pdf_urls(candidate):
+    """Resolve explicitly linked arXiv copies, including any supplied version."""
+    output = []
+    for url in [*candidate.get('source_urls', []), *candidate.get('pdf_urls', [])]:
+        parsed = urlparse(url)
+        if (parsed.hostname not in {'arxiv.org', 'www.arxiv.org', 'export.arxiv.org'}
+                or not parsed.path.startswith(('/abs/', '/pdf/', '/html/'))):
+            continue
+        identifiers = [token[6:] for token in identifier_tokens(url) if token.startswith('arxiv:')]
+        if len(identifiers) != 1:
+            raise EvidenceError('Linked author copy has an ambiguous arXiv identity')
+        version = re.search(r'(v\d+)(?:\.pdf)?$', parsed.path, re.I)
+        output.append('https://arxiv.org/pdf/' + identifiers[0] + (version.group(1).lower() if version else ''))
+    return list(dict.fromkeys(output))
+
+
 class PageMetadata(HTMLParser):
     def __init__(self, text):
         super().__init__(convert_charrefs=True)
-        self.meta, self.links, self.text = {}, [], []
+        self.meta, self.links, self.text, self.link_labels = {}, [], [], {}
+        self.active_link = None
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
@@ -62,9 +126,16 @@ class PageMetadata(HTMLParser):
             self.meta.setdefault(key, []).append(attrs.get('content', ''))
         if tag == 'a' and attrs.get('href'):
             self.links.append(attrs['href'])
+            self.active_link = attrs['href']
+
+    def handle_endtag(self, tag):
+        if tag == 'a':
+            self.active_link = None
 
     def handle_data(self, text):
         self.text.append(text)
+        if self.active_link:
+            self.link_labels[self.active_link] = self.link_labels.get(self.active_link, '') + text
 
     def get(self, *keys):
         return next((self.meta[k][0] for k in keys if self.meta.get(k)), '')
@@ -76,11 +147,26 @@ class Sources:
         self.documents = infrastructure.get('documents', {})
         self.session = session or requests.Session()
         self.failures = []
+        self.unavailable = {}
         self.last_request = 0
+
+    def failure(self, message):
+        if message not in self.failures:
+            self.failures.append(message)
+            logger.warning('Discovery coverage: %s', message)
+
+    def disable_index(self, host, reason):
+        message = f'{host}: {reason}; skipping this index for the rest of this run'
+        self.unavailable[host] = message
+        self.failure(message)
+        return SourceUnavailable(message)
 
     def get(self, url, params=None, *, max_bytes=8_000_000):
         if urlparse(url).scheme not in {'http', 'https'}:
             raise EvidenceError('Evidence must have an HTTP(S) source URL')
+        host = urlparse(url).hostname
+        if host in self.unavailable:
+            raise SourceUnavailable(self.unavailable[host])
         interval = float(self.options.get('request_interval_seconds', 1.5))
         timeout = float(self.options.get('timeout_seconds', 45))
         headers = {'User-Agent': 'DailyPaper/2.0 (research metadata verification)'}
@@ -90,6 +176,10 @@ class Sources:
             time.sleep(max(0, interval - (time.monotonic() - self.last_request)))
             self.last_request = time.monotonic()
             response = self.session.get(url, params=params, headers=headers, timeout=timeout, stream=True)
+            if host in INDEX_HOSTS and response.status_code in {403, 429}:
+                status = response.status_code
+                response.close()
+                raise self.disable_index(host, f'HTTP {status} access/rate limit')
             if response.status_code in {429, 500, 502, 503, 504} and attempt < int(self.options.get('retries', 2)):
                 response.close()
                 time.sleep(min(30, 2 ** attempt))
@@ -108,8 +198,19 @@ class Sources:
         raise EvidenceError('Source request failed')
 
     def json(self, url, params=None):
-        raw, final = self.get(url, params)
-        return json.loads(raw), final
+        host = urlparse(url).hostname
+        try:
+            raw, final = self.get(url, params)
+            try:
+                return json.loads(raw), final
+            except (ValueError, UnicodeError) as error:
+                if host in INDEX_HOSTS:
+                    raise self.disable_index(host, 'non-JSON response (possibly an HTML access challenge)') from error
+                raise EvidenceError(f'{host}: invalid JSON metadata') from error
+        except requests.RequestException as error:
+            if host in INDEX_HOSTS and (error.response is None or error.response.status_code >= 500):
+                raise self.disable_index(host, request_failure(error)) from error
+            raise
 
     def dblp(self, venue, year, limit):
         payload, url = self.json('https://dblp.org/search/publ/api', {'q': f'{venue} {year}', 'format': 'json', 'h': limit})
@@ -168,24 +269,28 @@ class Sources:
         used = {venue: 0 for venue in settings.venues}
         for year in range(latest.year, earliest.year - 1, -1):
             for venue in settings.venues:
+                if INDEX_HOSTS <= self.unavailable.keys():
+                    return candidates
                 remaining = limit - used[venue]
                 if remaining <= 0:
                     continue
                 try:
                     found = []
-                    for alias in venue.split(' / '):
+                    for alias in venue.split(' / ') if 'dblp.org' not in self.unavailable else ():
                         entries = self.dblp(alias, year, min(per_year, remaining))
                         for entry in entries:
                             entry['venue'] = venue
                         found.extend(entries)
                 except (requests.RequestException, ValueError, KeyError) as error:
-                    self.failures.append(f'{venue} {year}: DBLP {type(error).__name__}')
+                    if not isinstance(error, SourceUnavailable):
+                        self.failure(f'{venue} {year}: DBLP {request_failure(error)}')
                     found = []
-                if not found:
+                if not found and 'api.openalex.org' not in self.unavailable:
                     try:
                         found = self.openalex(venue, max(earliest, date(year, 1, 1)), min(latest, date(year, 12, 31)), min(per_year, remaining))
                     except (requests.RequestException, ValueError, KeyError) as error:
-                        self.failures.append(f'{venue} {year}: OpenAlex {type(error).__name__}')
+                        if not isinstance(error, SourceUnavailable):
+                            self.failure(f'{venue} {year}: OpenAlex {request_failure(error)}')
                 for candidate in found[:min(per_year, remaining)]:
                     if candidate['candidate_id'] not in seen:
                         candidates.append(candidate)
@@ -198,7 +303,10 @@ class Sources:
     def verify_publication(self, candidate):
         candidate = dict(candidate)
         candidate['pdf_urls'] = list(candidate.get('pdf_urls', []))
-        official_urls = set(filter(None, candidate.get('official_urls', [])))
+        # Rebuild supplement provenance from article pages, never model assertions.
+        candidate['supplements'] = []
+        candidate['source_urls'] = list(dict.fromkeys(filter(None, [*candidate.get('source_urls', []),
+                                                                 *candidate.get('official_urls', [])])))
         doi = next((t[4:] for t in identifier_tokens(candidate.get('doi', '')) if t.startswith('doi:')), '')
         records = []
         incomplete_online_date = []
@@ -211,6 +319,10 @@ class Sources:
                     raise EvidenceError('Publisher DOI title differs from the discovered work')
                 if record.get('type') not in {'journal-article', 'proceedings-article'}:
                     raise EvidenceError('Publisher record is not a formal research article')
+                labels = [*record.get('container-title', []), *record.get('short-container-title', []),
+                          record.get('event', {}).get('name', ''), record.get('event', {}).get('acronym', '')]
+                if not publication_venue_matches(labels, candidate['venue'], record.get('issue', '')):
+                    raise EvidenceError('Publisher venue differs from the configured venue or is excluded')
                 online = record.get('published-online', {}).get('date-parts', [[]])[0]
                 if online and len(online) < 3:
                     incomplete_online_date = online
@@ -221,7 +333,6 @@ class Sources:
                     records.append({'url': url, 'kind': 'publisher-deposited-crossref', 'publication_date': published,
                                     'title': title, 'record': record})
                 candidate['source_urls'] = list(dict.fromkeys([*candidate.get('source_urls', []), record.get('URL', '')]))
-                official_urls.add(record.get('URL', ''))
                 candidate['pdf_urls'].extend(link['URL'] for link in record.get('link', []) if link.get('content-type') == 'application/pdf')
                 candidate['abstract'] = candidate.get('abstract') or ' '.join(PageMetadata(record.get('abstract', '')).text)
             except requests.RequestException:
@@ -242,7 +353,8 @@ class Sources:
                 title = page.get('citation_title', 'dc.title')
                 if normalize_title(title) != normalize_title(candidate['title']):
                     continue
-                for key in ('citation_online_date', 'citation_publication_date', 'dc.date') if source_url in official_urls else ():
+                official = official_landing(final, page, candidate['venue'])
+                for key in ('citation_online_date', 'citation_publication_date') if official else ():
                     value = page.get(key).replace('/', '-')
                     if re.fullmatch(r'\d{4}-\d{2}-\d{2}', value):
                         date.fromisoformat(value)
@@ -250,7 +362,12 @@ class Sources:
                                         'date_field': key, 'title': title, 'metadata': page.meta, 'source_sha256': sha256(raw)})
                 pdf = page.get('citation_pdf_url')
                 if pdf:
-                    candidate['pdf_urls'].append(urljoin(final, pdf))
+                    candidate['pdf_urls'].insert(0 if official else len(candidate['pdf_urls']), urljoin(final, pdf))
+                if official:
+                    for link in page.links:
+                        if (urlparse(link).path.lower().endswith('.pdf')
+                                and re.search(r'supplement|appendi[xc]', link + ' ' + page.link_labels.get(link, ''), re.I)):
+                            candidate['supplements'].append({'url': urljoin(final, link), 'article_url': final})
                 candidate['pdf_urls'].extend(urljoin(final, link) for link in page.links if link.lower().endswith('.pdf'))
                 candidate['abstract'] = candidate.get('abstract') or page.get('citation_abstract', 'dc.description')
                 candidate.setdefault('identifiers', {}).setdefault('doi', []).extend(
@@ -266,7 +383,10 @@ class Sources:
                 raise EvidenceError('First online publication date is incomplete; a later print date cannot replace it')
         candidate['publication_date'] = min(record['publication_date'] for record in records)
         candidate['publication_evidence'] = records
+        candidate['supplements'] = list({s['url']: s for s in candidate['supplements']}.values())
+        supplements = {s['url'] for s in candidate['supplements']}
         candidate['pdf_urls'] = list(dict.fromkeys(candidate['pdf_urls']))
+        candidate['pdf_urls'] = [url for url in candidate['pdf_urls'] if url not in supplements]
         if not candidate['pdf_urls'] and doi:
             try:
                 data, _ = self.json('https://api.openalex.org/works/https://doi.org/' + quote(doi, safe='/'))
@@ -339,15 +459,61 @@ class Sources:
                     title = normalize_title(candidate['title'])
                     if title not in normalize_title(' '.join(texts[:2])):
                         raise EvidenceError('Full-paper title could not be matched to the verified publication')
-                    (directory / 'paper.pdf').write_bytes(raw)
-                    pages = []
-                    for number, (page, text) in enumerate(zip(document, texts), 1):
-                        image = directory / f'page-{number:03}.png'
-                        page.get_pixmap(dpi=int(self.documents.get('render_dpi', 150)), alpha=False).save(image)
-                        pages.append({'page': number, 'text': text, 'image': str(image.resolve()),
-                                      'image_sha256': sha256(image.read_bytes())})
-                return {'pdf': str((directory / 'paper.pdf').resolve()), 'url': final,
-                        'sha256': sha256(raw), 'pages': pages}
+                break
             except (requests.RequestException, ValueError, RuntimeError) as error:
-                failures.append(f'{url}: {error}')
-        raise EvidenceError('Complete paper unavailable: ' + '; '.join(failures))
+                failures.append(f'{url}: {request_failure(error) if isinstance(error, requests.RequestException) else error}')
+        else:
+            raise EvidenceError('Complete paper unavailable: ' + '; '.join(failures))
+
+        # A supplement is additional evidence, not an alternative main PDF. Fetch
+        # it in the existing controller, which already owns bounded PDF retrieval.
+        parts = [(raw, final, 'main')]
+        for supplement in candidate.get('supplements', []):
+            try:
+                extra, resolved = self.get(supplement['url'], max_bytes=int(self.documents.get('max_pdf_bytes', 50_000_000)))
+                parts.append((extra, resolved, 'supplement'))
+            except (requests.RequestException, ValueError, RuntimeError) as error:
+                raise EvidenceError('Required published supplement unavailable: ' + supplement['url']) from error
+        # A linked author version can contain artifact/appendix evidence omitted
+        # from the publisher PDF. Keep distinct copies for explicit comparison;
+        # never infer completeness from page count or silently replace a version.
+        for author_url in author_pdf_urls(candidate):
+            if author_url in {source_url for _, source_url, _ in parts}:
+                continue
+            try:
+                extra, resolved = self.get(author_url, max_bytes=int(self.documents.get('max_pdf_bytes', 50_000_000)))
+                if sha256(extra) in {sha256(source) for source, _, _ in parts}:
+                    continue
+                with fitz.open(stream=extra, filetype='pdf') as author:
+                    title_text = ' '.join(author[number].get_text(sort=True) for number in range(min(2, len(author))))
+                    if normalize_title(candidate['title']) not in normalize_title(title_text):
+                        raise EvidenceError('Author-copy title does not match the verified publication')
+                parts.append((extra, resolved, 'author-version'))
+            except (requests.RequestException, ValueError, RuntimeError) as error:
+                detail = request_failure(error) if isinstance(error, requests.RequestException) else str(error)
+                raise EvidenceError('Linked author version could not be verified: ' + author_url + ': ' + detail) from error
+        receipts, pages = [], []
+        with fitz.open() as combined:
+            for index, (source, source_url, kind) in enumerate(parts):
+                with fitz.open(stream=source, filetype='pdf') as part:
+                    if part.needs_pass or not len(part) or len(combined) + len(part) > int(self.documents.get('max_pages', 100)):
+                        raise EvidenceError('Complete paper and supplements unreadable or exceed page limit; not truncating')
+                    if any(not page.get_text().strip() for page in part):
+                        raise EvidenceError('Paper or supplement includes pages without extractable text; verified OCR is required')
+                    source_path = directory / f'source-{index:02}.pdf'
+                    source_path.write_bytes(source)
+                    receipts.append({'pdf': str(source_path.resolve()), 'url': source_url, 'kind': kind,
+                                     'sha256': sha256(source), 'first_page': len(combined) + 1, 'page_count': len(part)})
+                    combined.insert_pdf(part)
+            complete = combined.tobytes() if len(parts) > 1 else raw
+            (directory / 'paper.pdf').write_bytes(complete)
+            for number, page in enumerate(combined, 1):
+                image = directory / f'page-{number:03}.png'
+                page.get_pixmap(dpi=int(self.documents.get('render_dpi', 150)), alpha=False).save(image)
+                part = next(p for p in receipts if p['first_page'] <= number < p['first_page'] + p['page_count'])
+                pages.append({'page': number, 'text': page.get_text(sort=True), 'image': str(image.resolve()),
+                              'image_sha256': sha256(image.read_bytes()), 'source_url': part['url'],
+                              'source_page': number - part['first_page'] + 1, 'source_kind': part['kind']})
+        logger.info('Complete paper acquired: %s; %s pages across %s documents', candidate['title'], len(pages), len(receipts))
+        return {'pdf': str((directory / 'paper.pdf').resolve()), 'url': final,
+                'sha256': sha256(complete), 'pages': pages, 'source_documents': receipts}

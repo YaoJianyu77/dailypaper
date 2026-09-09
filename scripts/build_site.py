@@ -186,7 +186,18 @@ def report_page(report: Report, older, newer, base_url):
     return f'''
     <header class="report-header"><p class="eyebrow">DAILY BRIEFING <span>/</span> {report.date:%A}</p><h1>{formatted_date(report)}</h1><div class="report-meta"><span>{report_count(report)}</span><span>~{reading_time(report)} min read</span></div></header>
     <div class="reader-layout">{contents}<article id="report-body">{intro}{''.join(papers)}<nav class="issue-pagination" aria-label="Adjacent reports">{''.join(navigation)}</nav></article></div>
-    <dialog id="figure-dialog" aria-label="Enlarged paper figure"><button class="dialog-close" type="button" aria-label="Close enlarged figure">×</button><img alt=""><p></p></dialog>'''
+    <dialog id="figure-dialog" aria-label="Enlarged paper figure">
+      <div class="dialog-toolbar">
+        <button class="dialog-fit" type="button">Fit</button>
+        <button class="dialog-actual" type="button" aria-label="Show original image size">100%</button>
+        <button class="dialog-smaller" type="button" aria-label="Zoom out">−</button>
+        <button class="dialog-larger" type="button" aria-label="Zoom in">+</button>
+        <output class="dialog-scale" aria-label="Zoom level" aria-live="polite">100%</output>
+        <button class="dialog-close" type="button" aria-label="Close enlarged figure">×</button>
+      </div>
+      <div class="figure-viewport" tabindex="0" aria-label="Figure; scroll to explore"><img alt=""></div>
+      <p class="dialog-caption"></p>
+    </dialog>'''
 
 
 def copy_assets(root, output):

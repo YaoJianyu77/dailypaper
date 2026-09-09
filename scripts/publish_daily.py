@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+from contextlib import nullcontext
 from datetime import date, datetime, timezone
 from html.parser import HTMLParser
 import json
@@ -51,6 +52,14 @@ def validate_bundle(root, bundle, settings, *, allow_run_id=None):
     validate_trends(bundle['trends'], bundle['papers'], settings)
     validate_review(bundle['review'], settings)
     require(bundle['report_markdown'] == render_report(bundle, settings), 'Report changed after assembly')
+    rendering = bundle.get('rendering', {})
+    require(rendering.get('report_sha256') == sha256(bundle['report_markdown'].encode()),
+            'Missing or stale website browser verification')
+    require(rendering.get('chromium_sandbox') is True and rendering.get('offline') is True,
+            'Website browser safeguards were not verified')
+    require(rendering.get('screenshots'), 'Website review has no rendered screenshots')
+    for shot in rendering['screenshots']:
+        require(sha256(Path(shot['path']).read_bytes()) == shot['sha256'], 'Website screenshot changed after review')
     paths = set()
     for asset in bundle['assets']:
         path = asset['path']
@@ -64,8 +73,8 @@ def validate_bundle(root, bundle, settings, *, allow_run_id=None):
         require(pixels.width > 0 and pixels.height > 0, 'Visual cannot be decoded')
 
 
-def verify_rendered(root, bundle, settings):
-    """Build an isolated article, check HTML tables and decode every linked image."""
+def verify_rendered(root, bundle, settings, *, output_dir=None):
+    """Build the isolated article and capture actual desktop/mobile browser views."""
     class Visuals(HTMLParser):
         def __init__(self):
             super().__init__()
@@ -78,10 +87,10 @@ def verify_rendered(root, bundle, settings):
             if tag == 'table':
                 self.tables += 1
 
-    with tempfile.TemporaryDirectory(prefix='dailypaper-render-') as directory:
+    with (nullcontext(str(output_dir)) if output_dir else tempfile.TemporaryDirectory(prefix='dailypaper-render-')) as directory:
         staged = Path(directory)
         report = staged / 'content/daily' / f'{bundle["date"]}.md'
-        report.parent.mkdir(parents=True)
+        report.parent.mkdir(parents=True, exist_ok=True)
         report.write_text(bundle['report_markdown'], encoding='utf-8')
         (staged / 'DAILY_REPORT_PRODUCT_REQUIREMENTS.md').write_text(settings.raw, encoding='utf-8')
         for asset in bundle['assets']:
@@ -101,6 +110,10 @@ def verify_rendered(root, bundle, settings):
             target = safe_target(staged / 'dist', unquote(urlparse(url).path.removeprefix('/dailypaper/')))
             pixels = fitz.Pixmap(str(target))
             require(pixels.width > 0 and pixels.height > 0, 'Rendered figure is broken')
+        from browser_render import inspect_site
+        rendering = inspect_site(staged / 'dist', f'daily/{bundle["date"]}/', staged / 'screenshots',
+                                 len(bundle['assets']), table_count)
+        return {**rendering, 'report_sha256': sha256(bundle['report_markdown'].encode())}
 
 
 def verify_archived_run(root, run):
