@@ -317,6 +317,7 @@ class PipelineTests(unittest.TestCase):
             lambda b: b['papers'][0]['analysis']['sections'][3].update(text='```mermaid\ngraph LR\nA-->B\n```'),
             lambda b: b['review'].update(approved=False, problems=['Unverified claim']),
             lambda b: b['papers'][0].update(venue='An unconfigured workshop'),
+            lambda b: b['papers'][0].update(pdf_urls=[]),
         ):
             draft = copy.deepcopy(bundle)
             mutate(draft)
@@ -569,6 +570,27 @@ class PipelineTests(unittest.TestCase):
         self.sources.files[candidate['source_urls'][0]] = b'<p>Accepted for publication; date unknown.</p>'
         with self.assertRaisesRegex(EvidenceError, 'No exact official'):
             self.sources.verify_publication(candidate)
+
+    def test_missing_complete_paper_is_excluded_before_selection(self):
+        candidate = self.sources.candidates[0]
+        candidate['pdf_urls'] = []
+        crossref_url = next(url for url in self.sources.files if 'crossref.org' in url)
+        record = json.loads(self.sources.files[crossref_url])
+        record['message']['link'][0]['content-type'] = 'unspecified'
+        self.sources.files[crossref_url] = json_bytes(record)
+        article_url = candidate['source_urls'][0]
+        citation = f'<meta name="citation_pdf_url" content="{article_url}.pdf">'.encode()
+        self.sources.files[article_url] = self.sources.files[article_url].replace(citation, b'')
+        openalex_url = 'https://api.openalex.org/works/https://doi.org/10.9999/fixture-0'
+        self.sources.files[openalex_url] = json_bytes({'locations': []})
+
+        pool = discovery(self.root, self.settings, DAY, self.sources, load_history(self.root))
+
+        self.assertNotIn(candidate['title'], [paper['title'] for paper in pool['candidates']])
+        rejected = next(item for item in pool['rejected'] if item['title'] == candidate['title'])
+        self.assertIn('No complete-paper URL was discovered', rejected['reason'])
+        with self.assertRaisesRegex(EvidenceError, 'No complete-paper URL was discovered'):
+            self.sources.full_paper({'title': candidate['title'], 'pdf_urls': []}, self.root / 'missing-pdf')
 
     def test_classic_influence_is_retrieved_and_missing_evidence_underfills(self):
         original = self.backend.generate

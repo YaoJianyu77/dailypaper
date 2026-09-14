@@ -446,6 +446,8 @@ class Sources:
     def full_paper(self, candidate, directory):
         directory = Path(directory)
         directory.mkdir(parents=True, exist_ok=True)
+        if not candidate.get('pdf_urls'):
+            raise EvidenceError('No complete-paper URL was discovered for ' + candidate['title'])
         failures = []
         for url in candidate.get('pdf_urls', []):
             try:

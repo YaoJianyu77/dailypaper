@@ -33,6 +33,8 @@ def discovery(root, settings, day, sources, history, *, backend=None, diagnostic
                 if previous:
                     raise EvidenceError('Previously recommended or duplicate work: ' + reason)
                 paper = sources.verify_publication(candidate)
+                require(paper.get('pdf_urls'),
+                        'No complete-paper URL was discovered; excluding the candidate before selection')
                 category = settings.category(paper['publication_date'], day)
                 if not category or not settings.quotas[category]:
                     raise EvidenceError('Outside current date windows')

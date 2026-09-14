@@ -101,6 +101,8 @@ def validate_selection(papers, settings, day, history, shortfall_reason='', run_
     for paper in papers:
         require(paper['venue'] in settings.venues, 'Paper venue is no longer configured')
         require(paper.get('publication_evidence'), 'Missing verified official publication evidence')
+        require(paper.get('pdf_urls'),
+                'Selected paper has no complete-paper URL; preserve the selection and revalidate its sources')
         category = settings.category(paper['publication_date'], day)
         require(category is not None and category == paper['category'], 'Paper outside its configured date window')
         require(paper.get('topic_fit') and paper.get('identity_evidence'), 'Topic or identity check missing')
