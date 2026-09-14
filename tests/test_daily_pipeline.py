@@ -756,12 +756,30 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(len(bundle['papers']), 5)
         self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
 
-    def test_invalid_fresh_analysis_stops_without_automatic_model_retry(self):
+    def test_invalid_fresh_analysis_stops_then_resumes_with_targeted_correction(self):
         self.backend.invalid_analysis = True
         with self.assertRaisesRegex(ValidationError, 'Empty summary'):
             self.prepare()
         self.assertEqual(sum(stage == 'analyze' for stage, *_ in self.backend.calls), 1)
         self.assertEqual(sum(stage == 'select' for stage, *_ in self.backend.calls), 1)
+        cached = sorted((self.root / f'.cache/dailypaper/runs/{DAY}').glob('paper-*/analyzed.json'))
+        self.assertEqual(len(cached), 1)
+        retained = json.loads(cached[0].read_text())
+        self.assertEqual(retained['revision_attempts'], 0)
+        self.assertNotIn('assets', retained)
+
+        calls = len(self.backend.calls)
+        self.backend.invalid_analysis = False
+        bundle = self.prepare()
+        resumed = [call for call in self.backend.calls[calls:] if call[0] == 'analyze'
+                   and 'revision_feedback' in call[1]]
+        self.assertEqual(len(resumed), 1)
+        self.assertIn('Empty summary', resumed[0][1]['revision_feedback'])
+        self.assertEqual(resumed[0][1]['prior_analysis'], retained['analysis'])
+        corrected = json.loads(cached[0].read_text())
+        self.assertEqual(corrected['revision_attempts'], 1)
+        self.assertIn('assets', corrected)
+        self.assertEqual(len(bundle['papers']), 5)
         self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
 
     def test_browser_blocks_remote_resources_and_binds_screenshots_to_report(self):

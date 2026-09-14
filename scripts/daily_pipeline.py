@@ -188,9 +188,13 @@ def prepare(root, *, day=None, sources=None, backend=None, pool=None, stage_dir=
         directory.mkdir(parents=True, exist_ok=True)
         cached = directory / 'analyzed.json'
         revision_feedback = ''
+        revision_attempts = 0
         if cached.exists():
             paper = json.loads(cached.read_text())
             require(paper['settings_sha256'] == settings.sha256, 'Paper checkpoint uses stale settings')
+            revision_attempts = paper.get('revision_attempts', 0)
+            require(type(revision_attempts) is int and 0 <= revision_attempts <= 1,
+                    'Paper checkpoint has an invalid targeted-correction count')
             analyzed = {key: value for key, value in paper.items() if key != 'analyzed_sha256'}
             require(paper['analyzed_sha256'] == sha256(json_bytes(analyzed)),
                     'Analyzed paper checkpoint was modified')
@@ -199,6 +203,8 @@ def prepare(root, *, day=None, sources=None, backend=None, pool=None, stage_dir=
                 validate_analysis(paper['analysis'], paper['document'], settings)
             except ValidationError as error:
                 revision_feedback = str(error)
+                require(revision_attempts < 1,
+                        f'Targeted correction already attempted for {selected["title"]}: {error}')
                 logger.warning('Revising cached paper after validation: %s: %s', selected['title'], error)
         if not cached.exists() or revision_feedback:
             prior_analysis = paper.get('analysis') if revision_feedback else None
@@ -210,10 +216,20 @@ def prepare(root, *, day=None, sources=None, backend=None, pool=None, stage_dir=
                 context.update(prior_analysis=prior_analysis, revision_feedback=revision_feedback)
             images = [page['image'] for page in document['pages']]
             analysis = backend.generate('analyze', context, images)
-            counts = validate_analysis(analysis, document, settings)
+            try:
+                counts = validate_analysis(analysis, document, settings)
+            except ValidationError as error:
+                paper = {**copy.deepcopy(selected), 'document': document, 'analysis': analysis,
+                         'settings_sha256': settings.sha256,
+                         'revision_attempts': revision_attempts + int(bool(revision_feedback))}
+                paper['analyzed_sha256'] = sha256(json_bytes(paper))
+                save_checkpoint(cached, paper)
+                logger.warning('Retained invalid analysis for explicit recovery: %s: %s', selected['title'], error)
+                raise
             assets, blocks = prepare_visuals(paper, analysis, document, directory / 'prepared')
             paper = {**copy.deepcopy(selected), 'document': document, 'analysis': analysis,
                      'assets': assets, 'visual_blocks': blocks, 'counts': counts, 'settings_sha256': settings.sha256}
+            paper['revision_attempts'] = revision_attempts + int(bool(revision_feedback))
             paper['analyzed_sha256'] = sha256(json_bytes(paper))
             save_checkpoint(cached, paper)
         validate_analysis(paper['analysis'], paper['document'], settings)
