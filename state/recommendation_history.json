@@ -18383,7 +18383,10 @@
       ],
       "source_urls": [
         "https://proceedings.mlsys.org/paper_files/paper/2026/hash/bc75fa9843a7905bbed9d83895a88f7f-Abstract-Conference.html",
-        "https://arxiv.org/abs/2511.08083"
+        "https://arxiv.org/abs/2511.08083",
+        "https://proceedings.mlsys.org/paper_files/paper/2026/file/bc75fa9843a7905bbed9d83895a88f7f-Paper-Conference.pdf",
+        "https://proceedings.mlsys.org/paper_files/paper/2026/file/bc75fa9843a7905bbed9d83895a88f7f-Supplemental-Conference.pdf",
+        "https://arxiv.org/pdf/2511.08083"
       ],
       "continuing_influence": {},
       "full_paper_sha256": "ae62371439b31c62597d07daa96b076f5a8ce3d03a6d5977ff6ecff0f6c3e5fe",
@@ -18397,7 +18400,14 @@
         "assessment_words": 68,
         "pages": 79,
         "visuals": 2
-      }
+      },
+      "legacy_evidence": [
+        {
+          "path": "content/daily/2026-09-13.md",
+          "title": "HipKittens: Fast and Furious AMD Kernels",
+          "sha256": "869a20891e2e62c9ef88a24279c53e0ae9f13bdb94521be4b73476fee3f3baf0"
+        }
+      ]
     },
     {
       "work_id": "doi:10.1145/3789240.3829111",
@@ -19323,7 +19333,9 @@
         "https://arxiv.org/abs/2504.19058",
         "https://github.com/tcp-acceleration-service/Presto",
         "https://conferences.sigcomm.org/sigcomm/2026/program/papers/",
-        "https://doi.org/10.1145/3789240.3829111"
+        "https://doi.org/10.1145/3789240.3829111",
+        "https://api.crossref.org/works/10.1145%2F3789240.3829111",
+        "https://arxiv.org/pdf/2504.19058"
       ],
       "continuing_influence": {},
       "full_paper_sha256": "334a71daf8cbdc3a17f6f8e733543f32391c3e35271868d098a90de2e0374daf",
@@ -19337,7 +19349,14 @@
         "assessment_words": 63,
         "pages": 19,
         "visuals": 2
-      }
+      },
+      "legacy_evidence": [
+        {
+          "path": "content/daily/2026-09-13.md",
+          "title": "Presto: A Match-Action TCP Stack for the Terabit Era",
+          "sha256": "869a20891e2e62c9ef88a24279c53e0ae9f13bdb94521be4b73476fee3f3baf0"
+        }
+      ]
     },
     {
       "work_id": "doi:10.1145/3767295.3769348",
@@ -20010,7 +20029,10 @@
         "https://dl.acm.org/doi/10.1145/3767295.3769348",
         "https://ipads.se.sjtu.edu.cn/_media/publications/kunserve-eurosys26.pdf",
         "https://arxiv.org/abs/2412.18169",
-        "https://doi.org/10.1145/3767295.3769348"
+        "https://doi.org/10.1145/3767295.3769348",
+        "https://api.crossref.org/works/10.1145%2F3767295.3769348",
+        "https://ipads.sjtu.edu.cn/_media/publications/kunserve-eurosys26.pdf",
+        "https://arxiv.org/pdf/2412.18169"
       ],
       "continuing_influence": {},
       "full_paper_sha256": "5119ce01575b7603fa6360fc7046bbc1ea0dd06493002e7cb59b05213ac452c6",
@@ -20024,7 +20046,14 @@
         "assessment_words": 65,
         "pages": 34,
         "visuals": 2
-      }
+      },
+      "legacy_evidence": [
+        {
+          "path": "content/daily/2026-09-13.md",
+          "title": "KUNSERVE: Parameter-centric Memory Management for Efficient Memory Overloading Handling in LLM Serving",
+          "sha256": "869a20891e2e62c9ef88a24279c53e0ae9f13bdb94521be4b73476fee3f3baf0"
+        }
+      ]
     },
     {
       "work_id": "doi:10.1145/3789240.3829207",
@@ -20429,7 +20458,8 @@
         "https://dl.acm.org/doi/10.1145/3789240.3829207",
         "https://www.cs.cornell.edu/~ragarwal/pubs/optccl.pdf",
         "https://conferences.sigcomm.org/sigcomm/2026/program/papers/",
-        "https://doi.org/10.1145/3789240.3829207"
+        "https://doi.org/10.1145/3789240.3829207",
+        "https://api.crossref.org/works/10.1145%2F3789240.3829207"
       ],
       "continuing_influence": {},
       "full_paper_sha256": "9204defdc2948cd1398dac553e69fc1b991bc4777c29b23e42b81414e8fa9224",
@@ -20442,6 +20472,304 @@
         "brief_words": 119,
         "assessment_words": 50,
         "pages": 13,
+        "visuals": 2
+      },
+      "legacy_evidence": [
+        {
+          "path": "content/daily/2026-09-13.md",
+          "title": "OptCCL: Scalable Synthesis of Optimal Collective Communication Algorithms",
+          "sha256": "869a20891e2e62c9ef88a24279c53e0ae9f13bdb94521be4b73476fee3f3baf0"
+        }
+      ]
+    },
+    {
+      "work_id": "title:d262b7afb4d2057bac0626a3",
+      "title": "From Tokens to Layers: Redefining Stall-Free Scheduling for MoE Serving with Layered Prefill",
+      "title_aliases": [
+        "From Tokens to Layers: Redefining Stall-Free Scheduling for MoE Serving with Layered Prefill",
+        "From Tokens to Layers: Redefining Stall-Free Scheduling for LLM Serving with Layered Prefill"
+      ],
+      "authors": [
+        "Gunjun Lee",
+        "Jiwon Kim",
+        "Jaiyoung Park",
+        "Younjoo Lee",
+        "Jung Ho Ahn"
+      ],
+      "identifiers": {
+        "doi": [],
+        "arxiv": [],
+        "dblp": []
+      },
+      "category": "latest",
+      "venue": "MLSys",
+      "publication_date": "2026-05-18",
+      "publication_date_evidence": [
+        {
+          "url": "https://proceedings.mlsys.org/paper_files/paper/2026/hash/c0f460c6d63599ea870ba9db63dc96a9-Abstract-Conference.html",
+          "kind": "official-landing-page",
+          "publication_date": "2026-05-18",
+          "date_field": "citation_publication_date",
+          "title": "From Tokens to Layers: Redefining Stall-Free Scheduling for MoE Serving with Layered Prefill",
+          "metadata": {
+            "": [
+              ""
+            ],
+            "viewport": [
+              "width=device-width, initial-scale=1, shrink-to-fit=no"
+            ],
+            "citation_title": [
+              "From Tokens to Layers: Redefining Stall-Free Scheduling for MoE Serving with Layered Prefill"
+            ],
+            "citation_author": [
+              "Lee, Gunjun",
+              "Kim, Jiwon",
+              "Park, Jaiyoung",
+              "Lee, Younjoo",
+              "Ahn, Jung H."
+            ],
+            "citation_journal_title": [
+              "Proceedings of Machine Learning and Systems"
+            ],
+            "citation_volume": [
+              "8"
+            ],
+            "citation_firstpage": [
+              "398"
+            ],
+            "citation_lastpage": [
+              "421"
+            ],
+            "citation_pdf_url": [
+              "https://proceedings.mlsys.org/paper_files/paper/2026/file/c0f460c6d63599ea870ba9db63dc96a9-Paper-Conference.pdf"
+            ],
+            "citation_publication_date": [
+              "2026-05-18"
+            ]
+          },
+          "source_sha256": "8927b786d78ac383940afea4d20f389e4809d708e59037560d690df9495043c6"
+        }
+      ],
+      "source_urls": [
+        "https://proceedings.mlsys.org/paper_files/paper/2026/hash/c0f460c6d63599ea870ba9db63dc96a9-Abstract-Conference.html",
+        "https://mlsys.org/Conferences/2026"
+      ],
+      "continuing_influence": {},
+      "full_paper_sha256": "1b8db8afb026a68856f77577bb1c3a1d140512c699f609228bfc2955310686f6",
+      "run_id": "systems-paper-daily:2026-09-14",
+      "status": "archived",
+      "reserved_at": "2026-09-14T15:12:37.969182+00:00",
+      "report_path": "content/daily/2026-09-14.md",
+      "verification": {
+        "summary_words": 1100,
+        "brief_words": 129,
+        "assessment_words": 79,
+        "pages": 24,
+        "visuals": 2
+      }
+    },
+    {
+      "work_id": "title:bbf43ccd9c899c947e96223e",
+      "title": "CRAFT: Fine-Grained Cost-Aware Expert Replication For Efficient Mixture-of-Experts Serving",
+      "title_aliases": [
+        "CRAFT: Fine-Grained Cost-Aware Expert Replication For Efficient Mixture-of-Experts Serving"
+      ],
+      "authors": [
+        "Adrian Zhao",
+        "Zhenkun Cai",
+        "Zhenyu Song",
+        "Lingfan Yu",
+        "Haozheng Fan",
+        "Jun Wu",
+        "Yida Wang",
+        "Nandita Vijaykumar"
+      ],
+      "identifiers": {
+        "doi": [],
+        "arxiv": [],
+        "dblp": []
+      },
+      "category": "latest",
+      "venue": "MLSys",
+      "publication_date": "2026-05-18",
+      "publication_date_evidence": [
+        {
+          "url": "https://proceedings.mlsys.org/paper_files/paper/2026/hash/3a7f9e485845dac27423375c934cb4db-Abstract-Conference.html",
+          "kind": "official-landing-page",
+          "publication_date": "2026-05-18",
+          "date_field": "citation_publication_date",
+          "title": "CRAFT: Fine-Grained Cost-Aware Expert Replication For Efficient Mixture-of-Experts Serving",
+          "metadata": {
+            "": [
+              ""
+            ],
+            "viewport": [
+              "width=device-width, initial-scale=1, shrink-to-fit=no"
+            ],
+            "citation_title": [
+              "CRAFT: Fine-Grained Cost-Aware Expert Replication For Efficient Mixture-of-Experts Serving"
+            ],
+            "citation_author": [
+              "Zhao, Adrian",
+              "Cai, Zhenkun",
+              "Song, Zhenyu",
+              "Yu, Lingfan",
+              "Fan, Haozheng",
+              "Wu, Jun",
+              "Wang, Yida",
+              "Vijaykumar, Nandita"
+            ],
+            "citation_journal_title": [
+              "Proceedings of Machine Learning and Systems"
+            ],
+            "citation_volume": [
+              "8"
+            ],
+            "citation_firstpage": [
+              "689"
+            ],
+            "citation_lastpage": [
+              "700"
+            ],
+            "citation_pdf_url": [
+              "https://proceedings.mlsys.org/paper_files/paper/2026/file/3a7f9e485845dac27423375c934cb4db-Paper-Conference.pdf"
+            ],
+            "citation_publication_date": [
+              "2026-05-18"
+            ]
+          },
+          "source_sha256": "0a68ff25d7fb496dd8f251b358bad2320094051cfba6e1608cc22fbc275643b8"
+        }
+      ],
+      "source_urls": [
+        "https://proceedings.mlsys.org/paper_files/paper/2026/hash/3a7f9e485845dac27423375c934cb4db-Abstract-Conference.html",
+        "https://mlsys.org/Conferences/2026"
+      ],
+      "continuing_influence": {},
+      "full_paper_sha256": "eda1a477ad82aa180cd4a94e486307dd18b34d50e81912048529c377d82afe7a",
+      "run_id": "systems-paper-daily:2026-09-14",
+      "status": "archived",
+      "reserved_at": "2026-09-14T15:12:37.969182+00:00",
+      "report_path": "content/daily/2026-09-14.md",
+      "verification": {
+        "summary_words": 1076,
+        "brief_words": 124,
+        "assessment_words": 63,
+        "pages": 18,
+        "visuals": 2
+      }
+    },
+    {
+      "work_id": "title:f7980ea359b1d6140d33c323",
+      "title": "Beyond the Buzz: A Pragmatic Take on Inference Disaggregation",
+      "title_aliases": [
+        "Beyond the Buzz: A Pragmatic Take on Inference Disaggregation",
+        "A Pragmatic Exploration of Prefill-Decode Disaggregation in Large Scale Inference"
+      ],
+      "authors": [
+        "Tiyasa Mitra",
+        "Ritika Borkar",
+        "Nidhi Bhatia",
+        "Shivam Raj",
+        "Hongkuan Zhou",
+        "Yan Ru Pei",
+        "Vishwanath Venkatesan",
+        "Kyle Kranen",
+        "Ramon Matas",
+        "Dheevatsa Mudigere",
+        "Ritchie Zhao",
+        "Maximilian Golub",
+        "Arpan Dutta",
+        "Suresh Nambi",
+        "Sailaja Madduri",
+        "Dharmesh Jani",
+        "Brian Pharris",
+        "Itay Neeman",
+        "Bita Darvish Rouhani"
+      ],
+      "identifiers": {
+        "doi": [],
+        "arxiv": [],
+        "dblp": []
+      },
+      "category": "latest",
+      "venue": "MLSys",
+      "publication_date": "2026-05-18",
+      "publication_date_evidence": [
+        {
+          "url": "https://proceedings.mlsys.org/paper_files/paper/2026/hash/d49cee5f3a79d97d719df255689d83d7-Abstract-Conference.html",
+          "kind": "official-landing-page",
+          "publication_date": "2026-05-18",
+          "date_field": "citation_publication_date",
+          "title": "Beyond the Buzz: A Pragmatic Take on Inference Disaggregation",
+          "metadata": {
+            "": [
+              ""
+            ],
+            "viewport": [
+              "width=device-width, initial-scale=1, shrink-to-fit=no"
+            ],
+            "citation_title": [
+              "Beyond the Buzz: A Pragmatic Take on Inference Disaggregation"
+            ],
+            "citation_author": [
+              "Mitra, Tiyasa",
+              "Borkar, Ritika",
+              "Bhatia, Nidhi",
+              "Raj, Shivam",
+              "Zhou, Hongkuan",
+              "Pei, Yan R.",
+              "Venkatesan, Vishwanath",
+              "Kranen, Kyle",
+              "Matas, Ramon",
+              "Mudigere, Dheevatsa",
+              "Zhao, Ritchie",
+              "Golub, Maximilian",
+              "Dutta, Arpan",
+              "Nambi, Suresh",
+              "Madduri, Sailaja",
+              "Jani, Dharmesh",
+              "Pharris, Brian",
+              "Neeman, Itay",
+              "Rouhani, Bita D."
+            ],
+            "citation_journal_title": [
+              "Proceedings of Machine Learning and Systems"
+            ],
+            "citation_volume": [
+              "8"
+            ],
+            "citation_firstpage": [
+              "2001"
+            ],
+            "citation_lastpage": [
+              "2015"
+            ],
+            "citation_pdf_url": [
+              "https://proceedings.mlsys.org/paper_files/paper/2026/file/d49cee5f3a79d97d719df255689d83d7-Paper-Conference.pdf"
+            ],
+            "citation_publication_date": [
+              "2026-05-18"
+            ]
+          },
+          "source_sha256": "1b1d4f6405a0aec1da731df94cbad290fde806b773f400da981c8f143f333fac"
+        }
+      ],
+      "source_urls": [
+        "https://proceedings.mlsys.org/paper_files/paper/2026/hash/d49cee5f3a79d97d719df255689d83d7-Abstract-Conference.html",
+        "https://mlsys.org/Conferences/2026"
+      ],
+      "continuing_influence": {},
+      "full_paper_sha256": "d6d0788e072b664c7158423b4a06b3b7baa9791f49eb8f4f11681c387731120b",
+      "run_id": "systems-paper-daily:2026-09-14",
+      "status": "archived",
+      "reserved_at": "2026-09-14T15:12:37.969182+00:00",
+      "report_path": "content/daily/2026-09-14.md",
+      "verification": {
+        "summary_words": 1086,
+        "brief_words": 130,
+        "assessment_words": 69,
+        "pages": 16,
         "visuals": 2
       }
     }
@@ -20878,6 +21206,55 @@
       ],
       "artifact_sha256": "8a1d37b94c196f5a0dbb3db7a868448f89599b87dbd20826e87a5179ca9d7ccd",
       "archived_at": "2026-09-14T04:30:59.990036+00:00"
+    },
+    {
+      "run_id": "systems-paper-daily:2026-09-14",
+      "local_date": "2026-09-14",
+      "timezone": "America/New_York",
+      "status": "archived",
+      "reserved_at": "2026-09-14T15:12:37.969182+00:00",
+      "settings_sha256": "548e4a323794c557323a40057dfa2370d218d17c4a56ec54c51c1655dc11c653",
+      "work_ids": [
+        "title:d262b7afb4d2057bac0626a3",
+        "title:bbf43ccd9c899c947e96223e",
+        "title:f7980ea359b1d6140d33c323"
+      ],
+      "date_windows": {
+        "latest": {
+          "start": "2026-03-14",
+          "end": "2026-09-14"
+        },
+        "classic": {
+          "start": "2021-09-14",
+          "end": "2026-03-13"
+        }
+      },
+      "report_path": "content/daily/2026-09-14.md",
+      "report_sha256": "e701a8cd89e021cb71b6e6c7d02d50c5f66f8dfbcd13a0e9cfb5d431ede3d47f",
+      "visual_assets": [
+        {
+          "path": "content/assets/papers/work-957d1d9c0452cb620ebc/images/figure-1.png",
+          "sha256": "9e393bbd563029bfbaa75a20f308c838cbe50cbea5a15990b3b2d7b67090e1b4"
+        },
+        {
+          "path": "content/assets/papers/work-379e8c3fcc5ac219b272/images/figure-1.png",
+          "sha256": "34c6e1bd3af4e78758dc3edbca083c76adaa8093476e38d8833dfc3d00c72dd5"
+        },
+        {
+          "path": "content/assets/papers/work-379e8c3fcc5ac219b272/images/figure-2.png",
+          "sha256": "88a614d10f0d5b894de4396d84dd65c1d8f604434fbaa8f4a61e77b1f79b7a36"
+        },
+        {
+          "path": "content/assets/papers/work-8a4c9bd87f4c1f812965/images/figure-1.png",
+          "sha256": "6a2299cf12fb7f6568f25e93620df3e1f220a598e6233e1d5d0426686d426fad"
+        },
+        {
+          "path": "content/assets/papers/work-8a4c9bd87f4c1f812965/images/figure-2.png",
+          "sha256": "33edf79cdaae17a3559b1d38554874dec78fa9e4c1d11b9c914a1edc6abfeef5"
+        }
+      ],
+      "artifact_sha256": "6bf6ac3650042805ad3fa762c04e2cb66a0e539b2cb9b06e6da35e535af2203f",
+      "archived_at": "2026-09-14T15:12:38.428852+00:00"
     }
   ],
   "schema_version": 1,
