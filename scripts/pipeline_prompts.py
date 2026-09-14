@@ -88,6 +88,7 @@ TASKS = {
                'retain verified facts and experimental conditions. '
                'Each section text is Markdown prose without repeating its heading. '
                "The Final assessment section text must begin exactly with 'Interpretation.' or 'Interpretation:' so its evaluative conclusions are explicitly labeled. "
+               'Obey the configured word limits using the validator count: all section text plus every visual explanation and caveat, with captions excluded. '
                'Return insights and findings with source pages. For visuals, crop bbox coordinates are fractions of page '
                'width/height (left, top, right, bottom); table headers and rows contain verified source cells. '
                'Use the original Figure/Table identifier as label and paraphrase the caption. '

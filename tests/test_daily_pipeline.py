@@ -1032,6 +1032,7 @@ class PipelineTests(unittest.TestCase):
                     self.assertIn('rather than returning an empty selection', prompt)
                 if stage == 'analyze':
                     self.assertIn("Final assessment section text must begin exactly with 'Interpretation.'", prompt)
+                    self.assertIn('all section text plus every visual explanation and caveat', prompt)
 
     def test_removed_review_stage_cannot_be_called(self):
         with self.assertRaisesRegex(ValueError, 'Unknown stage'):
