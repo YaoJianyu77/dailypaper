@@ -731,6 +731,31 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(len(diagnostics['candidates']), 5)
         self.assertTrue(diagnostics['source_failures'])
 
+    def test_failed_selection_resumes_verified_discovery_without_another_search_call(self):
+        original = self.backend.generate
+        calls = []
+        failed = False
+
+        def fallback(stage, context, images=()):
+            nonlocal failed
+            calls.append(stage)
+            if stage == 'discover':
+                return self.discovery_result()
+            if stage == 'select' and not failed:
+                failed = True
+                return {'selected': [], 'shortfall_reason': 'Fixture selection refusal.'}
+            return original(stage, context, images)
+
+        with patch.object(self.sources, 'discover', return_value=[]), \
+             patch.object(self.backend, 'generate', side_effect=fallback):
+            with self.assertRaisesRegex(ValidationError, 'No verified papers selected'):
+                self.prepare()
+            bundle = self.prepare()
+        self.assertEqual(calls.count('discover'), 1)
+        self.assertEqual(calls.count('select'), 2)
+        self.assertEqual(len(bundle['papers']), 5)
+        self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
+
     def test_invalid_fresh_analysis_stops_without_automatic_model_retry(self):
         self.backend.invalid_analysis = True
         with self.assertRaisesRegex(ValidationError, 'Empty summary'):
@@ -1002,6 +1027,9 @@ class PipelineTests(unittest.TestCase):
                 for name, path in skills.items():
                     self.assertEqual(prompt.count(path.read_text()), int(name in expected), name)
                 self.assertEqual(json.loads(messages[1]['content']), context)
+                if stage == 'select':
+                    self.assertIn('do not require or try to reopen production history files', prompt)
+                    self.assertIn('rather than returning an empty selection', prompt)
 
     def test_removed_review_stage_cannot_be_called(self):
         with self.assertRaisesRegex(ValueError, 'Unknown stage'):

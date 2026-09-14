@@ -166,8 +166,15 @@ def prepare(root, *, day=None, sources=None, backend=None, pool=None, stage_dir=
                 'Settings changed during a pending run; keep its selection and explicitly revalidate before resuming')
         chosen = checkpoint['selection']
     else:
+        discovery_path = stage / 'discovery.json'
+        if pool is None and discovery_path.exists():
+            pool = json.loads(discovery_path.read_text())
+            require(pool.get('settings_sha256') == settings.sha256 and pool.get('date') == day.isoformat()
+                    and pool.get('windows') == settings.windows(day) and pool.get('candidates'),
+                    'Retained discovery checkpoint is incomplete or uses different settings/date windows')
+            logger.info('Resuming retained discovery checkpoint with %s verified candidates', len(pool['candidates']))
         pool = pool or discovery(root, settings, day, sources, history, backend=backend,
-                                 diagnostics_path=stage / 'discovery.json')
+                                 diagnostics_path=discovery_path)
         chosen = select(root, settings, day, backend, sources, pool, history)
         save_checkpoint(checkpoint_path, {'settings_sha256': settings.sha256, 'run_id': run_id, 'selection': chosen})
     validate_selection(chosen['papers'], settings, day, load_history(root), chosen['shortfall_reason'])

@@ -5,7 +5,7 @@ description: Use during DailyPaper generation to check candidates against perman
 
 # History and existing material
 
-Use `scripts/recommendation_history.py` to read and reconcile the evidence sources owned by `AGENTS.md`. Follow its full-history, permanent-exclusion, and safe-update rules.
+The controller uses `scripts/recommendation_history.py` to read and reconcile the evidence sources owned by `AGENTS.md`. Follow its full-history, permanent-exclusion, and safe-update rules. When a stage task supplies `prior_recommendation_evidence`, that is the controller's complete canonical snapshot for the call. Use it directly; do not try to reopen production history from the isolated stage workspace or treat the intentionally absent production file as missing evidence.
 
 ## Identity checks
 

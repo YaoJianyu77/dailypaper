@@ -4,7 +4,7 @@ Execution rules belong here; user preferences belong only in `DAILY_REPORT_PRODU
 
 ## Read and route
 
-Read `PROJECT_STATE.md`, then the complete settings page. Before selection, read complete canonical history and prior recommendation evidence through `scripts/recommendation_history.py`. Before implementation changes, read the relevant skills and their callers.
+Read `PROJECT_STATE.md`, then the complete settings page. Before selection, the controller reads complete canonical history and prior recommendation evidence through `scripts/recommendation_history.py`. Stage threads receive that complete snapshot as `prior_recommendation_evidence`; they must use the supplied snapshot instead of requiring production files inside their isolated workspace. Before implementation changes, read the relevant skills and their callers.
 
 Precedence: the user's explicit request → settings → this file → skill details. Older files, cached prompts, and defaults cannot override settings or require a second preference edit.
 

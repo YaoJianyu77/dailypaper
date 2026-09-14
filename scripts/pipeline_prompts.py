@@ -68,6 +68,10 @@ TASKS = {
                 'Explain inaccessible venues, incomplete coverage, and missing evidence in coverage_limits.',
     'select': 'Return candidate_id values from the supplied verified candidates, with topic_fit, identity_evidence, '
               'and title_aliases checked against prior_recommendation_evidence. '
+              'The controller already loaded the complete canonical history into prior_recommendation_evidence and '
+              'will independently recheck every selected identity; do not require or try to reopen production history files. '
+              'Select the best eligible supplied candidates even when there are fewer candidates than the requested slots; '
+              'record the unfilled slots in shortfall_reason rather than returning an empty selection solely because the target cannot be filled. '
               'The controller retrieves the selected complete PDFs and publisher-linked supplements under the existing document limits. '
               'A native web-tool PDF size limit alone is not evidence that the controller cannot access a paper; '
               'do not exclude a lead solely for that tool limit. Actual acquisition failures stop preparation. '
