@@ -272,7 +272,8 @@ class PipelineTests(unittest.TestCase):
         self.edit('**900–1,100 words per paper**', '**1,100–1,150 words per paper**')
         self.edit('**1–2** important', '**1–1** important')
         self.edit("**Clear Research Trends in Today's Papers**", '**Fixture Research Direction**')
-        self.edit('GPU systems;', 'Storage research;')
+        primary = self.settings.tables['research areas']['primary']
+        self.edit(primary, 'Storage research;')
         self.edit('SOSP, OSDI, NSDI', 'PLDI, OSDI, NSDI')
         self.sources = FixtureSources(self.settings, self.infrastructure)
         bundle = self.prepare()
@@ -385,8 +386,6 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(len(reconciled['papers']), 3)
         write_history(snapshot, reconciled)
         self.assertEqual(load_history(self.root).reconciled(), reconciled)
-        # Canonical imported evidence still excludes identifier aliases if a
-        # legacy index is later unavailable; no record is omitted from prompts.
         index.unlink()
         current = load_history(self.root)
         with self.assertRaises(HistoryError):
@@ -674,7 +673,7 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual({paper['venue'] for paper in result}, set(self.settings.venues))
         self.assertTrue(any(year == 2021 for _, year, _ in calls))
         self.assertLessEqual(len(result), len(self.settings.venues) * 12)
-        self.assertTrue(sources.failures)  # Budget limitations are handed to selection.
+        self.assertTrue(sources.failures)
 
     def test_blocked_indexes_stop_repeated_requests_and_redact_credentials(self):
         session = Mock()
@@ -690,7 +689,6 @@ class PipelineTests(unittest.TestCase):
         self.assertIn('non-JSON', sources.failures[0])
         self.assertIn('HTTP 429', sources.failures[1])
         self.assertNotIn('private-fixture-token', str(sources.failures))
-        # Repeated access in this run fails locally; a fresh run may retry the service.
         with self.assertRaisesRegex(EvidenceError, 'HTTP 429'):
             sources.json('https://api.openalex.org/works/fixture')
         self.assertEqual(session.get.call_count, 2)
@@ -724,7 +722,7 @@ class PipelineTests(unittest.TestCase):
              patch.object(self.backend, 'generate', side_effect=fallback):
             bundle = self.prepare()
             resumed = self.prepare()
-        self.assertEqual(len(calls), 1)  # A retry keeps the existing selection.
+        self.assertEqual(len(calls), 1)
         self.assertEqual(bundle['report_markdown'], resumed['report_markdown'])
         self.assertEqual(len(bundle['papers']), 5)
         self.assertEqual(len(bundle['assets']), 5)
@@ -823,7 +821,7 @@ class PipelineTests(unittest.TestCase):
         messages = build_messages(self.root, self.settings, 'discover', {})
         self.assertIn(self.settings.raw, messages[0]['content'])
         self.assertIn('skills/daily-paper-search/SKILL.md', messages[0]['content'])
-        result = self.discovery_result()  # Still contains old SOSP fixture candidates.
+        result = self.discovery_result()
         self.backend.generate = Mock(return_value=result)
         with patch.object(self.sources, 'discover', return_value=[]), self.assertRaises(jsonschema.ValidationError):
             discovery(self.root, self.settings, DAY, self.sources, load_history(self.root), backend=self.backend)
@@ -868,7 +866,7 @@ class PipelineTests(unittest.TestCase):
         self.sources.files[crossref_url] = json_bytes(record)
         with self.assertRaisesRegex(EvidenceError, 'Publisher venue'):
             self.sources.verify_publication(candidate)
-        candidate['doi'] = ''  # The author page is listed as official by the untrusted model.
+        candidate['doi'] = ''
         with self.assertRaisesRegex(EvidenceError, 'No exact official'):
             self.sources.verify_publication(candidate)
         self.assertTrue(publication_venue_matches(["Proceedings ... (ASPLOS '26)"], 'ASPLOS'))
@@ -954,8 +952,6 @@ class PipelineTests(unittest.TestCase):
     def test_runner_commits_exact_artifacts_and_recovers_failed_push(self):
         import run_local_daily
         shutil.copyfile(REPO / '.gitignore', self.root / '.gitignore')
-        # The fixture checkout invokes the real build script through a symlink;
-        # all Git state and the remote live inside this temporary directory.
         (self.root / 'scripts').symlink_to(REPO / 'scripts', target_is_directory=True)
         with tempfile.TemporaryDirectory(prefix='dailypaper-remote-') as directory:
             remote = Path(directory) / 'remote.git'
@@ -1036,7 +1032,6 @@ class PipelineTests(unittest.TestCase):
             ('trends', {}, ('daily-paper-editor',)),
         ]
         skills = {path.parent.name: path for path in (self.root / 'skills').glob('*/SKILL.md')}
-        # A canonical skill edit must reach its next applicable call without a prompt edit.
         for name, path in skills.items():
             path.write_text(path.read_text() + f'\nFixture instruction update for {name}.\n')
         rules = (self.root / 'AGENTS.md').read_text()
