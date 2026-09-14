@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, datetime, timezone
 import html
 from html.parser import HTMLParser
 import json
@@ -12,7 +12,7 @@ import os
 from pathlib import Path
 import re
 import time
-from urllib.parse import quote, urljoin, urlparse
+from urllib.parse import parse_qs, quote, urljoin, urlparse
 
 import fitz
 import requests
@@ -21,6 +21,12 @@ from recommendation_history import identifier_tokens, normalize_title, sha256, w
 
 logger = logging.getLogger(__name__)
 INDEX_HOSTS = {'dblp.org', 'api.openalex.org'}
+OFFICIAL_PUBLISHER_HOSTS = {
+    'usenix.org', 'www.usenix.org', 'dl.acm.org', 'ieeexplore.ieee.org', 'proceedings.mlsys.org',
+    'proceedings.mlr.press', 'www.proceedings.mlr.press', 'roboticsproceedings.org',
+    'www.roboticsproceedings.org', 'openreview.net', 'www.openreview.net', 'proceedings.neurips.cc',
+    'openaccess.thecvf.com', 'link.springer.com', 'journals.sagepub.com',
+}
 
 
 class EvidenceError(ValueError):
@@ -41,15 +47,15 @@ def listify(value):
     return value if isinstance(value, list) else [] if value is None else [value]
 
 
-def label_matches(actual, configured):
-    actual = normalize_title(re.sub(r'\s*\(\d+\)$', '', actual))
-    # Spelling translations only: a key does not make a venue eligible. Eligibility
-    # comes exclusively from the configured sources. Avoid substring matches that
-    # accidentally admit a similarly named workshop or companion proceedings.
+def venue_aliases(configured):
+    """Return only spelling aliases for an already-configured eligible venue."""
     spellings = {
         'usenix atc': ['USENIX Annual Technical Conference', 'USENIX Conference'],
         'sc': ['Supercomputing', 'International Conference for High Performance Computing Networking Storage and Analysis'],
         'mlsys': ['Machine Learning and Systems', 'Proceedings of Machine Learning and Systems'],
+        'corl': ['Conference on Robot Learning'],
+        'rss': ['Robotics: Science and Systems'],
+        'neurips': ['NIPS', 'Advances in Neural Information Processing Systems'],
         'acm tocs': ['ACM Trans. Comput. Syst.', 'ACM Transactions on Computer Systems'],
         'acm tos': ['ACM Trans. Storage', 'ACM Transactions on Storage'],
         'ieee tpds': ['IEEE Trans. Parallel Distributed Syst.', 'IEEE Transactions on Parallel and Distributed Systems'],
@@ -57,10 +63,28 @@ def label_matches(actual, configured):
         'acm taco': ['ACM Trans. Archit. Code Optim.', 'ACM Transactions on Architecture and Code Optimization'],
         'ieee acm ton': ['IEEE ACM Trans. Netw.', 'IEEE ACM Transactions on Networking'],
         'acm pomacs': ['Proc. ACM Meas. Anal. Comput. Syst.', 'Proceedings of the ACM on Measurement and Analysis of Computing Systems'],
+        'ieee t ro': ['IEEE Trans. Robotics', 'IEEE Transactions on Robotics'],
+        'ieee ra l': ['IEEE Robotics Autom. Lett.', 'IEEE Robotics and Automation Letters'],
+        'ijrr': ['Int. J. Robotics Res.', 'International Journal of Robotics Research',
+                 'The International Journal of Robotics Research'],
     }
-    aliases = [normalize_title(a) for a in configured.split(' / ')]
-    aliases += [normalize_title(a) for key in list(aliases) for a in spellings.get(key, [])]
-    return actual in aliases
+    aliases = [normalize_title(alias) for alias in configured.split(' / ')]
+    aliases += [normalize_title(alias) for key in list(aliases) for alias in spellings.get(key, [])]
+    return tuple(dict.fromkeys(alias for alias in aliases if alias))
+
+
+def label_matches(actual, configured):
+    actual = normalize_title(re.sub(r'\s*\(\d+\)$', '', actual))
+    # Spelling translations only: a key does not make a venue eligible. Eligibility
+    # comes exclusively from the configured sources. Avoid substring matches that
+    # accidentally admit a similarly named workshop or companion proceedings.
+    return actual in venue_aliases(configured)
+
+
+def configured_venue_in_text(text, configured):
+    """Match a configured venue in trusted bibliographic text, using whole normalized tokens."""
+    normalized = f' {normalize_title(text)} '
+    return any(f' {alias} ' in normalized for alias in venue_aliases(configured))
 
 
 def publication_venue_matches(labels, configured, issue=''):
@@ -79,21 +103,30 @@ def publication_venue_matches(labels, configured, issue=''):
         if label_matches(label, configured):
             return True
         normalized = normalize_title(label)
-        for alias in configured.split(' / '):
-            # E.g. "Proceedings ... (ASPLOS '26)". Whole tokens, never substrings.
-            if f' {normalize_title(alias)} ' in f' {normalized} ':
+        for alias in venue_aliases(configured):
+            # E.g. "Proceedings ... (ASPLOS '26)" or an ordinal conference title.
+            if f' {alias} ' in f' {normalized} ':
                 return True
     return False
 
 
 def official_landing(url, page, venue):
     """Untrusted discovery cannot designate an arbitrary author page as official."""
-    host = urlparse(url).hostname or ''
-    publishers = {'usenix.org', 'www.usenix.org', 'dl.acm.org', 'ieeexplore.ieee.org', 'proceedings.mlsys.org'}
-    if host not in publishers:
+    host = (urlparse(url).hostname or '').casefold()
+    if host not in OFFICIAL_PUBLISHER_HOSTS:
         return False
     labels = [page.get('citation_conference_title'), page.get('citation_journal_title')]
-    return publication_venue_matches(labels, venue, page.get('citation_issue'))
+    if publication_venue_matches(labels, venue, page.get('citation_issue')):
+        return True
+    # Several robotics/ML proceedings expose the venue only in the bibliographic
+    # header rather than citation_* metadata. Restrict this fallback to trusted
+    # publisher hosts and the beginning of the page so abstract references cannot
+    # make an unrelated venue look official.
+    return configured_venue_in_text(' '.join(page.text[:80]), venue)
+
+
+def openreview_value(value):
+    return value.get('value', '') if isinstance(value, dict) else value or ''
 
 
 def author_pdf_urls(candidate):
@@ -211,6 +244,68 @@ class Sources:
             if host in INDEX_HOSTS and (error.response is None or error.response.status_code >= 500):
                 raise self.disable_index(host, request_failure(error)) from error
             raise
+
+    def pmlr_publication_evidence(self, article_url, candidate):
+        """Bind a PMLR article to its volume-level exact publication date."""
+        parsed = urlparse(article_url)
+        if (parsed.hostname or '').casefold() not in {'proceedings.mlr.press', 'www.proceedings.mlr.press'}:
+            return None
+        match = re.fullmatch(r'/v(\d+)/[^/]+\.html', parsed.path)
+        if not match:
+            raise EvidenceError('PMLR source is not a paper landing page')
+        volume = match.group(1)
+        volume_url = f'{parsed.scheme}://{parsed.netloc}/v{volume}/'
+        raw, final = self.get(volume_url)
+        page = PageMetadata(raw.decode('utf-8', errors='replace'))
+        head = ' '.join(page.text[:120])
+        text = ' '.join(page.text)
+        if not configured_venue_in_text(head, candidate['venue']):
+            raise EvidenceError('PMLR volume does not match the configured venue')
+        if normalize_title(candidate['title']) not in normalize_title(text):
+            raise EvidenceError('PMLR volume does not contain the discovered work')
+        published = re.search(
+            rf'Published\s+as\s+Volume\s+{re.escape(volume)}\s+by\b.*?\bon\s+(\d{{1,2}}\s+[A-Za-z]+\s+\d{{4}})',
+            text, re.I)
+        if not published:
+            raise EvidenceError('PMLR volume lacks an exact official publication date')
+        try:
+            value = datetime.strptime(published.group(1), '%d %B %Y').date().isoformat()
+        except ValueError as error:
+            raise EvidenceError('PMLR volume publication date is not parseable') from error
+        return {'url': final, 'kind': 'pmlr-volume-publication', 'publication_date': value,
+                'title': candidate['title'], 'volume': volume, 'source_sha256': sha256(raw)}
+
+    def openreview_publication_evidence(self, article_url, candidate):
+        """Verify an accepted ICLR main-conference paper through OpenReview API v2."""
+        parsed = urlparse(article_url)
+        if (parsed.hostname or '').casefold() not in {'openreview.net', 'www.openreview.net'}:
+            return None
+        if parsed.path.rstrip('/') != '/forum':
+            raise EvidenceError('OpenReview source is not a forum landing page')
+        forum_ids = parse_qs(parsed.query).get('id', [])
+        if len(forum_ids) != 1 or not forum_ids[0]:
+            raise EvidenceError('OpenReview forum URL has no unique note id')
+        forum_id = forum_ids[0]
+        payload, api_url = self.json('https://api2.openreview.net/notes', {'id': forum_id})
+        note = next((item for item in payload.get('notes', []) if item.get('id') == forum_id), None)
+        if not note:
+            raise EvidenceError('OpenReview API did not return the forum note')
+        content = note.get('content', {})
+        title = openreview_value(content.get('title'))
+        venue_id = str(openreview_value(content.get('venueid') or content.get('venue_id')))
+        venue = str(openreview_value(content.get('venue')))
+        if normalize_title(title) != normalize_title(candidate['title']):
+            raise EvidenceError('OpenReview title differs from the discovered work')
+        if not re.fullmatch(r'ICLR\.cc/\d{4}/Conference(?:/(?:Poster|Oral|Spotlight))?', venue_id, re.I):
+            raise EvidenceError('OpenReview note is not an accepted ICLR main-conference paper')
+        if not configured_venue_in_text(venue + ' ' + venue_id.replace('.', ' '), candidate['venue']):
+            raise EvidenceError('OpenReview venue differs from the configured venue')
+        pdate = note.get('pdate')
+        if not isinstance(pdate, (int, float)) or pdate <= 0:
+            raise EvidenceError('OpenReview accepted note lacks an exact publication timestamp')
+        value = datetime.fromtimestamp(pdate / 1000, tz=timezone.utc).date().isoformat()
+        return {'url': api_url, 'kind': 'openreview-accepted-note', 'publication_date': value,
+                'title': title, 'venue': venue, 'venue_id': venue_id, 'note_id': forum_id, 'pdate': pdate}
 
     def dblp(self, venue, year, limit):
         payload, url = self.json('https://dblp.org/search/publ/api', {'q': f'{venue} {year}', 'format': 'json', 'h': limit})
@@ -338,7 +433,7 @@ class Sources:
             except requests.RequestException:
                 pass
         for source_url in candidate.get('source_urls', []):
-            host = urlparse(source_url).hostname or ''
+            host = (urlparse(source_url).hostname or '').casefold()
             if not source_url or host in {'arxiv.org', 'export.arxiv.org', 'openalex.org', 'dblp.org'}:
                 continue
             if source_url.lower().endswith('.pdf'):
@@ -350,11 +445,29 @@ class Sources:
                     candidate['pdf_urls'].append(final)
                     continue
                 page = PageMetadata(raw.decode('utf-8', errors='replace'))
-                title = page.get('citation_title', 'dc.title')
+                special_record = None
+                if host in {'openreview.net', 'www.openreview.net'}:
+                    special_record = self.openreview_publication_evidence(final, candidate)
+                    title = special_record['title']
+                    forum_id = special_record['note_id']
+                    candidate['pdf_urls'].append('https://openreview.net/pdf?id=' + quote(forum_id, safe=''))
+                else:
+                    title = page.get('citation_title', 'dc.title')
+                    if not title and normalize_title(candidate['title']) in normalize_title(' '.join(page.text[:40])):
+                        title = candidate['title']
+                    if normalize_title(title) != normalize_title(candidate['title']):
+                        continue
+                    if host in {'proceedings.mlr.press', 'www.proceedings.mlr.press'}:
+                        special_record = self.pmlr_publication_evidence(final, candidate)
                 if normalize_title(title) != normalize_title(candidate['title']):
                     continue
+                if special_record:
+                    records.append(special_record)
                 official = official_landing(final, page, candidate['venue'])
-                for key in ('citation_online_date', 'citation_publication_date') if official else ():
+                date_keys = () if host in {'openreview.net', 'www.openreview.net',
+                                            'proceedings.mlr.press', 'www.proceedings.mlr.press'} \
+                    else ('citation_online_date', 'citation_publication_date')
+                for key in date_keys if official else ():
                     value = page.get(key).replace('/', '-')
                     if re.fullmatch(r'\d{4}-\d{2}-\d{2}', value):
                         date.fromisoformat(value)
