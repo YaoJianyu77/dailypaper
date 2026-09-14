@@ -108,9 +108,10 @@ def infer_site_base_url(repo_root: Path, remote_name: str, config: Dict[str, Any
     return f'/{repo_name}'
 
 
-def verify_runtime(repo_root, day=None):
+def verify_runtime(repo_root, day=None, *, run_diagnostic=False):
     settings = load_settings(repo_root)
-    backend = CodexBackend(repo_root, settings, load_infrastructure(repo_root))
+    backend = CodexBackend(repo_root, settings, load_infrastructure(repo_root),
+                           run_diagnostic=run_diagnostic)
     resolution = backend.preflight()
     log_dir = repo_root / 'state/logs'
     log_dir.mkdir(parents=True, exist_ok=True)
@@ -151,7 +152,7 @@ def main() -> int:
 def run_locked(repo_root, args):
     logger.info('DailyPaper invocation started (pid=%s)', os.getpid())
     if args.check_runtime:
-        verify_runtime(repo_root, args.date)
+        verify_runtime(repo_root, args.date, run_diagnostic=True)
         return 0
     if args.dry_run:
         import tempfile

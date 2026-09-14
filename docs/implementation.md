@@ -39,7 +39,7 @@ Ignored `.cache/dailypaper/runs/<date>/` holds `runtime.json`, selection, PDFs/p
 
 ## Codex and scheduling details
 
-The app-server transport provides image-viewing receipts absent from `codex exec --json`. Official recommendation text and the authenticated account catalog identify the research model. The configured `medium` reasoning mode must be account-supported and described as balanced in current official guidance. Source URLs/hashes, selection evidence, effective model/effort, CLI version, and per-call token receipts are logged under ignored `state/logs/`.
+The app-server transport provides image-viewing receipts absent from `codex exec --json`. Official recommendation text and the authenticated account catalog identify the research model. The configured `medium` reasoning mode must be account-supported and described as balanced in current official guidance. Normal production does this metadata preflight without repeating the model-driven synthetic installation diagnostic; invoke `--check-runtime` explicitly after runtime changes. Source URLs/hashes, selection evidence, effective model/effort, CLI version, and per-call token receipts are logged under ignored `state/logs/`.
 
 Ordinary `thread/read` omits effective approval/sandbox details, so verification reads the runtime-reported session's `turn_context`, bound to its thread and turn IDs. Empty startup metadata is retried read-only for at most 45 seconds; other protocol errors and configuration mismatches are fatal. Subagent activity, collaboration-agent calls, and model reroutes are rejected before output is accepted. Controlled filesystem/network denials are part of the synthetic capability check.
 

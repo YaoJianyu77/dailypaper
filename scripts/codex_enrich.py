@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verified Codex transport for full-paper research and review stages."""
+"""Verified Codex transport for full-paper research stages."""
 
 import copy
 import logging
@@ -16,16 +16,18 @@ logger = logging.getLogger(__name__)
 
 
 class CodexBackend:
-    def __init__(self, root, settings, infrastructure):
+    def __init__(self, root, settings, infrastructure, *, run_diagnostic=False):
         self.root, self.settings = Path(root), settings
         self.options = infrastructure.get('ai', {})
+        self.run_diagnostic = run_diagnostic
         self.resolution = None
 
     def preflight(self):
         if self.resolution is None:
             resolution = resolve_runtime(self.root, self.settings)
-            resolution['capabilities'] = check_capabilities(self.root, resolution,
-                timeout=int(self.options.get('codex_timeout_seconds', 1200)))
+            if self.run_diagnostic:
+                resolution['capabilities'] = check_capabilities(self.root, resolution,
+                    timeout=int(self.options.get('codex_timeout_seconds', 1200)))
             self.resolution = resolution
             self.identity = resolution_identity(resolution)
         require(resolution_identity(self.resolution) == self.identity, 'Resolved report configuration was changed; generation stopped')

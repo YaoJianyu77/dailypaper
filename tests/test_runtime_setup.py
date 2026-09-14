@@ -368,11 +368,12 @@ class RuntimeTests(unittest.TestCase):
     def test_preflight_is_frozen_and_callers_cannot_mutate_it(self):
         backend = CodexBackend(REPO, self.settings, {})
         with patch('codex_enrich.resolve_runtime', return_value=dict(self.resolution)) as resolve, \
-             patch('codex_enrich.check_capabilities', return_value={'fixture': True}):
+             patch('codex_enrich.check_capabilities') as diagnostic:
             first = backend.preflight()
             first['mode'] = 'other'
             self.assertEqual(backend.preflight()['mode'], 'medium')
             self.assertEqual(resolve.call_count, 1)
+            diagnostic.assert_not_called()
             backend.resolution['model'] = 'other'
             with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'configuration was changed'):
                 backend.preflight()
@@ -405,8 +406,8 @@ class RuntimeTests(unittest.TestCase):
             self.assertFalse((scratch / 'content').exists())
             self.assertFalse((scratch / 'state').exists())
 
-    def test_preflight_failure_prevents_production_calls_and_no_api_fallback(self):
-        backend = CodexBackend(REPO, self.settings, {})
+    def test_explicit_runtime_diagnostic_failure_prevents_calls_and_no_api_fallback(self):
+        backend = CodexBackend(REPO, self.settings, {}, run_diagnostic=True)
         with patch('codex_enrich.resolve_runtime', return_value={}), \
              patch('codex_enrich.check_capabilities', side_effect=runtime.RuntimeVerificationError('Tool access failed')), \
              patch('codex_enrich.execute') as execute:
