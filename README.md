@@ -2,8 +2,6 @@
 
 Read the **[website](https://yaojianyu77.github.io/dailypaper/)** or choose a date in the [report reader](https://yaojianyu77.github.io/dailypaper/reader/). One shared HTML page displays the daily Markdown; article text stays in `content/daily/`.
 
-Edit **[DAILY_REPORT_PRODUCT_REQUIREMENTS.md](DAILY_REPORT_PRODUCT_REQUIREMENTS.md)** to change the next report. It is the only user settings file.
-
 | Six settings | Controls |
 |---|---|
 | [Research areas](DAILY_REPORT_PRODUCT_REQUIREMENTS.md#1-research-areas) | Topics, priorities, exclusions |
