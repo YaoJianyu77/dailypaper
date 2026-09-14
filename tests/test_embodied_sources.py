@@ -9,6 +9,8 @@ import unittest
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / 'scripts'))
 
+from codex_enrich import CodexBackend
+from daily_pipeline import needs_web_discovery
 from paper_sources import EvidenceError, PageMetadata, Sources, label_matches, official_landing
 
 
@@ -29,6 +31,15 @@ class FixtureSources(Sources):
 
 
 class EmbodiedSourceTests(unittest.TestCase):
+    def test_production_always_supplements_sparse_indexes_with_topic_search(self):
+        quotas = {'latest': 4, 'classic': 1}
+        full = {'latest': 4, 'classic': 1}
+        production = CodexBackend.__new__(CodexBackend)
+        self.assertTrue(needs_web_discovery(production, full, quotas))
+        self.assertFalse(needs_web_discovery(object(), full, quotas))
+        self.assertTrue(needs_web_discovery(object(), {'latest': 3, 'classic': 1}, quotas))
+        self.assertFalse(needs_web_discovery(None, {'latest': 0, 'classic': 0}, quotas))
+
     def test_robotics_journal_spelling_aliases(self):
         self.assertTrue(label_matches('IEEE Trans. Robotics', 'IEEE T-RO / IEEE Transactions on Robotics'))
         self.assertTrue(label_matches('IEEE Robotics Autom. Lett.', 'IEEE RA-L / IEEE Robotics and Automation Letters'))
