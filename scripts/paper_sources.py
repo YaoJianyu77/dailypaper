@@ -448,6 +448,9 @@ class Sources:
         directory.mkdir(parents=True, exist_ok=True)
         if not candidate.get('pdf_urls'):
             raise EvidenceError('No complete-paper URL was discovered for ' + candidate['title'])
+        accepted_titles = [normalize_title(title) for title in
+                           [candidate['title'], *candidate.get('title_aliases', [])]
+                           if normalize_title(title)]
         failures = []
         for url in candidate.get('pdf_urls', []):
             try:
@@ -458,8 +461,8 @@ class Sources:
                     texts = [page.get_text(sort=True) for page in document]
                     if any(not text.strip() for text in texts):
                         raise EvidenceError('PDF includes pages without extractable text; verified OCR is required')
-                    title = normalize_title(candidate['title'])
-                    if title not in normalize_title(' '.join(texts[:2])):
+                    title_text = normalize_title(' '.join(texts[:2]))
+                    if not any(title in title_text for title in accepted_titles):
                         raise EvidenceError('Full-paper title could not be matched to the verified publication')
                 break
             except (requests.RequestException, ValueError, RuntimeError) as error:
@@ -488,7 +491,8 @@ class Sources:
                     continue
                 with fitz.open(stream=extra, filetype='pdf') as author:
                     title_text = ' '.join(author[number].get_text(sort=True) for number in range(min(2, len(author))))
-                    if normalize_title(candidate['title']) not in normalize_title(title_text):
+                    normalized_text = normalize_title(title_text)
+                    if not any(title in normalized_text for title in accepted_titles):
                         raise EvidenceError('Author-copy title does not match the verified publication')
                 parts.append((extra, resolved, 'author-version'))
             except (requests.RequestException, ValueError, RuntimeError) as error:

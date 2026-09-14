@@ -575,6 +575,10 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(verified['publication_date'], '2026-09-01')
         document = self.sources.full_paper(verified, self.root / 'document')
         validate_analysis(analysis_result(document, self.settings), document, self.settings)
+        renamed = {**verified, 'title': 'Renamed proceedings title',
+                   'title_aliases': [verified['title']]}
+        alias_document = self.sources.full_paper(renamed, self.root / 'renamed')
+        self.assertEqual(alias_document['sha256'], document['sha256'])
         with self.assertRaisesRegex(EvidenceError, 'title could not be matched'):
             self.sources.full_paper({**verified, 'title': 'Wrong research work'}, self.root / 'wrong')
         self.sources.documents['max_pages'] = 1
