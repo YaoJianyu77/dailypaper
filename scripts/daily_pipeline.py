@@ -23,6 +23,14 @@ def save_checkpoint(path, value):
     atomic_write(path, json_bytes(value), replace=True)
 
 
+def needs_web_discovery(backend, counts, quotas):
+    """Production supplements sparse venue indexes even when raw counts meet quotas."""
+    return backend is not None and (
+        isinstance(backend, CodexBackend)
+        or any(counts[key] < quota for key, quota in quotas.items())
+    )
+
+
 def discovery(root, settings, day, sources, history, *, backend=None, diagnostics_path=None):
     verified, rejected = [], []
     def verify(candidates):
@@ -52,8 +60,8 @@ def discovery(root, settings, day, sources, history, *, backend=None, diagnostic
     logger.info('Discovering configured venues; complete history contains %s source records', len(history.records))
     verify(sources.discover(settings, day))
     counts = {category: sum(p['category'] == category for p in verified) for category in settings.quotas}
-    if backend is not None and any(counts[key] < quota for key, quota in settings.quotas.items()):
-        logger.info('Index coverage insufficient (%s); searching official sources with verified Codex runtime', counts)
+    if needs_web_discovery(backend, counts, settings.quotas):
+        logger.info('Supplementing index coverage (%s) with topic-aware official-source search', counts)
         from pipeline_prompts import stage_schema
         import jsonschema
         result = backend.generate('discover', {'date': day.isoformat(), 'date_windows': settings.windows(day),
