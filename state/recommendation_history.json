@@ -17973,7 +17973,9 @@
         "https://pldi26.sigplan.org/details/pldi-2026-papers/47/Modular-GPU-Programming-with-Typed-Perspectives",
         "https://dl.acm.org/doi/10.1145/3808290",
         "https://arxiv.org/abs/2511.11939",
-        "https://doi.org/10.1145/3808290"
+        "https://doi.org/10.1145/3808290",
+        "https://api.crossref.org/works/10.1145%2F3808290",
+        "https://arxiv.org/pdf/2511.11939"
       ],
       "continuing_influence": {},
       "full_paper_sha256": "b92338ba20a39fa214f2c027062127f2ad86150853c2f24724915e1ce1ce6504",
@@ -17987,7 +17989,14 @@
         "assessment_words": 64,
         "pages": 48,
         "visuals": 2
-      }
+      },
+      "legacy_evidence": [
+        {
+          "path": "content/daily/2026-09-08.md",
+          "title": "Modular GPU Programming with Typed Perspectives",
+          "sha256": "fbf36a587d198f6a6b9ca8438c4ec6504946dda52054156ccfd4cfc7fc0f1b1e"
+        }
+      ]
     },
     {
       "work_id": "arxiv:2601.20309",
@@ -18059,7 +18068,8 @@
       ],
       "source_urls": [
         "https://proceedings.mlsys.org/paper_files/paper/2026/hash/07fd64f9316f40193c6a4d87d8afa011-Abstract-Conference.html",
-        "https://arxiv.org/abs/2601.20309"
+        "https://arxiv.org/abs/2601.20309",
+        "https://proceedings.mlsys.org/paper_files/paper/2026/file/07fd64f9316f40193c6a4d87d8afa011-Paper-Conference.pdf"
       ],
       "continuing_influence": {},
       "full_paper_sha256": "cc42dea681bb8edbd10b4685bbf284ba12c07e6505e7819500a0c782702e48d8",
@@ -18073,7 +18083,14 @@
         "assessment_words": 61,
         "pages": 19,
         "visuals": 2
-      }
+      },
+      "legacy_evidence": [
+        {
+          "path": "content/daily/2026-09-08.md",
+          "title": "SuperInfer: SLO-Aware Rotary Scheduling and Memory Management for LLM Inference on Superchips",
+          "sha256": "fbf36a587d198f6a6b9ca8438c4ec6504946dda52054156ccfd4cfc7fc0f1b1e"
+        }
+      ]
     },
     {
       "work_id": "arxiv:2605.21603",
@@ -18157,7 +18174,9 @@
       ],
       "source_urls": [
         "https://proceedings.mlsys.org/paper_files/paper/2026/hash/bbd7d8bd780fcf7143add2317ba04638-Abstract-Conference.html",
-        "https://arxiv.org/abs/2605.21603"
+        "https://arxiv.org/abs/2605.21603",
+        "https://proceedings.mlsys.org/paper_files/paper/2026/file/bbd7d8bd780fcf7143add2317ba04638-Paper-Conference.pdf",
+        "https://proceedings.mlsys.org/paper_files/paper/2026/file/bbd7d8bd780fcf7143add2317ba04638-Supplemental-Conference.pdf"
       ],
       "continuing_influence": {},
       "full_paper_sha256": "302bacc8e2d5741146497248bb37eb450b3e70288ee7fa367a8a35ef986927ee",
@@ -18171,7 +18190,14 @@
         "assessment_words": 68,
         "pages": 16,
         "visuals": 2
-      }
+      },
+      "legacy_evidence": [
+        {
+          "path": "content/daily/2026-09-08.md",
+          "title": "DynaFlow: Transparent and Flexible Intra-Device Parallelism via Programmable Operator Scheduling",
+          "sha256": "fbf36a587d198f6a6b9ca8438c4ec6504946dda52054156ccfd4cfc7fc0f1b1e"
+        }
+      ]
     },
     {
       "work_id": "arxiv:2511.02043",
@@ -18251,7 +18277,9 @@
       ],
       "source_urls": [
         "https://proceedings.mlsys.org/paper_files/paper/2026/hash/bc52716d13d2d72ea0f335667d86c0f8-Abstract-Conference.html",
-        "https://arxiv.org/abs/2511.02043"
+        "https://arxiv.org/abs/2511.02043",
+        "https://proceedings.mlsys.org/paper_files/paper/2026/file/bc52716d13d2d72ea0f335667d86c0f8-Paper-Conference.pdf",
+        "https://arxiv.org/pdf/2511.02043"
       ],
       "continuing_influence": {},
       "full_paper_sha256": "069c0ac2468dbe32beb50d79e8f855632c42f5d39e42cc10feadf6a1f46418a5",
@@ -18264,6 +18292,2156 @@
         "brief_words": 115,
         "assessment_words": 66,
         "pages": 39,
+        "visuals": 2
+      },
+      "legacy_evidence": [
+        {
+          "path": "content/daily/2026-09-08.md",
+          "title": "Flashlight: PyTorch Compiler Extensions to Accelerate Attention Variants",
+          "sha256": "fbf36a587d198f6a6b9ca8438c4ec6504946dda52054156ccfd4cfc7fc0f1b1e"
+        }
+      ]
+    },
+    {
+      "work_id": "doi:10.48550/arxiv.2511.08083",
+      "title": "HipKittens: Fast and Furious AMD Kernels",
+      "title_aliases": [
+        "HipKittens: Fast and Furious AMD Kernels"
+      ],
+      "authors": [
+        "William Hu",
+        "Drew Wadsworth",
+        "Sean Siddens",
+        "Stanley Winata",
+        "Daniel Y. Fu",
+        "Ryan Swann",
+        "Muhammad Osama",
+        "Christopher Ré",
+        "Simran Arora"
+      ],
+      "identifiers": {
+        "doi": [
+          "10.48550/arxiv.2511.08083"
+        ],
+        "arxiv": [
+          "2511.08083"
+        ],
+        "dblp": []
+      },
+      "category": "latest",
+      "venue": "MLSys",
+      "publication_date": "2026-05-18",
+      "publication_date_evidence": [
+        {
+          "url": "https://proceedings.mlsys.org/paper_files/paper/2026/hash/bc75fa9843a7905bbed9d83895a88f7f-Abstract-Conference.html",
+          "kind": "official-landing-page",
+          "publication_date": "2026-05-18",
+          "date_field": "citation_publication_date",
+          "title": "HipKittens: Fast and Furious AMD Kernels",
+          "metadata": {
+            "": [
+              ""
+            ],
+            "viewport": [
+              "width=device-width, initial-scale=1, shrink-to-fit=no"
+            ],
+            "citation_title": [
+              "HipKittens: Fast and Furious AMD Kernels"
+            ],
+            "citation_author": [
+              "Hu, William",
+              "Wadsworth, Drew",
+              "Siddens, Sean",
+              "Winata, Stanley",
+              "Fu, Daniel Y.",
+              "Swann, Ryan",
+              "Osama, Muhammad",
+              "Ré, Christopher",
+              "Arora, Simran"
+            ],
+            "citation_journal_title": [
+              "Proceedings of Machine Learning and Systems"
+            ],
+            "citation_volume": [
+              "8"
+            ],
+            "citation_firstpage": [
+              "1431"
+            ],
+            "citation_lastpage": [
+              "1443"
+            ],
+            "citation_pdf_url": [
+              "https://proceedings.mlsys.org/paper_files/paper/2026/file/bc75fa9843a7905bbed9d83895a88f7f-Paper-Conference.pdf"
+            ],
+            "citation_publication_date": [
+              "2026-05-18"
+            ]
+          },
+          "source_sha256": "5c9eab006b7dc170079be8f7c73897bb171c797e0c3bd161aae33b2a35732f0b"
+        }
+      ],
+      "source_urls": [
+        "https://proceedings.mlsys.org/paper_files/paper/2026/hash/bc75fa9843a7905bbed9d83895a88f7f-Abstract-Conference.html",
+        "https://arxiv.org/abs/2511.08083"
+      ],
+      "continuing_influence": {},
+      "full_paper_sha256": "ae62371439b31c62597d07daa96b076f5a8ce3d03a6d5977ff6ecff0f6c3e5fe",
+      "run_id": "systems-paper-daily:2026-09-13",
+      "status": "archived",
+      "reserved_at": "2026-09-14T04:30:59.524264+00:00",
+      "report_path": "content/daily/2026-09-13.md",
+      "verification": {
+        "summary_words": 1086,
+        "brief_words": 114,
+        "assessment_words": 68,
+        "pages": 79,
+        "visuals": 2
+      }
+    },
+    {
+      "work_id": "doi:10.1145/3789240.3829111",
+      "title": "Presto: A Match-Action TCP Stack for the Terabit Era",
+      "title_aliases": [
+        "Presto: A Match-Action TCP Stack for the Terabit Era",
+        "Scaling Data Center TCP to Terabits with Laminar"
+      ],
+      "authors": [
+        "Rajath Shashidhara",
+        "Antoine Kaufmann",
+        "Simon Peter"
+      ],
+      "identifiers": {
+        "doi": [
+          "10.1145/3789240.3829111"
+        ],
+        "arxiv": [
+          "2504.19058"
+        ],
+        "dblp": []
+      },
+      "category": "latest",
+      "venue": "SIGCOMM",
+      "publication_date": "2026-08-11",
+      "publication_date_evidence": [
+        {
+          "url": "https://api.crossref.org/works/10.1145%2F3789240.3829111",
+          "kind": "publisher-deposited-crossref",
+          "publication_date": "2026-08-11",
+          "title": "Presto: A Match-Action TCP Stack for the Terabit Era",
+          "record": {
+            "indexed": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ],
+              "date-time": "2026-08-11T19:28:07Z",
+              "timestamp": 1786476487382,
+              "version": "build-2736575974"
+            },
+            "publisher-location": "New York, NY, USA",
+            "reference-count": 107,
+            "publisher": "ACM",
+            "license": [
+              {
+                "start": {
+                  "date-parts": [
+                    [
+                      2026,
+                      8,
+                      11
+                    ]
+                  ],
+                  "date-time": "2026-08-11T00:00:00Z",
+                  "timestamp": 1786406400000
+                },
+                "content-version": "vor",
+                "delay-in-days": 0,
+                "URL": "https://creativecommons.org/licenses/by/4.0/legalcode"
+              }
+            ],
+            "funder": [
+              {
+                "DOI": "10.13039/100000001",
+                "name": "National Science Foundation",
+                "doi-asserted-by": "publisher",
+                "award": [
+                  "2212193"
+                ],
+                "award-info": [
+                  {
+                    "award-number": [
+                      "2212193"
+                    ]
+                  }
+                ],
+                "id": [
+                  {
+                    "id": "10.13039/100000001",
+                    "id-type": "DOI",
+                    "asserted-by": "publisher"
+                  }
+                ]
+              }
+            ],
+            "content-domain": {
+              "domain": [
+                "dl.acm.org"
+              ],
+              "crossmark-restriction": true
+            },
+            "short-container-title": [],
+            "published-print": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  17
+                ]
+              ]
+            },
+            "DOI": "10.1145/3789240.3829111",
+            "type": "proceedings-article",
+            "created": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ],
+              "date-time": "2026-08-11T18:33:22Z",
+              "timestamp": 1786473202000
+            },
+            "page": "1360-1375",
+            "update-policy": "https://doi.org/10.1145/crossmark-policy",
+            "source": "Crossref",
+            "is-referenced-by-count": 0,
+            "title": [
+              "Presto: A Match-Action TCP Stack for the Terabit Era"
+            ],
+            "prefix": "10.1145",
+            "author": [
+              {
+                "ORCID": "https://orcid.org/0000-0002-9676-8959",
+                "authenticated-orcid": false,
+                "given": "Rajath",
+                "family": "Shashidhara",
+                "sequence": "first",
+                "affiliation": [
+                  {
+                    "name": "Paul G. Allen School of Computer Science and Engineering, University of Washington, Seattle, WA, USA"
+                  }
+                ],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "ORCID": "https://orcid.org/0000-0002-6355-2772",
+                "authenticated-orcid": false,
+                "given": "Antoine",
+                "family": "Kaufmann",
+                "sequence": "additional",
+                "affiliation": [
+                  {
+                    "name": "Max Planck Institute for Software Systems (MPI-SWS), Saarbrücken, Germany"
+                  }
+                ],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "ORCID": "https://orcid.org/0009-0007-4748-8524",
+                "authenticated-orcid": false,
+                "given": "Simon",
+                "family": "Peter",
+                "sequence": "additional",
+                "affiliation": [
+                  {
+                    "name": "Paul G. Allen School of Computer Science and Engineering, University of Washington, Seattle, WA, USA"
+                  }
+                ],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              }
+            ],
+            "member": "320",
+            "published-online": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ]
+            },
+            "reference": [
+              {
+                "key": "e_1_3_2_1_1_1",
+                "volume-title": "2020 IEEE Hot Chips 32 Symposium (HCS). IEEE Computer Society, 1–32",
+                "author": "Agrawal Anurag",
+                "year": "2020",
+                "unstructured": "Anurag Agrawal and Changhoon Kim. 2020. Intel Tofino 2—A 12.9 Tbps P4-programmable Ethernet Switch. In 2020 IEEE Hot Chips 32 Symposium (HCS). IEEE Computer Society, 1–32. https://www.hc32.hotchips.org/assets/program/conference/day2/HotChips2020_Networking_Tofino.pdf"
+              },
+              {
+                "key": "e_1_3_2_1_2_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/1851182.1851192"
+              },
+              {
+                "key": "e_1_3_2_1_3_1",
+                "volume-title": "AMD. Retrieved",
+                "author": "AMD.",
+                "year": "2026",
+                "unstructured": "AMD. 2026. Alveo U200 and U250 Data Center Accelerator Cards Data Sheet. AMD. Retrieved June 29, 2026 from https://docs.amd.com/r-/en-US/ds962-u200-u250/Alveo-Product-Details"
+              },
+              {
+                "key": "e_1_3_2_1_4_1",
+                "volume-title": "Vivado Software. Retrieved",
+                "author": "AMD.",
+                "year": "2026",
+                "unstructured": "AMD. 2026. Vitis Networking P4. Vivado Software. Retrieved June 29, 2026 from https://www.amd.com/en/products/adaptive-socs-and-fpgas/intellectual-property/ef-di-vitisnetp4.html"
+              },
+              {
+                "key": "e_1_3_2_1_5_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.5555/3388242.3388250"
+              },
+              {
+                "key": "e_1_3_2_1_6_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3482898.3483365"
+              },
+              {
+                "key": "e_1_3_2_1_7_1",
+                "volume-title": "Empowering Azure Storage with RDMA. In 20th USENIX Symposium on Networked Systems Design and Implementation (NSDI 23)",
+                "author": "Bai Wei",
+                "year": "2023",
+                "unstructured": "Wei Bai, Shanim Sainul Abdeen, Ankit Agrawal, Krishan Kumar Attre, Paramvir Bahl, Ameya Bhagat, Gowri Bhaskara, Tanya Brokhman, Lei Cao, Ahmad Cheema, Rebecca Chow, Jeff Cohen, Mahmoud Elhaddad, Vivek Ette, Igal Figlin, Daniel Firestone, Mathew George, Ilya German, Lakhmeet Ghai, Eric Green, Albert Greenberg, Manish Gupta, Randy Haagens, Matthew Hendel, Ridwan Howlader, Neetha John, Julia Johnstone, Tom Jolly, Greg Kramer, David Kruse, Ankit Kumar, Erica Lan, Ivan Lee, Avi Levy, Marina Lipshteyn, Xin Liu, Chen Liu, Guohan Lu, Yuemin Lu, Xiakun Lu, Vadim Makhervaks, Ulad Malashanka, David A. Maltz, Ilias Marinos, Rohan Mehta, Sharda Murthi, Anup Namdhari, Aaron Ogus, Jitendra Padhye, Madhav Pandya, Douglas Phillips, Adrian Power, Suraj Puri, Shachar Raindel, Jordan Rhee, Anthony Russo, Maneesh Sah, Ali Sheriff, Chris Sparacino, Ashutosh Srivastava, Weixiang Sun, Nick Swanson, Fuhou Tian, Lukasz Tomczyk, Vamsi Vadlamuri, Alec Wolman, Ying Xie, Joyce Yom, Lihua Yuan, Yanzhao Zhang, and Brian Zill. 2023. Empowering Azure Storage with RDMA. In 20th USENIX Symposium on Networked Systems Design and Implementation (NSDI 23). USENIX Association, Boston, MA, 49–67. https://www.usenix.org/conference/nsdi23/presentation/bai"
+              },
+              {
+                "key": "e_1_3_2_1_8_1",
+                "volume-title": "Virtual Consensus in Delos. In 14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20)",
+                "author": "Balakrishnan Mahesh",
+                "year": "2020",
+                "unstructured": "Mahesh Balakrishnan, Jason Flinn, Chen Shen, Mihir Dharamshi, Ahmed Jafri, Xiao Shi, Santosh Ghosh, Hazem Hassan, Aaryaman Sagar, Rhed Shi, Jingming Liu, Filip Gruszczynski, Xianan Zhang, Huy Hoang, Ahmed Yossef, Francois Richard, and Yee Jiun Song. 2020. Virtual Consensus in Delos. In 14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20). USENIX Association, 617–632. https://www.usenix.org/conference/osdi20/presentation/balakrishnan"
+              },
+              {
+                "key": "e_1_3_2_1_9_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/2535930"
+              },
+              {
+                "key": "e_1_3_2_1_10_1",
+                "volume-title": "Proceedings of the 11th USENIX Conference on Operating Systems Design and Implementation",
+                "author": "Belay Adam",
+                "year": "2014",
+                "unstructured": "Adam Belay, George Prekas, Ana Klimovic, Samuel Grossman, Christos Kozyrakis, and Edouard Bugnion. 2014. IX: A Protected Dataplane Operating System for High Throughput and Low Latency. In Proceedings of the 11th USENIX Conference on Operating Systems Design and Implementation (Broomfield, CO) (OSDI '14). USENIX Association, USA, 49–65. https://www.usenix.org/conference/osdi14/technical-sessions/presentation/belay"
+              },
+              {
+                "key": "e_1_3_2_1_11_1",
+                "doi-asserted-by": "publisher",
+                "unstructured": "David Borman Robert T. Braden Van Jacobson and Richard Scheffenegger. 2014. TCP Extensions for High Performance. Internet Engineering Task Force (IETF). 10.17487/RFC7323",
+                "DOI": "10.17487/RFC7323"
+              },
+              {
+                "key": "e_1_3_2_1_12_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/2486001.2486011"
+              },
+              {
+                "key": "e_1_3_2_1_13_1",
+                "doi-asserted-by": "publisher",
+                "unstructured": "Robert T. Braden. 1989. Requirements for Internet Hosts—Communication Layers. Internet Engineering Task Force (IETF). 10.17487/RFC1122",
+                "DOI": "10.17487/RFC1122"
+              },
+              {
+                "key": "e_1_3_2_1_14_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3452296.3472888"
+              },
+              {
+                "key": "e_1_3_2_1_15_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3544216.3544230"
+              },
+              {
+                "key": "e_1_3_2_1_16_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3009824"
+              },
+              {
+                "key": "e_1_3_2_1_17_1",
+                "volume-title": "Retrieved",
+                "author": "Communications Chelsio",
+                "year": "2016",
+                "unstructured": "Chelsio Communications. 2016. T6 ASIC: High Performance, Dual Port Unified Wire 1/10/25/40/50/100Gb Ethernet Controller. Retrieved June 29, 2026 from https://www.chelsio.com/wp-content/uploads/resources/Chelsio-Terminator-6-Brief.pdf"
+              },
+              {
+                "key": "e_1_3_2_1_18_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1109/ICNP61940.2024.10858560"
+              },
+              {
+                "key": "e_1_3_2_1_19_1",
+                "doi-asserted-by": "publisher",
+                "unstructured": "Yuchung Cheng Neal Cardwell Nandita Dukkipati and Priyaranjan Jha. 2021. RFC 8985: The RACK-TLP Loss Detection Algorithm for TCP. Google. 10.17487/RFC8985",
+                "DOI": "10.17487/RFC8985"
+              },
+              {
+                "key": "e_1_3_2_1_20_1",
+                "volume-title": "Retrieved",
+                "author": "Intel Corporation",
+                "year": "2023",
+                "unstructured": "Intel Corporation. 2023. Intel Tofino 2. Retrieved June 29, 2026 from https://www.intel.com/content/www/us/en/products/sku/218648/intel-tofino-2-12-8-tbps-20-stage-4-pipelines/specifications.html"
+              },
+              {
+                "key": "e_1_3_2_1_21_1",
+                "volume-title": "17th USENIX Symposium on Networked Systems Design and Implementation (NSDI 20)",
+                "author": "Ding Cong",
+                "year": "2020",
+                "unstructured": "Cong Ding, David Chu, Evan Zhao, Xiang Li, Lorenzo Alvisi, and Robbert Van Renesse. 2020. Scalog: Seamless Reconfiguration and Total Order in a Scalable Shared Log. In 17th USENIX Symposium on Networked Systems Design and Implementation (NSDI 20). USENIX Association, Santa Clara, CA, 325–338. https://www.usenix.org/conference/nsdi20/presentation/ding"
+              },
+              {
+                "key": "e_1_3_2_1_22_1",
+                "volume-title": "Retrieved",
+                "author": "Documentation Linux Networking",
+                "year": "2025",
+                "unstructured": "Linux Networking Documentation. 2025. MSG_ZEROCOPY. Retrieved June 29, 2026 from https://docs.kernel.org/networking/msg_zerocopy.html"
+              },
+              {
+                "key": "e_1_3_2_1_23_1",
+                "volume-title": "Retrieved",
+                "author": "Documentation Linux Networking",
+                "year": "2025",
+                "unstructured": "Linux Networking Documentation. 2025. Scaling in the Linux Networking Stack. Retrieved June 29, 2026 from https://www.kernel.org/doc/html/v6.14/networking/scaling.html"
+              },
+              {
+                "key": "e_1_3_2_1_24_1",
+                "volume-title": "Retrieved",
+                "author": "Documentation Linux Networking",
+                "year": "2025",
+                "unstructured": "Linux Networking Documentation. 2025. Segmentation Offloads in the Linux Networking Stack. Retrieved June 29, 2026 from https://www.kernel.org/doc/Documentation/networking/segmentation-offloads.txt"
+              },
+              {
+                "key": "e_1_3_2_1_25_1",
+                "volume-title": "Proceedings of the 11th USENIX Conference on Networked Systems Design and Implementation",
+                "author": "Dragojević Aleksandar",
+                "year": "2014",
+                "unstructured": "Aleksandar Dragojević, Dushyanth Narayanan, Orion Hodson, and Miguel Castro. 2014. FaRM: fast remote memory. In Proceedings of the 11th USENIX Conference on Networked Systems Design and Implementation (Seattle, WA) (NSDI'14). USENIX Association, USA, 401–414. https://www.usenix.org/conference/nsdi14/technical-sessions/dragojevi{ć}"
+              },
+              {
+                "key": "e_1_3_2_1_26_1",
+                "volume-title": "Retrieved",
+                "year": "2023",
+                "unstructured": "ESnet. 2023. iPerf3. Retrieved April 15, 2025 from https://software.es.net/iperf/"
+              },
+              {
+                "key": "e_1_3_2_1_27_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3445814.3446724"
+              },
+              {
+                "key": "e_1_3_2_1_28_1",
+                "volume-title": "Proceedings of the 15th USENIX Conference on Networked Systems Design and Implementation",
+                "author": "Firestone Daniel",
+                "year": "2018",
+                "unstructured": "Daniel Firestone, Andrew Putnam, Sambhrama Mundkur, Derek Chiou, Alireza Dabagh, Mike Andrewartha, Hari Angepat, Vivek Bhanu, Adrian Caulfield, Eric Chung, Harish Kumar Chandrappa, Somesh Chaturmohta, Matt Humphrey, Jack Lavier, Norman Lam, Fengfen Liu, Kalin Ovtcharov, Jitu Padhye, Gautham Popuri, Shachar Raindel, Tejas Sapre, Mark Shaw, Gabriel Silva, Madhan Sivakumar, Nisheeth Srivastava, Anshuman Verma, Qasim Zuhair, Deepak Bansal, Doug Burger, Kushagra Vaid, David A. Maltz, and Albert Greenberg. 2018. Azure Accelerated Networking: SmartNICs in the Public Cloud. In Proceedings of the 15th USENIX Conference on Networked Systems Design and Implementation (Renton, WA, USA) (NSDI '18). USENIX Association, USA, 51–64. https://www.usenix.org/conference/nsdi18/presentation/firestone"
+              },
+              {
+                "key": "e_1_3_2_1_29_1",
+                "volume-title": "Proceedings of the 2013 USENIX Conference on Annual Technical Conference (San Jose, CA) (USENIX ATC'13). USENIX Association, USA, 333–346",
+                "author": "Flajslik Mario",
+                "year": "2013",
+                "unstructured": "Mario Flajslik and Mendel Rosenblum. 2013. Network interface design for low latency request-response protocols. In Proceedings of the 2013 USENIX Conference on Annual Technical Conference (San Jose, CA) (USENIX ATC'13). USENIX Association, USA, 333–346. https://www.usenix.org/conference/atc13/technical-sessions/presentation/flajslik"
+              },
+              {
+                "key": "e_1_3_2_1_30_1",
+                "doi-asserted-by": "publisher",
+                "unstructured": "Sally Floyd Jamshid Mahdavi Matt Mathis and Dr. Allyn Romanow. 1996. TCP Selective Acknowledgment Options. Internet Engineering Task Force (IETF). 10.17487/RFC2018",
+                "DOI": "10.17487/RFC2018"
+              },
+              {
+                "key": "e_1_3_2_1_31_1",
+                "volume-title": "Retrieved",
+                "author": "Foundation Linux",
+                "year": "2024",
+                "unstructured": "Linux Foundation. 2024. Storage Performance Development Kit (SPDK). Retrieved June 29, 2026 from http://www.spdk.io"
+              },
+              {
+                "key": "e_1_3_2_1_32_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3651890.3672233"
+              },
+              {
+                "key": "e_1_3_2_1_33_1",
+                "volume-title": "When Cloud Storage Meets RDMA. In 18th USENIX Symposium on Networked Systems Design and Implementation (NSDI 21)",
+                "author": "Gao Yixiao",
+                "year": "2021",
+                "unstructured": "Yixiao Gao, Qiang Li, Lingbo Tang, Yongqing Xi, Pengcheng Zhang, Wenwen Peng, Bo Li, Yaohui Wu, Shaozong Liu, Lei Yan, Fei Feng, Yan Zhuang, Fan Liu, Pan Liu, Xingkui Liu, Zhongjie Wu, Junping Wu, Zheng Cao, Chen Tian, Jinbo Wu, Jiaji Zhu, Haiyong Wang, Dennis Cai, and Jiesheng Wu. 2021. When Cloud Storage Meets RDMA. In 18th USENIX Symposium on Networked Systems Design and Implementation (NSDI 21). USENIX Association, 519–533. https://www.usenix.org/conference/nsdi21/presentation/gao"
+              },
+              {
+                "key": "e_1_3_2_1_34_1",
+                "volume-title": "19th USENIX Symposium on Networked Systems Design and Implementation (NSDI 22)",
+                "author": "Ghasemirahni Hamid",
+                "year": "2022",
+                "unstructured": "Hamid Ghasemirahni, Tom Barbette, Georgios P. Katsikas, Alireza Farshin, Amir Roozbeh, Massimo Girondi, Marco Chiesa, Gerald Q. Maguire Jr., and Dejan Kostić. 2022. Packet Order Matters! Improving Application Performance by Deliberately Delaying Packets. In 19th USENIX Symposium on Networked Systems Design and Implementation (NSDI 22). USENIX Association, Renton, WA, 807–827. https://www.usenix.org/conference/nsdi22/presentation/ghasemirahni"
+              },
+              {
+                "key": "e_1_3_2_1_35_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3375235.3375239"
+              },
+              {
+                "key": "e_1_3_2_1_36_1",
+                "volume-title": "Retrieved",
+                "author": "Gurevich Vladimir",
+                "year": "2021",
+                "unstructured": "Vladimir Gurevich and Andy Fingerhut. 2021. P416 Programming for Intel Tofino using Intel P4 Studio. Retrieved June 29, 2026 from https://opennetworking.org/wp-content/uploads/2021/05/2021-P4-WS-Vladimir-Gurevich-Slides.pdf"
+              },
+              {
+                "key": "e_1_3_2_1_37_1",
+                "volume-title": "Proceedings of the 10th USENIX Conference on Operating Systems Design and Implementation",
+                "author": "Han Sangjin",
+                "year": "2012",
+                "unstructured": "Sangjin Han, Scott Marshall, Byung-Gon Chun, and Sylvia Ratnasamy. 2012. MegaPipe: A New Programming Interface for Scalable Network I/O. In Proceedings of the 10th USENIX Conference on Operating Systems Design and Implementation (Hollywood, CA, USA) (OSDI '12). USENIX Association, USA, 135–148. https://www.usenix.org/conference/osdi12/technical-sessions/presentation/han"
+              },
+              {
+                "key": "e_1_3_2_1_38_1",
+                "volume-title": "17th USENIX Symposium on Networked Systems Design and Implementation (NSDI 20)",
+                "author": "Hwang Jaehyun",
+                "year": "2020",
+                "unstructured": "Jaehyun Hwang, Qizhe Cai, Ao Tang, and Rachit Agarwal. 2020. TCP = RDMA: CPU-efficient Remote Storage Access with i10. In 17th USENIX Symposium on Networked Systems Design and Implementation (NSDI 20). USENIX Association, Santa Clara, CA, 127–140. https://www.usenix.org/conference/nsdi20/presentation/hwang"
+              },
+              {
+                "key": "e_1_3_2_1_39_1",
+                "volume-title": "Retrieved",
+                "year": "2006",
+                "unstructured": "Intel. 2006. Accelerating High-Speed Networking with Intel I/O Acceleration Technology. Retrieved June 29, 2026 from https://www.intel.com/content/dam/doc/white-paper/i-o-acceleration-technology-paper.pdf"
+              },
+              {
+                "key": "e_1_3_2_1_40_1",
+                "volume-title": "Retrieved",
+                "year": "2012",
+                "unstructured": "Intel. 2012. Intel Data Direct I/O Technology (Intel DDIO): A Primer. Retrieved June 29, 2026 from https://www.intel.com/content/dam/www/public/us/en/documents/technology-briefs/data-direct-i-o-technology-brief.pdf"
+              },
+              {
+                "key": "e_1_3_2_1_41_1",
+                "volume-title": "Retrieved",
+                "year": "2019",
+                "unstructured": "Intel. 2019. Jumbo Frames and Jumbo Packets Notes. Retrieved June 29, 2026 from https://www.intel.com/content/www/us/en/support/articles/000006639/ethernet-products.html"
+              },
+              {
+                "key": "e_1_3_2_1_42_1",
+                "volume-title": "Proceedings of the 11th USENIX Conference on Networked Systems Design and Implementation",
+                "author": "Jeong Eun Young",
+                "year": "2014",
+                "unstructured": "Eun Young Jeong, Shinae Woo, Muhammad Jamshed, Haewon Jeong, Sunghwan Ihm, Dongsu Han, and KyoungSoo Park. 2014. mTCP: A Highly Scalable User-Level TCP Stack for Multicore Systems. In Proceedings of the 11th USENIX Conference on Networked Systems Design and Implementation (Seattle, WA) (NSDI '14). USENIX Association, USA, 489–502. https://www.usenix.org/conference/nsdi14/technical-sessions/presentation/jeong"
+              },
+              {
+                "key": "e_1_3_2_1_43_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3603269.3604853"
+              },
+              {
+                "key": "e_1_3_2_1_44_1",
+                "volume-title": "Design Guidelines for High Performance RDMA Systems. In 2016 USENIX Annual Technical Conference (USENIX ATC 16)",
+                "author": "Kalia Anuj",
+                "unstructured": "Anuj Kalia, Michael Kaminsky, and David G. Andersen. 2016. Design Guidelines for High Performance RDMA Systems. In 2016 USENIX Annual Technical Conference (USENIX ATC 16). USENIX Association, Denver, CO, 437–450. https://www.usenix.org/conference/atc16/technical-sessions/presentation/kalia"
+              },
+              {
+                "key": "e_1_3_2_1_45_1",
+                "volume-title": "Scalable and Simple Distributed Transactions with Two-Sided (RDMA) Datagram RPCs. In 12th USENIX Symposium on Operating Systems Design and Implementation (OSDI 16)",
+                "author": "Kalia Anuj",
+                "unstructured": "Anuj Kalia, Michael Kaminsky, and David G. Andersen. 2016. FaSST: Fast, Scalable and Simple Distributed Transactions with Two-Sided (RDMA) Datagram RPCs. In 12th USENIX Symposium on Operating Systems Design and Implementation (OSDI 16). USENIX Association, Savannah, GA, 185–201. https://www.usenix.org/conference/osdi16/technical-sessions/presentation/kalia"
+              },
+              {
+                "key": "e_1_3_2_1_46_1",
+                "volume-title": "Proceedings of the 16th USENIX Conference on Networked Systems Design and Implementation",
+                "author": "Kalia Anuj",
+                "unstructured": "Anuj Kalia, Michael Kaminsky, and David G. Andersen. 2019. Datacenter RPCs Can Be General and Fast. In Proceedings of the 16th USENIX Conference on Networked Systems Design and Implementation (Boston, MA, USA) (NSDI '19). USENIX Association, USA, 1–16. https://www.usenix.org/conference/nsdi19/presentation/kalia"
+              },
+              {
+                "key": "e_1_3_2_1_47_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/2872362.2872367"
+              },
+              {
+                "key": "e_1_3_2_1_48_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3302424.3303985"
+              },
+              {
+                "key": "e_1_3_2_1_49_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3387514.3405855"
+              },
+              {
+                "key": "e_1_3_2_1_50_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3452296.3472905"
+              },
+              {
+                "key": "e_1_3_2_1_51_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3286062.3286063"
+              },
+              {
+                "key": "e_1_3_2_1_52_1",
+                "volume-title": "Rearchitecting the TCP Stack for I/O-Offloaded Content Delivery. In 20th USENIX Symposium on Networked Systems Design and Implementation (NSDI 23)",
+                "author": "Kim Taehyun",
+                "year": "2023",
+                "unstructured": "Taehyun Kim, Deondre Martin Ng, Junzhi Gong, Youngjin Kwon, Minlan Yu, and KyoungSoo Park. 2023. Rearchitecting the TCP Stack for I/O-Offloaded Content Delivery. In 20th USENIX Symposium on Networked Systems Design and Implementation (NSDI 23). USENIX Association, Boston, MA, 275–292. https://www.usenix.org/conference/nsdi23/presentation/kim-taehyun"
+              },
+              {
+                "key": "e_1_3_2_1_53_1",
+                "volume-title": "Proceedings of the 2019 USENIX Annual Technical Conference (Renton, WA, USA) (USENIX ATC '19). USENIX Association, USA, 863–879",
+                "author": "Kogias Marios",
+                "year": "2019",
+                "unstructured": "Marios Kogias, George Prekas, Adrien Ghosn, Jonas Fietz, and Edouard Bugnion. 2019. R2P2: Making RPCs First-Class Datacenter Citizens. In Proceedings of the 2019 USENIX Annual Technical Conference (Renton, WA, USA) (USENIX ATC '19). USENIX Association, USA, 863–879. https://www.usenix.org/conference/atc19/presentation/kogias-r2p2"
+              },
+              {
+                "key": "e_1_3_2_1_54_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3477132.3483561"
+              },
+              {
+                "key": "e_1_3_2_1_55_1",
+                "volume-title": "12th USENIX Symposium on Operating Systems Design and Implementation (OSDI 16)",
+                "author": "Li Jialin",
+                "unstructured": "Jialin Li, Ellis Michael, Naveen Kr. Sharma, Adriana Szekeres, and Dan R. K. Ports. 2016. Just Say NO to Paxos Overhead: Replacing Consensus with Network Ordering. In 12th USENIX Symposium on Operating Systems Design and Implementation (OSDI 16). USENIX Association, Savannah, GA, 467–483. https://www.usenix.org/conference/osdi16/technical-sessions/presentation/li"
+              },
+              {
+                "key": "e_1_3_2_1_56_1",
+                "volume-title": "Pegasus: Tolerating Skewed Workloads in Distributed Storage with In-Network Coherence Directories. In 14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20)",
+                "author": "Li Jialin",
+                "unstructured": "Jialin Li, Jacob Nelson, Ellis Michael, Xin Jin, and Dan R. K. Ports. 2020. Pegasus: Tolerating Skewed Workloads in Distributed Storage with In-Network Coherence Directories. In 14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20). USENIX Association, 387–406. https://www.usenix.org/conference/osdi20/presentation/li-jialin"
+              },
+              {
+                "key": "e_1_3_2_1_57_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3447786.3456227"
+              },
+              {
+                "key": "e_1_3_2_1_58_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1109/MICRO61859.2024.00037"
+              },
+              {
+                "key": "e_1_3_2_1_59_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/2872362.2872391"
+              },
+              {
+                "key": "e_1_3_2_1_60_1",
+                "volume-title": "Retrieved",
+                "year": "2019",
+                "unstructured": "Linux. 2019. Efficient I/O with io_uring. Retrieved June 29, 2026 from https://kernel.dk/io_uring.pdf"
+              },
+              {
+                "key": "e_1_3_2_1_61_1",
+                "volume-title": "Retrieved",
+                "year": "2020",
+                "unstructured": "Linux. 2020. io_uring—Linux manual page. Retrieved June 29, 2026 from https://man7.org/linux/man-pages/man7/io_uring.7.html"
+              },
+              {
+                "key": "e_1_3_2_1_62_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3694715.3695983"
+              },
+              {
+                "key": "e_1_3_2_1_63_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3735358.3735373"
+              },
+              {
+                "key": "e_1_3_2_1_64_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3341301.3359657"
+              },
+              {
+                "key": "e_1_3_2_1_65_1",
+                "volume-title": "Google Cloud. Retrieved",
+                "author": "Mehta Nirav",
+                "year": "2022",
+                "unstructured": "Nirav Mehta. 2022. The next wave of Google Cloud infrastructure innovation: New C3 VM and Hyperdisk. Google Cloud. Retrieved June 29, 2026 from https://cloud.google.com/blog/products/compute/introducing-c3-machines-with-googles-custom-intel-ipu"
+              },
+              {
+                "key": "e_1_3_2_1_66_1",
+                "volume-title": "Memcached: Free & open source, high-performance, distributed memory object caching system. https://memcached.org/",
+                "year": "2020",
+                "unstructured": "memcached. 2020. Memcached: Free & open source, high-performance, distributed memory object caching system. https://memcached.org/"
+              },
+              {
+                "key": "e_1_3_2_1_67_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/2785956.2787510"
+              },
+              {
+                "key": "e_1_3_2_1_68_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3230543.3230557"
+              },
+              {
+                "key": "e_1_3_2_1_69_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3230543.3230564"
+              },
+              {
+                "key": "e_1_3_2_1_70_1",
+                "volume-title": "Proceedings of the 17th USENIX Conference on Networked Systems Design and Implementation",
+                "author": "Moon Young Gyoun",
+                "year": "2020",
+                "unstructured": "Young Gyoun Moon, Seung Eon Lee, Muhammad Asim Jamshed, and KyoungSoo Park. 2020. AccelTCP: Accelerating Network Applications with Stateful TCP Offloading. In Proceedings of the 17th USENIX Conference on Networked Systems Design and Implementation (Santa Clara, CA, USA) (NSDI '20). USENIX Association, USA, 77–92. https://www.usenix.org/conference/nsdi20/presentation/moon"
+              },
+              {
+                "key": "e_1_3_2_1_71_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3230543.3230553"
+              },
+              {
+                "key": "e_1_3_2_1_72_1",
+                "volume-title": "Retrieved",
+                "year": "2024",
+                "unstructured": "Netberg. 2024. Netberg Aurora 810. Retrieved June 29, 2026 from https://netbergtw.com/products/aurora-810/"
+              },
+              {
+                "key": "e_1_3_2_1_73_1",
+                "volume-title": "Retrieved",
+                "author": "Pensando AMD",
+                "year": "2024",
+                "unstructured": "AMD Pensando. 2024. AMD Pensando 2nd Generation (Elba) Data Processing Unit. Retrieved June 29, 2026 from https://www.amd.com/content/dam/amd/en/documents/pensando-technical-docs/product-briefs/pensando-elba-product-brief.pdf"
+              },
+              {
+                "key": "e_1_3_2_1_74_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/2168836.2168870"
+              },
+              {
+                "key": "e_1_3_2_1_75_1",
+                "volume-title": "Proceedings of the 11th USENIX Symposium on Operating Systems Design and Implementation (OSDI '14)",
+                "author": "Peter Simon",
+                "year": "2014",
+                "unstructured": "Simon Peter, Jialin Li, Irene Zhang, Dan R. K. Ports, Doug Woos, Arvind Krishnamurthy, Thomas Anderson, and Timothy Roscoe. 2014. Arrakis: The Operating System is the Control Plane. In Proceedings of the 11th USENIX Symposium on Operating Systems Design and Implementation (OSDI '14). USENIX Association, Broomfield, CO, 1–16. https://www.usenix.org/conference/osdi14/technical-sessions/presentation/peter"
+              },
+              {
+                "key": "e_1_3_2_1_76_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.5555/3488766.3488779"
+              },
+              {
+                "key": "e_1_3_2_1_77_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/2996868"
+              },
+              {
+                "key": "e_1_3_2_1_78_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3651890.3672265"
+              },
+              {
+                "key": "e_1_3_2_1_79_1",
+                "volume-title": "Retrieved",
+                "author": "RDMA Consortium",
+                "year": "2009",
+                "unstructured": "RDMA Consortium. 2009. Architectural specifications for RDMA over TCP/IP. Retrieved June 29, 2026 from http://www.rdmaconsortium.org/"
+              },
+              {
+                "key": "e_1_3_2_1_80_1",
+                "volume-title": "Proceedings of the 2012 USENIX Conference on Annual Technical Conference (Boston, MA) (USENIX ATC'12)",
+                "author": "Rizzo Luigi",
+                "unstructured": "Luigi Rizzo. 2012. Netmap: a novel framework for fast packet I/O. In Proceedings of the 2012 USENIX Conference on Annual Technical Conference (Boston, MA) (USENIX ATC'12). USENIX Association, USA, 9. https://www.usenix.org/conference/atc12/technical-sessions/presentation/rizzo"
+              },
+              {
+                "key": "e_1_3_2_1_81_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1109/FPL.2019.00053"
+              },
+              {
+                "key": "e_1_3_2_1_82_1",
+                "volume-title": "Enso: A Streaming Interface for NIC-Application Communication. In 17th USENIX Symposium on Operating Systems Design and Implementation (OSDI 23)",
+                "author": "Sadok Hugo",
+                "year": "2023",
+                "unstructured": "Hugo Sadok, Nirav Atre, Zhipeng Zhao, Daniel S. Berger, James C. Hoe, Aurojit Panda, Justine Sherry, and Ren Wang. 2023. Enso: A Streaming Interface for NIC-Application Communication. In 17th USENIX Symposium on Operating Systems Design and Implementation (OSDI 23). USENIX Association, Boston, MA, 1005–1025. https://www.usenix.org/conference/osdi23/presentation/sadok"
+              },
+              {
+                "key": "e_1_3_2_1_83_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3458336.3465281"
+              },
+              {
+                "key": "e_1_3_2_1_84_1",
+                "volume-title": "20th USENIX Symposium on Networked Systems Design and Implementation (NSDI 23)",
+                "author": "Scazzariello Mariano",
+                "year": "2023",
+                "unstructured": "Mariano Scazzariello, Tommaso Caiazzi, Hamid Ghasemirahni, Tom Barbette, Dejan Kostić, and Marco Chiesa. 2023. A High-Speed Stateful Packet Processing Approach for Tbps Programmable Switches. In 20th USENIX Symposium on Networked Systems Design and Implementation (NSDI 23). USENIX Association, Boston, MA, 1237–1255. https://www.usenix.org/conference/nsdi23/presentation/scazzariello"
+              },
+              {
+                "key": "e_1_3_2_1_85_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3617232.3624868"
+              },
+              {
+                "key": "e_1_3_2_1_86_1",
+                "volume-title": "Retrieved",
+                "author": "Services Amazon Web",
+                "year": "2023",
+                "unstructured": "Amazon Web Services. 2023. AWS: The Nitro System Journey. Retrieved June 29, 2026 from https://docs.aws.amazon.com/whitepapers/latest/security-design-of-aws-nitro-system/the-nitro-system-journey.html"
+              },
+              {
+                "key": "e_1_3_2_1_87_1",
+                "volume-title": "Evaluating the Power of Flexible Packet Processing for Network Resource Allocation. In 14th USENIX Symposium on Networked Systems Design and Implementation (NSDI 17)",
+                "author": "Sharma Naveen Kr.",
+                "year": "2017",
+                "unstructured": "Naveen Kr. Sharma, Antoine Kaufmann, Thomas Anderson, Arvind Krishnamurthy, Jacob Nelson, and Simon Peter. 2017. Evaluating the Power of Flexible Packet Processing for Network Resource Allocation. In 14th USENIX Symposium on Networked Systems Design and Implementation (NSDI 17). USENIX Association, Boston, MA, 67–82. https://www.usenix.org/conference/nsdi17/technical-sessions/presentation/sharma"
+              },
+              {
+                "key": "e_1_3_2_1_88_1",
+                "volume-title": "Approximating Fair Queueing on Reconfigurable Switches. In 15th USENIX Symposium on Networked Systems Design and Implementation (NSDI 18)",
+                "author": "Sharma Naveen Kr.",
+                "year": "2018",
+                "unstructured": "Naveen Kr. Sharma, Ming Liu, Kishore Atreya, and Arvind Krishnamurthy. 2018. Approximating Fair Queueing on Reconfigurable Switches. In 15th USENIX Symposium on Networked Systems Design and Implementation (NSDI 18). USENIX Association, Renton, WA, 1–16. https://www.usenix.org/conference/nsdi18/presentation/sharma"
+              },
+              {
+                "key": "e_1_3_2_1_89_1",
+                "volume-title": "Programmable Calendar Queues for High-speed Packet Scheduling. In 17th USENIX Symposium on Networked Systems Design and Implementation (NSDI 20)",
+                "author": "Sharma Naveen Kr.",
+                "year": "2020",
+                "unstructured": "Naveen Kr. Sharma, Chenxingyu Zhao, Ming Liu, Pravein G Kannan, Changhoon Kim, Arvind Krishnamurthy, and Anirudh Sivaraman. 2020. Programmable Calendar Queues for High-speed Packet Scheduling. In 17th USENIX Symposium on Networked Systems Design and Implementation (NSDI 20). USENIX Association, Santa Clara, CA, 685–699. https://www.usenix.org/conference/nsdi20/presentation/sharma"
+              },
+              {
+                "key": "e_1_3_2_1_90_1",
+                "volume-title": "Building Flexible Data Center Network Stacks for the Terabit Era. Ph. D. Dissertation",
+                "author": "Shashidhara Rajath",
+                "unstructured": "Rajath Shashidhara. 2025. Building Flexible Data Center Network Stacks for the Terabit Era. Ph. D. Dissertation. University of Washington."
+              },
+              {
+                "key": "e_1_3_2_1_91_1",
+                "volume-title": "FlexTOE: Flexible TCP Offload with Fine-Grained Parallelism. In 19th USENIX Symposium on Networked Systems Design and Implementation (NSDI 22)",
+                "author": "Shashidhara Rajath",
+                "year": "2022",
+                "unstructured": "Rajath Shashidhara, Tim Stamler, Antoine Kaufmann, and Simon Peter. 2022. FlexTOE: Flexible TCP Offload with Fine-Grained Parallelism. In 19th USENIX Symposium on Networked Systems Design and Implementation (NSDI 22). USENIX Association, Renton, WA, 87–102. https://www.usenix.org/conference/nsdi22/presentation/shashidhara"
+              },
+              {
+                "key": "e_1_3_2_1_92_1",
+                "volume-title": "Proceedings of the 14th USENIX Conference on Hot Topics in Operating Systems (Santa Ana Pueblo, New Mexcio) (HotOS '13)",
+                "author": "Shinde Pravin",
+                "year": "2013",
+                "unstructured": "Pravin Shinde, Antoine Kaufmann, Timothy Roscoe, and Stefan Kaestle. 2013. We Need to Talk about NICs. In Proceedings of the 14th USENIX Conference on Hot Topics in Operating Systems (Santa Ana Pueblo, New Mexcio) (HotOS '13). USENIX Association, USA, 1. https://www.usenix.org/conference/hotos13/session/shinde"
+              },
+              {
+                "key": "e_1_3_2_1_93_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3387514.3405897"
+              },
+              {
+                "key": "e_1_3_2_1_94_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3718958.3754353"
+              },
+              {
+                "key": "e_1_3_2_1_95_1",
+                "volume-title": "18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24)",
+                "author": "Skiadopoulos Athinagoras",
+                "year": "2024",
+                "unstructured": "Athinagoras Skiadopoulos, Zhiqiang Xie, Mark Zhao, Qizhe Cai, Saksham Agarwal, Jacob Adelmann, David Ahern, Carlo Contavalli, Michael Goldflam, Vitaly Mayatskikh, et al. 2024. High-throughput and flexible host networking for accelerated computing. In 18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24). 405–423."
+              },
+              {
+                "key": "e_1_3_2_1_96_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3603269.3604849"
+              },
+              {
+                "key": "e_1_3_2_1_97_1",
+                "volume-title": "Retrieved",
+                "author": "SPDK.",
+                "year": "2024",
+                "unstructured": "SPDK. 2024. Block Device User Guide. Retrieved June 29, 2026 from https://spdk.io/doc/bdev.html"
+              },
+              {
+                "key": "e_1_3_2_1_98_1",
+                "volume-title": "Retrieved",
+                "author": "SPDK.",
+                "year": "2024",
+                "unstructured": "SPDK. 2024. Running benchmarks with Perf Tool. Retrieved June 29, 2026 from https://spdk.io/doc/nvme.html"
+              },
+              {
+                "key": "e_1_3_2_1_99_1",
+                "volume-title": "Virtuoso: High Resource Utilization and μs-scale Performance Isolation in a Shared Virtual Machine TCP Network Stack. arXiv preprint arXiv:2309.14016v4",
+                "author": "Stolet Matheus",
+                "year": "2023",
+                "unstructured": "Matheus Stolet, Liam Arzola, Simon Peter, and Antoine Kaufmann. 2023. Virtuoso: High Resource Utilization and μs-scale Performance Isolation in a Shared Virtual Machine TCP Network Stack. arXiv preprint arXiv:2309.14016v4 (2023). https://arxiv.org/pdf/2309.14016v4"
+              },
+              {
+                "key": "e_1_3_2_1_100_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1109/ISSCC42615.2023.10067333"
+              },
+              {
+                "key": "e_1_3_2_1_101_1",
+                "volume-title": "Inc. Retrieved",
+                "author": "Sysoev Igor",
+                "year": "2026",
+                "unstructured": "Igor Sysoev. 2026. NGINX: HTTP and reverse proxy server. F5, Inc. Retrieved June 12, 2026 from https://nginx.org/"
+              },
+              {
+                "key": "e_1_3_2_1_102_1",
+                "volume-title": "Concordia: Distributed Shared Memory with In-Network Cache Coherence. In 19th USENIX Conference on File and Storage Technologies (FAST 21)",
+                "author": "Wang Qing",
+                "year": "2021",
+                "unstructured": "Qing Wang, Youyou Lu, Erci Xu, Junru Li, Youmin Chen, and Jiwu Shu. 2021. Concordia: Distributed Shared Memory with In-Network Cache Coherence. In 19th USENIX Conference on File and Storage Technologies (FAST 21). USENIX Association, 277–292. https://www.usenix.org/conference/fast21/presentation/wang"
+              },
+              {
+                "key": "e_1_3_2_1_103_1",
+                "volume-title": "Proceedings of the 2016 USENIX Conference on Usenix Annual Technical Conference (Denver, CO, USA) (USENIX ATC '16). USENIX Association, USA, 43–56",
+                "author": "Yasukata Kenichi",
+                "year": "2016",
+                "unstructured": "Kenichi Yasukata, Michio Honda, Douglas Santry, and Lars Eggert. 2016. StackMap: low-latency networking with the OS stack and dedicated NICs. In Proceedings of the 2016 USENIX Conference on Usenix Annual Technical Conference (Denver, CO, USA) (USENIX ATC '16). USENIX Association, USA, 43–56. https://www.usenix.org/conference/atc16/technical-sessions/presentation/yasukata"
+              },
+              {
+                "key": "e_1_3_2_1_104_1",
+                "volume-title": "Unlocking the Power of Inline Floating-Point Operations on Programmable Switches. In 19th USENIX Symposium on Networked Systems Design and Implementation (NSDI 22)",
+                "author": "Yuan Yifan",
+                "year": "2022",
+                "unstructured": "Yifan Yuan, Omar Alama, Jiawei Fei, Jacob Nelson, Dan R. K. Ports, Amedeo Sapio, Marco Canini, and Nam Sung Kim. 2022. Unlocking the Power of Inline Floating-Point Operations on Programmable Switches. In 19th USENIX Symposium on Networked Systems Design and Implementation (NSDI 22). USENIX Association, Renton, WA, 683–700. https://www.usenix.org/conference/nsdi22/presentation/yuan"
+              },
+              {
+                "key": "e_1_3_2_1_105_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3477132.3483569"
+              },
+              {
+                "key": "e_1_3_2_1_106_1",
+                "volume-title": "White-Boxing RDMA with Packet-Granular Software Control. In 22nd USENIX Symposium on Networked Systems Design and Implementation (NSDI 25)",
+                "author": "Zhao Chenxingyu",
+                "year": "2025",
+                "unstructured": "Chenxingyu Zhao, Jaehong Min, Ming Liu, and Arvind Krishnamurthy. 2025. White-Boxing RDMA with Packet-Granular Software Control. In 22nd USENIX Symposium on Networked Systems Design and Implementation (NSDI 25). USENIX Association, Philadelphia, PA, 427–449. https://www.usenix.org/conference/nsdi25/presentation/zhao-chenxingyu"
+              },
+              {
+                "key": "e_1_3_2_1_107_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.5555/3488766.3488827"
+              }
+            ],
+            "event": {
+              "name": "SIGCOMM '26: ACM SIGCOMM 2026 Conference",
+              "location": "Colorado Convention Center Denver CO USA",
+              "acronym": "SIGCOMM '26",
+              "sponsor": [
+                "SIGCOMM ACM Special Interest Group on Data Communication"
+              ]
+            },
+            "container-title": [
+              "Proceedings of the ACM SIGCOMM 2026 Conference"
+            ],
+            "original-title": [],
+            "link": [
+              {
+                "URL": "https://dl.acm.org/doi/pdf/10.1145/3789240.3829111",
+                "content-type": "unspecified",
+                "content-version": "vor",
+                "intended-application": "similarity-checking"
+              }
+            ],
+            "deposited": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ],
+              "date-time": "2026-08-11T18:43:57Z",
+              "timestamp": 1786473837000
+            },
+            "score": 1,
+            "resource": {
+              "primary": {
+                "URL": "https://dl.acm.org/doi/10.1145/3789240.3829111"
+              }
+            },
+            "subtitle": [],
+            "short-title": [],
+            "issued": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ]
+            },
+            "references-count": 107,
+            "alternative-id": [
+              "10.1145/3789240.3829111",
+              "10.1145/3789240"
+            ],
+            "URL": "https://doi.org/10.1145/3789240.3829111",
+            "relation": {},
+            "subject": [],
+            "published": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ]
+            },
+            "assertion": [
+              {
+                "value": "2026-08-11",
+                "order": 3,
+                "name": "published",
+                "label": "Published",
+                "group": {
+                  "name": "publication_history",
+                  "label": "Publication History"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "source_urls": [
+        "https://dl.acm.org/doi/10.1145/3789240.3829111",
+        "https://arxiv.org/abs/2504.19058",
+        "https://github.com/tcp-acceleration-service/Presto",
+        "https://conferences.sigcomm.org/sigcomm/2026/program/papers/",
+        "https://doi.org/10.1145/3789240.3829111"
+      ],
+      "continuing_influence": {},
+      "full_paper_sha256": "334a71daf8cbdc3a17f6f8e733543f32391c3e35271868d098a90de2e0374daf",
+      "run_id": "systems-paper-daily:2026-09-13",
+      "status": "archived",
+      "reserved_at": "2026-09-14T04:30:59.524264+00:00",
+      "report_path": "content/daily/2026-09-13.md",
+      "verification": {
+        "summary_words": 1093,
+        "brief_words": 124,
+        "assessment_words": 63,
+        "pages": 19,
+        "visuals": 2
+      }
+    },
+    {
+      "work_id": "doi:10.1145/3767295.3769348",
+      "title": "KUNSERVE: Parameter-centric Memory Management for Efficient Memory Overloading Handling in LLM Serving",
+      "title_aliases": [
+        "KUNSERVE: Parameter-centric Memory Management for Efficient Memory Overloading Handling in LLM Serving",
+        "KunServe: Elastic and Efficient Large Language Model Serving with Parameter-centric Memory Management",
+        "KunServe: Parameter-centric Memory Management for Efficient Memory Throttling Handling in LLM Serving",
+        "KunServe: Efficient Parameter-centric Memory Management for LLM Serving"
+      ],
+      "authors": [
+        "Rongxin Cheng",
+        "Yuxin Lai",
+        "Xingda Wei",
+        "Rong Chen",
+        "Haibo Chen"
+      ],
+      "identifiers": {
+        "doi": [
+          "10.1145/3767295.3769348"
+        ],
+        "arxiv": [
+          "2412.18169"
+        ],
+        "dblp": []
+      },
+      "category": "latest",
+      "venue": "EuroSys",
+      "publication_date": "2026-04-26",
+      "publication_date_evidence": [
+        {
+          "url": "https://api.crossref.org/works/10.1145%2F3767295.3769348",
+          "kind": "publisher-deposited-crossref",
+          "publication_date": "2026-04-26",
+          "title": "KUNSERVE: Parameter-centric Memory Management for Efficient Memory Overloading Handling in LLM Serving",
+          "record": {
+            "indexed": {
+              "date-parts": [
+                [
+                  2026,
+                  6,
+                  5
+                ]
+              ],
+              "date-time": "2026-06-05T13:07:54Z",
+              "timestamp": 1780664874664,
+              "version": "3.54.1"
+            },
+            "publisher-location": "New York, NY, USA",
+            "reference-count": 56,
+            "publisher": "ACM",
+            "license": [
+              {
+                "start": {
+                  "date-parts": [
+                    [
+                      2026,
+                      4,
+                      26
+                    ]
+                  ],
+                  "date-time": "2026-04-26T00:00:00Z",
+                  "timestamp": 1777161600000
+                },
+                "content-version": "vor",
+                "delay-in-days": 0,
+                "URL": "https://creativecommons.org/licenses/by/4.0/legalcode"
+              }
+            ],
+            "content-domain": {
+              "domain": [
+                "dl.acm.org"
+              ],
+              "crossmark-restriction": true
+            },
+            "short-container-title": [],
+            "published-print": {
+              "date-parts": [
+                [
+                  2026,
+                  4,
+                  27
+                ]
+              ]
+            },
+            "DOI": "10.1145/3767295.3769348",
+            "type": "proceedings-article",
+            "created": {
+              "date-parts": [
+                [
+                  2026,
+                  4,
+                  24
+                ]
+              ],
+              "date-time": "2026-04-24T20:20:04Z",
+              "timestamp": 1777062004000
+            },
+            "page": "1244-1260",
+            "update-policy": "https://doi.org/10.1145/crossmark-policy",
+            "source": "Crossref",
+            "is-referenced-by-count": 0,
+            "title": [
+              "KUNSERVE: Parameter-centric Memory Management for Efficient Memory Overloading Handling in LLM Serving"
+            ],
+            "prefix": "10.1145",
+            "author": [
+              {
+                "ORCID": "https://orcid.org/0009-0001-2380-2407",
+                "authenticated-orcid": false,
+                "given": "Rongxin",
+                "family": "Cheng",
+                "sequence": "first",
+                "affiliation": [
+                  {
+                    "name": "Shanghai Jiao Tong University, Shanghai, China"
+                  }
+                ],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "ORCID": "https://orcid.org/0009-0000-1089-8609",
+                "authenticated-orcid": false,
+                "given": "Yuxin",
+                "family": "Lai",
+                "sequence": "additional",
+                "affiliation": [
+                  {
+                    "name": "Shanghai Jiao Tong University, Shanghai, China"
+                  }
+                ],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "ORCID": "https://orcid.org/0000-0003-4983-6047",
+                "authenticated-orcid": false,
+                "given": "Xingda",
+                "family": "Wei",
+                "sequence": "additional",
+                "affiliation": [
+                  {
+                    "name": "Shanghai Jiao Tong University, Shanghai, China"
+                  }
+                ],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "ORCID": "https://orcid.org/0000-0002-6115-8130",
+                "authenticated-orcid": false,
+                "given": "Rong",
+                "family": "Chen",
+                "sequence": "additional",
+                "affiliation": [
+                  {
+                    "name": "Shanghai Jiao Tong University, Shanghai, China"
+                  }
+                ],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "ORCID": "https://orcid.org/0000-0002-9720-0361",
+                "authenticated-orcid": false,
+                "given": "Haibo",
+                "family": "Chen",
+                "sequence": "additional",
+                "affiliation": [
+                  {
+                    "name": "Shanghai JiaoTong University, Shanghai, China"
+                  }
+                ],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              }
+            ],
+            "member": "320",
+            "published-online": {
+              "date-parts": [
+                [
+                  2026,
+                  4,
+                  26
+                ]
+              ]
+            },
+            "reference": [
+              {
+                "key": "e_1_3_2_1_1_1",
+                "volume-title": "https://docs.kernel.org/admin-guide/mm/multigen_lru.html",
+                "author": "Multi",
+                "year": "2023",
+                "unstructured": "Multi-gen lru. https://docs.kernel.org/admin-guide/mm/multigen_lru.html, 2023."
+              },
+              {
+                "key": "e_1_3_2_1_2_1",
+                "volume-title": "fast, and cheap llm serving for everyone. https://github.com/vllm-project/vllm",
+                "author": "Easy",
+                "year": "2024",
+                "unstructured": "Easy, fast, and cheap llm serving for everyone. https://github.com/vllm-project/vllm, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_3_1",
+                "volume-title": "https://huggingface.co/datasets/shibing624/sharegpt_gpt4",
+                "author": "Sharegpt",
+                "year": "2024",
+                "unstructured": "Sharegpt_gpt4, 2024. https://huggingface.co/datasets/shibing624/sharegpt_gpt4, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_4_1",
+                "volume-title": "https://docs.nvidia.com/cuda/cuda-driver-api/group_CUDA_VA.html",
+                "author": "Virtual",
+                "year": "2024",
+                "unstructured": "Virtual memory management. https://docs.nvidia.com/cuda/cuda-driver-api/group_CUDA_VA.html, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_5_1",
+                "volume-title": "https://www.baseten.co/blog/how-multi-node-inference-works-llms-deepseek-r1/#from-single-node-to-multi-node-infrastructure",
+                "author": "How",
+                "year": "2025",
+                "unstructured": "How multi-node inference works for massive llms like deepseek-r1. https://www.baseten.co/blog/how-multi-node-inference-works-llms-deepseek-r1/#from-single-node-to-multi-node-infrastructure, 2025."
+              },
+              {
+                "key": "e_1_3_2_1_6_1",
+                "volume-title": "https://www.perplexity.ai/hub/blog/lower-latency-and-higher-throughput-with-multi-node-deepseek-deployment",
+                "author": "Lower",
+                "year": "2025",
+                "unstructured": "Lower latency and higher throughput with multi-node deepseek deployment. https://www.perplexity.ai/hub/blog/lower-latency-and-higher-throughput-with-multi-node-deepseek-deployment, 2025."
+              },
+              {
+                "key": "e_1_3_2_1_7_1",
+                "volume-title": "Forty-first International Conference on Machine Learning, ICML 2024",
+                "author": "Abhyankar R.",
+                "year": "2024",
+                "unstructured": "Abhyankar, R., He, Z., Srivatsa, V., Zhang, H., and Zhang, Y. Infercept: Efficient intercept support for augmented large language model inference. In Forty-first International Conference on Machine Learning, ICML 2024, Vienna, Austria, July 21–27, 2024 (2024), Open-Review.net."
+              },
+              {
+                "key": "e_1_3_2_1_8_1",
+                "first-page": "134",
+                "volume-title": "18th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2024",
+                "author": "Agrawal A.",
+                "year": "2024",
+                "unstructured": "Agrawal, A., Kedia, N., Panwar, A., Mohan, J., Kwatra, N., Gulavani, B. S., Tumanov, A., and Ramjee, R. Taming throughput-latency tradeoff in LLM inference with sarathi-serve. In 18th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2024, Santa Clara, CA, USA, July 10–12, 2024 (2024), A. Gavrilovska and D. B. Terry, Eds., USENIX Association, pp. 117–134."
+              },
+              {
+                "key": "e_1_3_2_1_9_1",
+                "volume-title": "SARATHI: efficient LLM inference by piggybacking decodes with chunked prefills. CoRR abs/2308.16369",
+                "author": "Agrawal A.",
+                "year": "2023",
+                "unstructured": "Agrawal, A., Panwar, A., Mohan, J., Kwatra, N., Gulavani, B. S., and Ramjee, R. SARATHI: efficient LLM inference by piggybacking decodes with chunked prefills. CoRR abs/2308.16369 (2023)."
+              },
+              {
+                "key": "e_1_3_2_1_10_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.18653/v1/2023.emnlp-main.298"
+              },
+              {
+                "key": "e_1_3_2_1_11_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.18653/v1/2023.emnlp-main.298"
+              },
+              {
+                "key": "e_1_3_2_1_12_1",
+                "volume-title": "Ray serve: Scalable and programmable serving. https://docs.ray.io/en/latest/serve/index.html",
+                "author": "Anyscale",
+                "year": "2024",
+                "unstructured": "Anyscale. Ray serve: Scalable and programmable serving. https://docs.ray.io/en/latest/serve/index.html, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_13_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/2600428.2609627"
+              },
+              {
+                "key": "e_1_3_2_1_14_1",
+                "volume-title": "https://aws.amazon.com/en/bedrock/",
+                "author": "Amazon",
+                "year": "2024",
+                "unstructured": "AWS. Amazon bedrock. https://aws.amazon.com/en/bedrock/, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_15_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.18653/v1/2024.acl-long.172"
+              },
+              {
+                "key": "e_1_3_2_1_16_1",
+                "volume-title": "Efficient and economic large language model inference with attention offloading. CoRR abs/2405.01814",
+                "author": "Chen S.",
+                "year": "2024",
+                "unstructured": "Chen, S., Lin, Y., Zhang, M., and Wu, Y. Efficient and economic large language model inference with attention offloading. CoRR abs/2405.01814 (2024)."
+              },
+              {
+                "key": "e_1_3_2_1_17_1",
+                "volume-title": "International Conference on Learning Representations (ICLR)",
+                "author": "Dao T.",
+                "year": "2024",
+                "unstructured": "Dao, T. FlashAttention-2: Faster attention with better parallelism and work partitioning. In International Conference on Learning Representations (ICLR) (2024)."
+              },
+              {
+                "key": "e_1_3_2_1_18_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.52202/068431-1189"
+              },
+              {
+                "key": "e_1_3_2_1_19_1",
+                "volume-title": "Top llm quantization methods and their impact on model quality",
+                "author": "Deepchecks",
+                "year": "2024",
+                "unstructured": "Deepchecks. Top llm quantization methods and their impact on model quality, 2024. https://www.deepchecks.com/top-llm-quantization-methods-impact-on-model-quality/, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_20_1",
+                "volume-title": "Deepseek-v3 technical report. CoRR abs/2412.19437",
+                "author": "DeepSeek AI",
+                "year": "2024",
+                "unstructured": "DeepSeek-AI, Liu, A., Feng, B., Xue, B., Wang, B., Wu, B., Lu, C., Zhao, C., Deng, C., Zhang, C., Ruan, C., Dai, D., Guo, D., Yang, D., Chen, D., Ji, D., Li, E., Lin, F., Dai, F., Luo, F., Hao, G., Chen, G., Li, G., Zhang, H., Bao, H., Xu, H., Wang, H., Zhang, H., Ding, H., Xin, H., Gao, H., Li, H., Qu, H., Cai, J. L., Liang, J., Guo, J., Ni, J., Li, J., Wang, J., Chen, J., Chen, J., Yuan, J., Qiu, J., Li, J., Song, J., Dong, K., Hu, K., Gao, K., Guan, K., Huang, K., Yu, K., Wang, L., Zhang, L., Xu, L., Xia, L., Zhao, L., Wang, L., Zhang, L., Li, M., Wang, M., Zhang, M., Zhang, M., Tang, M., Li, M., Tian, N., Huang, P., Wang, P., Zhang, P., Wang, Q., Zhu, Q., Chen, Q., Du, Q., Chen, R. J., Jin, R. L., Ge, R., Zhang, R., Pan, R., Wang, R., Xu, R., Zhang, R., Chen, R., Li, S. S., Lu, S., Zhou, S., Chen, S., Wu, S., Ye, S., Ma, S., Wang, S., Zhou, S., Yu, S., Zhou, S., Pan, S., Wang, T., Yun, T., Pei, T., Sun, T., Xiao, W. L., and Zeng, W. Deepseek-v3 technical report. CoRR abs/2412.19437 (2024)."
+              },
+              {
+                "key": "e_1_3_2_1_21_1",
+                "volume-title": "Flashinfer: Kernel library for llm serving. https://github.com/flashinfer-ai/flashinfer",
+                "author": "Flashinfer",
+                "year": "2024",
+                "unstructured": "Flashinfer ai. Flashinfer: Kernel library for llm serving. https://github.com/flashinfer-ai/flashinfer, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_22_1",
+                "series-title": "Proceedings of Machine Learning Research",
+                "first-page": "10337",
+                "volume-title": "International Conference on Machine Learning, ICML",
+                "author": "Frantar E.",
+                "year": "2023",
+                "unstructured": "Frantar, E., and Alistarh, D. Sparsegpt: Massive language models can be accurately pruned in one-shot. In International Conference on Machine Learning, ICML 2023, 23–29 July 2023, Honolulu, Hawaii, USA (2023), A. Krause, E. Brunskill, K. Cho, B. Engelhardt, S. Sabato, and J. Scarlett, Eds., vol. 202 of Proceedings of Machine Learning Research, PMLR, pp. 10323–10337."
+              },
+              {
+                "key": "e_1_3_2_1_23_1",
+                "first-page": "153",
+                "volume-title": "18th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2024",
+                "author": "Fu Y.",
+                "year": "2024",
+                "unstructured": "Fu, Y., Xue, L., Huang, Y., Brabete, A., Ustiugov, D., Patel, Y., and Mai, L. Serverlessllm: Low-latency serverless inference for large language models. In 18th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2024, Santa Clara, CA, USA, July 10–12, 2024 (2024), A. Gavrilovska and D. B. Terry, Eds., USENIX Association, pp. 135–153."
+              },
+              {
+                "key": "e_1_3_2_1_24_1",
+                "volume-title": "The Twelfth International Conference on Learning Representations, ICLR 2024",
+                "author": "Furuta H.",
+                "year": "2024",
+                "unstructured": "Furuta, H., Lee, K., Nachum, O., Matsuo, Y., Faust, A., Gu, S. S., and Gur, I. Multimodal web navigation with instruction-finetuned foundation models. In The Twelfth International Conference on Learning Representations, ICLR 2024, Vienna, Austria, May 7–11, 2024 (2024), OpenReview.net."
+              },
+              {
+                "key": "e_1_3_2_1_25_1",
+                "volume-title": "Amazon found every 100ms of latency cost them 1% in sales. https://www.gigaspaces.com/blog/amazon-found-every-100ms-of-latency-cost-them-1-in-sales",
+                "author": "GIGASPACES.",
+                "year": "2024",
+                "unstructured": "GIGASPACES. Amazon found every 100ms of latency cost them 1% in sales. https://www.gigaspaces.com/blog/amazon-found-every-100ms-of-latency-cost-them-1-in-sales, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_26_1",
+                "volume-title": "Accelerate your development speed with copilot. https://copilot.github.com",
+                "author": "GitHub",
+                "year": "2024",
+                "unstructured": "GitHub. Accelerate your development speed with copilot. https://copilot.github.com, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_27_1",
+                "volume-title": "Deepspeed-fastgen: High-throughput text generation for llms via MII and deepspeed-inference. CoRR abs/2401.08671",
+                "author": "Holmes C.",
+                "year": "2024",
+                "unstructured": "Holmes, C., Tanaka, M., Wyatt, M., Awan, A. A., Rasley, J., Rajbhandari, S., Aminabadi, R. Y., Qin, H., Bakhtiari, A., Kurilenko, L., and He, Y. Deepspeed-fastgen: High-throughput text generation for llms via MII and deepspeed-inference. CoRR abs/2401.08671 (2024)."
+              },
+              {
+                "key": "e_1_3_2_1_28_1",
+                "volume-title": "Inference without interference: Disaggregate LLM inference for mixed downstream workloads. CoRR abs/2401.11181",
+                "author": "Hu C.",
+                "year": "2024",
+                "unstructured": "Hu, C., Huang, H., Xu, L., Chen, X., Xu, J., Chen, S., Feng, H., Wang, C., Wang, S., Bao, Y., Sun, N., and Shan, Y. Inference without interference: Disaggregate LLM inference for mixed downstream workloads. CoRR abs/2401.11181 (2024)."
+              },
+              {
+                "key": "e_1_3_2_1_29_1",
+                "first-page": "912",
+                "volume-title": "Proceedings of the 30th ACM International Conference on Architectural Support for Programming Languages and Operating Systems",
+                "volume": "2",
+                "author": "Kamath A. K.",
+                "year": "2025",
+                "unstructured": "Kamath, A. K., Prabhu, R., Mohan, J., Peter, S., Ramjee, R., and Panwar, A. Pod-attention: Unlocking full prefill-decode overlap for faster LLM inference. In Proceedings of the 30th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2, ASPLOS 2025, Rotterdam, Netherlands, 30 March 2025 - 3 April 2025 (2025), L. Eeckhout, G. Smaragdakis, K. Liang, A. Sampson, M. A. Kim, and C. J. Rossbach, Eds., ACM, pp. 897–912."
+              },
+              {
+                "key": "e_1_3_2_1_30_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3600006.3613165"
+              },
+              {
+                "key": "e_1_3_2_1_31_1",
+                "volume-title": "Forty-first International Conference on Machine Learning, ICML 2024",
+                "author": "Li S.",
+                "year": "2024",
+                "unstructured": "Li, S., Ning, X., Wang, L., Liu, T., Shi, X., Yan, S., Dai, G., Yang, H., and Wang, Y. Evaluating quantized large language models. In Forty-first International Conference on Machine Learning, ICML 2024, Vienna, Austria, July 21–27, 2024 (2024), OpenReview.net."
+              },
+              {
+                "key": "e_1_3_2_1_32_1",
+                "first-page": "679",
+                "volume-title": "17th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2023",
+                "author": "Li Z.",
+                "year": "2023",
+                "unstructured": "Li, Z., Zheng, L., Zhong, Y., Liu, V., Sheng, Y., Jin, X., Huang, Y., Chen, Z., Zhang, H., Gonzalez, J. E., and Stoica, I. Al-paserve: Statistical multiplexing with model parallelism for deep learning serving. In 17th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2023, Boston, MA, USA, July 10–12, 2023 (2023), R. Geambasu and E. Nightingale, Eds., USENIX Association, pp. 663–679."
+              },
+              {
+                "key": "e_1_3_2_1_33_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.18653/v1/2024.findings-emnlp.935"
+              },
+              {
+                "key": "e_1_3_2_1_34_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3620665.3640411"
+              },
+              {
+                "key": "e_1_3_2_1_35_1",
+                "unstructured": "NVIDIA. Nvidia dgx superpod: Next generation scalable infrastructure for ai leadership. https://docs.nvidia.com/dgx-superpod/reference-architecture/scalable-infrastructure-h200/latest/_downloads/bbd08041e98eb913619944ead1f92373/RA-11336-001-DSPH200-ReferenceArch.pdf#page=8.10 2024."
+              },
+              {
+                "key": "e_1_3_2_1_36_1",
+                "volume-title": "https://chatgpt.com",
+                "author": "Open AI.",
+                "year": "2024",
+                "unstructured": "OpenAI. Chatgpt. https://chatgpt.com, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_37_1",
+                "volume-title": "Openai api. https://openai.com/index/openai-api/",
+                "author": "Open AI.",
+                "year": "2024",
+                "unstructured": "OpenAI. Openai api. https://openai.com/index/openai-api/, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_38_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1109/ISCA59077.2024.00019"
+              },
+              {
+                "key": "e_1_3_2_1_39_1",
+                "volume-title": "vattention: Dynamic memory management for serving llms without pagedattention. CoRR abs/2405.04437",
+                "author": "Prabhu R.",
+                "year": "2024",
+                "unstructured": "Prabhu, R., Nayak, A., Mohan, J., Ramjee, R., and Panwar, A. vattention: Dynamic memory management for serving llms without pagedattention. CoRR abs/2405.04437 (2024)."
+              },
+              {
+                "key": "e_1_3_2_1_40_1",
+                "volume-title": "Mooncake: A kvcache-centric disaggregated architecture for LLM serving. CoRR abs/2407.00079",
+                "author": "Qin R.",
+                "year": "2024",
+                "unstructured": "Qin, R., Li, Z., He, W., Zhang, M., Wu, Y., Zheng, W., and Xu, X. Mooncake: A kvcache-centric disaggregated architecture for LLM serving. CoRR abs/2407.00079 (2024)."
+              },
+              {
+                "key": "e_1_3_2_1_41_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3627703.3629581"
+              },
+              {
+                "key": "e_1_3_2_1_42_1",
+                "volume-title": "Megatron-lm: Training multi-billion parameter language models using model parallelism. CoRR abs/1909.08053",
+                "author": "Shoeybi M.",
+                "year": "2019",
+                "unstructured": "Shoeybi, M., Patwary, M., Puri, R., LeGresley, P., Casper, J., and Catanzaro, B. Megatron-lm: Training multi-billion parameter language models using model parallelism. CoRR abs/1909.08053 (2019)."
+              },
+              {
+                "key": "e_1_3_2_1_43_1",
+                "volume-title": "Dynamollm: Designing LLM inference clusters for performance and energy efficiency. CoRR abs/2408.00741",
+                "author": "Stojkovic J.",
+                "year": "2024",
+                "unstructured": "Stojkovic, J., Zhang, C., Goiri, Í., Torrellas, J., and Choukse, E. Dynamollm: Designing LLM inference clusters for performance and energy efficiency. CoRR abs/2408.00741 (2024)."
+              },
+              {
+                "key": "e_1_3_2_1_44_1",
+                "first-page": "191",
+                "volume-title": "18th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2024",
+                "author": "Sun B.",
+                "year": "2024",
+                "unstructured": "Sun, B., Huang, Z., Zhao, H., Xiao, W., Zhang, X., Li, Y., and Lin, W. Llumnix: Dynamic scheduling for large language model serving. In 18th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2024, Santa Clara, CA, USA, July 10–12, 2024 (2024), A. Gavrilovska and D. B. Terry, Eds., USENIX Association, pp. 173–191."
+              },
+              {
+                "key": "e_1_3_2_1_45_1",
+                "volume-title": "September",
+                "author": "Team Q.",
+                "year": "2024",
+                "unstructured": "Team, Q. Qwen2.5: A party of foundation models, September 2024."
+              },
+              {
+                "key": "e_1_3_2_1_46_1",
+                "first-page": "6008",
+                "volume-title": "Advances in Neural Information Processing Systems 30: Annual Conference on Neural Information Processing Systems 2017",
+                "author": "Vaswani A.",
+                "year": "2017",
+                "unstructured": "Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., and Polosukhin, I. Attention is all you need. In Advances in Neural Information Processing Systems 30: Annual Conference on Neural Information Processing Systems 2017, December 4–9, 2017, Long Beach, CA, USA (2017), I. Guyon, U. von Luxburg, S. Bengio, H. M. Wallach, R. Fergus, S. V. N. Vishwanathan, and R. Garnett, Eds., pp. 5998–6008."
+              },
+              {
+                "key": "e_1_3_2_1_47_1",
+                "volume-title": "Llm compressor",
+                "year": "2025",
+                "unstructured": "vllm project. Llm compressor, 2025. https://github.com/vllm-project/llm-compressor, 2025."
+              },
+              {
+                "key": "e_1_3_2_1_48_1",
+                "volume-title": "Burstgpt: A real-world workload dataset to optimize llm serving systems",
+                "author": "Wang Y.",
+                "year": "2024",
+                "unstructured": "Wang, Y., Chen, Y., Li, Z., Kang, X., Tang, Z., He, X., Guo, R., Wang, X., Wang, Q., Zhou, A. C., and Chu, X. Burstgpt: A real-world workload dataset to optimize llm serving systems, 2024."
+              },
+              {
+                "key": "e_1_3_2_1_49_1",
+                "volume-title": "https://mathworld.wolfram.com/LeastSquaresFitting.html",
+                "author": "Weisstein E. W.",
+                "year": "2025",
+                "unstructured": "Weisstein, E. W. \"least squares fitting.\" from mathworld-a wolfram resource. https://mathworld.wolfram.com/LeastSquaresFitting.html, 2025."
+              },
+              {
+                "key": "e_1_3_2_1_50_1",
+                "volume-title": "Loongserve: Efficiently serving long-context large language models with elastic sequence parallelism. CoRR abs/2404.09526",
+                "author": "Wu B.",
+                "year": "2024",
+                "unstructured": "Wu, B., Liu, S., Zhong, Y., Sun, P., Liu, X., and Jin, X. Loongserve: Efficiently serving long-context large language models with elastic sequence parallelism. CoRR abs/2404.09526 (2024)."
+              },
+              {
+                "key": "e_1_3_2_1_51_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3694715.3695948"
+              },
+              {
+                "key": "e_1_3_2_1_52_1",
+                "volume-title": "Fast distributed inference serving for large language models. CoRR abs/2305.05920",
+                "author": "Wu B.",
+                "year": "2023",
+                "unstructured": "Wu, B., Zhong, Y., Zhang, Z., Huang, G., Liu, X., and Jin, X. Fast distributed inference serving for large language models. CoRR abs/2305.05920 (2023)."
+              },
+              {
+                "key": "e_1_3_2_1_53_1",
+                "first-page": "293",
+                "volume-title": "19th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2025",
+                "author": "Zhang D.",
+                "year": "2025",
+                "unstructured": "Zhang, D., Wang, H., Liu, Y., Wei, X., Shan, Y., Chen, R., and Chen, H. Blitzscale: Fast and live large model autoscaling with O(1) host caching. In 19th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2025, Boston, MA, USA, July 7–9, 2025 (2025), L. Zhou and Y. Zhou, Eds., USENIX Association, pp. 275–293."
+              },
+              {
+                "key": "e_1_3_2_1_54_1",
+                "first-page": "578",
+                "volume-title": "16th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2022",
+                "author": "Zheng L.",
+                "year": "2022",
+                "unstructured": "Zheng, L., Li, Z., Zhang, H., Zhuang, Y., Chen, Z., Huang, Y., Wang, Y., Xu, Y., Zhuo, D., Xing, E. P., Gonzalez, J. E., and Stoica, I. Alpa: Automating inter- and intra-operator parallelism for distributed deep learning. In 16th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2022, Carlsbad, CA, USA, July 11–13, 2022 (2022), M. K. Aguilera and H. Weatherspoon, Eds., USENIX Association, pp. 559–578."
+              },
+              {
+                "key": "e_1_3_2_1_55_1",
+                "first-page": "210",
+                "volume-title": "18th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2024",
+                "author": "Zhong Y.",
+                "year": "2024",
+                "unstructured": "Zhong, Y., Liu, S., Chen, J., Hu, J., Zhu, Y., Liu, X., Jin, X., and Zhang, H. Distserve: Disaggregating prefill and decoding for goodput-optimized large language model serving. In 18th USENIX Symposium on Operating Systems Design and Implementation, OSDI 2024, Santa Clara, CA, USA, July 10–12, 2024 (2024), A. Gavrilovska and D. B. Terry, Eds., USENIX Association, pp. 193–210."
+              },
+              {
+                "key": "e_1_3_2_1_56_1",
+                "volume-title": "Nanoflow: Towards optimal large language model serving throughput. CoRR abs/2408.12757",
+                "author": "Zhu K.",
+                "year": "2024",
+                "unstructured": "Zhu, K., Zhao, Y., Zhao, L., Zuo, G., Gu, Y., Xie, D., Gao, Y., Xu, Q., Tang, T., Ye, Z., Kamahori, K., Lin, C., Wang, S., Krishnamurthy, A., and Kasikci, B. Nanoflow: Towards optimal large language model serving throughput. CoRR abs/2408.12757 (2024)."
+              }
+            ],
+            "event": {
+              "name": "EUROSYS '26: 21st European Conference on Computer Systems",
+              "location": "McEwan Hall/The University of Edinburgh Edinburgh Scotland UK",
+              "acronym": "EUROSYS '26",
+              "sponsor": [
+                "SIGOPS ACM Special Interest Group on Operating Systems"
+              ]
+            },
+            "container-title": [
+              "Proceedings of the 21st European Conference on Computer Systems"
+            ],
+            "original-title": [],
+            "link": [
+              {
+                "URL": "https://dl.acm.org/doi/pdf/10.1145/3767295.3769348",
+                "content-type": "unspecified",
+                "content-version": "vor",
+                "intended-application": "similarity-checking"
+              }
+            ],
+            "deposited": {
+              "date-parts": [
+                [
+                  2026,
+                  6,
+                  5
+                ]
+              ],
+              "date-time": "2026-06-05T12:21:59Z",
+              "timestamp": 1780662119000
+            },
+            "score": 1,
+            "resource": {
+              "primary": {
+                "URL": "https://dl.acm.org/doi/10.1145/3767295.3769348"
+              }
+            },
+            "subtitle": [],
+            "short-title": [],
+            "issued": {
+              "date-parts": [
+                [
+                  2026,
+                  4,
+                  26
+                ]
+              ]
+            },
+            "references-count": 56,
+            "alternative-id": [
+              "10.1145/3767295.3769348",
+              "10.1145/3767295"
+            ],
+            "URL": "https://doi.org/10.1145/3767295.3769348",
+            "relation": {},
+            "subject": [],
+            "published": {
+              "date-parts": [
+                [
+                  2026,
+                  4,
+                  26
+                ]
+              ]
+            },
+            "assertion": [
+              {
+                "value": "2026-04-26",
+                "order": 3,
+                "name": "published",
+                "label": "Published",
+                "group": {
+                  "name": "publication_history",
+                  "label": "Publication History"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "source_urls": [
+        "https://dl.acm.org/doi/10.1145/3767295.3769348",
+        "https://ipads.se.sjtu.edu.cn/_media/publications/kunserve-eurosys26.pdf",
+        "https://arxiv.org/abs/2412.18169",
+        "https://doi.org/10.1145/3767295.3769348"
+      ],
+      "continuing_influence": {},
+      "full_paper_sha256": "5119ce01575b7603fa6360fc7046bbc1ea0dd06493002e7cb59b05213ac452c6",
+      "run_id": "systems-paper-daily:2026-09-13",
+      "status": "archived",
+      "reserved_at": "2026-09-14T04:30:59.524264+00:00",
+      "report_path": "content/daily/2026-09-13.md",
+      "verification": {
+        "summary_words": 1092,
+        "brief_words": 125,
+        "assessment_words": 65,
+        "pages": 34,
+        "visuals": 2
+      }
+    },
+    {
+      "work_id": "doi:10.1145/3789240.3829207",
+      "title": "OptCCL: Scalable Synthesis of Optimal Collective Communication Algorithms",
+      "title_aliases": [
+        "OptCCL: Scalable Synthesis of Optimal Collective Communication Algorithms"
+      ],
+      "authors": [
+        "Richard Shapley",
+        "Rachit Agarwal",
+        "David Shmoys"
+      ],
+      "identifiers": {
+        "doi": [
+          "10.1145/3789240.3829207"
+        ],
+        "arxiv": [],
+        "dblp": []
+      },
+      "category": "latest",
+      "venue": "SIGCOMM",
+      "publication_date": "2026-08-11",
+      "publication_date_evidence": [
+        {
+          "url": "https://api.crossref.org/works/10.1145%2F3789240.3829207",
+          "kind": "publisher-deposited-crossref",
+          "publication_date": "2026-08-11",
+          "title": "OptCCL: Scalable Synthesis of Optimal Collective Communication Algorithms",
+          "record": {
+            "indexed": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ],
+              "date-time": "2026-08-11T19:28:18Z",
+              "timestamp": 1786476498472,
+              "version": "build-2736575974"
+            },
+            "publisher-location": "New York, NY, USA",
+            "reference-count": 27,
+            "publisher": "ACM",
+            "license": [
+              {
+                "start": {
+                  "date-parts": [
+                    [
+                      2026,
+                      8,
+                      11
+                    ]
+                  ],
+                  "date-time": "2026-08-11T00:00:00Z",
+                  "timestamp": 1786406400000
+                },
+                "content-version": "vor",
+                "delay-in-days": 0,
+                "URL": "https://creativecommons.org/licenses/by/4.0/legalcode"
+              }
+            ],
+            "content-domain": {
+              "domain": [
+                "dl.acm.org"
+              ],
+              "crossmark-restriction": true
+            },
+            "short-container-title": [],
+            "published-print": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  17
+                ]
+              ]
+            },
+            "DOI": "10.1145/3789240.3829207",
+            "type": "proceedings-article",
+            "created": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ],
+              "date-time": "2026-08-11T18:33:22Z",
+              "timestamp": 1786473202000
+            },
+            "page": "177-189",
+            "update-policy": "https://doi.org/10.1145/crossmark-policy",
+            "source": "Crossref",
+            "is-referenced-by-count": 0,
+            "title": [
+              "OptCCL: Scalable Synthesis of Optimal Collective Communication Algorithms"
+            ],
+            "prefix": "10.1145",
+            "author": [
+              {
+                "ORCID": "https://orcid.org/0000-0002-7092-8061",
+                "authenticated-orcid": false,
+                "given": "Richard",
+                "family": "Shapley",
+                "sequence": "first",
+                "affiliation": [
+                  {
+                    "name": "Cornell University, Ithaca, NY, USA"
+                  }
+                ],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "ORCID": "https://orcid.org/0000-0001-6731-9938",
+                "authenticated-orcid": false,
+                "given": "Rachit",
+                "family": "Agarwal",
+                "sequence": "additional",
+                "affiliation": [
+                  {
+                    "name": "Cornell University, Ithaca, NY, USA"
+                  }
+                ],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "ORCID": "https://orcid.org/0000-0003-3882-901X",
+                "authenticated-orcid": false,
+                "given": "David",
+                "family": "Shmoys",
+                "sequence": "additional",
+                "affiliation": [
+                  {
+                    "name": "Cornell University, Ithaca, NY, USA"
+                  }
+                ],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              }
+            ],
+            "member": "320",
+            "published-online": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ]
+            },
+            "reference": [
+              {
+                "key": "e_1_3_2_1_1_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.1145/3230543.3230569"
+              },
+              {
+                "key": "e_1_3_2_1_2_1",
+                "volume-title": "Orlin",
+                "author": "Ahuja Ravindra K.",
+                "year": "1993",
+                "unstructured": "Ravindra K. Ahuja, Thomas L. Magnanti, and James B. Orlin. 1993. Network flows - theory, algorithms and applications. Prentice Hall, Upper Saddle River, NJ."
+              },
+              {
+                "key": "e_1_3_2_1_3_1",
+                "unstructured": "Zixian Cai Zhengyang Liu Saeed Maleki Madanlal Musuvathi Todd Mytkowicz Jacob Nelson and Olli Saarikivi. 2021. Synthesizing optimal collective algorithms. In PPoPP."
+              },
+              {
+                "key": "e_1_3_2_1_4_1",
+                "volume-title": "Crux: GPU-efficient communication scheduling for deep learning training. In SIGCOMM.",
+                "author": "Cao Jiamin",
+                "year": "2024",
+                "unstructured": "Jiamin Cao, Yu Guan, Kun Qian, Jiaqi Gao, Wencong Xiao, Jianbo Dong, Binzhang Fu, Dennis Cai, and Ennan Zhai. 2024. Crux: GPU-efficient communication scheduling for deep learning training. In SIGCOMM."
+              },
+              {
+                "key": "e_1_3_2_1_5_1",
+                "unstructured": "Jiamin Cao Shangfeng Shi Jiaqi Gao Weisen Liu Yifan Yang Yichi Xu Zhilong Zheng Yu Guan Kun Qian Ying Liu Mingwei Xu Tianshu Wang Ning Wang Jianbo Dong Binzhang Fu Dennis Cai and Ennan Zhai. 2025. SyCCL: Exploiting symmetry for efficient collective communication scheduling. In SIGCOMM."
+              },
+              {
+                "key": "e_1_3_2_1_6_1",
+                "doi-asserted-by": "publisher",
+                "DOI": "10.5555/3118754.3118993"
+              },
+              {
+                "key": "e_1_3_2_1_7_1",
+                "volume-title": "Nvidia A100 tensor core GPU: Performance and innovation",
+                "author": "Choquette Jack",
+                "year": "2021",
+                "unstructured": "Jack Choquette, Wishwesh Gandhi, Olivier Giroux, Nick Stam, and Ronny Krashinsky. 2021. Nvidia A100 tensor core GPU: Performance and innovation. IEEE Micro (2021)."
+              },
+              {
+                "key": "e_1_3_2_1_8_1",
+                "volume-title": "Charles Sutton, Sebastian Gehrmann, et al.",
+                "author": "Chowdhery Aakanksha",
+                "year": "2023",
+                "unstructured": "Aakanksha Chowdhery, Sharan Narang, Jacob Devlin, Maarten Bosma, Gaurav Mishra, Adam Roberts, Paul Barham, Hyung Won Chung, Charles Sutton, Sebastian Gehrmann, et al. 2023. PaLM: Scaling language modeling with pathways. Journal of Machine Learning Research (2023)."
+              },
+              {
+                "key": "e_1_3_2_1_9_1",
+                "unstructured": "NVIDIA collective communications library (NCCL). 2026. https://developer.nvidia.com/nccl."
+              },
+              {
+                "key": "e_1_3_2_1_10_1",
+                "unstructured": "ROCm communication collectives library (RCCL). 2025. https://github.com/ROCm/rccl."
+              },
+              {
+                "key": "e_1_3_2_1_11_1",
+                "volume-title": "Guilherme Goes, Hany Morsy, Rohit Puri, Mohammad Riftadi, Ashmitha Jeevaraj Shetty, Jingyi Yang, Shuqiang Zhang, Mikel Jimenez Fernandez, Shashidhar Gandham, and Hongyi Zeng.",
+                "author": "Gangidi Adithya",
+                "year": "2024",
+                "unstructured": "Adithya Gangidi, Rui Miao, Shengbao Zheng, Sai Jayesh Bondu, Guilherme Goes, Hany Morsy, Rohit Puri, Mohammad Riftadi, Ashmitha Jeevaraj Shetty, Jingyi Yang, Shuqiang Zhang, Mikel Jimenez Fernandez, Shashidhar Gandham, and Hongyi Zeng. 2024. RDMA over Ethernet for distributed training at Meta scale. In SIGCOMM."
+              },
+              {
+                "key": "e_1_3_2_1_12_1",
+                "unstructured": "Myeongjae Jeon Shivaram Venkataraman Amar Phanishayee Junjie Qian Wencong Xiao and Fan Yang. 2019. Analysis of Large-Scale Multi-Tenant GPU Clusters for DNN Training Workloads. In ATC."
+              },
+              {
+                "key": "e_1_3_2_1_13_1",
+                "unstructured": "Ziheng Jiang Haibin Lin Yinmin Zhong Qi Huang Yangrui Chen Zhi Zhang Yanghua Peng Xiang Li Cong Xie Shibiao Nong Yulu Jia Sun He Hongmin Chen Zhihao Bai Qi Hou Shipeng Yan Ding Zhou Yiyao Sheng Zhuo Jiang Haohan Xu Haoran Wei Zhang Zhang Pengfei Nie Leqi Zou Sida Zhao Liang Xiang Zherui Liu Zhe Li Xiaoying Jia Jianxi Ye Xin Jin and Xin Liu. 2024. MegaScale: Scaling large language model training to more than 10 000 GPUs. In NSDI."
+              },
+              {
+                "key": "e_1_3_2_1_14_1",
+                "volume-title": "TCCL: Discovering better communication paths for PCIe GPU clusters. In ASPLOS.",
+                "author": "Kim Heehoon",
+                "year": "2024",
+                "unstructured": "Heehoon Kim, Junyeol Ryu, and Jaejin Lee. 2024. TCCL: Discovering better communication paths for PCIe GPU clusters. In ASPLOS."
+              },
+              {
+                "key": "e_1_3_2_1_15_1",
+                "volume-title": "Liangyu Zhao, Vincent Liu, Miguel Castro, Srikanth Kandula, and Luke Marshall.",
+                "author": "Liu Xuting",
+                "year": "2024",
+                "unstructured": "Xuting Liu, Behnaz Arzani, Siva Kesava Reddy Kakarla, Liangyu Zhao, Vincent Liu, Miguel Castro, Srikanth Kandula, and Luke Marshall. 2024. Rethinking machine learning collective communication as a multi-commodity flow problem. In SIGCOMM."
+              },
+              {
+                "key": "e_1_3_2_1_16_1",
+                "unstructured": "NERSC. 2026. Perlmutter architecture. https://docs.nersc.gov/systems/perlmutter/architecture/."
+              },
+              {
+                "key": "e_1_3_2_1_17_1",
+                "doi-asserted-by": "crossref",
+                "unstructured": "A.K. Parekh and R.G. Gallager. 1993. A generalized processor sharing approach to flow control in integrated services networks: the single-node case. IEEE/ACM Transactions on Networking (1993).",
+                "DOI": "10.1109/90.234856"
+              },
+              {
+                "key": "e_1_3_2_1_18_1",
+                "volume-title": "A generalized processor sharing approach to flow control in integrated services networks: the multiple node case",
+                "author": "Gallager A.K.",
+                "year": "1994",
+                "unstructured": "A.K. Parekhand R.G. Gallager. 1994. A generalized processor sharing approach to flow control in integrated services networks: the multiple node case. IEEE/ACM Transactions on Networking (1994)."
+              },
+              {
+                "key": "e_1_3_2_1_19_1",
+                "unstructured": "Amedeo Sapio Marco Canini Chen-Yu Ho Jacob Nelson Panos Kalnis Changhoon Kim Arvind Krishnamurthy Masoud Moshref Dan Ports and Peter Richtarik. 2021. Scaling distributed machine learning with in-network aggregation. In NSDI."
+              },
+              {
+                "key": "e_1_3_2_1_20_1",
+                "volume-title": "TACCL: Guiding collective algorithm synthesis using communication sketches. In NSDI.",
+                "author": "Shah Aashaka",
+                "year": "2023",
+                "unstructured": "Aashaka Shah, Vijay Chidambaram, Meghan Cowan, Saeed Maleki, Madan Musuvathi, Todd Mytkowicz, Jacob Nelson, Olli Saarikivi, and Rachee Singh. 2023. TACCL: Guiding collective algorithm synthesis using communication sketches. In NSDI."
+              },
+              {
+                "key": "e_1_3_2_1_21_1",
+                "unstructured": "Richard Shapley Rachit Agarwal and David Shmoys. 2026. OptCCL: Scalable synthesis of optimal collective communication algorithms. Technical Report. https://github.com/ml-collectives/optccl"
+              },
+              {
+                "key": "e_1_3_2_1_22_1",
+                "doi-asserted-by": "crossref",
+                "unstructured": "Midhul Vuppalapati Saksham Agarwal Henry Schuh Baris Kasikci Arvind Krishnamurthy and Rachit Agarwal. 2024. Understanding the host network. In SIGCOMM.",
+                "DOI": "10.1145/3651890.3672271"
+              },
+              {
+                "key": "e_1_3_2_1_23_1",
+                "volume-title": "Proceedings of Machine Learning and Systems",
+                "author": "Wang Guanhua",
+                "year": "2020",
+                "unstructured": "Guanhua Wang, Shivaram Venkataraman, Amar Phanishayee, Nikhil Devanur, Jorgen Thelin, and Ion Stoica. 2020. Blink: Fast and generic collectives for distributed ml. Proceedings of Machine Learning and Systems (2020)."
+              },
+              {
+                "key": "e_1_3_2_1_24_1",
+                "volume-title": "Rail-only: A low-cost high-performance network for training LLMs with trillion parameters. In HOTI.",
+                "author": "Wang Weiyang",
+                "year": "2024",
+                "unstructured": "Weiyang Wang, Manya Ghobadi, Kayvon Shakeri, Ying Zhang, and Naader Hasani. 2024. Rail-only: A low-cost high-performance network for training LLMs with trillion parameters. In HOTI."
+              },
+              {
+                "key": "e_1_3_2_1_25_1",
+                "volume-title": "TACOS: Topology-aware collective algorithm synthesizer for distributed machine learning. In MICRO.",
+                "author": "Won William",
+                "year": "2024",
+                "unstructured": "William Won, Midhilesh Elavazhagan, Sudarshan Srinivasan, Swati Gupta, and Tushar Krishna. 2024. TACOS: Topology-aware collective algorithm synthesizer for distributed machine learning. In MICRO."
+              },
+              {
+                "key": "e_1_3_2_1_26_1",
+                "volume-title": "MCCS: A service-based approach to collective communication for multi-tenant cloud. In SIGCOMM.",
+                "author": "Wu Yongji",
+                "year": "2024",
+                "unstructured": "Yongji Wu, Yechen Xu, Jingrong Chen, Zhaodong Wang, Ying Zhang, Matthew Lentz, and Danyang Zhuo. 2024. MCCS: A service-based approach to collective communication for multi-tenant cloud. In SIGCOMM."
+              },
+              {
+                "key": "e_1_3_2_1_27_1",
+                "unstructured": "Liangyu Zhao Saeed Maleki Yuanhong Wang Zezhou Wang Ziyue Yang Hossein Pourreza and Arvind Krishnamurthy. 2026. ForestColl: Throughput-optimal collective communications on heterogeneous network fabrics. In NSDI."
+              }
+            ],
+            "event": {
+              "name": "SIGCOMM '26: ACM SIGCOMM 2026 Conference",
+              "location": "Colorado Convention Center Denver CO USA",
+              "acronym": "SIGCOMM '26",
+              "sponsor": [
+                "SIGCOMM ACM Special Interest Group on Data Communication"
+              ]
+            },
+            "container-title": [
+              "Proceedings of the ACM SIGCOMM 2026 Conference"
+            ],
+            "original-title": [],
+            "link": [
+              {
+                "URL": "https://dl.acm.org/doi/pdf/10.1145/3789240.3829207",
+                "content-type": "unspecified",
+                "content-version": "vor",
+                "intended-application": "similarity-checking"
+              }
+            ],
+            "deposited": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ],
+              "date-time": "2026-08-11T18:46:36Z",
+              "timestamp": 1786473996000
+            },
+            "score": 1,
+            "resource": {
+              "primary": {
+                "URL": "https://dl.acm.org/doi/10.1145/3789240.3829207"
+              }
+            },
+            "subtitle": [],
+            "short-title": [],
+            "issued": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ]
+            },
+            "references-count": 27,
+            "alternative-id": [
+              "10.1145/3789240.3829207",
+              "10.1145/3789240"
+            ],
+            "URL": "https://doi.org/10.1145/3789240.3829207",
+            "relation": {},
+            "subject": [],
+            "published": {
+              "date-parts": [
+                [
+                  2026,
+                  8,
+                  11
+                ]
+              ]
+            },
+            "assertion": [
+              {
+                "value": "2026-08-11",
+                "order": 3,
+                "name": "published",
+                "label": "Published",
+                "group": {
+                  "name": "publication_history",
+                  "label": "Publication History"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "source_urls": [
+        "https://dl.acm.org/doi/10.1145/3789240.3829207",
+        "https://www.cs.cornell.edu/~ragarwal/pubs/optccl.pdf",
+        "https://conferences.sigcomm.org/sigcomm/2026/program/papers/",
+        "https://doi.org/10.1145/3789240.3829207"
+      ],
+      "continuing_influence": {},
+      "full_paper_sha256": "9204defdc2948cd1398dac553e69fc1b991bc4777c29b23e42b81414e8fa9224",
+      "run_id": "systems-paper-daily:2026-09-13",
+      "status": "archived",
+      "reserved_at": "2026-09-14T04:30:59.524264+00:00",
+      "report_path": "content/daily/2026-09-13.md",
+      "verification": {
+        "summary_words": 1050,
+        "brief_words": 119,
+        "assessment_words": 50,
+        "pages": 13,
         "visuals": 2
       }
     }
@@ -18638,6 +20816,68 @@
       ],
       "artifact_sha256": "9783ae5df991846a682879352660ae2bff43711a5bd7816a90162e599ce254cb",
       "archived_at": "2026-09-09T01:19:07.740561+00:00"
+    },
+    {
+      "run_id": "systems-paper-daily:2026-09-13",
+      "local_date": "2026-09-13",
+      "timezone": "America/New_York",
+      "status": "archived",
+      "reserved_at": "2026-09-14T04:30:59.524264+00:00",
+      "settings_sha256": "05699719e9140676d0f6588101b37edcc5fd7e58bac56d731c6ea6a2a875c505",
+      "work_ids": [
+        "doi:10.48550/arxiv.2511.08083",
+        "doi:10.1145/3789240.3829111",
+        "doi:10.1145/3767295.3769348",
+        "doi:10.1145/3789240.3829207"
+      ],
+      "date_windows": {
+        "latest": {
+          "start": "2026-03-13",
+          "end": "2026-09-13"
+        },
+        "classic": {
+          "start": "2021-09-13",
+          "end": "2026-03-12"
+        }
+      },
+      "report_path": "content/daily/2026-09-13.md",
+      "report_sha256": "869a20891e2e62c9ef88a24279c53e0ae9f13bdb94521be4b73476fee3f3baf0",
+      "visual_assets": [
+        {
+          "path": "content/assets/papers/work-d5ce6c1722990cc75639/images/figure-1.png",
+          "sha256": "ed231f44b873b67dcaf7027a885d9626d226c38e7dad355ee4771b1559bfcc48"
+        },
+        {
+          "path": "content/assets/papers/work-d5ce6c1722990cc75639/images/figure-2.png",
+          "sha256": "82a3f2504955279e3fa8adb60d73fc9d3ed1dee39bc945a8df1e3065b436de2b"
+        },
+        {
+          "path": "content/assets/papers/work-c2818670d4c06bbf30e4/images/figure-1.png",
+          "sha256": "e9e9eaa5cf98b0ffd0f8fbb67fbda5fe0ddf526ebad11eb33ea6f58e7c730bce"
+        },
+        {
+          "path": "content/assets/papers/work-c2818670d4c06bbf30e4/images/figure-2.png",
+          "sha256": "57d0606d16098585bde583303b33b66f05e9fe33ed37404a3c9a4bc5974e4a79"
+        },
+        {
+          "path": "content/assets/papers/work-b0d03cf1ad204cc54f3c/images/figure-1.png",
+          "sha256": "c52a564478b4f6e0bd5e583d240937d44a1113dae22693bb4e53dad21b80048f"
+        },
+        {
+          "path": "content/assets/papers/work-b0d03cf1ad204cc54f3c/images/figure-2.png",
+          "sha256": "198e48f6718df3a672e25d3a5cb47a004c367c10d764733d7ecc165022213dd9"
+        },
+        {
+          "path": "content/assets/papers/work-87c0fa9586e55393b074/images/figure-1.png",
+          "sha256": "95aeae1627b6a439ea3b8f5442ebfdf43a568ca248b98126dd64f57bffe387f9"
+        },
+        {
+          "path": "content/assets/papers/work-87c0fa9586e55393b074/images/figure-2.png",
+          "sha256": "5ae2546137b3f7b4ff00b93bc3fa048aa0645aee052785ab4bcf9a52552ed679"
+        }
+      ],
+      "artifact_sha256": "8a1d37b94c196f5a0dbb3db7a868448f89599b87dbd20826e87a5179ca9d7ccd",
+      "archived_at": "2026-09-14T04:30:59.990036+00:00"
     }
   ],
   "schema_version": 1,
