@@ -1030,6 +1030,8 @@ class PipelineTests(unittest.TestCase):
                 if stage == 'select':
                     self.assertIn('do not require or try to reopen production history files', prompt)
                     self.assertIn('rather than returning an empty selection', prompt)
+                if stage == 'analyze':
+                    self.assertIn("Final assessment section text must begin exactly with 'Interpretation.'", prompt)
 
     def test_removed_review_stage_cannot_be_called(self):
         with self.assertRaisesRegex(ValueError, 'Unknown stage'):

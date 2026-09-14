@@ -87,6 +87,7 @@ TASKS = {
                'If prior_analysis and revision_feedback are supplied, revise this same paper to resolve every reported issue; '
                'retain verified facts and experimental conditions. '
                'Each section text is Markdown prose without repeating its heading. '
+               "The Final assessment section text must begin exactly with 'Interpretation.' or 'Interpretation:' so its evaluative conclusions are explicitly labeled. "
                'Return insights and findings with source pages. For visuals, crop bbox coordinates are fractions of page '
                'width/height (left, top, right, bottom); table headers and rows contain verified source cells. '
                'Use the original Figure/Table identifier as label and paraphrase the caption. '
