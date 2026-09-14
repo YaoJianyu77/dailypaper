@@ -25,7 +25,7 @@ from paper_sources import EvidenceError, Sources, label_matches, publication_ven
 from pipeline_prompts import build_messages, stage_schema
 from publish_daily import publish
 from recommendation_history import (HISTORY_PATH, HistoryError, assert_unchanged, json_bytes,
-                                    identifier_tokens, load_history, match_record, write_history)
+                                    identifier_tokens, load_history, match_record, sha256, write_history)
 from report_settings import SettingsError, calendar_shift, load_infrastructure, load_settings
 from report_validation import ValidationError, prepare_visuals, validate_analysis, validate_document, validate_trends
 from site_content import read_report
@@ -57,7 +57,10 @@ def analysis_result(document, settings):
     return {'document_sha256': document['sha256'], 'read_pages': [p['page'] for p in document['pages']],
             'visual_section': settings.headings[3],
             'visual_labels': {'pdf_page': 'PDF page', 'paraphrased_caption': 'Caption (paraphrased)'},
-            'sections': [{'heading': heading, 'text': ' '.join(['Evidence'] * count)} for heading, count in zip(settings.headings, counts)],
+            'sections': [{'heading': heading,
+                          'text': ('Interpretation. ' if heading == settings.headings[-1] else '')
+                                  + ' '.join(['Evidence'] * count)}
+                         for heading, count in zip(settings.headings, counts)],
             'insights': [{'text': 'Fixture only', 'page': 1}], 'findings': [{'text': 'Fixture only', 'page': 2}], 'visuals': visuals}
 
 
@@ -247,6 +250,26 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(checkpoint.read_bytes(), selection)
         self.assertFalse((self.root / 'content').exists())
         self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
+
+    def test_cached_analysis_failing_current_validation_is_revised(self):
+        self.prepare()
+        cached = sorted((self.root / f'.cache/dailypaper/runs/{DAY}').glob('paper-*/reviewed.json'))[0]
+        paper = json.loads(cached.read_text())
+        paper['analysis']['sections'][-1]['text'] = paper['analysis']['sections'][-1]['text'].removeprefix('Interpretation. ')
+        reviewed = {key: value for key, value in paper.items() if key not in {'review', 'reviewed_sha256'}}
+        paper['reviewed_sha256'] = sha256(json_bytes(reviewed))
+        cached.write_bytes(json_bytes(paper))
+        calls = len(self.backend.calls)
+
+        resumed = self.prepare()
+
+        new_calls = self.backend.calls[calls:]
+        analysis_calls = [call for call in new_calls if call[0] == 'analyze']
+        self.assertEqual(len(analysis_calls), 1)
+        self.assertIn('Final assessment must begin', analysis_calls[0][1]['revision_feedback'])
+        self.assertIn('prior_analysis', analysis_calls[0][1])
+        revised = next(item for item in resumed['papers'] if item['title'] == paper['title'])
+        self.assertTrue(revised['analysis']['sections'][-1]['text'].startswith('Interpretation. '))
 
     def test_changing_only_settings_changes_generation_and_rendering(self):
         self.edit('**4** previously', '**1** previously')

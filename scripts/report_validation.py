@@ -69,6 +69,8 @@ def validate_analysis(analysis, document, settings):
     require(settings.brief_min <= brief <= settings.brief_max, f'Opening brief has {brief} words')
     require(assessment <= settings.assessment_max, f'Final assessment has {assessment} words')
     require(len(re.split(r'\n\s*\n', sections[-1]['text'].strip())) == 1, 'Final assessment must be one paragraph')
+    require(re.match(r'^Interpretation[.:]\s+', sections[-1]['text'].strip()),
+            "Final assessment must begin with 'Interpretation.' or 'Interpretation:'")
     count = sum(word_count(section['text']) for section in sections)
     count += sum(word_count(v['explanation']) + word_count(v['caveat']) for v in analysis['visuals'])
     require(settings.summary_min <= count <= min(settings.summary_max, settings.hard_max), f'Summary has {count} words excluding captions')

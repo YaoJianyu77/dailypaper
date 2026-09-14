@@ -35,7 +35,7 @@ Discovery skips an index for the rest of an invocation after an access challenge
 
 Paper acquisition retains the verified main PDF, publisher-linked supplements, and distinct explicitly linked author versions. Original bytes, hashes, source URLs, and page mappings remain available for review. Byte-identical copies are deduplicated. Missing appendices, wrong-work copies, unreadable pages, or aggregate limits stop preparation. Combined page numbers identify visual crops and claim evidence; source page numbers preserve citations to originals.
 
-Ignored `.cache/dailypaper/runs/<date>/` holds `runtime.json`, selection, PDFs/page images, reviewed papers, trends, the rendered site, and `bundle.json`. Runtime receipts freeze model, reasoning, CLI version, and settings digest. Revisions retain the same selected paper and original evidence; persistent review failures stop the run. The final review receives actual website screenshots. Report and asset hashes bind archived files to reviewed artifacts; transaction recovery follows AGENTS.md.
+Ignored `.cache/dailypaper/runs/<date>/` holds `runtime.json`, selection, PDFs/page images, reviewed papers, trends, the rendered site, and `bundle.json`. Runtime receipts freeze model, reasoning, CLI version, and settings digest. Revisions retain the same selected paper and original evidence; cached analyses that fail current validation are revised and independently reviewed again. Persistent review failures stop the run. Use `run_local_daily.py --date YYYY-MM-DD` to resume an unfinished report after the local date changes. The final review receives actual website screenshots. Report and asset hashes bind archived files to reviewed artifacts; transaction recovery follows AGENTS.md.
 
 ## Codex and scheduling details
 

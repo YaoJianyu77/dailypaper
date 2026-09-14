@@ -14,7 +14,7 @@ from paper_sources import EvidenceError, Sources, request_failure
 from recommendation_history import atomic_write, json_bytes, load_history, match_record, normalize_title, sha256, work_id
 from report_settings import load_infrastructure, load_settings
 from report_validation import (ValidationError, prepare_visuals, render_report, require, validate_analysis,
-                               validate_review, validate_selection, validate_trends)
+                               validate_document, validate_review, validate_selection, validate_trends)
 
 logger = logging.getLogger(__name__)
 
@@ -180,13 +180,28 @@ def prepare(root, *, day=None, sources=None, backend=None, pool=None, stage_dir=
         directory = stage / ('paper-' + sha256(work_id(paper).encode())[:20])
         directory.mkdir(parents=True, exist_ok=True)
         cached = directory / 'reviewed.json'
+        revision_feedback = ''
         if cached.exists():
             paper = json.loads(cached.read_text())
             require(paper['settings_sha256'] == settings.sha256, 'Paper checkpoint uses stale settings')
-        else:
-            document = sources.full_paper(paper, directory)
+            reviewed = {key: value for key, value in paper.items() if key not in {'review', 'reviewed_sha256'}}
+            require(paper['reviewed_sha256'] == sha256(json_bytes(reviewed)),
+                    'Reviewed paper checkpoint was modified')
+            validate_document(paper['document'])
+            try:
+                validate_analysis(paper['analysis'], paper['document'], settings)
+                validate_review(paper['review'], settings)
+            except ValidationError as error:
+                revision_feedback = str(error)
+                logger.warning('Revising cached paper after validation: %s: %s', selected['title'], error)
+        if not cached.exists() or revision_feedback:
+            prior_analysis = paper.get('analysis') if revision_feedback else None
+            document = paper['document'] if revision_feedback else sources.full_paper(paper, directory)
+            paper = copy.deepcopy(selected)
             context = {'date': day.isoformat(), 'paper': paper, 'document': document,
                        'image_order': [f'PDF page {page["page"]}' for page in document['pages']]}
+            if prior_analysis is not None:
+                context.update(prior_analysis=prior_analysis, revision_feedback=revision_feedback)
             images = [page['image'] for page in document['pages']]
             for attempt in range(3):
                 analysis = backend.generate('analyze', context, images)

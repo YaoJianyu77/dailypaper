@@ -27,8 +27,9 @@ bash scripts/install_local_cron.sh --logs
 bash scripts/install_local_cron.sh --check   # live capability check
 .cache/dailypaper/venv/bin/python scripts/run_local_daily.py --dry-run
 .cache/dailypaper/venv/bin/python scripts/run_local_daily.py
+.cache/dailypaper/venv/bin/python scripts/run_local_daily.py --date 2026-09-13
 ```
 
-The dry-run prepares and checks an article in temporary storage. The normal run verifies the current recommended model and strongest supported reasoning, generates the report, commits, and pushes. Unverified capabilities stop the run without a downgrade. GitHub Pages deploys the committed content.
+The dry-run prepares and checks an article in temporary storage. The normal run verifies the current recommended model and strongest supported reasoning, generates the report, commits, and pushes. `--date` resumes a specific unfinished local date after midnight. Unverified capabilities stop the run without a downgrade. GitHub Pages deploys the committed content.
 
 Maintainers: [execution rules](AGENTS.md) · [skills](skills/) · [current status](PROJECT_STATE.md) · [implementation and tests](docs/implementation.md).
