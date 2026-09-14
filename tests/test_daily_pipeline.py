@@ -33,13 +33,6 @@ from site_content import read_report
 DAY = date(2026, 9, 8)
 
 
-def review_result():
-    checks = ('language', 'topic_fit', 'identity', 'publication', 'full_paper', 'technical_claims',
-              'visual_fidelity', 'structure', 'trend_evidence')
-    return {'approved': True, 'problems': [],
-            **{key: {'passed': True, 'evidence': 'Offline test receipt; no claim of scientific verification.'} for key in checks}}
-
-
 def analysis_result(document, settings):
     visual = {'kind': 'crop', 'page': 1, 'bbox': [.1, .25, .9, .65], 'label': 'Figure 1',
               'caption': 'Fixture data flow', 'explanation': 'Fixture supports data flow.',
@@ -122,7 +115,7 @@ class FixtureSources(Sources):
 class FixtureBackend:
     def __init__(self, root):
         self.root, self.calls = root, []
-        self.reject = False
+        self.invalid_analysis = False
 
     def generate(self, stage, context, images=()):
         settings = load_settings(self.root)
@@ -143,7 +136,10 @@ class FixtureBackend:
                 counts[category] += 1
             return {'selected': chosen, 'shortfall_reason': '' if counts == settings.quotas else 'Fixture source coverage leaves slots unfilled.'}
         if stage == 'analyze':
-            return analysis_result(context['document'], settings)
+            result = analysis_result(context['document'], settings)
+            if self.invalid_analysis:
+                result['sections'][0]['text'] = ''
+            return result
         if stage == 'trends':
             return {'labels': {'report_title': 'Daily Paper Report', 'latest': 'Latest', 'classic': 'Classic',
                               'timezone': 'Timezone', 'latest_window': 'Latest window', 'classic_window': 'Classic window',
@@ -151,10 +147,7 @@ class FixtureBackend:
                               'full_paper': 'Full paper', 'supporting_papers': 'Supporting papers'},
                     'trends': [], 'insufficient_evidence': 'Synthetic fixtures cannot support a scientific trend.',
                     'coverage_note': context.get('selection_shortfall', '')}
-        result = review_result()
-        if self.reject:
-            result.update(approved=False, problems=['Fixture models rejection of unresolved evidence.'])
-        return result
+        raise AssertionError(f'Unexpected model stage: {stage}')
 
 
 class PipelineTests(unittest.TestCase):
@@ -194,14 +187,15 @@ class PipelineTests(unittest.TestCase):
             self.assertEqual(len(images), 2)
             self.assertGreater(len(context['document']['pages'][1]['text']), 2200)
             self.assertIn('TAIL_EVIDENCE_NOT_IN_ABSTRACT', messages[1]['content'])
-        _, final_context, final_images, _ = self.backend.calls[-1]
-        self.assertEqual(final_context['kind'], 'trends')
-        self.assertEqual(final_context['report_markdown'], bundle['report_markdown'])
-        self.assertEqual(final_images, [s['path'] for s in bundle['rendering']['screenshots']])
+        final_stage, final_context, final_images, _ = self.backend.calls[-1]
+        self.assertEqual(final_stage, 'trends')
+        self.assertEqual(final_images, [])
         for entry, paper in zip(final_context['papers'], bundle['papers'], strict=True):
-            self.assertNotIn('analysis', entry)  # Prose already appears in the assembled article.
-            self.assertEqual(entry['review'], paper['review'])
+            self.assertEqual(entry['analysis'], paper['analysis'])
             self.assertEqual(entry['title'], paper['title'])
+        self.assertFalse(any(stage == 'review' for stage, *_ in self.backend.calls))
+        self.assertEqual([stage for stage, *_ in self.backend.calls],
+                         ['select', *(['analyze'] * 5), 'trends'])
         result = publish(self.root, bundle)
         self.assertEqual(result['status'], 'archived')
         report = read_report(self.root / f'content/daily/{DAY}.md')
@@ -253,11 +247,11 @@ class PipelineTests(unittest.TestCase):
 
     def test_cached_analysis_failing_current_validation_is_revised(self):
         self.prepare()
-        cached = sorted((self.root / f'.cache/dailypaper/runs/{DAY}').glob('paper-*/reviewed.json'))[0]
+        cached = sorted((self.root / f'.cache/dailypaper/runs/{DAY}').glob('paper-*/analyzed.json'))[0]
         paper = json.loads(cached.read_text())
         paper['analysis']['sections'][-1]['text'] = paper['analysis']['sections'][-1]['text'].removeprefix('Interpretation. ')
-        reviewed = {key: value for key, value in paper.items() if key not in {'review', 'reviewed_sha256'}}
-        paper['reviewed_sha256'] = sha256(json_bytes(reviewed))
+        analyzed = {key: value for key, value in paper.items() if key != 'analyzed_sha256'}
+        paper['analyzed_sha256'] = sha256(json_bytes(analyzed))
         cached.write_bytes(json_bytes(paper))
         calls = len(self.backend.calls)
 
@@ -321,8 +315,8 @@ class PipelineTests(unittest.TestCase):
             discovery(self.root, self.settings, next_day, self.sources, ledger)
 
     def test_edited_settings_cannot_replace_pending_selection(self):
-        self.backend.reject = True
-        with self.assertRaisesRegex(ValidationError, 'review rejected'):
+        self.backend.invalid_analysis = True
+        with self.assertRaisesRegex(ValidationError, 'Empty summary'):
             self.prepare()
         self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
         chosen = (self.root / f'.cache/dailypaper/runs/{DAY}/selection.json').read_bytes()
@@ -338,7 +332,7 @@ class PipelineTests(unittest.TestCase):
             lambda b: b['papers'][0]['analysis']['sections'][0].update(text='An abstract.'),
             lambda b: b['papers'][0]['analysis']['visuals'][0].update(caption=''),
             lambda b: b['papers'][0]['analysis']['sections'][3].update(text='```mermaid\ngraph LR\nA-->B\n```'),
-            lambda b: b['review'].update(approved=False, problems=['Unverified claim']),
+            lambda b: b['papers'][0].update(analyzed_sha256='changed'),
             lambda b: b['papers'][0].update(venue='An unconfigured workshop'),
             lambda b: b['papers'][0].update(pdf_urls=[]),
         ):
@@ -737,43 +731,11 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(len(diagnostics['candidates']), 5)
         self.assertTrue(diagnostics['source_failures'])
 
-    def test_rejected_analysis_is_revised_without_reselecting_or_changing_history(self):
-        original = self.backend.generate
-        attempts, reviews = [], []
-        def revise(stage, context, images=()):
-            result = original(stage, context, images)
-            if stage == 'analyze' and context['paper']['title'] == self.sources.candidates[0]['title']:
-                attempts.append(context)
-            if stage == 'review' and context['kind'] == 'paper' and not reviews:
-                reviews.append(context)
-                result.update(approved=False, problems=['Include the workload conditions for the measured result.'])
-            if stage == 'review' and context['kind'] == 'trends':
-                self.assertTrue(context['rendering']['offline'])
-                self.assertTrue(context['rendering']['chromium_sandbox'])
-                self.assertEqual([s['path'] for s in context['rendering']['screenshots']], images)
-                self.assertEqual({s['viewport_width'] for s in context['rendering']['screenshots']}, {1440, 390})
-                for view in context['rendering']['views']:
-                    self.assertEqual(len(view['expanded_figures']), view['images'])
-                    for figure in view['expanded_figures']:
-                        self.assertEqual(figure['scale'], 1)
-                        self.assertEqual(max(t['left'] for t in figure['tiles']), max(0, figure['full_width'] - figure['width']))
-                        self.assertEqual(max(t['top'] for t in figure['tiles']), max(0, figure['full_height'] - figure['height']))
-            return result
-        with patch.object(self.backend, 'generate', side_effect=revise):
+    def test_invalid_fresh_analysis_stops_without_automatic_model_retry(self):
+        self.backend.invalid_analysis = True
+        with self.assertRaisesRegex(ValidationError, 'Empty summary'):
             self.prepare()
-        self.assertEqual(len(attempts), 2)
-        self.assertEqual(attempts[0]['paper'], attempts[1]['paper'])
-        self.assertEqual(attempts[0]['document'], attempts[1]['document'])
-        self.assertIn('workload conditions', attempts[1]['revision_feedback'])
-        self.assertIn('prior_analysis', attempts[1])
-        self.assertEqual(sum(stage == 'select' for stage, *_ in self.backend.calls), 1)
-        self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
-
-    def test_revision_limit_does_not_bypass_failed_review(self):
-        self.backend.reject = True
-        with self.assertRaisesRegex(ValidationError, 'review rejected'):
-            self.prepare()
-        self.assertEqual(sum(stage == 'analyze' for stage, *_ in self.backend.calls), 3)
+        self.assertEqual(sum(stage == 'analyze' for stage, *_ in self.backend.calls), 1)
         self.assertEqual(sum(stage == 'select' for stage, *_ in self.backend.calls), 1)
         self.assertEqual((self.root / HISTORY_PATH).read_bytes(), self.original_history)
 
@@ -1005,7 +967,7 @@ class PipelineTests(unittest.TestCase):
             captured.update(prompt=prompt, images=images, schema=schema)
             return result, []
 
-        resolution = {'executable': '/fixture/codex', 'model': 'verified-fixture', 'mode': 'ultra', 'settings_sha256': self.settings.sha256}
+        resolution = {'executable': '/fixture/codex', 'model': 'verified-fixture', 'mode': 'medium', 'settings_sha256': self.settings.sha256}
         backend = CodexBackend(self.root, self.settings, self.infrastructure)
         with patch.object(CodexBackend, 'preflight', return_value=resolution), patch('codex_enrich.execute', side_effect=codex_run):
             self.assertEqual(backend.generate('analyze', context, images), result)
@@ -1025,9 +987,6 @@ class PipelineTests(unittest.TestCase):
             ('influence', {}, ('daily-paper-search',)),
             ('analyze', {}, ('paper-deep-analysis', 'paper-image-extractor')),
             ('trends', {}, ('daily-paper-editor',)),
-            ('review', {'kind': 'paper'}, ('daily-paper-search', 'paper-note-search',
-                                         'paper-deep-analysis', 'paper-image-extractor')),
-            ('review', {'kind': 'trends'}, ('daily-paper-editor', 'paper-image-extractor')),
         ]
         skills = {path.parent.name: path for path in (self.root / 'skills').glob('*/SKILL.md')}
         # A canonical skill edit must reach its next applicable call without a prompt edit.
@@ -1044,34 +1003,11 @@ class PipelineTests(unittest.TestCase):
                     self.assertEqual(prompt.count(path.read_text()), int(name in expected), name)
                 self.assertEqual(json.loads(messages[1]['content']), context)
 
-    def test_codex_review_routes_original_evidence_and_rejects_unknown_kind(self):
-        document = self.sources.full_paper(self.sources.candidates[0], self.root / 'review-transport')
-        paper = {**self.sources.candidates[0], 'document': document,
-                 'analysis': analysis_result(document, self.settings)}
-        images = [page['image'] for page in document['pages']]
-        contexts = [
-            {'kind': 'paper', 'paper': paper, 'prior_recommendation_evidence': ['fixture prior work']},
-            {'kind': 'trends', 'report_markdown': 'Fixture assembled article',
-             'papers': [{'title': paper['title'], 'review': review_result()}],
-             'rendering': {'screenshots': [{'path': images[0], 'viewport_width': 390}]}},
-        ]
-        resolution = {'executable': '/fixture/codex', 'settings_sha256': self.settings.sha256}
-        backend = CodexBackend(self.root, self.settings, self.infrastructure)
-        with patch.object(CodexBackend, 'preflight', return_value=resolution), \
-             patch('codex_enrich.execute', return_value=(review_result(), [])) as run:
-            for context in contexts:
-                with self.subTest(kind=context['kind']):
-                    self.assertEqual(backend.generate('review', context, images), review_result())
-                    _, actual_resolution, _, prompt, schema, actual_images = run.call_args.args
-                    self.assertIs(actual_resolution, resolution)
-                    self.assertTrue(prompt.endswith(json.dumps(context, ensure_ascii=False)))
-                    self.assertEqual(actual_images, images)
-                    self.assertEqual(schema, stage_schema('review', self.settings))
-            for context in ({}, {'kind': 'unknown'}):
-                run.reset_mock()
-                with self.assertRaisesRegex(ValueError, 'Unknown review kind'):
-                    backend.generate('review', context, images)
-                run.assert_not_called()
+    def test_removed_review_stage_cannot_be_called(self):
+        with self.assertRaisesRegex(ValueError, 'Unknown stage'):
+            stage_schema('review', self.settings)
+        with self.assertRaises(KeyError):
+            build_messages(self.root, self.settings, 'review', {})
 
     def test_retained_skill_extractor_reads_local_pdf_without_network(self):
         helper = REPO / 'skills/paper-image-extractor/scripts/extract_images.py'

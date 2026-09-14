@@ -53,6 +53,6 @@ Distinguish contributions in conceptual insight, algorithm, system design, and e
 
 Within the configured assessment limit, give one paragraph covering what is convincingly demonstrated, remaining uncertainty, strongest and weakest parts, the main contribution type, and the conditions under which conclusions can be trusted.
 
-## Final editorial check
+## Analysis check
 
-Define paper-specific terms on first use and apply the settings' content exclusions. Use `daily-paper-editor` for article assembly and final review.
+Before returning the single contracted analysis, define paper-specific terms on first use, apply the settings' content exclusions, and check every quantitative claim against a cited page, figure, or table. The controller performs schema, source-receipt, visual, and rendering validation without a second model-review call.

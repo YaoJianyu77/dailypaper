@@ -14,7 +14,7 @@ from paper_sources import EvidenceError, Sources, request_failure
 from recommendation_history import atomic_write, json_bytes, load_history, match_record, normalize_title, sha256, work_id
 from report_settings import load_infrastructure, load_settings
 from report_validation import (ValidationError, prepare_visuals, render_report, require, validate_analysis,
-                               validate_document, validate_review, validate_selection, validate_trends)
+                               validate_document, validate_selection, validate_trends)
 
 logger = logging.getLogger(__name__)
 
@@ -179,18 +179,17 @@ def prepare(root, *, day=None, sources=None, backend=None, pool=None, stage_dir=
         paper = copy.deepcopy(selected)
         directory = stage / ('paper-' + sha256(work_id(paper).encode())[:20])
         directory.mkdir(parents=True, exist_ok=True)
-        cached = directory / 'reviewed.json'
+        cached = directory / 'analyzed.json'
         revision_feedback = ''
         if cached.exists():
             paper = json.loads(cached.read_text())
             require(paper['settings_sha256'] == settings.sha256, 'Paper checkpoint uses stale settings')
-            reviewed = {key: value for key, value in paper.items() if key not in {'review', 'reviewed_sha256'}}
-            require(paper['reviewed_sha256'] == sha256(json_bytes(reviewed)),
-                    'Reviewed paper checkpoint was modified')
+            analyzed = {key: value for key, value in paper.items() if key != 'analyzed_sha256'}
+            require(paper['analyzed_sha256'] == sha256(json_bytes(analyzed)),
+                    'Analyzed paper checkpoint was modified')
             validate_document(paper['document'])
             try:
                 validate_analysis(paper['analysis'], paper['document'], settings)
-                validate_review(paper['review'], settings)
             except ValidationError as error:
                 revision_feedback = str(error)
                 logger.warning('Revising cached paper after validation: %s: %s', selected['title'], error)
@@ -203,32 +202,16 @@ def prepare(root, *, day=None, sources=None, backend=None, pool=None, stage_dir=
             if prior_analysis is not None:
                 context.update(prior_analysis=prior_analysis, revision_feedback=revision_feedback)
             images = [page['image'] for page in document['pages']]
-            for attempt in range(3):
-                analysis = backend.generate('analyze', context, images)
-                try:
-                    counts = validate_analysis(analysis, document, settings)
-                    assets, blocks = prepare_visuals(paper, analysis, document, directory / 'prepared')
-                    paper = {**copy.deepcopy(selected), 'document': document, 'analysis': analysis,
-                             'assets': assets, 'visual_blocks': blocks, 'counts': counts, 'settings_sha256': settings.sha256}
-                    review = backend.generate('review', {'kind': 'paper', 'paper': paper,
-                            'prior_recommendation_evidence': history.prompt_records,
-                            'date_windows': settings.windows(day),
-                            'image_order': context['image_order'] + [asset['path'] for asset in assets]},
-                            images + [asset['source'] for asset in assets])
-                    validate_review(review, settings)
-                    break
-                except ValidationError as error:
-                    if attempt == 2:
-                        raise
-                    logger.warning('Revising the same paper after validation: %s: %s', selected['title'], error)
-                    context = {**context, 'prior_analysis': analysis, 'revision_feedback': str(error)}
-            paper['review'] = review
-            paper['reviewed_sha256'] = sha256(json_bytes({key: value for key, value in paper.items() if key not in {'review', 'reviewed_sha256'}}))
+            analysis = backend.generate('analyze', context, images)
+            counts = validate_analysis(analysis, document, settings)
+            assets, blocks = prepare_visuals(paper, analysis, document, directory / 'prepared')
+            paper = {**copy.deepcopy(selected), 'document': document, 'analysis': analysis,
+                     'assets': assets, 'visual_blocks': blocks, 'counts': counts, 'settings_sha256': settings.sha256}
+            paper['analyzed_sha256'] = sha256(json_bytes(paper))
             save_checkpoint(cached, paper)
         validate_analysis(paper['analysis'], paper['document'], settings)
-        validate_review(paper['review'], settings)
-        require(paper['reviewed_sha256'] == sha256(json_bytes({key: value for key, value in paper.items() if key not in {'review', 'reviewed_sha256'}})),
-                'Reviewed paper checkpoint was modified')
+        require(paper['analyzed_sha256'] == sha256(json_bytes({key: value for key, value in paper.items() if key != 'analyzed_sha256'})),
+                'Analyzed paper checkpoint was modified')
         bundle['papers'].append(paper)
         bundle['assets'].extend(paper['assets'])
     trends_path = stage / 'trends.json'
@@ -245,14 +228,6 @@ def prepare(root, *, day=None, sources=None, backend=None, pool=None, stage_dir=
     bundle['report_markdown'] = render_report(bundle, settings)
     from publish_daily import validate_bundle, verify_rendered
     bundle['rendering'] = verify_rendered(root, bundle, settings, output_dir=stage / 'website')
-    screenshots = bundle['rendering']['screenshots']
-    bundle['review'] = backend.generate('review', {'kind': 'trends', 'report_markdown': bundle['report_markdown'],
-        'papers': [{'work_id': work_id(p), 'title': p['title'], 'category': p['category'],
-                    'review': p['review']} for p in bundle['papers']], 'trends': trends,
-        'selection_shortfall': bundle['shortfall_reason'],
-        'rendering': bundle['rendering'], 'image_order': [f'{s["viewport_width"]}px {s["item"]}' for s in screenshots]},
-        [s['path'] for s in screenshots])
-    validate_review(bundle['review'], settings)
     validate_bundle(root, bundle, settings)
     save_checkpoint(stage / 'bundle.json', bundle)
     return bundle

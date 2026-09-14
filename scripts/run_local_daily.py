@@ -133,7 +133,7 @@ def main() -> int:
     parser.add_argument('--repo-root', default=None, help='Repository root path')
     parser.add_argument('--skip-push', action='store_true', help='Generate locally without pushing')
     parser.add_argument('--dry-run', action='store_true', help='Prepare and render in a temporary workspace without publishing, committing, or pushing')
-    parser.add_argument('--check-runtime', action='store_true', help='Verify the strongest model/reasoning, subagents, tools and skill routing using a synthetic PDF; no report or history writes')
+    parser.add_argument('--check-runtime', action='store_true', help='Verify the recommended model, balanced reasoning, tools, single-thread policy and skill routing using a synthetic PDF; no report or history writes')
     parser.add_argument('--date', type=date.fromisoformat, default=None,
                         help='Generate or resume this local report date (YYYY-MM-DD); defaults to today')
     parser.add_argument('--remote', default=None, help='Git remote to pull from and push to (auto-detected by default)')

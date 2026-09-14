@@ -5,7 +5,7 @@ description: Use after DailyPaper search, history checks, full-paper analysis, a
 
 # Daily article editing
 
-Apply the current settings and the publication transaction in `AGENTS.md`. Accept papers only after eligibility/history checks, full-paper analysis, and visual verification.
+Apply the current settings and the publication transaction in `AGENTS.md`. Accept papers only after eligibility/history checks, full-paper analysis, and visual preparation.
 
 ## Assemble and edit
 
@@ -17,6 +17,6 @@ Apply settings section 6 to the complete selected analyses: group papers by shar
 
 ## Check the result
 
-Check word counts, structure, coverage explanations, and trend support against current settings. Use per-paper review evidence for scientific claims, and `paper-image-extractor` for visual fidelity and legibility checks on the final desktop/mobile browser screenshots.
+Check word counts, structure, coverage explanations, and trend support against current settings. Preserve the page-level evidence returned by each paper's single analysis. The controller checks source hashes, page coverage, visual bounds, asset hashes, and final desktop/mobile rendering without another model call.
 
 `scripts/report_validation.py` assembles Markdown, `scripts/publish_daily.py` validates an isolated site and archives the transaction, and `scripts/pipeline_prompts.py` owns stage output contracts. Legacy reports retain their schema through the site parser; do not regenerate them when changing templates.

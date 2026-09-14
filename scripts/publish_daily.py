@@ -21,7 +21,7 @@ from content_store import get_repo_root
 from recommendation_history import (HISTORY_PATH, assert_unchanged, atomic_write, history_lock,
                                     identities, json_bytes, load_history, sha256, work_id, write_history)
 from report_settings import load_settings
-from report_validation import (render_report, require, validate_analysis, validate_review,
+from report_validation import (render_report, require, validate_analysis,
                                validate_selection, validate_trends)
 
 
@@ -41,14 +41,12 @@ def validate_bundle(root, bundle, settings, *, allow_run_id=None):
     expected_assets = []
     for paper in bundle['papers']:
         validate_analysis(paper['analysis'], paper['document'], settings)
-        validate_review(paper['review'], settings)
         require(paper['settings_sha256'] == settings.sha256, 'Paper used different settings')
-        reviewed = {key: value for key, value in paper.items() if key not in {'review', 'reviewed_sha256'}}
-        require(paper['reviewed_sha256'] == sha256(json_bytes(reviewed)), 'Paper changed after review')
+        analyzed = {key: value for key, value in paper.items() if key != 'analyzed_sha256'}
+        require(paper['analyzed_sha256'] == sha256(json_bytes(analyzed)), 'Paper changed after analysis validation')
         expected_assets.extend(paper['assets'])
-    require(bundle['assets'] == expected_assets, 'Asset manifest differs from reviewed papers')
+    require(bundle['assets'] == expected_assets, 'Asset manifest differs from analyzed papers')
     validate_trends(bundle['trends'], bundle['papers'], settings)
-    validate_review(bundle['review'], settings)
     require(bundle['report_markdown'] == render_report(bundle, settings), 'Report changed after assembly')
     rendering = bundle.get('rendering', {})
     require(rendering.get('report_sha256') == sha256(bundle['report_markdown'].encode()),
@@ -57,7 +55,7 @@ def validate_bundle(root, bundle, settings, *, allow_run_id=None):
             'Website browser safeguards were not verified')
     require(rendering.get('screenshots'), 'Website review has no rendered screenshots')
     for shot in rendering['screenshots']:
-        require(sha256(Path(shot['path']).read_bytes()) == shot['sha256'], 'Website screenshot changed after review')
+        require(sha256(Path(shot['path']).read_bytes()) == shot['sha256'], 'Website screenshot changed after verification')
     paths = set()
     for asset in bundle['assets']:
         path = asset['path']
@@ -66,7 +64,7 @@ def validate_bundle(root, bundle, settings, *, allow_run_id=None):
         require(path not in paths, 'Repeated asset path')
         paths.add(path)
         raw = Path(asset['source']).read_bytes()
-        require(sha256(raw) == asset['sha256'], 'Visual changed after review')
+        require(sha256(raw) == asset['sha256'], 'Visual changed after preparation')
         pixels = fitz.Pixmap(raw)
         require(pixels.width > 0 and pixels.height > 0, 'Visual cannot be decoded')
 
@@ -186,7 +184,7 @@ def publish(root, bundle, *, before_finalize=None):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Publish a fully reviewed preparation bundle')
+    parser = argparse.ArgumentParser(description='Publish a fully validated preparation bundle')
     parser.add_argument('--repo-root')
     parser.add_argument('--input', required=True)
     args = parser.parse_args()

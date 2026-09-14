@@ -54,7 +54,7 @@ class FakeServer:
         self.events = []
         self.pending = iter(self.final_events)
         self.selected = self.catalog_model
-        self.effort = self.supported[-1]
+        self.effort = runtime.REASONING_MODE if runtime.REASONING_MODE in self.supported else self.supported[-1]
 
     def __enter__(self):
         return self
@@ -111,7 +111,7 @@ class RuntimeTests(unittest.TestCase):
         FakeServer.sandbox_override = None
         FakeServer.permission_overrides = {}
         FakeServer.final_events = completed_events()
-        self.resolution = {'model': 'fixture-research', 'mode': 'ultra', 'cli_version': 'fixture-cli',
+        self.resolution = {'model': 'fixture-research', 'mode': 'medium', 'cli_version': 'fixture-cli',
                            'executable': '/fixture/codex', 'settings_sha256': self.settings.sha256}
 
     def resolve(self, models=None, guidance=None):
@@ -185,47 +185,35 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(value['model'], FakeServer.catalog_model)
         self.assertIn('most capable', value['selection_evidence']['model_recommendation']['description'])
 
-    def test_available_model_requires_official_maximum_and_effective_confirmation(self):
+    def test_available_model_requires_documented_balanced_mode_and_effective_confirmation(self):
         value = self.resolve()
-        self.assertEqual((value['model'], value['mode']), ('fixture-research', 'ultra'))
+        self.assertEqual((value['model'], value['mode']), ('fixture-research', 'medium'))
         start = next(params for method, params in FakeServer.calls if method == 'thread/start')
         self.assertFalse(start['allowProviderModelFallback'])
-        self.assertEqual(start['config']['agents.default_subagent_reasoning_effort'], 'ultra')
+        self.assertEqual(start['config']['model_reasoning_effort'], 'medium')
         self.assertEqual(start['approvalPolicy'], 'never')
         self.assertNotIn('approvalsReviewer', start)
-        self.assertEqual(start['config']['agents.default_subagent_model'], value['model'])
-        self.assertEqual(value['selection_evidence']['reasoning']['selected'], 'ultra')
+        self.assertNotIn('agents.default_subagent_model', start['config'])
+        self.assertEqual(value['selection_evidence']['reasoning']['selected'], 'medium')
         self.assertEqual(value['cli_version'], 'fixture-cli')
 
-    def test_new_reasoning_level_is_selected_from_guidance_and_account_support(self):
-        FakeServer.supported = ['zenith', 'low', 'ultra', 'max', 'xhigh']
-        guidance = reasoning_guidance('zenith').replace('- **`max`**',
-            '- **`ultra`**: Use for demanding reasoning.\n- **`max`**')
-        value = self.resolve(guidance=guidance)
-        self.assertEqual(value['mode'], 'zenith')
+    def test_balanced_mode_must_be_documented_and_account_supported(self):
+        value = self.resolve()
+        self.assertEqual(value['mode'], 'medium')
         start = next(params for method, params in FakeServer.calls if method == 'thread/start')
-        self.assertEqual(start['config']['model_reasoning_effort'], 'zenith')
-        self.assertEqual(start['config']['agents.default_subagent_reasoning_effort'], 'zenith')
+        self.assertEqual(start['config']['model_reasoning_effort'], 'medium')
         self.resolution = value
         self.assertTrue(self.execute()[0]['ok'])
         turn = next(params for method, params in FakeServer.calls if method == 'turn/start')
-        self.assertEqual(turn['effort'], 'zenith')
-        with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'does not document'):
+        self.assertEqual(turn['effort'], 'medium')
+        FakeServer.supported.remove('medium')
+        with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'does not support'):
             self.resolve()
 
-    def test_ambiguous_or_conflicting_reasoning_order_stops(self):
-        FakeServer.supported = ['max', 'xhigh']
-        with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'does not uniquely order'):
-            self.resolve()
-        guidance = reasoning_guidance().replace('Higher reasoning',
-            'Reasoning effort order: `xhigh` < `max` < `ultra`.\n\nHigher reasoning')
-        resolved = self.resolve(guidance=guidance)
-        self.assertEqual(resolved['mode'], 'max')
-        self.assertIn('Reasoning effort order: `xhigh` < `max` < `ultra`.',
-                      resolved['selection_evidence']['reasoning']['ordering_statements'])
-        contradictory = guidance.replace('`xhigh` < `max` < `ultra`', '`ultra` < `max` < `xhigh`')
-        with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'contradictory ordering'):
-            self.resolve(guidance=contradictory)
+    def test_unbalanced_or_unrecognized_reasoning_guidance_stops(self):
+        guidance = reasoning_guidance().replace('A balanced default.', 'Use for ordinary tasks.')
+        with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'balanced mode'):
+            self.resolve(guidance=guidance)
         with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'format changed'):
             self.resolve(guidance='Unrecognized future reasoning documentation')
 
@@ -244,11 +232,11 @@ class RuntimeTests(unittest.TestCase):
         self.assertTrue(result['ok'])
         start = next(params for method, params in FakeServer.calls if method == 'turn/start')
         self.assertEqual(start['model'], self.resolution['model'])
-        self.assertEqual(start['effort'], 'ultra')
+        self.assertEqual(start['effort'], 'medium')
         self.assertEqual(start['approvalPolicy'], 'never')
         self.assertEqual(start['input'][1]['type'], 'localImage')
         self.assertEqual(start['input'][1]['detail'], 'original')
-        self.assertIn('Explicitly use these exact values', start['input'][0]['text'])
+        self.assertIn('Complete this stage in the current thread', start['input'][0]['text'])
 
     def test_runtime_substitution_is_rejected_before_generation(self):
         for field, value in (('effort_override', 'xhigh'), ('model_override', 'other-model')):
@@ -274,28 +262,23 @@ class RuntimeTests(unittest.TestCase):
             with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'rerouted'):
                 self.execute()
 
-    def test_subagents_and_grandchildren_require_exact_effective_settings(self):
+    def test_subagents_and_collaboration_calls_are_rejected(self):
         def activity(parent, child, kind):
             return {'method': 'item/completed', 'params': {'threadId': parent, 'item': {
                 'type': 'subAgentActivity', 'agentThreadId': child, 'kind': kind}}}
-        FakeServer.final_events = [activity('fixture-thread', 'child', 'started'),
-            activity('fixture-thread', 'child', 'interacted'),
-            activity('child', 'grandchild', 'started'), activity('child', 'grandchild', 'completed'),
-            activity('fixture-thread', 'child', 'completed')] + completed_events()
-        self.assertTrue(self.execute()[0]['ok'])
-        reads = {params['threadId'] for method, params in FakeServer.calls if method == 'thread/read'}
-        self.assertEqual(reads, {'fixture-thread', 'child', 'grandchild'})
-        for field, value in (('model', 'other'), ('reasoningEffort', 'high'), ('reasoningEffort', None),
-                             ('modelProvider', 'other'), ('cliVersion', 'changed')):
-            with self.subTest(field=field, value=value):
-                FakeServer.thread_overrides = {'grandchild': {field: value}}
-                with self.assertRaises(runtime.RuntimeVerificationError):
-                    self.execute()
+        for event in (activity('fixture-thread', 'child', 'started'),
+                      {'method': 'thread/started', 'params': {'thread': {'id': 'child'}}},
+                      {'method': 'turn/started', 'params': {'threadId': 'child', 'turn': {'id': 'child-turn'}}},
+                      {'method': 'item/completed', 'params': {'threadId': 'fixture-thread',
+                       'item': {'type': 'collabAgentToolCall', 'receiverThreadIds': ['child']}}}):
+            FakeServer.final_events = [event] + completed_events()
+            with self.subTest(event=event), self.assertRaisesRegex(runtime.RuntimeVerificationError, 'token-efficient'):
+                self.execute()
 
     def test_unfinished_subagent_prevents_accepting_parent_result(self):
         FakeServer.final_events.insert(0, {'method': 'item/completed', 'params': {
             'threadId': 'fixture-thread', 'item': {'type': 'subAgentActivity', 'agentThreadId': 'child', 'kind': 'started'}}})
-        with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'still running'):
+        with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'token-efficient'):
             self.execute()
 
     def test_never_is_explicit_on_initial_calls_and_retries(self):
@@ -332,6 +315,22 @@ class RuntimeTests(unittest.TestCase):
             with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'another Codex thread'):
                 runtime.read_turn_permissions(thread, 'first', timeout=0)
 
+    def test_final_token_and_rate_limit_receipt_is_read_once(self):
+        usage = {'input_tokens': 120, 'cached_input_tokens': 80, 'output_tokens': 5,
+                 'reasoning_output_tokens': 2, 'total_tokens': 125}
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'rollout-fixture-thread.jsonl'
+            rows = [
+                {'type': 'token_usage_record', 'payload': {'thread_token_usage': usage}},
+                {'type': 'event_msg', 'payload': {'type': 'token_count', 'rate_limits': {
+                    'primary': {'used_percent': 7.0, 'window_minutes': 10080, 'resets_at': 123}}}},
+            ]
+            path.write_text(''.join(json.dumps(row) + '\n' for row in rows) + '{"incomplete"')
+            self.assertEqual(runtime.read_token_usage({'path': str(path)}), {
+                'usage': usage,
+                'rate_limit': {'used_percent': 7.0, 'window_minutes': 10080, 'resets_at': 123},
+            })
+
     def test_interactive_or_missing_approval_policy_stops_before_turn(self):
         for policy in ('on-request', 'untrusted', {'granular': {'sandbox_approval': True}}):
             FakeServer.approval_override = policy
@@ -342,19 +341,15 @@ class RuntimeTests(unittest.TestCase):
         with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'approvalPolicy=never'):
             runtime.verify_permissions({'sandbox': {'type': 'workspaceWrite', 'networkAccess': False}}, REPO)
 
-    def test_parent_and_subagent_effective_permissions_cannot_change(self):
-        activity = lambda kind: {'method': 'item/completed', 'params': {'threadId': 'fixture-thread',
-            'item': {'type': 'subAgentActivity', 'agentThreadId': 'child', 'kind': kind}}}
-        FakeServer.final_events = [activity('started'), activity('completed')] + completed_events()
-        for thread in ('fixture-thread', 'child'):
-            for bad in ({'approvalPolicy': 'on-request'}, {'approvalPolicy': None},
-                        {'sandbox': {'type': 'dangerFullAccess'}},
-                        {'sandbox': {'type': 'workspaceWrite', 'networkAccess': True}},
-                        {'sandbox': {'type': 'workspaceWrite', 'networkAccess': False, 'writableRoots': ['/']}},
-                        {'runtimeWorkspaceRoots': ['/']}):
-                FakeServer.permission_overrides = {thread: bad}
-                with self.subTest(thread=thread, bad=bad), self.assertRaises(runtime.RuntimeVerificationError):
-                    self.execute()
+    def test_parent_effective_permissions_cannot_change(self):
+        for bad in ({'approvalPolicy': 'on-request'}, {'approvalPolicy': None},
+                    {'sandbox': {'type': 'dangerFullAccess'}},
+                    {'sandbox': {'type': 'workspaceWrite', 'networkAccess': True}},
+                    {'sandbox': {'type': 'workspaceWrite', 'networkAccess': False, 'writableRoots': ['/']}},
+                    {'runtimeWorkspaceRoots': ['/']}):
+            FakeServer.permission_overrides = {'fixture-thread': bad}
+            with self.subTest(bad=bad), self.assertRaises(runtime.RuntimeVerificationError):
+                self.execute()
 
     def test_never_does_not_allow_a_broader_starting_sandbox(self):
         for sandbox in ({'type': 'dangerFullAccess'}, {'type': 'externalSandbox'},
@@ -376,7 +371,7 @@ class RuntimeTests(unittest.TestCase):
              patch('codex_enrich.check_capabilities', return_value={'fixture': True}):
             first = backend.preflight()
             first['mode'] = 'other'
-            self.assertEqual(backend.preflight()['mode'], 'ultra')
+            self.assertEqual(backend.preflight()['mode'], 'medium')
             self.assertEqual(resolve.call_count, 1)
             backend.resolution['model'] = 'other'
             with self.assertRaisesRegex(runtime.RuntimeVerificationError, 'configuration was changed'):

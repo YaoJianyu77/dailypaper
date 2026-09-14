@@ -24,6 +24,7 @@ from pipeline_prompts import STAGE_SKILLS
 logger = logging.getLogger(__name__)
 OFFICIAL_HOSTS = {'learn.chatgpt.com', 'developers.openai.com', 'platform.openai.com'}
 APPROVAL_POLICY = 'never'
+REASONING_MODE = 'medium'
 
 
 class RuntimeVerificationError(RuntimeError):
@@ -143,8 +144,9 @@ class AppServer:
 def policy_sources(settings):
     section = settings.sections['per-paper content']
     rows = settings.tables['per-paper content']
-    require(rows.get('required codex mode', '').startswith('Strongest supported reasoning'),
-            'The settings must require the strongest supported reasoning verified against official guidance')
+    configured = rows.get('required codex mode', '').lower()
+    require(configured.startswith('balanced reasoning') and REASONING_MODE in configured,
+            f'The settings must require the documented balanced reasoning mode ({REASONING_MODE})')
     require('most capable' in rows.get('production model policy', '').lower(), 'The unified production model policy is missing')
     urls = []
     for label in ('Production model policy', 'Required Codex mode'):
@@ -182,18 +184,13 @@ def recommended_model(document):
     return model_recommendation(document)['model']
 
 
-def strongest_reasoning(document, supported):
-    """Establish a unique maximum from official statements, never name/list order.
-
-    An explicit deepest-reasoning statement establishes a top tier. Explicit
-    inequality chains can establish additional relationships. Grouped levels
-    remain incomparable unless the source separately orders them.
-    """
+def configured_reasoning(document, supported, requested=REASONING_MODE):
+    """Verify the configured balanced mode against docs and account support."""
     section = re.search(r'^### Reasoning effort \(`model_reasoning_effort`\)\s*\n(.*?)(?=^#{1,3} |</ContentModeSwitch>|\Z)',
                         document, re.M | re.S)
-    require(section, 'Official reasoning guidance format changed; ordering cannot be verified')
+    require(section, 'Official reasoning guidance format changed; configured mode cannot be verified')
     text = section[1]
-    entries, maxima = {}, []
+    entries = {}
     for match in re.finditer(r'^- (.+?)(?=\n\n|\n- |\Z)', text, re.M | re.S):
         label, separator, description = match[1].partition(':')
         names = re.findall(r'`([a-zA-Z0-9_-]+)`', label)
@@ -202,44 +199,15 @@ def strongest_reasoning(document, supported):
         for name in names:
             require(name not in entries, 'Official reasoning guidance contains duplicate or conflicting levels')
             entries[name] = description
-        if re.match(r'Use for (?:the )?(?:deepest|strongest|highest|maximum) reasoning(?: when|[.,]|$)', description, re.I):
-            maxima.append(names)
     levels = [entry.get('reasoningEffort') for entry in supported]
     require(levels and all(isinstance(level, str) and level for level in levels) and len(set(levels)) == len(levels),
             'The selected model has no verifiable supported reasoning settings')
-    require(set(levels) <= set(entries),
-            f'Official guidance does not document supported reasoning levels: {sorted(set(levels) - set(entries))}; no lower level selected')
-    require(len(maxima) <= 1, 'Official guidance names conflicting strongest reasoning tiers')
-    stronger = {name: set() for name in entries}
-    ordering_statements = []
-    if maxima:
-        ordering_statements.append(entries[maxima[0][0]])
-        for name in maxima[0]:
-            stronger[name].update(set(entries) - set(maxima[0]))
-    for line in text.splitlines():
-        if not line.startswith('Reasoning effort order:'):
-            continue
-        ordering_statements.append(line)
-        chain = line.removeprefix('Reasoning effort order:').strip().rstrip('.')
-        require(re.fullmatch(r'`[a-zA-Z0-9_-]+`(?:\s*[<>]\s*`[a-zA-Z0-9_-]+`)+', chain),
-                'Official reasoning order cannot be interpreted safely')
-        names = re.findall(r'`([^`]+)`', chain)
-        signs = re.findall(r'[<>]', chain)
-        require(len(set(names)) == len(names) and set(names) <= set(entries) and len(set(signs)) == 1,
-                'Official reasoning ordering is contradictory or incomplete')
-        for left, right, sign in zip(names, names[1:], signs):
-            higher, lower = (left, right) if sign == '>' else (right, left)
-            stronger[higher].add(lower)
-    for _ in entries:
-        for name in entries:
-            stronger[name].update({other for lower in list(stronger[name]) for other in stronger[lower]})
-    require(all(name not in below for name, below in stronger.items()), 'Official reasoning guidance has a contradictory ordering')
-    winners = [name for name in levels if set(levels) - {name} <= stronger[name]]
-    require(len(winners) == 1, 'Official guidance does not uniquely order the strongest supported reasoning setting; no downgrade selected')
-    selected = winners[0]
-    return selected, {'supported': supported, 'documented': entries,
-                      'stronger_than': {name: sorted(below) for name, below in stronger.items()},
-                      'selected': selected, 'ordering_statements': ordering_statements}
+    require(requested in entries, f'Official guidance does not document configured reasoning mode {requested}')
+    require(requested in levels, f'The selected model does not support configured reasoning mode {requested}')
+    require(re.search(r'\bbalanc', entries[requested], re.I),
+            f'Official guidance no longer describes {requested} as a balanced mode')
+    return requested, {'supported': supported, 'documented': entries,
+                       'selected': requested, 'selection_statement': entries[requested]}
 
 
 def resolution_identity(resolution):
@@ -266,9 +234,7 @@ def bind_report(stage, resolution):
 
 
 def runtime_overrides(resolution):
-    return {'model_reasoning_effort': resolution['mode'],
-            'agents.default_subagent_model': resolution['model'],
-            'agents.default_subagent_reasoning_effort': resolution['mode']}
+    return {'model_reasoning_effort': resolution['mode']}
 
 
 def verify_thread(server, resolution, thread_id, *, timeout=45):
@@ -348,6 +314,26 @@ def read_turn_permissions(thread, turn_id=None, timeout=45):
         time.sleep(0.05)
 
 
+def read_token_usage(thread):
+    """Read the final cumulative usage receipt written by Codex for one thread."""
+    path = Path(thread.get('path') or '')
+    if not path.is_file():
+        return None
+    usage, limit = None, None
+    with path.open() as stream:
+        for line in stream:
+            if not line.endswith('\n'):
+                break
+            record = json.loads(line)
+            if record.get('type') == 'token_usage_record':
+                usage = record.get('payload', {}).get('thread_token_usage') or usage
+            elif record.get('type') == 'event_msg' and record.get('payload', {}).get('type') == 'token_count':
+                primary = (record['payload'].get('rate_limits') or {}).get('primary')
+                if primary:
+                    limit = primary
+    return {'usage': usage, 'rate_limit': limit} if usage else None
+
+
 def verify_effective(server, resolution, directory, *, ephemeral=True):
     result = server.call('thread/start', {'model': resolution['model'], 'cwd': str(directory),
         'sandbox': 'workspace-write', 'approvalPolicy': APPROVAL_POLICY,
@@ -390,7 +376,7 @@ def resolve_runtime(root, settings):
                     break
             matches = [row for row in rows if row['model'] == model and not row['hidden']]
             require(len(matches) == 1, f'The officially recommended model {model} is not available to this Codex account; no downgrade selected')
-            resolution['mode'], reasoning_evidence = strongest_reasoning(modes, matches[0]['supportedReasoningEfforts'])
+            resolution['mode'], reasoning_evidence = configured_reasoning(modes, matches[0]['supportedReasoningEfforts'])
             resolution['selection_evidence'] = {'model_recommendation': recommendation, 'reasoning': reasoning_evidence,
                 'account_type': account['account'].get('type'), 'catalog_model': matches[0]['model']}
             require('image' in matches[0].get('inputModalities', []), f'{model} does not advertise image inputs for paper inspection')
@@ -408,35 +394,41 @@ def resolve_runtime(root, settings):
 
 
 class ExecutionGuard:
-    """Audit parent and native subagent settings, including reroutes mid-turn."""
+    """Audit the single stage thread and reject reroutes or delegation."""
     def __init__(self, server, resolution, thread_id, directory, sandbox):
         self.server, self.resolution, self.root_thread = server, resolution, thread_id
         self.directory, self.sandbox = directory, sandbox
         self.threads = {thread_id}
         self.active_turns = set()
-        self.active_agents = set()
 
     def verify(self, thread_id, turn_id=None):
-        require(thread_id, 'Codex emitted a subagent without a verifiable thread identity')
+        require(thread_id, 'Codex emitted a thread without a verifiable identity')
         thread = verify_thread(self.server, self.resolution, thread_id)
         live = read_turn_permissions(thread, turn_id)
         verify_permissions(live, self.directory, self.sandbox)
         logger.info('Effective Codex permissions verified: thread=%s approvalPolicy=%s sandbox=%s networkAccess=%s',
                     thread_id, live['approvalPolicy'], live['sandbox']['type'], live['sandbox']['networkAccess'])
         self.threads.add(thread_id)
+        return thread
 
     def inspect(self, event):
         method, params = event.get('method'), event.get('params', {})
         require(method != 'model/rerouted', f'Codex rerouted a model during execution: {params}; generation stopped')
         if method == 'thread/settings/updated':
+            require(params['threadId'] == self.root_thread,
+                    'Codex attempted subagent delegation; token-efficient stages require one thread')
             settings = params['threadSettings']
             verify_permissions({'approvalPolicy': settings.get('approvalPolicy'),
                                 'sandbox': settings.get('sandboxPolicy')}, self.directory, self.sandbox)
             self.verify(params['threadId'])
         if method == 'thread/started':
-            self.verify(params['thread']['id'])
+            child = params['thread']['id']
+            require(child == self.root_thread, 'Codex attempted subagent delegation; token-efficient stages require one thread')
+            self.verify(child)
         if method in {'turn/started', 'turn/completed'}:
             thread_id = params['threadId']
+            require(thread_id == self.root_thread,
+                    'Codex attempted subagent delegation; token-efficient stages require one thread')
             self.verify(thread_id, params['turn']['id'])
             if method == 'turn/started':
                 self.active_turns.add(thread_id)
@@ -447,26 +439,19 @@ class ExecutionGuard:
         item = params.get('item', {})
         if method in {'item/started', 'item/completed'}:
             if item.get('type') == 'subAgentActivity':
-                child = item.get('agentThreadId')
-                self.verify(child)
-                if item.get('kind') == 'started':
-                    self.active_agents.add(child)
-                elif item.get('kind') == 'completed':
-                    self.active_agents.discard(child)
-                elif item.get('kind') == 'interacted':
-                    pass  # A message is activity, not completion of the child task.
-                else:
-                    raise RuntimeVerificationError(f'Subagent activity {item.get("kind")!r} cannot establish successful completion')
+                raise RuntimeVerificationError('Codex attempted subagent delegation; token-efficient stages require one thread')
             if item.get('type') == 'collabAgentToolCall':
-                for key, required in (('model', self.resolution['model']), ('reasoningEffort', self.resolution['mode'])):
-                    require(item.get(key) in (None, required), f'Subagent requested a conflicting {key}; generation stopped')
-                for child in item.get('receiverThreadIds', []):
-                    self.verify(child)
+                raise RuntimeVerificationError('Codex attempted a collaboration-agent call; token-efficient stages require one thread')
 
     def finish(self):
-        require(not self.active_turns and not self.active_agents, 'A subagent is still running; report completion cannot be verified')
+        require(not self.active_turns, 'A Codex turn is still running; report completion cannot be verified')
+        receipts = []
         for thread_id in self.threads:
-            self.verify(thread_id)
+            thread = self.verify(thread_id)
+            receipt = read_token_usage(thread)
+            if receipt:
+                receipts.append(receipt)
+        return receipts
 
 
 def execute(executable, resolution, root, prompt, schema, images=(), timeout=1200, workspace=None):
@@ -487,9 +472,9 @@ def execute(executable, resolution, root, prompt, schema, images=(), timeout=120
         with AppServer(executable, directory) as server:
             effective = verify_effective(server, resolution, directory, ephemeral=False)
             contract = (f'The verified DailyPaper runtime for this report is model={resolution["model"]}, '
-                        f'reasoning_effort={resolution["mode"]}. Explicitly use these exact values for every native '
-                        'subagent spawn, including further delegation. Do not select another model, effort, or custom '
-                        'agent configuration that changes them. Do not launch a nested Codex runtime or model API '
+                        f'reasoning_effort={resolution["mode"]}. Complete this stage in the current thread. Do not spawn, '
+                        'message, or delegate to subagents, and do not select another model, effort, or custom '
+                        'agent configuration. Do not launch a nested Codex runtime or model API '
                         f'to evade this policy. Approval policy is {APPROVAL_POLICY} for this thread and all descendants. '
                         'Keep the inherited workspace-write sandbox and its existing permissions. Operations outside '
                         'that sandbox must fail; do not request escalation, extra permissions, or a different approval policy. '
@@ -521,15 +506,26 @@ def execute(executable, resolution, root, prompt, schema, images=(), timeout=120
                         guard.inspect(pending.pop(0))
                         pending.extend(server.events)
                         server.events.clear()
-                    guard.finish()
+                    receipts = guard.finish()
                     while server.events:
                         pending.extend(server.events)
                         server.events.clear()
                         while pending:
                             guard.inspect(pending.pop(0))
-                    require(not guard.active_turns and not guard.active_agents, 'A subagent is still running; report completion cannot be verified')
+                    require(not guard.active_turns, 'A Codex turn is still running; report completion cannot be verified')
                     turn = params['turn']
                     require(turn['status'] == 'completed', f'Codex execution failed: {turn.get("error")}; no downgrade selected')
                     finals = [item['text'] for item in items if item['type'] == 'agentMessage' and item.get('phase') == 'final_answer']
                     require(finals, 'Codex did not return a complete final result')
+                    if receipts:
+                        totals = {key: sum((receipt['usage'].get(key) or 0) for receipt in receipts)
+                                  for key in ('input_tokens', 'cached_input_tokens', 'output_tokens',
+                                              'reasoning_output_tokens', 'total_tokens')}
+                        limits = [receipt['rate_limit'] for receipt in receipts if receipt.get('rate_limit')]
+                        if limits:
+                            latest = limits[-1]
+                            totals.update(rate_limit_used_percent=latest.get('used_percent'),
+                                          rate_limit_window_minutes=latest.get('window_minutes'),
+                                          rate_limit_resets_at=latest.get('resets_at'))
+                        logger.info('Codex call token usage: %s', json.dumps(totals, sort_keys=True))
                     return json.loads(finals[-1]), items

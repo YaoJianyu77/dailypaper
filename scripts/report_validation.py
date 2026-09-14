@@ -1,4 +1,4 @@
-"""Validate evidence and render only complete, reviewed report artifacts."""
+"""Validate evidence and render only complete report artifacts."""
 
 from datetime import date
 from pathlib import Path
@@ -86,14 +86,6 @@ def validate_analysis(analysis, document, settings):
             require(all(len(row) == len(visual['headers']) for row in visual['rows']), 'Table columns do not align')
     return {'summary_words': count, 'brief_words': brief, 'assessment_words': assessment,
             'pages': len(document['pages']), 'visuals': len(analysis['visuals'])}
-
-
-def validate_review(review, settings):
-    jsonschema.validate(review, stage_schema('review', settings))
-    require(review['approved'] and not review['problems'], 'Final review rejected the draft: ' + '; '.join(review['problems']))
-    for key, value in review.items():
-        if isinstance(value, dict):
-            require(value['passed'] and value['evidence'].strip(), f'Unverified review check: {key}')
 
 
 def validate_selection(papers, settings, day, history, shortfall_reason='', run_id=None):

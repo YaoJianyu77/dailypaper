@@ -11,7 +11,6 @@ STAGE_SKILLS = {
     'influence': ('daily-paper-search',),
     'analyze': ('paper-deep-analysis', 'paper-image-extractor'),
     'trends': ('daily-paper-editor',),
-    'review': ('daily-paper-search', 'paper-note-search', 'paper-deep-analysis', 'paper-image-extractor'),
 }
 
 
@@ -25,7 +24,6 @@ def array(items, **limits):
 
 TEXT = {'type': 'string'}
 PAGE = {'type': 'integer', 'minimum': 1}
-BOOL = {'type': 'boolean'}
 
 
 def stage_schema(stage, settings):
@@ -58,11 +56,6 @@ def stage_schema(stage, settings):
                               official_publication=TEXT, full_paper=TEXT, supporting_papers=TEXT),
                    trends=array(obj(title=TEXT, text=TEXT, supporting_work_ids=array(TEXT)), maxItems=settings.trend_max),
                    insufficient_evidence=TEXT, coverage_note=TEXT)
-    if stage == 'review':
-        check = obj(passed=BOOL, evidence=TEXT)
-        return obj(approved=BOOL, language=check, topic_fit=check, identity=check, publication=check,
-                   full_paper=check, technical_claims=check, visual_fidelity=check, structure=check,
-                   trend_evidence=check, problems=array(TEXT))
     raise ValueError(f'Unknown stage: {stage}')
 
 
@@ -100,34 +93,11 @@ TASKS = {
               'when no shared trend is supported. Edit selection_shortfall into coverage_note following the editing skill; '
               'return an empty note when none is needed. Translate display labels into the configured language; '
               'report_title excludes the date.',
-    'review': 'Independently evaluate every contracted check against the current settings and applicable skills. '
-              'Each check needs concrete evidence; reject unresolved claims or missing required evidence. '
-              'Use the supplied images for inspection; the controller owns browser rendering. Do not launch a browser '
-              'or expand sandbox permissions.',
-}
-
-
-REVIEW_TASKS = {
-    'paper': 'Check the supplied paper, including its publication and classic-influence evidence, prior identities, '
-             'complete text/page images, analysis, selected crops, and table cells. This approval covers one paper. '
-             'Defer final website layout to article review after assembly; mark trend_evidence passed with an '
-             'explicit not-applicable explanation.',
-    'trends': 'The complete article text is supplied once as report_markdown. Check it and trends, with the controller-rendered desktop/mobile screenshots '
-              'and rendering receipt. Verify every figure/table using the visual skill, including original-size '
-              'expanded views and every supplied scroll tile; scaled previews are allowed. Reject missing browser evidence. '
-              'For paper-specific checks, cite the supplied papers[].review receipts; do not repeat discovery or '
-              'full-paper analysis. Reject missing or failed paper receipts.',
 }
 
 
 def stage_skills(stage, context):
-    """Route review instructions by the evidence supplied by daily_pipeline."""
-    if stage == 'review':
-        kind = context.get('kind')
-        if kind not in REVIEW_TASKS:
-            raise ValueError(f'Unknown review kind: {kind!r}')
-        if kind == 'trends':
-            return STAGE_SKILLS['trends'] + ('paper-image-extractor',)
+    """Return the canonical skills for a token-budgeted stage."""
     return STAGE_SKILLS[stage]
 
 
@@ -146,7 +116,7 @@ def build_messages(root, settings, stage, context):
         'Current settings:\n' + settings.raw,
         'Execution rules:\n' + rules,
         *skills,
-        'Stage task:\n' + TASKS[stage] + ('\n' + REVIEW_TASKS[context['kind']] if stage == 'review' else ''),
+        'Stage task:\n' + TASKS[stage],
         'Output contract:\n' + json.dumps(stage_schema(stage, settings), ensure_ascii=False),
     ])
     return [{'role': 'system', 'content': system},

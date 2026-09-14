@@ -22,9 +22,9 @@ When asked to generate DailyPaper, execute these skills in order. Read full hist
 
 ## Runtime and permissions
 
-Use `scripts/run_local_daily.py` for production. It must verify the model and reasoning policy from the settings before generation. Apply the exact resolved configuration to every stage and delegated research check; verify parent and descendant settings and reject substitutions. Retain the configuration in preparation checkpoints so retries cannot mix models or reasoning settings.
+Use `scripts/run_local_daily.py` for production. It must verify the model and reasoning policy from the settings before generation. Apply the exact resolved configuration to every stage, keep each stage in one thread, and reject substitutions or delegation. Retain the configuration in preparation checkpoints so retries cannot mix models or reasoning settings.
 
-Production, dry-run, retry, and delegated Codex threads use explicit `approvalPolicy="never"` with the existing `workspaceWrite` sandbox. Verify effective approval and sandbox settings; never inherit an interactive policy. `never` grants no additional filesystem, network, or host permissions. Operations outside the sandbox must fail without escalation, permission grants, or automatic approval.
+Production, dry-run, and retry Codex threads use explicit `approvalPolicy="never"` with the existing `workspaceWrite` sandbox. Verify effective approval and sandbox settings; never inherit an interactive policy. `never` grants no additional filesystem, network, or host permissions. Operations outside the sandbox must fail without escalation, permission grants, or automatic approval.
 
 Use tools to read full papers, inspect pages, calculate results, and prepare visuals in scratch storage. Only the controller writes production content/history or runs Git publication. Stage tasks must not recursively launch generation or publication. Keep transport in `scripts/codex_enrich.py`, prompts/contracts in `scripts/pipeline_prompts.py`, and orchestration in `scripts/daily_pipeline.py`; update callers and isolated tests with contract changes.
 
@@ -52,6 +52,6 @@ Prefer committing the report, assets, and final history together. If reservation
 
 ## Quality and completion
 
-Validate against current settings: publication/date eligibility, permanent identity, full-paper reading, experimental claims and conditions, word counts, visuals, and trends. Inspect the rendered website at its deployment base path; image syntax, file existence, and asset inventories do not prove visible, legible figures or tables.
+Validate against current settings: publication/date eligibility, permanent identity, complete-paper/page receipts, evidence references, word counts, visuals, and trends. Respect the settings' model-call budget: no independent paper or report model-review pass. Inspect the rendered website at its deployment base path; image syntax, file existence, and asset inventories do not prove visible, legible figures or tables.
 
 Read back committed content and history. Distinguish generated, committed, pushed, deployed, and verified states; a commit alone proves no deployment. Verify schedules and unattended capabilities from actual execution, not documentation. Implementation details and test commands are in `docs/implementation.md`.
